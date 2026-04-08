@@ -100,7 +100,7 @@ export default function DemoForm() {
               <div className="text-center py-8">
                 <CheckCircle2 size={48} className="text-emerald-400 mx-auto mb-4" />
                 <h3 className="text-xl font-bold text-white mb-2">
-                  Thanks! We&apos;ll reach out within 24 hours.
+                  Thanks! We&apos;ll reach out within 30 minutes.
                 </h3>
                 <p className="text-sm text-zinc-400 mb-6">
                   Keep an eye on your inbox.
@@ -118,7 +118,7 @@ export default function DemoForm() {
                   Request a Demo
                 </h3>
                 <p className="text-sm text-zinc-400 mb-6">
-                  We&apos;ll reach out within 24 hours.
+                  We&apos;ll reach out within 30 minutes.
                 </p>
 
                 <form onSubmit={handleSubmit} className="space-y-4">
@@ -201,8 +201,8 @@ export default function DemoForm() {
                   {status === "error" && (
                     <p className="text-sm text-red-400">
                       Something went wrong. Please try again or email{" "}
-                      <a href="mailto:hello@databyt.in" className="underline">
-                        hello@databyt.in
+                      <a href="mailto:kuberan811@gmail.com" className="underline">
+                        kuberan811@gmail.com
                       </a>
                     </p>
                   )}

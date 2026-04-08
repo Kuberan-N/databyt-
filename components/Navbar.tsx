@@ -38,8 +38,10 @@ export default function Navbar() {
       >
         <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
           {/* Logo */}
-          <a href="#" className="text-xl font-bold text-white tracking-tight">
-            Databyt
+          <a href="#" className="flex items-center gap-0 text-xl font-extrabold tracking-tight">
+            <span className="text-white">data</span>
+            <span className="bg-gradient-to-r from-purple-400 to-purple-600 bg-clip-text text-transparent">byt</span>
+            <span className="w-1.5 h-1.5 rounded-full bg-purple-500 ml-0.5 mb-3"></span>
           </a>
 
           {/* Desktop nav */}
@@ -87,7 +89,11 @@ export default function Navbar() {
         }`}
       >
         <div className="flex items-center justify-between px-6 h-16 border-b border-zinc-800">
-          <span className="text-lg font-bold text-white">Databyt</span>
+          <span className="flex items-center gap-0 text-lg font-extrabold tracking-tight">
+            <span className="text-white">data</span>
+            <span className="bg-gradient-to-r from-purple-400 to-purple-600 bg-clip-text text-transparent">byt</span>
+            <span className="w-1.5 h-1.5 rounded-full bg-purple-500 ml-0.5 mb-2"></span>
+          </span>
           <button
             onClick={() => setMobileOpen(false)}
             className="text-zinc-400 hover:text-white transition-colors"
