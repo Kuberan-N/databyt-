@@ -8,15 +8,15 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Databyt — Automated Investor Reporting for Indian Founders",
+  title: "DataByt — Stop the Night-Before Investor Call Panic",
   description:
-    "Stop building your investor update manually. Databyt automates MRR, churn, CAC, and LTV into a branded report delivered by the 3rd of every month.",
+    "Your Razorpay says ₹10L. Your spreadsheet says ₹9.2L. We find the gap, fix it, and automate your investor reporting forever.",
   openGraph: {
-    title: "Databyt — Automated Investor Reporting",
+    title: "DataByt — Investor-Ready Metrics for Indian Founders",
     description:
-      "MRR, churn, CAC, LTV — automated and delivered by the 3rd.",
+      "We audit your data, fix discrepancies, and deliver a branded investor report by the 3rd of every month.",
     url: "https://databyt.in",
-    siteName: "Databyt",
+    siteName: "DataByt",
     type: "website",
   },
 };
