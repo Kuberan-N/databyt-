@@ -12,13 +12,15 @@ const plans = [
     setup: "₹25,000",
     monthly: "₹5,000",
     features: [
-      "Automated MRR, churn, CAC, LTV",
-      "Branded PDF report",
-      "Live metrics dashboard",
-      "Monthly narrative summary",
-      "Email delivery by the 3rd",
+      "Razorpay/Stripe data audit & reconciliation",
+      "MRR, Churn, CAC, LTV, Burn Rate, Runway",
+      "Branded PDF report + live dashboard",
+      "3-line investor narrative summary",
+      "Delivered by the 3rd of every month",
+      "Hypercare support within 24 hours",
     ],
-    cta: "Get Started",
+    valueLine: "That's less than ₹2,500 per recovered hour in year one.",
+    cta: "Book Free Audit First",
     ctaStyle: "primary" as const,
   },
   {
@@ -28,11 +30,12 @@ const plans = [
     monthly: "₹5,000",
     features: [
       "Everything in Investor Report",
-      "Unified data from Razorpay + Sheets + CRM",
-      "Real-time dashboard updates",
-      "Daily automated data sync",
+      "Multi-source data integration",
       "Custom metric definitions",
+      "Advanced reconciliation across platforms",
+      "Priority support",
     ],
+    valueLine: "Best for founders with 2+ data sources.",
     cta: "Request Demo",
     ctaStyle: "secondary" as const,
   },
@@ -130,6 +133,13 @@ export default function Pricing() {
                 ))}
               </ul>
 
+              {/* Value line */}
+              {plan.valueLine && (
+                <p className="text-xs text-purple-400 mb-6 -mt-4 font-medium">
+                  {plan.valueLine}
+                </p>
+              )}
+
               {/* CTA button */}
               {plan.ctaStyle === "primary" ? (
                 <button onClick={openDemo} className="w-full bg-gradient-to-r from-purple-600 to-purple-500 hover:from-purple-500 hover:to-purple-400 text-white rounded-full px-8 py-4 font-semibold transition-all duration-200 hover:scale-[1.02]">
@@ -151,7 +161,7 @@ export default function Pricing() {
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
         >
-          Setup takes 5 business days. Cancel anytime. No lock-in.
+          Setup takes 5 business days. Cancel anytime. No lock-in. Pay after you see the work.
         </motion.p>
       </div>
     </section>

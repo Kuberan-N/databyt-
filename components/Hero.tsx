@@ -74,12 +74,11 @@ export default function Hero() {
           animate="visible"
           custom={1}
         >
-          Stop Building Your
-          <br />
+          Stop the{" "}
           <span className="bg-gradient-to-r from-purple-400 to-purple-600 bg-clip-text text-transparent">
-            Investor Update
+            Night-Before
           </span>{" "}
-          Manually.
+          Investor Call Panic.
         </motion.h1>
 
         {/* Sub-headline */}
@@ -90,13 +89,16 @@ export default function Hero() {
           animate="visible"
           custom={2}
         >
-          We automate your MRR, churn, CAC, and LTV into a branded report
-          — delivered to your inbox by the 3rd of every month.
+          Your Razorpay says ₹10L. Your spreadsheet says ₹9.2L. Nobody can
+          tell you why — and your investor call is tomorrow.
+          <br /><br />
+          We find the gap, fix it, and automate your investor reporting so you
+          never scramble again.
         </motion.p>
 
         {/* CTAs */}
         <motion.div
-          className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16"
+          className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-4"
           variants={fadeUp}
           initial="hidden"
           animate="visible"
@@ -106,7 +108,7 @@ export default function Hero() {
             onClick={openDemo}
             className="group bg-gradient-to-r from-purple-600 to-purple-500 hover:from-purple-500 hover:to-purple-400 text-white font-semibold rounded-full px-8 py-4 transition-all hover:scale-[1.02] hover:shadow-[0_0_30px_rgba(139,92,246,0.3)] flex items-center gap-2"
           >
-            Request a Free Demo
+            Book a Free 20-Min Audit
             <ArrowRight
               size={18}
               className="group-hover:translate-x-0.5 transition-transform"
@@ -119,6 +121,17 @@ export default function Hero() {
             See How It Works
           </a>
         </motion.div>
+
+        {/* Trust line */}
+        <motion.p
+          className="text-sm text-zinc-500 mb-16"
+          variants={fadeUp}
+          initial="hidden"
+          animate="visible"
+          custom={3.5}
+        >
+          No payment required · No spam · Just clarity on your numbers.
+        </motion.p>
 
         {/* Mock dashboard card */}
         <motion.div

@@ -2,7 +2,7 @@
 
 import { motion, useInView, type Variants } from "framer-motion";
 import { useRef } from "react";
-import { Link, Cpu, Mail } from "lucide-react";
+import { Link, Search, Wrench, Calculator, Mail } from "lucide-react";
 
 const steps = [
   {
@@ -10,21 +10,35 @@ const steps = [
     icon: Link,
     title: "Connect",
     description:
-      "Link your Razorpay, Google Sheets, and CRM. Takes 30 minutes.",
+      "Share your Razorpay or Stripe API keys and your Google Sheet. Takes 30 minutes. You control access — revoke anytime.",
   },
   {
     num: "02",
-    icon: Cpu,
-    title: "Automate",
+    icon: Search,
+    title: "We Audit",
     description:
-      "We build your metrics pipeline. MRR, churn, CAC, LTV — all calculated automatically.",
+      "We pull every transaction, compare it across all your data sources, and tell you exactly where the numbers don't match — and why.",
   },
   {
     num: "03",
-    icon: Mail,
-    title: "Receive",
+    icon: Wrench,
+    title: "We Fix",
     description:
-      "A branded PDF + live dashboard delivered to your inbox by the 3rd of every month.",
+      "Refunds, duplicates, timezone mismatches, test payments — we resolve every discrepancy once so your data is clean from day one.",
+  },
+  {
+    num: "04",
+    icon: Calculator,
+    title: "We Calculate",
+    description:
+      "MRR. Churn. CAC. LTV. Burn Rate. Runway. All six metrics computed from verified, reconciled data — not best guesses from a broken spreadsheet.",
+  },
+  {
+    num: "05",
+    icon: Mail,
+    title: "You Receive",
+    description:
+      "A branded PDF report, a live dashboard, and a 3-line narrative summary an investor can read in 30 seconds. Delivered by the 3rd of every month. Zero effort from you.",
   },
 ];
 
@@ -35,7 +49,7 @@ const fadeUp: Variants = {
 
 const stagger: Variants = {
   hidden: {},
-  visible: { transition: { staggerChildren: 0.15 } },
+  visible: { transition: { staggerChildren: 0.12 } },
 };
 
 export default function HowItWorks() {
@@ -53,11 +67,11 @@ export default function HowItWorks() {
           animate={inView ? "visible" : "hidden"}
         >
           <h2 className="text-3xl md:text-5xl font-bold text-white mb-4">
-            How Databyt Works
+            From Messy Data to Investor-Ready Report in{" "}
+            <span className="bg-gradient-to-r from-purple-400 to-purple-600 bg-clip-text text-transparent">
+              5 Days
+            </span>
           </h2>
-          <p className="text-base md:text-lg text-zinc-400 max-w-xl mx-auto">
-            From raw data to investor-ready report in 3 steps.
-          </p>
         </motion.div>
 
         {/* Steps */}
@@ -67,36 +81,33 @@ export default function HowItWorks() {
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
         >
-          {/* Horizontal connecting line — desktop only */}
-          <div className="hidden md:block absolute top-16 left-[16.67%] right-[16.67%] h-px border-t-2 border-dashed border-zinc-800" />
+          {/* Vertical connecting line */}
+          <div className="absolute top-0 bottom-0 left-7 w-px border-l-2 border-dashed border-zinc-800" />
 
-          {/* Vertical connecting line — mobile only */}
-          <div className="md:hidden absolute top-0 bottom-0 left-7 w-px border-l-2 border-dashed border-zinc-800" />
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-6">
+          <div className="flex flex-col gap-10">
             {steps.map((step) => (
               <motion.div
                 key={step.num}
                 variants={fadeUp}
-                className="relative flex md:flex-col items-start md:items-center md:text-center gap-5 md:gap-0 pl-14 md:pl-0"
+                className="relative flex items-start gap-5 pl-14"
               >
                 {/* Number badge */}
-                <div className="absolute left-0 md:relative md:left-auto flex-shrink-0 w-14 h-14 rounded-full bg-purple-600/20 border border-purple-500/30 flex items-center justify-center mb-0 md:mb-5">
+                <div className="absolute left-0 flex-shrink-0 w-14 h-14 rounded-full bg-purple-600/20 border border-purple-500/30 flex items-center justify-center">
                   <span className="text-sm font-bold text-purple-400">
                     {step.num}
                   </span>
                 </div>
 
-                <div>
-                  {/* Icon */}
-                  <div className="p-2.5 rounded-xl bg-zinc-800/50 border border-zinc-700/50 w-fit mb-3 md:mx-auto">
-                    <step.icon size={20} className="text-zinc-300" />
+                <div className="bg-zinc-900/50 border border-zinc-800 rounded-2xl p-6 flex-1 hover:border-purple-500/30 hover:shadow-[0_0_30px_rgba(139,92,246,0.1)] transition-all">
+                  <div className="flex items-center gap-3 mb-2">
+                    <div className="p-2 rounded-lg bg-zinc-800/50 border border-zinc-700/50">
+                      <step.icon size={18} className="text-purple-400" />
+                    </div>
+                    <h3 className="text-xl font-semibold text-white">
+                      {step.title}
+                    </h3>
                   </div>
-
-                  <h3 className="text-xl font-semibold text-white mb-2">
-                    {step.title}
-                  </h3>
-                  <p className="text-sm text-zinc-400 leading-relaxed max-w-xs md:mx-auto">
+                  <p className="text-sm text-zinc-400 leading-relaxed">
                     {step.description}
                   </p>
                 </div>

@@ -15,38 +15,38 @@ const metrics = [
   {
     icon: TrendingUp,
     title: "MRR & ARR Tracking",
-    description: "Monthly and annual recurring revenue, tracked automatically.",
+    description: "Your recurring revenue, tracked month-over-month — verified against your actual Razorpay or Stripe transactions. No formulas. No guesswork.",
     sample: "₹4.2L",
   },
   {
     icon: UserMinus,
     title: "Churn Rate Analysis",
-    description: "Know exactly how many customers you're losing and why.",
+    description: "Not just a percentage. Know exactly who you lost, when they left, and why — so you can fix retention before your next board update.",
     sample: "3.1%",
   },
   {
     icon: Target,
-    title: "Customer Acquisition Cost",
-    description: "Total CAC calculated from your actual spend data.",
+    title: "Customer Acquisition Cost (CAC)",
+    description: "Calculated from your real ad spend and conversion data, not back-of-napkin estimates you'll have to defend later.",
     sample: "₹1,850",
   },
   {
     icon: Heart,
     title: "Lifetime Value (LTV)",
-    description: "Understand the true long-term value of each customer.",
+    description: "See the true long-term value of each customer segment, so you can justify your spend and project growth with confidence.",
     sample: "₹28,400",
   },
   {
     icon: Flame,
     title: "Burn Rate & Runway",
-    description: "How fast you're spending and how long your cash lasts.",
+    description: "Know exactly how many months you have left — and precisely when to start your next fundraise, before it becomes urgent.",
     sample: "18 months",
   },
   {
     icon: MessageSquare,
     title: "Executive Summary",
     description:
-      "A 3-line narrative you can copy-paste into your investor update.",
+      "Three lines. Plain English. Copy-paste it into your investor email and hit send. Done.",
     sample: "AI-generated",
   },
 ];

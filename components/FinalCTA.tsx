@@ -29,7 +29,10 @@ export default function FinalCTA() {
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
         >
-          Ready to Automate Your Investor Reporting?
+          Your Next Investor Call Deserves{" "}
+          <span className="bg-gradient-to-r from-purple-400 to-purple-600 bg-clip-text text-transparent">
+            Clean Metrics
+          </span>
         </motion.h2>
 
         <motion.p
@@ -38,7 +41,8 @@ export default function FinalCTA() {
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
         >
-          Join Indian founders who stopped spending Sundays in Excel.
+          Book a free 20-minute audit. We&apos;ll show you exactly where your data
+          breaks — and how we fix it so it never breaks again.
         </motion.p>
 
         <motion.div
@@ -50,12 +54,38 @@ export default function FinalCTA() {
             onClick={open}
             className="group inline-flex items-center gap-2 bg-gradient-to-r from-purple-600 to-purple-500 hover:from-purple-500 hover:to-purple-400 text-white font-semibold rounded-full px-10 py-4 text-lg transition-all hover:scale-[1.02] hover:shadow-[0_0_30px_rgba(139,92,246,0.3)]"
           >
-            Request a Free Demo
+            Book Your Free Audit
             <ArrowRight
               size={20}
               className="group-hover:translate-x-0.5 transition-transform"
             />
           </button>
+        </motion.div>
+
+        <motion.p
+          className="text-sm text-zinc-500 mt-6"
+          variants={fadeUp}
+          initial="hidden"
+          animate={inView ? "visible" : "hidden"}
+        >
+          No payment required. No spam. Just straight answers about your numbers.
+        </motion.p>
+
+        <motion.div
+          className="flex flex-wrap items-center justify-center gap-4 mt-4"
+          variants={fadeUp}
+          initial="hidden"
+          animate={inView ? "visible" : "hidden"}
+        >
+          <span className="text-xs text-zinc-600 border border-zinc-800 rounded-full px-3 py-1">
+            Read-only access only
+          </span>
+          <span className="text-xs text-zinc-600 border border-zinc-800 rounded-full px-3 py-1">
+            You control your API keys
+          </span>
+          <span className="text-xs text-zinc-600 border border-zinc-800 rounded-full px-3 py-1">
+            Cancel anytime
+          </span>
         </motion.div>
       </div>
     </section>

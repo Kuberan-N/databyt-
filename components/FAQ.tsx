@@ -29,6 +29,18 @@ const faqs = [
     q: "Do you work with pre-revenue startups?",
     a: "Our services are designed for startups with at least ₹50K/month in revenue, as you need transaction data for meaningful metrics.",
   },
+  {
+    q: "What if my investor asks a tough question about the metrics?",
+    a: "We support you. Send us the question — we'll prepare the answer together. You'll never walk into a call feeling underprepared again.",
+  },
+  {
+    q: "Do you offer a guarantee?",
+    a: "Yes. We deliver your first report before you pay anything. If the metrics don't match your actual data, you get a full refund. No fine print.",
+  },
+  {
+    q: "What makes you different from hiring a data analyst?",
+    a: "A full-time data analyst costs ₹15–20L per year. Databyt costs ₹85K per year. We deliver by the 3rd of every month, without you managing anyone, chasing deadlines, or reviewing someone else's spreadsheet.",
+  },
 ];
 
 const fadeUp: Variants = {
