@@ -3,51 +3,44 @@
 import { motion, useInView, type Variants } from "framer-motion";
 import { useRef } from "react";
 import {
-  TrendingUp,
-  UserMinus,
-  Target,
-  Heart,
-  Flame,
-  MessageSquare,
+  Database,
+  Bot,
+  BarChart3,
+  Wallet,
+  Headphones,
+  FileText,
 } from "lucide-react";
 
-const metrics = [
+const deliverables = [
   {
-    icon: TrendingUp,
-    title: "MRR & ARR Tracking",
-    description: "Your recurring revenue, tracked month-over-month — verified against your actual Razorpay or Stripe transactions. No formulas. No guesswork.",
-    sample: "₹4.2L",
+    icon: Database,
+    title: "Data Pipeline Foundation",
+    description: "Databricks Lakehouse setup, 3 source integrations, dbt modelling, Unity Catalog, observability hooks — production-grade from day one.",
   },
   {
-    icon: UserMinus,
-    title: "Churn Rate Analysis",
-    description: "Not just a percentage. Know exactly who you lost, when they left, and why — so you can fix retention before your next board update.",
-    sample: "3.1%",
+    icon: Bot,
+    title: "Agentic AI Module",
+    description: "One production agent shipped per month — built on Claude/OpenAI + your lakehouse. Evaluated, monitored, and versioned.",
   },
   {
-    icon: Target,
-    title: "Customer Acquisition Cost (CAC)",
-    description: "Calculated from your real ad spend and conversion data, not back-of-napkin estimates you'll have to defend later.",
-    sample: "₹1,850",
+    icon: BarChart3,
+    title: "Metrics & Reporting",
+    description: "Live dashboard (Metabase/Hex/Databricks SQL) + monthly investor-ready PDF with a 3-line narrative your board can read in 30 seconds.",
   },
   {
-    icon: Heart,
-    title: "Lifetime Value (LTV)",
-    description: "See the true long-term value of each customer segment, so you can justify your spend and project growth with confidence.",
-    sample: "₹28,400",
+    icon: Wallet,
+    title: "FinOps Monitoring",
+    description: "Databricks/Snowflake cost dashboard with alerts at 80% budget. Quarterly optimization pass. Clients save 20–40% on average.",
   },
   {
-    icon: Flame,
-    title: "Burn Rate & Runway",
-    description: "Know exactly how many months you have left — and precisely when to start your next fundraise, before it becomes urgent.",
-    sample: "18 months",
+    icon: Headphones,
+    title: "Support & Ownership",
+    description: "Private Slack, 2 syncs/week, 24-hour incident SLA. Runbook + README included so you're never locked in.",
   },
   {
-    icon: MessageSquare,
-    title: "Executive Summary",
-    description:
-      "Three lines. Plain English. Copy-paste it into your investor email and hit send. Done.",
-    sample: "AI-generated",
+    icon: FileText,
+    title: "Documentation & Handoff",
+    description: "Every deliverable comes with architecture docs, data lineage maps, and a handoff guide. You own everything — code, repo, docs.",
   },
 ];
 
@@ -75,60 +68,55 @@ export default function Deliverables() {
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
         >
-          <h2 className="text-3xl md:text-5xl font-bold text-white mb-4">
-            What&apos;s Inside Your Report
+          <h2 className="text-3xl md:text-5xl font-bold text-white mb-4 font-heading">
+            What You Get{" "}
+            <span className="text-gradient-blue">Every Month</span>
           </h2>
-          <p className="text-base md:text-lg text-zinc-400 max-w-xl mx-auto">
-            Every metric your investors care about — calculated, formatted, and
-            delivered.
+          <p className="text-base md:text-lg text-slate-400 max-w-xl mx-auto">
+            One operator. One Slack channel. Six deliverables shipped monthly.
           </p>
         </motion.div>
 
-        {/* Metric cards grid */}
+        {/* Deliverable cards grid */}
         <motion.div
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5"
           variants={stagger}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
         >
-          {metrics.map((metric) => (
+          {deliverables.map((item) => (
             <motion.div
-              key={metric.title}
+              key={item.title}
               variants={fadeUp}
-              className="bg-zinc-900/50 border border-zinc-800 rounded-2xl p-6 backdrop-blur-sm hover:border-purple-500/30 hover:shadow-[0_0_30px_rgba(139,92,246,0.1)] transition-all duration-300"
+              className="bg-[#0A1628]/80 border border-slate-800 rounded-2xl p-6 backdrop-blur-sm hover:border-blue-500/30 hover:shadow-[0_0_30px_rgba(59,130,246,0.1)] transition-all duration-300"
             >
-              <div className="flex items-start justify-between mb-4">
-                <div className="p-2.5 rounded-xl bg-zinc-800/50 border border-zinc-700/50">
-                  <metric.icon size={20} className="text-purple-400" />
-                </div>
-                <span className="text-2xl font-bold text-purple-400">
-                  {metric.sample}
-                </span>
+              <div className="p-2.5 rounded-xl bg-slate-800/50 border border-slate-700/50 w-fit mb-4">
+                <item.icon size={20} className="text-blue-400" />
               </div>
               <h3 className="text-lg font-semibold text-white mb-1">
-                {metric.title}
+                {item.title}
               </h3>
-              <p className="text-sm text-zinc-400 leading-relaxed">
-                {metric.description}
+              <p className="text-sm text-slate-400 leading-relaxed">
+                {item.description}
               </p>
             </motion.div>
           ))}
         </motion.div>
 
-        {/* Callout card */}
+        {/* Callout card — Hormozi: effort reduction */}
         <motion.div
-          className="mt-10 bg-zinc-900/50 border border-zinc-800 rounded-2xl p-6 border-l-4 border-l-purple-500"
+          className="mt-10 bg-[#0A1628]/80 border border-slate-800 rounded-2xl p-6 border-l-4 border-l-blue-500"
           variants={fadeUp}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
         >
-          <p className="text-zinc-300 text-base md:text-lg leading-relaxed">
-            Every report includes a{" "}
+          <p className="text-slate-300 text-base md:text-lg leading-relaxed">
+            Everything is{" "}
             <span className="text-white font-semibold">
-              3-line narrative summary
+              outcome-counted, not hour-billed
             </span>{" "}
-            you can copy-paste directly into your investor update. This is what
-            makes your report truly investor-ready.
+            — deliverables per month, not timesheets. No surprise invoices,
+            no scope creep conversations. One operator, one bill, one Slack channel.
           </p>
         </motion.div>
       </div>

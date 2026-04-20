@@ -19,30 +19,31 @@ export default function FinalCTA() {
     <section className="relative py-24 md:py-32 px-6 overflow-hidden">
       {/* Background gradient orb */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-        <div className="w-[500px] h-[500px] rounded-full bg-purple-600/15 blur-[120px]" />
+        <div className="w-[500px] h-[500px] rounded-full bg-blue-600/15 blur-[120px]" />
       </div>
 
       <div className="relative z-10 max-w-3xl mx-auto text-center" ref={ref}>
+        {/* StoryBrand: success vision + stakes */}
         <motion.h2
-          className="text-3xl md:text-5xl font-bold text-white mb-6"
+          className="text-3xl md:text-5xl font-bold text-white mb-6 font-heading"
           variants={fadeUp}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
         >
-          Your Next Investor Call Deserves{" "}
-          <span className="bg-gradient-to-r from-purple-400 to-purple-600 bg-clip-text text-transparent">
-            Clean Metrics
+          Your Next Board Meeting{" "}
+          <span className="text-gradient-blue">
+            Deserves Clean Data
           </span>
         </motion.h2>
 
         <motion.p
-          className="text-base md:text-lg text-zinc-400 mb-10"
+          className="text-base md:text-lg text-slate-400 mb-10"
           variants={fadeUp}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
         >
-          Book a free 20-minute audit. We&apos;ll show you exactly where your data
-          breaks — and how we fix it so it never breaks again.
+          Book a free 20-minute audit. We&apos;ll find at least $15K in wasted
+          spend or one critical pipeline gap — guaranteed. No pitch, no pressure.
         </motion.p>
 
         <motion.div
@@ -52,7 +53,7 @@ export default function FinalCTA() {
         >
           <button
             onClick={open}
-            className="group inline-flex items-center gap-2 bg-gradient-to-r from-purple-600 to-purple-500 hover:from-purple-500 hover:to-purple-400 text-white font-semibold rounded-full px-10 py-4 text-lg transition-all hover:scale-[1.02] hover:shadow-[0_0_30px_rgba(139,92,246,0.3)]"
+            className="group inline-flex items-center gap-2 bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 text-white font-semibold rounded-full px-10 py-4 text-lg transition-all hover:scale-[1.02] hover:shadow-[0_0_30px_rgba(59,130,246,0.3)]"
           >
             Book Your Free Audit
             <ArrowRight
@@ -63,28 +64,32 @@ export default function FinalCTA() {
         </motion.div>
 
         <motion.p
-          className="text-sm text-zinc-500 mt-6"
+          className="text-sm text-slate-500 mt-6"
           variants={fadeUp}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
         >
-          No payment required. No spam. Just straight answers about your numbers.
+          No payment required. No spam. Just straight answers about your data.
         </motion.p>
 
+        {/* Trust badges — per strategy recommendation */}
         <motion.div
           className="flex flex-wrap items-center justify-center gap-4 mt-4"
           variants={fadeUp}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
         >
-          <span className="text-xs text-zinc-600 border border-zinc-800 rounded-full px-3 py-1">
-            Read-only access only
+          <span className="text-xs text-slate-600 border border-slate-800 rounded-full px-3 py-1">
+            SOC 2 in progress
           </span>
-          <span className="text-xs text-zinc-600 border border-zinc-800 rounded-full px-3 py-1">
-            You control your API keys
+          <span className="text-xs text-slate-600 border border-slate-800 rounded-full px-3 py-1">
+            GDPR-ready
           </span>
-          <span className="text-xs text-zinc-600 border border-zinc-800 rounded-full px-3 py-1">
-            Cancel anytime
+          <span className="text-xs text-slate-600 border border-slate-800 rounded-full px-3 py-1">
+            Read-only API access
+          </span>
+          <span className="text-xs text-slate-600 border border-slate-800 rounded-full px-3 py-1">
+            You own the code
           </span>
         </motion.div>
       </div>

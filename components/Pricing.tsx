@@ -2,42 +2,65 @@
 
 import { motion, useInView, type Variants } from "framer-motion";
 import { useRef } from "react";
-import { Check } from "lucide-react";
+import { Check, Star, ArrowRight } from "lucide-react";
 import { useDemoForm } from "./DemoFormContext";
 
 const plans = [
   {
-    name: "Investor Report",
-    popular: true,
-    setup: "₹25,000",
-    monthly: "₹5,000",
+    name: "Audit Sprint",
+    tag: "Starter",
+    price: "$1,500",
+    priceNote: "one-time",
+    monthly: null,
+    who: "Pre-Seed, early Seed, or \"not sure\" founders",
     features: [
-      "Razorpay/Stripe data audit & reconciliation",
-      "MRR, Churn, CAC, LTV, Burn Rate, Runway",
-      "Branded PDF report + live dashboard",
-      "3-line investor narrative summary",
-      "Delivered by the 3rd of every month",
-      "Hypercare support within 24 hours",
+      "2-week data audit",
+      "Databricks/Snowflake cost report",
+      "Architecture map & gap analysis",
+      "1 quick-win agent delivered",
+      "Written deliverable + 90-min walkthrough",
     ],
-    valueLine: "That's less than ₹2,500 per recovered hour in year one.",
-    cta: "Book Free Audit First",
-    ctaStyle: "primary" as const,
+    cta: "Start With an Audit",
+    ctaStyle: "secondary" as const,
+    popular: false,
   },
   {
-    name: "Full Data Pipeline",
-    popular: false,
-    setup: "₹35,000",
-    monthly: "₹5,000",
+    name: "Fractional Lite",
+    tag: "Most Popular",
+    price: "$2,500",
+    priceNote: "/month",
+    monthly: "+ $500 setup",
+    who: "Seed startups, 5–20 employees, need a data foundation",
     features: [
-      "Everything in Investor Report",
-      "Multi-source data integration",
-      "Custom metric definitions",
-      "Advanced reconciliation across platforms",
-      "Priority support",
+      "1 pipeline OR 1 AI agent shipped/month",
+      "Databricks Lakehouse setup",
+      "Live metrics dashboard",
+      "Async Slack support",
+      "1 sync call/week",
+      "You own the code — cancel anytime",
     ],
-    valueLine: "Best for founders with 2+ data sources.",
-    cta: "Request Demo",
+    cta: "Book a Free Audit First",
+    ctaStyle: "primary" as const,
+    popular: true,
+  },
+  {
+    name: "Fractional Monthly",
+    tag: "Full Stack",
+    price: "$4,500",
+    priceNote: "/month",
+    monthly: "+ $1,500 setup",
+    who: "Series A, 10–40 employees, no data engineer",
+    features: [
+      "1 pipeline + 1 AI agent shipped/month",
+      "Everything in Lite, plus:",
+      "dbt modelling + Unity Catalog",
+      "FinOps monitoring (20–40% savings)",
+      "Investor-ready PDF + narrative",
+      "2 sync calls/week + 24hr incident SLA",
+    ],
+    cta: "Book a Free Audit First",
     ctaStyle: "secondary" as const,
+    popular: false,
   },
 ];
 
@@ -58,25 +81,39 @@ export default function Pricing() {
 
   return (
     <section id="pricing" className="py-24 md:py-32 px-6">
-      <div className="max-w-4xl mx-auto" ref={ref}>
-        {/* Heading */}
+      <div className="max-w-6xl mx-auto" ref={ref}>
+        {/* Heading — Hormozi: anchor against alternative */}
+        <motion.div
+          className="text-center mb-6"
+          variants={fadeUp}
+          initial="hidden"
+          animate={inView ? "visible" : "hidden"}
+        >
+          <h2 className="text-3xl md:text-5xl font-bold text-white mb-4 font-heading">
+            Simple Pricing. No Surprises.
+          </h2>
+          <p className="text-base md:text-lg text-slate-400 max-w-xl mx-auto">
+            A full-time data engineer costs $131K–$170K/year.
+            We start at $2,500/month.
+          </p>
+        </motion.div>
+
+        {/* Price anchor badge */}
         <motion.div
           className="text-center mb-16"
           variants={fadeUp}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
         >
-          <h2 className="text-3xl md:text-5xl font-bold text-white mb-4">
-            Simple Pricing. No Surprises.
-          </h2>
-          <p className="text-base md:text-lg text-zinc-400 max-w-xl mx-auto">
-            Transparent pricing for startups that value their time.
-          </p>
+          <span className="inline-flex items-center gap-2 text-xs font-medium text-amber-400 bg-amber-500/10 border border-amber-500/20 rounded-full px-4 py-1.5">
+            <Star size={12} className="fill-amber-400" />
+            Save $100K+ vs full-time hire in year one
+          </span>
         </motion.div>
 
         {/* Pricing cards */}
         <motion.div
-          className="grid grid-cols-1 md:grid-cols-2 gap-6"
+          className="grid grid-cols-1 md:grid-cols-3 gap-6"
           variants={stagger}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
@@ -85,40 +122,43 @@ export default function Pricing() {
             <motion.div
               key={plan.name}
               variants={fadeUp}
-              className={`relative bg-zinc-900/50 rounded-2xl p-8 backdrop-blur-sm ${
+              className={`relative bg-[#0A1628]/80 rounded-2xl p-8 backdrop-blur-sm ${
                 plan.popular
-                  ? "border border-purple-500/50 shadow-[0_0_40px_rgba(139,92,246,0.15)]"
-                  : "border border-zinc-800"
+                  ? "border-2 border-blue-500/50 shadow-[0_0_40px_rgba(59,130,246,0.15)]"
+                  : "border border-slate-800"
               }`}
             >
-              {/* Popular badge */}
-              {plan.popular && (
-                <span className="absolute -top-3 left-8 bg-purple-600 text-white text-xs font-semibold px-3 py-1 rounded-full uppercase tracking-wide">
-                  Popular
-                </span>
-              )}
+              {/* Tag badge */}
+              <span className={`absolute -top-3 left-8 text-xs font-semibold px-3 py-1 rounded-full uppercase tracking-wide ${
+                plan.popular
+                  ? "bg-gradient-to-r from-blue-600 to-cyan-500 text-white"
+                  : "bg-slate-800 text-slate-400"
+              }`}>
+                {plan.tag}
+              </span>
 
               {/* Plan name */}
-              <h3 className="text-xl font-semibold text-white mb-6">
+              <h3 className="text-xl font-semibold text-white mb-1 mt-2">
                 {plan.name}
               </h3>
+              <p className="text-xs text-slate-500 mb-6">{plan.who}</p>
 
               {/* Pricing */}
               <div className="mb-2">
                 <span className="text-4xl font-bold text-white">
-                  {plan.setup}
+                  {plan.price}
                 </span>
-                <span className="text-zinc-500 ml-2 text-sm">
-                  one-time setup
+                <span className="text-slate-500 ml-2 text-sm">
+                  {plan.priceNote}
                 </span>
               </div>
-              <p className="text-zinc-400 text-base mb-6">
-                <span className="text-white font-semibold">{plan.monthly}</span>
-                /month
-              </p>
+              {plan.monthly && (
+                <p className="text-sm text-slate-500 mb-6">{plan.monthly}</p>
+              )}
+              {!plan.monthly && <div className="mb-6" />}
 
               {/* Divider */}
-              <div className="border-t border-zinc-800 mb-6" />
+              <div className="border-t border-slate-800 mb-6" />
 
               {/* Features */}
               <ul className="space-y-3 mb-8">
@@ -126,27 +166,27 @@ export default function Pricing() {
                   <li key={feature} className="flex items-start gap-3">
                     <Check
                       size={18}
-                      className="text-purple-400 mt-0.5 flex-shrink-0"
+                      className="text-blue-400 mt-0.5 flex-shrink-0"
                     />
-                    <span className="text-sm text-zinc-300">{feature}</span>
+                    <span className="text-sm text-slate-300">{feature}</span>
                   </li>
                 ))}
               </ul>
 
-              {/* Value line */}
-              {plan.valueLine && (
-                <p className="text-xs text-purple-400 mb-6 -mt-4 font-medium">
-                  {plan.valueLine}
-                </p>
-              )}
-
               {/* CTA button */}
               {plan.ctaStyle === "primary" ? (
-                <button onClick={openDemo} className="w-full bg-gradient-to-r from-purple-600 to-purple-500 hover:from-purple-500 hover:to-purple-400 text-white rounded-full px-8 py-4 font-semibold transition-all duration-200 hover:scale-[1.02]">
+                <button
+                  onClick={openDemo}
+                  className="w-full bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 text-white rounded-full px-8 py-4 font-semibold transition-all duration-200 hover:scale-[1.02] hover:shadow-[0_0_20px_rgba(59,130,246,0.3)] flex items-center justify-center gap-2"
+                >
                   {plan.cta}
+                  <ArrowRight size={16} />
                 </button>
               ) : (
-                <button onClick={openDemo} className="w-full border border-zinc-700 hover:border-purple-500 text-zinc-300 hover:text-white rounded-full px-8 py-4 font-semibold transition-all duration-200 hover:scale-[1.02]">
+                <button
+                  onClick={openDemo}
+                  className="w-full border border-slate-700 hover:border-blue-500 text-slate-300 hover:text-white rounded-full px-8 py-4 font-semibold transition-all duration-200 hover:scale-[1.02]"
+                >
                   {plan.cta}
                 </button>
               )}
@@ -156,12 +196,12 @@ export default function Pricing() {
 
         {/* Bottom note */}
         <motion.p
-          className="text-center text-zinc-500 text-sm mt-10"
+          className="text-center text-slate-500 text-sm mt-10"
           variants={fadeUp}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
         >
-          Setup takes 5 business days. Cancel anytime. No lock-in. Pay after you see the work.
+          All plans: cancel anytime with 7 days&apos; notice. You keep the code. Billed monthly, no 6-month SOWs.
         </motion.p>
       </div>
     </section>

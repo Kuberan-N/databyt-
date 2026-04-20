@@ -5,11 +5,11 @@ import { useRef } from "react";
 import { AlertCircle } from "lucide-react";
 
 const causes = [
-  "Refunds processed in Razorpay but never updated in your sheet",
-  "Duplicate transactions from webhook retries you didn't know about",
-  "UTC vs IST timezone gaps silently splitting revenue across months",
-  "Test payments mixed in with real revenue",
-  "Incomplete data syncs that skip transactions on certain dates",
+  "Databricks bills growing 17–32% year-over-year with no visibility into waste",
+  "Data scattered across 10–15 SaaS tools — no single source of truth",
+  "Pipeline failures silently corrupting your board-ready dashboards",
+  "AI pilots running on dirty data that nobody owns or validates",
+  "Manual metric reconciliation before every board meeting",
 ];
 
 const fadeUp: Variants = {
@@ -31,34 +31,33 @@ export default function TheRealProblem() {
       <div className="max-w-4xl mx-auto" ref={ref}>
         {/* Headline */}
         <motion.h2
-          className="text-3xl md:text-5xl font-bold text-white text-center mb-8"
+          className="text-3xl md:text-5xl font-bold text-white text-center mb-8 font-heading"
           variants={fadeUp}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
         >
-          The #1 Problem:{" "}
-          <span className="bg-gradient-to-r from-purple-400 to-purple-600 bg-clip-text text-transparent">
-            Your Numbers Don&apos;t Match
+          Only 31% of Firms Say Their Data Is{" "}
+          <span className="text-gradient-blue">
+            AI-Ready
           </span>
         </motion.h2>
 
         {/* Body */}
         <motion.p
-          className="text-base md:text-lg text-zinc-400 text-center max-w-2xl mx-auto mb-10 leading-relaxed"
+          className="text-base md:text-lg text-slate-400 text-center max-w-2xl mx-auto mb-10 leading-relaxed"
           variants={fadeUp}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
         >
-          Razorpay shows ₹10L. Your spreadsheet shows ₹9.2L. That&apos;s
-          ₹80,000 you can&apos;t explain — and neither can your CA.
+          The gap between &ldquo;we want AI&rdquo; and &ldquo;our data
+          supports AI&rdquo; is where 40%+ of agentic projects get cancelled.
           <br /><br />
-          We&apos;ve seen this with every founder we&apos;ve spoken to. The
-          causes are always the same:
+          The same data problems show up at every startup we audit:
         </motion.p>
 
         {/* Causes list */}
         <motion.div
-          className="bg-zinc-900/50 border border-zinc-800 rounded-2xl p-6 md:p-8 mb-10"
+          className="bg-[#0A1628]/80 border border-slate-800 rounded-2xl p-6 md:p-8 mb-10"
           variants={stagger}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
@@ -67,13 +66,13 @@ export default function TheRealProblem() {
             <motion.div
               key={i}
               variants={fadeUp}
-              className="flex items-start gap-3 py-3 border-b border-zinc-800/50 last:border-b-0"
+              className="flex items-start gap-3 py-3 border-b border-slate-800/50 last:border-b-0"
             >
               <AlertCircle
                 size={18}
-                className="text-purple-400 mt-0.5 flex-shrink-0"
+                className="text-blue-400 mt-0.5 flex-shrink-0"
               />
-              <span className="text-sm md:text-base text-zinc-300 leading-relaxed">
+              <span className="text-sm md:text-base text-slate-300 leading-relaxed">
                 {cause}
               </span>
             </motion.div>
@@ -82,15 +81,15 @@ export default function TheRealProblem() {
 
         {/* Closing */}
         <motion.p
-          className="text-base md:text-lg text-zinc-300 text-center max-w-2xl mx-auto leading-relaxed"
+          className="text-base md:text-lg text-slate-300 text-center max-w-2xl mx-auto leading-relaxed"
           variants={fadeUp}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
         >
-          We audit your data, find the exact discrepancy, fix it once, and
-          automate it so it never breaks again. Your metrics become{" "}
+          We audit your data stack, find the gaps, fix them once, and
+          automate them so they never break again. Your metrics become{" "}
           <span className="text-white font-semibold">
-            investor-trustworthy
+            board-trustworthy
           </span>{" "}
           — for the first time.
         </motion.p>

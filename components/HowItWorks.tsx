@@ -2,43 +2,36 @@
 
 import { motion, useInView, type Variants } from "framer-motion";
 import { useRef } from "react";
-import { Link, Search, Wrench, Calculator, Mail } from "lucide-react";
+import { Search, Wrench, Rocket, Headphones } from "lucide-react";
 
 const steps = [
   {
     num: "01",
-    icon: Link,
-    title: "Connect",
+    icon: Search,
+    title: "Audit",
     description:
-      "Share your Razorpay or Stripe API keys and your Google Sheet. Takes 30 minutes. You control access — revoke anytime.",
+      "We run a free 2-week diagnostic on your data stack. Find the gaps. Map the architecture. Identify 20–40% in wasted Databricks/Snowflake spend. You get a written report — zero obligation.",
   },
   {
     num: "02",
-    icon: Search,
-    title: "We Audit",
+    icon: Wrench,
+    title: "Build",
     description:
-      "We pull every transaction, compare it across all your data sources, and tell you exactly where the numbers don't match — and why.",
+      "Production-grade data pipelines in 3 weeks. Ingestion (Fivetran/Airbyte) → Databricks Lakehouse → dbt models → dashboard. Not a PoC, not a deck — running in your account.",
   },
   {
     num: "03",
-    icon: Wrench,
-    title: "We Fix",
+    icon: Rocket,
+    title: "Ship",
     description:
-      "Refunds, duplicates, timezone mismatches, test payments — we resolve every discrepancy once so your data is clean from day one.",
+      "One AI agent shipped per month — AR chaser, CS triage, lead enricher, inventory alerter. Tied to your lakehouse so it stays accurate. Evaluated, monitored, versioned.",
   },
   {
     num: "04",
-    icon: Calculator,
-    title: "We Calculate",
+    icon: Headphones,
+    title: "Own",
     description:
-      "MRR. Churn. CAC. LTV. Burn Rate. Runway. All six metrics computed from verified, reconciled data — not best guesses from a broken spreadsheet.",
-  },
-  {
-    num: "05",
-    icon: Mail,
-    title: "You Receive",
-    description:
-      "A branded PDF report, a live dashboard, and a 3-line narrative summary an investor can read in 30 seconds. Delivered by the 3rd of every month. Zero effort from you.",
+      "Private Slack channel, 2 live syncs per week, 24-hour incident SLA. You own the code, the repo, and the docs. Runbook included so you're never locked in. Cancel any month.",
   },
 ];
 
@@ -59,19 +52,23 @@ export default function HowItWorks() {
   return (
     <section id="how-it-works" className="py-24 md:py-32 px-6">
       <div className="max-w-6xl mx-auto" ref={ref}>
-        {/* Heading */}
+        {/* Heading — StoryBrand: the plan */}
         <motion.div
           className="text-center mb-16"
           variants={fadeUp}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
         >
-          <h2 className="text-3xl md:text-5xl font-bold text-white mb-4">
-            From Messy Data to Investor-Ready Report in{" "}
-            <span className="bg-gradient-to-r from-purple-400 to-purple-600 bg-clip-text text-transparent">
-              5 Days
-            </span>
+          <h2 className="text-3xl md:text-5xl font-bold text-white mb-4 font-heading">
+            From Broken Data to{" "}
+            <span className="text-gradient-blue">
+              Board-Ready
+            </span>{" "}
+            in 4 Steps
           </h2>
+          <p className="text-base md:text-lg text-slate-400 max-w-xl mx-auto">
+            A clear path from audit to ownership. No 6-month SOW required.
+          </p>
         </motion.div>
 
         {/* Steps */}
@@ -82,7 +79,7 @@ export default function HowItWorks() {
           animate={inView ? "visible" : "hidden"}
         >
           {/* Vertical connecting line */}
-          <div className="absolute top-0 bottom-0 left-7 w-px border-l-2 border-dashed border-zinc-800" />
+          <div className="absolute top-0 bottom-0 left-7 w-px border-l-2 border-dashed border-slate-800" />
 
           <div className="flex flex-col gap-10">
             {steps.map((step) => (
@@ -92,22 +89,22 @@ export default function HowItWorks() {
                 className="relative flex items-start gap-5 pl-14"
               >
                 {/* Number badge */}
-                <div className="absolute left-0 flex-shrink-0 w-14 h-14 rounded-full bg-purple-600/20 border border-purple-500/30 flex items-center justify-center">
-                  <span className="text-sm font-bold text-purple-400">
+                <div className="absolute left-0 flex-shrink-0 w-14 h-14 rounded-full bg-blue-600/20 border border-blue-500/30 flex items-center justify-center">
+                  <span className="text-sm font-bold text-blue-400">
                     {step.num}
                   </span>
                 </div>
 
-                <div className="bg-zinc-900/50 border border-zinc-800 rounded-2xl p-6 flex-1 hover:border-purple-500/30 hover:shadow-[0_0_30px_rgba(139,92,246,0.1)] transition-all">
+                <div className="bg-[#0A1628]/80 border border-slate-800 rounded-2xl p-6 flex-1 hover:border-blue-500/30 hover:shadow-[0_0_30px_rgba(59,130,246,0.1)] transition-all">
                   <div className="flex items-center gap-3 mb-2">
-                    <div className="p-2 rounded-lg bg-zinc-800/50 border border-zinc-700/50">
-                      <step.icon size={18} className="text-purple-400" />
+                    <div className="p-2 rounded-lg bg-slate-800/50 border border-slate-700/50">
+                      <step.icon size={18} className="text-blue-400" />
                     </div>
                     <h3 className="text-xl font-semibold text-white">
                       {step.title}
                     </h3>
                   </div>
-                  <p className="text-sm text-zinc-400 leading-relaxed">
+                  <p className="text-sm text-slate-400 leading-relaxed">
                     {step.description}
                   </p>
                 </div>

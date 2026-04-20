@@ -5,6 +5,7 @@ import { Menu, X } from "lucide-react";
 import { useDemoForm } from "./DemoFormContext";
 
 const navLinks = [
+  { label: "Services", href: "#deliverables" },
   { label: "How It Works", href: "#how-it-works" },
   { label: "Pricing", href: "#pricing" },
   { label: "FAQ", href: "#faq" },
@@ -32,16 +33,16 @@ export default function Navbar() {
       <nav
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           scrolled
-            ? "bg-[#0A0A0A]/80 backdrop-blur-lg border-b border-zinc-800/50"
+            ? "bg-[#050A14]/80 backdrop-blur-lg border-b border-slate-800/50"
             : "bg-transparent"
         }`}
       >
         <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
           {/* Logo */}
-          <a href="#" className="flex items-center gap-0 text-xl font-extrabold tracking-tight">
+          <a href="#" className="flex items-center gap-0 text-xl font-extrabold tracking-tight font-heading">
             <span className="text-white">Data</span>
-            <span className="bg-gradient-to-r from-purple-400 to-purple-600 bg-clip-text text-transparent">Byt</span>
-            <span className="w-1.5 h-1.5 rounded-full bg-purple-500 ml-0.5 mb-3"></span>
+            <span className="text-gradient-blue">Byt</span>
+            <span className="w-1.5 h-1.5 rounded-full bg-blue-500 ml-0.5 mb-3"></span>
           </a>
 
           {/* Desktop nav */}
@@ -50,23 +51,23 @@ export default function Navbar() {
               <a
                 key={link.href}
                 href={link.href}
-                className="text-sm font-medium text-zinc-400 hover:text-white transition-colors"
+                className="text-sm font-medium text-slate-400 hover:text-white transition-colors"
               >
                 {link.label}
               </a>
             ))}
             <button
               onClick={openDemo}
-              className="bg-gradient-to-r from-purple-600 to-purple-500 hover:from-purple-500 hover:to-purple-400 text-white text-sm font-semibold rounded-full px-6 py-2.5 transition-all hover:scale-[1.02]"
+              className="bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 text-white text-sm font-semibold rounded-full px-6 py-2.5 transition-all hover:scale-[1.02] hover:shadow-[0_0_20px_rgba(59,130,246,0.3)]"
             >
-              Request Demo
+              Book a Free Audit
             </button>
           </div>
 
           {/* Mobile hamburger */}
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
-            className="md:hidden text-zinc-400 hover:text-white transition-colors"
+            className="md:hidden text-slate-400 hover:text-white transition-colors"
             aria-label="Toggle menu"
           >
             {mobileOpen ? <X size={24} /> : <Menu size={24} />}
@@ -84,19 +85,19 @@ export default function Navbar() {
 
       {/* Mobile drawer */}
       <div
-        className={`fixed top-0 right-0 z-50 h-full w-72 bg-[#111111] border-l border-zinc-800 transform transition-transform duration-300 ease-out md:hidden ${
+        className={`fixed top-0 right-0 z-50 h-full w-72 bg-[#0A1628] border-l border-slate-800 transform transition-transform duration-300 ease-out md:hidden ${
           mobileOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
-        <div className="flex items-center justify-between px-6 h-16 border-b border-zinc-800">
-          <span className="flex items-center gap-0 text-lg font-extrabold tracking-tight">
+        <div className="flex items-center justify-between px-6 h-16 border-b border-slate-800">
+          <span className="flex items-center gap-0 text-lg font-extrabold tracking-tight font-heading">
             <span className="text-white">Data</span>
-            <span className="bg-gradient-to-r from-purple-400 to-purple-600 bg-clip-text text-transparent">Byt</span>
-            <span className="w-1.5 h-1.5 rounded-full bg-purple-500 ml-0.5 mb-2"></span>
+            <span className="text-gradient-blue">Byt</span>
+            <span className="w-1.5 h-1.5 rounded-full bg-blue-500 ml-0.5 mb-2"></span>
           </span>
           <button
             onClick={() => setMobileOpen(false)}
-            className="text-zinc-400 hover:text-white transition-colors"
+            className="text-slate-400 hover:text-white transition-colors"
             aria-label="Close menu"
           >
             <X size={24} />
@@ -108,16 +109,16 @@ export default function Navbar() {
               key={link.href}
               href={link.href}
               onClick={() => setMobileOpen(false)}
-              className="text-base font-medium text-zinc-400 hover:text-white transition-colors"
+              className="text-base font-medium text-slate-400 hover:text-white transition-colors"
             >
               {link.label}
             </a>
           ))}
           <button
             onClick={() => { setMobileOpen(false); openDemo(); }}
-            className="bg-gradient-to-r from-purple-600 to-purple-500 hover:from-purple-500 hover:to-purple-400 text-white text-sm font-semibold rounded-full px-6 py-3 text-center transition-all mt-2"
+            className="bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 text-white text-sm font-semibold rounded-full px-6 py-3 text-center transition-all mt-2"
           >
-            Request Demo
+            Book a Free Audit
           </button>
         </div>
       </div>

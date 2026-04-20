@@ -1,5 +1,6 @@
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
+import TechStack from "@/components/TechStack";
 import Problem from "@/components/Problem";
 import TheRealProblem from "@/components/TheRealProblem";
 import HowItWorks from "@/components/HowItWorks";
@@ -8,8 +9,10 @@ import NarrativeExample from "@/components/NarrativeExample";
 import TimeSaved from "@/components/TimeSaved";
 import Guarantee from "@/components/Guarantee";
 import WhyTrustUs from "@/components/WhyTrustUs";
+import FounderStory from "@/components/FounderStory";
 import Pricing from "@/components/Pricing";
 import CaseStudies from "@/components/CaseStudies";
+import LeadMagnet from "@/components/LeadMagnet";
 import FAQ from "@/components/FAQ";
 import FinalCTA from "@/components/FinalCTA";
 import Footer from "@/components/Footer";
@@ -22,6 +25,7 @@ export default function Home() {
       <Navbar />
       <main>
         <Hero />
+        <TechStack />
         <Problem />
         <TheRealProblem />
         <HowItWorks />
@@ -30,8 +34,10 @@ export default function Home() {
         <TimeSaved />
         <Guarantee />
         <WhyTrustUs />
+        <FounderStory />
         <Pricing />
         <CaseStudies />
+        <LeadMagnet />
         <FAQ />
         <FinalCTA />
       </main>
@@ -40,4 +46,3 @@ export default function Home() {
     </DemoFormProvider>
   );
 }
-

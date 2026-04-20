@@ -2,26 +2,32 @@
 
 import { motion, useInView, type Variants } from "framer-motion";
 import { useRef } from "react";
-import { FileSpreadsheet, Clock, AlertTriangle } from "lucide-react";
+import { AlertTriangle, DollarSign, BrainCircuit } from "lucide-react";
 
 const painPoints = [
   {
-    icon: FileSpreadsheet,
-    title: "Manual Razorpay Exports",
-    description:
-      "Every month, you download CSVs, open Google Sheets, and copy-paste numbers like it's 2015. You know there's a better way — you just haven't had time to build it.",
-  },
-  {
-    icon: Clock,
-    title: "4+ Hours Wasted Monthly",
-    description:
-      "You're manually calculating MRR, churn, and CAC — hours that should go toward your product, your team, or your sanity. The spreadsheet always wins.",
-  },
-  {
     icon: AlertTriangle,
-    title: "Night-Before Panic",
+    title: "Pipelines Break Every Week",
     description:
-      "It's 11 PM. Your investor call is at 10 AM. Razorpay says one number. Your sheet says another. You don't know which is right — and you can't afford to guess.",
+      "30–40% of data pipelines fail weekly. 67 incidents per month on average. Your board sees the broken dashboard — and loses confidence in your numbers.",
+    stat: "67",
+    statLabel: "incidents/month avg",
+  },
+  {
+    icon: DollarSign,
+    title: "Can't Justify a $150K Hire",
+    description:
+      "A full-time US data engineer costs $131K–$170K loaded. You need 20 hours a week, not 40. But Upwork freelancers disappear after two sprints.",
+    stat: "$150K",
+    statLabel: "avg annual cost",
+  },
+  {
+    icon: BrainCircuit,
+    title: "AI Pilots That Go Nowhere",
+    description:
+      "40% of agentic AI projects will be cancelled by 2027. The gap between 'we want AI' and 'our data supports AI' is where projects die.",
+    stat: "40%",
+    statLabel: "AI projects cancelled",
   },
 ];
 
@@ -43,13 +49,21 @@ export default function Problem() {
     <section id="problem" className="py-24 md:py-32 px-6">
       <div className="max-w-6xl mx-auto" ref={ref}>
         <motion.h2
-          className="text-3xl md:text-5xl font-bold text-white text-center mb-16"
+          className="text-3xl md:text-5xl font-bold text-white text-center mb-4 font-heading"
           variants={fadeUp}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
         >
           Sound Familiar?
         </motion.h2>
+        <motion.p
+          className="text-base md:text-lg text-slate-400 text-center max-w-xl mx-auto mb-16"
+          variants={fadeUp}
+          initial="hidden"
+          animate={inView ? "visible" : "hidden"}
+        >
+          Every Seed-to-Series B founder hits these walls.
+        </motion.p>
 
         <motion.div
           className="grid grid-cols-1 md:grid-cols-3 gap-5"
@@ -61,28 +75,35 @@ export default function Problem() {
             <motion.div
               key={point.title}
               variants={fadeUp}
-              className="bg-zinc-900/50 border border-zinc-800 rounded-2xl p-8 hover:border-purple-500/30 hover:shadow-[0_0_30px_rgba(139,92,246,0.1)] transition-all"
+              className="bg-[#0A1628]/80 border border-slate-800 rounded-2xl p-8 hover:border-blue-500/30 hover:shadow-[0_0_30px_rgba(59,130,246,0.1)] transition-all group"
             >
-              <div className="p-3 rounded-xl bg-purple-500/10 border border-purple-500/20 w-fit mb-5">
-                <point.icon size={24} className="text-purple-400" />
+              <div className="flex items-start justify-between mb-5">
+                <div className="p-3 rounded-xl bg-blue-500/10 border border-blue-500/20 w-fit">
+                  <point.icon size={24} className="text-blue-400" />
+                </div>
+                <div className="text-right">
+                  <p className="text-2xl font-bold text-gradient-blue">{point.stat}</p>
+                  <p className="text-xs text-slate-500">{point.statLabel}</p>
+                </div>
               </div>
               <h3 className="text-xl font-semibold text-white mb-2">
                 {point.title}
               </h3>
-              <p className="text-sm text-zinc-400 leading-relaxed">
+              <p className="text-sm text-slate-400 leading-relaxed">
                 {point.description}
               </p>
             </motion.div>
           ))}
         </motion.div>
 
+        {/* StoryBrand: stakes — what happens if you don't act */}
         <motion.p
-          className="text-center text-zinc-500 italic mt-12 text-base"
+          className="text-center text-slate-500 italic mt-12 text-base"
           variants={fadeUp}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
         >
-          You didn&apos;t start a company to do data entry.
+          You didn&apos;t raise to babysit data pipelines.
         </motion.p>
       </div>
     </section>

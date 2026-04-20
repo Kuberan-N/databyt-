@@ -6,40 +6,36 @@ import { ChevronDown } from "lucide-react";
 
 const faqs = [
   {
-    q: "What data sources do you support?",
-    a: "Razorpay, Google Sheets, HubSpot, Zoho CRM, and LeadSquared. If you use something else, we'll scope it within 48 hours.",
+    q: "What tech stack do you work with?",
+    a: "Databricks (Lakehouse, Unity Catalog, Spark), dbt, Fivetran, Airbyte, Snowflake, Apache Airflow, and major cloud platforms (AWS, Azure, GCP). For AI agents, we use Claude, OpenAI, LangChain, and LangGraph. If you use something else, we'll scope compatibility within 48 hours.",
   },
   {
-    q: "How long does setup take?",
-    a: "5 business days from the day you share access to your data sources.",
+    q: "How fast can you start?",
+    a: "A working pipeline or agent lands in your account within 7 days of kickoff. Full setup takes 3 weeks for production-grade pipelines. If we don't deliver in Week 1, you get a full refund.",
   },
   {
-    q: "Is my data safe?",
-    a: "Yes. We use read-only access to your data sources. Your data is processed and stored securely. We never share it with third parties.",
+    q: "What about data security?",
+    a: "We use read-only API access to your data sources. Data never leaves your account — we work inside your Databricks/Snowflake environment. SOC 2 compliance in progress. GDPR-ready. You control access and can revoke anytime.",
   },
   {
-    q: "Can I cancel anytime?",
-    a: "Yes. No lock-in contracts. Cancel with 30 days notice.",
+    q: "How does pricing work?",
+    a: "Fixed monthly fee, billed monthly. No 6-month SOWs, no surprise invoices. Cancel with 7 days' notice — you keep the code, the repo, and the docs. The Audit Sprint is a one-time $1,500 engagement with no ongoing commitment.",
   },
   {
-    q: "What if I need custom metrics?",
-    a: "The Full Data Pipeline plan includes custom metric definitions. We'll work with you to define exactly what you need.",
+    q: "What makes you different from a consultancy?",
+    a: "Traditional consultancies (Accenture, Tiger Analytics) start at $50K+ and take 3–6 months. We're one senior operator, fixed monthly fee, shipping outcomes — not a team of juniors billing hours. You get the same Databricks-native expertise at a fraction of the cost.",
   },
   {
-    q: "Do you work with pre-revenue startups?",
-    a: "Our services are designed for startups with at least ₹50K/month in revenue, as you need transaction data for meaningful metrics.",
+    q: "Do you replace our existing tools?",
+    a: "No. We optimize what you have. If you're on Databricks, we make it faster and cheaper. If you're on a messy mix of Airflow and Python scripts, we migrate you to a production-grade stack. We never force a re-platform.",
   },
   {
-    q: "What if my investor asks a tough question about the metrics?",
-    a: "We support you. Send us the question — we'll prepare the answer together. You'll never walk into a call feeling underprepared again.",
+    q: "What if we grow and need more?",
+    a: "Start with Fractional Lite ($2,500/mo). When you're ready, upgrade to Fractional Monthly ($4,500/mo) for the full data + AI stack. The Platform Partner tier ($8,500/mo) is for Series A–B companies that need unlimited scope and SOC 2-ready governance.",
   },
   {
-    q: "Do you offer a guarantee?",
-    a: "Yes. We deliver your first report before you pay anything. If the metrics don't match your actual data, you get a full refund. No fine print.",
-  },
-  {
-    q: "What makes you different from hiring a data analyst?",
-    a: "A full-time data analyst costs ₹15–20L per year. Databyt costs ₹85K per year. We deliver by the 3rd of every month, without you managing anyone, chasing deadlines, or reviewing someone else's spreadsheet.",
+    q: "Can we see a sample deliverable?",
+    a: "Yes. Book a free 20-minute audit — we'll run a real diagnostic on your data stack and show you exactly what we'd build. No obligation, no pitch. If we can't find at least one actionable insight, we'll tell you honestly.",
   },
 ];
 
@@ -63,7 +59,7 @@ export default function FAQ() {
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
         >
-          <h2 className="text-3xl md:text-5xl font-bold text-white mb-4">
+          <h2 className="text-3xl md:text-5xl font-bold text-white mb-4 font-heading">
             Questions? We&apos;ve Got Answers.
           </h2>
         </motion.div>
@@ -80,7 +76,7 @@ export default function FAQ() {
             return (
               <div
                 key={i}
-                className="bg-zinc-900/50 border border-zinc-800 rounded-2xl overflow-hidden transition-colors hover:border-zinc-700"
+                className="bg-[#0A1628]/80 border border-slate-800 rounded-2xl overflow-hidden transition-colors hover:border-slate-700"
               >
                 <button
                   onClick={() => setOpenIndex(isOpen ? null : i)}
@@ -94,7 +90,7 @@ export default function FAQ() {
                     transition={{ duration: 0.2 }}
                     className="flex-shrink-0"
                   >
-                    <ChevronDown size={20} className="text-zinc-500" />
+                    <ChevronDown size={20} className="text-slate-500" />
                   </motion.span>
                 </button>
 
@@ -106,7 +102,7 @@ export default function FAQ() {
                       exit={{ height: 0, opacity: 0 }}
                       transition={{ duration: 0.25, ease: "easeInOut" }}
                     >
-                      <p className="px-6 pb-5 text-sm text-zinc-400 leading-relaxed">
+                      <p className="px-6 pb-5 text-sm text-slate-400 leading-relaxed">
                         {faq.a}
                       </p>
                     </motion.div>

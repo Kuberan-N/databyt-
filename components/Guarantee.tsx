@@ -7,15 +7,15 @@ import { Shield, RefreshCcw, BadgeCheck } from "lucide-react";
 const guarantees = [
   {
     icon: Shield,
-    text: "First report delivered before you pay a single rupee",
+    text: "Working pipeline or agent in your account within 7 days — or 100% refund",
   },
   {
     icon: RefreshCcw,
-    text: "Full refund if the metrics don't match your actual data",
+    text: "Metrics that don't match your source of truth? We rebuild free until they match",
   },
   {
     icon: BadgeCheck,
-    text: "Free revisions until you — and your investors — are fully confident",
+    text: "Cancel any month with 7 days' notice. You keep the code, the repo, and the docs",
   },
 ];
 
@@ -36,30 +36,29 @@ export default function Guarantee() {
   return (
     <section className="py-24 md:py-32 px-6">
       <div className="max-w-4xl mx-auto text-center" ref={ref}>
-        {/* Headline */}
+        {/* Headline — Hormozi: risk reversal */}
         <motion.h2
-          className="text-3xl md:text-5xl font-bold text-white mb-6"
+          className="text-3xl md:text-5xl font-bold text-white mb-6 font-heading"
           variants={fadeUp}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
         >
-          Our Promise:{" "}
-          <span className="bg-gradient-to-r from-purple-400 to-purple-600 bg-clip-text text-transparent">
-            You Pay After You See the Work
+          Week 1, or{" "}
+          <span className="text-gradient-blue">
+            Your Money Back
           </span>
         </motion.h2>
 
         {/* Body */}
         <motion.p
-          className="text-base md:text-lg text-zinc-400 max-w-2xl mx-auto mb-12 leading-relaxed"
+          className="text-base md:text-lg text-slate-400 max-w-2xl mx-auto mb-12 leading-relaxed"
           variants={fadeUp}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
         >
-          We deliver your first report. You review every number. If the metrics
-          match reality and you&apos;re satisfied — you pay. If something&apos;s
-          off, we fix it free until it&apos;s right. No risk. No upfront
-          commitment. No awkward conversations.
+          A working pipeline or agent lands in your account within 7 days of
+          kickoff, or we refund 100%. No caveats, no fine print. We don&apos;t
+          get paid until you see the work.
         </motion.p>
 
         {/* Guarantee cards */}
@@ -73,12 +72,12 @@ export default function Guarantee() {
             <motion.div
               key={i}
               variants={fadeUp}
-              className="bg-zinc-900/50 border border-zinc-800 rounded-2xl p-6 hover:border-purple-500/30 hover:shadow-[0_0_30px_rgba(139,92,246,0.1)] transition-all"
+              className="bg-[#0A1628]/80 border border-slate-800 rounded-2xl p-6 hover:border-blue-500/30 hover:shadow-[0_0_30px_rgba(59,130,246,0.1)] transition-all"
             >
-              <div className="p-3 rounded-xl bg-purple-500/10 border border-purple-500/20 w-fit mx-auto mb-4">
-                <g.icon size={24} className="text-purple-400" />
+              <div className="p-3 rounded-xl bg-blue-500/10 border border-blue-500/20 w-fit mx-auto mb-4">
+                <g.icon size={24} className="text-blue-400" />
               </div>
-              <p className="text-sm text-zinc-300 leading-relaxed">{g.text}</p>
+              <p className="text-sm text-slate-300 leading-relaxed">{g.text}</p>
             </motion.div>
           ))}
         </motion.div>

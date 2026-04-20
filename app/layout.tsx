@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Outfit } from "next/font/google";
 import "./globals.css";
 
 const inter = Inter({
@@ -7,14 +7,20 @@ const inter = Inter({
   variable: "--font-inter",
 });
 
+const outfit = Outfit({
+  subsets: ["latin"],
+  variable: "--font-outfit",
+  weight: ["400", "500", "600", "700", "800"],
+});
+
 export const metadata: Metadata = {
-  title: "DataByt — Stop the Night-Before Investor Call Panic",
+  title: "DataByt — Fractional Data + AI Team for Startups",
   description:
-    "Your Razorpay says ₹10L. Your spreadsheet says ₹9.2L. We find the gap, fix it, and automate your investor reporting forever.",
+    "Replace the $150K data engineer with a $4,500/month retainer. Databricks pipelines, agentic AI, and investor-ready metrics — shipped monthly by one senior operator.",
   openGraph: {
-    title: "DataByt — Investor-Ready Metrics for Indian Founders",
+    title: "DataByt — Your Fractional Data + AI Team",
     description:
-      "We audit your data, fix discrepancies, and deliver a branded investor report by the 3rd of every month.",
+      "Databricks pipelines and agentic automations shipped monthly, for the price of one junior hire. Week 1, or your money back.",
     url: "https://databyt.in",
     siteName: "DataByt",
     type: "website",
@@ -29,7 +35,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <body
-        className={`${inter.variable} font-sans bg-[#0A0A0A] text-white antialiased`}
+        className={`${inter.variable} ${outfit.variable} font-sans bg-[#050A14] text-white antialiased`}
       >
         {children}
       </body>

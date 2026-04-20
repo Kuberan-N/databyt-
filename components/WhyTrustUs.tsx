@@ -2,26 +2,26 @@
 
 import { motion, useInView, type Variants } from "framer-motion";
 import { useRef } from "react";
-import { Heart, Search, Headphones } from "lucide-react";
+import { Database, Layers, Target } from "lucide-react";
 
 const cards = [
   {
-    icon: Heart,
-    title: "We Speak Founder",
+    icon: Database,
+    title: "Databricks-Native Specialist",
     description:
-      "We've been the founder at midnight, exporting Razorpay CSVs, praying the numbers add up before a 10 AM call. We built Databyt because we lived this pain.",
+      "Not a generalist dev shop. Every deliverable uses the same stack you'll scale into at Series B. No re-platforming, no migrations — just compounding value.",
   },
   {
-    icon: Search,
-    title: "We Audit, Not Just Automate",
+    icon: Layers,
+    title: "Data + AI in One Operator",
     description:
-      "We don't just pull your data into a prettier dashboard. We find exactly why your numbers don't match — and fix the root cause so it never breaks again.",
+      "Competitors silo data engineering and AI into separate vendors — doubling your coordination tax and your bills. One person, one bill, one Slack channel.",
   },
   {
-    icon: Headphones,
-    title: "Hypercare After Delivery",
+    icon: Target,
+    title: "Outcomes, Not Hours",
     description:
-      "Investor asks a tough question about your metrics? We help you answer it. Numbers look off after delivery? We fix it within 24 hours. You're never on your own.",
+      "Deliverables per month, not timesheets. No surprise invoices, no scope-creep conversations. You know exactly what you're getting and exactly what it costs.",
   },
 ];
 
@@ -44,14 +44,14 @@ export default function WhyTrustUs() {
       <div className="max-w-6xl mx-auto" ref={ref}>
         {/* Heading */}
         <motion.h2
-          className="text-3xl md:text-5xl font-bold text-white text-center mb-16"
+          className="text-3xl md:text-5xl font-bold text-white text-center mb-16 font-heading"
           variants={fadeUp}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
         >
-          Why Founders{" "}
-          <span className="bg-gradient-to-r from-purple-400 to-purple-600 bg-clip-text text-transparent">
-            Trust Us
+          Three Reasons to{" "}
+          <span className="text-gradient-blue">
+            Pick Us
           </span>
         </motion.h2>
 
@@ -66,15 +66,15 @@ export default function WhyTrustUs() {
             <motion.div
               key={card.title}
               variants={fadeUp}
-              className="bg-zinc-900/50 border border-zinc-800 rounded-2xl p-8 hover:border-purple-500/30 hover:shadow-[0_0_30px_rgba(139,92,246,0.1)] transition-all"
+              className="bg-[#0A1628]/80 border border-slate-800 rounded-2xl p-8 hover:border-blue-500/30 hover:shadow-[0_0_30px_rgba(59,130,246,0.1)] transition-all"
             >
-              <div className="p-3 rounded-xl bg-purple-500/10 border border-purple-500/20 w-fit mb-5">
-                <card.icon size={24} className="text-purple-400" />
+              <div className="p-3 rounded-xl bg-blue-500/10 border border-blue-500/20 w-fit mb-5">
+                <card.icon size={24} className="text-blue-400" />
               </div>
               <h3 className="text-xl font-semibold text-white mb-2">
                 {card.title}
               </h3>
-              <p className="text-sm text-zinc-400 leading-relaxed">
+              <p className="text-sm text-slate-400 leading-relaxed">
                 {card.description}
               </p>
             </motion.div>
