@@ -30,7 +30,7 @@ const deliverables = [
   {
     icon: Wallet,
     title: "FinOps Cost Control",
-    description: "Token cost optimization from Day 1. Databricks compute cost alerts. Average clients save $47K/yr on infrastructure after audit. Runaway costs eliminated.",
+    description: "Token cost optimization from Day 1. Databricks compute cost alerts. 20-40% typical Databricks cost reduction. Runaway costs eliminated.",
   },
   {
     icon: Headphones,

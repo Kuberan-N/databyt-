@@ -56,6 +56,10 @@ export default function FounderStory() {
             <p className="text-xs text-slate-500 mt-2">— Kuberan, Founder @ Databyt</p>
           </div>
 
+          <div className="mt-6 text-sm text-slate-300 bg-blue-500/10 border border-blue-500/20 p-4 rounded-xl">
+            Currently onboarding our first 10 founding clients at launch pricing. Prices increase after the first 10 case studies are published.
+          </div>
+
           <div className="mt-8 pt-6 border-t border-slate-800">
             <p className="text-white font-semibold">Kuberan</p>
             <p className="text-sm text-slate-500">Founder, Databyt · 8 years in data engineering · Databricks-native</p>

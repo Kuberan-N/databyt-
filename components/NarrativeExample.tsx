@@ -7,8 +7,8 @@ import { Zap, Shield, TrendingUp, Bot } from "lucide-react";
 const results = [
   {
     icon: TrendingUp,
-    metric: "$47K",
-    label: "Databricks cost savings found in 20 minutes",
+    metric: "20-40%",
+    label: "Databricks cost reduction found in 20 minutes",
   },
   {
     icon: Shield,
@@ -103,11 +103,11 @@ export default function NarrativeExample() {
           <p className="text-base md:text-lg text-slate-200 leading-relaxed italic">
             &ldquo;We&apos;d tried two AI vendors before Databyt. Both failed because our Databricks data was too messy.
             Databyt spent 2 weeks on the data foundation — Unity Catalog, dbt models, clean Delta tables — before
-            touching the agent. Week 4: AR Chase Agent live. Month 1: $184K recovered from overdue invoices.
+            touching the agent. Week 6: AR Chase Agent live. Month 1: $184K recovered from overdue invoices.
             The agent paid for the entire engagement in 30 days.&rdquo;
           </p>
           <p className="text-sm text-slate-500 mt-4">
-            Result: 4 weeks from kickoff · $184K recovered Month 1 · Agent still running 99.1% uptime
+            Result: 6 weeks from kickoff · $184K recovered Month 1 · Agent still running 99.1% uptime
           </p>
         </motion.div>
       </div>

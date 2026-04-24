@@ -9,8 +9,9 @@ const plans = [
   {
     name: "AI Readiness Audit",
     tag: "Start Here",
-    price: "$5,000",
+    price: "$499",
     priceNote: "one-time",
+    subtitle: "Launch special — limited to first 10 clients",
     duration: "2 weeks",
     who: "Seed-stage or pre-AI startups on Databricks",
     features: [
@@ -18,7 +19,7 @@ const plans = [
       "Agent opportunity map — 5 use cases prioritized",
       "FinOps baseline + cost reduction plan",
       "Written deliverable + 90-min walkthrough",
-      "100% applicable to Starter Agent tier",
+      "100% applicable to Build tier",
     ],
     cta: "Start Here",
     ctaStyle: "secondary" as const,
@@ -26,15 +27,16 @@ const plans = [
     highlighted: false,
   },
   {
-    name: "Starter Agent",
+    name: "Build",
     tag: "Most Popular",
-    price: "$15,000",
-    priceNote: "4 weeks",
-    duration: "4 weeks",
-    who: "Seed to Series A startups ready to ship their first agent",
+    price: "$3,500",
+    priceNote: "starting",
+    subtitle: "Scales up to $9,500 depending on complexity",
+    duration: "4-8 weeks",
+    who: "Seed to Series B startups ready to ship their first agent",
     features: [
       "AI Readiness Audit included",
-      "1 production AI agent built on your Databricks",
+      "Production AI agent built on your Databricks",
       "Data pipeline feeding the agent",
       "Monitoring + cost tracking dashboard",
       "Documentation + handoff training",
@@ -46,30 +48,11 @@ const plans = [
     highlighted: true,
   },
   {
-    name: "Production Agent System",
-    tag: "Enterprise",
-    price: "$50,000",
-    priceNote: "8 weeks",
-    duration: "8 weeks",
-    who: "Series A–B startups needing multi-agent production systems",
-    features: [
-      "Everything in Starter Agent, plus:",
-      "Multi-step agent with tool use + memory",
-      "Custom integrations (Slack/Email/CRM/API)",
-      "Evaluation framework + guardrails",
-      "Mosaic AI / Agent Bricks deployment",
-      "Unity Catalog governance setup",
-    ],
-    cta: "Book Free Audit First",
-    ctaStyle: "secondary" as const,
-    popular: false,
-    highlighted: false,
-  },
-  {
-    name: "AI Operations Retainer",
+    name: "Retain",
     tag: "Ongoing",
-    price: "$10,000",
-    priceNote: "/month",
+    price: "$2,500",
+    priceNote: "/month starting",
+    subtitle: "Scales to $4,500 for enterprise workloads",
     duration: "Ongoing",
     who: "Post-launch clients scaling AI with new agents every month",
     features: [
@@ -111,6 +94,9 @@ export default function Pricing() {
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
         >
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-sm font-semibold mb-6">
+            🎯 Launch Pricing — Locked for First 10 Clients Only
+          </div>
           <h2 className="text-3xl md:text-5xl font-bold text-white mb-4 font-heading">
             Simple Pricing.{" "}
             <span className="text-gradient-blue">Production-Ready Delivery.</span>
@@ -133,7 +119,7 @@ export default function Pricing() {
         </motion.div>
 
         <motion.div
-          className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5"
+          className="grid grid-cols-1 lg:grid-cols-3 gap-5"
           variants={stagger}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
@@ -161,6 +147,9 @@ export default function Pricing() {
 
               {/* Plan name */}
               <h3 className="text-lg font-bold text-white mb-1 mt-3">{plan.name}</h3>
+              {plan.subtitle && (
+                <p className="text-xs font-semibold text-amber-400 mb-2">{plan.subtitle}</p>
+              )}
               <p className="text-xs text-slate-500 mb-5 leading-snug">{plan.who}</p>
 
               {/* Pricing */}

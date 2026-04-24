@@ -9,7 +9,7 @@ const trustBadges = [
   { label: "GDPR ready" },
   { label: "Read-only API access" },
   { label: "You own all code + models" },
-  { label: "4-week delivery guarantee" },
+  { label: "6-week delivery guarantee" },
 ];
 
 const stats = [
@@ -21,7 +21,7 @@ const stats = [
   },
   {
     icon: Clock,
-    value: "4 weeks",
+    value: "6 weeks",
     label: "from kickoff to production agent",
     source: "Databyt guarantee",
   },
@@ -93,7 +93,7 @@ export default function Hero() {
         >
           We build production AI agents on your Databricks stack — with enterprise-grade data engineering under the hood.{" "}
           <span className="text-slate-300 font-medium">
-            Agent-ready data + one working agent in 4 weeks, or 100% refund.
+            Agent-ready data + one working agent in 6 weeks, or 100% refund.
           </span>
         </motion.p>
 
@@ -129,7 +129,7 @@ export default function Hero() {
           animate="visible"
           custom={3.5}
         >
-          4-week delivery guarantee · Cancel retainer anytime · You own every line of code
+          6-week delivery guarantee · Cancel retainer anytime · You own every line of code
         </motion.p>
 
         {/* Trust badges row */}

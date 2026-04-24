@@ -7,8 +7,8 @@ import { Shield, RefreshCcw, BadgeCheck } from "lucide-react";
 const guarantees = [
   {
     icon: Shield,
-    title: "4-Week Production Guarantee",
-    text: "Production agent running in 4 weeks — or 100% refund. No caveats, no fine print. We don't get paid until your agent is live.",
+    title: "6-Week Production Guarantee",
+    text: "Production agent running in 6 weeks — or 100% refund. No caveats, no fine print. We don't get paid until your agent is live.",
   },
   {
     icon: RefreshCcw,
@@ -45,7 +45,7 @@ export default function Guarantee() {
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
         >
-          4 Weeks,{" "}
+          6 Weeks,{" "}
           <span className="text-gradient-blue">or Your Money Back</span>
         </motion.h2>
 
@@ -55,7 +55,7 @@ export default function Guarantee() {
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
         >
-          We put our money where our mouth is. A production agent in your Databricks account within 4 weeks of kickoff — or a full refund. The risk is entirely on us. That&apos;s how confident we are.
+          We put our money where our mouth is. A production agent in your Databricks account within 6 weeks of kickoff — or a full refund. The risk is entirely on us. That&apos;s how confident we are.
         </motion.p>
 
         <motion.div

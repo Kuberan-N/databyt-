@@ -11,7 +11,7 @@ const faqs = [
   },
   {
     q: "How fast can you start?",
-    a: "Your AI Readiness Audit can be booked within 48 hours of our first call. The audit itself takes 2 weeks. Your first production agent is live 4 weeks after that — or you get a full refund.",
+    a: "Your AI Readiness Audit can be booked within 48 hours of our first call. The audit itself takes 2 weeks. Your first production agent is live 6 weeks after that — or you get a full refund.",
   },
   {
     q: "What about data security?",
@@ -19,11 +19,11 @@ const faqs = [
   },
   {
     q: "How does pricing work?",
-    a: "Fixed fees — no hourly billing, no surprise invoices. Every engagement starts with the $5,000 AI Readiness Audit (100% credited toward your build). The Starter Agent is $15,000 fixed-price for 4 weeks. The retainer is $10,000/month — cancel anytime with 7 days notice, you keep everything.",
+    a: "Fixed fees — no hourly billing, no surprise invoices. Every engagement starts with the $499 AI Readiness Audit. The Build phase is $3,500 - $9,500 depending on complexity. The retainer is $2,500/month starting — cancel anytime with 7 days notice, you keep everything.",
   },
   {
     q: "What makes you different from a consultancy?",
-    a: "We're data engineers first — most AI builders can't handle real enterprise data. Traditional consultancies (Accenture, Tiger Analytics) start at $150K+ and take 6 months. We ship a production agent in 4 weeks at a fixed price. The difference is operational maturity, not just AI tooling.",
+    a: "We're data engineers first — most AI builders can't handle real enterprise data. Traditional consultancies (Accenture, Tiger Analytics) start at $150K+ and take 6 months. We ship a production agent in 6 weeks at a fixed price. The difference is operational maturity, not just AI tooling.",
   },
   {
     q: "Do you replace our existing tools?",
@@ -31,7 +31,7 @@ const faqs = [
   },
   {
     q: "What if we grow and need more agents?",
-    a: "Move to our AI Operations Retainer — $10,000/month. We ship one new agent every month, handle monitoring and incident response with a 24-hour SLA, and continuously optimize your Databricks costs. Cancel any month with 7 days notice.",
+    a: "Move to our AI Operations Retainer — starting at $2,500/month (scales to $4,500 for enterprise workloads). We ship one new agent every month, handle monitoring and incident response with a 24-hour SLA, and continuously optimize your Databricks costs. Cancel any month with 7 days notice.",
   },
   {
     q: "Can we see a sample deliverable?",

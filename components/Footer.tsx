@@ -12,7 +12,7 @@ export default function Footer() {
           <span className="text-xs text-slate-700">·</span>
           <span className="text-xs text-slate-600">You own all code + models</span>
           <span className="text-xs text-slate-700">·</span>
-          <span className="text-xs text-slate-600">4-week delivery guarantee</span>
+          <span className="text-xs text-slate-600">6-week delivery guarantee</span>
         </div>
 
         {/* Main footer row */}

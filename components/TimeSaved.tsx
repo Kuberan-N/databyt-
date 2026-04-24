@@ -7,14 +7,14 @@ import { Clock, DollarSign, Bot, Activity } from "lucide-react";
 const results = [
   {
     icon: Clock,
-    value: "4 weeks",
+    value: "6 weeks",
     label: "From kickoff to production agent",
     color: "#3B82F6",
   },
   {
     icon: DollarSign,
-    value: "$47K",
-    label: "Average annual Databricks savings identified",
+    value: "20-40%",
+    label: "Typical Databricks cost reduction identified",
     color: "#10B981",
   },
   {
@@ -56,7 +56,7 @@ export default function TimeSaved() {
         >
           <h2 className="text-3xl md:text-5xl font-bold text-white mb-4 font-heading">
             What{" "}
-            <span className="text-gradient-blue">4 Weeks Looks Like</span>
+            <span className="text-gradient-blue">6 Weeks Looks Like</span>
           </h2>
           <p className="text-base md:text-lg text-slate-400 max-w-xl mx-auto">
             Real metrics from real production agent deployments. Anonymized for privacy.
