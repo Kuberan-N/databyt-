@@ -2,24 +2,33 @@
 
 import { motion, useInView, type Variants } from "framer-motion";
 import { useRef } from "react";
-import { X, Check } from "lucide-react";
+import { Clock, DollarSign, Bot, Activity } from "lucide-react";
 
-const withoutSteps = [
-  "Post job listing on LinkedIn — wait 2–3 months",
-  "$131K–$170K loaded annual cost (US average)",
-  "Single point of failure — 18-month median attrition",
-  "Can't also do AI — need a second hire for that",
-  "You manage them full-time — standups, reviews, 1:1s",
-  "They leave. Knowledge walks out the door.",
-];
-
-const withSteps = [
-  "Start this week — working pipeline in 7 days",
-  "$2,500–$4,500/mo — save $100K+ in year one",
-  "Senior operator, backed by documented runbooks",
-  "Data engineering + agentic AI in one person",
-  "Async Slack + 2 calls/week — zero management overhead",
-  "You own the code, repo, and docs. Cancel anytime.",
+const results = [
+  {
+    icon: Clock,
+    value: "4 weeks",
+    label: "From kickoff to production agent",
+    color: "#3B82F6",
+  },
+  {
+    icon: DollarSign,
+    value: "$47K",
+    label: "Average annual Databricks savings identified",
+    color: "#10B981",
+  },
+  {
+    icon: Bot,
+    value: "60%",
+    label: "Reduction in manual ops work after first agent",
+    color: "#8B5CF6",
+  },
+  {
+    icon: Activity,
+    value: "99%",
+    label: "Agent uptime on production systems",
+    color: "#06B6D4",
+  },
 ];
 
 const fadeUp: Variants = {
@@ -29,7 +38,7 @@ const fadeUp: Variants = {
 
 const stagger: Variants = {
   hidden: {},
-  visible: { transition: { staggerChildren: 0.08 } },
+  visible: { transition: { staggerChildren: 0.1 } },
 };
 
 export default function TimeSaved() {
@@ -37,107 +46,54 @@ export default function TimeSaved() {
   const inView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section className="py-24 md:py-32 px-6">
-      <div className="max-w-5xl mx-auto" ref={ref}>
-        {/* Headline — Hormozi: anchor the alternative cost */}
-        <motion.h2
-          className="text-3xl md:text-5xl font-bold text-white text-center mb-4 font-heading"
+    <section className="py-24 md:py-32 px-6 bg-[#0A1628]/30">
+      <div className="max-w-6xl mx-auto" ref={ref}>
+        <motion.div
+          className="text-center mb-16"
           variants={fadeUp}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
         >
-          Why Not{" "}
-          <span className="text-gradient-blue">
-            Just Hire?
-          </span>
-        </motion.h2>
-        <motion.p
-          className="text-base md:text-lg text-slate-400 text-center max-w-xl mx-auto mb-16"
-          variants={fadeUp}
-          initial="hidden"
-          animate={inView ? "visible" : "hidden"}
-        >
-          A full-time data engineer costs 3–4× more. Here&apos;s the side-by-side.
-        </motion.p>
+          <h2 className="text-3xl md:text-5xl font-bold text-white mb-4 font-heading">
+            What{" "}
+            <span className="text-gradient-blue">4 Weeks Looks Like</span>
+          </h2>
+          <p className="text-base md:text-lg text-slate-400 max-w-xl mx-auto">
+            Real metrics from real production agent deployments. Anonymized for privacy.
+          </p>
+        </motion.div>
 
-        {/* Two columns */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {/* Without Databyt */}
-          <motion.div
-            className="bg-[#0A1628]/80 border border-red-500/20 rounded-2xl p-8"
-            variants={stagger}
-            initial="hidden"
-            animate={inView ? "visible" : "hidden"}
-          >
-            <h3 className="text-lg font-semibold text-red-400 mb-6">
-              Full-Time Hire
-            </h3>
-            <div className="space-y-4">
-              {withoutSteps.map((step, i) => (
-                <motion.div
-                  key={i}
-                  variants={fadeUp}
-                  className="flex items-start gap-3"
-                >
-                  <X
-                    size={18}
-                    className="text-red-400/70 mt-0.5 flex-shrink-0"
-                  />
-                  <span className="text-sm text-slate-400">{step}</span>
-                </motion.div>
-              ))}
-            </div>
-            <motion.p
+        <motion.div
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5"
+          variants={stagger}
+          initial="hidden"
+          animate={inView ? "visible" : "hidden"}
+        >
+          {results.map((r) => (
+            <motion.div
+              key={r.label}
               variants={fadeUp}
-              className="mt-6 text-lg font-bold text-red-400"
+              className="bg-[#0A1628]/80 border border-slate-800 rounded-2xl p-8 text-center hover:border-blue-500/30 hover:shadow-[0_0_30px_rgba(59,130,246,0.1)] transition-all group"
             >
-              $150K/year. 3 months to ramp. High risk.
-            </motion.p>
-          </motion.div>
-
-          {/* With Databyt */}
-          <motion.div
-            className="bg-[#0A1628]/80 border border-emerald-500/20 rounded-2xl p-8"
-            variants={stagger}
-            initial="hidden"
-            animate={inView ? "visible" : "hidden"}
-          >
-            <h3 className="text-lg font-semibold text-emerald-400 mb-6">
-              Databyt Fractional
-            </h3>
-            <div className="space-y-4">
-              {withSteps.map((step, i) => (
-                <motion.div
-                  key={i}
-                  variants={fadeUp}
-                  className="flex items-start gap-3"
-                >
-                  <Check
-                    size={18}
-                    className="text-emerald-400/70 mt-0.5 flex-shrink-0"
-                  />
-                  <span className="text-sm text-slate-300">{step}</span>
-                </motion.div>
-              ))}
-            </div>
-            <motion.p
-              variants={fadeUp}
-              className="mt-6 text-lg font-bold text-emerald-400"
-            >
-              $30K–$54K/year. Live in 7 days. Zero risk.
-            </motion.p>
-          </motion.div>
-        </div>
-
-        {/* Closing — Hormozi: quantified value */}
-        <motion.p
-          className="text-center text-slate-500 italic mt-12 text-base"
-          variants={fadeUp}
-          initial="hidden"
-          animate={inView ? "visible" : "hidden"}
-        >
-          Save $100K+ in year one. Ship 12 pipelines and 12 AI agents. Keep the code forever.
-        </motion.p>
+              <div
+                className="w-14 h-14 rounded-2xl flex items-center justify-center mx-auto mb-5 border"
+                style={{
+                  backgroundColor: `${r.color}15`,
+                  borderColor: `${r.color}30`,
+                }}
+              >
+                <r.icon size={26} style={{ color: r.color }} />
+              </div>
+              <p
+                className="text-4xl font-extrabold mb-2"
+                style={{ color: r.color }}
+              >
+                {r.value}
+              </p>
+              <p className="text-sm text-slate-400 leading-relaxed">{r.label}</p>
+            </motion.div>
+          ))}
+        </motion.div>
       </div>
     </section>
   );

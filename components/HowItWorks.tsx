@@ -2,36 +2,48 @@
 
 import { motion, useInView, type Variants } from "framer-motion";
 import { useRef } from "react";
-import { Search, Wrench, Rocket, Headphones } from "lucide-react";
+import { Search, Database, Bot, Repeat } from "lucide-react";
 
 const steps = [
   {
     num: "01",
     icon: Search,
-    title: "Audit",
+    title: "AI READINESS AUDIT",
+    duration: "2 weeks",
     description:
-      "We run a free 2-week diagnostic on your data stack. Find the gaps. Map the architecture. Identify 20–40% in wasted Databricks/Snowflake spend. You get a written report — zero obligation.",
+      "We run a deep diagnostic on your data stack, infrastructure, and business processes. You get a written agent opportunity map (5 use cases prioritized), a FinOps baseline, and a cost reduction plan. Zero obligation after this.",
+    deliverable: "Written report + 90-min walkthrough",
+    color: "#3B82F6",
   },
   {
     num: "02",
-    icon: Wrench,
-    title: "Build",
+    icon: Database,
+    title: "DATA FOUNDATION",
+    duration: "4–6 weeks",
     description:
-      "Production-grade data pipelines in 3 weeks. Ingestion (Fivetran/Airbyte) → Databricks Lakehouse → dbt models → dashboard. Not a PoC, not a deck — running in your account.",
+      "We clean, unify, and prepare your data for AI. This means Databricks Lakehouse setup, dbt modelling, Unity Catalog governance, and production-grade pipelines. No agent works without this — and 95% of agencies skip it.",
+    deliverable: "Agent-ready data layer in your Databricks workspace",
+    color: "#06B6D4",
   },
   {
     num: "03",
-    icon: Rocket,
-    title: "Ship",
+    icon: Bot,
+    title: "AGENT BUILD",
+    duration: "4 weeks",
     description:
-      "One AI agent shipped per month — AR chaser, CS triage, lead enricher, inventory alerter. Tied to your lakehouse so it stays accurate. Evaluated, monitored, versioned.",
+      "First production agent running on your real data. Evaluated, monitored, versioned. With guardrails so it doesn't hallucinate. Deployed on Mosaic AI / Databricks Model Serving — inside your account.",
+    deliverable: "1 production AI agent + monitoring dashboard",
+    color: "#8B5CF6",
   },
   {
     num: "04",
-    icon: Headphones,
-    title: "Own",
+    icon: Repeat,
+    title: "SCALE & OWN",
+    duration: "Ongoing",
     description:
-      "Private Slack channel, 2 live syncs per week, 24-hour incident SLA. You own the code, the repo, and the docs. Runbook included so you're never locked in. Cancel any month.",
+      "One new agent shipped every month. FinOps optimization to control token costs. You own every repo, every model, every line of code. Cancel any month with 7 days notice. The compounding value stays with you.",
+    deliverable: "New agent monthly + 24hr SLA + private Slack",
+    color: "#10B981",
   },
 ];
 
@@ -52,7 +64,6 @@ export default function HowItWorks() {
   return (
     <section id="how-it-works" className="py-24 md:py-32 px-6">
       <div className="max-w-6xl mx-auto" ref={ref}>
-        {/* Heading — StoryBrand: the plan */}
         <motion.div
           className="text-center mb-16"
           variants={fadeUp}
@@ -60,18 +71,14 @@ export default function HowItWorks() {
           animate={inView ? "visible" : "hidden"}
         >
           <h2 className="text-3xl md:text-5xl font-bold text-white mb-4 font-heading">
-            From Broken Data to{" "}
-            <span className="text-gradient-blue">
-              Board-Ready
-            </span>{" "}
-            in 4 Steps
+            From AI Idea to Production{" "}
+            <span className="text-gradient-blue">in 4 Steps</span>
           </h2>
           <p className="text-base md:text-lg text-slate-400 max-w-xl mx-auto">
-            A clear path from audit to ownership. No 6-month SOW required.
+            A clear path from audit to running agents. Fixed timelines, fixed prices — no 6-month SOW required.
           </p>
         </motion.div>
 
-        {/* Steps */}
         <motion.div
           className="relative"
           variants={stagger}
@@ -79,34 +86,57 @@ export default function HowItWorks() {
           animate={inView ? "visible" : "hidden"}
         >
           {/* Vertical connecting line */}
-          <div className="absolute top-0 bottom-0 left-7 w-px border-l-2 border-dashed border-slate-800" />
+          <div className="absolute top-7 bottom-7 left-7 w-px border-l-2 border-dashed border-slate-800 hidden md:block" />
 
-          <div className="flex flex-col gap-10">
+          <div className="flex flex-col gap-8">
             {steps.map((step) => (
               <motion.div
                 key={step.num}
                 variants={fadeUp}
-                className="relative flex items-start gap-5 pl-14"
+                className="relative flex items-start gap-5 md:pl-14"
               >
                 {/* Number badge */}
-                <div className="absolute left-0 flex-shrink-0 w-14 h-14 rounded-full bg-blue-600/20 border border-blue-500/30 flex items-center justify-center">
-                  <span className="text-sm font-bold text-blue-400">
+                <div
+                  className="flex-shrink-0 w-14 h-14 rounded-full flex items-center justify-center border md:absolute md:left-0"
+                  style={{
+                    backgroundColor: `${step.color}15`,
+                    borderColor: `${step.color}40`,
+                  }}
+                >
+                  <span className="text-sm font-bold" style={{ color: step.color }}>
                     {step.num}
                   </span>
                 </div>
 
                 <div className="bg-[#0A1628]/80 border border-slate-800 rounded-2xl p-6 flex-1 hover:border-blue-500/30 hover:shadow-[0_0_30px_rgba(59,130,246,0.1)] transition-all">
-                  <div className="flex items-center gap-3 mb-2">
-                    <div className="p-2 rounded-lg bg-slate-800/50 border border-slate-700/50">
-                      <step.icon size={18} className="text-blue-400" />
+                  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-3">
+                    <div className="flex items-center gap-3">
+                      <div
+                        className="p-2 rounded-lg border"
+                        style={{ backgroundColor: `${step.color}15`, borderColor: `${step.color}30` }}
+                      >
+                        <step.icon size={18} style={{ color: step.color }} />
+                      </div>
+                      <h3 className="text-lg font-bold text-white tracking-wide">
+                        {step.title}
+                      </h3>
                     </div>
-                    <h3 className="text-xl font-semibold text-white">
-                      {step.title}
-                    </h3>
+                    <span
+                      className="text-xs font-semibold px-3 py-1 rounded-full border w-fit"
+                      style={{
+                        color: step.color,
+                        backgroundColor: `${step.color}10`,
+                        borderColor: `${step.color}30`,
+                      }}
+                    >
+                      {step.duration}
+                    </span>
                   </div>
-                  <p className="text-sm text-slate-400 leading-relaxed">
-                    {step.description}
-                  </p>
+                  <p className="text-sm text-slate-400 leading-relaxed mb-3">{step.description}</p>
+                  <div className="flex items-center gap-2 pt-3 border-t border-slate-800">
+                    <span className="text-xs text-slate-500">Deliverable:</span>
+                    <span className="text-xs font-medium text-slate-300">{step.deliverable}</span>
+                  </div>
                 </div>
               </motion.div>
             ))}

@@ -5,13 +5,13 @@ import { useRef } from "react";
 
 const techLogos = [
   { name: "Databricks", color: "#FF3621" },
+  { name: "Mosaic AI", color: "#FF6D3B" },
+  { name: "Unity Catalog", color: "#0063BB" },
+  { name: "Delta Live Tables", color: "#29B5E8" },
   { name: "dbt", color: "#FF694A" },
-  { name: "Snowflake", color: "#29B5E8" },
-  { name: "Fivetran", color: "#0073FF" },
-  { name: "Airbyte", color: "#615EFF" },
-  { name: "Apache Airflow", color: "#017CEE" },
-  { name: "Claude AI", color: "#D4A574" },
-  { name: "LangChain", color: "#1C3C3C" },
+  { name: "Claude (Anthropic)", color: "#D4A574" },
+  { name: "LangGraph", color: "#1C3C3C" },
+  { name: "Apache Spark", color: "#E25A1C" },
 ];
 
 const fadeUp: Variants = {
@@ -32,7 +32,7 @@ export default function TechStack() {
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
         >
-          Built on the stack you&apos;ll scale into at Series B
+          Databricks-native stack — your data never leaves your workspace
         </motion.p>
 
         <motion.div

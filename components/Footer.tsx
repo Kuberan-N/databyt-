@@ -4,18 +4,20 @@ export default function Footer() {
       <div className="max-w-6xl mx-auto">
         {/* Trust signals row */}
         <div className="flex flex-wrap items-center justify-center gap-4 mb-6">
-          <span className="text-xs text-slate-600">SOC 2 in progress</span>
+          <span className="text-xs text-slate-600">SOC 2 practices</span>
           <span className="text-xs text-slate-700">·</span>
-          <span className="text-xs text-slate-600">GDPR-ready</span>
+          <span className="text-xs text-slate-600">GDPR ready</span>
           <span className="text-xs text-slate-700">·</span>
           <span className="text-xs text-slate-600">Read-only API access</span>
           <span className="text-xs text-slate-700">·</span>
-          <span className="text-xs text-slate-600">Data never leaves your account</span>
+          <span className="text-xs text-slate-600">You own all code + models</span>
+          <span className="text-xs text-slate-700">·</span>
+          <span className="text-xs text-slate-600">4-week delivery guarantee</span>
         </div>
 
         {/* Main footer row */}
         <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-slate-500">
-          <p>&copy; 2026 Databyt. Built by founders, for founders.</p>
+          <p>&copy; 2026 Databyt. AI Agent Studio for Databricks Startups.</p>
 
           <div className="flex items-center gap-6">
             <a

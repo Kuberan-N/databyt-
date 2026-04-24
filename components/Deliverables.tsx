@@ -14,33 +14,33 @@ import {
 const deliverables = [
   {
     icon: Database,
-    title: "Data Pipeline Foundation",
-    description: "Databricks Lakehouse setup, 3 source integrations, dbt modelling, Unity Catalog, observability hooks — production-grade from day one.",
+    title: "Agent-Ready Data Foundation",
+    description: "Databricks Lakehouse setup, Unity Catalog governance, Delta Live Tables, dbt modelling — everything an AI agent needs to operate on real production data.",
   },
   {
     icon: Bot,
-    title: "Agentic AI Module",
-    description: "One production agent shipped per month — built on Claude/OpenAI + your lakehouse. Evaluated, monitored, and versioned.",
+    title: "Production AI Agent",
+    description: "One production agent shipped per engagement — built on Claude/OpenAI + your Databricks lakehouse. Evaluated, monitored, versioned, and running on Mosaic AI.",
   },
   {
     icon: BarChart3,
-    title: "Metrics & Reporting",
-    description: "Live dashboard (Metabase/Hex/Databricks SQL) + monthly investor-ready PDF with a 3-line narrative your board can read in 30 seconds.",
+    title: "Agent Monitoring Dashboard",
+    description: "Live dashboard showing agent performance, token usage, error rates, and business outcome metrics. You see exactly what your agent is doing and what it costs.",
   },
   {
     icon: Wallet,
-    title: "FinOps Monitoring",
-    description: "Databricks/Snowflake cost dashboard with alerts at 80% budget. Quarterly optimization pass. Clients save 20–40% on average.",
+    title: "FinOps Cost Control",
+    description: "Token cost optimization from Day 1. Databricks compute cost alerts. Average clients save $47K/yr on infrastructure after audit. Runaway costs eliminated.",
   },
   {
     icon: Headphones,
-    title: "Support & Ownership",
-    description: "Private Slack, 2 syncs/week, 24-hour incident SLA. Runbook + README included so you're never locked in.",
+    title: "Guardrails & Evaluation Framework",
+    description: "Agents hallucinate without guardrails. We build evaluation pipelines, safety checks, and output validation — so your agent is reliable enough for production.",
   },
   {
     icon: FileText,
-    title: "Documentation & Handoff",
-    description: "Every deliverable comes with architecture docs, data lineage maps, and a handoff guide. You own everything — code, repo, docs.",
+    title: "Full Documentation & Handoff",
+    description: "Architecture docs, agent runbooks, data lineage maps, and a handoff guide for your team. You own everything — every repo, every model, every config file.",
   },
 ];
 
@@ -69,11 +69,11 @@ export default function Deliverables() {
           animate={inView ? "visible" : "hidden"}
         >
           <h2 className="text-3xl md:text-5xl font-bold text-white mb-4 font-heading">
-            What You Get{" "}
-            <span className="text-gradient-blue">Every Month</span>
+            What We{" "}
+            <span className="text-gradient-blue">Actually Build</span>
           </h2>
           <p className="text-base md:text-lg text-slate-400 max-w-xl mx-auto">
-            One operator. One Slack channel. Six deliverables shipped monthly.
+            Six deliverables. One fixed price. Everything inside your Databricks workspace — and you own it all.
           </p>
         </motion.div>
 

@@ -2,14 +2,29 @@
 
 import { motion, useInView, type Variants } from "framer-motion";
 import { useRef } from "react";
-import { AlertCircle } from "lucide-react";
+import { Check } from "lucide-react";
 
-const causes = [
-  "Databricks bills growing 17–32% year-over-year with no visibility into waste",
-  "Data scattered across 10–15 SaaS tools — no single source of truth",
-  "Pipeline failures silently corrupting your board-ready dashboards",
-  "AI pilots running on dirty data that nobody owns or validates",
-  "Manual metric reconciliation before every board meeting",
+const differentiators = [
+  {
+    point: "Most agent builders can't handle real enterprise data. We can.",
+    emphasis: true,
+  },
+  {
+    point: "Databricks-native — your data never leaves your workspace",
+    emphasis: false,
+  },
+  {
+    point: "FinOps-aware — we control token costs from Day 1",
+    emphasis: false,
+  },
+  {
+    point: "Unity Catalog governance — every action is audited",
+    emphasis: false,
+  },
+  {
+    point: "You own every line of code we write",
+    emphasis: false,
+  },
 ];
 
 const fadeUp: Variants = {
@@ -27,72 +42,69 @@ export default function TheRealProblem() {
   const inView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section className="py-24 md:py-32 px-6">
-      <div className="max-w-4xl mx-auto" ref={ref}>
-        {/* Headline */}
-        <motion.h2
-          className="text-3xl md:text-5xl font-bold text-white text-center mb-8 font-heading"
-          variants={fadeUp}
-          initial="hidden"
-          animate={inView ? "visible" : "hidden"}
-        >
-          Only 31% of Firms Say Their Data Is{" "}
-          <span className="text-gradient-blue">
-            AI-Ready
-          </span>
-        </motion.h2>
+    <section className="py-24 md:py-32 px-6 bg-[#0A1628]/30">
+      <div className="max-w-5xl mx-auto" ref={ref}>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+          {/* Left: heading + context */}
+          <motion.div
+            variants={fadeUp}
+            initial="hidden"
+            animate={inView ? "visible" : "hidden"}
+          >
+            <span className="inline-block text-xs font-semibold uppercase tracking-[0.2em] text-blue-400 mb-4">
+              Our Difference
+            </span>
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-6 font-heading leading-tight">
+              We&apos;re{" "}
+              <span className="text-gradient-blue">
+                Data Engineers First,
+              </span>{" "}
+              AI Builders Second
+            </h2>
+            <p className="text-slate-400 leading-relaxed mb-6">
+              Building an AI agent on clean demo data is easy. Building one that survives your messy, siloed, governed enterprise data — that&apos;s a fundamentally different skill set. Most AI agencies don&apos;t have it.
+            </p>
+            <p className="text-slate-400 leading-relaxed">
+              We came up through data engineering — Databricks, Unity Catalog, dbt, Spark. We only build AI on top of a data foundation we&apos;ve already hardened. That&apos;s why our agents work in production.
+            </p>
 
-        {/* Body */}
-        <motion.p
-          className="text-base md:text-lg text-slate-400 text-center max-w-2xl mx-auto mb-10 leading-relaxed"
-          variants={fadeUp}
-          initial="hidden"
-          animate={inView ? "visible" : "hidden"}
-        >
-          The gap between &ldquo;we want AI&rdquo; and &ldquo;our data
-          supports AI&rdquo; is where 40%+ of agentic projects get cancelled.
-          <br /><br />
-          The same data problems show up at every startup we audit:
-        </motion.p>
+            {/* Quote callout */}
+            <div className="mt-8 p-4 border border-blue-500/20 bg-blue-500/5 rounded-xl">
+              <p className="text-sm text-slate-300 italic leading-relaxed">
+                &ldquo;70% of enterprise AI projects fail to move from proof-of-concept to production. The #1 reason: data infrastructure not ready.&rdquo;
+              </p>
+              <p className="text-xs text-slate-500 mt-2">— Databricks State of Data + AI Report, 2024</p>
+            </div>
+          </motion.div>
 
-        {/* Causes list */}
-        <motion.div
-          className="bg-[#0A1628]/80 border border-slate-800 rounded-2xl p-6 md:p-8 mb-10"
-          variants={stagger}
-          initial="hidden"
-          animate={inView ? "visible" : "hidden"}
-        >
-          {causes.map((cause, i) => (
-            <motion.div
-              key={i}
-              variants={fadeUp}
-              className="flex items-start gap-3 py-3 border-b border-slate-800/50 last:border-b-0"
-            >
-              <AlertCircle
-                size={18}
-                className="text-blue-400 mt-0.5 flex-shrink-0"
-              />
-              <span className="text-sm md:text-base text-slate-300 leading-relaxed">
-                {cause}
-              </span>
-            </motion.div>
-          ))}
-        </motion.div>
-
-        {/* Closing */}
-        <motion.p
-          className="text-base md:text-lg text-slate-300 text-center max-w-2xl mx-auto leading-relaxed"
-          variants={fadeUp}
-          initial="hidden"
-          animate={inView ? "visible" : "hidden"}
-        >
-          We audit your data stack, find the gaps, fix them once, and
-          automate them so they never break again. Your metrics become{" "}
-          <span className="text-white font-semibold">
-            board-trustworthy
-          </span>{" "}
-          — for the first time.
-        </motion.p>
+          {/* Right: bullet points */}
+          <motion.div
+            variants={stagger}
+            initial="hidden"
+            animate={inView ? "visible" : "hidden"}
+          >
+            <div className="space-y-4">
+              {differentiators.map((item, i) => (
+                <motion.div
+                  key={i}
+                  variants={fadeUp}
+                  className={`flex items-start gap-4 p-4 rounded-xl border transition-all ${
+                    item.emphasis
+                      ? "bg-blue-500/10 border-blue-500/30 hover:border-blue-500/50"
+                      : "bg-[#0A1628]/60 border-slate-800 hover:border-slate-700"
+                  }`}
+                >
+                  <div className={`p-1 rounded-full flex-shrink-0 mt-0.5 ${item.emphasis ? "bg-blue-500/20" : "bg-slate-700/50"}`}>
+                    <Check size={14} className={item.emphasis ? "text-blue-400" : "text-slate-400"} />
+                  </div>
+                  <span className={`text-sm leading-relaxed ${item.emphasis ? "text-white font-medium" : "text-slate-300"}`}>
+                    {item.point}
+                  </span>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+        </div>
       </div>
     </section>
   );

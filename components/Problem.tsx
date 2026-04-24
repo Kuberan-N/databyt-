@@ -2,32 +2,35 @@
 
 import { motion, useInView, type Variants } from "framer-motion";
 import { useRef } from "react";
-import { AlertTriangle, DollarSign, BrainCircuit } from "lucide-react";
+import { Database, AlertTriangle, Layers } from "lucide-react";
 
 const painPoints = [
   {
+    icon: Database,
+    title: "Dirty Data Kills Agents",
+    description:
+      "60% of AI projects are abandoned due to poor data quality. Your agent is only as good as the data feeding it — and messy, siloed production data breaks every LLM in minutes.",
+    stat: "60%",
+    statLabel: "AI projects fail at data (Gartner 2024)",
+    statColor: "text-red-400",
+  },
+  {
+    icon: Layers,
+    title: "Wrong Tech Stack",
+    description:
+      "Teams pick LangChain on notebooks that don't scale past demo day. Without Databricks-native infrastructure, you're one data volume spike away from a $0 production agent.",
+    stat: "Demo",
+    statLabel: "→ Production gap kills projects",
+    statColor: "text-amber-400",
+  },
+  {
     icon: AlertTriangle,
-    title: "Pipelines Break Every Week",
+    title: "No Production Discipline",
     description:
-      "30–40% of data pipelines fail weekly. 67 incidents per month on average. Your board sees the broken dashboard — and loses confidence in your numbers.",
-    stat: "67",
-    statLabel: "incidents/month avg",
-  },
-  {
-    icon: DollarSign,
-    title: "Can't Justify a $150K Hire",
-    description:
-      "A full-time US data engineer costs $131K–$170K loaded. You need 20 hours a week, not 40. But Upwork freelancers disappear after two sprints.",
-    stat: "$150K",
-    statLabel: "avg annual cost",
-  },
-  {
-    icon: BrainCircuit,
-    title: "AI Pilots That Go Nowhere",
-    description:
-      "40% of agentic AI projects will be cancelled by 2027. The gap between 'we want AI' and 'our data supports AI' is where projects die.",
+      "Agents hallucinate without proper guardrails, evaluation frameworks, and monitoring. 40% of agentic AI projects will be cancelled by 2027 (Gartner). The missing piece is always operational maturity.",
     stat: "40%",
-    statLabel: "AI projects cancelled",
+    statLabel: "Agentic AI projects cancelled by 2027",
+    statColor: "text-orange-400",
   },
 ];
 
@@ -54,15 +57,16 @@ export default function Problem() {
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
         >
-          Sound Familiar?
+          Why Most AI Projects{" "}
+          <span className="text-gradient-blue">Never Reach Production</span>
         </motion.h2>
         <motion.p
-          className="text-base md:text-lg text-slate-400 text-center max-w-xl mx-auto mb-16"
+          className="text-base md:text-lg text-slate-400 text-center max-w-2xl mx-auto mb-16"
           variants={fadeUp}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
         >
-          Every Seed-to-Series B founder hits these walls.
+          Every Seed-to-Series B startup hits the same three walls. Most AI builders can&apos;t fix them. We can.
         </motion.p>
 
         <motion.div
@@ -82,28 +86,23 @@ export default function Problem() {
                   <point.icon size={24} className="text-blue-400" />
                 </div>
                 <div className="text-right">
-                  <p className="text-2xl font-bold text-gradient-blue">{point.stat}</p>
-                  <p className="text-xs text-slate-500">{point.statLabel}</p>
+                  <p className={`text-2xl font-bold ${point.statColor}`}>{point.stat}</p>
+                  <p className="text-xs text-slate-500 max-w-[120px] text-right leading-tight">{point.statLabel}</p>
                 </div>
               </div>
-              <h3 className="text-xl font-semibold text-white mb-2">
-                {point.title}
-              </h3>
-              <p className="text-sm text-slate-400 leading-relaxed">
-                {point.description}
-              </p>
+              <h3 className="text-xl font-semibold text-white mb-2">{point.title}</h3>
+              <p className="text-sm text-slate-400 leading-relaxed">{point.description}</p>
             </motion.div>
           ))}
         </motion.div>
 
-        {/* StoryBrand: stakes — what happens if you don't act */}
         <motion.p
           className="text-center text-slate-500 italic mt-12 text-base"
           variants={fadeUp}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
         >
-          You didn&apos;t raise to babysit data pipelines.
+          You didn&apos;t raise to babysit data pipelines — or watch AI demos that never ship.
         </motion.p>
       </div>
     </section>

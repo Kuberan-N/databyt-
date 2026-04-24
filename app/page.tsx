@@ -1,6 +1,7 @@
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import TechStack from "@/components/TechStack";
+import VideoDemo from "@/components/VideoDemo";
 import Problem from "@/components/Problem";
 import TheRealProblem from "@/components/TheRealProblem";
 import HowItWorks from "@/components/HowItWorks";
@@ -26,6 +27,7 @@ export default function Home() {
       <main>
         <Hero />
         <TechStack />
+        <VideoDemo />
         <Problem />
         <TheRealProblem />
         <HowItWorks />

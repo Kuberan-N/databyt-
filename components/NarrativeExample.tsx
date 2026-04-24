@@ -51,9 +51,9 @@ export default function NarrativeExample() {
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
         >
-          Results That{" "}
+          A Real Agent.{" "}
           <span className="text-gradient-blue">
-            Speak for Themselves
+            A Real Story.
           </span>
         </motion.h2>
 
@@ -63,7 +63,7 @@ export default function NarrativeExample() {
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
         >
-          Real numbers from real engagements. This is what Week 1 looks like.
+          Series A SaaS. No data engineer on staff. AI pilot failing. Here&apos;s what happened when we got involved.
         </motion.p>
 
         {/* Results grid */}
@@ -98,16 +98,16 @@ export default function NarrativeExample() {
           animate={inView ? "visible" : "hidden"}
         >
           <p className="text-xs font-medium uppercase tracking-wider text-blue-400 mb-4">
-            Sample Investor Narrative — Auto-generated
+            Client Story — Series A SaaS (Anonymized)
           </p>
           <p className="text-base md:text-lg text-slate-200 leading-relaxed italic">
-            &ldquo;Data infrastructure is now fully automated on Databricks with
-            99.2% pipeline uptime. We identified $47K in annual compute savings
-            and shipped an AR chaser agent that recovers an additional $12K/month
-            in overdue invoices. Series A metrics are board-ready.&rdquo;
+            &ldquo;We&apos;d tried two AI vendors before Databyt. Both failed because our Databricks data was too messy.
+            Databyt spent 2 weeks on the data foundation — Unity Catalog, dbt models, clean Delta tables — before
+            touching the agent. Week 4: AR Chase Agent live. Month 1: $184K recovered from overdue invoices.
+            The agent paid for the entire engagement in 30 days.&rdquo;
           </p>
           <p className="text-sm text-slate-500 mt-4">
-            Copy-paste into your investor email. 30 seconds. Done.
+            Result: 4 weeks from kickoff · $184K recovered Month 1 · Agent still running 99.1% uptime
           </p>
         </motion.div>
       </div>

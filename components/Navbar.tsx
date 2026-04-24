@@ -5,9 +5,9 @@ import { Menu, X } from "lucide-react";
 import { useDemoForm } from "./DemoFormContext";
 
 const navLinks = [
-  { label: "Services", href: "#deliverables" },
   { label: "How It Works", href: "#how-it-works" },
   { label: "Pricing", href: "#pricing" },
+  { label: "Demo", href: "#video-demo" },
   { label: "FAQ", href: "#faq" },
 ];
 
@@ -22,7 +22,6 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Lock body scroll when mobile menu is open
   useEffect(() => {
     document.body.style.overflow = mobileOpen ? "hidden" : "";
     return () => { document.body.style.overflow = ""; };
@@ -42,7 +41,7 @@ export default function Navbar() {
           <a href="#" className="flex items-center gap-0 text-xl font-extrabold tracking-tight font-heading">
             <span className="text-white">Data</span>
             <span className="text-gradient-blue">Byt</span>
-            <span className="w-1.5 h-1.5 rounded-full bg-blue-500 ml-0.5 mb-3"></span>
+            <span className="w-1.5 h-1.5 rounded-full bg-blue-500 ml-0.5 mb-3" />
           </a>
 
           {/* Desktop nav */}
@@ -60,7 +59,7 @@ export default function Navbar() {
               onClick={openDemo}
               className="bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 text-white text-sm font-semibold rounded-full px-6 py-2.5 transition-all hover:scale-[1.02] hover:shadow-[0_0_20px_rgba(59,130,246,0.3)]"
             >
-              Book a Free Audit
+              Book Free AI Check
             </button>
           </div>
 
@@ -93,7 +92,7 @@ export default function Navbar() {
           <span className="flex items-center gap-0 text-lg font-extrabold tracking-tight font-heading">
             <span className="text-white">Data</span>
             <span className="text-gradient-blue">Byt</span>
-            <span className="w-1.5 h-1.5 rounded-full bg-blue-500 ml-0.5 mb-2"></span>
+            <span className="w-1.5 h-1.5 rounded-full bg-blue-500 ml-0.5 mb-2" />
           </span>
           <button
             onClick={() => setMobileOpen(false)}
@@ -118,7 +117,7 @@ export default function Navbar() {
             onClick={() => { setMobileOpen(false); openDemo(); }}
             className="bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 text-white text-sm font-semibold rounded-full px-6 py-3 text-center transition-all mt-2"
           >
-            Book a Free Audit
+            Book Free AI Readiness Check
           </button>
         </div>
       </div>
