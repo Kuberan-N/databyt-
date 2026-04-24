@@ -25,7 +25,6 @@ const databytRows = [
 ];
 
 const genericPositive = [true, true, true, false, false, false, false];
-const databytPositive = [true, true, true, true, true, true, true];
 
 const fadeUp: Variants = {
   hidden: { opacity: 0, y: 40 },
