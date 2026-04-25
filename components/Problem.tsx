@@ -2,7 +2,7 @@
 
 import { motion, useInView, type Variants } from "framer-motion";
 import { useRef } from "react";
-import { Database, AlertTriangle, Layers } from "lucide-react";
+
 
 const painPoints = [
   {

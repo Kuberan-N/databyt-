@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, type Variants } from "framer-motion";
-import { ArrowRight, Bot, Clock, Database, Shield, TrendingDown } from "lucide-react";
+import { ArrowRight, Bot, Shield, TrendingDown } from "lucide-react";
 import { useDemoForm } from "./DemoFormContext";
 
 const trustBadges = [
@@ -12,13 +12,7 @@ const trustBadges = [
   { label: "7-day delivery guarantee" },
 ];
 
-// Simple agent flow diagram nodes
-const agentNodes = [
-  { label: "Raw Data", color: "#3B82F6", delay: 0 },
-  { label: "Data Pipeline", color: "#06B6D4", delay: 0.3 },
-  { label: "AI Agent", color: "#8B5CF6", delay: 0.6 },
-  { label: "Business Output", color: "#10B981", delay: 0.9 },
-];
+
 
 const fadeUp: Variants = {
   hidden: { opacity: 0, y: 40 },
@@ -136,6 +130,7 @@ export default function Hero() {
         </motion.div>
 
         {/* Stats row / Agent flow removed */}
+      </div>
 
       {/* Bottom fade */}
       <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#050A14] to-transparent pointer-events-none" />
