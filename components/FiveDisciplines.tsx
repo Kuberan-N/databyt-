@@ -86,12 +86,14 @@ export default function FiveDisciplines() {
               variants={fadeUp}
               className="bg-[#0A1628]/80 border border-slate-800 rounded-2xl p-6 hover:border-blue-500/30 hover:bg-slate-800/40 transition-all flex flex-col h-full group relative"
             >
-              <div className="absolute top-6 right-6 text-4xl font-black text-slate-800/50 group-hover:text-blue-500/10 transition-colors">
-                {d.number}
+              <div className="flex justify-between items-start mb-4 relative z-10 gap-2">
+                <h3 className="text-lg font-bold text-white leading-snug">
+                  {d.title}
+                </h3>
+                <div className="text-4xl font-black text-slate-800/60 group-hover:text-cyan-400 group-hover:drop-shadow-[0_0_12px_rgba(34,211,238,0.8)] transition-all duration-300 transform group-hover:scale-110 flex-shrink-0">
+                  {d.number}
+                </div>
               </div>
-              <h3 className="text-lg font-bold text-white mb-4 relative z-10">
-                {d.title}
-              </h3>
               <p className="text-sm text-slate-400 leading-relaxed flex-grow relative z-10 mb-6">
                 {d.body}
               </p>

@@ -88,7 +88,7 @@ body {
   width: 600px;
   height: 600px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(59, 130, 246, 0.25) 0%, rgba(6, 182, 212, 0.1) 40%, transparent 70%);
+  background: radial-gradient(circle, rgba(0, 85, 255, 0.25) 0%, rgba(0, 229, 255, 0.1) 40%, transparent 70%);
   filter: blur(80px);
   animation: float 8s ease-in-out infinite, pulse-glow 4s ease-in-out infinite;
   pointer-events: none;
@@ -139,7 +139,7 @@ body {
 
 /* Gradient text utility */
 .text-gradient-blue {
-  background: linear-gradient(135deg, #3B82F6, #06B6D4);
+  background: linear-gradient(135deg, #0055ff, #00e5ff);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;

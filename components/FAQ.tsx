@@ -31,7 +31,7 @@ const faqs = [
   },
   {
     q: "Why should I trust a solo founder with a production AI system?",
-    a: "Senior engineer delivery (8+ years data engineering). No junior consultants. Documented 5-disciplines methodology. Full code ownership transfers to you. We're transparent about being early-stage — that's why founding-client pricing exists.",
+    a: "Senior engineer delivery (4+ years Azure Data Engineering). No junior consultants. Documented 5-disciplines methodology. Full code ownership transfers to you. We're transparent about being early-stage — that's why founding-client pricing exists.",
   },
 ];
 
