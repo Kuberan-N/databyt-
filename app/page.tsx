@@ -1,5 +1,6 @@
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
+import TwoPaths from "@/components/TwoPaths";
 import Problem from "@/components/Problem";
 import TheRealProblem from "@/components/TheRealProblem";
 import HowItWorks from "@/components/HowItWorks";
@@ -8,6 +9,7 @@ import NarrativeExample from "@/components/NarrativeExample";
 import TimeSaved from "@/components/TimeSaved";
 import ProofSection from "@/components/ProofSection";
 import Pricing from "@/components/Pricing";
+import FiveDisciplines from "@/components/FiveDisciplines";
 import WhatHappensAfter from "@/components/WhatHappensAfter";
 import Guarantee from "@/components/Guarantee";
 import WhyTrustUs from "@/components/WhyTrustUs";
@@ -26,6 +28,7 @@ export default function Home() {
       <Navbar />
       <main>
         <Hero />
+        <TwoPaths />
         <Problem />
         <TheRealProblem />
         <HowItWorks />
@@ -34,6 +37,7 @@ export default function Home() {
         <TimeSaved />
         <ProofSection />
         <Pricing />
+        <FiveDisciplines />
         <WhatHappensAfter />
         <Guarantee />
         <WhyTrustUs />

@@ -14,15 +14,15 @@ const outfit = Outfit({
 });
 
 export const metadata: Metadata = {
-  title: "Databyt — AI Agent Studio for Startups on Databricks",
+  title: "Databyt — Databricks Cost Audits + Production AI Agents",
   description:
-    "Production-grade AI agents built on your Databricks stack. First agent live in 6 weeks or full refund. For Seed-Series B startups.",
+    "Databricks cost audits ($749) and production AI agents ($12K-$25K) built with 5 disciplines: evaluation, failure modes, human-in-the-loop, memory loops, monitoring. Senior data engineer, no junior consultants. Founding 5 clients pricing.",
   keywords:
     "databricks AI agents, AI agent development, fractional AI team, databricks agent builder, AI readiness audit",
   openGraph: {
-    title: "Databyt — AI Agent Studio for Startups on Databricks",
+    title: "Databyt — Databricks Cost Audits + Production AI Agents",
     description:
-      "We build production AI agents on your Databricks stack — with enterprise-grade data engineering under the hood. Agent-ready data + one working agent in 6 weeks, or 100% refund.",
+      "Databricks cost audits ($749) and production AI agents ($12K-$25K) built with 5 disciplines: evaluation, failure modes, human-in-the-loop, memory loops, monitoring. Senior data engineer, no junior consultants. Founding 5 clients pricing.",
     url: "https://databyt.in",
     siteName: "Databyt",
     type: "website",

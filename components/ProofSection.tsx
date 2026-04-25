@@ -8,22 +8,22 @@ const proofs = [
   {
     icon: "📄",
     title: "Sample Audit Report",
-    text: "See exactly what you'll receive. No email gate.",
+    text: "See exactly what a DataByt audit looks like. No email gate, download instantly.",
     cta: "Download Sample Report (PDF)",
     link: "#",
   },
   {
     icon: "🎥",
-    title: "Audit Walkthrough Video",
-    text: "5-minute Loom showing how I read a Databricks workspace and identify the top 3 waste sources.",
-    cta: "Watch Walkthrough",
+    title: "AI Agent Walkthrough",
+    text: "5-minute Loom showing how we discover, scope, and evaluate an AI agent.",
+    cta: "Watch Demo (Loom)",
     link: "#",
   },
   {
     icon: "📊",
     title: "FinOps Field Manual",
-    text: "My 22-page guide to Databricks cost optimization. Same framework I use in every audit.",
-    cta: "Download Free (PDF)",
+    text: "The 22-page framework we use in every audit. Free download.",
+    cta: "Get the Manual (PDF)",
     link: "#",
   },
 ];

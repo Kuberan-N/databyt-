@@ -5,23 +5,37 @@ import { useRef } from "react";
 
 
 const painPoints = [
+  // ROW 1 - COST PAIN
   {
     icon: "💸",
     title: "Databricks bill keeps climbing",
-    description:
-      "Your monthly DBU spend grew 2-3x this year, but you can't point to specific reasons. Finance is asking questions you can't answer.",
+    description: "Your monthly DBU spend grew 2-3x this year. Finance is asking questions you can't answer.",
   },
   {
     icon: "🐌",
     title: "Pipelines are slow and flaky",
-    description:
-      "Jobs take hours longer than they should. You've added more compute to 'fix' it, but the problem keeps coming back.",
+    description: "Jobs take hours longer than they should. You've added more compute to 'fix' it, but the problem keeps coming back.",
   },
   {
     icon: "🤷",
     title: "Nobody knows what's actually running",
-    description:
-      "Your workspace has 40+ jobs, dozens of clusters, and notebooks nobody owns. You're paying for compute that probably isn't needed.",
+    description: "Your workspace has 40+ jobs, dozens of clusters, and notebooks nobody owns. You're paying for compute that probably isn't needed.",
+  },
+  // ROW 2 - AI PAIN
+  {
+    icon: "🎭",
+    title: "Your AI demos never reach production",
+    description: "You've shipped 3 agent prototypes. None survived production. The team calls them 'demos that work on Tuesdays.'",
+  },
+  {
+    icon: "🔥",
+    title: "AI projects burn budget without ROI",
+    description: "You spent $80K on a chatbot that hallucinates customer names. CFO is asking when this turns into revenue.",
+  },
+  {
+    icon: "🛠️",
+    title: "Your engineers can't build agents yet",
+    description: "Your team is great at pipelines but stuck on agent rigor — evaluation, failure modes, monitoring. They keep shipping demos, not systems.",
   },
 ];
 
@@ -43,25 +57,17 @@ export default function Problem() {
     <section id="problem" className="py-24 md:py-32 px-6">
       <div className="max-w-6xl mx-auto" ref={ref}>
         <motion.h2
-          className="text-3xl md:text-5xl font-bold text-white text-center mb-4 font-heading"
+          className="text-3xl md:text-5xl font-bold text-white text-center mb-16 font-heading"
           variants={fadeUp}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
         >
-          You Probably Have{" "}
-          <span className="text-gradient-blue">These 3 Symptoms</span>
+          If This Sounds Familiar,{" "}
+          <span className="text-gradient-blue">We Can Help</span>
         </motion.h2>
-        <motion.p
-          className="text-base md:text-lg text-slate-400 text-center max-w-2xl mx-auto mb-16"
-          variants={fadeUp}
-          initial="hidden"
-          animate={inView ? "visible" : "hidden"}
-        >
-          If any of these sound familiar, you have hidden waste in your Databricks environment.
-        </motion.p>
 
         <motion.div
-          className="grid grid-cols-1 md:grid-cols-3 gap-5"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5"
           variants={stagger}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
@@ -70,15 +76,15 @@ export default function Problem() {
             <motion.div
               key={point.title}
               variants={fadeUp}
-              className="bg-[#0A1628]/80 border border-slate-800 rounded-2xl p-8 hover:border-blue-500/30 hover:shadow-[0_0_30px_rgba(59,130,246,0.1)] transition-all group"
+              className="bg-[#0A1628]/80 border border-slate-800 rounded-2xl p-8 hover:border-blue-500/30 hover:shadow-[0_0_30px_rgba(59,130,246,0.1)] transition-all group flex flex-col"
             >
               <div className="flex items-start justify-between mb-5">
-                <div className="p-3 rounded-xl bg-blue-500/10 border border-blue-500/20 w-fit flex items-center justify-center text-2xl">
+                <div className="p-3 rounded-xl bg-slate-800/50 border border-slate-700/50 w-fit flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">
                   {point.icon}
                 </div>
               </div>
-              <h3 className="text-xl font-semibold text-white mb-2">{point.title}</h3>
-              <p className="text-sm text-slate-400 leading-relaxed">{point.description}</p>
+              <h3 className="text-xl font-semibold text-white mb-3">{point.title}</h3>
+              <p className="text-sm text-slate-400 leading-relaxed flex-grow">{point.description}</p>
             </motion.div>
           ))}
         </motion.div>

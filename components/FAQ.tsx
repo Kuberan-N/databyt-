@@ -5,33 +5,47 @@ import { motion, useInView, AnimatePresence, type Variants } from "framer-motion
 import { ChevronDown } from "lucide-react";
 
 const faqs = [
+  // Existing relevant ones
   {
-    q: "Why $749 and not more?",
-    a: "Because you haven't worked with me yet. The audit is priced as a low-risk way to see if we're a fit. If the audit delivers value, we can discuss larger engagements after.",
+    q: "Why $749 for an audit?",
+    a: "Because you haven't worked with me yet. The audit is priced as a low-risk way to see if we're a fit.",
   },
   {
     q: "How fast can you start?",
-    a: "Within 48 hours of booking. The audit itself takes 7 days from kickoff to delivery.",
-  },
-  {
-    q: "What access do you need?",
-    a: "Read-only access to your Databricks workspace — specifically to system tables (billing, lakeflow, access). We never touch production data or write anything to your workspace.",
+    a: "Within 48 hours of booking. The audit itself takes 7 days from kickoff to delivery. Agent builds start in 1-2 weeks.",
   },
   {
     q: "What about security?",
-    a: "Signed NDA before any access. Read-only permissions. SOC 2 practices (not certified yet — we're transparent about that). Your data never leaves your cloud.",
+    a: "Signed NDA before any access. Read-only permissions for audits. SOC 2 practices. Your data never leaves your cloud.",
   },
   {
     q: "Will the audit really find enough to justify $749?",
     a: "If it doesn't find at least $5K/year in waste, you get your money back. In most workspaces with >$10K/month Databricks spend, we find significantly more.",
   },
+  // New ones
   {
-    q: "What happens if I want ongoing help?",
-    a: "We discuss advisory packages only after the audit is complete. No pressure during the engagement.",
+    q: "Why are your agent prices lower than Accenture or boutique agencies?",
+    a: "Founding client pricing. We're collecting our first 5 case studies at this rate. After 5 case studies published, pricing rises to market rate ($40K-$80K). You get senior-engineer delivery at boutique pricing — for now.",
   },
   {
-    q: "Are you a solo founder or an agency?",
-    a: "I'm a solo founder. You work directly with me, not a junior consultant.",
+    q: "Will my agent actually work in production, or is this another demo?",
+    a: "Every build includes a full evaluation suite, failure mode design, and human-in-the-loop checkpoints — the 5 disciplines that separate production AI from prototypes. We commit to 30 days of post-launch iteration if anything breaks.",
+  },
+  {
+    q: "What's the difference between Starter Agent and Production Agent?",
+    a: "Starter is single-task, 1-2 integrations, great for testing. Production is multi-step, 3-5 integrations, with memory + tool use. Many clients start with Starter, then upgrade to Production after seeing it work.",
+  },
+  {
+    q: "What if the agent breaks at 3 AM?",
+    a: "Production monitoring is included in every build. With the optional retainer, we respond within 24 business hours. We design fallback paths into every agent — so it fails gracefully, not catastrophically.",
+  },
+  {
+    q: "Do I need to give you full access to my Databricks workspace?",
+    a: "We work IN your workspace, with read-only access to system tables for the audit, and scoped write access only to specific schemas you designate. Your data never leaves your cloud.",
+  },
+  {
+    q: "Why should I trust a solo founder with a production AI system?",
+    a: "Senior engineer delivery (8+ years Databricks/Spark/Delta Lake). No junior consultants. Documented 5-disciplines methodology. Code ownership transfers to you. 30-day refund window. We're transparent about being early-stage — that's why founding-client pricing exists.",
   },
 ];
 

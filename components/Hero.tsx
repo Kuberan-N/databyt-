@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, type Variants } from "framer-motion";
-import { ArrowRight, Bot, Shield, TrendingDown } from "lucide-react";
+import { ArrowRight, Shield, TrendingDown } from "lucide-react";
 import { useDemoForm } from "./DemoFormContext";
 
 const trustBadges = [
@@ -69,9 +69,9 @@ export default function Hero() {
           animate="visible"
           custom={2}
         >
-          Most data teams overspend on Databricks by 40-60% without knowing it.{" "}
+          Databricks-native engineers who stop the bleeding — and ship production AI systems that don&apos;t fail.{" "}
           <span className="text-slate-300 font-medium">
-            We run a 7-day audit that shows you exactly where the waste is — and how to fix it. $749 flat fee.
+            Two services. One specialized stack. Built with the same rigor your data pipelines deserve.
           </span>
         </motion.p>
 
@@ -87,16 +87,15 @@ export default function Hero() {
             onClick={openDemo}
             className="group bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 text-white font-semibold rounded-full px-8 py-4 transition-all hover:scale-[1.02] hover:shadow-[0_0_30px_rgba(59,130,246,0.4)] flex items-center gap-2"
           >
-            Book Your Databricks Audit — $749
+            Book Your Audit — $749
             <ArrowRight size={18} className="group-hover:translate-x-0.5 transition-transform" />
           </button>
-          <a
-            href="#"
-            className="border border-slate-700 hover:border-blue-500/50 text-slate-300 hover:text-white font-semibold rounded-full px-8 py-4 transition-all flex items-center gap-2"
+          <button
+            onClick={openDemo}
+            className="border border-slate-700 hover:border-purple-500/50 text-slate-300 hover:text-white font-semibold rounded-full px-8 py-4 transition-all flex items-center gap-2"
           >
-            <Bot size={16} />
-            See a sample audit report →
-          </a>
+            Build an AI Agent →
+          </button>
         </motion.div>
 
         {/* Trust line */}
@@ -107,7 +106,7 @@ export default function Hero() {
           animate="visible"
           custom={3.5}
         >
-          7-day delivery guarantee · Cancel anytime · You own all recommendations
+          Audit ($749) or Agent ($12K-$25K). Founding 5 clients pricing.
         </motion.p>
 
         {/* Trust badges row */}

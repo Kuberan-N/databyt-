@@ -35,19 +35,22 @@ export default function FounderStory() {
 
           <div className="space-y-4 text-slate-400 leading-relaxed text-base">
             <p>
-              I spent 8 years as a data engineer watching companies burn money on Databricks. Not because they were careless — because nobody was specifically looking at the cost side.
+              I spent 8 years as a data engineer watching companies waste money on Databricks AND watching their AI projects fail to reach production.
             </p>
             <p>
-              Most teams are focused on shipping features. Finance is focused on the overall bill. Nobody owns the gap in between — and that&apos;s where the waste lives.
+              Both problems have the same root cause: nobody specifically owns them. Engineers focus on shipping features. Finance focuses on the overall bill. AI experiments live in notebooks, never reaching production.
             </p>
             <p className="text-slate-300 font-medium">
-              Databyt exists to fill that gap. One focused service: find your Databricks waste, show you how to fix it, done in 7 days for $749.
+              Databyt fills these gaps with two specialized services:
             </p>
             <p>
-              No retainers pushed on you. No junior consultants. No multi-month engagements you didn&apos;t ask for.
+              <strong className="text-white">Cost audits</strong> that find what&apos;s wasted — usually $30K-$80K/year.
             </p>
             <p>
-              If the audit works and you want more help after, we can talk. Until then, I just want to deliver an audit that&apos;s worth 10x what you paid.
+              <strong className="text-white">Production AI agents</strong> that ship systems your team can actually trust — using the 5 disciplines (evaluation, failure modes, human-in-the-loop, memory loops, monitoring) that separate demos from production systems.
+            </p>
+            <p>
+              No retainers pushed on you. No junior consultants. Senior engineer on every project. Founding-client pricing while we collect our first 5 case studies.
             </p>
           </div>
 

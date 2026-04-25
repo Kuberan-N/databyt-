@@ -8,25 +8,25 @@ const results = [
   {
     icon: Clock,
     value: "7 days",
-    label: "Average time from kickoff to audit delivery",
+    label: "Audit delivery from kickoff",
     color: "#3B82F6",
   },
   {
     icon: DollarSign,
     value: "40-60%",
-    label: "Typical Databricks overspend we uncover (industry data)",
+    label: "Typical Databricks overspend we uncover",
     color: "#10B981",
   },
   {
-    icon: Activity,
-    value: "22 pages",
-    label: "Depth of our audit deliverable",
+    icon: Bot,
+    value: "5",
+    label: "Disciplines applied to every agent build",
     color: "#8B5CF6",
   },
   {
-    icon: Bot,
-    value: "$749",
-    label: "Flat fee — no scope creep, no add-ons",
+    icon: Activity,
+    value: "13%",
+    label: "Of companies see real AI value (we change this)",
     color: "#06B6D4",
   },
 ];
