@@ -2,47 +2,34 @@
 
 import { motion, useInView, type Variants } from "framer-motion";
 import { useRef } from "react";
-import { Search, Database, Bot, Repeat } from "lucide-react";
 
 const steps = [
   {
     num: "01",
-    icon: Search,
-    title: "AI READINESS AUDIT",
-    duration: "2 weeks",
-    description:
-      "We run a deep diagnostic on your data stack, infrastructure, and business processes. You get a written agent opportunity map (5 use cases prioritized), a FinOps baseline, and a cost reduction plan. Zero obligation after this.",
-    deliverable: "Written report + 90-min walkthrough",
+    title: "Free Workshop",
+    duration: "Week 0",
+    description: "90 minutes. We sit with your team and map your biggest manual workflow step by step. We identify which parts genuinely need AI, which need simple rules, and which need a human. You leave with an AI Opportunity Map. We leave with what we need to scope the build. No cost. No commitment.",
     color: "#3B82F6",
   },
   {
     num: "02",
-    icon: Database,
-    title: "DATA FOUNDATION",
-    duration: "4–6 weeks",
-    description:
-      "We clean, unify, and prepare your data for AI. This means Databricks Lakehouse setup, dbt modelling, Unity Catalog governance, and production-grade pipelines. No agent works without this — and 95% of agencies skip it.",
-    deliverable: "Agent-ready data layer in your Databricks workspace",
+    title: "Architecture & Evaluation Design",
+    duration: "Weeks 1-2",
+    description: "Before building: we design the agent architecture, the evaluation framework, and every failure mode. You approve the plan before we write production code. No surprises mid-build.",
     color: "#06B6D4",
   },
   {
     num: "03",
-    icon: Bot,
-    title: "AGENT BUILD",
-    duration: "4 weeks",
-    description:
-      "First production agent running on your real data. Evaluated, monitored, versioned. With guardrails so it doesn't hallucinate. Deployed on Mosaic AI / Databricks Model Serving — inside your account.",
-    deliverable: "1 production AI agent + monitoring dashboard",
+    title: "Build & Evaluate",
+    duration: "Weeks 3-8",
+    description: "We build inside your Databricks workspace. Weekly demos. Evaluation suite runs continuously. Human-in-the-loop checkpoints designed and tested. You see progress weekly — not just at the end.",
     color: "#8B5CF6",
   },
   {
     num: "04",
-    icon: Repeat,
-    title: "SCALE & OWN",
-    duration: "Ongoing",
-    description:
-      "One new agent shipped every month. FinOps optimization to control token costs. You own every repo, every model, every line of code. Cancel any month with 7 days notice. The compounding value stays with you.",
-    deliverable: "New agent monthly + 24hr SLA + private Slack",
+    title: "Deploy & Monitor",
+    duration: "Weeks 8-10",
+    description: "Production deployment with full monitoring. 30 days of post-launch support included. Full code handoff. Your team owns everything. We're available if something needs adjusting — at no additional cost for 30 days.",
     color: "#10B981",
   },
 ];
@@ -62,85 +49,69 @@ export default function HowItWorks() {
   const inView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section id="how-it-works" className="py-24 md:py-32 px-6">
-      <div className="max-w-6xl mx-auto" ref={ref}>
+    <section id="how-we-work" className="py-24 md:py-32 px-6">
+      <div className="max-w-7xl mx-auto" ref={ref}>
         <motion.div
           className="text-center mb-16"
           variants={fadeUp}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
         >
-          <h2 className="text-3xl md:text-5xl font-bold text-white mb-4 font-heading">
-            From AI Idea to Production{" "}
-            <span className="text-gradient-blue">in 4 Steps</span>
+          <h2 className="text-3xl md:text-5xl font-bold text-white mb-6 font-heading">
+            From First Call to Production <br className="hidden md:block" />
+            <span className="text-gradient-blue">in 8-10 Weeks</span>
           </h2>
           <p className="text-base md:text-lg text-slate-400 max-w-xl mx-auto">
-            A clear path from audit to running agents. Fixed timelines, fixed prices — no 6-month SOW required.
+            A structured process designed to move fast without cutting corners.
           </p>
         </motion.div>
 
         <motion.div
-          className="relative"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 relative"
           variants={stagger}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
         >
-          {/* Vertical connecting line */}
-          <div className="absolute top-7 bottom-7 left-7 w-px border-l-2 border-dashed border-slate-800 hidden md:block" />
+          {/* Connecting line for desktop */}
+          <div className="hidden lg:block absolute top-10 left-12 right-12 h-px border-t-2 border-dashed border-slate-800" />
 
-          <div className="flex flex-col gap-8">
-            {steps.map((step) => (
-              <motion.div
-                key={step.num}
-                variants={fadeUp}
-                className="relative flex items-start gap-5 md:pl-14"
+          {steps.map((step) => (
+            <motion.div
+              key={step.num}
+              variants={fadeUp}
+              className="relative flex flex-col pt-4 lg:pt-0"
+            >
+              {/* Number badge */}
+              <div
+                className="w-16 h-16 rounded-full flex items-center justify-center border mx-auto lg:mx-0 mb-6 relative z-10 bg-[#050A14]"
+                style={{
+                  backgroundColor: `${step.color}15`,
+                  borderColor: `${step.color}40`,
+                }}
               >
-                {/* Number badge */}
-                <div
-                  className="flex-shrink-0 w-14 h-14 rounded-full flex items-center justify-center border md:absolute md:left-0"
+                <span className="text-xl font-bold" style={{ color: step.color }}>
+                  {step.num}
+                </span>
+              </div>
+
+              <div className="bg-[#0A1628]/80 border border-slate-800 rounded-2xl p-6 flex-1 hover:border-blue-500/30 hover:shadow-[0_0_30px_rgba(59,130,246,0.1)] transition-all flex flex-col text-center lg:text-left">
+                <span
+                  className="text-xs font-semibold px-3 py-1 rounded-full border w-fit mx-auto lg:mx-0 mb-4"
                   style={{
-                    backgroundColor: `${step.color}15`,
-                    borderColor: `${step.color}40`,
+                    color: step.color,
+                    backgroundColor: `${step.color}10`,
+                    borderColor: `${step.color}30`,
                   }}
                 >
-                  <span className="text-sm font-bold" style={{ color: step.color }}>
-                    {step.num}
-                  </span>
-                </div>
-
-                <div className="bg-[#0A1628]/80 border border-slate-800 rounded-2xl p-6 flex-1 hover:border-blue-500/30 hover:shadow-[0_0_30px_rgba(59,130,246,0.1)] transition-all">
-                  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-3">
-                    <div className="flex items-center gap-3">
-                      <div
-                        className="p-2 rounded-lg border"
-                        style={{ backgroundColor: `${step.color}15`, borderColor: `${step.color}30` }}
-                      >
-                        <step.icon size={18} style={{ color: step.color }} />
-                      </div>
-                      <h3 className="text-lg font-bold text-white tracking-wide">
-                        {step.title}
-                      </h3>
-                    </div>
-                    <span
-                      className="text-xs font-semibold px-3 py-1 rounded-full border w-fit"
-                      style={{
-                        color: step.color,
-                        backgroundColor: `${step.color}10`,
-                        borderColor: `${step.color}30`,
-                      }}
-                    >
-                      {step.duration}
-                    </span>
-                  </div>
-                  <p className="text-sm text-slate-400 leading-relaxed mb-3">{step.description}</p>
-                  <div className="flex items-center gap-2 pt-3 border-t border-slate-800">
-                    <span className="text-xs text-slate-500">Deliverable:</span>
-                    <span className="text-xs font-medium text-slate-300">{step.deliverable}</span>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
+                  {step.duration}
+                </span>
+                <h3 className="text-lg font-bold text-white tracking-wide mb-3">
+                  {step.title}
+                </h3>
+                <p className="text-sm text-slate-400 leading-relaxed mb-4 flex-grow">{step.description}</p>
+              </div>
+            </motion.div>
+          ))}
         </motion.div>
       </div>
     </section>

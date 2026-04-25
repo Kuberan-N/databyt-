@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Outfit } from "next/font/google";
 import "./globals.css";
+import { CurrencyProvider } from "@/components/CurrencyContext";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -14,17 +15,17 @@ const outfit = Outfit({
 });
 
 export const metadata: Metadata = {
-  title: "Databyt — Databricks Cost Audits + Production AI Agents",
+  title: "DataByt — Production AI Agents on Databricks | 5 Disciplines Engineering",
   description:
-    "Databricks cost audits ($749) and production AI agents ($12K-$25K) built with 5 disciplines: evaluation, failure modes, human-in-the-loop, memory loops, monitoring. Senior data engineer, no junior consultants. Founding 5 clients pricing.",
+    "We build production AI agents on Databricks using 5 engineering disciplines most agencies skip. Evaluation suites, failure mode handling, human-in-the-loop design, monitoring. Founding client pricing: $12,000-$25,000. 8-10 weeks to production.",
   keywords:
     "databricks AI agents, AI agent development, fractional AI team, databricks agent builder, AI readiness audit",
   openGraph: {
-    title: "Databyt — Databricks Cost Audits + Production AI Agents",
+    title: "Your AI Project Is Stuck. We Ship It to Production.",
     description:
-      "Databricks cost audits ($749) and production AI agents ($12K-$25K) built with 5 disciplines: evaluation, failure modes, human-in-the-loop, memory loops, monitoring. Senior data engineer, no junior consultants. Founding 5 clients pricing.",
+      "DataByt builds production AI agents on Databricks using 5 disciplines. Not demos. Systems.",
     url: "https://databyt.in",
-    siteName: "Databyt",
+    siteName: "DataByt",
     type: "website",
   },
 };
@@ -39,7 +40,9 @@ export default function RootLayout({
       <body
         className={`${inter.variable} ${outfit.variable} font-sans bg-[#050A14] text-white antialiased`}
       >
-        {children}
+        <CurrencyProvider>
+          {children}
+        </CurrencyProvider>
       </body>
     </html>
   );

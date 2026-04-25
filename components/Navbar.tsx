@@ -5,9 +5,9 @@ import { Menu, X } from "lucide-react";
 import { useDemoForm } from "./DemoFormContext";
 
 const navLinks = [
-  { label: "How It Works", href: "#how-it-works" },
+  { label: "How We Work", href: "#how-we-work" },
+  { label: "Services", href: "#services" },
   { label: "Pricing", href: "#pricing" },
-  { label: "Demo", href: "#video-demo" },
   { label: "FAQ", href: "#faq" },
 ];
 
@@ -36,7 +36,7 @@ export default function Navbar() {
             : "bg-transparent"
         }`}
       >
-        <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+        <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between mt-10">
           {/* Logo */}
           <a href="#" className="flex items-center gap-0 text-xl font-extrabold tracking-tight font-heading">
             <span className="text-white">Data</span>
@@ -59,7 +59,7 @@ export default function Navbar() {
               onClick={openDemo}
               className="bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 text-white text-sm font-semibold rounded-full px-6 py-2.5 transition-all hover:scale-[1.02] hover:shadow-[0_0_20px_rgba(59,130,246,0.3)]"
             >
-              Book Free AI Check
+              Book Free Workshop &rarr;
             </button>
           </div>
 
@@ -117,7 +117,7 @@ export default function Navbar() {
             onClick={() => { setMobileOpen(false); openDemo(); }}
             className="bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 text-white text-sm font-semibold rounded-full px-6 py-3 text-center transition-all mt-2"
           >
-            Book Free AI Readiness Check
+            Book Free Workshop &rarr;
           </button>
         </div>
       </div>

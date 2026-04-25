@@ -5,27 +5,9 @@ import { motion, useInView, AnimatePresence, type Variants } from "framer-motion
 import { ChevronDown } from "lucide-react";
 
 const faqs = [
-  // Existing relevant ones
-  {
-    q: "Why $749 for an audit?",
-    a: "Because you haven't worked with me yet. The audit is priced as a low-risk way to see if we're a fit.",
-  },
-  {
-    q: "How fast can you start?",
-    a: "Within 48 hours of booking. The audit itself takes 7 days from kickoff to delivery. Agent builds start in 1-2 weeks.",
-  },
-  {
-    q: "What about security?",
-    a: "Signed NDA before any access. Read-only permissions for audits. SOC 2 practices. Your data never leaves your cloud.",
-  },
-  {
-    q: "Will the audit really find enough to justify $749?",
-    a: "If it doesn't find at least $5K/year in waste, you get your money back. In most workspaces with >$10K/month Databricks spend, we find significantly more.",
-  },
-  // New ones
   {
     q: "Why are your agent prices lower than Accenture or boutique agencies?",
-    a: "Founding client pricing. We're collecting our first 5 case studies at this rate. After 5 case studies published, pricing rises to market rate ($40K-$80K). You get senior-engineer delivery at boutique pricing — for now.",
+    a: "Founding client pricing. We're collecting our first 5 case studies at this rate. After 5 case studies are published, pricing rises to market rate ($35K-$65K). You get senior-engineer delivery at early-stage pricing — for now.",
   },
   {
     q: "Will my agent actually work in production, or is this another demo?",
@@ -33,7 +15,11 @@ const faqs = [
   },
   {
     q: "What's the difference between Starter Agent and Production Agent?",
-    a: "Starter is single-task, 1-2 integrations, great for testing. Production is multi-step, 3-5 integrations, with memory + tool use. Many clients start with Starter, then upgrade to Production after seeing it work.",
+    a: "Starter is single-task, 1-2 integrations, great for testing your first workflow. Production is multi-step, 3-5 integrations, with memory + tool use, built for complex logic. Most clients start with Starter, then upgrade after seeing it work.",
+  },
+  {
+    q: "How fast can you start?",
+    a: "We are currently accepting 5 clients for the May cohort. Once you book a workshop and we agree on scope, builds begin within 1-2 weeks depending on your data readiness.",
   },
   {
     q: "What if the agent breaks at 3 AM?",
@@ -41,11 +27,11 @@ const faqs = [
   },
   {
     q: "Do I need to give you full access to my Databricks workspace?",
-    a: "We work IN your workspace, with read-only access to system tables for the audit, and scoped write access only to specific schemas you designate. Your data never leaves your cloud.",
+    a: "We work IN your workspace, with scoped write access only to specific schemas you designate. Your data never leaves your cloud, and we never train our own models on your data.",
   },
   {
     q: "Why should I trust a solo founder with a production AI system?",
-    a: "Senior engineer delivery (8+ years Databricks/Spark/Delta Lake). No junior consultants. Documented 5-disciplines methodology. Code ownership transfers to you. 30-day refund window. We're transparent about being early-stage — that's why founding-client pricing exists.",
+    a: "Senior engineer delivery (8+ years data engineering). No junior consultants. Documented 5-disciplines methodology. Full code ownership transfers to you. We're transparent about being early-stage — that's why founding-client pricing exists.",
   },
 ];
 
@@ -68,6 +54,9 @@ export default function FAQ() {
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
         >
+          <span className="inline-block text-sm font-semibold tracking-wider text-blue-400 uppercase mb-4">
+            Clear Answers
+          </span>
           <h2 className="text-3xl md:text-5xl font-bold text-white mb-4 font-heading">
             Questions?{" "}
             <span className="text-gradient-blue">We&apos;ve Got Answers.</span>
@@ -109,7 +98,7 @@ export default function FAQ() {
                       exit={{ height: 0, opacity: 0 }}
                       transition={{ duration: 0.25, ease: "easeInOut" }}
                     >
-                      <p className="px-6 pb-5 text-sm text-slate-400 leading-relaxed">{faq.a}</p>
+                       <p className="px-6 pb-5 text-sm text-slate-400 leading-relaxed">{faq.a}</p>
                     </motion.div>
                   )}
                 </AnimatePresence>

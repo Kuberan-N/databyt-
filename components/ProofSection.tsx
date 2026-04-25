@@ -2,29 +2,28 @@
 
 import { motion, useInView, type Variants } from "framer-motion";
 import { useRef } from "react";
-import { ArrowRight } from "lucide-react";
 
 const proofs = [
   {
-    icon: "📄",
-    title: "Sample Audit Report",
-    text: "See exactly what a DataByt audit looks like. No email gate, download instantly.",
-    cta: "Download Sample Report (PDF)",
-    link: "#",
+    icon: "📁",
+    title: "AR Collections Agent — Full Build",
+    text: "We built a production-grade Accounts Receivable collections agent on synthetic fintech data. Evaluation suite, failure mode handling, MLflow tracing, production deployment. Full code on GitHub.",
+    cta: "View on GitHub →",
+    link: "https://github.com",
   },
   {
     icon: "🎥",
-    title: "AI Agent Walkthrough",
-    text: "5-minute Loom showing how we discover, scope, and evaluate an AI agent.",
-    cta: "Watch Demo (Loom)",
-    link: "#",
+    title: "20-Minute Build Walkthrough",
+    text: "Watch us apply all 5 disciplines to a real agent build. Architecture decisions, evaluation design, failure mode handling, deployment. Unedited. No script.",
+    cta: "Watch Walkthrough →",
+    link: "https://loom.com",
   },
   {
     icon: "📊",
-    title: "FinOps Field Manual",
-    text: "The 22-page framework we use in every audit. Free download.",
-    cta: "Get the Manual (PDF)",
-    link: "#",
+    title: "The DataByt Engineering Framework",
+    text: "The complete 22-page technical framework behind every agent we build. Download free — no email gate. Used by data teams at Series A to Series C companies.",
+    cta: "Download Free →",
+    link: "/databyt_business_strategy.pdf",
   },
 ];
 
@@ -52,11 +51,11 @@ export default function ProofSection() {
           animate={inView ? "visible" : "hidden"}
         >
           <h2 className="text-3xl md:text-5xl font-bold text-white mb-4 font-heading">
-            Proof,{" "}
-            <span className="text-gradient-blue">Not Promises</span>
+            See the Work <br className="hidden md:block" />
+            <span className="text-gradient-blue">Before You Commit</span>
           </h2>
           <p className="text-base md:text-lg text-slate-400 max-w-2xl mx-auto">
-            Everything you need to see before working with us.
+            We believe in proof before promises. Everything below is publicly available — no email required.
           </p>
         </motion.div>
 
@@ -70,21 +69,22 @@ export default function ProofSection() {
             <motion.div
               key={i}
               variants={fadeUp}
-              className="bg-[#0A1628]/80 border border-slate-800 rounded-2xl p-8 hover:border-blue-500/30 hover:shadow-[0_0_30px_rgba(59,130,246,0.1)] transition-all flex flex-col"
+              className="bg-[#0A1628]/80 border border-slate-800 rounded-2xl p-8 hover:border-blue-500/30 hover:shadow-[0_0_30px_rgba(59,130,246,0.1)] transition-all flex flex-col group"
             >
-              <div className="flex items-center gap-3 mb-4">
-                <span className="text-3xl">{p.icon}</span>
-                <h3 className="text-xl font-semibold text-white">{p.title}</h3>
+              <div className="flex items-center gap-3 mb-6">
+                <span className="text-3xl group-hover:scale-110 transition-transform">{p.icon}</span>
+                <h3 className="text-xl font-semibold text-white leading-snug">{p.title}</h3>
               </div>
-              <p className="text-sm text-slate-400 leading-relaxed mb-6 flex-1">
+              <p className="text-sm text-slate-400 leading-relaxed mb-8 flex-1">
                 {p.text}
               </p>
               <a
                 href={p.link}
-                className="inline-flex items-center gap-2 text-sm font-medium text-blue-400 hover:text-blue-300 transition-colors mt-auto"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center w-full bg-slate-800 hover:bg-slate-700 text-white text-sm font-semibold py-3 rounded-lg transition-colors mt-auto border border-slate-700 group-hover:border-blue-500/50"
               >
                 {p.cta}
-                <ArrowRight size={16} />
               </a>
             </motion.div>
           ))}

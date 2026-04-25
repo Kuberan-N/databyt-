@@ -2,7 +2,7 @@
 
 import { motion, useInView, type Variants } from "framer-motion";
 import { useRef } from "react";
-import { ArrowRight, Check } from "lucide-react";
+import { Check } from "lucide-react";
 import { useDemoForm } from "./DemoFormContext";
 
 const fadeUp: Variants = {
@@ -15,7 +15,7 @@ const stagger: Variants = {
   visible: { transition: { staggerChildren: 0.1 } },
 };
 
-export default function TwoPaths() {
+export default function CostOfInaction() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-100px" });
   const { open: openDemo } = useDemoForm();
@@ -24,92 +24,95 @@ export default function TwoPaths() {
     <section className="py-24 px-6 bg-[#050A14]">
       <div className="max-w-6xl mx-auto" ref={ref}>
         <motion.div
-          className="grid grid-cols-1 md:grid-cols-2 gap-8"
+          className="text-center mb-16"
+          variants={fadeUp}
+          initial="hidden"
+          animate={inView ? "visible" : "hidden"}
+        >
+          <h2 className="text-3xl md:text-5xl font-bold text-white mb-6 font-heading">
+            What Happens If You Don&apos;t Fix This in the Next 90 Days
+          </h2>
+        </motion.div>
+
+        <motion.div
+          className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16"
           variants={stagger}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
         >
-          {/* Card 1: Cost Audit */}
+          {/* Left Column: Nightmare */}
           <motion.div
             variants={fadeUp}
-            className="bg-[#0A1628]/80 border border-slate-800 rounded-2xl p-8 hover:border-blue-500/30 transition-all group flex flex-col h-full relative overflow-hidden"
+            className="bg-[#0A1628]/80 border border-slate-800 rounded-2xl p-8 transition-all group flex flex-col h-full relative overflow-hidden"
           >
-            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 to-cyan-400 opacity-50" />
+            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-red-500 to-orange-500 opacity-50" />
             
-            <span className="text-xs font-semibold tracking-wide text-blue-400 uppercase mb-4">
-              PATH 1 — COST AUDIT
-            </span>
-            <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">
-              Find the waste hiding in your Databricks workspace
+            <h3 className="text-2xl font-bold text-white mb-8 border-b border-slate-800 pb-4">
+              If Nothing Changes
             </h3>
-            <p className="text-slate-400 mb-8 leading-relaxed flex-grow">
-              Most data teams overspend by 40-60%. We run a 7-day audit that identifies exactly where the waste is — and how to fix it. No retainer, no upsell pressure.
-            </p>
             
-            <ul className="space-y-3 mb-8">
+            <ul className="space-y-4 mb-8 flex-grow">
               {[
-                "7-day delivery",
-                "20-page audit report",
-                "Cost breakdown by job, cluster, workload",
-                "Top 10 waste sources with $ impact",
-                "$749 flat fee"
+                "Your AI OKR fails publicly this quarter",
+                "CFO freezes AI budget citing \"no demonstrated ROI\"",
+                "Engineering team loses confidence, best people leave",
+                "Competitor ships production AI, earns the customer trust you're still trying to build",
+                "You spend another $50K-$100K on a new agency that delivers the same outcome",
+                "12 months from now: still no production AI, $200K spent, same demos in the notebook"
               ].map((item, i) => (
                 <li key={i} className="flex items-start gap-3">
-                  <Check size={18} className="text-blue-500 mt-0.5 flex-shrink-0" />
-                  <span className="text-sm text-slate-300">{item}</span>
+                  <span className="text-red-500 font-bold mt-0.5 flex-shrink-0">✗</span>
+                  <span className="text-sm md:text-base text-slate-300">{item}</span>
                 </li>
               ))}
             </ul>
-
-            <button
-              onClick={openDemo}
-              className="w-full bg-slate-800 hover:bg-slate-700 border border-slate-700 text-white rounded-xl px-6 py-4 font-semibold transition-all flex items-center justify-center gap-2 group-hover:border-blue-500/50"
-            >
-              Start with Audit
-              <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
-            </button>
           </motion.div>
 
-          {/* Card 2: Production AI Agents */}
+          {/* Right Column: Dream */}
           <motion.div
             variants={fadeUp}
-            className="bg-[#0A1628]/80 border border-slate-800 rounded-2xl p-8 hover:border-purple-500/30 transition-all group flex flex-col h-full relative overflow-hidden"
+            className="bg-slate-900 border-2 border-indigo-500/50 rounded-2xl p-8 transition-all group flex flex-col h-full relative overflow-hidden shadow-[0_0_30px_rgba(99,102,241,0.1)]"
           >
-            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-purple-500 to-pink-500 opacity-50" />
+            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-indigo-500 to-cyan-400 opacity-100" />
             
-            <span className="text-xs font-semibold tracking-wide text-purple-400 uppercase mb-4">
-              PATH 2 — PRODUCTION AI AGENTS
-            </span>
-            <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">
-              Ship AI systems your engineering team can actually trust
+            <h3 className="text-2xl font-bold text-white mb-8 border-b border-slate-800 pb-4">
+              If We Work Together
             </h3>
-            <p className="text-slate-400 mb-8 leading-relaxed flex-grow">
-              88% of companies use AI. Only 13% see real value. The gap is production rigor. We build agents on your Databricks stack with full evaluation suites, failure mode handling, and monitoring from day one.
-            </p>
             
-            <ul className="space-y-3 mb-8">
+            <ul className="space-y-4 mb-8 flex-grow">
               {[
-                "Built on YOUR Databricks workspace",
-                "Evaluation framework + failure mode design",
-                "Human-in-the-loop checkpoints",
-                "Production monitoring included",
-                "Starting at $12,000"
+                "Production AI agent live in 8-10 weeks",
+                "Engineering team owns the system — no dependency on us",
+                "Evaluation framework catches problems before users do",
+                "CFO sees ROI: hours saved, revenue automated, costs reduced",
+                "AI OKR delivered — team builds on a working foundation",
+                "12 months from now: multiple agents live, compounding value"
               ].map((item, i) => (
                 <li key={i} className="flex items-start gap-3">
-                  <Check size={18} className="text-purple-500 mt-0.5 flex-shrink-0" />
-                  <span className="text-sm text-slate-300">{item}</span>
+                  <Check size={20} className="text-indigo-400 mt-0.5 flex-shrink-0" />
+                  <span className="text-sm md:text-base text-slate-200">{item}</span>
                 </li>
               ))}
             </ul>
-
-            <button
-              onClick={openDemo}
-              className="w-full bg-slate-800 hover:bg-slate-700 border border-slate-700 text-white rounded-xl px-6 py-4 font-semibold transition-all flex items-center justify-center gap-2 group-hover:border-purple-500/50"
-            >
-              Build an Agent
-              <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
-            </button>
           </motion.div>
+        </motion.div>
+
+        {/* CTA */}
+        <motion.div
+          className="flex flex-col items-center justify-center gap-4 text-center"
+          variants={fadeUp}
+          initial="hidden"
+          animate={inView ? "visible" : "hidden"}
+        >
+          <button
+            onClick={openDemo}
+            className="bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 text-white text-lg font-semibold rounded-full px-10 py-5 transition-all hover:scale-[1.02] hover:shadow-[0_0_30px_rgba(59,130,246,0.4)] flex items-center gap-2"
+          >
+            Book Free 90-Min Workshop &rarr;
+          </button>
+          <p className="text-sm text-slate-500">
+            We have 2 founding client spots remaining for May cohort.
+          </p>
         </motion.div>
       </div>
     </section>

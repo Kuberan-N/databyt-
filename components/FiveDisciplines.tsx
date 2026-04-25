@@ -5,29 +5,34 @@ import { useRef } from "react";
 
 const disciplines = [
   {
-    icon: "📋",
-    title: "EVALUATION",
-    body: "Test suite of 50-100 real examples. Your agent runs against every one before production. Performance measured, not assumed.",
+    number: "01",
+    title: "Evaluation",
+    body: "We build a test suite of 50-100 real scenarios before deployment. Your agent runs against every case. Performance is measured, documented, and reported — not assumed.",
+    result: "Outcome: Zero production surprises."
   },
   {
-    icon: "⚠️",
-    title: "FAILURE MODES",
-    body: "We list every failure: API timeouts, LLM hallucinations, database outages. Then we design what happens when each one fails.",
+    number: "02",
+    title: "Failure Mode Design",
+    body: "APIs time out. LLMs hallucinate. Databases go offline. We list every failure mode before building and design what happens when each one occurs. Your agent fails gracefully — never silently or catastrophically.",
+    result: "Outcome: Predictable behavior under pressure."
   },
   {
-    icon: "👤",
-    title: "HUMAN-IN-THE-LOOP",
-    body: "LLMs do 99% well. The 1% they don't can lose your business. We design checkpoints where humans add judgment, creativity, and taste.",
+    number: "03",
+    title: "Human-in-the-Loop",
+    body: "LLMs perform at 99% in normal conditions. It's the 1% edge cases that destroy trust. We design approval checkpoints where human judgment is required — keeping your team in control of high-stakes decisions.",
+    result: "Outcome: Trust at scale."
   },
   {
-    icon: "🔄",
-    title: "MEMORY + FEEDBACK",
-    body: "Self-improving agents. Every interaction makes the next one smarter, through reinforcement learning patterns.",
+    number: "04",
+    title: "Memory & Feedback Loops",
+    body: "Every interaction teaches the next one. We build feedback collection and reinforcement patterns into every agent — so the system improves from live usage without retraining from scratch.",
+    result: "Outcome: An agent that gets better over time."
   },
   {
-    icon: "📊",
-    title: "MONITORING",
-    body: "Drift detection, latency tracking, output quality. We watch your agent in production so it doesn't quietly break.",
+    number: "05",
+    title: "Monitoring After Deployment",
+    body: "We instrument every agent with latency tracking, output quality scoring, and drift detection. You know exactly how your agent is performing — in real time, at all times.",
+    result: "Outcome: No silent degradation in production."
   },
 ];
 
@@ -57,12 +62,15 @@ export default function FiveDisciplines() {
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
         >
+          <span className="inline-block text-sm font-semibold tracking-wider text-blue-400 uppercase mb-4">
+            Why DataByt Is Different
+          </span>
           <h2 className="text-3xl md:text-5xl font-bold text-white mb-6 font-heading">
-            5 Disciplines of{" "}
-            <span className="text-gradient-blue">Real AI Engineering</span>
+            Production AI Requires 5 Disciplines. <br className="hidden md:block" />
+            <span className="text-gradient-blue">Most Agencies Know 2.</span>
           </h2>
-          <p className="text-lg text-slate-400 max-w-2xl mx-auto">
-            We don&apos;t ship demos. We engineer systems that survive Monday mornings, API timeouts, and real-world data.
+          <p className="text-lg text-slate-400 max-w-3xl mx-auto">
+            This is what we design before we write a single line of production code. Most teams discover these requirements 6 weeks after launch — when it&apos;s expensive to fix.
           </p>
         </motion.div>
 
@@ -76,17 +84,22 @@ export default function FiveDisciplines() {
             <motion.div
               key={i}
               variants={fadeUp}
-              className="bg-[#0A1628]/80 border border-slate-800 rounded-2xl p-6 hover:border-blue-500/30 hover:bg-slate-800/40 transition-all flex flex-col h-full group"
+              className="bg-[#0A1628]/80 border border-slate-800 rounded-2xl p-6 hover:border-blue-500/30 hover:bg-slate-800/40 transition-all flex flex-col h-full group relative"
             >
-              <div className="text-3xl mb-4 p-3 bg-slate-800/50 rounded-xl w-fit group-hover:scale-110 transition-transform">
-                {d.icon}
+              <div className="absolute top-6 right-6 text-4xl font-black text-slate-800/50 group-hover:text-blue-500/10 transition-colors">
+                {d.number}
               </div>
-              <h3 className="text-sm font-bold text-white tracking-wider mb-3">
+              <h3 className="text-lg font-bold text-white mb-4 relative z-10">
                 {d.title}
               </h3>
-              <p className="text-sm text-slate-400 leading-relaxed flex-grow">
+              <p className="text-sm text-slate-400 leading-relaxed flex-grow relative z-10 mb-6">
                 {d.body}
               </p>
+              <div className="pt-4 border-t border-slate-800 relative z-10 mt-auto">
+                <span className="text-sm font-medium text-blue-400">
+                  {d.result}
+                </span>
+              </div>
             </motion.div>
           ))}
         </motion.div>
@@ -97,9 +110,10 @@ export default function FiveDisciplines() {
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
         >
-          <span className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-slate-800/50 border border-slate-700/50 text-slate-300 text-sm font-medium">
-            Most agencies skip 3 of these. We don&apos;t.
-          </span>
+          <h3 className="text-xl md:text-2xl font-bold text-white">
+            Most agencies deliver on 2 of these. We deliver all 5. <br className="hidden md:block" />
+            That is why our agents survive production.
+          </h3>
         </motion.div>
       </div>
     </section>

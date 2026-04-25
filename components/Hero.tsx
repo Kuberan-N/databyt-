@@ -1,18 +1,16 @@
 "use client";
 
 import { motion, type Variants } from "framer-motion";
-import { ArrowRight, Shield, TrendingDown } from "lucide-react";
+import { Shield } from "lucide-react";
 import { useDemoForm } from "./DemoFormContext";
 
 const trustBadges = [
-  { label: "SOC 2 practices" },
-  { label: "GDPR ready" },
-  { label: "Read-only API access" },
-  { label: "You own all recommendations" },
-  { label: "7-day delivery guarantee" },
+  { label: "Databricks-Native" },
+  { label: "5 Disciplines Framework" },
+  { label: "Code Ownership: Yours" },
+  { label: "Production-Ready in 8 Weeks" },
+  { label: "30-Day Post-Launch Support" },
 ];
-
-
 
 const fadeUp: Variants = {
   hidden: { opacity: 0, y: 40 },
@@ -38,12 +36,12 @@ export default function Hero() {
       {/* Dot grid */}
       <div className="absolute inset-0 dot-grid pointer-events-none" />
 
-      <div className="relative z-10 max-w-6xl mx-auto px-6 pt-24 pb-16 text-center">
+      <div className="relative z-10 max-w-6xl mx-auto px-6 pt-24 pb-16 text-center mt-12">
         {/* Positioning badge */}
         <motion.div variants={fadeUp} initial="hidden" animate="visible" custom={0}>
           <span className="inline-flex items-center gap-2 text-sm font-medium text-blue-400 bg-blue-500/10 border border-blue-500/20 rounded-full px-4 py-1.5 mb-8 shimmer">
-            <TrendingDown size={14} />
-            Databricks Cost Optimization
+            <Shield size={14} />
+            Production AI Engineering on Databricks
           </span>
         </motion.div>
 
@@ -55,9 +53,9 @@ export default function Hero() {
           animate="visible"
           custom={1}
         >
-          We find wasted Databricks spend —{" "}
+          Stop Shipping AI Demos. <br className="hidden sm:block" />
           <span className="text-gradient-blue">
-            usually $30K-$80K/year.
+            Start Shipping Systems.
           </span>
         </motion.h1>
 
@@ -69,9 +67,9 @@ export default function Hero() {
           animate="visible"
           custom={2}
         >
-          Databricks-native engineers who stop the bleeding — and ship production AI systems that don&apos;t fail.{" "}
+          We engineer production AI agents on your Databricks stack — with evaluation suites, failure modes, and live monitoring built in from day one.{" "}
           <span className="text-slate-300 font-medium">
-            Two services. One specialized stack. Built with the same rigor your data pipelines deserve.
+            Not chatbots. Not prototypes. Systems your engineering team can trust at 3 AM.
           </span>
         </motion.p>
 
@@ -87,15 +85,14 @@ export default function Hero() {
             onClick={openDemo}
             className="group bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 text-white font-semibold rounded-full px-8 py-4 transition-all hover:scale-[1.02] hover:shadow-[0_0_30px_rgba(59,130,246,0.4)] flex items-center gap-2"
           >
-            Book Your Audit — $749
-            <ArrowRight size={18} className="group-hover:translate-x-0.5 transition-transform" />
+            Book Free 90-Min Workshop &rarr;
           </button>
-          <button
-            onClick={openDemo}
+          <a
+            href="#how-we-work"
             className="border border-slate-700 hover:border-purple-500/50 text-slate-300 hover:text-white font-semibold rounded-full px-8 py-4 transition-all flex items-center gap-2"
           >
-            Build an AI Agent →
-          </button>
+            See How We Build &rarr;
+          </a>
         </motion.div>
 
         {/* Trust line */}
@@ -106,7 +103,7 @@ export default function Hero() {
           animate="visible"
           custom={3.5}
         >
-          Audit ($749) or Agent ($12K-$25K). Founding 5 clients pricing.
+          No pitch. No commitment. We map your biggest workflow and show you what actually needs AI — in 90 minutes.
         </motion.p>
 
         {/* Trust badges row */}
@@ -122,7 +119,7 @@ export default function Hero() {
               key={b.label}
               className="flex items-center gap-1.5 text-xs font-medium text-slate-400 bg-slate-800/50 border border-slate-700/50 rounded-full px-3 py-1.5"
             >
-              <Shield size={10} className="text-blue-400" />
+              <span className="text-blue-400">◉</span>
               {b.label}
             </span>
           ))}

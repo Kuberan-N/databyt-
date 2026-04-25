@@ -30,7 +30,7 @@ export default function FinalCTA() {
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
         >
-          Free 20-Min AI Readiness Check
+          Free 90-Min Workshop
         </motion.span>
 
         <motion.h2
@@ -39,8 +39,8 @@ export default function FinalCTA() {
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
         >
-          Your Next AI Project Should{" "}
-          <span className="text-gradient-blue">Ship, Not Die</span>
+          Stop Shipping Demos. <br className="hidden md:block" />
+          <span className="text-gradient-blue">Start Shipping Systems.</span>
         </motion.h2>
 
         <motion.p
@@ -49,11 +49,7 @@ export default function FinalCTA() {
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
         >
-          Book a free 20-min AI Readiness Check. We&apos;ll identify{" "}
-          <span className="text-slate-300 font-medium">3 agent opportunities</span>{" "}
-          and{" "}
-          <span className="text-slate-300 font-medium">1 critical data gap</span>{" "}
-          — guaranteed. No pitch, no pressure.
+          Book your free 90-minute workshop. We&apos;ll map out exactly how to build an agent that survives production. No cost. No commitment.
         </motion.p>
 
         <motion.div
@@ -65,33 +61,24 @@ export default function FinalCTA() {
             onClick={open}
             className="group inline-flex items-center gap-2 bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 text-white font-semibold rounded-full px-10 py-4 text-lg transition-all hover:scale-[1.02] hover:shadow-[0_0_40px_rgba(59,130,246,0.35)]"
           >
-            Book Your Free Check
+            Book Free 90-Min Workshop
             <ArrowRight size={20} className="group-hover:translate-x-0.5 transition-transform" />
           </button>
         </motion.div>
 
-        <motion.p
-          className="text-sm text-slate-500 mt-5"
-          variants={fadeUp}
-          initial="hidden"
-          animate={inView ? "visible" : "hidden"}
-        >
-          No payment required · No spam · Just straight answers about your data + AI readiness
-        </motion.p>
-
         {/* Trust badges */}
         <motion.div
-          className="flex flex-wrap items-center justify-center gap-3 mt-6"
+          className="flex flex-wrap items-center justify-center gap-3 mt-10"
           variants={fadeUp}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
         >
-          {["SOC 2 practices", "GDPR ready", "You own the code"].map((badge) => (
+          {["2 Founding Spots Remaining", "10-Week Production Guarantee", "Full Code Ownership"].map((badge) => (
             <span
               key={badge}
-              className="flex items-center gap-1.5 text-xs text-slate-500 border border-slate-800 rounded-full px-3 py-1"
+              className="flex items-center gap-1.5 text-xs text-slate-300 border border-slate-700 bg-slate-800/50 rounded-full px-4 py-2"
             >
-              <Shield size={10} className="text-blue-500/60" />
+              <Shield size={12} className="text-blue-500" />
               {badge}
             </span>
           ))}

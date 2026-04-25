@@ -30,33 +30,30 @@ export default function FounderStory() {
           </div>
 
           <h2 className="text-2xl md:text-3xl font-bold text-white mb-6 font-heading">
-            Why I Started Databyt
+            Why I Started DataByt
           </h2>
 
           <div className="space-y-4 text-slate-400 leading-relaxed text-base">
             <p>
-              I spent 8 years as a data engineer watching companies waste money on Databricks AND watching their AI projects fail to reach production.
+              I spent 8 years as a data engineer watching AI projects fail to reach production.
             </p>
             <p>
-              Both problems have the same root cause: nobody specifically owns them. Engineers focus on shipping features. Finance focuses on the overall bill. AI experiments live in notebooks, never reaching production.
-            </p>
-            <p className="text-slate-300 font-medium">
-              Databyt fills these gaps with two specialized services:
+              The gap between a cool Jupyter notebook demo and a production system that survives API timeouts, handles bad data, and doesn&apos;t hallucinate is massive. Most agencies are built to sell the demo. They aren&apos;t built to engineer the failure modes.
             </p>
             <p>
-              <strong className="text-white">Cost audits</strong> that find what&apos;s wasted — usually $30K-$80K/year.
+              DataByt exists to bridge that gap. We apply rigid software engineering principles — rigorous evaluation, failure mode design, and monitoring — to generative AI.
             </p>
             <p>
-              <strong className="text-white">Production AI agents</strong> that ship systems your team can actually trust — using the 5 disciplines (evaluation, failure modes, human-in-the-loop, memory loops, monitoring) that separate demos from production systems.
+              We don&apos;t ship demos. We ship production agents your team can actually trust. And we do it with transparent pricing, full code handoffs, and real guarantees.
             </p>
-            <p>
-              No retainers pushed on you. No junior consultants. Senior engineer on every project. Founding-client pricing while we collect our first 5 case studies.
+            <p className="text-slate-300 font-medium pt-2">
+              Our founding client cohort is open now. If you want an agent in production by the end of next quarter, let&apos;s talk.
             </p>
           </div>
 
           <div className="mt-8 pt-6 border-t border-slate-800">
             <p className="text-white font-semibold">Kuberan</p>
-            <p className="text-sm text-slate-500">Founder, Databyt · 8 years in data engineering · Databricks-native</p>
+            <p className="text-sm text-slate-500">Founder, DataByt · 8 years in data engineering · Databricks-native</p>
           </div>
         </motion.div>
       </div>

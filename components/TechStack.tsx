@@ -5,13 +5,11 @@ import { useRef } from "react";
 
 const techLogos = [
   { name: "Databricks", color: "#FF3621" },
-  { name: "Mosaic AI", color: "#FF6D3B" },
-  { name: "Unity Catalog", color: "#0063BB" },
-  { name: "Delta Live Tables", color: "#29B5E8" },
-  { name: "dbt", color: "#FF694A" },
-  { name: "Claude (Anthropic)", color: "#D4A574" },
-  { name: "LangGraph", color: "#1C3C3C" },
   { name: "Apache Spark", color: "#E25A1C" },
+  { name: "Delta Lake", color: "#00A9E0" },
+  { name: "Mosaic AI", color: "#FF6D3B" },
+  { name: "MLflow", color: "#0194E2" },
+  { name: "LangGraph", color: "#1C3C3C" },
 ];
 
 const fadeUp: Variants = {
@@ -19,12 +17,12 @@ const fadeUp: Variants = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
 };
 
-export default function TechStack() {
+export default function SocialProofBar() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-50px" });
 
   return (
-    <section className="py-12 px-6 border-y border-slate-800/50">
+    <section className="py-12 px-6 bg-[#03060C] border-y border-slate-800/50 overflow-hidden">
       <div className="max-w-6xl mx-auto" ref={ref}>
         <motion.p
           className="text-center text-xs font-medium uppercase tracking-[0.2em] text-slate-500 mb-8"
@@ -32,11 +30,11 @@ export default function TechStack() {
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
         >
-          Databricks-native stack — your data never leaves your workspace
+          Used by engineering teams building production AI on Databricks
         </motion.p>
 
         <motion.div
-          className="flex flex-wrap items-center justify-center gap-6 md:gap-10"
+          className="flex flex-nowrap md:flex-wrap items-center justify-start md:justify-center gap-6 md:gap-10 overflow-x-auto pb-4 md:pb-0 scrollbar-hide"
           variants={fadeUp}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
@@ -44,7 +42,7 @@ export default function TechStack() {
           {techLogos.map((tech) => (
             <div
               key={tech.name}
-              className="group flex items-center gap-2 px-4 py-2 rounded-lg border border-transparent hover:border-slate-700/50 transition-all cursor-default"
+              className="flex-shrink-0 group flex items-center gap-2 px-4 py-2 rounded-lg border border-transparent hover:border-slate-700/50 transition-all cursor-default"
             >
               <div
                 className="w-2 h-2 rounded-full opacity-60 group-hover:opacity-100 transition-opacity"
@@ -55,6 +53,18 @@ export default function TechStack() {
               </span>
             </div>
           ))}
+        </motion.div>
+
+        <motion.div
+          className="mt-10 text-center"
+          variants={fadeUp}
+          initial="hidden"
+          animate={inView ? "visible" : "hidden"}
+        >
+          <p className="text-lg md:text-xl font-bold text-slate-300 max-w-2xl mx-auto">
+            88% of companies use AI. Only 13% see results. <br className="hidden sm:block" />
+            <span className="text-white">We work exclusively with the 13%.</span>
+          </p>
         </motion.div>
       </div>
     </section>

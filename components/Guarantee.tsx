@@ -6,18 +6,18 @@ import { useRef } from "react";
 const guarantees = [
   {
     icon: "⏱️",
-    title: "7 days, or your money back",
-    body: "If we don't deliver the audit within 7 days of kickoff, full refund.",
+    title: "The 10-Week Production Guarantee",
+    body: "We scope timelines aggressively. If your agent isn't live in production by week 10, we work for free until it is.",
   },
   {
-    icon: "💰",
-    title: "Found waste, or your money back",
-    body: "If we don't identify at least $5K/year in Databricks waste, full refund.",
+    icon: "🛡️",
+    title: "The 30-Day Breakage Guarantee",
+    body: "If the agent fails in production within 30 days of launch, we drop everything and fix it. No support tickets, no hourly billing. Free.",
   },
   {
-    icon: "✅",
-    title: "Production-ready agents, or we iterate free",
-    body: "Every agent build includes 30 days of post-launch fixes at no charge. If it doesn't survive production, we keep iterating until it does.",
+    icon: "🔑",
+    title: "The Full Ownership Guarantee",
+    body: "You own the GitHub repo, the Databricks infrastructure, and the evaluation suite. You never pay us a hostage fee.",
   },
 ];
 
@@ -36,7 +36,7 @@ export default function Guarantee() {
   const inView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section className="py-24 md:py-32 px-6">
+    <section className="py-24 md:py-32 px-6 bg-[#050A14]">
       <div className="max-w-6xl mx-auto" ref={ref}>
         <motion.div
           className="text-center mb-16"
@@ -44,11 +44,15 @@ export default function Guarantee() {
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
         >
-          <h2 className="text-3xl md:text-5xl font-bold text-white mb-4 font-heading">
-            Three <span className="text-gradient-blue">Guarantees</span>
+          <span className="inline-block text-sm font-semibold tracking-wider text-blue-400 uppercase mb-4">
+            Skin in the Game
+          </span>
+          <h2 className="text-3xl md:text-5xl font-bold text-white mb-6 font-heading">
+            Agencies Charge for Effort. <br className="hidden md:block" />
+            <span className="text-gradient-blue">We Charge for Outcomes.</span>
           </h2>
           <p className="text-base md:text-lg text-slate-400 max-w-2xl mx-auto">
-            We take the risk so you don&apos;t have to.
+            We take the risk so your engineering team doesn&apos;t have to.
           </p>
         </motion.div>
 
