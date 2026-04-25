@@ -5,26 +5,20 @@ import { useRef } from "react";
 import { Check, X } from "lucide-react";
 
 const genericRows = [
-  "Can call LLM APIs",
-  "Knows LangChain",
-  "Builds demos on clean data",
-  "Can't handle messy production data",
-  "No FinOps — runaway costs",
-  "Works on their infrastructure",
-  "$40K project becomes $80K when data issues hit",
+  "$15K-$40K minimum engagement",
+  "3-4 week start time",
+  "Generic audits, mostly meetings",
+  "Junior consultants doing the work",
+  "Scope expands, price expands",
 ];
 
 const databytRows = [
-  "Data engineers FIRST, AI builders second",
-  "Databricks-native (Mosaic AI, Unity Catalog)",
-  "Handle real enterprise data — messy, siloed, governed",
-  "FinOps-aware — costs controlled from Day 1",
-  "All work inside your Databricks workspace",
-  "Fixed price, no surprises",
-  "You own every line of code we write",
+  "$749 flat, no surprises",
+  "Kick off within 48 hours",
+  "Fixed-scope deliverable",
+  "Senior engineer does everything",
+  "What you see is what you pay",
 ];
-
-const genericPositive = [true, true, true, false, false, false, false];
 
 const fadeUp: Variants = {
   hidden: { opacity: 0, y: 40 },
@@ -51,10 +45,10 @@ export default function WhyTrustUs() {
         >
           <h2 className="text-3xl md:text-5xl font-bold text-white mb-4 font-heading">
             Why Not Hire{" "}
-            <span className="text-gradient-blue">Generic AI Consultants?</span>
+            <span className="text-gradient-blue">a Consultant?</span>
           </h2>
           <p className="text-base md:text-lg text-slate-400 max-w-2xl mx-auto">
-            Generic AI developers and agencies can call an LLM. What they can&apos;t do is handle your real enterprise data.
+            Traditional consultants bill by the hour and stretch projects out. We productized the exact steps needed to find waste.
           </p>
         </motion.div>
 
@@ -66,15 +60,12 @@ export default function WhyTrustUs() {
           animate={inView ? "visible" : "hidden"}
         >
           {/* Header */}
-          <div className="grid grid-cols-3 border-b border-slate-800">
-            <div className="p-5 text-xs font-semibold uppercase tracking-widest text-slate-500">
-              What They Offer
-            </div>
-            <div className="p-5 text-center text-sm font-semibold text-slate-400 border-l border-slate-800">
-              Generic AI Dev / Agency
+          <div className="grid grid-cols-2 border-b border-slate-800">
+            <div className="p-5 text-center text-sm font-semibold text-slate-400">
+              Hiring a Databricks Consultant
             </div>
             <div className="p-5 text-center text-sm font-bold text-white bg-blue-500/5 border-l border-blue-500/20">
-              <span className="text-gradient-blue">Databyt</span>
+              <span className="text-gradient-blue">Databyt Audit</span>
             </div>
           </div>
 
@@ -88,26 +79,19 @@ export default function WhyTrustUs() {
               <motion.div
                 key={i}
                 variants={fadeUp}
-                className="grid grid-cols-3 border-b border-slate-800/50 hover:bg-slate-800/20 transition-colors"
+                className="grid grid-cols-2 border-b border-slate-800/50 hover:bg-slate-800/20 transition-colors"
               >
-                <div className="p-4 text-sm text-slate-400 flex items-center">
-                  {databytRows[i]}
-                </div>
-                <div className="p-4 flex items-center justify-center border-l border-slate-800">
-                  {genericPositive[i] ? (
-                    <div className="flex items-center gap-2">
-                      <Check size={16} className="text-slate-500" />
-                      <span className="text-sm text-slate-500">{item}</span>
-                    </div>
-                  ) : (
-                    <div className="flex items-center gap-2">
-                      <X size={16} className="text-red-500/70" />
-                      <span className="text-sm text-slate-600">{item}</span>
-                    </div>
-                  )}
+                <div className="p-4 flex items-center justify-center">
+                  <div className="flex items-center gap-2">
+                    <X size={16} className="text-red-500/70 flex-shrink-0" />
+                    <span className="text-sm text-slate-400">{item}</span>
+                  </div>
                 </div>
                 <div className="p-4 flex items-center justify-center border-l border-blue-500/20 bg-blue-500/3">
-                  <Check size={16} className="text-blue-400 flex-shrink-0" />
+                  <div className="flex items-center gap-2">
+                    <Check size={16} className="text-blue-400 flex-shrink-0" />
+                    <span className="text-sm text-white font-medium">{databytRows[i]}</span>
+                  </div>
                 </div>
               </motion.div>
             ))}
@@ -121,7 +105,7 @@ export default function WhyTrustUs() {
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
         >
-          The difference isn&apos;t the AI toolkit — it&apos;s whether your data is ready to power it.
+          The difference isn&apos;t the process — it&apos;s the lack of bloated scope.
         </motion.p>
       </div>
     </section>

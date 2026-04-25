@@ -7,66 +7,46 @@ import { useDemoForm } from "./DemoFormContext";
 
 const plans = [
   {
-    name: "AI Readiness Audit",
-    tag: "Start Here",
-    price: "$499",
-    priceNote: "one-time",
-    subtitle: "Launch special — limited to first 10 clients",
-    duration: "2 weeks",
-    who: "Seed-stage or pre-AI startups on Databricks",
+    name: "Databricks Cost Audit",
+    tag: "Primary Offer",
+    price: "$749",
+    priceNote: "flat fee",
+    subtitle: "",
+    duration: "7 days from kickoff",
+    who: "Data teams looking to reduce Databricks spend",
     features: [
-      "2-week data + infrastructure diagnostic",
-      "Agent opportunity map — 5 use cases prioritized",
-      "FinOps baseline + cost reduction plan",
-      "Written deliverable + 90-min walkthrough",
-      "100% applicable to Build tier",
+      "Complete scan of your Databricks workspace",
+      "Cost breakdown by job, cluster, and workload",
+      "Top 10 waste sources identified with $ impact",
+      "Optimization roadmap (quick wins + structural fixes)",
+      "20-page audit report (PDF)",
+      "60-minute walkthrough call",
+      "30-day email support for questions",
     ],
-    cta: "Start Here",
-    ctaStyle: "secondary" as const,
-    popular: false,
-    highlighted: false,
-  },
-  {
-    name: "Build",
-    tag: "Most Popular",
-    price: "$3,500",
-    priceNote: "starting",
-    subtitle: "Scales up to $9,500 depending on complexity",
-    duration: "4-8 weeks",
-    who: "Seed to Series B startups ready to ship their first agent",
-    features: [
-      "AI Readiness Audit included",
-      "Production AI agent built on your Databricks",
-      "Data pipeline feeding the agent",
-      "Monitoring + cost tracking dashboard",
-      "Documentation + handoff training",
-      "30-day bug-fix warranty",
-    ],
-    cta: "Book Free Audit First",
+    cta: "Book Audit — $749",
     ctaStyle: "primary" as const,
     popular: true,
     highlighted: true,
+    hasButton: true,
   },
   {
-    name: "Retain",
-    tag: "Ongoing",
-    price: "$2,500",
-    priceNote: "/month starting",
-    subtitle: "Scales to $4,500 for enterprise workloads",
-    duration: "Ongoing",
-    who: "Post-launch clients scaling AI with new agents every month",
+    name: "Data + AI Advisory (Coming Soon)",
+    tag: "Coming Soon",
+    price: "Advisory",
+    priceNote: "",
+    subtitle: "For clients post-audit who want ongoing optimization, data platform improvements, or AI agent builds.",
+    duration: "Available from July",
+    who: "Available only to post-audit clients",
     features: [
-      "Monitoring + incident response (24hr SLA)",
-      "1 new agent shipped every month",
-      "Cost optimization ongoing",
-      "Private Slack + 2 calls/week",
-      "Cancel anytime with 7 days notice",
-      "You keep everything",
+      "Structural data issues",
+      "Pipeline redesign",
+      "Future AI work",
     ],
-    cta: "Book Free Audit First",
+    cta: "",
     ctaStyle: "secondary" as const,
     popular: false,
     highlighted: false,
+    hasButton: false,
   },
 ];
 
@@ -95,14 +75,14 @@ export default function Pricing() {
           animate={inView ? "visible" : "hidden"}
         >
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-sm font-semibold mb-6">
-            🎯 Launch Pricing — Locked for First 10 Clients Only
+            🎯 Zero Risk, High ROI
           </div>
           <h2 className="text-3xl md:text-5xl font-bold text-white mb-4 font-heading">
             Simple Pricing.{" "}
-            <span className="text-gradient-blue">Production-Ready Delivery.</span>
+            <span className="text-gradient-blue">Clear Outcomes.</span>
           </h2>
           <p className="text-base md:text-lg text-slate-400 max-w-xl mx-auto">
-            Fixed fees, no surprises. Every engagement starts with an AI Readiness Audit so we know exactly what to build.
+            One flat fee. We find the waste, give you the exact steps to fix it, and support you along the way.
           </p>
         </motion.div>
 
@@ -114,12 +94,12 @@ export default function Pricing() {
         >
           <span className="inline-flex items-center gap-2 text-xs font-medium text-amber-400 bg-amber-500/10 border border-amber-500/20 rounded-full px-4 py-1.5">
             <Star size={12} className="fill-amber-400" />
-            Every project starts with the $5K Audit — 100% applied toward your build
+            100% Money-Back Guarantee if we don&apos;t find at least $5K in savings
           </span>
         </motion.div>
 
         <motion.div
-          className="grid grid-cols-1 lg:grid-cols-3 gap-5"
+          className="grid grid-cols-1 lg:grid-cols-2 gap-5 max-w-4xl mx-auto"
           variants={stagger}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
@@ -173,21 +153,23 @@ export default function Pricing() {
               </ul>
 
               {/* CTA button */}
-              {plan.ctaStyle === "primary" ? (
-                <button
-                  onClick={openDemo}
-                  className="w-full bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 text-white rounded-full px-6 py-3.5 font-semibold text-sm transition-all duration-200 hover:scale-[1.02] hover:shadow-[0_0_20px_rgba(59,130,246,0.3)] flex items-center justify-center gap-2"
-                >
-                  {plan.cta}
-                  <ArrowRight size={15} />
-                </button>
-              ) : (
-                <button
-                  onClick={openDemo}
-                  className="w-full border border-slate-700 hover:border-blue-500 text-slate-300 hover:text-white rounded-full px-6 py-3.5 font-semibold text-sm transition-all duration-200 hover:scale-[1.02]"
-                >
-                  {plan.cta}
-                </button>
+              {plan.hasButton && (
+                plan.ctaStyle === "primary" ? (
+                  <button
+                    onClick={openDemo}
+                    className="w-full bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 text-white rounded-full px-6 py-3.5 font-semibold text-sm transition-all duration-200 hover:scale-[1.02] hover:shadow-[0_0_20px_rgba(59,130,246,0.3)] flex items-center justify-center gap-2"
+                  >
+                    {plan.cta}
+                    <ArrowRight size={15} />
+                  </button>
+                ) : (
+                  <button
+                    onClick={openDemo}
+                    className="w-full border border-slate-700 hover:border-blue-500 text-slate-300 hover:text-white rounded-full px-6 py-3.5 font-semibold text-sm transition-all duration-200 hover:scale-[1.02]"
+                  >
+                    {plan.cta}
+                  </button>
+                )
               )}
             </motion.div>
           ))}
@@ -199,7 +181,7 @@ export default function Pricing() {
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
         >
-          All projects: fixed price, no surprises. Retainer: cancel anytime with 7 days&apos; notice. You keep the code.
+          All audits: fixed price, no surprises. You keep all the recommendations.
         </motion.p>
       </div>
     </section>

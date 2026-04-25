@@ -7,26 +7,26 @@ import { Clock, DollarSign, Bot, Activity } from "lucide-react";
 const results = [
   {
     icon: Clock,
-    value: "6 weeks",
-    label: "From kickoff to production agent",
+    value: "7 days",
+    label: "Average time from kickoff to audit delivery",
     color: "#3B82F6",
   },
   {
     icon: DollarSign,
-    value: "20-40%",
-    label: "Typical Databricks cost reduction identified",
+    value: "40-60%",
+    label: "Typical Databricks overspend we uncover (industry data)",
     color: "#10B981",
   },
   {
-    icon: Bot,
-    value: "60%",
-    label: "Reduction in manual ops work after first agent",
+    icon: Activity,
+    value: "22 pages",
+    label: "Depth of our audit deliverable",
     color: "#8B5CF6",
   },
   {
-    icon: Activity,
-    value: "99%",
-    label: "Agent uptime on production systems",
+    icon: Bot,
+    value: "$749",
+    label: "Flat fee — no scope creep, no add-ons",
     color: "#06B6D4",
   },
 ];
@@ -55,11 +55,11 @@ export default function TimeSaved() {
           animate={inView ? "visible" : "hidden"}
         >
           <h2 className="text-3xl md:text-5xl font-bold text-white mb-4 font-heading">
-            What{" "}
-            <span className="text-gradient-blue">6 Weeks Looks Like</span>
+            What the{" "}
+            <span className="text-gradient-blue">Numbers Say</span>
           </h2>
           <p className="text-base md:text-lg text-slate-400 max-w-xl mx-auto">
-            Real metrics from real production agent deployments. Anonymized for privacy.
+            Verifiable or directional metrics. No inflated claims.
           </p>
         </motion.div>
 

@@ -6,36 +6,32 @@ import { ChevronDown } from "lucide-react";
 
 const faqs = [
   {
-    q: "What tech stack do you work with?",
-    a: "We're Databricks-native — Lakehouse, Mosaic AI, Unity Catalog, Delta Live Tables, Spark. We also use dbt, Fivetran, Airbyte, and Apache Airflow. For the AI agent layer: Claude (Anthropic), OpenAI GPT-4, LangGraph, and LangChain. If you're on a different stack, we'll assess compatibility during the audit.",
+    q: "Why $749 and not more?",
+    a: "Because you haven't worked with me yet. The audit is priced as a low-risk way to see if we're a fit. If the audit delivers value, we can discuss larger engagements after.",
   },
   {
     q: "How fast can you start?",
-    a: "Your AI Readiness Audit can be booked within 48 hours of our first call. The audit itself takes 2 weeks. Your first production agent is live 6 weeks after that — or you get a full refund.",
+    a: "Within 48 hours of booking. The audit itself takes 7 days from kickoff to delivery.",
   },
   {
-    q: "What about data security?",
-    a: "Your data never leaves your workspace. We work entirely inside your Databricks environment using read-only API access to your source systems. We follow SOC 2 practices (compliance in progress) and are GDPR-ready. You control access and can revoke it anytime.",
+    q: "What access do you need?",
+    a: "Read-only access to your Databricks workspace — specifically to system tables (billing, lakeflow, access). We never touch production data or write anything to your workspace.",
   },
   {
-    q: "How does pricing work?",
-    a: "Fixed fees — no hourly billing, no surprise invoices. Every engagement starts with the $499 AI Readiness Audit. The Build phase is $3,500 - $9,500 depending on complexity. The retainer is $2,500/month starting — cancel anytime with 7 days notice, you keep everything.",
+    q: "What about security?",
+    a: "Signed NDA before any access. Read-only permissions. SOC 2 practices (not certified yet — we're transparent about that). Your data never leaves your cloud.",
   },
   {
-    q: "What makes you different from a consultancy?",
-    a: "We're data engineers first — most AI builders can't handle real enterprise data. Traditional consultancies (Accenture, Tiger Analytics) start at $150K+ and take 6 months. We ship a production agent in 6 weeks at a fixed price. The difference is operational maturity, not just AI tooling.",
+    q: "Will the audit really find enough to justify $749?",
+    a: "If it doesn't find at least $5K/year in waste, you get your money back. In most workspaces with >$10K/month Databricks spend, we find significantly more.",
   },
   {
-    q: "Do you replace our existing tools?",
-    a: "No — we enhance them. If you're on Databricks, we make your data agent-ready. If you're on a messy mix of scripts and spreadsheets, we migrate you to a production stack. We never force a re-platform unless it's genuinely the right call.",
+    q: "What happens if I want ongoing help?",
+    a: "We discuss advisory packages only after the audit is complete. No pressure during the engagement.",
   },
   {
-    q: "What if we grow and need more agents?",
-    a: "Move to our AI Operations Retainer — starting at $2,500/month (scales to $4,500 for enterprise workloads). We ship one new agent every month, handle monitoring and incident response with a 24-hour SLA, and continuously optimize your Databricks costs. Cancel any month with 7 days notice.",
-  },
-  {
-    q: "Can we see a sample deliverable?",
-    a: "Yes. Book a free 20-minute AI Readiness Check — we'll run a real diagnostic on your data stack, identify 3 agent opportunities, and flag 1 critical data gap. No obligation, no pitch. If we can't find actionable insights, we'll tell you honestly.",
+    q: "Are you a solo founder or an agency?",
+    a: "I'm a solo founder. You work directly with me, not a junior consultant.",
   },
 ];
 

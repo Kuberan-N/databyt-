@@ -7,18 +7,18 @@ import { Shield, RefreshCcw, BadgeCheck } from "lucide-react";
 const guarantees = [
   {
     icon: Shield,
-    title: "6-Week Production Guarantee",
-    text: "Production agent running in 6 weeks — or 100% refund. No caveats, no fine print. We don't get paid until your agent is live.",
+    title: "7 days, or your money back",
+    text: "If we don't deliver the audit within 7 days of kickoff, full refund.",
   },
   {
     icon: RefreshCcw,
-    title: "Metrics Accuracy Promise",
-    text: "Metrics don't match your source of truth? We rebuild free — as many times as it takes until they match exactly.",
+    title: "Under $750, zero risk",
+    text: "If the audit doesn't identify at least $5K/year in waste, full refund.",
   },
   {
     icon: BadgeCheck,
-    title: "Cancel Anytime Terms",
-    text: "Cancel your retainer anytime with 7 days notice. You keep everything — every repo, every model, every line of code.",
+    title: "You own everything",
+    text: "All findings, recommendations, and SQL queries we use are yours to keep. No lock-in, no dependencies on us.",
   },
 ];
 
@@ -45,7 +45,7 @@ export default function Guarantee() {
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
         >
-          6 Weeks,{" "}
+          7 Days,{" "}
           <span className="text-gradient-blue">or Your Money Back</span>
         </motion.h2>
 
@@ -55,7 +55,7 @@ export default function Guarantee() {
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
         >
-          We put our money where our mouth is. A production agent in your Databricks account within 6 weeks of kickoff — or a full refund. The risk is entirely on us. That&apos;s how confident we are.
+          We put our money where our mouth is. We deliver your Databricks audit within 7 days of kickoff, or you get a full refund. 
         </motion.p>
 
         <motion.div

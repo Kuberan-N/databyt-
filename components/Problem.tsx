@@ -6,31 +6,22 @@ import { Database, AlertTriangle, Layers } from "lucide-react";
 
 const painPoints = [
   {
-    icon: Database,
-    title: "Dirty Data Kills Agents",
+    icon: "💸",
+    title: "Databricks bill keeps climbing",
     description:
-      "60% of AI projects are abandoned due to poor data quality. Your agent is only as good as the data feeding it — and messy, siloed production data breaks every LLM in minutes.",
-    stat: "60%",
-    statLabel: "AI projects fail at data (Gartner 2024)",
-    statColor: "text-red-400",
+      "Your monthly DBU spend grew 2-3x this year, but you can't point to specific reasons. Finance is asking questions you can't answer.",
   },
   {
-    icon: Layers,
-    title: "Wrong Tech Stack",
+    icon: "🐌",
+    title: "Pipelines are slow and flaky",
     description:
-      "Teams pick LangChain on notebooks that don't scale past demo day. Without Databricks-native infrastructure, you're one data volume spike away from a $0 production agent.",
-    stat: "Demo",
-    statLabel: "→ Production gap kills projects",
-    statColor: "text-amber-400",
+      "Jobs take hours longer than they should. You've added more compute to 'fix' it, but the problem keeps coming back.",
   },
   {
-    icon: AlertTriangle,
-    title: "No Production Discipline",
+    icon: "🤷",
+    title: "Nobody knows what's actually running",
     description:
-      "Agents hallucinate without proper guardrails, evaluation frameworks, and monitoring. 40% of agentic AI projects will be cancelled by 2027 (Gartner). The missing piece is always operational maturity.",
-    stat: "40%",
-    statLabel: "Agentic AI projects cancelled by 2027",
-    statColor: "text-orange-400",
+      "Your workspace has 40+ jobs, dozens of clusters, and notebooks nobody owns. You're paying for compute that probably isn't needed.",
   },
 ];
 
@@ -57,8 +48,8 @@ export default function Problem() {
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
         >
-          Why Most AI Projects{" "}
-          <span className="text-gradient-blue">Never Reach Production</span>
+          You Probably Have{" "}
+          <span className="text-gradient-blue">These 3 Symptoms</span>
         </motion.h2>
         <motion.p
           className="text-base md:text-lg text-slate-400 text-center max-w-2xl mx-auto mb-16"
@@ -66,7 +57,7 @@ export default function Problem() {
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
         >
-          Every Seed-to-Series B startup hits the same three walls. Most AI builders can&apos;t fix them. We can.
+          If any of these sound familiar, you have hidden waste in your Databricks environment.
         </motion.p>
 
         <motion.div
@@ -82,12 +73,8 @@ export default function Problem() {
               className="bg-[#0A1628]/80 border border-slate-800 rounded-2xl p-8 hover:border-blue-500/30 hover:shadow-[0_0_30px_rgba(59,130,246,0.1)] transition-all group"
             >
               <div className="flex items-start justify-between mb-5">
-                <div className="p-3 rounded-xl bg-blue-500/10 border border-blue-500/20 w-fit">
-                  <point.icon size={24} className="text-blue-400" />
-                </div>
-                <div className="text-right">
-                  <p className={`text-2xl font-bold ${point.statColor}`}>{point.stat}</p>
-                  <p className="text-xs text-slate-500 max-w-[120px] text-right leading-tight">{point.statLabel}</p>
+                <div className="p-3 rounded-xl bg-blue-500/10 border border-blue-500/20 w-fit flex items-center justify-center text-2xl">
+                  {point.icon}
                 </div>
               </div>
               <h3 className="text-xl font-semibold text-white mb-2">{point.title}</h3>
@@ -95,15 +82,6 @@ export default function Problem() {
             </motion.div>
           ))}
         </motion.div>
-
-        <motion.p
-          className="text-center text-slate-500 italic mt-12 text-base"
-          variants={fadeUp}
-          initial="hidden"
-          animate={inView ? "visible" : "hidden"}
-        >
-          You didn&apos;t raise to babysit data pipelines — or watch AI demos that never ship.
-        </motion.p>
       </div>
     </section>
   );
