@@ -92,7 +92,7 @@ export default function Pricing() {
               <span className="text-5xl font-extrabold text-white">{starterPrice}</span>
             </div>
             <div className="flex items-center gap-4 mb-6">
-              <span className="text-sm text-purple-400 font-medium">4-6 weeks</span>
+              <span className="text-sm text-cyan-400 font-medium">4-6 weeks</span>
               <span className="w-1 h-1 rounded-full bg-slate-600" />
               <span className="text-sm text-slate-500">Next start: May 12th</span>
             </div>
@@ -143,22 +143,22 @@ export default function Pricing() {
           {/* Card 2: Production Agent (Highlight) */}
           <motion.div
             variants={fadeUp}
-            className="relative bg-[#0A1628]/80 rounded-2xl p-8 backdrop-blur-sm flex flex-col border-2 border-purple-500/60 shadow-[0_0_50px_rgba(168,85,247,0.15)]"
+            className="relative bg-[#0A1628]/80 rounded-2xl p-8 backdrop-blur-sm flex flex-col border-2 border-cyan-500/60 shadow-[0_0_50px_rgba(6,182,212,0.15)]"
           >
             <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-full max-w-[200px] text-center">
-              <span className="text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider bg-gradient-to-r from-purple-600 to-pink-500 text-white shadow-lg">
+              <span className="text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider bg-gradient-to-r from-blue-600 to-cyan-500 text-white shadow-lg">
                 MOST REQUESTED
               </span>
             </div>
             
             <h3 className="text-2xl font-bold text-white mb-2 mt-2">Production Agent</h3>
-            <p className="text-sm text-purple-300 font-medium mb-6">The complete system. Multi-step. Memory. Tools. Built for teams that can&apos;t afford for it to fail.</p>
+            <p className="text-sm text-cyan-300 font-medium mb-6">The complete system. Multi-step. Memory. Tools. Built for teams that can&apos;t afford for it to fail.</p>
             
             <div className="mb-2">
               <span className="text-5xl font-extrabold text-white">{prodPrice}</span>
             </div>
             <div className="flex items-center gap-4 mb-6">
-              <span className="text-sm text-purple-400 font-medium">8-10 weeks</span>
+              <span className="text-sm text-cyan-400 font-medium">8-10 weeks</span>
               <span className="w-1 h-1 rounded-full bg-slate-600" />
               <span className="text-sm text-slate-500">Next start: May 12th</span>
             </div>
@@ -167,7 +167,7 @@ export default function Pricing() {
             
             <ul className="space-y-3 mb-8 flex-1">
               <li className="flex items-start gap-3">
-                <Check size={16} className="text-purple-400 mt-0.5 flex-shrink-0" />
+                <Check size={16} className="text-cyan-400 mt-0.5 flex-shrink-0" />
                 <span className="text-sm font-medium text-white">Everything in Starter Agent, plus:</span>
               </li>
               {[
@@ -183,7 +183,7 @@ export default function Pricing() {
                 "Architecture review call at 90 days post-launch"
               ].map((feature) => (
                 <li key={feature} className="flex items-start gap-3">
-                  <Check size={16} className="text-purple-400 mt-0.5 flex-shrink-0" />
+                  <Check size={16} className="text-cyan-400 mt-0.5 flex-shrink-0" />
                   <span className="text-sm text-slate-300">{feature}</span>
                 </li>
               ))}
@@ -203,7 +203,7 @@ export default function Pricing() {
 
             <button
               onClick={openDemo}
-              className="w-full bg-gradient-to-r from-purple-600 to-pink-500 hover:from-purple-500 hover:to-pink-400 text-white rounded-full px-6 py-4 font-bold text-sm transition-all duration-200 hover:scale-[1.02] hover:shadow-[0_0_20px_rgba(168,85,247,0.3)] flex items-center justify-center gap-2"
+              className="w-full bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 text-white rounded-full px-6 py-4 font-bold text-sm transition-all duration-200 hover:scale-[1.02] hover:shadow-[0_0_20px_rgba(6,182,212,0.3)] flex items-center justify-center gap-2"
             >
               Claim Production Spot &rarr;
             </button>

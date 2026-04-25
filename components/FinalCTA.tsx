@@ -21,7 +21,7 @@ export default function FinalCTA() {
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
         <div className="w-[600px] h-[600px] rounded-full bg-blue-600/12 blur-[120px]" />
       </div>
-      <div className="absolute top-0 left-1/4 w-64 h-64 rounded-full bg-purple-600/8 blur-[80px] pointer-events-none" />
+      <div className="absolute top-0 left-1/4 w-64 h-64 rounded-full bg-cyan-600/8 blur-[80px] pointer-events-none" />
 
       <div className="relative z-10 max-w-3xl mx-auto text-center" ref={ref}>
         <motion.span

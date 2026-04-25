@@ -56,7 +56,7 @@ export default function VideoDemo() {
             onClick={() => setPlaying(true)}
           >
             {/* Gradient background */}
-            <div className="absolute inset-0 bg-gradient-to-br from-blue-900/20 to-purple-900/20" />
+            <div className="absolute inset-0 bg-gradient-to-br from-blue-900/20 to-cyan-900/20" />
             <div className="absolute inset-0 dot-grid opacity-50" />
 
             {!playing ? (

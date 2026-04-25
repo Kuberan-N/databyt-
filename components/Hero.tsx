@@ -30,7 +30,7 @@ export default function Hero() {
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
         <div className="gradient-orb" />
       </div>
-      <div className="absolute top-1/4 -right-32 w-72 h-72 rounded-full bg-purple-500/8 blur-[100px] pointer-events-none" />
+      <div className="absolute top-1/4 -right-32 w-72 h-72 rounded-full bg-cyan-500/8 blur-[100px] pointer-events-none" />
       <div className="absolute bottom-1/4 -left-32 w-64 h-64 rounded-full bg-cyan-500/10 blur-[100px] pointer-events-none" />
 
       {/* Dot grid */}
@@ -89,7 +89,7 @@ export default function Hero() {
           </button>
           <a
             href="#how-we-work"
-            className="border border-slate-700 hover:border-purple-500/50 text-slate-300 hover:text-white font-semibold rounded-full px-8 py-4 transition-all flex items-center gap-2"
+            className="border border-slate-700 hover:border-cyan-500/50 text-slate-300 hover:text-white font-semibold rounded-full px-8 py-4 transition-all flex items-center gap-2"
           >
             See How We Build &rarr;
           </a>
