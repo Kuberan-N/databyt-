@@ -1,13 +1,12 @@
-import AnnouncementBar from "@/components/AnnouncementBar";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
-import SocialProofBar from "@/components/TechStack";
+import PainTicker from "@/components/PainTicker";
 import ProblemAgitation from "@/components/Problem";
 import CostOfInaction from "@/components/TwoPaths";
-import ComparisonTable from "@/components/ComparisonTable";
-import FiveDisciplines from "@/components/FiveDisciplines";
+import Services from "@/components/Services";
 import HowItWorks from "@/components/HowItWorks";
-import ProofSection from "@/components/ProofSection";
+import RealNumbers from "@/components/RealNumbers";
+import ComparisonTable from "@/components/ComparisonTable";
 import Pricing from "@/components/Pricing";
 import Guarantee from "@/components/Guarantee";
 import FounderStory from "@/components/FounderStory";
@@ -20,17 +19,16 @@ import { DemoFormProvider } from "@/components/DemoFormContext";
 export default function Home() {
   return (
     <DemoFormProvider>
-      <AnnouncementBar />
       <Navbar />
       <main>
         <Hero />
-        <SocialProofBar />
+        <PainTicker />
         <ProblemAgitation />
         <CostOfInaction />
-        <ComparisonTable />
-        <FiveDisciplines />
+        <Services />
         <HowItWorks />
-        <ProofSection />
+        <RealNumbers />
+        <ComparisonTable />
         <Pricing />
         <Guarantee />
         <FounderStory />

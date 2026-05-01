@@ -3,26 +3,34 @@
 import { motion, type Variants } from "framer-motion";
 import { Shield } from "lucide-react";
 import { useDemoForm } from "./DemoFormContext";
+import { useEffect, useState } from "react";
 
 const trustBadges = [
-  { label: "Databricks-Native" },
-  { label: "5 Disciplines Framework" },
-  { label: "Code Ownership: Yours" },
-  { label: "Production-Ready in 8 Weeks" },
-  { label: "30-Day Post-Launch Support" },
+  "Databricks-Native",
+  "Snowflake-Native",
+  "Data Never Leaves",
+  "3 Weeks to Production",
 ];
 
 const fadeUp: Variants = {
-  hidden: { opacity: 0, y: 40 },
+  hidden: { opacity: 0, y: 30 },
   visible: (i: number) => ({
     opacity: 1,
     y: 0,
-    transition: { duration: 0.6, delay: i * 0.1 },
+    transition: { duration: 0.8, delay: i * 0.12, ease: [0.25, 0.46, 0.45, 0.94] },
   }),
 };
 
 export default function Hero() {
   const { open: openDemo } = useDemoForm();
+  const [wasteCost, setWasteCost] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setWasteCost((prev) => prev + 13);
+    }, 1000);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
@@ -30,52 +38,64 @@ export default function Hero() {
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
         <div className="gradient-orb" />
       </div>
-      <div className="absolute top-1/4 -right-32 w-72 h-72 rounded-full bg-cyan-500/8 blur-[100px] pointer-events-none" />
-      <div className="absolute bottom-1/4 -left-32 w-64 h-64 rounded-full bg-cyan-500/10 blur-[100px] pointer-events-none" />
+      <div className="absolute top-1/3 -right-40 w-96 h-96 rounded-full bg-cyan-500/5 blur-[120px] pointer-events-none" />
+      <div className="absolute bottom-1/3 -left-40 w-80 h-80 rounded-full bg-blue-500/5 blur-[120px] pointer-events-none" />
 
       {/* Dot grid */}
       <div className="absolute inset-0 dot-grid pointer-events-none" />
 
-      <div className="relative z-10 max-w-6xl mx-auto px-6 pt-24 pb-16 text-center mt-12">
+      <div className="relative z-10 max-w-5xl mx-auto px-6 pt-32 pb-24 text-center">
         {/* Positioning badge */}
         <motion.div variants={fadeUp} initial="hidden" animate="visible" custom={0}>
-          <span className="inline-flex items-center gap-2 text-sm font-medium text-blue-400 bg-blue-500/10 border border-blue-500/20 rounded-full px-4 py-1.5 mb-8 shimmer">
+          <span className="inline-flex items-center gap-2 text-sm font-medium text-blue-400 bg-blue-500/8 border border-blue-500/15 rounded-full px-5 py-2 mb-10 shimmer">
             <Shield size={14} />
-            Production AI Engineering on Databricks
+            Finance AI Agents — Databricks & Snowflake
           </span>
         </motion.div>
 
         {/* Main headline */}
         <motion.h1
-          className="text-4xl sm:text-5xl md:text-7xl font-extrabold tracking-tight text-white leading-[1.1] mb-6 font-heading"
+          className="text-4xl sm:text-5xl md:text-7xl font-extrabold tracking-tight text-white leading-[1.08] mb-8 font-heading"
           variants={fadeUp}
           initial="hidden"
           animate="visible"
           custom={1}
         >
-          Stop Shipping AI Demos. <br className="hidden sm:block" />
-          <span className="text-gradient-blue">
-            Start Shipping Systems.
-          </span>
+          Your Finance Team Is Losing <br className="hidden sm:block" />
+          <span className="text-gradient-blue">$47,000/Month</span>{" "}
+          to Manual AR.
         </motion.h1>
 
         {/* Sub-headline */}
         <motion.p
-          className="text-lg md:text-xl text-slate-400 max-w-3xl mx-auto mb-10 leading-relaxed"
+          className="text-lg md:text-xl text-slate-400 max-w-3xl mx-auto mb-6 leading-relaxed"
           variants={fadeUp}
           initial="hidden"
           animate="visible"
           custom={2}
         >
-          We engineer production AI agents on your Databricks stack — with evaluation suites, failure modes, and live monitoring built in from day one.{" "}
-          <span className="text-slate-300 font-medium">
-            Not chatbots. Not prototypes. Systems your engineering team can trust at 3 AM.
+          We build AI agents that collect your money, reconcile your cash, and run on{" "}
+          <span className="text-white font-medium">your Databricks or Snowflake</span>.{" "}
+          No SaaS subscription. No data leaving your infrastructure.
+        </motion.p>
+
+        {/* Live waste counter — subtle */}
+        <motion.p
+          className="text-sm text-slate-500 mb-12"
+          variants={fadeUp}
+          initial="hidden"
+          animate="visible"
+          custom={2.5}
+        >
+          Since you opened this page, manual AR has cost US companies{" "}
+          <span className="font-semibold text-blue-400 tabular-nums">
+            ${wasteCost.toLocaleString()}
           </span>
         </motion.p>
 
         {/* CTAs */}
         <motion.div
-          className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-4"
+          className="flex flex-col sm:flex-row items-center justify-center gap-5 mb-6"
           variants={fadeUp}
           initial="hidden"
           animate="visible"
@@ -83,53 +103,51 @@ export default function Hero() {
         >
           <button
             onClick={openDemo}
-            className="group bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 text-white font-semibold rounded-full px-8 py-4 transition-all hover:scale-[1.02] hover:shadow-[0_0_30px_rgba(59,130,246,0.4)] flex items-center gap-2"
+            className="group bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 text-white font-semibold rounded-full px-10 py-4 transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_0_40px_rgba(59,130,246,0.3)] flex items-center gap-2 btn-pulse"
           >
-            Book Free 90-Min Workshop &rarr;
+            Book Free AR Assessment &rarr;
           </button>
           <a
-            href="#how-we-work"
-            className="border border-slate-700 hover:border-cyan-500/50 text-slate-300 hover:text-white font-semibold rounded-full px-8 py-4 transition-all flex items-center gap-2"
+            href="#services"
+            className="border border-slate-700/60 hover:border-blue-500/40 text-slate-300 hover:text-white font-semibold rounded-full px-10 py-4 transition-all duration-300 flex items-center gap-2"
           >
-            See How We Build &rarr;
+            See What We Build
           </a>
         </motion.div>
 
         {/* Trust line */}
         <motion.p
-          className="text-sm text-slate-500 mb-10"
+          className="text-sm text-slate-500 mb-16"
           variants={fadeUp}
           initial="hidden"
           animate="visible"
           custom={3.5}
         >
-          No pitch. No commitment. We map your biggest workflow and show you what actually needs AI — in 90 minutes.
+          20 minutes. No pitch. We show you exactly where your AR process is leaking cash.
         </motion.p>
 
         {/* Trust badges row */}
         <motion.div
-          className="flex flex-wrap items-center justify-center gap-3 mb-14"
+          className="flex flex-wrap items-center justify-center gap-4"
           variants={fadeUp}
           initial="hidden"
           animate="visible"
           custom={4}
         >
-          {trustBadges.map((b) => (
+          {trustBadges.map((label) => (
             <span
-              key={b.label}
-              className="flex items-center gap-1.5 text-xs font-medium text-slate-400 bg-slate-800/50 border border-slate-700/50 rounded-full px-3 py-1.5"
+              key={label}
+              className="flex items-center gap-2 text-xs font-medium text-slate-500 bg-slate-800/30 border border-slate-700/30 rounded-full px-4 py-2"
             >
-              <span className="text-blue-400">◉</span>
-              {b.label}
+              <span className="w-1.5 h-1.5 rounded-full bg-blue-500/60" />
+              {label}
             </span>
           ))}
         </motion.div>
-
-        {/* Stats row / Agent flow removed */}
       </div>
 
       {/* Bottom fade */}
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#050A14] to-transparent pointer-events-none" />
+      <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-[#050A14] to-transparent pointer-events-none" />
     </section>
   );
 }

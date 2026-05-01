@@ -3,62 +3,58 @@
 import { motion, useInView, type Variants } from "framer-motion";
 import { useRef } from "react";
 
-
 const painPoints = [
   {
-    icon: "🔴",
-    title: "It works in staging. It fails in production.",
-    description: "Your team built something impressive. It passed every internal test. Then it hit real users and started hallucinating names, misrouting requests, and producing outputs no one can explain. Your engineers are debugging prompts instead of shipping features. Two quarters of work. Zero production deployments.",
-    bottomLine: "This is not an AI problem. This is an engineering discipline problem."
+    title: "Your AR team chases $2M+ in overdue invoices — manually.",
+    description: "Every morning, your AR specialists open spreadsheets, copy invoice numbers, and write follow-up emails. They spend 4.5 hours per day on manual data entry — that\u2019s $30,000 per person per year in pure waste.",
+    bottomLine: "An AI agent does this in seconds. 24/7. Without missing a single invoice."
   },
   {
-    icon: "🔴",
-    title: "You spent $80K. The demo still lives in a notebook.",
-    description: "The agency delivered. The prototype looked impressive in the deck. Then your team tried to run it on live data and it broke. No evaluation framework. No failure mode handling. No monitoring. A $80K demo that your CFO is now asking about in quarterly reviews.",
-    bottomLine: "Agencies optimise for demos. We optimise for Monday mornings."
+    title: "Your DSO is 50+ days. Your competitors are at 30.",
+    description: "Series B SaaS companies average 45-55 days DSO. For every $10M in annual revenue, that\u2019s $1.5M locked in unpaid invoices. Companies that automated AR dropped DSO by 15-25 days.",
+    bottomLine: "Every day of DSO costs you. An AI agent collects while your team sleeps."
   },
   {
-    icon: "🔴",
-    title: "Your engineers know pipelines. Not agent systems.",
-    description: "Your data team is exceptional at Databricks. They build bulletproof pipelines. But production AI agents require a different discipline — evaluation suites, human-in-the-loop checkpoints, reinforcement loops, deployment monitoring. Nobody taught them this. Nobody teaches this.",
-    bottomLine: "This is the gap DataByt fills."
+    title: "You\u2019re paying $65K/year per AR specialist to do what AI does for $4,900.",
+    description: "The average AR specialist costs $55,000-$75,000/year. They process 50-80 invoices per day. An AI agent processes thousands. It never calls in sick. It never forgets a follow-up.",
+    bottomLine: "This is not a technology problem. It\u2019s a finance execution problem."
   },
 ];
 
 const fadeUp: Variants = {
-  hidden: { opacity: 0, y: 40 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
+  hidden: { opacity: 0, y: 24 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] } },
 };
 
 const stagger: Variants = {
   hidden: {},
-  visible: { transition: { staggerChildren: 0.1 } },
+  visible: { transition: { staggerChildren: 0.15 } },
 };
 
 export default function ProblemAgitation() {
   const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: "-100px" });
+  const inView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section id="problem" className="py-24 md:py-32 px-6">
+    <section id="problem" className="py-32 md:py-40 px-6">
       <div className="max-w-6xl mx-auto" ref={ref}>
         <motion.div
-          className="text-center mb-16"
+          className="text-center mb-20"
           variants={fadeUp}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
         >
-          <h2 className="text-3xl md:text-5xl font-bold text-white mb-6 font-heading">
-            Your AI Project Is Probably Dying Right Now. <br className="hidden md:block" />
-            <span className="text-gradient-blue">Here&apos;s How to Tell.</span>
+          <h2 className="text-3xl md:text-5xl font-bold text-white mb-8 font-heading leading-tight">
+            Manual AR Is Bleeding Your Company Dry. <br className="hidden md:block" />
+            <span className="text-gradient-blue">Here&apos;s the Proof.</span>
           </h2>
-          <p className="text-xl text-slate-400 max-w-3xl mx-auto">
-            Three symptoms that appear in every team before the AI project gets cancelled, the budget gets frozen, or the CTO starts asking hard questions.
+          <p className="text-lg text-slate-400 max-w-2xl mx-auto leading-relaxed">
+            Three problems that cost Series B+ companies hundreds of thousands every year — and that your finance team has accepted as normal.
           </p>
         </motion.div>
 
         <motion.div
-          className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-16"
+          className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-20"
           variants={stagger}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
@@ -67,16 +63,11 @@ export default function ProblemAgitation() {
             <motion.div
               key={point.title}
               variants={fadeUp}
-              className="bg-[#0A1628]/80 border border-slate-800 rounded-2xl p-8 hover:border-red-500/30 hover:shadow-[0_0_30px_rgba(239,68,68,0.1)] transition-all group flex flex-col"
+              className="glass-card rounded-2xl p-8 transition-all duration-500 flex flex-col"
             >
-              <div className="flex items-start justify-between mb-5">
-                <div className="text-2xl group-hover:scale-110 transition-transform">
-                  {point.icon}
-                </div>
-              </div>
-              <h3 className="text-xl font-semibold text-white mb-3">{point.title}</h3>
-              <p className="text-sm text-slate-400 leading-relaxed flex-grow mb-6">{point.description}</p>
-              <p className="text-sm font-bold text-red-400 mt-auto pt-4 border-t border-slate-800">
+              <h3 className="text-lg font-semibold text-white mb-4 leading-snug">{point.title}</h3>
+              <p className="text-sm text-slate-400 leading-relaxed flex-grow mb-8">{point.description}</p>
+              <p className="text-sm font-semibold text-blue-400 pt-5 border-t border-slate-800/50">
                 {point.bottomLine}
               </p>
             </motion.div>
@@ -84,13 +75,14 @@ export default function ProblemAgitation() {
         </motion.div>
 
         <motion.div
-          className="max-w-4xl mx-auto bg-slate-900 border border-slate-700 p-8 rounded-2xl text-center shadow-xl"
+          className="max-w-3xl mx-auto glass-card p-10 rounded-2xl text-center"
           variants={fadeUp}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
         >
-          <p className="text-lg md:text-xl font-medium text-slate-300 leading-relaxed">
-            Every week this remains unsolved: your competitors ship. Your OKRs slip. Your board loses confidence in AI initiatives. And the engineering team that built the demo starts getting questions they can&apos;t answer.
+          <p className="text-lg md:text-xl text-slate-300 leading-relaxed">
+            Every month you wait: your DSO stays high, your cash stays locked, your competitors get faster.{" "}
+            <span className="text-white font-semibold">The cost of inaction is $47,000/month.</span>
           </p>
         </motion.div>
       </div>

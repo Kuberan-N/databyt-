@@ -6,87 +6,82 @@ import { useRef } from "react";
 const steps = [
   {
     num: "01",
-    title: "Free Workshop",
-    duration: "Week 0",
-    description: "90 minutes. We sit with your team and map your biggest manual workflow step by step. We identify which parts genuinely need AI, which need simple rules, and which need a human. You leave with an AI Opportunity Map. We leave with what we need to scope the build. No cost. No commitment.",
+    title: "We Audit",
+    duration: "Day 1–3",
+    description: "We connect to your Databricks or Snowflake, map your AR workflow, and show you exactly where money is leaking. You get a written AR Leakage Report — whether you hire us or not.",
     color: "#3B82F6",
   },
   {
     num: "02",
-    title: "Architecture & Evaluation Design",
-    duration: "Weeks 1-2",
-    description: "Before building: we design the agent architecture, the evaluation framework, and every failure mode. You approve the plan before we write production code. No surprises mid-build.",
+    title: "We Build",
+    duration: "Week 1–3",
+    description: "We build the AI agent inside YOUR infrastructure. Your data never leaves. Weekly demos. You see the agent learning your invoices, your customers, your patterns in real-time.",
     color: "#06B6D4",
   },
   {
     num: "03",
-    title: "Build & Evaluate",
-    duration: "Weeks 3-8",
-    description: "We build inside your Databricks workspace. Weekly demos. Evaluation suite runs continuously. Human-in-the-loop checkpoints designed and tested. You see progress weekly — not just at the end.",
-    color: "#8B5CF6",
-  },
-  {
-    num: "04",
-    title: "Deploy & Monitor",
-    duration: "Weeks 8-10",
-    description: "Production deployment with full monitoring. 30 days of post-launch support included. Full code handoff. Your team owns everything. We're available if something needs adjusting — at no additional cost for 30 days.",
+    title: "You Collect",
+    duration: "Week 3+",
+    description: "The agent goes live. It collects, prioritizes, tracks, and escalates — autonomously. We monitor for 30 days. Then it\u2019s yours forever. Every line of code.",
     color: "#10B981",
   },
 ];
 
 const fadeUp: Variants = {
-  hidden: { opacity: 0, y: 40 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
+  hidden: { opacity: 0, y: 24 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] } },
 };
 
 const stagger: Variants = {
   hidden: {},
-  visible: { transition: { staggerChildren: 0.12 } },
+  visible: { transition: { staggerChildren: 0.2 } },
 };
 
 export default function HowItWorks() {
   const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: "-100px" });
+  const inView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section id="how-we-work" className="py-24 md:py-32 px-6">
-      <div className="max-w-7xl mx-auto" ref={ref}>
+    <section id="how-it-works" className="py-32 md:py-40 px-6">
+      <div className="max-w-6xl mx-auto" ref={ref}>
         <motion.div
-          className="text-center mb-16"
+          className="text-center mb-20"
           variants={fadeUp}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
         >
-          <h2 className="text-3xl md:text-5xl font-bold text-white mb-6 font-heading">
-            From First Call to Production <br className="hidden md:block" />
-            <span className="text-gradient-blue">in 8-10 Weeks</span>
+          <span className="inline-block text-[11px] font-semibold tracking-[0.25em] text-blue-400 uppercase mb-5">
+            Simple Process
+          </span>
+          <h2 className="text-3xl md:text-5xl font-bold text-white mb-6 font-heading leading-tight">
+            From First Call to Collecting Cash <br className="hidden md:block" />
+            <span className="text-gradient-blue">in 3 Weeks</span>
           </h2>
-          <p className="text-base md:text-lg text-slate-400 max-w-xl mx-auto">
-            A structured process designed to move fast without cutting corners.
+          <p className="text-base md:text-lg text-slate-400 max-w-xl mx-auto leading-relaxed">
+            We build. We measure. We leave you with something that works while you sleep.
           </p>
         </motion.div>
 
         <motion.div
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 relative"
+          className="grid grid-cols-1 md:grid-cols-3 gap-8 relative"
           variants={stagger}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
         >
-          {/* Connecting line for desktop */}
-          <div className="hidden lg:block absolute top-10 left-12 right-12 h-px border-t-2 border-dashed border-slate-800" />
+          {/* Connecting line */}
+          <div className="hidden md:block absolute top-12 left-16 right-16 h-px border-t-2 border-dashed border-slate-800/50" />
 
           {steps.map((step) => (
             <motion.div
               key={step.num}
               variants={fadeUp}
-              className="relative flex flex-col pt-4 lg:pt-0"
+              className="relative flex flex-col"
             >
-              {/* Number badge */}
               <div
-                className="w-16 h-16 rounded-full flex items-center justify-center border mx-auto lg:mx-0 mb-6 relative z-10 bg-[#050A14]"
+                className="w-20 h-20 rounded-full flex items-center justify-center border mx-auto mb-8 relative z-10 bg-[#050A14]"
                 style={{
-                  backgroundColor: `${step.color}15`,
-                  borderColor: `${step.color}40`,
+                  backgroundColor: `${step.color}08`,
+                  borderColor: `${step.color}25`,
                 }}
               >
                 <span className="text-xl font-bold" style={{ color: step.color }}>
@@ -94,21 +89,21 @@ export default function HowItWorks() {
                 </span>
               </div>
 
-              <div className="bg-[#0A1628]/80 border border-slate-800 rounded-2xl p-6 flex-1 hover:border-blue-500/30 hover:shadow-[0_0_30px_rgba(59,130,246,0.1)] transition-all flex flex-col text-center lg:text-left">
+              <div className="glass-card rounded-2xl p-8 flex-1 transition-all duration-500 flex flex-col text-center">
                 <span
-                  className="text-xs font-semibold px-3 py-1 rounded-full border w-fit mx-auto lg:mx-0 mb-4"
+                  className="text-[10px] font-semibold px-3 py-1.5 rounded-full border w-fit mx-auto mb-5"
                   style={{
                     color: step.color,
-                    backgroundColor: `${step.color}10`,
-                    borderColor: `${step.color}30`,
+                    backgroundColor: `${step.color}08`,
+                    borderColor: `${step.color}20`,
                   }}
                 >
                   {step.duration}
                 </span>
-                <h3 className="text-lg font-bold text-white tracking-wide mb-3">
+                <h3 className="text-xl font-bold text-white tracking-wide mb-4">
                   {step.title}
                 </h3>
-                <p className="text-sm text-slate-400 leading-relaxed mb-4 flex-grow">{step.description}</p>
+                <p className="text-sm text-slate-400 leading-relaxed">{step.description}</p>
               </div>
             </motion.div>
           ))}

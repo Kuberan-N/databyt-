@@ -6,58 +6,63 @@ import { useRef } from "react";
 const guarantees = [
   {
     icon: "⏱️",
-    title: "The 10-Week Production Guarantee",
-    body: "We scope timelines aggressively. If your agent isn't live in production by week 10, we work for free until it is.",
+    title: "3-Week Delivery",
+    body: "AR Collections Agent delivered to production in 3 weeks. If we miss the deadline, you don\u2019t pay.",
   },
   {
     icon: "🛡️",
-    title: "The 30-Day Breakage Guarantee",
-    body: "If the agent fails in production within 30 days of launch, we drop everything and fix it. No support tickets, no hourly billing. Free.",
+    title: "30-Day Protection",
+    body: "If the agent breaks in production within 30 days, we fix it immediately. No tickets, no hourly billing.",
   },
   {
     icon: "🔑",
-    title: "The Full Ownership Guarantee",
-    body: "You own the GitHub repo, the Databricks infrastructure, and the evaluation suite. You never pay us a hostage fee.",
+    title: "Full Ownership",
+    body: "You own the code, the infrastructure, and the data. No hostage fees. No subscriptions. Ever.",
+  },
+  {
+    icon: "🔒",
+    title: "Data Sovereignty",
+    body: "Your data NEVER leaves your Databricks or Snowflake. We build inside your cloud. Period.",
   },
 ];
 
 const fadeUp: Variants = {
-  hidden: { opacity: 0, y: 40 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
+  hidden: { opacity: 0, y: 24 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] } },
 };
 
 const stagger: Variants = {
   hidden: {},
-  visible: { transition: { staggerChildren: 0.1 } },
+  visible: { transition: { staggerChildren: 0.12 } },
 };
 
 export default function Guarantee() {
   const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: "-100px" });
+  const inView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section className="py-24 md:py-32 px-6 bg-[#050A14]">
+    <section className="py-32 md:py-40 px-6">
       <div className="max-w-6xl mx-auto" ref={ref}>
         <motion.div
-          className="text-center mb-16"
+          className="text-center mb-20"
           variants={fadeUp}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
         >
-          <span className="inline-block text-sm font-semibold tracking-wider text-blue-400 uppercase mb-4">
+          <span className="inline-block text-[11px] font-semibold tracking-[0.25em] text-blue-400 uppercase mb-5">
             Skin in the Game
           </span>
-          <h2 className="text-3xl md:text-5xl font-bold text-white mb-6 font-heading">
-            Agencies Charge for Effort. <br className="hidden md:block" />
-            <span className="text-gradient-blue">We Charge for Outcomes.</span>
+          <h2 className="text-3xl md:text-5xl font-bold text-white mb-6 font-heading leading-tight">
+            We Don&apos;t Hide Behind Contracts. <br className="hidden md:block" />
+            <span className="text-gradient-blue">We Stand Behind Guarantees.</span>
           </h2>
-          <p className="text-base md:text-lg text-slate-400 max-w-2xl mx-auto">
-            We take the risk so your engineering team doesn&apos;t have to.
+          <p className="text-base md:text-lg text-slate-400 max-w-2xl mx-auto leading-relaxed">
+            If we fail, you don&apos;t pay. That&apos;s not marketing — it&apos;s how we do business.
           </p>
         </motion.div>
 
         <motion.div
-          className="grid grid-cols-1 md:grid-cols-3 gap-5"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
           variants={stagger}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
@@ -66,12 +71,12 @@ export default function Guarantee() {
             <motion.div
               key={i}
               variants={fadeUp}
-              className="bg-[#0A1628]/80 border border-slate-800 rounded-2xl p-8 hover:border-blue-500/30 hover:shadow-[0_0_30px_rgba(59,130,246,0.1)] transition-all flex flex-col items-center text-center group"
+              className="glass-card rounded-2xl p-8 transition-all duration-500 flex flex-col items-center text-center"
             >
-              <div className="text-4xl mb-6 p-4 bg-slate-800/50 rounded-2xl w-fit group-hover:scale-110 transition-transform">
+              <div className="text-4xl mb-8 p-5 bg-slate-800/30 rounded-2xl w-fit">
                 {g.icon}
               </div>
-              <h3 className="text-xl font-bold text-white mb-4">{g.title}</h3>
+              <h3 className="text-base font-bold text-white mb-4">{g.title}</h3>
               <p className="text-sm text-slate-400 leading-relaxed">
                 {g.body}
               </p>

@@ -6,50 +6,58 @@ import { ArrowRight, Shield } from "lucide-react";
 import { useDemoForm } from "./DemoFormContext";
 
 const fadeUp: Variants = {
-  hidden: { opacity: 0, y: 40 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
+  hidden: { opacity: 0, y: 24 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] } },
 };
 
 export default function FinalCTA() {
   const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: "-100px" });
+  const inView = useInView(ref, { once: true, margin: "-80px" });
   const { open } = useDemoForm();
 
   return (
-    <section className="relative py-24 md:py-32 px-6 overflow-hidden">
-      {/* Background gradient orb */}
+    <section className="relative py-32 md:py-40 px-6 overflow-hidden">
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-        <div className="w-[600px] h-[600px] rounded-full bg-blue-600/12 blur-[120px]" />
+        <div className="w-[700px] h-[700px] rounded-full bg-blue-600/8 blur-[150px]" />
       </div>
-      <div className="absolute top-0 left-1/4 w-64 h-64 rounded-full bg-cyan-600/8 blur-[80px] pointer-events-none" />
+      <div className="absolute top-0 left-1/4 w-80 h-80 rounded-full bg-cyan-600/5 blur-[100px] pointer-events-none" />
 
       <div className="relative z-10 max-w-3xl mx-auto text-center" ref={ref}>
         <motion.span
-          className="inline-block text-xs font-semibold uppercase tracking-[0.2em] text-blue-400 mb-6"
+          className="inline-block text-[11px] font-semibold uppercase tracking-[0.25em] text-blue-400 mb-8"
           variants={fadeUp}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
         >
-          Free 90-Min Workshop
+          Start Automating
         </motion.span>
 
         <motion.h2
-          className="text-3xl md:text-5xl font-bold text-white mb-6 font-heading"
+          className="text-3xl md:text-5xl font-bold text-white mb-8 font-heading leading-tight"
           variants={fadeUp}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
         >
-          Stop Shipping Demos. <br className="hidden md:block" />
-          <span className="text-gradient-blue">Start Shipping Systems.</span>
+          Every Day You Wait, Your AR Team <br className="hidden md:block" />
+          <span className="text-gradient-blue">Processes 100 Invoices Manually at $16 Each.</span>
         </motion.h2>
 
         <motion.p
-          className="text-base md:text-lg text-slate-400 mb-10 leading-relaxed"
+          className="text-base md:text-lg text-slate-400 mb-5 leading-relaxed"
           variants={fadeUp}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
         >
-          Book your free 90-minute workshop. We&apos;ll map out exactly how to build an agent that survives production. No cost. No commitment.
+          That&apos;s <span className="text-white font-medium">$1,600/day</span> in inefficiency. An AI agent eliminates this in 3 weeks. Book your free 20-minute assessment.
+        </motion.p>
+
+        <motion.p
+          className="text-sm text-blue-400/70 mb-14"
+          variants={fadeUp}
+          initial="hidden"
+          animate={inView ? "visible" : "hidden"}
+        >
+          3 build slots remaining for May
         </motion.p>
 
         <motion.div
@@ -59,26 +67,25 @@ export default function FinalCTA() {
         >
           <button
             onClick={open}
-            className="group inline-flex items-center gap-2 bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 text-white font-semibold rounded-full px-10 py-4 text-lg transition-all hover:scale-[1.02] hover:shadow-[0_0_40px_rgba(59,130,246,0.35)]"
+            className="group inline-flex items-center gap-3 bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 text-white font-semibold rounded-full px-12 py-5 text-lg transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_0_50px_rgba(59,130,246,0.3)] btn-pulse"
           >
-            Book Free 90-Min Workshop
-            <ArrowRight size={20} className="group-hover:translate-x-0.5 transition-transform" />
+            Book Free AR Assessment
+            <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform duration-300" />
           </button>
         </motion.div>
 
-        {/* Trust badges */}
         <motion.div
-          className="flex flex-wrap items-center justify-center gap-3 mt-10"
+          className="flex flex-wrap items-center justify-center gap-4 mt-12"
           variants={fadeUp}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
         >
-          {["2 Founding Spots Remaining", "10-Week Production Guarantee", "Full Code Ownership"].map((badge) => (
+          {["3-Week Guarantee", "Data Never Leaves", "Full Code Ownership"].map((badge) => (
             <span
               key={badge}
-              className="flex items-center gap-1.5 text-xs text-slate-300 border border-slate-700 bg-slate-800/50 rounded-full px-4 py-2"
+              className="flex items-center gap-2 text-xs text-slate-400 border border-slate-700/30 bg-slate-800/20 rounded-full px-4 py-2"
             >
-              <Shield size={12} className="text-blue-500" />
+              <Shield size={11} className="text-blue-400/60" />
               {badge}
             </span>
           ))}

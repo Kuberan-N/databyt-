@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Outfit } from "next/font/google";
 import "./globals.css";
-import { CurrencyProvider } from "@/components/CurrencyContext";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -15,15 +14,15 @@ const outfit = Outfit({
 });
 
 export const metadata: Metadata = {
-  title: "DataByt — Production AI Agents on Databricks | 5 Disciplines Engineering",
+  title: "DataByt — Finance AI Agents on Your Databricks & Snowflake",
   description:
-    "We build production AI agents on Databricks using 5 engineering disciplines most agencies skip. Evaluation suites, failure mode handling, human-in-the-loop design, monitoring. Founding client pricing: $12,000-$25,000. 8-10 weeks to production.",
+    "We build production finance AI agents on your Databricks or Snowflake. AR Collections Agent in 3 weeks. Your data never leaves your infrastructure. DSO reduced 15-25 days.",
   keywords:
-    "databricks AI agents, AI agent development, fractional AI team, databricks agent builder, AI readiness audit",
+    "AR collections automation, finance AI agent, accounts receivable AI, Databricks AI agent, Snowflake AI agent, order to cash automation, DSO reduction",
   openGraph: {
-    title: "Your AI Project Is Stuck. We Ship It to Production.",
+    title: "Finance AI Agents — Built on Your Infrastructure | DataByt",
     description:
-      "DataByt builds production AI agents on Databricks using 5 disciplines. Not demos. Systems.",
+      "Production finance AI agents on your Databricks or Snowflake. Data never leaves. AR Collections from $4,900.",
     url: "https://databyt.in",
     siteName: "DataByt",
     type: "website",
@@ -40,9 +39,7 @@ export default function RootLayout({
       <body
         className={`${inter.variable} ${outfit.variable} font-sans bg-[#050A14] text-white antialiased`}
       >
-        <CurrencyProvider>
-          {children}
-        </CurrencyProvider>
+        {children}
       </body>
     </html>
   );

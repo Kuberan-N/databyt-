@@ -5,8 +5,8 @@ import { Menu, X } from "lucide-react";
 import { useDemoForm } from "./DemoFormContext";
 
 const navLinks = [
-  { label: "How We Work", href: "#how-we-work" },
   { label: "Services", href: "#services" },
+  { label: "How It Works", href: "#how-it-works" },
   { label: "Pricing", href: "#pricing" },
   { label: "FAQ", href: "#faq" },
 ];
@@ -30,13 +30,13 @@ export default function Navbar() {
   return (
     <>
       <nav
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
           scrolled
-            ? "bg-[#050A14]/80 backdrop-blur-lg border-b border-slate-800/50"
+            ? "bg-[#050A14]/85 backdrop-blur-xl border-b border-slate-800/40 shadow-2xl"
             : "bg-transparent"
         }`}
       >
-        <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between mt-10">
+        <div className="max-w-6xl mx-auto px-6 h-20 flex items-center justify-between">
           {/* Logo */}
           <a href="#" className="flex items-center gap-0 text-xl font-extrabold tracking-tight font-heading">
             <span className="text-white">Data</span>
@@ -45,21 +45,21 @@ export default function Navbar() {
           </a>
 
           {/* Desktop nav */}
-          <div className="hidden md:flex items-center gap-8">
+          <div className="hidden md:flex items-center gap-10">
             {navLinks.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
-                className="text-sm font-medium text-slate-400 hover:text-white transition-colors"
+                className="text-sm font-medium text-slate-400 hover:text-white transition-colors duration-300"
               >
                 {link.label}
               </a>
             ))}
             <button
               onClick={openDemo}
-              className="bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 text-white text-sm font-semibold rounded-full px-6 py-2.5 transition-all hover:scale-[1.02] hover:shadow-[0_0_20px_rgba(59,130,246,0.3)]"
+              className="bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 text-white text-sm font-semibold rounded-full px-7 py-2.5 transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_0_30px_rgba(59,130,246,0.25)]"
             >
-              Book Free Workshop &rarr;
+              Book Free Assessment
             </button>
           </div>
 
@@ -88,7 +88,7 @@ export default function Navbar() {
           mobileOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
-        <div className="flex items-center justify-between px-6 h-16 border-b border-slate-800">
+        <div className="flex items-center justify-between px-6 h-20 border-b border-slate-800">
           <span className="flex items-center gap-0 text-lg font-extrabold tracking-tight font-heading">
             <span className="text-white">Data</span>
             <span className="text-gradient-blue">Byt</span>
@@ -102,7 +102,7 @@ export default function Navbar() {
             <X size={24} />
           </button>
         </div>
-        <div className="flex flex-col px-6 pt-8 gap-6">
+        <div className="flex flex-col px-6 pt-10 gap-7">
           {navLinks.map((link) => (
             <a
               key={link.href}
@@ -115,9 +115,9 @@ export default function Navbar() {
           ))}
           <button
             onClick={() => { setMobileOpen(false); openDemo(); }}
-            className="bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 text-white text-sm font-semibold rounded-full px-6 py-3 text-center transition-all mt-2"
+            className="bg-gradient-to-r from-blue-600 to-cyan-500 text-white text-sm font-semibold rounded-full px-6 py-3 text-center transition-all mt-2"
           >
-            Book Free Workshop &rarr;
+            Book Free Assessment
           </button>
         </div>
       </div>

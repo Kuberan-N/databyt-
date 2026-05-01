@@ -21,15 +21,15 @@ const config: Config = {
         danger: "#EF4444",
         blue: {
           ...colors.blue,
-          400: "#3388ff",
-          500: "#0055ff",
-          600: "#0044cc",
+          400: "#3388FF",
+          500: "#0066FF",
+          600: "#0052CC",
         },
         cyan: {
           ...colors.cyan,
-          400: "#33eeff",
-          500: "#00e5ff",
-          600: "#00b8cc",
+          400: "#22D3EE",
+          500: "#06B6D4",
+          600: "#0891B2",
         },
       },
       fontFamily: {
