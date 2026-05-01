@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Outfit } from "next/font/google";
 import "./globals.css";
+import { CurrencyProvider } from "@/components/CurrencyContext";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -39,7 +40,9 @@ export default function RootLayout({
       <body
         className={`${inter.variable} ${outfit.variable} font-sans bg-[#050A14] text-white antialiased`}
       >
-        {children}
+        <CurrencyProvider>
+          {children}
+        </CurrencyProvider>
       </body>
     </html>
   );

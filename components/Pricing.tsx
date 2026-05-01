@@ -1,9 +1,10 @@
 "use client";
 
 import { motion, useInView, type Variants } from "framer-motion";
-import { useRef, useState, useEffect } from "react";
+import { useRef } from "react";
 import { Check } from "lucide-react";
 import { useDemoForm } from "./DemoFormContext";
+import { useCurrency } from "./CurrencyContext";
 
 const fadeUp: Variants = {
   hidden: { opacity: 0, y: 24 },
@@ -19,14 +20,9 @@ export default function Pricing() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
   const { open: openDemo } = useDemoForm();
-  const [isINR, setIsINR] = useState(false);
-
-  useEffect(() => {
-    try {
-      const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
-      if (tz && tz.startsWith("Asia/")) setIsINR(true);
-    } catch { /* fallback USD */ }
-  }, []);
+  const { currency } = useCurrency();
+  
+  const isINR = currency === "INR";
 
   const arPrice = isINR ? "₹3,99,000" : "$4,900";
   const arAnchored = isINR ? "₹8,00,000 – ₹12,00,000/yr" : "$50K – $150K/yr";
