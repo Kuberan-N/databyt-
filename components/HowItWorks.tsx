@@ -5,25 +5,28 @@ import { useRef } from "react";
 
 const steps = [
   {
-    num: "01",
-    title: "We Audit",
-    duration: "Day 1–3",
+    num: "1",
+    title: "Week 0 — Free Workshop",
     description: "We connect to your Databricks or Snowflake, map your AR workflow, and show you exactly where money is leaking. You get a written AR Leakage Report — whether you hire us or not.",
-    color: "#0A0A0A",
+    active: false,
   },
   {
-    num: "02",
-    title: "We Build",
-    duration: "Week 1–3",
-    description: "We build the AI agent inside YOUR infrastructure. Your data never leaves. Weekly demos. You see the agent learning your invoices, your customers, your patterns in real-time.",
-    color: "#E8321A",
+    num: "2",
+    title: "Weeks 1–3 — Architecture Design",
+    description: "We design the agent inside YOUR infrastructure. Evaluation suite, failure modes, governance — all designed before a single line of production code is written.",
+    active: false,
   },
   {
-    num: "03",
-    title: "You Collect",
-    duration: "Week 3+",
+    num: "3",
+    title: "Weeks 3–8 — Build & Evaluate",
+    description: "We build the AI agent. Your data never leaves your environment. Weekly demos. You see the agent learning your invoices, customers, patterns in real-time.",
+    active: false,
+  },
+  {
+    num: "4",
+    title: "Weeks 8–10 — Deploy & Monitor",
     description: "The agent goes live. It collects, prioritizes, tracks, and escalates — autonomously. We monitor for 30 days. Then it's yours forever. Every line of code.",
-    color: "#0A0A0A",
+    active: true,
   },
 ];
 
@@ -34,7 +37,7 @@ const fadeUp: Variants = {
 
 const stagger: Variants = {
   hidden: {},
-  visible: { transition: { staggerChildren: 0.2 } },
+  visible: { transition: { staggerChildren: 0.12 } },
 };
 
 export default function HowItWorks() {
@@ -42,71 +45,56 @@ export default function HowItWorks() {
   const inView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section id="how-it-works" className="py-32 md:py-40 px-6 bg-[#FAFAF8]">
-      <div className="max-w-6xl mx-auto" ref={ref}>
+    <section id="how-it-works" className="py-24 md:py-28 px-6 md:px-10 bg-white">
+      <div className="max-w-[1200px] mx-auto" ref={ref}>
         <motion.div
-          className="text-center mb-16"
+          className="text-center mb-14"
           variants={fadeUp}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
         >
-          <span className="section-label mb-5 block">
-            Simple Process
-          </span>
+          <span className="section-label mb-5 block">Process</span>
           <h2
-            className="font-heading font-extrabold text-[#0A0A0A] mb-6 leading-tight"
-            style={{ fontSize: "clamp(2rem, 4vw, 3.5rem)", letterSpacing: "-0.04em" }}
+            className="font-heading font-extrabold text-black mb-5 leading-[1.06]"
+            style={{ fontSize: "clamp(2rem, 4.2vw, 3.25rem)", letterSpacing: "-0.04em" }}
           >
-            From First Call to Collecting Cash <br className="hidden md:block" />
-            <span style={{ color: "#E8321A" }}>in 3 Weeks</span>
+            From first call to <span style={{ color: "#E8321A" }}>collecting cash</span>
           </h2>
-          <p className="text-base text-gray-500 max-w-xl mx-auto">
-            We build. We measure. We leave you with something that works while you sleep.
+          <p className="text-[16px] text-[#666] max-w-[600px] mx-auto">
+            We build, measure, and leave you with something that works while you sleep.
           </p>
         </motion.div>
 
         <motion.div
-          className="grid grid-cols-1 md:grid-cols-3 gap-6 relative"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 relative"
           variants={stagger}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
         >
-          {/* Connecting line */}
-          <div className="hidden md:block absolute top-10 left-24 right-24 h-px border-t border-dashed border-black/10" />
-
           {steps.map((step) => (
             <motion.div
               key={step.num}
               variants={fadeUp}
-              className="relative flex flex-col"
+              className="flex flex-col items-start"
             >
               <div
-                className="w-16 h-16 rounded-full flex items-center justify-center border mx-auto mb-6 relative z-10 bg-white"
+                className="w-12 h-12 rounded-full flex items-center justify-center mb-5 transition-all duration-300"
                 style={{
-                  borderColor: step.color === "#E8321A" ? "#E8321A" : "rgba(0,0,0,0.1)",
+                  border: `2px solid ${step.active ? "#E8321A" : "#E8E8E8"}`,
+                  background: step.active ? "#E8321A" : "#fff",
                 }}
               >
-                <span className="font-heading text-lg font-bold" style={{ color: step.color }}>
+                <span
+                  className="font-heading text-[18px] font-extrabold"
+                  style={{ color: step.active ? "#fff" : "#1A1A1A", letterSpacing: "-0.02em" }}
+                >
                   {step.num}
                 </span>
               </div>
-
-              <div className="light-card rounded-2xl p-8 flex-1 transition-all duration-300 flex flex-col text-center"
-                   style={{ borderColor: step.color === "#E8321A" ? "#E8321A" : "rgba(0,0,0,0.08)" }}>
-                <span
-                  className="text-[10px] font-bold tracking-widest uppercase px-3 py-1.5 rounded-full w-fit mx-auto mb-5"
-                  style={{
-                    color: step.color,
-                    backgroundColor: step.color === "#E8321A" ? "rgba(232,50,26,0.08)" : "rgba(0,0,0,0.04)",
-                  }}
-                >
-                  {step.duration}
-                </span>
-                <h3 className="font-heading text-xl font-bold text-[#0A0A0A] mb-3">
-                  {step.title}
-                </h3>
-                <p className="text-sm text-gray-600 leading-relaxed">{step.description}</p>
-              </div>
+              <h3 className="font-heading font-bold text-black text-[16px] mb-3 leading-snug" style={{ letterSpacing: "-0.02em" }}>
+                {step.title}
+              </h3>
+              <p className="text-[13px] text-[#666] leading-relaxed">{step.description}</p>
             </motion.div>
           ))}
         </motion.div>

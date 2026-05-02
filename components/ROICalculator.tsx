@@ -2,6 +2,7 @@
 
 import { useState, useRef } from "react";
 import { motion, useInView, type Variants } from "framer-motion";
+import { useCurrency } from "./CurrencyContext";
 
 const fadeUp: Variants = {
   hidden: { opacity: 0, y: 24 },
@@ -9,14 +10,24 @@ const fadeUp: Variants = {
 };
 
 function formatINR(amount: number) {
+  if (amount >= 10000000) return `₹${(amount / 10000000).toFixed(2)}Cr`;
   if (amount >= 100000) return `₹${(amount / 100000).toFixed(1)}L`;
   if (amount >= 1000) return `₹${(amount / 1000).toFixed(0)}K`;
   return `₹${amount}`;
 }
 
+function formatUSD(amount: number) {
+  if (amount >= 1000) return `$${(amount / 1000).toFixed(1)}K`;
+  return `$${amount}`;
+}
+
+const USD_RATE = 83;
+
 export default function ROICalculator() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
+  const { currency } = useCurrency();
+  const isINR = currency === "INR";
 
   const [invoices, setInvoices] = useState(500);
   const [minutesPerInvoice, setMinutesPerInvoice] = useState(12);
@@ -25,116 +36,124 @@ export default function ROICalculator() {
   const monthlyManual = Math.round((invoices * minutesPerInvoice / 60) * hourlyRate);
   const agentCost = 95000;
   const monthlySaving = Math.max(0, monthlyManual - agentCost);
-  const annualSaving = monthlySaving * 12;
+
+  const fmt = (n: number) => isINR ? formatINR(n) : formatUSD(Math.round(n / USD_RATE));
+  const rateLabel = isINR ? "₹/hour" : "$/hour";
+  const rateDisplay = isINR
+    ? `₹${hourlyRate.toLocaleString("en-IN")}/hr`
+    : `$${Math.round(hourlyRate / USD_RATE)}/hr`;
 
   return (
-    <section className="py-32 md:py-40 px-6 bg-[#0A0A0A]">
-      <div className="max-w-4xl mx-auto" ref={ref}>
+    <section className="py-24 md:py-28 px-6 md:px-10 bg-white">
+      <div className="max-w-[1100px] mx-auto" ref={ref}>
         <motion.div
-          className="text-center mb-16"
+          className="text-center mb-12"
           variants={fadeUp}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
         >
-          <span className="section-label mb-5 block" style={{ color: "#E8321A" }}>ROI Calculator</span>
+          <span className="section-label mb-5 block">ROI Calculator</span>
           <h2
-            className="font-heading font-extrabold text-white mb-4"
-            style={{ fontSize: "clamp(2rem, 4vw, 3rem)", letterSpacing: "-0.04em" }}
+            className="font-heading font-extrabold text-black mb-4 leading-[1.06]"
+            style={{ fontSize: "clamp(2rem, 4.2vw, 3rem)", letterSpacing: "-0.04em" }}
           >
-            Calculate what manual AR is costing you.
+            Calculate what manual AR is <span style={{ color: "#E8321A" }}>costing you.</span>
           </h2>
-          <p className="text-white/40 text-base max-w-xl mx-auto">
-            Move the sliders. See the real cost of doing nothing. Most finance teams are shocked.
+          <p className="text-[#666] text-[16px] max-w-[600px] mx-auto">
+            Move the sliders. See the real cost of doing nothing.
           </p>
         </motion.div>
 
         <motion.div
-          className="rounded-2xl p-8 md:p-12"
-          style={{ background: "rgba(255,255,255,0.04)", border: "0.5px solid rgba(255,255,255,0.08)" }}
+          className="rounded-xl p-8 md:p-10"
+          style={{ background: "#F8F8F8", border: "1px solid #E8E8E8" }}
           variants={fadeUp}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
         >
-          <div className="grid md:grid-cols-2 gap-12">
+          <div className="grid md:grid-cols-2 gap-10">
             {/* Sliders */}
-            <div className="space-y-10">
-              {/* Invoices */}
+            <div className="space-y-9">
               <div>
                 <div className="flex justify-between mb-3">
-                  <label className="text-sm font-medium text-white/70">Invoices per month</label>
-                  <span className="font-heading font-bold text-white" style={{ color: "#E8321A" }}>{invoices.toLocaleString("en-IN")}</span>
+                  <label className="text-[14px] font-medium text-[#1A1A1A]">Invoices per month</label>
+                  <span className="font-heading font-bold text-[16px]" style={{ color: "#E8321A" }}>
+                    {invoices.toLocaleString("en-IN")}
+                  </span>
                 </div>
                 <input
                   type="range" min={50} max={2000} step={50}
                   value={invoices}
                   onChange={(e) => setInvoices(Number(e.target.value))}
-                  className="w-full h-1 rounded-full appearance-none cursor-pointer"
-                  style={{ background: `linear-gradient(to right, #E8321A ${((invoices-50)/1950)*100}%, rgba(255,255,255,0.1) 0%)` }}
+                  className="w-full h-1.5 rounded-full appearance-none cursor-pointer"
+                  style={{ background: `linear-gradient(to right, #E8321A 0%, #E8321A ${((invoices-50)/1950)*100}%, #E0E0E0 ${((invoices-50)/1950)*100}%, #E0E0E0 100%)` }}
                 />
-                <div className="flex justify-between mt-1.5 text-[10px] text-white/25">
+                <div className="flex justify-between mt-2 text-[11px] text-[#999]">
                   <span>50</span><span>2,000</span>
                 </div>
               </div>
 
-              {/* Minutes per invoice */}
               <div>
                 <div className="flex justify-between mb-3">
-                  <label className="text-sm font-medium text-white/70">Minutes per invoice (manual work)</label>
-                  <span className="font-heading font-bold" style={{ color: "#E8321A" }}>{minutesPerInvoice} min</span>
+                  <label className="text-[14px] font-medium text-[#1A1A1A]">Minutes per invoice</label>
+                  <span className="font-heading font-bold text-[16px]" style={{ color: "#E8321A" }}>
+                    {minutesPerInvoice} min
+                  </span>
                 </div>
                 <input
                   type="range" min={5} max={30} step={1}
                   value={minutesPerInvoice}
                   onChange={(e) => setMinutesPerInvoice(Number(e.target.value))}
-                  className="w-full h-1 rounded-full appearance-none cursor-pointer"
-                  style={{ background: `linear-gradient(to right, #E8321A ${((minutesPerInvoice-5)/25)*100}%, rgba(255,255,255,0.1) 0%)` }}
+                  className="w-full h-1.5 rounded-full appearance-none cursor-pointer"
+                  style={{ background: `linear-gradient(to right, #E8321A 0%, #E8321A ${((minutesPerInvoice-5)/25)*100}%, #E0E0E0 ${((minutesPerInvoice-5)/25)*100}%, #E0E0E0 100%)` }}
                 />
-                <div className="flex justify-between mt-1.5 text-[10px] text-white/25">
+                <div className="flex justify-between mt-2 text-[11px] text-[#999]">
                   <span>5 min</span><span>30 min</span>
                 </div>
               </div>
 
-              {/* Hourly rate */}
               <div>
                 <div className="flex justify-between mb-3">
-                  <label className="text-sm font-medium text-white/70">Finance staff cost (₹/hour)</label>
-                  <span className="font-heading font-bold" style={{ color: "#E8321A" }}>₹{hourlyRate.toLocaleString("en-IN")}/hr</span>
+                  <label className="text-[14px] font-medium text-[#1A1A1A]">Finance staff cost ({rateLabel})</label>
+                  <span className="font-heading font-bold text-[16px]" style={{ color: "#E8321A" }}>
+                    {rateDisplay}
+                  </span>
                 </div>
                 <input
                   type="range" min={200} max={2000} step={50}
                   value={hourlyRate}
                   onChange={(e) => setHourlyRate(Number(e.target.value))}
-                  className="w-full h-1 rounded-full appearance-none cursor-pointer"
-                  style={{ background: `linear-gradient(to right, #E8321A ${((hourlyRate-200)/1800)*100}%, rgba(255,255,255,0.1) 0%)` }}
+                  className="w-full h-1.5 rounded-full appearance-none cursor-pointer"
+                  style={{ background: `linear-gradient(to right, #E8321A 0%, #E8321A ${((hourlyRate-200)/1800)*100}%, #E0E0E0 ${((hourlyRate-200)/1800)*100}%, #E0E0E0 100%)` }}
                 />
-                <div className="flex justify-between mt-1.5 text-[10px] text-white/25">
-                  <span>₹200</span><span>₹2,000</span>
+                <div className="flex justify-between mt-2 text-[11px] text-[#999]">
+                  <span>{isINR ? "₹200" : "$2"}</span><span>{isINR ? "₹2,000" : "$24"}</span>
                 </div>
               </div>
             </div>
 
-            {/* Results */}
-            <div className="flex flex-col gap-4">
-              <div className="rounded-xl p-6" style={{ background: "#E8321A" }}>
-                <p className="text-sm font-medium text-white/70 mb-2">Monthly cost doing it manually</p>
-                <p className="font-heading font-extrabold text-4xl text-white" style={{ letterSpacing: "-0.04em" }}>
-                  {formatINR(monthlyManual)}
+            {/* Results - red panel */}
+            <div className="rounded-xl p-7 flex flex-col justify-between" style={{ background: "#E8321A" }}>
+              <div className="mb-6">
+                <p className="text-[12px] font-semibold uppercase tracking-wider text-white/80 mb-2">Your monthly manual cost</p>
+                <p className="font-heading font-extrabold text-white" style={{ fontSize: "clamp(2.5rem, 5vw, 3.5rem)", letterSpacing: "-0.04em", lineHeight: 1 }}>
+                  {fmt(monthlyManual)}
                 </p>
               </div>
-              <div className="rounded-xl p-6" style={{ background: "rgba(255,255,255,0.06)", border: "0.5px solid rgba(255,255,255,0.1)" }}>
-                <p className="text-sm font-medium text-white/50 mb-2">DataByt agent cost</p>
-                <p className="font-heading font-extrabold text-3xl text-white" style={{ letterSpacing: "-0.04em" }}>
-                  ₹95,000<span className="text-lg text-white/40">/month</span>
+              <div className="border-t border-white/25 pt-5 mb-5">
+                <p className="text-[12px] font-semibold uppercase tracking-wider text-white/80 mb-1">DataByt retainer</p>
+                <p className="font-heading font-bold text-white text-[22px]" style={{ letterSpacing: "-0.02em" }}>
+                  {fmt(agentCost)}<span className="text-[14px] text-white/70 font-medium">/month</span>
                 </p>
-                <p className="text-xs text-white/30 mt-1">Includes monitoring, tuning, incident response</p>
               </div>
-              <div className="rounded-xl p-6" style={{ background: "rgba(255,255,255,0.06)", border: "0.5px solid rgba(255,255,255,0.1)" }}>
-                <p className="text-sm font-medium text-white/50 mb-2">Your annual saving</p>
-                <p className="font-heading font-extrabold text-4xl text-white" style={{ letterSpacing: "-0.04em", color: annualSaving > 0 ? "#4ade80" : "white" }}>
-                  {annualSaving > 0 ? formatINR(annualSaving) : "₹0"}
+              <div className="border-t border-white/25 pt-5">
+                <p className="text-[12px] font-semibold uppercase tracking-wider text-white/80 mb-1">You save</p>
+                <p className="font-heading font-extrabold text-white" style={{ fontSize: "clamp(1.75rem, 3.5vw, 2.5rem)", letterSpacing: "-0.03em", lineHeight: 1 }}>
+                  {monthlySaving > 0 ? fmt(monthlySaving) : (isINR ? "₹0" : "$0")}
+                  <span className="text-[14px] text-white/70 font-medium ml-2">/month</span>
                 </p>
-                {annualSaving <= 0 && (
-                  <p className="text-xs text-white/30 mt-1">Increase invoices or minutes to see savings</p>
+                {monthlySaving <= 0 && (
+                  <p className="text-[11px] text-white/70 mt-2">Increase invoices or rate to see savings</p>
                 )}
               </div>
             </div>

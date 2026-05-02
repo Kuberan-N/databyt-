@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Outfit } from "next/font/google";
+import { Inter, Syne } from "next/font/google";
 import "./globals.css";
 import { CurrencyProvider } from "@/components/CurrencyContext";
 
@@ -9,9 +9,9 @@ const inter = Inter({
   display: "swap",
 });
 
-const outfit = Outfit({
+const syne = Syne({
   subsets: ["latin"],
-  variable: "--font-outfit",
+  variable: "--font-syne",
   weight: ["400", "500", "600", "700", "800"],
   display: "swap",
 });
@@ -38,8 +38,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${inter.variable} ${outfit.variable} scroll-smooth`}>
-      <body className="antialiased font-sans">
+    <html lang="en" className={`${inter.variable} ${syne.variable} scroll-smooth`}>
+      <body className="antialiased font-body bg-white">
         <CurrencyProvider>{children}</CurrencyProvider>
       </body>
     </html>

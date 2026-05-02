@@ -19,30 +19,18 @@ export default function Home() {
   return (
     <DemoFormProvider>
       <Navbar />
-      <main>
-        {/* S2: Hero — black bg */}
+      <main className="bg-white">
         <Hero />
-        {/* S3: Problem — white bg */}
         <Problem />
-        {/* S4: Platform Support — off-white */}
         <PlatformSupport />
-        {/* S5: ROI Calculator — black bg */}
         <ROICalculator />
-        {/* S6: 5 Disciplines — gray bg */}
         <FiveDisciplines />
-        {/* S7: Process / How We Work — gray bg */}
         <HowItWorks />
-        {/* S8: Proof — white bg */}
         <ProofSection />
-        {/* S9: Pricing — gray bg */}
         <Pricing />
-        {/* S10: Guarantees — white bg */}
         <Guarantee />
-        {/* S11: Founder Story — gray bg */}
         <FounderStory />
-        {/* S12: FAQ — gray bg */}
         <FAQ />
-        {/* S13: Final CTA — red bg */}
         <FinalCTA />
       </main>
       <Footer />

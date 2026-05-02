@@ -5,7 +5,7 @@ import { Menu, X } from "lucide-react";
 import { useDemoForm } from "./DemoFormContext";
 
 const navLinks = [
-  { label: "How We Work", href: "#how-it-works" },
+  { label: "How It Works", href: "#how-it-works" },
   { label: "Platforms", href: "#platforms" },
   { label: "Pricing", href: "#pricing" },
   { label: "FAQ", href: "#faq" },
@@ -29,53 +29,47 @@ export default function Navbar() {
 
   return (
     <>
-      {/* Floating pill badge */}
-      <div className="fixed top-4 left-1/2 -translate-x-1/2 z-50 hidden md:flex">
-        <span className="flex items-center gap-2 text-[11px] font-semibold text-white bg-black/80 backdrop-blur-md border border-white/10 rounded-full px-4 py-1.5">
-          <span className="w-1.5 h-1.5 rounded-full bg-[#E8321A] animate-pulse" />
-          Production AI Engineering on Databricks
-        </span>
-      </div>
-
       <nav
-        className={`fixed top-0 left-0 right-0 z-40 transition-all duration-500 ${
-          scrolled
-            ? "bg-[#0A0A0A]/90 backdrop-blur-xl border-b border-white/5"
-            : "bg-transparent"
+        className={`fixed top-0 left-0 right-0 transition-all duration-300 bg-white ${
+          scrolled ? "border-b border-[#E8E8E8] shadow-[0_1px_2px_rgba(0,0,0,0.04)]" : "border-b border-[#E8E8E8]/60"
         }`}
+        style={{ zIndex: 999 }}
       >
-        <div className="max-w-6xl mx-auto px-6 h-20 flex items-center justify-between">
-          {/* Logo */}
-          <a href="#" className="flex items-center gap-0 font-heading text-xl font-extrabold tracking-tight">
-            <span className="text-white">Data</span>
+        <div className="flex items-center justify-between h-[60px] px-6 md:px-10 max-w-[1400px] mx-auto">
+          {/* Logo - left */}
+          <a href="#" className="flex items-center font-heading font-extrabold text-[24px] leading-none tracking-tight">
+            <span className="text-black">Data</span>
             <span style={{ color: "#E8321A" }}>Byt</span>
-            <span className="w-1.5 h-1.5 rounded-full ml-0.5 mb-3 flex-shrink-0" style={{ background: "#E8321A" }} />
           </a>
 
-          {/* Desktop nav */}
-          <div className="hidden md:flex items-center gap-8">
+          {/* Desktop nav - center */}
+          <div className="hidden md:flex items-center gap-9 absolute left-1/2 -translate-x-1/2">
             {navLinks.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
-                className="text-sm font-medium text-white/60 hover:text-white transition-colors duration-200"
+                className="text-[14px] font-medium text-black hover:text-[#E8321A] transition-colors duration-200"
               >
                 {link.label}
               </a>
             ))}
+          </div>
+
+          {/* CTA - right */}
+          <div className="hidden md:flex items-center">
             <button
               onClick={openDemo}
-              className="text-white text-sm font-semibold rounded-full px-6 py-2.5 transition-all duration-200 hover:opacity-90 btn-pulse"
+              className="text-white text-[14px] font-semibold rounded-lg px-6 py-3 transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_6px_20px_rgba(232,50,26,0.25)]"
               style={{ background: "#E8321A" }}
             >
-              Book Free Workshop →
+              Book Workshop →
             </button>
           </div>
 
           {/* Mobile hamburger */}
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
-            className="md:hidden text-white/60 hover:text-white transition-colors"
+            className="md:hidden text-black hover:text-[#E8321A] transition-colors"
             aria-label="Toggle menu"
           >
             {mobileOpen ? <X size={24} /> : <Menu size={24} />}
@@ -85,45 +79,46 @@ export default function Navbar() {
 
       {/* Mobile overlay */}
       <div
-        className={`fixed inset-0 z-40 bg-black/70 backdrop-blur-sm transition-opacity duration-300 md:hidden ${
+        className={`fixed inset-0 bg-black/40 backdrop-blur-sm transition-opacity duration-300 md:hidden ${
           mobileOpen ? "opacity-100" : "opacity-0 pointer-events-none"
         }`}
+        style={{ zIndex: 998 }}
         onClick={() => setMobileOpen(false)}
       />
 
       {/* Mobile drawer */}
       <div
-        className={`fixed top-0 right-0 z-50 h-full w-72 bg-[#0A0A0A] border-l border-white/10 transform transition-transform duration-300 ease-out md:hidden ${
+        className={`fixed top-0 right-0 h-full w-72 bg-white border-l border-[#E8E8E8] transform transition-transform duration-300 ease-out md:hidden ${
           mobileOpen ? "translate-x-0" : "translate-x-full"
         }`}
+        style={{ zIndex: 999 }}
       >
-        <div className="flex items-center justify-between px-6 h-20 border-b border-white/10">
-          <span className="flex items-center gap-0 font-heading text-lg font-extrabold tracking-tight">
-            <span className="text-white">Data</span>
+        <div className="flex items-center justify-between px-6 h-[60px] border-b border-[#E8E8E8]">
+          <span className="flex items-center font-heading font-extrabold text-[22px] leading-none tracking-tight">
+            <span className="text-black">Data</span>
             <span style={{ color: "#E8321A" }}>Byt</span>
-            <span className="w-1.5 h-1.5 rounded-full ml-0.5 mb-2 flex-shrink-0" style={{ background: "#E8321A" }} />
           </span>
-          <button onClick={() => setMobileOpen(false)} className="text-white/60 hover:text-white">
+          <button onClick={() => setMobileOpen(false)} className="text-black hover:text-[#E8321A]">
             <X size={24} />
           </button>
         </div>
-        <div className="flex flex-col px-6 pt-10 gap-7">
+        <div className="flex flex-col px-6 pt-8 gap-6">
           {navLinks.map((link) => (
             <a
               key={link.href}
               href={link.href}
               onClick={() => setMobileOpen(false)}
-              className="text-base font-medium text-white/60 hover:text-white transition-colors"
+              className="text-[15px] font-medium text-black hover:text-[#E8321A] transition-colors"
             >
               {link.label}
             </a>
           ))}
           <button
             onClick={() => { setMobileOpen(false); openDemo(); }}
-            className="text-white text-sm font-semibold rounded-full px-6 py-3 text-center"
+            className="text-white text-[14px] font-semibold rounded-lg px-6 py-3 text-center mt-4"
             style={{ background: "#E8321A" }}
           >
-            Book Free Workshop →
+            Book Workshop →
           </button>
         </div>
       </div>

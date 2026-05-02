@@ -17,10 +17,10 @@ const platforms = [
   {
     name: "Databricks",
     badge: "Best Fit",
-    badgeColor: "#E8321A",
+    badgeStyle: { background: "#E8321A", color: "#fff" },
     featured: true,
     features: [
-      "AgentBricks + MLflow evaluation",
+      "Agent Bricks + MLflow evaluation",
       "Unity Catalog governance",
       "Delta Lake invoice storage",
       "Enterprise-grade monitoring",
@@ -30,7 +30,7 @@ const platforms = [
   {
     name: "Snowflake",
     badge: "Great Fit",
-    badgeColor: "#0A0A0A",
+    badgeStyle: { background: "#1A1A1A", color: "#fff" },
     featured: false,
     features: [
       "Snowflake Cortex agents",
@@ -43,7 +43,7 @@ const platforms = [
   {
     name: "QuickBooks / SAP / Excel",
     badge: "Also Works",
-    badgeColor: "#6b7280",
+    badgeStyle: { background: "#666", color: "#fff" },
     featured: false,
     features: [
       "QuickBooks API integration",
@@ -51,7 +51,7 @@ const platforms = [
       "Excel / CSV ingestion",
       "Upgrade path to Databricks included",
     ],
-    note: "Great starting point. Most clients upgrade to Databricks after first build.",
+    note: "Great starting point. Most clients upgrade to Databricks after the first build.",
   },
 ];
 
@@ -60,28 +60,28 @@ export default function PlatformSupport() {
   const inView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section id="platforms" className="py-32 md:py-40 px-6 bg-[#FAFAF8]">
-      <div className="max-w-6xl mx-auto" ref={ref}>
+    <section id="platforms" className="py-24 md:py-28 px-6 md:px-10 bg-white">
+      <div className="max-w-[1200px] mx-auto" ref={ref}>
         <motion.div
-          className="text-center mb-16"
+          className="text-center mb-14"
           variants={fadeUp}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
         >
-          <span className="section-label mb-5 block">Platform Support</span>
+          <span className="section-label mb-5 block">Platforms</span>
           <h2
-            className="font-heading font-extrabold text-[#0A0A0A] mb-4"
-            style={{ fontSize: "clamp(2rem, 4vw, 3rem)", letterSpacing: "-0.04em" }}
+            className="font-heading font-extrabold text-black mb-5 leading-[1.06]"
+            style={{ fontSize: "clamp(2rem, 4.2vw, 3rem)", letterSpacing: "-0.04em" }}
           >
-            We meet you where your data lives.
+            We meet you <span style={{ color: "#E8321A" }}>where your data lives.</span>
           </h2>
-          <p className="text-base text-gray-500 max-w-xl mx-auto">
-            No migration required. No new tools. We connect to your existing stack and build the agent inside your infrastructure.
+          <p className="text-[16px] text-[#666] max-w-[600px] mx-auto">
+            No migration required. We connect to your existing stack and build inside your infrastructure.
           </p>
         </motion.div>
 
         <motion.div
-          className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12"
+          className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-10"
           variants={stagger}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
@@ -90,22 +90,22 @@ export default function PlatformSupport() {
             <motion.div
               key={p.name}
               variants={fadeUp}
-              className="rounded-2xl p-8 flex flex-col transition-all duration-200 hover:-translate-y-1"
+              className="rounded-xl p-7 flex flex-col bg-white transition-all duration-300 hover:scale-[1.02]"
               style={{
-                background: p.featured ? "#0A0A0A" : "#fff",
-                border: p.featured ? "1px solid #E8321A" : "0.5px solid rgba(0,0,0,0.08)",
+                border: p.featured ? "2px solid #E8321A" : "1px solid #E8E8E8",
+                boxShadow: p.featured ? "0 4px 24px rgba(232,50,26,0.08)" : "none",
               }}
             >
               <div className="flex items-center justify-between mb-6">
                 <h3
-                  className="font-heading font-bold text-xl"
-                  style={{ color: p.featured ? "#fff" : "#0A0A0A", letterSpacing: "-0.03em" }}
+                  className="font-heading font-bold text-[20px] text-black"
+                  style={{ letterSpacing: "-0.02em" }}
                 >
                   {p.name}
                 </h3>
                 <span
-                  className="text-[10px] font-bold tracking-[0.15em] uppercase px-3 py-1 rounded-full text-white"
-                  style={{ background: p.badgeColor }}
+                  className="text-[10px] font-bold tracking-[0.15em] uppercase px-2.5 py-1 rounded-md"
+                  style={p.badgeStyle}
                 >
                   {p.badge}
                 </span>
@@ -115,24 +115,22 @@ export default function PlatformSupport() {
                 {p.features.map((f) => (
                   <li
                     key={f}
-                    className="flex items-center gap-2.5 text-sm"
-                    style={{ color: p.featured ? "rgba(255,255,255,0.65)" : "#374151" }}
+                    className="flex items-start gap-2.5 text-[14px] text-[#1A1A1A]"
                   >
                     <span
-                      className="w-1 h-1 rounded-full flex-shrink-0"
-                      style={{ background: p.featured ? "#E8321A" : "#9ca3af" }}
-                    />
+                      className="font-bold flex-shrink-0 leading-tight"
+                      style={{ color: "#E8321A" }}
+                    >
+                      →
+                    </span>
                     {f}
                   </li>
                 ))}
               </ul>
 
               <p
-                className="text-xs leading-relaxed border-t pt-5"
-                style={{
-                  color: p.featured ? "rgba(255,255,255,0.35)" : "#9ca3af",
-                  borderColor: p.featured ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.06)",
-                }}
+                className="text-[12px] leading-relaxed border-t pt-4 text-[#666]"
+                style={{ borderColor: "#E8E8E8" }}
               >
                 {p.note}
               </p>
@@ -142,15 +140,15 @@ export default function PlatformSupport() {
 
         {/* Info box */}
         <motion.div
-          className="rounded-2xl p-8 max-w-4xl mx-auto"
-          style={{ background: "#fff", border: "0.5px solid rgba(0,0,0,0.08)" }}
+          className="rounded-xl p-7 max-w-[920px] mx-auto"
+          style={{ background: "#F5F5F5", border: "1px solid #E8E8E8" }}
           variants={fadeUp}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
         >
-          <p className="text-sm text-gray-600 leading-relaxed text-center">
-            <span className="font-semibold text-[#0A0A0A]">No Databricks yet?</span> We can provision and configure a Databricks workspace for you as part of the project. You own the account. You pay the compute directly (typically{" "}
-            <span className="font-semibold text-[#0A0A0A]">₹25,000–50,000/month</span> for AR workloads). We configure everything. This is the upgrade path most clients take after starting on QuickBooks or SAP.
+          <p className="text-[14px] text-[#1A1A1A] leading-relaxed text-center">
+            <span className="font-semibold text-black">No Databricks yet?</span> We provision and configure a Databricks workspace for you as part of the project. You own the account. You pay compute directly (typically{" "}
+            <span className="font-semibold text-black">₹25,000–50,000/month</span> for AR workloads).
           </p>
         </motion.div>
       </div>

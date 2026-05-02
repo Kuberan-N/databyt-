@@ -10,8 +10,8 @@ const fadeUp: Variants = {
 };
 
 const proofPills = [
-  "3 Founding Spots Remaining",
-  "10-Week Production Guarantee",
+  "■ ■ ■ 3 Spots Remaining",
+  "10-Week Guarantee",
   "Full Code Ownership",
 ];
 
@@ -22,20 +22,12 @@ export default function FinalCTA() {
 
   return (
     <section
-      className="relative py-40 px-6 overflow-hidden min-h-[80vh] flex items-center"
+      className="relative py-24 md:py-32 px-6 md:px-10 overflow-hidden"
       style={{ background: "#E8321A" }}
     >
-      {/* Subtle noise texture overlay */}
-      <div
-        className="absolute inset-0 pointer-events-none opacity-5"
-        style={{
-          backgroundImage: "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")",
-        }}
-      />
-
-      <div className="relative z-10 max-w-3xl mx-auto text-center w-full" ref={ref}>
+      <div className="relative z-10 max-w-[840px] mx-auto text-center" ref={ref}>
         <motion.span
-          className="inline-block text-[11px] font-bold uppercase tracking-[0.25em] text-white/60 mb-8"
+          className="inline-block text-[12px] font-bold uppercase tracking-[0.25em] text-white/85 mb-7 font-heading"
           variants={fadeUp}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
@@ -44,18 +36,18 @@ export default function FinalCTA() {
         </motion.span>
 
         <motion.h2
-          className="font-heading font-extrabold text-white mb-8 leading-[1.05]"
-          style={{ fontSize: "clamp(2.5rem, 6vw, 4.5rem)", letterSpacing: "-0.04em" }}
+          className="font-heading font-extrabold text-white mb-7 leading-[1.04]"
+          style={{ fontSize: "clamp(2.5rem, 6vw, 4rem)", letterSpacing: "-0.04em" }}
           variants={fadeUp}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
         >
-          Stop Shipping Demos.<br />
-          Start Shipping Systems.
+          Stop shipping demos.<br />
+          Start shipping systems.
         </motion.h2>
 
         <motion.p
-          className="text-base md:text-lg text-white/70 mb-14 leading-relaxed max-w-xl mx-auto"
+          className="text-[17px] text-white/85 mb-10 leading-relaxed max-w-[580px] mx-auto"
           variants={fadeUp}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
@@ -64,27 +56,27 @@ export default function FinalCTA() {
         </motion.p>
 
         <motion.div
-          className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12"
+          className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-10"
           variants={fadeUp}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
         >
           <button
             onClick={open}
-            className="bg-white font-semibold rounded-full px-10 py-4 transition-all duration-200 hover:opacity-90 hover:scale-[1.02]"
+            className="bg-white font-heading font-semibold rounded-lg px-8 py-4 text-[16px] transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_8px_30px_rgba(0,0,0,0.2)]"
             style={{ color: "#E8321A" }}
           >
             Book Free 90-Min Workshop →
           </button>
           <a
             href="mailto:kuberan@databyt.in"
-            className="border border-white/30 hover:border-white/60 text-white font-semibold rounded-full px-10 py-4 transition-all duration-200"
+            className="font-semibold rounded-lg px-8 py-4 text-[16px] transition-all duration-300 hover:scale-[1.03] hover:bg-white/10"
+            style={{ border: "1px solid rgba(255,255,255,0.5)", color: "#fff" }}
           >
             Email kuberan@databyt.in
           </a>
         </motion.div>
 
-        {/* Proof pills */}
         <motion.div
           className="flex flex-wrap items-center justify-center gap-3"
           variants={fadeUp}
@@ -94,7 +86,7 @@ export default function FinalCTA() {
           {proofPills.map((pill) => (
             <span
               key={pill}
-              className="text-xs font-medium text-white/70 border border-white/20 rounded-full px-4 py-2"
+              className="text-[12px] font-medium text-white border border-white/35 rounded-full px-4 py-1.5"
             >
               {pill}
             </span>

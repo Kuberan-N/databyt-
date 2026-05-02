@@ -7,16 +7,19 @@ type Currency = "USD" | "INR";
 interface CurrencyContextType {
   currency: Currency;
   isLoaded: boolean;
+  setCurrency: (c: Currency) => void;
 }
 
 const CurrencyContext = createContext<CurrencyContextType>({
   currency: "USD",
   isLoaded: false,
+  setCurrency: () => {},
 });
 
 export const CurrencyProvider = ({ children }: { children: React.ReactNode }) => {
-  const [currency, setCurrency] = useState<Currency>("USD");
+  const [currency, setCurrencyState] = useState<Currency>("USD");
   const [isLoaded, setIsLoaded] = useState(false);
+  const [userOverride, setUserOverride] = useState(false);
 
   useEffect(() => {
     const fetchCurrency = async () => {
@@ -25,7 +28,7 @@ export const CurrencyProvider = ({ children }: { children: React.ReactNode }) =>
         if (response.ok) {
           const data = await response.json();
           if (data.country_code === "IN") {
-            setCurrency("INR");
+            if (!userOverride) setCurrencyState("INR");
           }
         }
       } catch (error) {
@@ -36,10 +39,16 @@ export const CurrencyProvider = ({ children }: { children: React.ReactNode }) =>
     };
 
     fetchCurrency();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const setCurrency = (c: Currency) => {
+    setUserOverride(true);
+    setCurrencyState(c);
+  };
+
   return (
-    <CurrencyContext.Provider value={{ currency, isLoaded }}>
+    <CurrencyContext.Provider value={{ currency, isLoaded, setCurrency }}>
       {children}
     </CurrencyContext.Provider>
   );
