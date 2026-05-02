@@ -9,21 +9,21 @@ const steps = [
     title: "We Audit",
     duration: "Day 1–3",
     description: "We connect to your Databricks or Snowflake, map your AR workflow, and show you exactly where money is leaking. You get a written AR Leakage Report — whether you hire us or not.",
-    color: "#3B82F6",
+    color: "#0A0A0A",
   },
   {
     num: "02",
     title: "We Build",
     duration: "Week 1–3",
     description: "We build the AI agent inside YOUR infrastructure. Your data never leaves. Weekly demos. You see the agent learning your invoices, your customers, your patterns in real-time.",
-    color: "#06B6D4",
+    color: "#E8321A",
   },
   {
     num: "03",
     title: "You Collect",
     duration: "Week 3+",
-    description: "The agent goes live. It collects, prioritizes, tracks, and escalates — autonomously. We monitor for 30 days. Then it\u2019s yours forever. Every line of code.",
-    color: "#10B981",
+    description: "The agent goes live. It collects, prioritizes, tracks, and escalates — autonomously. We monitor for 30 days. Then it's yours forever. Every line of code.",
+    color: "#0A0A0A",
   },
 ];
 
@@ -42,34 +42,37 @@ export default function HowItWorks() {
   const inView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section id="how-it-works" className="py-32 md:py-40 px-6">
+    <section id="how-it-works" className="py-32 md:py-40 px-6 bg-[#FAFAF8]">
       <div className="max-w-6xl mx-auto" ref={ref}>
         <motion.div
-          className="text-center mb-20"
+          className="text-center mb-16"
           variants={fadeUp}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
         >
-          <span className="inline-block text-[11px] font-semibold tracking-[0.25em] text-blue-400 uppercase mb-5">
+          <span className="section-label mb-5 block">
             Simple Process
           </span>
-          <h2 className="text-3xl md:text-5xl font-bold text-white mb-6 font-heading leading-tight">
+          <h2
+            className="font-heading font-extrabold text-[#0A0A0A] mb-6 leading-tight"
+            style={{ fontSize: "clamp(2rem, 4vw, 3.5rem)", letterSpacing: "-0.04em" }}
+          >
             From First Call to Collecting Cash <br className="hidden md:block" />
-            <span className="text-gradient-blue">in 3 Weeks</span>
+            <span style={{ color: "#E8321A" }}>in 3 Weeks</span>
           </h2>
-          <p className="text-base md:text-lg text-slate-400 max-w-xl mx-auto leading-relaxed">
+          <p className="text-base text-gray-500 max-w-xl mx-auto">
             We build. We measure. We leave you with something that works while you sleep.
           </p>
         </motion.div>
 
         <motion.div
-          className="grid grid-cols-1 md:grid-cols-3 gap-8 relative"
+          className="grid grid-cols-1 md:grid-cols-3 gap-6 relative"
           variants={stagger}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
         >
           {/* Connecting line */}
-          <div className="hidden md:block absolute top-12 left-16 right-16 h-px border-t-2 border-dashed border-slate-800/50" />
+          <div className="hidden md:block absolute top-10 left-24 right-24 h-px border-t border-dashed border-black/10" />
 
           {steps.map((step) => (
             <motion.div
@@ -78,32 +81,31 @@ export default function HowItWorks() {
               className="relative flex flex-col"
             >
               <div
-                className="w-20 h-20 rounded-full flex items-center justify-center border mx-auto mb-8 relative z-10 bg-[#050A14]"
+                className="w-16 h-16 rounded-full flex items-center justify-center border mx-auto mb-6 relative z-10 bg-white"
                 style={{
-                  backgroundColor: `${step.color}08`,
-                  borderColor: `${step.color}25`,
+                  borderColor: step.color === "#E8321A" ? "#E8321A" : "rgba(0,0,0,0.1)",
                 }}
               >
-                <span className="text-xl font-bold" style={{ color: step.color }}>
+                <span className="font-heading text-lg font-bold" style={{ color: step.color }}>
                   {step.num}
                 </span>
               </div>
 
-              <div className="glass-card rounded-2xl p-8 flex-1 transition-all duration-500 flex flex-col text-center">
+              <div className="light-card rounded-2xl p-8 flex-1 transition-all duration-300 flex flex-col text-center"
+                   style={{ borderColor: step.color === "#E8321A" ? "#E8321A" : "rgba(0,0,0,0.08)" }}>
                 <span
-                  className="text-[10px] font-semibold px-3 py-1.5 rounded-full border w-fit mx-auto mb-5"
+                  className="text-[10px] font-bold tracking-widest uppercase px-3 py-1.5 rounded-full w-fit mx-auto mb-5"
                   style={{
                     color: step.color,
-                    backgroundColor: `${step.color}08`,
-                    borderColor: `${step.color}20`,
+                    backgroundColor: step.color === "#E8321A" ? "rgba(232,50,26,0.08)" : "rgba(0,0,0,0.04)",
                   }}
                 >
                   {step.duration}
                 </span>
-                <h3 className="text-xl font-bold text-white tracking-wide mb-4">
+                <h3 className="font-heading text-xl font-bold text-[#0A0A0A] mb-3">
                   {step.title}
                 </h3>
-                <p className="text-sm text-slate-400 leading-relaxed">{step.description}</p>
+                <p className="text-sm text-gray-600 leading-relaxed">{step.description}</p>
               </div>
             </motion.div>
           ))}

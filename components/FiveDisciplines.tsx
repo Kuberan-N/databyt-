@@ -51,25 +51,25 @@ export default function FiveDisciplines() {
   const inView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section className="py-24 md:py-32 px-6 bg-[#050A14] relative overflow-hidden">
-      {/* Background glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-4xl h-64 bg-blue-600/5 blur-[120px] pointer-events-none" />
-
-      <div className="max-w-7xl mx-auto relative z-10" ref={ref}>
+    <section className="py-24 md:py-32 px-6 bg-[#F5F4F0]">
+      <div className="max-w-7xl mx-auto" ref={ref}>
         <motion.div
           className="text-center mb-16"
           variants={fadeUp}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
         >
-          <span className="inline-block text-sm font-semibold tracking-wider text-blue-400 uppercase mb-4">
+          <span className="section-label mb-5 block">
             Why DataByt Is Different
           </span>
-          <h2 className="text-3xl md:text-5xl font-bold text-white mb-6 font-heading">
+          <h2
+            className="font-heading font-extrabold text-[#0A0A0A] mb-6 leading-tight"
+            style={{ fontSize: "clamp(2rem, 4vw, 3.5rem)", letterSpacing: "-0.04em" }}
+          >
             Production AI Requires 5 Disciplines. <br className="hidden md:block" />
-            <span className="text-gradient-blue">Most Agencies Know 2.</span>
+            <span style={{ color: "#E8321A" }}>Most Agencies Know 2.</span>
           </h2>
-          <p className="text-lg text-slate-400 max-w-3xl mx-auto">
+          <p className="text-base text-gray-500 max-w-3xl mx-auto">
             This is what we design before we write a single line of production code. Most teams discover these requirements 6 weeks after launch — when it&apos;s expensive to fix.
           </p>
         </motion.div>
@@ -84,21 +84,21 @@ export default function FiveDisciplines() {
             <motion.div
               key={i}
               variants={fadeUp}
-              className="bg-[#0A1628]/80 border border-slate-800 rounded-2xl p-6 hover:border-blue-500/30 hover:bg-slate-800/40 transition-all flex flex-col h-full group relative"
+              className="bg-white border border-black/5 rounded-2xl p-6 hover:border-[#E8321A]/30 transition-all flex flex-col h-full group relative shadow-sm"
             >
               <div className="flex justify-between items-start mb-4 relative z-10 gap-2">
-                <h3 className="text-lg font-bold text-white leading-snug">
+                <h3 className="font-heading font-bold text-[#0A0A0A] text-lg leading-snug" style={{ letterSpacing: "-0.02em" }}>
                   {d.title}
                 </h3>
-                <div className="text-4xl font-black text-slate-800/60 group-hover:text-cyan-400 group-hover:drop-shadow-[0_0_12px_rgba(34,211,238,0.8)] transition-all duration-300 transform group-hover:scale-110 flex-shrink-0">
+                <div className="font-heading text-4xl font-black text-gray-200 group-hover:text-[#E8321A] transition-colors duration-300 flex-shrink-0">
                   {d.number}
                 </div>
               </div>
-              <p className="text-sm text-slate-400 leading-relaxed flex-grow relative z-10 mb-6">
+              <p className="text-sm text-gray-600 leading-relaxed flex-grow relative z-10 mb-6">
                 {d.body}
               </p>
-              <div className="pt-4 border-t border-slate-800 relative z-10 mt-auto">
-                <span className="text-sm font-medium text-blue-400">
+              <div className="pt-4 border-t border-black/5 relative z-10 mt-auto">
+                <span className="text-sm font-semibold" style={{ color: "#E8321A" }}>
                   {d.result}
                 </span>
               </div>
@@ -112,7 +112,7 @@ export default function FiveDisciplines() {
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
         >
-          <h3 className="text-xl md:text-2xl font-bold text-white">
+          <h3 className="font-heading text-xl md:text-2xl font-bold text-[#0A0A0A]" style={{ letterSpacing: "-0.03em" }}>
             Most agencies deliver on 2 of these. We deliver all 5. <br className="hidden md:block" />
             That is why our agents survive production.
           </h3>
