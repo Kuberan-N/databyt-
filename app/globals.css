@@ -3,20 +3,16 @@
 @tailwind utilities;
 
 :root {
-  --bg-primary: #050A14;
-  --bg-secondary: #0A1628;
-  --bg-tertiary: #111D35;
-  --accent-primary: #3B82F6;
-  --accent-secondary: #60A5FA;
-  --accent-electric: #0066FF;
-  --accent-cyan: #06B6D4;
-  --accent-glow: rgba(59, 130, 246, 0.35);
-  --text-primary: #F8FAFC;
-  --text-secondary: #94A3B8;
-  --text-muted: #64748B;
-  --border: #1E293B;
-  --success: #10B981;
-  --danger: #EF4444;
+  --red: #E8321A;
+  --red-hover: #D02B15;
+  --red-muted: rgba(232, 50, 26, 0.12);
+  --red-border: rgba(232, 50, 26, 0.2);
+  --black: #0A0A0A;
+  --off-white: #FAFAF8;
+  --gray-light: #F5F4F0;
+  --text-primary: #0A0A0A;
+  --text-muted: #6B7280;
+  --border: rgba(0, 0, 0, 0.08);
 }
 
 html {
@@ -25,24 +21,20 @@ html {
 
 body {
   color: var(--text-primary);
-  background: var(--bg-primary);
+  background: var(--off-white);
+  font-family: 'DM Sans', sans-serif;
 }
 
-/* Floating gradient orb */
+/* ─── Animations ─── */
 @keyframes float {
   0%, 100% { transform: translate(0, 0) scale(1); }
   33% { transform: translate(30px, -30px) scale(1.05); }
   66% { transform: translate(-20px, 20px) scale(0.95); }
 }
 
-@keyframes pulse-glow {
-  0%, 100% { opacity: 0.3; }
-  50% { opacity: 0.55; }
-}
-
-@keyframes grid-fade {
-  0%, 100% { opacity: 0.02; }
-  50% { opacity: 0.05; }
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.85); }
 }
 
 @keyframes shimmer {
@@ -51,88 +43,84 @@ body {
 }
 
 @keyframes gentle-pulse {
-  0%, 100% {
-    box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.4);
-  }
-  50% {
-    box-shadow: 0 0 0 8px rgba(59, 130, 246, 0);
-  }
+  0%, 100% { box-shadow: 0 0 0 0 rgba(232, 50, 26, 0.4); }
+  50% { box-shadow: 0 0 0 8px rgba(232, 50, 26, 0); }
 }
 
-.gradient-orb {
-  position: absolute;
-  width: 700px;
-  height: 700px;
+@keyframes slide-in-left {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(100%); }
+}
+
+/* ─── Utility: pulsing red dot ─── */
+.pulse-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(0, 102, 255, 0.18) 0%, rgba(6, 182, 212, 0.06) 40%, transparent 70%);
-  filter: blur(100px);
-  animation: float 12s ease-in-out infinite, pulse-glow 6s ease-in-out infinite;
-  pointer-events: none;
+  background: var(--red);
+  animation: pulse-dot 1.5s ease-in-out infinite;
 }
 
-.gradient-orb-warm {
-  position: absolute;
-  width: 500px;
-  height: 500px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(59, 130, 246, 0.1) 0%, rgba(6, 182, 212, 0.04) 40%, transparent 70%);
-  filter: blur(80px);
-  animation: float 15s ease-in-out infinite reverse, pulse-glow 8s ease-in-out infinite;
-  pointer-events: none;
+/* ─── Gradient text: red ─── */
+.text-gradient-red {
+  background: linear-gradient(135deg, #E8321A, #FF6B4A);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
-/* Dot grid background */
-.dot-grid {
-  background-image: radial-gradient(circle, rgba(59, 130, 246, 0.05) 1px, transparent 1px);
-  background-size: 40px 40px;
-  animation: grid-fade 8s ease-in-out infinite;
-}
-
-/* Shimmer effect for badges */
+/* ─── Shimmer badge ─── */
 .shimmer {
-  background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.06), transparent);
+  background: linear-gradient(90deg, transparent, rgba(232, 50, 26, 0.06), transparent);
   background-size: 200% 100%;
   animation: shimmer 4s ease-in-out infinite;
 }
 
-/* Gradient text utility — Electric Blue */
-.text-gradient-blue {
-  background: linear-gradient(135deg, #0066FF, #00D4FF);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.text-gradient-cyan {
-  background: linear-gradient(135deg, #06B6D4, #3B82F6);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-/* Gentle pulse CTA button */
+/* ─── CTA pulse ─── */
 .btn-pulse {
   animation: gentle-pulse 3s ease-in-out infinite;
 }
 
-/* Premium card glass effect */
+/* ─── Dark glass card (for dark-bg sections) ─── */
 .glass-card {
-  background: rgba(10, 22, 40, 0.6);
+  background: rgba(255, 255, 255, 0.04);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(59, 130, 246, 0.08);
+  border: 0.5px solid rgba(255, 255, 255, 0.1);
 }
 
 .glass-card:hover {
-  border-color: rgba(59, 130, 246, 0.18);
-  box-shadow: 0 0 40px rgba(59, 130, 246, 0.06);
+  border-color: rgba(232, 50, 26, 0.25);
 }
 
-/* Scrollbar styling */
-::-webkit-scrollbar { width: 5px; }
-::-webkit-scrollbar-track { background: var(--bg-primary); }
-::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
-::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
+/* ─── Light card (for off-white / gray sections) ─── */
+.light-card {
+  background: #fff;
+  border: 0.5px solid rgba(0, 0, 0, 0.08);
+  transition: border-color 0.2s, transform 0.2s;
+}
+
+.light-card:hover {
+  border-top-color: var(--red);
+  transform: translateY(-2px);
+}
+
+/* ─── Section labels ─── */
+.section-label {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--red);
+}
+
+/* ─── Scrollbar ─── */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--off-white); }
+::-webkit-scrollbar-thumb { background: #d1d5db; border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { background: #9ca3af; }
 
 @layer utilities {
   .text-balance { text-wrap: balance; }

@@ -6,36 +6,32 @@ import { ChevronDown } from "lucide-react";
 
 const faqs = [
   {
-    q: "Why is this so much cheaper than HighRadius or Billtrust?",
-    a: "They\u2019re enterprise SaaS platforms \u2014 you pay for their cloud, support, sales team, and annual contracts. We build on YOUR existing Databricks or Snowflake, so there\u2019s no infrastructure cost on our side. You pay once. You own the code forever. No recurring fees.",
+    q: "Why are your prices lower than Accenture or boutique agencies?",
+    a: "Because we don't have 50 people in an office in Bangalore charging you for their project management overhead. You get a senior data engineer and AI engineer — Kuberan — directly on your account for the full project. No junior consultants. No account managers. The $4,200 is what the work actually costs at our cost structure, not what the market can bear.",
   },
   {
-    q: "Will this actually work in production, or is this another AI demo?",
-    a: "Every build includes evaluation suites, failure mode handling, and human-in-the-loop checkpoints. We deploy on your production infrastructure with 30 days of monitoring. If it breaks within 30 days, we fix it free. We ship systems, not demos.",
+    q: "Will my agent actually work in production, or is this another demo?",
+    a: "This is the most important question. The entire DataByt methodology exists to answer this. Before we write a single line of production code, we build an evaluation suite of 50–100 real test cases from your actual data. We design every failure mode. We build monitoring. The evaluation suite runs continuously. You see the score before launch. Most agencies ship demos hoping production works. We ship proof that production works.",
   },
   {
-    q: "What if our data is messy or incomplete?",
-    a: "That\u2019s normal. Our initial audit (Day 1-3) assesses data quality and identifies gaps. We design the agent to handle real-world data \u2014 missing fields, inconsistent formats, duplicates. If cleanup is needed first, we\u2019ll tell you exactly what to fix.",
-  },
-  {
-    q: "How does this integrate with our existing ERP?",
-    a: "We integrate with whatever your finance team uses \u2014 NetSuite, QuickBooks, Xero, SAP, or custom ERPs. The agent reads from your data platform where transaction data already lives or can be easily piped.",
-  },
-  {
-    q: "Why should I trust a newer company with my AR process?",
-    a: "Three reasons: (1) Your data never leaves your infrastructure \u2014 zero data risk. (2) You own every line of code \u2014 if you\u2019re unhappy, you keep everything. (3) We guarantee delivery \u2014 if we miss the deadline, you don\u2019t pay. The risk is entirely on us.",
+    q: "What's the difference between Starter Agent and Production Agent?",
+    a: "Starter Agent is a single workflow — one task, automated end-to-end. It's ideal for teams that want to prove the concept with a focused use case before scaling. Production Agent is a multi-step system with memory, tool calling, multiple system integrations, and reinforcement loops. It's for teams that have a critical workflow and cannot afford to fail. Most clients start with Starter and upgrade to Production within 90 days.",
   },
   {
     q: "How fast can you start?",
-    a: "We\u2019re currently booking builds for May. Once scope is agreed, the audit begins within 48 hours and the full build starts within the first week. Total time to production: 3 weeks for AR Collections, 6 weeks for Order-to-Cash.",
+    a: "The free 90-minute workshop can happen this week. After the workshop, if we're a good fit, we can start the Architecture and Evaluation phase within 7 days. Full production is 8–10 weeks from kickoff. Most clients see a working demo of their agent by Week 4.",
   },
   {
-    q: "What happens after the 30-day monitoring period?",
-    a: "You own the agent completely. Your team can maintain and extend it using our documentation. Optional retainer support is available but never required. Most agents run autonomously after handoff.",
+    q: "What if the agent breaks at 3 AM?",
+    a: "All Production Agent clients receive real-time monitoring dashboards with drift detection and latency alerts. If something breaks within 30 days of launch, we fix it for free — no support tickets, no hourly billing. After 30 days, the AI Ops Retainer covers ongoing incident response at ₹95,000/month.",
   },
   {
-    q: "Does the agent work 24/7?",
-    a: "Yes. Unlike a human AR specialist who works 8 hours, the AI agent runs continuously \u2014 sending collections at optimal times, tracking promises overnight, and flagging exceptions for your team each morning.",
+    q: "Do I need to give you full access to my Databricks workspace?",
+    a: "We work inside your workspace with the minimum permissions required for the project. We never ask for admin access. Everything is governed through Unity Catalog — you control who can see what. After handoff, you can revoke our access entirely. We recommend you do.",
+  },
+  {
+    q: "Why should I trust a solo founder with a production AI system?",
+    a: "Fair question. Three answers: First, every line of code we write lives in your GitHub and runs in your workspace — you're not trusting us with production, you're trusting yourself with code we wrote. Second, the evaluation suite means you can independently verify the agent works before it goes live. Third, our guarantees are contractual — if we miss, we work for free. You have more protection from DataByt than you do from a ₹5 crore Accenture contract.",
   },
 ];
 
@@ -50,7 +46,7 @@ export default function FAQ() {
   const inView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section id="faq" className="py-32 md:py-40 px-6">
+    <section id="faq" className="py-32 md:py-40 px-6 bg-[#F5F4F0]">
       <div className="max-w-3xl mx-auto" ref={ref}>
         <motion.div
           className="text-center mb-16"
@@ -58,16 +54,18 @@ export default function FAQ() {
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
         >
-          <span className="inline-block text-[11px] font-semibold tracking-[0.25em] text-blue-400 uppercase mb-5">
-            Clear Answers
-          </span>
-          <h2 className="text-3xl md:text-5xl font-bold text-white mb-6 font-heading">
-            Questions? <span className="text-gradient-blue">Straight Answers.</span>
+          <span className="section-label mb-5 block">Clear Answers</span>
+          <h2
+            className="font-heading font-extrabold text-[#0A0A0A] mb-4"
+            style={{ fontSize: "clamp(2rem, 4vw, 3rem)", letterSpacing: "-0.04em" }}
+          >
+            Questions?{" "}
+            <span style={{ color: "#E8321A" }}>We&apos;ve Got Answers.</span>
           </h2>
         </motion.div>
 
         <motion.div
-          className="space-y-4"
+          className="space-y-3"
           variants={fadeUp}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
@@ -77,19 +75,22 @@ export default function FAQ() {
             return (
               <div
                 key={i}
-                className="glass-card rounded-2xl overflow-hidden transition-all duration-300"
+                className="bg-white rounded-2xl overflow-hidden transition-all duration-200"
+                style={{ border: isOpen ? "0.5px solid #E8321A" : "0.5px solid rgba(0,0,0,0.08)" }}
               >
                 <button
                   onClick={() => setOpenIndex(isOpen ? null : i)}
                   className="w-full flex items-center justify-between px-7 py-6 text-left"
                 >
-                  <span className="text-[15px] font-medium text-white pr-4 leading-relaxed">{faq.q}</span>
+                  <span className="text-[15px] font-medium text-[#0A0A0A] pr-4 leading-relaxed">
+                    {faq.q}
+                  </span>
                   <motion.span
                     animate={{ rotate: isOpen ? 180 : 0 }}
-                    transition={{ duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
+                    transition={{ duration: 0.3 }}
                     className="flex-shrink-0"
                   >
-                    <ChevronDown size={18} className="text-slate-500" />
+                    <ChevronDown size={18} style={{ color: isOpen ? "#E8321A" : "#9ca3af" }} />
                   </motion.span>
                 </button>
 
@@ -99,9 +100,9 @@ export default function FAQ() {
                       initial={{ height: 0, opacity: 0 }}
                       animate={{ height: "auto", opacity: 1 }}
                       exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.35, ease: [0.25, 0.46, 0.45, 0.94] }}
+                      transition={{ duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
                     >
-                      <p className="px-7 pb-6 text-sm text-slate-400 leading-relaxed">{faq.a}</p>
+                      <p className="px-7 pb-7 text-sm text-gray-600 leading-relaxed">{faq.a}</p>
                     </motion.div>
                   )}
                 </AnimatePresence>

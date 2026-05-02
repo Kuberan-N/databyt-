@@ -6,24 +6,26 @@ import { CurrencyProvider } from "@/components/CurrencyContext";
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
+  display: "swap",
 });
 
 const outfit = Outfit({
   subsets: ["latin"],
   variable: "--font-outfit",
   weight: ["400", "500", "600", "700", "800"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "DataByt — Finance AI Agents on Your Databricks & Snowflake",
+  title: "DataByt — Stop Shipping AI Demos. Start Shipping Systems.",
   description:
-    "We build production finance AI agents on your Databricks or Snowflake. AR Collections Agent in 3 weeks. Your data never leaves your infrastructure. DSO reduced 15-25 days.",
+    "DataByt builds production AI agents for AR Collections automation on your Databricks, Snowflake, QuickBooks, or SAP. 8–10 weeks to production. DSO reduced 18 days. Your data never leaves your infrastructure.",
   keywords:
-    "AR collections automation, finance AI agent, accounts receivable AI, Databricks AI agent, Snowflake AI agent, order to cash automation, DSO reduction",
+    "AR collections automation, production AI agent, accounts receivable AI, Databricks AI agent, Snowflake AI agent, finance AI, DSO reduction, MLflow, LangGraph",
   openGraph: {
-    title: "Finance AI Agents — Built on Your Infrastructure | DataByt",
+    title: "DataByt — Production AI Agent Engineering",
     description:
-      "Production finance AI agents on your Databricks or Snowflake. Data never leaves. AR Collections from $4,900.",
+      "We build production AI agents for AR Collections. On your infrastructure. 8–10 weeks. Full code ownership.",
     url: "https://databyt.in",
     siteName: "DataByt",
     type: "website",
@@ -36,13 +38,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="scroll-smooth">
-      <body
-        className={`${inter.variable} ${outfit.variable} font-sans bg-[#050A14] text-white antialiased`}
-      >
-        <CurrencyProvider>
-          {children}
-        </CurrencyProvider>
+    <html lang="en" className={`${inter.variable} ${outfit.variable} scroll-smooth`}>
+      <body className="antialiased font-sans">
+        <CurrencyProvider>{children}</CurrencyProvider>
       </body>
     </html>
   );

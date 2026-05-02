@@ -5,24 +5,19 @@ import { useRef } from "react";
 
 const guarantees = [
   {
-    icon: "⏱️",
-    title: "3-Week Delivery",
-    body: "AR Collections Agent delivered to production in 3 weeks. If we miss the deadline, you don\u2019t pay.",
+    number: "01",
+    title: "The 10-Week Production Guarantee",
+    body: "We scope timelines aggressively. If your agent isn't live in production by week 10, we work for free until it is.",
   },
   {
-    icon: "🛡️",
-    title: "30-Day Protection",
-    body: "If the agent breaks in production within 30 days, we fix it immediately. No tickets, no hourly billing.",
+    number: "02",
+    title: "The 30-Day Breakage Guarantee",
+    body: "If the agent breaks in production within 30 days of launch, we fix it — no support tickets, no hourly billing, free.",
   },
   {
-    icon: "🔑",
-    title: "Full Ownership",
-    body: "You own the code, the infrastructure, and the data. No hostage fees. No subscriptions. Ever.",
-  },
-  {
-    icon: "🔒",
-    title: "Data Sovereignty",
-    body: "Your data NEVER leaves your Databricks or Snowflake. We build inside your cloud. Period.",
+    number: "03",
+    title: "The Full Ownership Guarantee",
+    body: "You own the GitHub repo, the Databricks infrastructure, and the evaluation suite. You never pay us a hostage fee. You can extend it without us.",
   },
 ];
 
@@ -41,45 +36,51 @@ export default function Guarantee() {
   const inView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section className="py-32 md:py-40 px-6">
+    <section className="py-32 md:py-40 px-6 bg-[#FAFAF8]">
       <div className="max-w-6xl mx-auto" ref={ref}>
         <motion.div
-          className="text-center mb-20"
+          className="text-center mb-16"
           variants={fadeUp}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
         >
-          <span className="inline-block text-[11px] font-semibold tracking-[0.25em] text-blue-400 uppercase mb-5">
-            Skin in the Game
+          <span className="section-label mb-5 block">
+            Agencies Charge for Effort. We Charge for Outcomes.
           </span>
-          <h2 className="text-3xl md:text-5xl font-bold text-white mb-6 font-heading leading-tight">
-            We Don&apos;t Hide Behind Contracts. <br className="hidden md:block" />
-            <span className="text-gradient-blue">We Stand Behind Guarantees.</span>
+          <h2
+            className="font-heading font-extrabold text-[#0A0A0A] mb-4 leading-tight"
+            style={{ fontSize: "clamp(2rem, 4vw, 3rem)", letterSpacing: "-0.04em" }}
+          >
+            We take the risk so your engineering team{" "}
+            <span style={{ color: "#E8321A" }}>doesn&apos;t have to.</span>
           </h2>
-          <p className="text-base md:text-lg text-slate-400 max-w-2xl mx-auto leading-relaxed">
-            If we fail, you don&apos;t pay. That&apos;s not marketing — it&apos;s how we do business.
-          </p>
         </motion.div>
 
         <motion.div
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
+          className="grid grid-cols-1 md:grid-cols-3 gap-6"
           variants={stagger}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
         >
-          {guarantees.map((g, i) => (
+          {guarantees.map((g) => (
             <motion.div
-              key={i}
+              key={g.number}
               variants={fadeUp}
-              className="glass-card rounded-2xl p-8 transition-all duration-500 flex flex-col items-center text-center"
+              className="light-card rounded-2xl p-8 flex flex-col"
             >
-              <div className="text-4xl mb-8 p-5 bg-slate-800/30 rounded-2xl w-fit">
-                {g.icon}
-              </div>
-              <h3 className="text-base font-bold text-white mb-4">{g.title}</h3>
-              <p className="text-sm text-slate-400 leading-relaxed">
-                {g.body}
-              </p>
+              <span
+                className="font-heading font-extrabold text-5xl mb-6 block"
+                style={{ color: "#E8321A", opacity: 0.3, letterSpacing: "-0.06em" }}
+              >
+                {g.number}
+              </span>
+              <h3
+                className="font-heading font-bold text-[#0A0A0A] text-lg mb-4"
+                style={{ letterSpacing: "-0.02em" }}
+              >
+                {g.title}
+              </h3>
+              <p className="text-sm text-gray-600 leading-relaxed">{g.body}</p>
             </motion.div>
           ))}
         </motion.div>

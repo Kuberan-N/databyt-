@@ -1,15 +1,23 @@
 "use client";
 
 import { motion, type Variants } from "framer-motion";
-import { Shield } from "lucide-react";
 import { useDemoForm } from "./DemoFormContext";
 import { useEffect, useState } from "react";
 
-const trustBadges = [
-  "Databricks-Native",
-  "Snowflake-Native",
-  "Data Never Leaves",
-  "3 Weeks to Production",
+const proofStats = [
+  { num: "18d", label: "Average DSO reduction" },
+  { num: "40h", label: "Finance hours saved weekly" },
+  { num: "8–10w", label: "First call to production" },
+  { num: "₹0", label: "New infrastructure cost" },
+];
+
+const trustStack = [
+  "Databricks AgentBricks",
+  "Anthropic Claude API",
+  "Snowflake Cortex",
+  "Delta Lake",
+  "MLflow",
+  "Unity Catalog",
 ];
 
 const fadeUp: Variants = {
@@ -17,7 +25,7 @@ const fadeUp: Variants = {
   visible: (i: number) => ({
     opacity: 1,
     y: 0,
-    transition: { duration: 0.8, delay: i * 0.12, ease: [0.25, 0.46, 0.45, 0.94] },
+    transition: { duration: 0.8, delay: i * 0.1, ease: [0.25, 0.46, 0.45, 0.94] },
   }),
 };
 
@@ -27,75 +35,75 @@ export default function Hero() {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setWasteCost((prev) => prev + 13);
+      setWasteCost((prev) => prev + 47);
     }, 1000);
     return () => clearInterval(interval);
   }, []);
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Gradient orb background */}
-      <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-        <div className="gradient-orb" />
-      </div>
-      <div className="absolute top-1/3 -right-40 w-96 h-96 rounded-full bg-cyan-500/5 blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-1/3 -left-40 w-80 h-80 rounded-full bg-blue-500/5 blur-[120px] pointer-events-none" />
+    <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-[#0A0A0A]">
+      {/* Subtle red glow */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background:
+            "radial-gradient(ellipse 80% 50% at 50% 0%, rgba(232,50,26,0.08) 0%, transparent 70%)",
+        }}
+      />
 
-      {/* Dot grid */}
-      <div className="absolute inset-0 dot-grid pointer-events-none" />
-
-      <div className="relative z-10 max-w-5xl mx-auto px-6 pt-32 pb-24 text-center">
-        {/* Positioning badge */}
-        <motion.div variants={fadeUp} initial="hidden" animate="visible" custom={0}>
-          <span className="inline-flex items-center gap-2 text-sm font-medium text-blue-400 bg-blue-500/8 border border-blue-500/15 rounded-full px-5 py-2 mb-10 shimmer">
-            <Shield size={14} />
-            Finance AI Agents — Databricks & Snowflake
+      <div className="relative z-10 max-w-5xl mx-auto px-6 pt-36 pb-20 text-center">
+        {/* Positioning chip */}
+        <motion.div variants={fadeUp} initial="hidden" animate="visible" custom={0} className="mb-10">
+          <span className="inline-flex items-center gap-2 text-[11px] font-semibold text-white/50 bg-white/5 border border-white/10 rounded-full px-5 py-2">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#E8321A]" />
+            Production AI Engineering · Not Another Demo
           </span>
         </motion.div>
 
-        {/* Main headline */}
+        {/* Headline */}
         <motion.h1
-          className="text-4xl sm:text-5xl md:text-7xl font-extrabold tracking-tight text-white leading-[1.08] mb-8 font-heading"
+          className="font-heading font-extrabold text-white leading-[1.05] tracking-tight mb-8"
+          style={{ fontSize: "clamp(2.5rem, 7vw, 5rem)", letterSpacing: "-0.04em" }}
           variants={fadeUp}
           initial="hidden"
           animate="visible"
           custom={1}
         >
-          Your Finance Team Is Losing <br className="hidden sm:block" />
-          <span className="text-gradient-blue">$47,000/Month</span>{" "}
-          to Manual AR.
+          Your AR team is doing<br />
+          <span style={{ color: "#E8321A" }}>₹40L worth of manual work.</span><br />
+          Every. Single. Year.
         </motion.h1>
 
         {/* Sub-headline */}
         <motion.p
-          className="text-lg md:text-xl text-slate-400 max-w-3xl mx-auto mb-6 leading-relaxed"
+          className="text-lg md:text-xl text-white/50 max-w-3xl mx-auto mb-4 leading-relaxed font-light"
           variants={fadeUp}
           initial="hidden"
           animate="visible"
           custom={2}
         >
-          We build AI agents that collect your money, reconcile your cash, and run on{" "}
-          <span className="text-white font-medium">your Databricks or Snowflake</span>.{" "}
-          No SaaS subscription. No data leaving your infrastructure.
+          We build production AI agents that automate accounts receivable collections — on your existing{" "}
+          <span className="text-white/80 font-medium">Databricks, Snowflake, QuickBooks, or SAP</span>.
+          Your data never leaves your environment. Your team gets 40 hours back every week.
         </motion.p>
 
-        {/* Live waste counter — subtle */}
+        {/* Live counter */}
         <motion.p
-          className="text-sm text-slate-500 mb-12"
+          className="text-sm text-white/30 mb-12"
           variants={fadeUp}
           initial="hidden"
           animate="visible"
           custom={2.5}
         >
-          Since you opened this page, manual AR has cost US companies{" "}
-          <span className="font-semibold text-blue-400 tabular-nums">
-            ${wasteCost.toLocaleString()}
+          Since you opened this page, manual AR has cost finance teams{" "}
+          <span className="font-semibold tabular-nums" style={{ color: "#E8321A" }}>
+            ₹{wasteCost.toLocaleString("en-IN")}
           </span>
         </motion.p>
 
         {/* CTAs */}
         <motion.div
-          className="flex flex-col sm:flex-row items-center justify-center gap-5 mb-6"
+          className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16"
           variants={fadeUp}
           initial="hidden"
           animate="visible"
@@ -103,51 +111,60 @@ export default function Hero() {
         >
           <button
             onClick={openDemo}
-            className="group bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 text-white font-semibold rounded-full px-10 py-4 transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_0_40px_rgba(59,130,246,0.3)] flex items-center gap-2 btn-pulse"
+            className="btn-pulse text-white font-semibold rounded-full px-10 py-4 transition-all duration-200 hover:opacity-90 hover:scale-[1.02] flex items-center gap-2"
+            style={{ background: "#E8321A" }}
           >
-            Book Free AR Assessment &rarr;
+            Book Free 90-Min Workshop →
           </button>
           <a
-            href="#services"
-            className="border border-slate-700/60 hover:border-blue-500/40 text-slate-300 hover:text-white font-semibold rounded-full px-10 py-4 transition-all duration-300 flex items-center gap-2"
+            href="#how-it-works"
+            className="border border-white/15 hover:border-white/30 text-white/70 hover:text-white font-semibold rounded-full px-10 py-4 transition-all duration-200"
           >
-            See What We Build
+            See How We Build →
           </a>
         </motion.div>
 
-        {/* Trust line */}
-        <motion.p
-          className="text-sm text-slate-500 mb-16"
-          variants={fadeUp}
-          initial="hidden"
-          animate="visible"
-          custom={3.5}
-        >
-          20 minutes. No pitch. We show you exactly where your AR process is leaking cash.
-        </motion.p>
-
-        {/* Trust badges row */}
+        {/* Proof stats */}
         <motion.div
-          className="flex flex-wrap items-center justify-center gap-4"
+          className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-3xl mx-auto mb-16"
           variants={fadeUp}
           initial="hidden"
           animate="visible"
           custom={4}
         >
-          {trustBadges.map((label) => (
-            <span
-              key={label}
-              className="flex items-center gap-2 text-xs font-medium text-slate-500 bg-slate-800/30 border border-slate-700/30 rounded-full px-4 py-2"
-            >
-              <span className="w-1.5 h-1.5 rounded-full bg-blue-500/60" />
-              {label}
-            </span>
+          {proofStats.map(({ num, label }) => (
+            <div key={label} className="text-center">
+              <div
+                className="font-heading font-extrabold text-3xl md:text-4xl mb-1"
+                style={{ color: "#E8321A", letterSpacing: "-0.04em" }}
+              >
+                {num}
+              </div>
+              <div className="text-xs text-white/40 leading-snug">{label}</div>
+            </div>
           ))}
         </motion.div>
       </div>
 
-      {/* Bottom fade */}
-      <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-[#050A14] to-transparent pointer-events-none" />
+      {/* Trust bar */}
+      <motion.div
+        className="w-full border-t border-white/5 bg-white/[0.02] py-5"
+        variants={fadeUp}
+        initial="hidden"
+        animate="visible"
+        custom={5}
+      >
+        <div className="max-w-5xl mx-auto px-6 flex flex-wrap items-center justify-center gap-x-8 gap-y-2">
+          <span className="text-[10px] font-semibold tracking-widest text-white/25 uppercase">
+            Built on:
+          </span>
+          {trustStack.map((item) => (
+            <span key={item} className="text-xs font-medium text-white/30">
+              {item}
+            </span>
+          ))}
+        </div>
+      </motion.div>
     </section>
   );
 }

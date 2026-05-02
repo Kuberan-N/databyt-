@@ -2,7 +2,6 @@
 
 import { motion, useInView, type Variants } from "framer-motion";
 import { useRef } from "react";
-import { ArrowRight, Shield } from "lucide-react";
 import { useDemoForm } from "./DemoFormContext";
 
 const fadeUp: Variants = {
@@ -10,83 +9,94 @@ const fadeUp: Variants = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] } },
 };
 
+const proofPills = [
+  "3 Founding Spots Remaining",
+  "10-Week Production Guarantee",
+  "Full Code Ownership",
+];
+
 export default function FinalCTA() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
   const { open } = useDemoForm();
 
   return (
-    <section className="relative py-32 md:py-40 px-6 overflow-hidden">
-      <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-        <div className="w-[700px] h-[700px] rounded-full bg-blue-600/8 blur-[150px]" />
-      </div>
-      <div className="absolute top-0 left-1/4 w-80 h-80 rounded-full bg-cyan-600/5 blur-[100px] pointer-events-none" />
+    <section
+      className="relative py-40 px-6 overflow-hidden min-h-[80vh] flex items-center"
+      style={{ background: "#E8321A" }}
+    >
+      {/* Subtle noise texture overlay */}
+      <div
+        className="absolute inset-0 pointer-events-none opacity-5"
+        style={{
+          backgroundImage: "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")",
+        }}
+      />
 
-      <div className="relative z-10 max-w-3xl mx-auto text-center" ref={ref}>
+      <div className="relative z-10 max-w-3xl mx-auto text-center w-full" ref={ref}>
         <motion.span
-          className="inline-block text-[11px] font-semibold uppercase tracking-[0.25em] text-blue-400 mb-8"
+          className="inline-block text-[11px] font-bold uppercase tracking-[0.25em] text-white/60 mb-8"
           variants={fadeUp}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
         >
-          Start Automating
+          Free 90-Min Workshop
         </motion.span>
 
         <motion.h2
-          className="text-3xl md:text-5xl font-bold text-white mb-8 font-heading leading-tight"
+          className="font-heading font-extrabold text-white mb-8 leading-[1.05]"
+          style={{ fontSize: "clamp(2.5rem, 6vw, 4.5rem)", letterSpacing: "-0.04em" }}
           variants={fadeUp}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
         >
-          Every Day You Wait, Your AR Team <br className="hidden md:block" />
-          <span className="text-gradient-blue">Processes 100 Invoices Manually at $16 Each.</span>
+          Stop Shipping Demos.<br />
+          Start Shipping Systems.
         </motion.h2>
 
         <motion.p
-          className="text-base md:text-lg text-slate-400 mb-5 leading-relaxed"
+          className="text-base md:text-lg text-white/70 mb-14 leading-relaxed max-w-xl mx-auto"
           variants={fadeUp}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
         >
-          That&apos;s <span className="text-white font-medium">$1,600/day</span> in inefficiency. An AI agent eliminates this in 3 weeks. Book your free 20-minute assessment.
-        </motion.p>
-
-        <motion.p
-          className="text-sm text-blue-400/70 mb-14"
-          variants={fadeUp}
-          initial="hidden"
-          animate={inView ? "visible" : "hidden"}
-        >
-          3 build slots remaining for May
+          Book your free 90-minute workshop. We&apos;ll map out exactly how to build an agent that survives production. No cost. No commitment. 3 founding spots remaining.
         </motion.p>
 
         <motion.div
+          className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12"
           variants={fadeUp}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
         >
           <button
             onClick={open}
-            className="group inline-flex items-center gap-3 bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 text-white font-semibold rounded-full px-12 py-5 text-lg transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_0_50px_rgba(59,130,246,0.3)] btn-pulse"
+            className="bg-white font-semibold rounded-full px-10 py-4 transition-all duration-200 hover:opacity-90 hover:scale-[1.02]"
+            style={{ color: "#E8321A" }}
           >
-            Book Free AR Assessment
-            <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform duration-300" />
+            Book Free 90-Min Workshop →
           </button>
+          <a
+            href="mailto:kuberan@databyt.in"
+            className="border border-white/30 hover:border-white/60 text-white font-semibold rounded-full px-10 py-4 transition-all duration-200"
+          >
+            Email kuberan@databyt.in
+          </a>
         </motion.div>
 
+        {/* Proof pills */}
         <motion.div
-          className="flex flex-wrap items-center justify-center gap-4 mt-12"
+          className="flex flex-wrap items-center justify-center gap-3"
           variants={fadeUp}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
         >
-          {["3-Week Guarantee", "Data Never Leaves", "Full Code Ownership"].map((badge) => (
+          {proofPills.map((pill) => (
             <span
-              key={badge}
-              className="flex items-center gap-2 text-xs text-slate-400 border border-slate-700/30 bg-slate-800/20 rounded-full px-4 py-2"
+              key={pill}
+              className="text-xs font-medium text-white/70 border border-white/20 rounded-full px-4 py-2"
             >
-              <Shield size={11} className="text-blue-400/60" />
-              {badge}
+              {pill}
             </span>
           ))}
         </motion.div>
