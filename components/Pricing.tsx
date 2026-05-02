@@ -232,8 +232,8 @@ export default function Pricing() {
             className="font-heading font-extrabold text-center text-[#0A0A0A] mb-10"
             style={{ fontSize: "1.75rem", letterSpacing: "-0.03em" }}
           >
-            "Hiring a data engineer + AI engineer costs $37,500/month.
-            DataByt delivers both for <span style={{ color: "#E8321A" }}>$8,400 total.</span>"
+            &quot;Hiring a data engineer + AI engineer costs $37,500/month.
+            DataByt delivers both for <span style={{ color: "#E8321A" }}>$8,400 total.</span>&quot;
           </h3>
           <div className="overflow-x-auto">
             <table className="w-full border-collapse text-sm">
