@@ -18,18 +18,18 @@ const guarantees = [
   {
     Icon: Unlock,
     title: "Full Ownership Guarantee",
-    body: "You own the GitHub repo, the Databricks infrastructure, the evaluation suite. No hostage fee. You can extend it without us.",
+    body: "You own the repo, the infrastructure, the evaluation suite. No hostage fee. You can extend it without us.",
   },
 ];
 
 const fadeUp: Variants = {
   hidden: { opacity: 0, y: 24 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] } },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] } },
 };
 
 const stagger: Variants = {
   hidden: {},
-  visible: { transition: { staggerChildren: 0.12 } },
+  visible: { transition: { staggerChildren: 0.08 } },
 };
 
 export default function Guarantee() {
@@ -47,11 +47,11 @@ export default function Guarantee() {
         >
           <span className="section-label mb-5 block">Guarantees</span>
           <h2
-            className="font-heading font-extrabold text-black mb-4 leading-[1.06]"
-            style={{ fontSize: "clamp(2rem, 4.2vw, 3rem)", letterSpacing: "-0.04em" }}
+            className="font-heading font-extrabold text-[#0A0A0A] mb-4 leading-[1.08]"
+            style={{ fontSize: "clamp(2rem, 4.2vw, 3rem)", letterSpacing: "-0.02em" }}
           >
-            We take the risk so your engineering team{" "}
-            <span style={{ color: "#E8321A" }}>doesn&apos;t have to.</span>
+            We take the risk so your team{" "}
+            <span style={{ color: "#0066FF" }}>doesn&apos;t have to</span>
           </h2>
         </motion.div>
 
@@ -65,14 +65,14 @@ export default function Guarantee() {
             <motion.div
               key={g.title}
               variants={fadeUp}
-              className="light-card p-8 flex flex-col"
+              className="ios-card p-7 flex flex-col"
             >
-              <div className="w-11 h-11 rounded-lg flex items-center justify-center mb-5" style={{ background: "rgba(232,50,26,0.08)" }}>
-                <g.Icon size={20} style={{ color: "#E8321A" }} />
+              <div className="w-11 h-11 rounded-xl flex items-center justify-center mb-5" style={{ background: "rgba(0,102,255,0.08)" }}>
+                <g.Icon size={20} style={{ color: "#0066FF" }} />
               </div>
               <h3
-                className="font-heading font-bold text-black text-[18px] mb-3"
-                style={{ letterSpacing: "-0.02em" }}
+                className="font-heading font-bold text-[#0A0A0A] text-[18px] mb-3"
+                style={{ letterSpacing: "-0.01em" }}
               >
                 {g.title}
               </h3>

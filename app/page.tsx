@@ -1,6 +1,7 @@
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import Problem from "@/components/Problem";
+import SolutionFlow from "@/components/SolutionFlow";
 import PlatformSupport from "@/components/PlatformSupport";
 import ROICalculator from "@/components/ROICalculator";
 import FiveDisciplines from "@/components/FiveDisciplines";
@@ -22,6 +23,7 @@ export default function Home() {
       <main className="bg-white">
         <Hero />
         <Problem />
+        <SolutionFlow />
         <PlatformSupport />
         <ROICalculator />
         <FiveDisciplines />

@@ -6,38 +6,38 @@ import { useRef } from "react";
 const steps = [
   {
     num: "1",
-    title: "Week 0 — Free Workshop",
-    description: "We connect to your Databricks or Snowflake, map your AR workflow, and show you exactly where money is leaking. You get a written AR Leakage Report — whether you hire us or not.",
+    title: "Week 0 — Free AR workflow audit",
+    description: "We connect to your existing systems, map your AR workflow, and show you exactly where money is leaking. You get a written report — whether you hire us or not.",
     active: false,
   },
   {
     num: "2",
-    title: "Weeks 1–3 — Architecture Design",
+    title: "Weeks 1–3 — Architecture & approval",
     description: "We design the agent inside YOUR infrastructure. Evaluation suite, failure modes, governance — all designed before a single line of production code is written.",
     active: false,
   },
   {
     num: "3",
-    title: "Weeks 3–8 — Build & Evaluate",
-    description: "We build the AI agent. Your data never leaves your environment. Weekly demos. You see the agent learning your invoices, customers, patterns in real-time.",
+    title: "Weeks 3–8 — Build & test",
+    description: "We build the agent. Your data never leaves your environment. Weekly demos. You see the agent learning your invoices, customers, patterns in real-time.",
     active: false,
   },
   {
     num: "4",
-    title: "Weeks 8–10 — Deploy & Monitor",
-    description: "The agent goes live. It collects, prioritizes, tracks, and escalates — autonomously. We monitor for 30 days. Then it's yours forever. Every line of code.",
+    title: "Weeks 8–10 — Production deployment",
+    description: "The agent goes live. It collects, prioritises, tracks, and escalates — autonomously. We monitor for 30 days. Then it's yours forever. Every line of code.",
     active: true,
   },
 ];
 
 const fadeUp: Variants = {
   hidden: { opacity: 0, y: 24 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] } },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] } },
 };
 
 const stagger: Variants = {
   hidden: {},
-  visible: { transition: { staggerChildren: 0.12 } },
+  visible: { transition: { staggerChildren: 0.1 } },
 };
 
 export default function HowItWorks() {
@@ -55,14 +55,11 @@ export default function HowItWorks() {
         >
           <span className="section-label mb-5 block">Process</span>
           <h2
-            className="font-heading font-extrabold text-black mb-5 leading-[1.06]"
-            style={{ fontSize: "clamp(2rem, 4.2vw, 3.25rem)", letterSpacing: "-0.04em" }}
+            className="font-heading font-extrabold text-[#0A0A0A] mb-5 leading-[1.08]"
+            style={{ fontSize: "clamp(2rem, 4.2vw, 3rem)", letterSpacing: "-0.02em" }}
           >
-            From first call to <span style={{ color: "#E8321A" }}>collecting cash</span>
+            From first call to <span style={{ color: "#0066FF" }}>collecting cash</span>
           </h2>
-          <p className="text-[16px] text-[#666] max-w-[600px] mx-auto">
-            We build, measure, and leave you with something that works while you sleep.
-          </p>
         </motion.div>
 
         <motion.div
@@ -78,20 +75,18 @@ export default function HowItWorks() {
               className="flex flex-col items-start"
             >
               <div
-                className="w-12 h-12 rounded-full flex items-center justify-center mb-5 transition-all duration-300"
+                className={`w-12 h-12 rounded-full flex items-center justify-center mb-5 font-heading font-bold text-[16px] transition-all duration-500 ease-ios ${
+                  step.active ? "pulse-blue" : ""
+                }`}
                 style={{
-                  border: `2px solid ${step.active ? "#E8321A" : "#E8E8E8"}`,
-                  background: step.active ? "#E8321A" : "#fff",
+                  background: "#0066FF",
+                  color: "#fff",
+                  boxShadow: step.active ? "0 8px 24px rgba(0,102,255,0.35)" : "0 4px 12px rgba(0,102,255,0.2)",
                 }}
               >
-                <span
-                  className="font-heading text-[18px] font-extrabold"
-                  style={{ color: step.active ? "#fff" : "#1A1A1A", letterSpacing: "-0.02em" }}
-                >
-                  {step.num}
-                </span>
+                {step.num}
               </div>
-              <h3 className="font-heading font-bold text-black text-[16px] mb-3 leading-snug" style={{ letterSpacing: "-0.02em" }}>
+              <h3 className="font-heading font-bold text-[#0A0A0A] text-[16px] mb-3 leading-snug" style={{ letterSpacing: "-0.01em" }}>
                 {step.title}
               </h3>
               <p className="text-[13px] text-[#666] leading-relaxed">{step.description}</p>

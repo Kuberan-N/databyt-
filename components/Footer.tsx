@@ -1,3 +1,5 @@
+import Logo from "./Logo";
+
 export default function Footer() {
   const links = [
     { label: "How It Works", href: "#how-it-works" },
@@ -9,38 +11,32 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="py-12 px-6 md:px-10" style={{ background: "#0A0A0A" }}>
+    <footer className="py-14 px-6 md:px-10" style={{ background: "#0A0A0A" }}>
       <div className="max-w-[1200px] mx-auto">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-8 mb-8">
-          {/* Logo + copyright */}
+        <div className="flex flex-col md:flex-row items-center justify-between gap-8 mb-2">
           <div className="flex flex-col md:flex-row md:items-center gap-3 md:gap-6">
-            <a href="#" className="flex items-center font-heading font-extrabold text-[22px] leading-none tracking-tight">
-              <span className="text-white">Data</span>
-              <span style={{ color: "#E8321A" }}>Byt</span>
-            </a>
-            <p className="text-[12px] text-white/50">© 2026 DataByt</p>
+            <Logo size={22} variant="light" />
+            <p className="text-[12px] text-white/45">© 2026 databyt</p>
           </div>
 
-          {/* Center links */}
           <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
             {links.map((l) => (
               <a
                 key={l.label}
                 href={l.href}
-                className="text-[13px] text-white/50 hover:text-white transition-colors duration-200"
+                className="text-[13px] text-white/50 hover:text-white transition-colors duration-300"
               >
                 {l.label}
               </a>
             ))}
           </div>
 
-          {/* Right - LinkedIn + email */}
           <div className="flex items-center gap-5">
             <a
               href="https://www.linkedin.com/in/kuberan-n-843013246/"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-white/60 hover:text-[#E8321A] transition-colors duration-200"
+              className="text-white/50 hover:text-[#0066FF] transition-colors duration-300"
               aria-label="LinkedIn"
             >
               <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -51,7 +47,7 @@ export default function Footer() {
             </a>
             <a
               href="mailto:kuberan@databyt.in"
-              className="text-[13px] text-white/60 hover:text-white transition-colors"
+              className="text-[13px] text-white/55 hover:text-white transition-colors"
             >
               kuberan@databyt.in
             </a>

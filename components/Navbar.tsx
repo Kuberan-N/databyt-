@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import { useDemoForm } from "./DemoFormContext";
+import Logo from "./Logo";
 
 const navLinks = [
   { label: "How It Works", href: "#how-it-works" },
@@ -17,7 +18,7 @@ export default function Navbar() {
   const { open: openDemo } = useDemoForm();
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 20);
+    const handleScroll = () => setScrolled(window.scrollY > 12);
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -30,46 +31,39 @@ export default function Navbar() {
   return (
     <>
       <nav
-        className={`fixed top-0 left-0 right-0 transition-all duration-300 bg-white ${
-          scrolled ? "border-b border-[#E8E8E8] shadow-[0_1px_2px_rgba(0,0,0,0.04)]" : "border-b border-[#E8E8E8]/60"
-        }`}
-        style={{ zIndex: 999 }}
+        className="fixed top-0 left-0 right-0 transition-all duration-500 ease-ios"
+        style={{
+          zIndex: 999,
+          background: scrolled ? "rgba(255,255,255,0.85)" : "rgba(255,255,255,0.6)",
+          backdropFilter: "blur(20px) saturate(180%)",
+          WebkitBackdropFilter: "blur(20px) saturate(180%)",
+          borderBottom: `1px solid ${scrolled ? "#E8E8E8" : "rgba(232,232,232,0.5)"}`,
+        }}
       >
-        <div className="flex items-center justify-between h-[60px] px-6 md:px-10 max-w-[1400px] mx-auto">
-          {/* Logo - left */}
-          <a href="#" className="flex items-center font-heading font-extrabold text-[24px] leading-none tracking-tight">
-            <span className="text-black">Data</span>
-            <span style={{ color: "#E8321A" }}>Byt</span>
-          </a>
+        <div className="flex items-center justify-between h-[64px] px-6 md:px-10 max-w-[1400px] mx-auto">
+          <Logo size={22} />
 
-          {/* Desktop nav - center */}
           <div className="hidden md:flex items-center gap-9 absolute left-1/2 -translate-x-1/2">
             {navLinks.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
-                className="text-[14px] font-medium text-black hover:text-[#E8321A] transition-colors duration-200"
+                className="text-[14px] font-medium text-[#0A0A0A] hover:text-[#0066FF] transition-colors duration-300"
               >
                 {link.label}
               </a>
             ))}
           </div>
 
-          {/* CTA - right */}
           <div className="hidden md:flex items-center">
-            <button
-              onClick={openDemo}
-              className="text-white text-[14px] font-semibold rounded-lg px-6 py-3 transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_6px_20px_rgba(232,50,26,0.25)]"
-              style={{ background: "#E8321A" }}
-            >
-              Book Workshop →
+            <button onClick={openDemo} className="btn-primary" style={{ padding: "10px 22px", fontSize: "14px" }}>
+              Book audit →
             </button>
           </div>
 
-          {/* Mobile hamburger */}
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
-            className="md:hidden text-black hover:text-[#E8321A] transition-colors"
+            className="md:hidden text-[#0A0A0A] hover:text-[#0066FF] transition-colors"
             aria-label="Toggle menu"
           >
             {mobileOpen ? <X size={24} /> : <Menu size={24} />}
@@ -77,28 +71,23 @@ export default function Navbar() {
         </div>
       </nav>
 
-      {/* Mobile overlay */}
       <div
-        className={`fixed inset-0 bg-black/40 backdrop-blur-sm transition-opacity duration-300 md:hidden ${
+        className={`fixed inset-0 bg-black/30 backdrop-blur-sm transition-opacity duration-300 md:hidden ${
           mobileOpen ? "opacity-100" : "opacity-0 pointer-events-none"
         }`}
         style={{ zIndex: 998 }}
         onClick={() => setMobileOpen(false)}
       />
 
-      {/* Mobile drawer */}
       <div
-        className={`fixed top-0 right-0 h-full w-72 bg-white border-l border-[#E8E8E8] transform transition-transform duration-300 ease-out md:hidden ${
+        className={`fixed top-0 right-0 h-full w-72 bg-white border-l border-[#E8E8E8] transform transition-transform duration-500 ease-ios md:hidden ${
           mobileOpen ? "translate-x-0" : "translate-x-full"
         }`}
         style={{ zIndex: 999 }}
       >
-        <div className="flex items-center justify-between px-6 h-[60px] border-b border-[#E8E8E8]">
-          <span className="flex items-center font-heading font-extrabold text-[22px] leading-none tracking-tight">
-            <span className="text-black">Data</span>
-            <span style={{ color: "#E8321A" }}>Byt</span>
-          </span>
-          <button onClick={() => setMobileOpen(false)} className="text-black hover:text-[#E8321A]">
+        <div className="flex items-center justify-between px-6 h-[64px] border-b border-[#E8E8E8]">
+          <Logo size={20} />
+          <button onClick={() => setMobileOpen(false)} className="text-[#0A0A0A] hover:text-[#0066FF]">
             <X size={24} />
           </button>
         </div>
@@ -108,17 +97,17 @@ export default function Navbar() {
               key={link.href}
               href={link.href}
               onClick={() => setMobileOpen(false)}
-              className="text-[15px] font-medium text-black hover:text-[#E8321A] transition-colors"
+              className="text-[15px] font-medium text-[#0A0A0A] hover:text-[#0066FF] transition-colors"
             >
               {link.label}
             </a>
           ))}
           <button
             onClick={() => { setMobileOpen(false); openDemo(); }}
-            className="text-white text-[14px] font-semibold rounded-lg px-6 py-3 text-center mt-4"
-            style={{ background: "#E8321A" }}
+            className="btn-primary mt-3"
+            style={{ width: "100%", justifyContent: "center", padding: "12px 22px", fontSize: "14px" }}
           >
-            Book Workshop →
+            Book audit →
           </button>
         </div>
       </div>

@@ -1,61 +1,63 @@
+/* General Sans + Satoshi via Fontshare (free for commercial use) */
+@import url('https://api.fontshare.com/v2/css?f[]=general-sans@500,600,700,800&f[]=satoshi@400,500,700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --red: #E8321A;
-  --red-hover: #D02B15;
-  --red-muted: rgba(232, 50, 26, 0.08);
-  --red-border: rgba(232, 50, 26, 0.2);
+  --blue: #0066FF;
+  --blue-hover: #0052CC;
+  --blue-soft: rgba(0, 102, 255, 0.08);
+  --blue-glow: rgba(0, 102, 255, 0.25);
+  --blue-glow-strong: rgba(0, 102, 255, 0.35);
   --black: #0A0A0A;
-  --white: #FFFFFF;
-  --gray-50: #FAFAFA;
-  --gray-100: #F5F5F5;
-  --gray-200: #E8E8E8;
-  --gray-400: #999999;
-  --gray-600: #666666;
-  --gray-900: #1A1A1A;
-  --text-primary: #000000;
-  --text-body: #1A1A1A;
+  --text-body: #333333;
   --text-muted: #666666;
   --border: #E8E8E8;
+  --border-hover: #0066FF;
+  --white: #FFFFFF;
+
+  /* iOS easing curves */
+  --ios-ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --ios-ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ios-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 html {
   scroll-behavior: smooth;
+  background: var(--white);
 }
 
 body {
   color: var(--text-body);
   background: var(--white);
-  font-family: var(--font-inter), 'Inter', system-ui, sans-serif;
+  font-family: 'Satoshi', var(--font-inter), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 /* ─── Animations ─── */
+@keyframes pulse-blue {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(0, 102, 255, 0.5); }
+  50% { box-shadow: 0 0 0 12px rgba(0, 102, 255, 0); }
+}
+
 @keyframes pulse-dot {
   0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.4; transform: scale(0.85); }
+  50% { opacity: 0.45; transform: scale(0.85); }
 }
 
-@keyframes shimmer {
-  0% { background-position: -200% 0; }
-  100% { background-position: 200% 0; }
-}
-
-@keyframes gentle-pulse {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(232, 50, 26, 0.45); }
-  50% { box-shadow: 0 0 0 10px rgba(232, 50, 26, 0); }
-}
-
-/* ─── Utility: pulsing red dot ─── */
 .pulse-dot {
   display: inline-block;
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: var(--red);
+  background: var(--blue);
   animation: pulse-dot 1.5s ease-in-out infinite;
 }
+
+.pulse-blue { animation: pulse-blue 2.5s ease-in-out infinite; }
 
 /* ─── Section labels ─── */
 .section-label {
@@ -64,96 +66,120 @@ body {
   font-weight: 600;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--red);
-  font-family: var(--font-outfit), 'Outfit', system-ui, sans-serif;
+  color: var(--blue);
+  font-family: 'General Sans', system-ui, sans-serif;
 }
 
-/* ─── CTA pulse ─── */
-.btn-pulse {
-  animation: gentle-pulse 3s ease-in-out infinite;
-}
-
-/* ─── Light card (default for white sections) ─── */
-.light-card {
-  background: #fff;
+/* ─── Card (iOS-style) ─── */
+.ios-card {
+  background: var(--white);
   border: 1px solid var(--border);
-  border-radius: 12px;
-  transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+  border-radius: 16px;
+  transition: border-color 0.4s var(--ios-ease),
+              transform 0.4s var(--ios-ease),
+              box-shadow 0.4s var(--ios-ease);
 }
 
-.light-card:hover {
-  border-color: var(--red);
-  transform: scale(1.02);
-  box-shadow: 0 4px 20px rgba(232, 50, 26, 0.08);
+.ios-card:hover {
+  border-color: var(--blue);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.06), 0 4px 12px rgba(0, 102, 255, 0.06);
 }
 
-/* ─── Buttons ─── */
+/* ─── Primary Button ─── */
 .btn-primary {
-  background: var(--red);
-  color: #fff;
-  border-radius: 8px;
-  padding: 12px 24px;
+  background: var(--blue);
+  color: var(--white);
+  border-radius: 12px;
+  padding: 14px 28px;
   font-weight: 600;
-  font-size: 14px;
-  transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+  font-size: 15px;
+  font-family: 'General Sans', system-ui, sans-serif;
+  letter-spacing: -0.01em;
+  box-shadow: 0 4px 16px rgba(0, 102, 255, 0.25);
+  transition: all 0.4s var(--ios-ease);
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
+  cursor: pointer;
+  border: none;
+  outline: none;
 }
 .btn-primary:hover {
-  background: var(--red-hover);
-  transform: scale(1.03);
-  box-shadow: 0 6px 20px rgba(232, 50, 26, 0.25);
+  background: var(--blue-hover);
+  box-shadow: 0 8px 24px rgba(0, 102, 255, 0.35);
+  transform: translateY(-1px) scale(1.02);
+}
+.btn-primary:active {
+  transform: translateY(0) scale(1);
+  box-shadow: 0 2px 8px rgba(0, 102, 255, 0.2);
 }
 
 .btn-ghost {
   background: transparent;
-  color: var(--red);
-  border: 1px solid var(--red);
-  border-radius: 8px;
-  padding: 12px 24px;
+  color: var(--blue);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 14px 28px;
   font-weight: 600;
-  font-size: 14px;
-  transition: all 0.3s ease;
+  font-size: 15px;
+  font-family: 'General Sans', system-ui, sans-serif;
+  letter-spacing: -0.01em;
+  transition: all 0.4s var(--ios-ease);
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-}
-.btn-ghost:hover {
-  background: var(--red);
-  color: #fff;
-  transform: scale(1.03);
-}
-
-/* ─── Slider thumb (range inputs) ─── */
-input[type="range"]::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  width: 18px;
-  height: 18px;
-  border-radius: 50%;
-  background: var(--red);
-  border: 2px solid #fff;
-  box-shadow: 0 2px 6px rgba(232, 50, 26, 0.3);
+  gap: 6px;
   cursor: pointer;
 }
-input[type="range"]::-moz-range-thumb {
-  width: 18px;
-  height: 18px;
+.btn-ghost:hover {
+  border-color: var(--blue);
+  background: var(--blue-soft);
+  transform: translateY(-1px) scale(1.02);
+}
+
+/* ─── Range slider ─── */
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+  outline: none;
+}
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
   border-radius: 50%;
-  background: var(--red);
-  border: 2px solid #fff;
-  box-shadow: 0 2px 6px rgba(232, 50, 26, 0.3);
+  background: var(--blue);
+  border: 3px solid var(--white);
+  box-shadow: 0 2px 8px rgba(0, 102, 255, 0.35);
+  cursor: pointer;
+  transition: transform 0.2s var(--ios-ease);
+}
+input[type="range"]::-webkit-slider-thumb:hover {
+  transform: scale(1.15);
+}
+input[type="range"]::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--blue);
+  border: 3px solid var(--white);
+  box-shadow: 0 2px 8px rgba(0, 102, 255, 0.35);
   cursor: pointer;
 }
 
 /* ─── Scrollbar ─── */
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: var(--white); }
-::-webkit-scrollbar-thumb { background: var(--gray-200); border-radius: 3px; }
-::-webkit-scrollbar-thumb:hover { background: var(--gray-400); }
+::-webkit-scrollbar-thumb { background: #d1d5db; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--blue); }
+
+::selection { background: var(--blue); color: var(--white); }
 
 @layer utilities {
   .text-balance { text-wrap: balance; }
-  .font-heading { font-family: var(--font-outfit), 'Outfit', system-ui, sans-serif; }
-  .font-body { font-family: var(--font-inter), 'Inter', system-ui, sans-serif; }
+  .font-heading { font-family: 'General Sans', system-ui, sans-serif; }
+  .font-body { font-family: 'Satoshi', system-ui, sans-serif; }
+  .font-mono { font-family: 'JetBrains Mono', ui-monospace, monospace; }
+  .ios-ease { transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1); }
 }

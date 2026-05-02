@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Outfit } from "next/font/google";
+import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { CurrencyProvider } from "@/components/CurrencyContext";
 
@@ -9,25 +9,25 @@ const inter = Inter({
   display: "swap",
 });
 
-const outfit = Outfit({
+const jetbrains = JetBrains_Mono({
   subsets: ["latin"],
-  variable: "--font-outfit",
-  weight: ["400", "500", "600", "700", "800"],
+  variable: "--font-jetbrains",
+  weight: ["400", "500", "600"],
   display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "DataByt — Stop Shipping AI Demos. Start Shipping Systems.",
+  title: "databyt — Fix your invoice follow-ups, collect payments faster",
   description:
-    "DataByt builds production AI agents for AR Collections automation on your Databricks, Snowflake, QuickBooks, or SAP. 8–10 weeks to production. DSO reduced 18 days. Your data never leaves your infrastructure.",
+    "We automate AR reminders, responses, and escalation inside your existing systems. Databricks, Snowflake, QuickBooks, SAP. 8–10 weeks to production.",
   keywords:
-    "AR collections automation, production AI agent, accounts receivable AI, Databricks AI agent, Snowflake AI agent, finance AI, DSO reduction, MLflow, LangGraph",
+    "AR collections automation, accounts receivable AI, invoice follow-up automation, DSO reduction, Databricks, Snowflake",
   openGraph: {
-    title: "DataByt — Production AI Agent Engineering",
+    title: "databyt — Production AI Agents on Your Infrastructure",
     description:
-      "We build production AI agents for AR Collections. On your infrastructure. 8–10 weeks. Full code ownership.",
+      "Fix your invoice follow-ups and collect payments faster. We build inside your existing stack.",
     url: "https://databyt.in",
-    siteName: "DataByt",
+    siteName: "databyt",
     type: "website",
   },
 };
@@ -38,8 +38,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${inter.variable} ${outfit.variable} scroll-smooth`}>
-      <body className="antialiased font-body bg-white">
+    <html lang="en" className={`${inter.variable} ${jetbrains.variable} scroll-smooth`}>
+      <body className="antialiased font-body bg-white text-[#333]">
         <CurrencyProvider>{children}</CurrencyProvider>
       </body>
     </html>

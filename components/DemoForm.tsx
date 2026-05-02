@@ -15,7 +15,7 @@ const revenueOptions = [
 ];
 
 const inputClass =
-  "w-full bg-white border border-[#E8E8E8] rounded-lg px-4 py-3 text-[#1A1A1A] placeholder:text-[#999] focus:border-[#E8321A] focus:ring-2 focus:ring-[#E8321A]/15 outline-none transition-all duration-200 text-[14px]";
+  "w-full bg-white border border-[#E8E8E8] rounded-xl px-4 py-3 text-[#0A0A0A] placeholder:text-[#999] focus:border-[#0066FF] focus:ring-2 focus:ring-[#0066FF]/20 outline-none transition-all duration-300 text-[14px]";
 
 export default function DemoForm() {
   const { isOpen, close } = useDemoForm();
@@ -67,21 +67,21 @@ export default function DemoForm() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.2 }}
+          transition={{ duration: 0.25 }}
         >
           <div className="absolute inset-0 bg-black/40 backdrop-blur-sm" onClick={handleClose} />
 
           <motion.div
-            className="relative bg-white rounded-2xl p-8 md:p-10 w-full max-w-lg max-h-[90vh] overflow-y-auto shadow-2xl"
-            style={{ border: "1px solid #E8E8E8" }}
-            initial={{ scale: 0.96, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            exit={{ scale: 0.96, opacity: 0 }}
-            transition={{ duration: 0.25, ease: [0.25, 0.46, 0.45, 0.94] }}
+            className="relative bg-white p-8 md:p-10 w-full max-w-lg max-h-[90vh] overflow-y-auto"
+            style={{ borderRadius: "20px", boxShadow: "0 24px 64px rgba(0,0,0,0.18)" }}
+            initial={{ scale: 0.96, opacity: 0, y: 8 }}
+            animate={{ scale: 1, opacity: 1, y: 0 }}
+            exit={{ scale: 0.96, opacity: 0, y: 8 }}
+            transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
           >
             <button
               onClick={handleClose}
-              className="absolute top-5 right-5 text-[#999] hover:text-[#E8321A] transition-colors"
+              className="absolute top-5 right-5 text-[#999] hover:text-[#0066FF] transition-colors"
               aria-label="Close"
             >
               <X size={20} />
@@ -89,25 +89,21 @@ export default function DemoForm() {
 
             {status === "success" ? (
               <div className="text-center py-8">
-                <CheckCircle2 size={48} style={{ color: "#E8321A" }} className="mx-auto mb-5" />
-                <h3 className="font-heading text-[20px] font-bold text-black mb-3" style={{ letterSpacing: "-0.02em" }}>
+                <CheckCircle2 size={48} style={{ color: "#0066FF" }} className="mx-auto mb-5" />
+                <h3 className="font-heading text-[20px] font-bold text-[#0A0A0A] mb-3" style={{ letterSpacing: "-0.01em" }}>
                   We&apos;ll reach out within 24 hours.
                 </h3>
                 <p className="text-[14px] text-[#666] mb-7">
-                  Check your inbox for your AR Assessment details.
+                  Check your inbox for your AR workflow audit details.
                 </p>
-                <button
-                  onClick={handleClose}
-                  className="font-semibold rounded-lg px-7 py-3 transition-all duration-300 hover:scale-[1.02]"
-                  style={{ border: "1px solid #E8E8E8", color: "#1A1A1A" }}
-                >
+                <button onClick={handleClose} className="btn-ghost" style={{ color: "#0A0A0A" }}>
                   Close
                 </button>
               </div>
             ) : (
               <>
-                <h3 className="font-heading text-[22px] font-extrabold text-black mb-2" style={{ letterSpacing: "-0.02em" }}>
-                  Book your free workshop
+                <h3 className="font-heading text-[22px] font-extrabold text-[#0A0A0A] mb-2" style={{ letterSpacing: "-0.01em" }}>
+                  Book your free audit
                 </h3>
                 <p className="text-[14px] text-[#666] mb-7">
                   90 minutes. No obligation. We&apos;ll show you exactly how much your manual AR is costing.
@@ -115,26 +111,26 @@ export default function DemoForm() {
 
                 <form onSubmit={handleSubmit} className="space-y-4">
                   <div>
-                    <label className="block text-[13px] font-medium text-[#1A1A1A] mb-1.5">
-                      Full Name <span style={{ color: "#E8321A" }}>*</span>
+                    <label className="block text-[13px] font-medium text-[#0A0A0A] mb-1.5">
+                      Full Name <span style={{ color: "#0066FF" }}>*</span>
                     </label>
                     <input type="text" required value={form.full_name} onChange={update("full_name")} placeholder="Alex Chen" className={inputClass} />
                   </div>
                   <div>
-                    <label className="block text-[13px] font-medium text-[#1A1A1A] mb-1.5">
-                      Work Email <span style={{ color: "#E8321A" }}>*</span>
+                    <label className="block text-[13px] font-medium text-[#0A0A0A] mb-1.5">
+                      Work Email <span style={{ color: "#0066FF" }}>*</span>
                     </label>
                     <input type="email" required value={form.email} onChange={update("email")} placeholder="alex@company.com" className={inputClass} />
                   </div>
                   <div>
-                    <label className="block text-[13px] font-medium text-[#1A1A1A] mb-1.5">
-                      Company <span style={{ color: "#E8321A" }}>*</span>
+                    <label className="block text-[13px] font-medium text-[#0A0A0A] mb-1.5">
+                      Company <span style={{ color: "#0066FF" }}>*</span>
                     </label>
                     <input type="text" required value={form.company_name} onChange={update("company_name")} placeholder="Acme Fintech" className={inputClass} />
                   </div>
                   <div>
-                    <label className="block text-[13px] font-medium text-[#1A1A1A] mb-1.5">
-                      Revenue <span style={{ color: "#E8321A" }}>*</span>
+                    <label className="block text-[13px] font-medium text-[#0A0A0A] mb-1.5">
+                      Revenue <span style={{ color: "#0066FF" }}>*</span>
                     </label>
                     <select required value={form.revenue_range} onChange={update("revenue_range")} className={`${inputClass} ${!form.revenue_range ? "text-[#999]" : ""}`}>
                       <option value="" disabled>Select range</option>
@@ -144,14 +140,14 @@ export default function DemoForm() {
                     </select>
                   </div>
                   <div>
-                    <label className="block text-[13px] font-medium text-[#1A1A1A] mb-1.5">
+                    <label className="block text-[13px] font-medium text-[#0A0A0A] mb-1.5">
                       Biggest AR challenge? <span className="text-[#999]">(optional)</span>
                     </label>
                     <textarea value={form.message} onChange={update("message")} rows={3} placeholder="e.g., DSO too high, manual collections..." className={`${inputClass} resize-none`} />
                   </div>
 
                   {status === "error" && (
-                    <p className="text-[13px]" style={{ color: "#E8321A" }}>
+                    <p className="text-[13px]" style={{ color: "#0066FF" }}>
                       Something went wrong. Email <a href="mailto:kuberan@databyt.in" className="underline">kuberan@databyt.in</a> directly.
                     </p>
                   )}
@@ -159,13 +155,12 @@ export default function DemoForm() {
                   <button
                     type="submit"
                     disabled={status === "loading"}
-                    className="w-full text-white rounded-lg px-6 py-3.5 font-semibold transition-all duration-300 hover:scale-[1.02] disabled:opacity-60 flex items-center justify-center gap-2 text-[14px]"
-                    style={{ background: "#E8321A" }}
+                    className="btn-primary w-full justify-center text-[14px] disabled:opacity-60"
                   >
-                    {status === "loading" ? (<><Loader2 size={16} className="animate-spin" />Submitting...</>) : "Book Free Workshop →"}
+                    {status === "loading" ? (<><Loader2 size={16} className="animate-spin" />Submitting...</>) : "Book free audit →"}
                   </button>
 
-                  <p className="text-[11px] text-center text-[#999]">No spam. Just a 90-min AR analysis.</p>
+                  <p className="text-[11px] text-center text-[#999]">No spam. Just a 90-min AR workflow analysis.</p>
                 </form>
               </>
             )}

@@ -2,62 +2,58 @@
 
 import { useRef } from "react";
 import { motion, useInView, type Variants } from "framer-motion";
+import { useCurrency } from "./CurrencyContext";
 
 const fadeUp: Variants = {
   hidden: { opacity: 0, y: 24 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] } },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] } },
 };
 
 const stagger: Variants = {
   hidden: {},
-  visible: { transition: { staggerChildren: 0.1 } },
+  visible: { transition: { staggerChildren: 0.08 } },
 };
 
 const platforms = [
   {
     name: "Databricks",
-    badge: "Best Fit",
-    badgeStyle: { background: "#E8321A", color: "#fff" },
-    featured: true,
     features: [
-      "Agent Bricks + MLflow evaluation",
+      "Native build environment",
       "Unity Catalog governance",
       "Delta Lake invoice storage",
       "Enterprise-grade monitoring",
     ],
-    note: "Our primary build environment. Every agent is Databricks-native by default.",
+    note: "Our most common build environment for clients on the data lakehouse.",
   },
   {
     name: "Snowflake",
-    badge: "Great Fit",
-    badgeStyle: { background: "#1A1A1A", color: "#fff" },
-    featured: false,
     features: [
-      "Snowflake Cortex agents",
+      "Cortex agents",
       "Iceberg table storage",
       "SQL-native orchestration",
-      "Strong FS compliance posture",
+      "Strong compliance posture",
     ],
-    note: "Full production capability with Cortex and Iceberg.",
+    note: "Full production capability inside your existing Snowflake account.",
   },
   {
-    name: "QuickBooks / SAP / Excel",
-    badge: "Also Works",
-    badgeStyle: { background: "#666", color: "#fff" },
-    featured: false,
+    name: "QuickBooks · SAP · Excel",
     features: [
       "QuickBooks API integration",
       "SAP ERP connector",
       "Excel / CSV ingestion",
-      "Upgrade path to Databricks included",
+      "Upgrade path included",
     ],
-    note: "Great starting point. Most clients upgrade to Databricks after the first build.",
+    note: "Great starting point. We meet you where your data already lives today.",
   },
 ];
 
 export default function PlatformSupport() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
+  const { fmt } = useCurrency();
+
+  const computeLow = fmt(25000);
+  const computeHigh = fmt(50000);
 
   return (
     <section id="platforms" className="py-24 md:py-28 px-6 md:px-10 bg-white">
@@ -70,13 +66,13 @@ export default function PlatformSupport() {
         >
           <span className="section-label mb-5 block">Platforms</span>
           <h2
-            className="font-heading font-extrabold text-black mb-5 leading-[1.06]"
-            style={{ fontSize: "clamp(2rem, 4.2vw, 3rem)", letterSpacing: "-0.04em" }}
+            className="font-heading font-extrabold text-[#0A0A0A] mb-5 leading-[1.08]"
+            style={{ fontSize: "clamp(2rem, 4.2vw, 3rem)", letterSpacing: "-0.02em" }}
           >
-            We meet you <span style={{ color: "#E8321A" }}>where your data lives.</span>
+            Works with <span style={{ color: "#0066FF" }}>your stack</span>
           </h2>
-          <p className="text-[16px] text-[#666] max-w-[600px] mx-auto">
-            No migration required. We connect to your existing stack and build inside your infrastructure.
+          <p className="text-[16px] text-[#666] max-w-[620px] mx-auto">
+            We build inside your existing systems — no new infrastructure required.
           </p>
         </motion.div>
 
@@ -90,65 +86,44 @@ export default function PlatformSupport() {
             <motion.div
               key={p.name}
               variants={fadeUp}
-              className="rounded-xl p-7 flex flex-col bg-white transition-all duration-300 hover:scale-[1.02]"
-              style={{
-                border: p.featured ? "2px solid #E8321A" : "1px solid #E8E8E8",
-                boxShadow: p.featured ? "0 4px 24px rgba(232,50,26,0.08)" : "none",
-              }}
+              className="ios-card p-7 flex flex-col"
             >
-              <div className="flex items-center justify-between mb-6">
-                <h3
-                  className="font-heading font-bold text-[20px] text-black"
-                  style={{ letterSpacing: "-0.02em" }}
-                >
-                  {p.name}
-                </h3>
-                <span
-                  className="text-[10px] font-bold tracking-[0.15em] uppercase px-2.5 py-1 rounded-md"
-                  style={p.badgeStyle}
-                >
-                  {p.badge}
-                </span>
-              </div>
+              <h3
+                className="font-heading font-bold text-[20px] text-[#0A0A0A] mb-6"
+                style={{ letterSpacing: "-0.01em" }}
+              >
+                {p.name}
+              </h3>
 
               <ul className="space-y-3 flex-1 mb-6">
                 {p.features.map((f) => (
                   <li
                     key={f}
-                    className="flex items-start gap-2.5 text-[14px] text-[#1A1A1A]"
+                    className="flex items-start gap-2.5 text-[14px] text-[#333]"
                   >
-                    <span
-                      className="font-bold flex-shrink-0 leading-tight"
-                      style={{ color: "#E8321A" }}
-                    >
-                      →
-                    </span>
+                    <span className="font-bold flex-shrink-0 leading-tight" style={{ color: "#0066FF" }}>→</span>
                     {f}
                   </li>
                 ))}
               </ul>
 
-              <p
-                className="text-[12px] leading-relaxed border-t pt-4 text-[#666]"
-                style={{ borderColor: "#E8E8E8" }}
-              >
+              <p className="text-[12px] leading-relaxed border-t pt-4 text-[#666]" style={{ borderColor: "#E8E8E8" }}>
                 {p.note}
               </p>
             </motion.div>
           ))}
         </motion.div>
 
-        {/* Info box */}
         <motion.div
-          className="rounded-xl p-7 max-w-[920px] mx-auto"
-          style={{ background: "#F5F5F5", border: "1px solid #E8E8E8" }}
+          className="rounded-2xl p-7 max-w-[920px] mx-auto"
+          style={{ background: "#F9FAFB", border: "1px solid #E8E8E8" }}
           variants={fadeUp}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
         >
-          <p className="text-[14px] text-[#1A1A1A] leading-relaxed text-center">
-            <span className="font-semibold text-black">No Databricks yet?</span> We provision and configure a Databricks workspace for you as part of the project. You own the account. You pay compute directly (typically{" "}
-            <span className="font-semibold text-black">₹25,000–50,000/month</span> for AR workloads).
+          <p className="text-[14px] text-[#333] leading-relaxed text-center">
+            <span className="font-semibold text-[#0A0A0A]">No data warehouse yet?</span> We can provision one for you as part of the project. You own the account. You pay compute directly (typically{" "}
+            <span className="font-semibold text-[#0A0A0A]">{computeLow}–{computeHigh}/month</span> for AR workloads).
           </p>
         </motion.div>
       </div>

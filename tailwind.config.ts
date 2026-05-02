@@ -9,24 +9,29 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        red: {
-          DEFAULT: "#E8321A",
-          hover: "#D02B15",
-          muted: "rgba(232,50,26,0.08)",
+        blue: {
+          DEFAULT: "#0066FF",
+          hover: "#0052CC",
+          soft: "rgba(0,102,255,0.08)",
+          glow: "rgba(0,102,255,0.25)",
         },
-        ink: "#000000",
-        body: "#1A1A1A",
+        ink: "#0A0A0A",
+        body: "#333333",
         muted: "#666666",
         line: "#E8E8E8",
       },
       fontFamily: {
-        sans: ["var(--font-inter)", "system-ui", "sans-serif"],
-        heading: ["var(--font-outfit)", "system-ui", "sans-serif"],
-        body: ["var(--font-inter)", "system-ui", "sans-serif"],
+        sans: ["Satoshi", "var(--font-inter)", "system-ui", "sans-serif"],
+        heading: ["General Sans", "system-ui", "sans-serif"],
+        body: ["Satoshi", "var(--font-inter)", "system-ui", "sans-serif"],
+        mono: ["var(--font-jetbrains)", "JetBrains Mono", "ui-monospace", "monospace"],
       },
       letterSpacing: {
-        tight: "-0.04em",
-        tighter: "-0.06em",
+        tight: "-0.02em",
+        tighter: "-0.04em",
+      },
+      transitionTimingFunction: {
+        ios: "cubic-bezier(0.16, 1, 0.3, 1)",
       },
     },
   },
