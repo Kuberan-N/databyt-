@@ -65,7 +65,7 @@ body {
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--red);
-  font-family: var(--font-syne), 'Syne', system-ui, sans-serif;
+  font-family: var(--font-outfit), 'Outfit', system-ui, sans-serif;
 }
 
 /* ─── CTA pulse ─── */
@@ -154,6 +154,6 @@ input[type="range"]::-moz-range-thumb {
 
 @layer utilities {
   .text-balance { text-wrap: balance; }
-  .font-heading { font-family: var(--font-syne), 'Syne', system-ui, sans-serif; }
+  .font-heading { font-family: var(--font-outfit), 'Outfit', system-ui, sans-serif; }
   .font-body { font-family: var(--font-inter), 'Inter', system-ui, sans-serif; }
 }
