@@ -4,10 +4,11 @@ import { useEffect, useState, ReactNode } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import {
-  Zap, LayoutDashboard, BarChart2, Send, Users, Settings,
+  LayoutDashboard, BarChart2, Send, Users, Settings,
   LogOut, ChevronLeft, Menu, FileText,
 } from "lucide-react";
 import { useAuth } from "@/components/AuthProvider";
+import { Logo } from "@/components/Navbar";
 
 const sidebarLinks = [
   { label: "Dashboard",   href: "/dashboard",             icon: LayoutDashboard },
@@ -31,10 +32,10 @@ export default function DashboardShell({ children }: { children: ReactNode }) {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-surface-950 flex items-center justify-center">
+      <div className="min-h-screen bg-[#F8F9FC] flex items-center justify-center">
         <div className="flex flex-col items-center gap-4">
-          <div className="w-10 h-10 border-2 border-primary-500/30 border-t-primary-500 rounded-full animate-spin" />
-          <p className="text-surface-400 text-sm">Loading dashboard...</p>
+          <div className="w-10 h-10 border-2 border-[#1B2B6B]/20 border-t-[#1B2B6B] rounded-full animate-spin" />
+          <p className="text-[#64748B] text-sm">Loading dashboard...</p>
         </div>
       </div>
     );
@@ -42,44 +43,40 @@ export default function DashboardShell({ children }: { children: ReactNode }) {
 
   if (!user) return null;
 
-  const currentPage = sidebarLinks.find((l) => pathname.startsWith(l.href) && (l.href !== "/dashboard" || pathname === "/dashboard"))?.label ?? "Dashboard";
+  const currentPage = sidebarLinks.find(
+    (l) => pathname.startsWith(l.href) && (l.href !== "/dashboard" || pathname === "/dashboard")
+  )?.label ?? "Dashboard";
   const initials = (organization?.name ?? user.email ?? "?").charAt(0).toUpperCase();
 
   return (
-    <div className="min-h-screen bg-surface-950 flex">
+    <div className="min-h-screen bg-[#F8F9FC] flex">
       {/* Sidebar — Desktop */}
       <motion.aside
         initial={false}
         animate={{ width: sidebarOpen ? 240 : 68 }}
-        className="hidden lg:flex flex-col bg-surface-900 border-r border-surface-800 overflow-hidden shrink-0"
+        className="hidden lg:flex flex-col bg-white border-r border-[#E2E8F0] overflow-hidden shrink-0"
       >
         {/* Logo */}
-        <div className="p-4 flex items-center justify-between border-b border-surface-800 h-16">
+        <div className="p-4 flex items-center justify-between border-b border-[#E2E8F0] h-16">
           <AnimatePresence>
             {sidebarOpen && (
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                className="flex items-center gap-2"
               >
-                <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-primary-500 to-accent-500 flex items-center justify-center shrink-0">
-                  <Zap className="w-3.5 h-3.5 text-white" />
-                </div>
-                <span className="text-base font-bold whitespace-nowrap">
-                  data<span className="text-primary-400">byt</span>
-                </span>
+                <Logo className="text-lg" />
               </motion.div>
             )}
           </AnimatePresence>
           {!sidebarOpen && (
-            <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-primary-500 to-accent-500 flex items-center justify-center mx-auto">
-              <Zap className="w-3.5 h-3.5 text-white" />
+            <div className="mx-auto">
+              <span className="font-black text-[#1B2B6B] text-lg">D</span>
             </div>
           )}
           <button
             onClick={() => setSidebarOpen(!sidebarOpen)}
-            className="text-surface-400 hover:text-white transition-colors p-1 shrink-0"
+            className="text-[#94A3B8] hover:text-[#1B2B6B] transition-colors p-1 shrink-0"
           >
             <ChevronLeft className={`w-4 h-4 transition-transform ${!sidebarOpen ? "rotate-180" : ""}`} />
           </button>
@@ -95,14 +92,14 @@ export default function DashboardShell({ children }: { children: ReactNode }) {
               <a
                 key={link.href}
                 href={link.href}
-                className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all ${
+                className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all ${
                   isActive
-                    ? "bg-primary-500/10 text-primary-400 border border-primary-500/20"
-                    : "text-surface-400 hover:text-white hover:bg-surface-800"
+                    ? "bg-[#EEF2FF] text-[#1B2B6B]"
+                    : "text-[#64748B] hover:text-[#1B2B6B] hover:bg-[#F8F9FC]"
                 } ${!sidebarOpen ? "justify-center" : ""}`}
                 title={!sidebarOpen ? link.label : undefined}
               >
-                <link.icon className="w-4.5 h-4.5 shrink-0" />
+                <link.icon className="w-4 h-4 shrink-0" />
                 <AnimatePresence>
                   {sidebarOpen && (
                     <motion.span
@@ -121,9 +118,9 @@ export default function DashboardShell({ children }: { children: ReactNode }) {
         </nav>
 
         {/* User */}
-        <div className="border-t border-surface-800 p-3">
+        <div className="border-t border-[#E2E8F0] p-3">
           <div className={`flex items-center gap-3 ${!sidebarOpen ? "justify-center" : ""}`}>
-            <div className="w-8 h-8 rounded-full bg-gradient-to-br from-primary-500 to-accent-500 flex items-center justify-center text-white text-xs font-bold shrink-0">
+            <div className="w-8 h-8 rounded-full bg-[#1B2B6B] flex items-center justify-center text-white text-xs font-bold shrink-0">
               {initials}
             </div>
             <AnimatePresence>
@@ -134,15 +131,15 @@ export default function DashboardShell({ children }: { children: ReactNode }) {
                   exit={{ opacity: 0 }}
                   className="flex-1 min-w-0"
                 >
-                  <p className="text-sm text-white truncate">{organization?.name ?? "My Company"}</p>
-                  <p className="text-xs text-surface-500 truncate capitalize">{orgUser?.role ?? "admin"}</p>
+                  <p className="text-sm text-[#0F172A] font-medium truncate">{organization?.name ?? "My Company"}</p>
+                  <p className="text-xs text-[#94A3B8] truncate capitalize">{orgUser?.role ?? "admin"}</p>
                 </motion.div>
               )}
             </AnimatePresence>
             {sidebarOpen && (
               <button
                 onClick={signOut}
-                className="text-surface-500 hover:text-danger-400 transition-colors p-1 shrink-0"
+                className="text-[#94A3B8] hover:text-[#E8242A] transition-colors p-1 shrink-0"
                 title="Sign out"
               >
                 <LogOut className="w-4 h-4" />
@@ -160,7 +157,7 @@ export default function DashboardShell({ children }: { children: ReactNode }) {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="lg:hidden fixed inset-0 bg-black/50 z-40"
+              className="lg:hidden fixed inset-0 bg-black/30 z-40"
               onClick={() => setMobileMenuOpen(false)}
             />
             <motion.aside
@@ -168,13 +165,10 @@ export default function DashboardShell({ children }: { children: ReactNode }) {
               animate={{ x: 0 }}
               exit={{ x: -260 }}
               transition={{ type: "spring", damping: 25 }}
-              className="lg:hidden fixed left-0 top-0 bottom-0 w-[240px] bg-surface-900 border-r border-surface-800 z-50 flex flex-col"
+              className="lg:hidden fixed left-0 top-0 bottom-0 w-[240px] bg-white border-r border-[#E2E8F0] z-50 flex flex-col"
             >
-              <div className="p-4 flex items-center gap-2 border-b border-surface-800 h-16">
-                <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-primary-500 to-accent-500 flex items-center justify-center">
-                  <Zap className="w-3.5 h-3.5 text-white" />
-                </div>
-                <span className="text-base font-bold">data<span className="text-primary-400">byt</span></span>
+              <div className="p-4 flex items-center border-b border-[#E2E8F0] h-16">
+                <Logo className="text-lg" />
               </div>
               <nav className="flex-1 py-4 space-y-0.5 px-2">
                 {sidebarLinks.map((link) => {
@@ -185,21 +179,21 @@ export default function DashboardShell({ children }: { children: ReactNode }) {
                     <a
                       key={link.href}
                       href={link.href}
-                      className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all ${
-                        isActive ? "bg-primary-500/10 text-primary-400" : "text-surface-400 hover:text-white hover:bg-surface-800"
+                      className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all ${
+                        isActive ? "bg-[#EEF2FF] text-[#1B2B6B]" : "text-[#64748B] hover:text-[#1B2B6B] hover:bg-[#F8F9FC]"
                       }`}
                       onClick={() => setMobileMenuOpen(false)}
                     >
-                      <link.icon className="w-4.5 h-4.5" />
+                      <link.icon className="w-4 h-4" />
                       {link.label}
                     </a>
                   );
                 })}
               </nav>
-              <div className="border-t border-surface-800 p-4">
+              <div className="border-t border-[#E2E8F0] p-4">
                 <button
                   onClick={() => { signOut(); setMobileMenuOpen(false); }}
-                  className="flex items-center gap-2 text-surface-400 hover:text-danger-400 text-sm"
+                  className="flex items-center gap-2 text-[#64748B] hover:text-[#E8242A] text-sm"
                 >
                   <LogOut className="w-4 h-4" />
                   Sign Out
@@ -212,20 +206,20 @@ export default function DashboardShell({ children }: { children: ReactNode }) {
 
       {/* Main content */}
       <div className="flex-1 flex flex-col min-w-0">
-        <header className="h-16 bg-surface-900/50 border-b border-surface-800 flex items-center justify-between px-4 sm:px-6 backdrop-blur-lg shrink-0">
+        <header className="h-16 bg-white border-b border-[#E2E8F0] flex items-center justify-between px-4 sm:px-6 shrink-0">
           <div className="flex items-center gap-3">
-            <button className="lg:hidden text-surface-400 hover:text-white" onClick={() => setMobileMenuOpen(true)}>
+            <button className="lg:hidden text-[#64748B] hover:text-[#1B2B6B]" onClick={() => setMobileMenuOpen(true)}>
               <Menu className="w-5 h-5" />
             </button>
-            <h1 className="text-base font-semibold text-white">{currentPage}</h1>
+            <h1 className="text-base font-semibold text-[#0F172A]">{currentPage}</h1>
           </div>
           <div className="flex items-center gap-3">
-            <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary-500/10 border border-primary-500/20">
-              <span className="text-xs font-medium text-primary-400 capitalize">
+            <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#EEF2FF] border border-[#1B2B6B]/20">
+              <span className="text-xs font-medium text-[#1B2B6B] capitalize">
                 {organization?.plan_tier ?? "starter"}
               </span>
             </div>
-            <div className="w-8 h-8 rounded-full bg-gradient-to-br from-primary-500 to-accent-500 flex items-center justify-center text-white text-xs font-bold">
+            <div className="w-8 h-8 rounded-full bg-[#1B2B6B] flex items-center justify-center text-white text-xs font-bold">
               {initials}
             </div>
           </div>

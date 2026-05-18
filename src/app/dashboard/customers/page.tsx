@@ -3,12 +3,10 @@
 import { useEffect, useState, useCallback } from "react";
 import { motion } from "framer-motion";
 import {
-  Users, UserPlus, Upload, ArrowRight, Search,
-  Mail, Phone, CreditCard, AlertTriangle,
+  Users, Search, Mail, Phone, CreditCard, AlertTriangle,
 } from "lucide-react";
 import { useAuth } from "@/components/AuthProvider";
 import { supabase } from "@/lib/supabase";
-import AddCustomerModal from "@/components/AddCustomerModal";
 
 interface CustomerRow {
   id: string;
@@ -41,7 +39,6 @@ export default function CustomersPage() {
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
   const [segmentFilter, setSegmentFilter] = useState<string>("all");
-  const [showAdd, setShowAdd] = useState(false);
 
   const load = useCallback(async () => {
     if (!organization) return;
@@ -101,17 +98,7 @@ export default function CustomersPage() {
       <div className="flex items-center justify-between flex-wrap gap-3">
         <div>
           <h2 className="text-2xl font-bold text-white">Customers</h2>
-          <p className="text-surface-400 text-sm mt-1">Manage customer records, segments, and payment history.</p>
-        </div>
-        <div className="flex gap-2">
-          <a href="/dashboard/ar-aging"
-            className="flex items-center gap-2 px-4 py-2 rounded-xl border border-surface-700 text-surface-300 text-sm hover:border-surface-600 hover:text-white transition-all">
-            <Upload className="w-4 h-4" /> Import CSV
-          </a>
-          <button onClick={() => setShowAdd(true)}
-            className="flex items-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-primary-600 to-accent-600 text-white text-sm font-semibold hover:from-primary-500 hover:to-accent-500 transition-all">
-            <UserPlus className="w-4 h-4" /> Add Customer
-          </button>
+          <p className="text-surface-400 text-sm mt-1">Your accounts receivable customer list.</p>
         </div>
       </div>
 
@@ -181,23 +168,11 @@ export default function CustomersPage() {
             <p className="text-white font-medium mb-1">
               {customers.length === 0 ? "No customers yet" : "No customers match your search"}
             </p>
-            <p className="text-surface-500 text-sm mb-6 max-w-xs leading-relaxed">
+            <p className="text-surface-500 text-sm max-w-xs leading-relaxed">
               {customers.length === 0
-                ? "Import your AR data or add customers manually to start tracking payments."
+                ? "Your DataByt operator will import your AR data."
                 : "Try adjusting your search or filter."}
             </p>
-            {customers.length === 0 && (
-              <div className="flex gap-3 flex-wrap justify-center">
-                <a href="/dashboard/ar-aging"
-                  className="inline-flex items-center gap-2 px-5 py-2.5 bg-primary-500/10 border border-primary-500/20 rounded-xl text-primary-400 text-sm font-medium hover:bg-primary-500/15 transition-colors">
-                  <Upload className="w-4 h-4" /> Import from CSV
-                </a>
-                <button onClick={() => setShowAdd(true)}
-                  className="inline-flex items-center gap-2 px-5 py-2.5 bg-surface-800 border border-surface-700 rounded-xl text-surface-300 text-sm font-medium hover:border-surface-600 hover:text-white transition-colors">
-                  <UserPlus className="w-4 h-4" /> Add Manually
-                </button>
-              </div>
-            )}
           </div>
         ) : (
           <div>
@@ -240,20 +215,6 @@ export default function CustomersPage() {
         )}
       </motion.div>
 
-      {customers.length > 0 && (
-        <div className="flex items-center gap-3 p-4 rounded-xl bg-surface-800/30 border border-surface-700/50">
-          <UserPlus className="w-5 h-5 text-surface-500 shrink-0" />
-          <div className="flex-1">
-            <p className="text-sm text-surface-300">Add a single customer manually</p>
-            <p className="text-xs text-surface-500">Create a customer record to track invoices and send collections.</p>
-          </div>
-          <button onClick={() => setShowAdd(true)} className="text-xs text-primary-400 font-medium flex items-center gap-1 whitespace-nowrap hover:text-primary-300">
-            Add Customer <ArrowRight className="w-3 h-3" />
-          </button>
-        </div>
-      )}
-
-      <AddCustomerModal open={showAdd} onClose={() => setShowAdd(false)} onSaved={load} />
     </div>
   );
 }

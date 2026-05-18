@@ -8,10 +8,14 @@
 -- ============================================================
 
 create table if not exists public.organizations (
-  id          uuid primary key default gen_random_uuid(),
-  name        text not null,
-  plan_tier   text not null default 'starter' check (plan_tier in ('starter', 'growth', 'scale')),
-  created_at  timestamptz not null default now()
+  id              uuid primary key default gen_random_uuid(),
+  name            text not null,
+  plan_tier       text not null default 'starter' check (plan_tier in ('starter', 'growth', 'scale')),
+  mrr             numeric(10,2),
+  contract_start  date,
+  contract_end    date,
+  status          text not null default 'active' check (status in ('active', 'onboarding', 'paused', 'churned')),
+  created_at      timestamptz not null default now()
 );
 
 create table if not exists public.users (
@@ -75,15 +79,21 @@ create table if not exists public.payments (
 );
 
 create table if not exists public.communications (
-  id          uuid primary key default gen_random_uuid(),
-  org_id      uuid not null references public.organizations(id) on delete cascade,
-  customer_id uuid references public.customers(id) on delete set null,
-  invoice_id  uuid references public.invoices(id) on delete set null,
-  type        text not null check (type in ('email', 'call', 'note')),
-  subject     text,
-  content     text not null,
-  sent_at     timestamptz not null default now(),
-  status      text default 'sent' check (status in ('draft', 'sent', 'opened', 'clicked', 'bounced', 'failed'))
+  id           uuid primary key default gen_random_uuid(),
+  org_id       uuid not null references public.organizations(id) on delete cascade,
+  customer_id  uuid references public.customers(id) on delete set null,
+  invoice_id   uuid references public.invoices(id) on delete set null,
+  type         text not null check (type in ('email', 'call', 'note')),
+  subject      text,
+  content      text not null,
+  sent_at      timestamptz not null default now(),
+  status       text default 'sent' check (status in ('draft', 'sent', 'opened', 'clicked', 'bounced', 'failed')),
+  direction         text not null default 'outbound' check (direction in ('outbound', 'inbound')),
+  sent_by_ai        boolean not null default false,
+  approved_by       text,
+  opened_at         timestamptz,
+  clicked_at        timestamptz,
+  resend_message_id text
 );
 
 -- ============================================================
@@ -190,6 +200,32 @@ create policy "communications_insert" on public.communications
 
 create policy "communications_update" on public.communications
   for update using (org_id = public.current_user_org_id());
+
+-- ============================================================
+-- TRIGGER: auto-create users row when invited client signs up
+-- ============================================================
+
+create or replace function public.handle_new_user()
+returns trigger language plpgsql security definer as $$
+begin
+  if new.raw_user_meta_data->>'org_id' is not null then
+    insert into public.users (id, org_id, email, role)
+    values (
+      new.id,
+      (new.raw_user_meta_data->>'org_id')::uuid,
+      new.email,
+      coalesce(new.raw_user_meta_data->>'role', 'admin')
+    )
+    on conflict (id) do nothing;
+  end if;
+  return new;
+end;
+$$;
+
+drop trigger if exists on_auth_user_created on auth.users;
+create trigger on_auth_user_created
+  after insert on auth.users
+  for each row execute procedure public.handle_new_user();
 
 -- ============================================================
 -- TRIGGER: auto-create org_settings row when org is created

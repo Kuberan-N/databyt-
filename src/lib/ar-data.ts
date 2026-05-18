@@ -180,17 +180,9 @@ export async function fetchInvoicesWithCustomers(orgId: string, statusFilter?: s
   }));
 }
 
-export async function updateInvoicePriorityScores(orgId: string) {
-  const invoices = await fetchInvoicesWithCustomers(orgId, ["open", "reminded", "overdue"]);
-  const maxAmount = Math.max(...invoices.map(i => i.amount), 1);
-  const maxDays = Math.max(...invoices.map(i => i.days_overdue), 1);
-
-  for (const inv of invoices) {
-    const score =
-      (inv.amount / maxAmount) * 0.4 +
-      (inv.days_overdue / maxDays) * 0.3 +
-      0.3; // payment history score placeholder = 0.3 until we have history
-    await db.from("invoices").update({ priority_score: Math.round(score * 100) / 100 })
-      .eq("id", inv.id);
-  }
+// Priority scoring is now handled server-side at /api/admin/score-invoices
+// (requires service role key to update across orgs and recalculate days_overdue).
+// This function is kept as a no-op to avoid breaking any existing call sites.
+export async function updateInvoicePriorityScores(_orgId: string): Promise<void> {
+  // Replaced by POST /api/admin/score-invoices
 }

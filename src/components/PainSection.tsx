@@ -1,129 +1,79 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { AlertTriangle, TrendingDown, Clock, DollarSign, FileX, Users } from "lucide-react";
 
-const painStats = [
+const stats = [
   {
-    icon: Users,
-    stat: "73%",
-    label: "of AP teams still manually key invoices into their accounting system.",
-    source: "PLANERGY AP Automation Report, 2025",
-    color: "text-danger-400",
+    value: "$15",
+    label: "average cost to process one invoice manually",
+    sub: "labor, errors, and rework included — PLANERGY 2025",
   },
   {
-    icon: DollarSign,
-    stat: "$15",
-    label: "average cost to process a single invoice by hand — labor, errors, rework included.",
-    source: "Resolve Pay, March 2026",
-    color: "text-warning-400",
+    value: "25 days",
+    label: "average invoice processing cycle",
+    sub: "from receipt to payment approval — DocuClipper 2025",
   },
   {
-    icon: FileX,
-    stat: "12.5%",
-    label: "of manually processed invoices contain at least one error — wrong amount, duplicate, or bad vendor code.",
-    source: "DocuClipper, 2025",
-    color: "text-danger-400",
-  },
-  {
-    icon: Clock,
-    stat: "10+ hrs",
-    label: "every week — 62% of finance teams spend this much on invoice processing alone.",
-    source: "IFOL AP Automation Trends, 2025",
-    color: "text-accent-400",
-  },
-  {
-    icon: TrendingDown,
-    stat: "25 days",
-    label: "average invoice processing cycle from receipt to payment approval in a manual workflow.",
-    source: "DocuClipper, 2025",
-    color: "text-primary-400",
-  },
-  {
-    icon: AlertTriangle,
-    stat: "49%",
-    label: "of companies still waste time and money on manual AP — despite automation being widely available.",
-    source: "HighRadius FINsider, 2025",
-    color: "text-warning-400",
+    value: "73%",
+    label: "of AP teams still manually key invoices into their system",
+    sub: "despite automation being widely available — HighRadius 2025",
   },
 ];
 
 export default function PainSection() {
   return (
-    <section className="relative py-24 bg-surface-950">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section header */}
+    <section className="bg-[#F8F9FC] py-24">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-14"
         >
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-danger-500/10 text-danger-400 text-sm font-medium mb-6">
-            <AlertTriangle className="w-4 h-4" />
-            The cost of doing nothing
-          </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">
-            Your manual process is{" "}
-            <span className="text-danger-400">costing you a fortune.</span>
+          <p className="text-xs font-bold uppercase tracking-widest text-[#E8242A] mb-4">The Cost of Doing Nothing</p>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#0F172A] leading-tight">
+            Your AR Team Is Doing{" "}
+            <span className="text-[#E8242A]">$30,000/Month</span>
+            {" "}of Manual Work
           </h2>
-          <p className="text-surface-400 text-lg max-w-2xl mx-auto">
-            These aren&apos;t estimates. Every stat below is from published
-            2025–2026 research.
-          </p>
         </motion.div>
 
-        {/* Pain Stats Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
-          {painStats.map((item, i) => (
+        {/* Stat cards */}
+        <div className="grid md:grid-cols-3 gap-6 mb-12">
+          {stats.map((s, i) => (
             <motion.div
               key={i}
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
-              className="glass rounded-2xl p-6 hover:scale-[1.02] transition-transform group"
+              className="bg-white border border-[#E2E8F0] rounded-2xl p-8 shadow-sm"
             >
-              <div className="flex items-start gap-4">
-                <div className="p-3 rounded-xl bg-surface-800 group-hover:bg-surface-700 transition-colors">
-                  <item.icon className={`w-6 h-6 ${item.color}`} />
-                </div>
-                <div>
-                  <div className={`text-3xl font-black ${item.color} mb-2`}>
-                    {item.stat}
-                  </div>
-                  <p className="text-surface-200 text-sm leading-relaxed mb-3">
-                    {item.label}
-                  </p>
-                  <p className="text-surface-500 text-xs italic">
-                    Source: {item.source}
-                  </p>
-                </div>
-              </div>
+              <p className="text-5xl font-black text-[#E8242A] mb-3">{s.value}</p>
+              <p className="text-[#0F172A] font-semibold text-base mb-2 leading-snug">{s.label}</p>
+              <p className="text-[#94A3B8] text-xs italic">{s.sub}</p>
             </motion.div>
           ))}
         </div>
 
-        {/* Bottom CTA */}
+        {/* Navy callout */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="glass rounded-2xl p-8 text-center glow-blue"
+          className="bg-[#1B2B6B] rounded-2xl px-8 py-10 text-center"
         >
-          <p className="text-lg sm:text-xl text-surface-200 mb-2">
-            If your team processes{" "}
-            <span className="text-white font-bold">2,000 invoices/month</span>{" "}
-            manually, you&apos;re paying
+          <p className="text-white/80 text-lg mb-1">DataByt replaces all of this for</p>
+          <p className="text-white text-4xl sm:text-5xl font-black mb-2">$3,000/month</p>
+          <p className="text-white/60 text-base">
+            10x cheaper than HighRadius. Same enterprise-grade outcome.
           </p>
-          <p className="text-4xl sm:text-5xl font-black text-danger-400 mb-2">
-            ~$30,000/month
-          </p>
-          <p className="text-surface-400 mb-6">in hidden labor costs alone.</p>
-          <p className="text-lg text-white font-semibold">
-            DataByt replaces that with{" "}
-            <span className="gradient-text text-2xl font-black">$49–$149/month</span>
-          </p>
+          <a href="#pricing"
+            className="inline-flex items-center gap-2 mt-6 px-6 py-3 bg-[#E8242A] text-white text-sm font-bold rounded-lg hover:bg-[#C41E23] transition-colors">
+            See Pricing
+          </a>
         </motion.div>
       </div>
     </section>

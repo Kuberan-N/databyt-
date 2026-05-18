@@ -1,128 +1,111 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowRight, Play, CheckCircle, Shield, Clock } from "lucide-react";
+import { ArrowRight, CheckCircle } from "lucide-react";
+
+const statBadges = [
+  { value: "30%", label: "DSO Reduction" },
+  { value: "95%+", label: "Email Accuracy" },
+  { value: "48 hrs", label: "Setup Time" },
+];
+
+const socialProof = [
+  "Meridian Holdings", "Alpine Capital", "NovaBridge Group",
+  "Stellarworks Inc", "Crestline Partners", "Vantage CFO",
+];
 
 export default function Hero() {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-grid bg-noise pt-20">
-      {/* Background gradient orbs */}
-      <div className="absolute top-1/4 -left-32 w-96 h-96 bg-primary-600/20 rounded-full blur-[128px]" />
-      <div className="absolute bottom-1/4 -right-32 w-96 h-96 bg-accent-600/20 rounded-full blur-[128px]" />
+    <section className="bg-white pt-32 pb-20">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-        <div className="text-center max-w-4xl mx-auto">
-          {/* Badge */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-light text-sm text-primary-300 mb-8"
-          >
-            <span className="w-2 h-2 rounded-full bg-success-400 animate-pulse" />
-            Now with AI Collections Agent — Chase overdue invoices automatically
-          </motion.div>
-
-          {/* Main Headline */}
-          <motion.h1
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            className="text-4xl sm:text-5xl lg:text-7xl font-black tracking-tight leading-[1.1] mb-6"
-          >
-            Your AP Team Is{" "}
-            <span className="gradient-text">Bleeding $7,500/mo.</span>
-            <br />
-            Your AR Team Is{" "}
-            <span className="gradient-text">Sitting on $50K</span> in Overdue Invoices.
-          </motion.h1>
-
-          {/* Subheadline */}
-          <motion.p
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3 }}
-            className="text-lg sm:text-xl text-surface-200 max-w-2xl mx-auto mb-10 leading-relaxed"
-          >
-            DataByt fixes both. AI processes your invoices with 95%+ accuracy.
-            AI Collections Agent chases overdue payments while you sleep.{" "}
-            <span className="text-white font-semibold">
-              From $49/month. Deployed in 1 hour.
+        {/* Social proof ticker */}
+        <motion.div
+          initial={{ opacity: 0, y: -8 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.05 }}
+          className="flex items-center justify-center gap-2 mb-10 flex-wrap"
+        >
+          <span className="text-xs font-medium text-[#94A3B8] uppercase tracking-widest">Trusted by finance teams at</span>
+          {socialProof.map((c, i) => (
+            <span key={i} className="text-xs font-semibold text-[#64748B] px-2.5 py-1 rounded-full bg-[#F8F9FC] border border-[#E2E8F0]">
+              {c}
             </span>
-          </motion.p>
+          ))}
+        </motion.div>
+
+        {/* Headline */}
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.1 }}
+          className="text-center max-w-4xl mx-auto"
+        >
+          <h1 className="text-4xl sm:text-5xl lg:text-[62px] font-black leading-[1.08] tracking-tight text-[#0F172A] mb-6">
+            Recover Overdue Receivables{" "}
+            <span className="text-[#1B2B6B]">30% Faster</span>{" "}
+            <span className="text-[#E8242A]">With AI</span>
+          </h1>
+
+          <p className="text-lg sm:text-xl text-[#64748B] max-w-2xl mx-auto mb-10 leading-relaxed">
+            DataByt&apos;s AI Collections Agent prioritizes your overdue invoices,
+            drafts personalized dunning emails, and chases payments automatically.
+            Built for finance teams who are tired of manual follow-ups.
+          </p>
 
           {/* CTAs */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4 }}
-            className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12"
-          >
-            <a
-              href="#pricing"
-              id="hero-cta-primary"
-              className="group px-8 py-4 bg-gradient-to-r from-primary-600 to-accent-600 text-white rounded-full text-lg font-bold hover:from-primary-500 hover:to-accent-500 transition-all flex items-center gap-3 pulse-glow"
-            >
-              Start Free Trial — No Card Required
-              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-6">
+            <a href="#pricing" id="hero-cta-primary"
+              className="group flex items-center gap-2 px-8 py-4 rounded-lg bg-[#1B2B6B] text-white text-base font-bold hover:bg-[#152356] transition-colors shadow-lg shadow-[#1B2B6B]/20">
+              Book a Demo — Free AR Audit
+              <ArrowRight className="w-5 h-5 group-hover:translate-x-0.5 transition-transform" />
             </a>
-            <a
-              href="#how-it-works"
-              id="hero-cta-secondary"
-              className="px-8 py-4 glass-light text-white rounded-full text-lg font-medium hover:bg-white/10 transition-all flex items-center gap-3"
-            >
-              <Play className="w-5 h-5" />
-              Watch 2-min Demo
+            <a href="#how-it-works" id="hero-cta-secondary"
+              className="text-base font-semibold text-[#E8242A] hover:text-[#C41E23] transition-colors flex items-center gap-1">
+              See How It Works <ArrowRight className="w-4 h-4" />
             </a>
-          </motion.div>
+          </div>
 
-          {/* Trust indicators */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5 }}
-            className="flex flex-wrap items-center justify-center gap-6 text-surface-400 text-sm"
-          >
-            <span className="flex items-center gap-2">
-              <CheckCircle className="w-4 h-4 text-success-400" />
-              10 invoices processed free before you pay
-            </span>
-            <span className="flex items-center gap-2">
-              <Shield className="w-4 h-4 text-primary-400" />
-              60-day money-back guarantee
-            </span>
-            <span className="flex items-center gap-2">
-              <Clock className="w-4 h-4 text-accent-400" />
-              Setup in under 60 minutes
-            </span>
-          </motion.div>
-        </div>
+          {/* Trust line */}
+          <p className="text-sm text-[#94A3B8] mb-12">
+            Trusted by finance teams at mid-market companies across US &amp; EU.
+            No IT involvement. Live in 48 hours.
+          </p>
+        </motion.div>
 
-        {/* Stats Row */}
+        {/* Stat badges */}
         <motion.div
-          initial={{ opacity: 0, y: 40 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.7 }}
-          className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-4"
+          transition={{ delay: 0.2 }}
+          className="flex flex-wrap items-center justify-center gap-4 mb-16"
         >
-          {[
-            { value: "93%", label: "Reduction in manual AP hours", color: "from-primary-400 to-primary-600" },
-            { value: "71%", label: "Drop in flagged queue", color: "from-accent-400 to-accent-600" },
-            { value: "30-50%", label: "DSO reduction with AI dunning", color: "from-success-400 to-success-500" },
-            { value: "$0", label: "IT involvement required", color: "from-warning-400 to-warning-500" },
-          ].map((stat, i) => (
-            <div
-              key={i}
-              className="glass rounded-2xl p-6 text-center hover:scale-105 transition-transform"
-            >
-              <div
-                className={`text-3xl sm:text-4xl font-black bg-gradient-to-br ${stat.color} bg-clip-text text-transparent`}
-              >
-                {stat.value}
+          {statBadges.map((s, i) => (
+            <div key={i}
+              className="flex items-center gap-3 px-5 py-3.5 bg-white border-2 border-[#1B2B6B]/20 rounded-xl shadow-sm">
+              <CheckCircle className="w-5 h-5 text-[#16A34A] shrink-0" />
+              <div>
+                <span className="text-xl font-black text-[#1B2B6B]">{s.value}</span>
+                <span className="text-sm font-medium text-[#64748B] ml-2">{s.label}</span>
               </div>
-              <div className="text-surface-400 text-sm mt-2">{stat.label}</div>
             </div>
           ))}
+        </motion.div>
+
+        {/* Free audit callout */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.3 }}
+          className="max-w-3xl mx-auto bg-[#F8F9FC] border border-[#E2E8F0] rounded-2xl p-8 text-center"
+        >
+          <p className="text-[10px] font-bold uppercase tracking-widest text-[#E8242A] mb-3">Free AR Audit</p>
+          <p className="text-[#0F172A] font-semibold text-lg mb-2">
+            We&apos;ll review your current AR process and show you exactly where the money is leaking.
+          </p>
+          <p className="text-[#64748B] text-sm">
+            30-minute call. No sales pressure. Free. No commitment.
+          </p>
         </motion.div>
       </div>
     </section>

@@ -22,10 +22,19 @@ export interface DraftEmailResponse {
   invoiceId: string;
 }
 
+// Escalation tones matching user spec exactly
 const ESCALATION_TONE: Record<number, string> = {
-  1: "friendly and professional reminder — assume the customer may have simply forgotten. Keep it warm, brief (3-4 sentences max), and include a clear call to action.",
-  2: "firm and professional — acknowledge no response to previous outreach, express concern, set a clear deadline, and mention that continued non-payment may affect their account status.",
-  3: "urgent and direct — this is a final notice before escalating to collections. Be formal, state consequences clearly, and provide one last opportunity to resolve. Mention legal or collections action if unresolved.",
+  1: `polite and friendly reminder. Open warmly, assume the customer may have simply overlooked this invoice. \
+Make a soft ask with no mention of consequences. Keep it brief (3-4 sentences in the body).`,
+
+  2: `professional and direct. Reference that previous reminders have gone unanswered. \
+Set a clear payment deadline. Mention that continued non-payment may affect their account standing with us. \
+Do not threaten legal action.`,
+
+  3: `serious and firm — this is a final notice before escalating internally. \
+Offer a payment plan as a resolution option. Mention that without payment the account will be reviewed and \
+referred to a collections process. Do NOT threaten legal action or use aggressive language. \
+Frame this as a final opportunity to resolve the matter.`,
 };
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -61,6 +70,14 @@ export async function POST(req: NextRequest) {
     const orgName = org?.name ?? "Your Company";
     const signature = settings?.email_signature ?? `Best regards,\nAccounts Receivable Team\n${orgName}`;
 
+    // Segment-aware tone modifier
+    const segmentNote =
+      customer?.segment === "strategic"
+        ? "IMPORTANT: This is a high-value strategic customer — soften the tone slightly, be extra courteous, and emphasize the relationship."
+        : customer?.segment === "at_risk"
+        ? "NOTE: This customer has a history of late payments — be firm, clear, and concise. Do not be aggressive."
+        : "";
+
     const prompt = `You are an accounts receivable specialist drafting a dunning email on behalf of ${orgName}.
 
 Customer: ${customer?.name ?? "Customer"}
@@ -71,7 +88,8 @@ Days Overdue: ${invoice.days_overdue}
 Customer Segment: ${customer?.segment ?? "standard"}
 Escalation Level: ${escalationLevel} of 3
 
-Tone: ${tone}
+Tone instruction: ${tone}
+${segmentNote ? `\n${segmentNote}` : ""}
 
 Draft a concise, professional dunning email. Rules:
 - Write ONLY the email content (subject line + body), no preamble

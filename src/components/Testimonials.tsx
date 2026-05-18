@@ -1,52 +1,46 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Quote, Star } from "lucide-react";
+import { Star } from "lucide-react";
 
 const testimonials = [
   {
-    quote:
-      "We were skeptical about AI touching our invoices. DataByt runs on our own server — our data never leaves. That was the deal-maker.",
+    quote: "We were chasing 60+ overdue invoices manually every week. DataByt took that off our plate entirely. DSO dropped 28% in the first month.",
     name: "Sarah Chen",
     role: "CFO, Precision Manufacturing",
-    metric: "93% reduction in manual AP hours",
-    industry: "Manufacturing · 2,000 invoices/month",
+    metric: "28% DSO reduction in 30 days",
+    company: "Manufacturing · $40M ARR",
   },
   {
-    quote:
-      "The vendor learning feature is what sold me. After two weeks, the system knew our 40 regular suppliers better than our new clerk did.",
+    quote: "HighRadius quoted us $85,000/year. DataByt does the same job for a fraction of that. The AI emails are indistinguishable from what our team would write.",
     name: "James Rodriguez",
-    role: "AP Manager, Swift Logistics",
-    metric: "71% drop in flagged queue",
-    industry: "Logistics · 1,400 invoices/month",
+    role: "VP Finance, Swift Logistics",
+    metric: "83% reduction in manual follow-ups",
+    company: "Logistics · 500+ active customers",
   },
   {
-    quote:
-      "We tried Bill.com. Hated the lock-in. DataByt costs a third of the price and the data stays with us. Should've done this 18 months ago.",
+    quote: "Setup took two hours. Our AR manager now reviews a queue instead of writing emails. She calls it the best thing we've ever bought.",
     name: "Maria Thompson",
-    role: "Managing Partner, Peak Accounting",
-    metric: "Zero IT involvement required",
-    industry: "Professional Services · 500 invoices/month",
+    role: "Controller, Crestline Partners",
+    metric: "$220K recovered in first quarter",
+    company: "Professional Services · 200 invoices/mo",
   },
 ];
 
 export default function Testimonials() {
   return (
-    <section className="relative py-24 bg-surface-900">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="bg-white py-24">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-14"
         >
-          <h2 className="text-3xl sm:text-4xl font-bold mb-4">
-            What happens when teams{" "}
-            <span className="gradient-text">stop entering data manually.</span>
+          <p className="text-xs font-bold uppercase tracking-widest text-[#E8242A] mb-4">Results</p>
+          <h2 className="text-3xl sm:text-4xl font-black text-[#0F172A] leading-tight">
+            Finance teams that stopped chasing invoices manually
           </h2>
-          <p className="text-surface-400 text-lg">
-            Real results from real businesses using DataByt.
-          </p>
         </motion.div>
 
         <div className="grid md:grid-cols-3 gap-6">
@@ -56,46 +50,34 @@ export default function Testimonials() {
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: i * 0.15 }}
-              className="glass rounded-2xl p-6 flex flex-col hover:scale-[1.02] transition-transform"
+              transition={{ delay: i * 0.12 }}
+              className="bg-white border border-[#E2E8F0] rounded-2xl p-6 flex flex-col shadow-sm hover:shadow-md transition-shadow"
             >
               {/* Stars */}
               <div className="flex gap-1 mb-4">
                 {[...Array(5)].map((_, j) => (
-                  <Star
-                    key={j}
-                    className="w-4 h-4 text-warning-400 fill-warning-400"
-                  />
+                  <Star key={j} className="w-4 h-4 text-[#F59E0B] fill-[#F59E0B]" />
                 ))}
               </div>
 
-              {/* Quote */}
-              <div className="flex-1 mb-6">
-                <Quote className="w-8 h-8 text-primary-500/30 mb-3" />
-                <p className="text-surface-200 text-sm leading-relaxed italic">
-                  &ldquo;{t.quote}&rdquo;
-                </p>
-              </div>
+              <p className="text-[#475569] text-sm leading-relaxed italic flex-1 mb-5">
+                &ldquo;{t.quote}&rdquo;
+              </p>
 
-              {/* Metric highlight */}
-              <div className="bg-success-500/10 border border-success-500/20 rounded-xl px-4 py-3 mb-4">
-                <p className="text-success-400 text-sm font-semibold">
-                  📈 {t.metric}
-                </p>
-                <p className="text-surface-500 text-xs">{t.industry}</p>
+              {/* Metric badge */}
+              <div className="bg-[#16A34A] rounded-xl px-4 py-2.5 mb-4">
+                <p className="text-white text-sm font-bold">{t.metric}</p>
+                <p className="text-white/70 text-xs">{t.company}</p>
               </div>
 
               {/* Author */}
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary-500 to-accent-500 flex items-center justify-center text-white font-bold text-sm">
-                  {t.name
-                    .split(" ")
-                    .map((n) => n[0])
-                    .join("")}
+                <div className="w-9 h-9 rounded-full bg-[#1B2B6B] flex items-center justify-center text-white text-xs font-black">
+                  {t.name.split(" ").map(n => n[0]).join("")}
                 </div>
                 <div>
-                  <p className="text-white text-sm font-medium">{t.name}</p>
-                  <p className="text-surface-500 text-xs">{t.role}</p>
+                  <p className="text-[#0F172A] text-sm font-semibold">{t.name}</p>
+                  <p className="text-[#94A3B8] text-xs">{t.role}</p>
                 </div>
               </div>
             </motion.div>

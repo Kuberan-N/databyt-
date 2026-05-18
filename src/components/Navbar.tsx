@@ -2,116 +2,104 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import {
-  Menu,
-  X,
-  Zap,
-  ArrowRight,
-} from "lucide-react";
+import { Menu, X, ArrowRight } from "lucide-react";
+
+const navLinks = [
+  { label: "How It Works", href: "#how-it-works" },
+  { label: "Pricing",      href: "#pricing" },
+  { label: "FAQ",          href: "#faq" },
+];
+
+export function Logo({ className = "" }: { className?: string }) {
+  return (
+    <span className={`font-black tracking-tight select-none ${className}`}>
+      <span className="text-[#1B2B6B]">Data</span><span className="text-[#E8242A]">Byt</span>
+    </span>
+  );
+}
 
 export default function Navbar() {
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [isMobileOpen, setIsMobileOpen] = useState(false);
+  const [scrolled, setScrolled]       = useState(false);
+  const [mobileOpen, setMobileOpen]   = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 20);
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    const onScroll = () => setScrolled(window.scrollY > 16);
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const navLinks = [
-    { label: "How It Works", href: "#how-it-works" },
-    { label: "Pricing", href: "#pricing" },
-    { label: "Calculator", href: "#calculator" },
-    { label: "FAQ", href: "#faq" },
-  ];
-
   return (
-    <motion.nav
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? "glass py-3" : "bg-transparent py-5"
-      }`}
-    >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
+    <nav className={`fixed top-10 left-0 right-0 z-40 transition-all duration-200 ${
+      scrolled
+        ? "bg-white border-b border-[#E2E8F0] shadow-[0_1px_4px_rgba(0,0,0,0.06)]"
+        : "bg-white/95 border-b border-[#E2E8F0]"
+    }`}>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+
         {/* Logo */}
-        <a href="#" className="flex items-center gap-2 group">
-          <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-primary-500 to-accent-500 flex items-center justify-center">
-            <Zap className="w-4 h-4 text-white" />
-          </div>
-          <span className="text-xl font-bold">
-            data<span className="text-primary-400">byt</span>
-            <span className="text-surface-500 text-sm font-normal ml-1">
-              CashFlow AI
-            </span>
-          </span>
+        <a href="#" className="flex items-center">
+          <Logo className="text-xl" />
         </a>
 
-        {/* Desktop Links */}
+        {/* Desktop links */}
         <div className="hidden md:flex items-center gap-8">
-          {navLinks.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              className="text-surface-200 hover:text-white transition-colors text-sm font-medium"
-            >
-              {link.label}
+          {navLinks.map(l => (
+            <a key={l.href} href={l.href}
+              className="text-[#64748B] hover:text-[#1B2B6B] text-sm font-medium transition-colors">
+              {l.label}
             </a>
           ))}
         </div>
 
-        {/* CTA */}
+        {/* Desktop CTA */}
         <div className="hidden md:flex items-center gap-3">
-          <a
-            href="#pricing"
-            className="px-5 py-2.5 bg-gradient-to-r from-primary-600 to-accent-600 text-white rounded-full text-sm font-semibold hover:from-primary-500 hover:to-accent-500 transition-all flex items-center gap-2 pulse-glow"
-          >
-            Start Free Trial <ArrowRight className="w-4 h-4" />
+          <a href="/auth"
+            className="text-sm font-medium text-[#64748B] hover:text-[#1B2B6B] transition-colors px-4 py-2">
+            Sign in
+          </a>
+          <a href="#pricing"
+            className="flex items-center gap-2 px-5 py-2.5 rounded-lg bg-[#1B2B6B] text-white text-sm font-semibold hover:bg-[#152356] transition-colors">
+            Book a Demo
+            <ArrowRight className="w-4 h-4" />
           </a>
         </div>
 
         {/* Mobile toggle */}
         <button
-          className="md:hidden text-white"
-          onClick={() => setIsMobileOpen(!isMobileOpen)}
+          className="md:hidden text-[#64748B] hover:text-[#1B2B6B] p-2"
+          onClick={() => setMobileOpen(!mobileOpen)}
           aria-label="Toggle menu"
         >
-          {isMobileOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
         </button>
       </div>
 
-      {/* Mobile Menu */}
+      {/* Mobile menu */}
       <AnimatePresence>
-        {isMobileOpen && (
+        {mobileOpen && (
           <motion.div
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden glass mt-2 mx-4 rounded-2xl overflow-hidden"
+            className="md:hidden border-t border-[#E2E8F0] bg-white overflow-hidden"
           >
-            <div className="p-6 flex flex-col gap-4">
-              {navLinks.map((link) => (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  className="text-surface-200 hover:text-white transition-colors py-2"
-                  onClick={() => setIsMobileOpen(false)}
-                >
-                  {link.label}
+            <div className="px-4 py-4 flex flex-col gap-1">
+              {navLinks.map(l => (
+                <a key={l.href} href={l.href}
+                  className="text-[#64748B] hover:text-[#1B2B6B] py-3 text-sm font-medium border-b border-[#F1F5F9] last:border-0 transition-colors"
+                  onClick={() => setMobileOpen(false)}>
+                  {l.label}
                 </a>
               ))}
-              <a
-                href="#pricing"
-                className="mt-2 px-5 py-3 bg-gradient-to-r from-primary-600 to-accent-600 text-white rounded-full text-sm font-semibold text-center"
-                onClick={() => setIsMobileOpen(false)}
-              >
-                Start Free Trial
+              <a href="#pricing"
+                className="mt-3 flex items-center justify-center gap-2 px-5 py-3 rounded-lg bg-[#1B2B6B] text-white text-sm font-semibold"
+                onClick={() => setMobileOpen(false)}>
+                Book a Demo <ArrowRight className="w-4 h-4" />
               </a>
             </div>
           </motion.div>
         )}
       </AnimatePresence>
-    </motion.nav>
+    </nav>
   );
 }

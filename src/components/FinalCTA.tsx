@@ -1,14 +1,14 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowRight, Zap, Mail } from "lucide-react";
+import { ArrowRight, Mail } from "lucide-react";
+import { Logo } from "@/components/Navbar";
 
 export default function FinalCTA() {
   return (
-    <section className="relative py-24 bg-surface-900 overflow-hidden">
-      {/* Background effects */}
-      <div className="absolute inset-0 bg-gradient-to-b from-primary-900/10 via-transparent to-accent-900/10" />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary-600/10 rounded-full blur-[200px]" />
+    <section className="bg-[#1B2B6B] py-24 overflow-hidden relative">
+      {/* Subtle radial glow */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_#2d46a8_0%,_transparent_70%)] opacity-40" />
 
       <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <motion.div
@@ -16,29 +16,29 @@ export default function FinalCTA() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
         >
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6">
-            Every day you wait, you&apos;re paying{" "}
-            <span className="text-danger-400">$250+ in hidden costs.</span>
+          <p className="text-white/60 text-xs font-bold uppercase tracking-widest mb-6">
+            Free AR Audit — No Commitment
+          </p>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white leading-tight mb-6">
+            Every week you wait, overdue invoices age another 7 days.
           </h2>
-          <p className="text-surface-200 text-lg max-w-2xl mx-auto mb-10">
-            Your competitors are already automating. The question isn&apos;t
-            whether you should switch — it&apos;s how much you&apos;ll lose
-            before you do.
+          <p className="text-white/70 text-lg max-w-2xl mx-auto mb-10">
+            Book a 30-minute call. We&apos;ll show you exactly where money is leaking in your AR process — free, with zero sales pressure.
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
             <a
               href="#pricing"
               id="final-cta-primary"
-              className="group px-8 py-4 bg-gradient-to-r from-primary-600 to-accent-600 text-white rounded-full text-lg font-bold hover:from-primary-500 hover:to-accent-500 transition-all flex items-center gap-3 pulse-glow"
+              className="group flex items-center gap-2 px-9 py-4 rounded-lg bg-[#E8242A] text-white text-base font-bold hover:bg-[#C41E23] transition-colors shadow-lg shadow-[#E8242A]/30"
             >
-              Start Free Trial — No Card Required
-              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              Book Free AR Audit
+              <ArrowRight className="w-5 h-5 group-hover:translate-x-0.5 transition-transform" />
             </a>
           </div>
 
-          <p className="text-surface-500 text-sm">
-            15 min setup. Process your first invoice in under 60 seconds.
+          <p className="text-white/40 text-sm">
+            Live in 48 hours. No IT involvement. No credit card required to start.
           </p>
         </motion.div>
       </div>
@@ -48,53 +48,31 @@ export default function FinalCTA() {
 
 export function Footer() {
   return (
-    <footer className="bg-surface-950 border-t border-surface-800 py-12">
+    <footer className="bg-[#0F172A] border-t border-white/5 py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-          <div className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-primary-500 to-accent-500 flex items-center justify-center">
-              <Zap className="w-4 h-4 text-white" />
-            </div>
-            <span className="text-xl font-bold">
-              data<span className="text-primary-400">byt</span>
-            </span>
+          <Logo className="text-xl" />
+
+          <div className="flex items-center gap-6 text-[#64748B] text-sm">
+            <a href="#how-it-works" className="hover:text-white transition-colors">How It Works</a>
+            <a href="#pricing" className="hover:text-white transition-colors">Pricing</a>
+            <a href="#faq" className="hover:text-white transition-colors">FAQ</a>
           </div>
 
-          <div className="flex items-center gap-6 text-surface-400 text-sm">
-            <a href="#how-it-works" className="hover:text-white transition-colors">
-              How It Works
-            </a>
-            <a href="#pricing" className="hover:text-white transition-colors">
-              Pricing
-            </a>
-            <a href="#calculator" className="hover:text-white transition-colors">
-              Calculator
-            </a>
-            <a href="#faq" className="hover:text-white transition-colors">
-              FAQ
-            </a>
-          </div>
-
-          <div className="flex items-center gap-4 text-surface-500 text-sm">
-            <a
-              href="mailto:kuberan@databyt.in"
-              className="flex items-center gap-2 hover:text-white transition-colors"
-            >
-              <Mail className="w-4 h-4" />
-              kuberan@databyt.in
-            </a>
-          </div>
+          <a
+            href="mailto:kuberan@databyt.in"
+            className="flex items-center gap-2 text-[#64748B] text-sm hover:text-white transition-colors"
+          >
+            <Mail className="w-4 h-4" />
+            kuberan@databyt.in
+          </a>
         </div>
 
-        <div className="mt-8 pt-8 border-t border-surface-800 flex flex-col sm:flex-row items-center justify-between gap-4 text-surface-600 text-xs">
-          <p>© 2026 DataByt. Made in India 🇮🇳</p>
+        <div className="mt-8 pt-8 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-4 text-[#475569] text-xs">
+          <p>© 2026 DataByt. Made in India.</p>
           <div className="flex gap-4">
-            <a href="#" className="hover:text-surface-400 transition-colors">
-              Privacy Policy
-            </a>
-            <a href="#" className="hover:text-surface-400 transition-colors">
-              Terms of Service
-            </a>
+            <a href="#" className="hover:text-[#64748B] transition-colors">Privacy Policy</a>
+            <a href="#" className="hover:text-[#64748B] transition-colors">Terms of Service</a>
           </div>
         </div>
       </div>

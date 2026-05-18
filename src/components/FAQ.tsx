@@ -2,48 +2,44 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronDown, HelpCircle } from "lucide-react";
+import { ChevronDown } from "lucide-react";
 
 const faqs = [
   {
-    q: "How is DataByt different from HighRadius or Bill.com?",
-    a: "HighRadius charges $8,000–$15,000+/year and is built for enterprises with 6-month implementation cycles. Bill.com locks you into their ecosystem with per-invoice fees. DataByt gives you enterprise-grade AI at 95% less cost, deploys in 1 hour, and you own your data. Plus, we include an AI Collections Agent that HighRadius charges separately for.",
+    q: "How is DataByt different from HighRadius or Tesorio?",
+    a: "HighRadius starts at $30,000+/year with a 6-month implementation cycle built for enterprises with dedicated IT teams. DataByt is live in 48 hours with no IT involvement, and starts at $3,000/month — the same AI-driven outcome at a fraction of the cost. We're built specifically for mid-market CFOs who don't have enterprise procurement budgets.",
   },
   {
-    q: "What if the AI makes mistakes on my invoices?",
-    a: "Our AI achieves 95%+ accuracy out of the box using Azure Document Intelligence + Claude AI. Uncertain extractions are automatically flagged for human review — your team sees them in 30 seconds. Our Vendor Learning Agent gets smarter with every correction, so accuracy only improves over time.",
+    q: "How does the AI Collections Agent actually work?",
+    a: "It imports your AR aging from QuickBooks or Xero daily. Then it scores every overdue invoice — factoring in amount, days overdue, customer segment, and payment history — to determine priority. It drafts a personalized dunning email for each, calibrating the tone to the invoice age (polite reminder → firm notice → final notice). You review and approve, or turn on full autopilot.",
   },
   {
-    q: "How does the AI Collections Agent work?",
-    a: "It imports your AR aging from QuickBooks/Xero daily, then uses AI to: (1) prioritize which customers to chase first based on amount, days overdue, and payment history, (2) draft personalized, professional reminder emails, (3) send them at optimal times via automated dunning sequences, and (4) include payment links for instant payment. You see everything in your AR dashboard.",
-  },
-  {
-    q: "Can I try before I buy?",
-    a: "Absolutely. We'll process 10 of your real invoices live during your demo — before you pay anything. No credit card required to start your free trial. And there's a 60-day unconditional money-back guarantee.",
-  },
-  {
-    q: "What accounting software do you integrate with?",
-    a: "We integrate with QuickBooks Online (Starter plan and up) and Xero (Growth plan and up). Invoices are synced as Bills in your accounting system. We're adding Sage and NetSuite in Q3 2026.",
-  },
-  {
-    q: "Is my data secure?",
-    a: "Yes. Your data is encrypted at rest and in transit. We use Supabase (PostgreSQL) with row-level security. Invoice files are stored in encrypted cloud storage. We never share your data. You can export everything and delete your account at any time.",
-  },
-  {
-    q: "What happens if I cancel?",
-    a: "You get a full Postgres dump and JSON export of all your data within 24 hours. No exit fees. No data hostage. We even keep your processed invoices accessible for 30 days after cancellation.",
+    q: "Will the AI emails sound robotic to my customers?",
+    a: "No. The AI is given context about your customer relationship and writes emails that read like a senior AR manager drafted them. Every email uses the customer's name, references specific invoice numbers and amounts, and is adapted to their payment history. Customers regularly respond without realizing the email was AI-generated.",
   },
   {
     q: "How long does setup take?",
-    a: "Under 1 hour for most businesses. Sign up → connect QuickBooks/Xero → upload or forward your first invoice. The AI starts extracting immediately. Collections Agent activates once your AR aging is imported.",
+    a: "48 hours for most businesses. We handle onboarding: QuickBooks/Xero connection, AR aging import, and first-run configuration. You don't touch a line of code or configure a workflow. By day 2, your queue is live and emails are ready to send.",
+  },
+  {
+    q: "What accounting software do you integrate with?",
+    a: "QuickBooks Online and Xero for both AR and AP data. Invoices and customers sync automatically. We're adding Sage and NetSuite in Q3 2026.",
+  },
+  {
+    q: "Is my data secure?",
+    a: "Yes. All data is encrypted at rest and in transit. We use PostgreSQL with row-level security — your data is completely isolated from other customers. We never train AI models on your data. You can export everything and delete your account at any time.",
+  },
+  {
+    q: "What's included in the free AR Audit?",
+    a: "A 30-minute call where we review your current AR process, calculate your monthly hidden cost of manual collections (labor, DSO drag, write-offs), and show you exactly where money is leaking. No sales pressure. You leave with a clear picture of your numbers whether you sign up or not.",
   },
 ];
 
 export default function FAQ() {
-  const [openIndex, setOpenIndex] = useState<number | null>(0);
+  const [open, setOpen] = useState<number | null>(0);
 
   return (
-    <section id="faq" className="relative py-24 bg-surface-950">
+    <section id="faq" className="bg-[#F8F9FC] py-24">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -51,48 +47,42 @@ export default function FAQ() {
           viewport={{ once: true }}
           className="text-center mb-12"
         >
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary-500/10 text-primary-400 text-sm font-medium mb-6">
-            <HelpCircle className="w-4 h-4" />
-            Frequently Asked Questions
-          </div>
-          <h2 className="text-3xl sm:text-4xl font-bold">
-            Got questions? We&apos;ve got{" "}
-            <span className="gradient-text">answers.</span>
+          <p className="text-xs font-bold uppercase tracking-widest text-[#E8242A] mb-4">FAQ</p>
+          <h2 className="text-3xl sm:text-4xl font-black text-[#0F172A]">
+            Common questions
           </h2>
         </motion.div>
 
-        <div className="space-y-3">
+        <div className="space-y-2">
           {faqs.map((faq, i) => (
             <motion.div
               key={i}
-              initial={{ opacity: 0, y: 10 }}
+              initial={{ opacity: 0, y: 8 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: i * 0.05 }}
-              className="glass rounded-2xl overflow-hidden"
+              transition={{ delay: i * 0.04 }}
+              className="bg-white border border-[#E2E8F0] rounded-xl overflow-hidden"
             >
               <button
-                onClick={() => setOpenIndex(openIndex === i ? null : i)}
-                className="w-full flex items-center justify-between p-5 text-left"
+                onClick={() => setOpen(open === i ? null : i)}
+                className="w-full flex items-center justify-between px-6 py-4 text-left hover:bg-[#F8F9FC] transition-colors"
               >
-                <span className="text-white font-medium pr-4">{faq.q}</span>
+                <span className="text-[#0F172A] font-semibold text-sm pr-4">{faq.q}</span>
                 <ChevronDown
-                  className={`w-5 h-5 text-surface-400 shrink-0 transition-transform ${
-                    openIndex === i ? "rotate-180" : ""
-                  }`}
+                  className={`w-5 h-5 text-[#1B2B6B] shrink-0 transition-transform ${open === i ? "rotate-180" : ""}`}
                 />
               </button>
               <AnimatePresence>
-                {openIndex === i && (
+                {open === i && (
                   <motion.div
                     initial={{ height: 0, opacity: 0 }}
                     animate={{ height: "auto", opacity: 1 }}
                     exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.2 }}
+                    transition={{ duration: 0.18 }}
                     className="overflow-hidden"
                   >
-                    <div className="px-5 pb-5 text-surface-400 text-sm leading-relaxed">
-                      {faq.a}
+                    <div className="px-6 pb-5 text-[#64748B] text-sm leading-relaxed border-t border-[#F1F5F9]">
+                      <div className="pt-4">{faq.a}</div>
                     </div>
                   </motion.div>
                 )}

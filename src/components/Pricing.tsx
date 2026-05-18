@@ -1,217 +1,153 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Check, ArrowRight, Star, Zap, Crown } from "lucide-react";
+import { Check, ArrowRight } from "lucide-react";
 
 const plans = [
   {
-    name: "Starter",
-    price: 49,
+    name: "AR Engine",
+    price: "$3,000",
     period: "/month",
-    subtitle: "For freelancers & micro-businesses",
-    invoiceLimit: "Up to 500 invoices/month",
-    icon: Zap,
-    color: "from-primary-500 to-primary-600",
-    popular: false,
+    setup: "+ $5,000 one-time setup",
+    subtitle: "AI-powered AR collections for mid-market finance teams",
+    highlight: false,
     features: [
-      "AI Invoice Processing (95%+ accuracy)",
-      "Basic Dunning (3 email templates)",
-      "1 ERP integration (QuickBooks)",
-      "5 reviewer logins",
-      "Full vendor learning",
-      "Email support",
-      "30-day money-back guarantee",
+      "AI Collections Agent — full automation",
+      "Personalized dunning emails (L1/L2/L3 tone)",
+      "AR aging dashboard & analytics",
+      "Customer segmentation (strategic / at-risk)",
+      "QuickBooks & Xero integration",
+      "Reply detection & tracking",
+      "Weekly performance reports",
+      "Dedicated onboarding — live in 48 hrs",
+      "Email & phone support",
     ],
+    cta: "Book a Demo",
+    ctaHref: "#pricing",
   },
   {
-    name: "Growth",
-    price: 99,
+    name: "CashFlow Command",
+    price: "$6,000",
     period: "/month",
-    subtitle: "For small businesses scaling fast",
-    invoiceLimit: "Up to 2,000 invoices/month",
-    icon: Star,
-    color: "from-accent-500 to-accent-600",
-    popular: true,
+    setup: "+ $10,000 one-time setup",
+    subtitle: "Full cash flow command center — AR + AP + forecasting",
+    highlight: true,
     features: [
-      "Everything in Starter, plus:",
-      "Full AI Collections Agent",
-      "AR Dashboard & Analytics",
-      "Smart priority scoring",
-      "SMS reminders",
-      "2 ERP integrations (QBO + Xero)",
-      "25 reviewer logins",
-      "Phone support (business hours)",
-      "60-day money-back guarantee",
-    ],
-  },
-  {
-    name: "Scale",
-    price: 149,
-    period: "/month",
-    subtitle: "For growing companies",
-    invoiceLimit: "Up to 5,000 invoices/month",
-    icon: Crown,
-    color: "from-warning-400 to-warning-500",
-    popular: false,
-    features: [
-      "Everything in Growth, plus:",
+      "Everything in AR Engine, plus:",
+      "AI Invoice Processor (AP automation)",
+      "Cash flow forecasting dashboard",
+      "Multi-entity / multi-org support",
       "Custom dunning sequences",
       "Payment link generation",
       "Unlimited ERP integrations",
-      "Unlimited reviewer logins",
-      "Custom column mapping",
       "Priority support + dedicated CSM",
-      "60-day money-back guarantee",
       "On-call engineering support",
     ],
+    cta: "Book a Demo",
+    ctaHref: "#pricing",
   },
 ];
 
 export default function Pricing() {
   return (
-    <section id="pricing" className="relative py-24 bg-surface-900">
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary-600/5 rounded-full blur-[200px]" />
+    <section id="pricing" className="bg-[#F8F9FC] py-24">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-14"
         >
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">
-            Simple pricing.{" "}
-            <span className="gradient-text">No invoice-per-invoice fees.</span>
+          <p className="text-xs font-bold uppercase tracking-widest text-[#E8242A] mb-4">Pricing</p>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#0F172A] leading-tight">
+            Enterprise-grade AI.{" "}
+            <span className="text-[#1B2B6B]">10× cheaper</span> than HighRadius.
           </h2>
-          <p className="text-surface-400 text-lg max-w-2xl mx-auto">
-            Flat monthly investment. Everything included. Cancel anytime.
+          <p className="mt-4 text-[#64748B] text-lg max-w-xl mx-auto">
+            Flat monthly fee. No per-invoice charges. No surprise bills.
           </p>
-
-          {/* Value anchor */}
-          <div className="mt-8 inline-flex items-center gap-3 glass-light rounded-full px-6 py-3">
-            <span className="text-surface-400 text-sm">
-              HighRadius charges{" "}
-              <span className="line-through text-danger-400">$8,000–$15,000/year</span>
-            </span>
-            <span className="text-surface-600">|</span>
-            <span className="text-success-400 text-sm font-semibold">
-              DataByt starts at $588/year
-            </span>
-          </div>
         </motion.div>
 
-        {/* Pricing Cards */}
-        <div className="grid lg:grid-cols-3 gap-8 max-w-5xl mx-auto">
+        <div className="grid md:grid-cols-2 gap-8">
           {plans.map((plan, i) => (
             <motion.div
               key={i}
-              initial={{ opacity: 0, y: 40 }}
+              initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: i * 0.15 }}
-              className={`relative rounded-3xl overflow-hidden ${
-                plan.popular ? "lg:scale-105 lg:-my-4" : ""
+              transition={{ delay: i * 0.1 }}
+              className={`rounded-2xl p-8 flex flex-col ${
+                plan.highlight
+                  ? "bg-[#1B2B6B] text-white shadow-xl shadow-[#1B2B6B]/25"
+                  : "bg-white border border-[#E2E8F0] shadow-sm"
               }`}
             >
-              {plan.popular && (
-                <div className="absolute top-0 left-0 right-0 bg-gradient-to-r from-accent-500 to-primary-500 text-white text-center py-2 text-sm font-bold">
-                  ⚡ MOST POPULAR — Best Value
+              {plan.highlight && (
+                <div className="inline-flex self-start mb-4">
+                  <span className="bg-[#E8242A] text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide">
+                    Full Suite
+                  </span>
                 </div>
               )}
 
-              <div
-                className={`glass h-full flex flex-col ${
-                  plan.popular
-                    ? "pt-14 border-accent-500/30"
-                    : "pt-8 border-surface-700/30"
-                } p-8 border rounded-3xl`}
-              >
-                {/* Plan header */}
-                <div className="mb-6">
-                  <div className="flex items-center gap-3 mb-3">
-                    <div
-                      className={`w-10 h-10 rounded-xl bg-gradient-to-br ${plan.color} flex items-center justify-center`}
-                    >
-                      <plan.icon className="w-5 h-5 text-white" />
-                    </div>
-                    <div>
-                      <h3 className="text-xl font-bold text-white">
-                        {plan.name}
-                      </h3>
-                      <p className="text-surface-500 text-xs">{plan.subtitle}</p>
-                    </div>
-                  </div>
-                </div>
+              <h3 className={`text-xl font-black mb-1 ${plan.highlight ? "text-white" : "text-[#0F172A]"}`}>
+                {plan.name}
+              </h3>
+              <p className={`text-sm mb-6 ${plan.highlight ? "text-white/70" : "text-[#64748B]"}`}>
+                {plan.subtitle}
+              </p>
 
-                {/* Price */}
-                <div className="mb-6">
-                  <div className="flex items-baseline gap-1">
-                    <span className="text-5xl font-black text-white">
-                      ${plan.price}
-                    </span>
-                    <span className="text-surface-400 text-lg">
-                      {plan.period}
-                    </span>
-                  </div>
-                  <p className="text-surface-500 text-sm mt-1">
-                    {plan.invoiceLimit}
-                  </p>
-                </div>
-
-                {/* CTA */}
-                <a
-                  href="#"
-                  id={`pricing-cta-${plan.name.toLowerCase()}`}
-                  className={`w-full py-3.5 rounded-full text-center font-semibold text-sm transition-all flex items-center justify-center gap-2 mb-8 ${
-                    plan.popular
-                      ? "bg-gradient-to-r from-accent-500 to-primary-500 text-white hover:from-accent-400 hover:to-primary-400 pulse-glow"
-                      : "glass-light text-white hover:bg-white/10"
-                  }`}
-                >
-                  Start Free Trial
-                  <ArrowRight className="w-4 h-4" />
-                </a>
-
-                {/* Features */}
-                <ul className="flex-1 space-y-3">
-                  {plan.features.map((feature, j) => (
-                    <li
-                      key={j}
-                      className="flex items-start gap-3 text-sm text-surface-200"
-                    >
-                      <Check className="w-4 h-4 text-success-400 mt-0.5 shrink-0" />
-                      {feature}
-                    </li>
-                  ))}
-                </ul>
+              <div className="mb-2">
+                <span className={`text-5xl font-black ${plan.highlight ? "text-white" : "text-[#0F172A]"}`}>
+                  {plan.price}
+                </span>
+                <span className={`text-base ml-1 ${plan.highlight ? "text-white/60" : "text-[#94A3B8]"}`}>
+                  {plan.period}
+                </span>
               </div>
+              <p className={`text-sm mb-8 ${plan.highlight ? "text-white/50" : "text-[#94A3B8]"}`}>
+                {plan.setup}
+              </p>
+
+              <a
+                href={plan.ctaHref}
+                className={`flex items-center justify-center gap-2 py-3.5 rounded-lg text-sm font-bold mb-8 transition-colors ${
+                  plan.highlight
+                    ? "bg-[#E8242A] text-white hover:bg-[#C41E23]"
+                    : "bg-[#1B2B6B] text-white hover:bg-[#152356]"
+                }`}
+              >
+                {plan.cta}
+                <ArrowRight className="w-4 h-4" />
+              </a>
+
+              <ul className="space-y-3 flex-1">
+                {plan.features.map((f, j) => (
+                  <li key={j} className="flex items-start gap-3 text-sm">
+                    <Check
+                      className={`w-4 h-4 mt-0.5 shrink-0 ${plan.highlight ? "text-[#4ADE80]" : "text-[#16A34A]"}`}
+                    />
+                    <span className={plan.highlight ? "text-white/80" : "text-[#475569]"}>{f}</span>
+                  </li>
+                ))}
+              </ul>
             </motion.div>
           ))}
         </div>
 
-        {/* Guarantee */}
+        {/* Comparison anchor */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mt-16 text-center"
+          className="mt-10 text-center"
         >
-          <div className="inline-flex flex-col sm:flex-row items-center gap-4 sm:gap-8 glass-light rounded-2xl px-8 py-6">
-            <div className="flex items-center gap-2 text-sm text-surface-200">
-              <span className="text-2xl">🛡️</span>
-              <span>60-day unconditional refund</span>
-            </div>
-            <div className="hidden sm:block w-px h-8 bg-surface-700" />
-            <div className="flex items-center gap-2 text-sm text-surface-200">
-              <span className="text-2xl">📋</span>
-              <span>Process 10 invoices free first</span>
-            </div>
-            <div className="hidden sm:block w-px h-8 bg-surface-700" />
-            <div className="flex items-center gap-2 text-sm text-surface-200">
-              <span className="text-2xl">🔓</span>
-              <span>Cancel anytime. Full data export.</span>
-            </div>
-          </div>
+          <p className="text-[#64748B] text-sm">
+            HighRadius starts at <span className="line-through text-[#EF4444]">$30,000+/year</span>.{" "}
+            <span className="text-[#0F172A] font-semibold">DataByt AR Engine: $36,000/year all-in.</span>{" "}
+            Same enterprise-grade outcome.
+          </p>
         </motion.div>
       </div>
     </section>
