@@ -73,8 +73,8 @@ body {
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: #F8F9FC;
-  color: #0F172A;
+  background: #FFFFFF;
+  color: #111111;
 }
 
 /* ─────────────────────────────────────────────────
