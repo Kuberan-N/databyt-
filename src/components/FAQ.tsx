@@ -4,6 +4,8 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Plus, Minus } from "lucide-react";
 
+const ease = [0.22, 1, 0.36, 1] as const;
+
 const faqs = [
   {
     q: "How is DataByt different from HighRadius?",
@@ -35,14 +37,14 @@ export default function FAQ() {
   const [open, setOpen] = useState<number | null>(null);
 
   return (
-    <section id="faq" className="bg-white py-24 border-b border-[#111111]">
+    <section id="faq" className="bg-[#FAFAFA] py-28 border-y border-[#EBEBEB]">
       <div className="max-w-6xl mx-auto px-6">
 
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, ease: "easeOut" }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.7, ease }}
           className="mb-14"
         >
           <h2 className="text-4xl sm:text-5xl font-black text-[#111111] leading-tight">
@@ -50,24 +52,24 @@ export default function FAQ() {
           </h2>
         </motion.div>
 
-        <div className="border-t border-[#111111]">
+        <div className="space-y-3">
           {faqs.map((faq, i) => (
             <motion.div
               key={i}
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: i * 0.05 }}
-              className="border-b border-[#111111]"
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-60px" }}
+              transition={{ duration: 0.5, ease, delay: i * 0.05 }}
+              className="rounded-2xl bg-white border border-[#EBEBEB] overflow-hidden"
             >
               <button
                 onClick={() => setOpen(open === i ? null : i)}
-                className="w-full flex items-center justify-between py-5 text-left"
+                className="w-full flex items-center justify-between px-7 py-5 text-left"
               >
                 <span className="text-[#111111] font-semibold text-base pr-8">{faq.q}</span>
                 {open === i
                   ? <Minus className="w-4 h-4 text-[#E8242A] shrink-0" />
-                  : <Plus className="w-4 h-4 text-[#111111] shrink-0" />
+                  : <Plus className="w-4 h-4 text-[#AAAAAA] shrink-0" />
                 }
               </button>
               <AnimatePresence>
@@ -76,10 +78,10 @@ export default function FAQ() {
                     initial={{ height: 0, opacity: 0 }}
                     animate={{ height: "auto", opacity: 1 }}
                     exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.25, ease: "easeOut" }}
+                    transition={{ duration: 0.3, ease }}
                     className="overflow-hidden"
                   >
-                    <p className="pb-5 text-[#555555] text-sm leading-relaxed">{faq.a}</p>
+                    <p className="px-7 pb-6 text-[#666666] text-sm leading-relaxed">{faq.a}</p>
                   </motion.div>
                 )}
               </AnimatePresence>

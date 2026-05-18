@@ -51,19 +51,19 @@ export default function ReportsPage() {
   return (
     <div className="space-y-6 max-w-3xl">
       <div>
-        <h2 className="text-2xl font-bold text-white">Reports</h2>
-        <p className="text-surface-400 text-sm mt-1">Generate CFO-ready AR reports for board meetings and financial reviews.</p>
+        <h2 className="text-2xl font-bold text-[#0F172A]">Reports</h2>
+        <p className="text-[#64748B] text-sm mt-1">Generate CFO-ready AR reports for board meetings and financial reviews.</p>
       </div>
 
       {/* Main report card */}
       <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} className="glass rounded-2xl p-6">
         <div className="flex items-start gap-4 mb-6">
-          <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-primary-500 to-accent-500 flex items-center justify-center shrink-0">
+          <div className="w-12 h-12 rounded-2xl bg-[#E8242A] flex items-center justify-center shrink-0">
             <FileText className="w-6 h-6 text-white" />
           </div>
           <div className="flex-1">
-            <h3 className="text-lg font-semibold text-white">CFO AR Collections Report</h3>
-            <p className="text-surface-400 text-sm mt-0.5">
+            <h3 className="text-lg font-semibold text-[#0F172A]">CFO AR Collections Report</h3>
+            <p className="text-[#64748B] text-sm mt-0.5">
               A professionally formatted PDF report covering all key AR metrics, aging breakdown, and top overdue customers.
             </p>
           </div>
@@ -71,13 +71,13 @@ export default function ReportsPage() {
 
         <div className="grid sm:grid-cols-2 gap-3 mb-6">
           {reportSections.map((s, i) => (
-            <div key={i} className="flex items-start gap-3 p-3.5 rounded-xl bg-surface-800/40 border border-surface-700/50">
-              <div className="w-7 h-7 rounded-lg bg-primary-500/10 border border-primary-500/20 flex items-center justify-center shrink-0 mt-0.5">
-                <s.icon className="w-3.5 h-3.5 text-primary-400" />
+            <div key={i} className="flex items-start gap-3 p-3.5 rounded-xl bg-[#F8F9FC] border border-[#E2E8F0]">
+              <div className="w-7 h-7 rounded-lg bg-[#FEF2F2] border border-[#E8242A]/20 flex items-center justify-center shrink-0 mt-0.5">
+                <s.icon className="w-3.5 h-3.5 text-[#E8242A]" />
               </div>
               <div>
-                <p className="text-sm font-medium text-white">{s.title}</p>
-                <p className="text-xs text-surface-500 mt-0.5 leading-relaxed">{s.desc}</p>
+                <p className="text-sm font-medium text-[#0F172A]">{s.title}</p>
+                <p className="text-xs text-[#64748B] mt-0.5 leading-relaxed">{s.desc}</p>
               </div>
             </div>
           ))}
@@ -99,7 +99,7 @@ export default function ReportsPage() {
         <button
           onClick={generatePDF}
           disabled={generating || !organization}
-          className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-primary-600 to-accent-600 text-white rounded-xl font-semibold text-sm hover:from-primary-500 hover:to-accent-500 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+          className="flex items-center gap-2 px-6 py-3 bg-[#E8242A] text-white rounded-xl font-semibold text-sm hover:bg-[#C41E23] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
         >
           {generating ? (
             <><Loader2 className="w-4 h-4 animate-spin" /> Generating PDF...</>
@@ -111,7 +111,7 @@ export default function ReportsPage() {
 
       {/* Upcoming features */}
       <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="glass rounded-2xl p-6">
-        <h3 className="text-sm font-semibold text-white mb-4">Coming Soon</h3>
+        <h3 className="text-sm font-semibold text-[#0F172A] mb-4">Coming Soon</h3>
         <div className="space-y-3">
           {[
             "Weekly automated CFO email delivery",
@@ -119,8 +119,8 @@ export default function ReportsPage() {
             "Collections velocity trend charts",
             "Forecast: projected collections next 30/60/90 days",
           ].map((f, i) => (
-            <div key={i} className="flex items-center gap-3 text-sm text-surface-400">
-              <div className="w-1.5 h-1.5 rounded-full bg-surface-600 shrink-0" />
+            <div key={i} className="flex items-center gap-3 text-sm text-[#64748B]">
+              <div className="w-1.5 h-1.5 rounded-full bg-[#CBD5E1] shrink-0" />
               {f}
             </div>
           ))}

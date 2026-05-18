@@ -1,17 +1,17 @@
 @import "tailwindcss";
 
 @theme {
-  /* ─── Primary: Deep Navy ─── */
-  --color-primary-50:  #EEF2FF;
-  --color-primary-100: #E0E7FF;
-  --color-primary-200: #C7D2FE;
-  --color-primary-300: #A5B4FC;
-  --color-primary-400: #4B5FA8;
-  --color-primary-500: #1B2B6B;
-  --color-primary-600: #152356;
-  --color-primary-700: #0F1A40;
-  --color-primary-800: #0A1130;
-  --color-primary-900: #060B1E;
+  /* ─── Primary: Electric Red ─── */
+  --color-primary-50:  #FFF1F2;
+  --color-primary-100: #FFE4E6;
+  --color-primary-200: #FECDD3;
+  --color-primary-300: #FDA4AF;
+  --color-primary-400: #F36166;
+  --color-primary-500: #E8242A;
+  --color-primary-600: #C41E23;
+  --color-primary-700: #9C181D;
+  --color-primary-800: #7A1218;
+  --color-primary-900: #5C0D12;
 
   /* ─── Accent: Sharp Red ─── */
   --color-accent-50:  #FFF1F2;
@@ -132,9 +132,9 @@ aside  .text-white {
   color: #FFFFFF;
 }
 
-/* ─── gradient-text: navy to medium-blue ─── */
+/* ─── gradient-text: red ─── */
 .gradient-text {
-  background: linear-gradient(135deg, #1B2B6B 0%, #4B5FA8 100%);
+  background: linear-gradient(135deg, #E8242A 0%, #C41E23 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;

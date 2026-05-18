@@ -2,6 +2,8 @@
 
 import { motion } from "framer-motion";
 
+const ease = [0.22, 1, 0.36, 1] as const;
+
 const steps = [
   {
     num: "01",
@@ -27,14 +29,14 @@ const steps = [
 
 export default function HowItWorks() {
   return (
-    <section id="how-it-works" className="bg-white py-24 border-b border-[#111111]">
+    <section id="how-it-works" className="bg-[#FAFAFA] py-28 border-y border-[#EBEBEB]">
       <div className="max-w-6xl mx-auto px-6">
 
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, ease: "easeOut" }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.7, ease }}
           className="mb-14"
         >
           <h2 className="text-4xl sm:text-5xl font-black text-[#111111] leading-tight">
@@ -42,19 +44,19 @@ export default function HowItWorks() {
           </h2>
         </motion.div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-0 border border-[#111111]">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {steps.map((s, i) => (
             <motion.div
               key={i}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, ease: "easeOut", delay: i * 0.1 }}
-              className={`p-8 ${i < steps.length - 1 ? "border-r border-[#111111]" : ""} ${i >= 2 ? "border-t border-[#111111] lg:border-t-0" : ""} ${i === 1 ? "sm:border-t-0" : ""}`}
+              viewport={{ once: true, margin: "-80px" }}
+              transition={{ duration: 0.6, ease, delay: i * 0.08 }}
+              className="p-7 rounded-2xl bg-white border border-[#EBEBEB] flex flex-col"
             >
-              <p className="text-[#E8242A] font-black text-sm mb-6">{s.num}</p>
+              <p className="text-[#E8242A] font-black text-sm mb-5">{s.num}</p>
               <h3 className="text-[#111111] font-bold text-lg mb-3">{s.title}</h3>
-              <p className="text-[#555555] text-sm leading-relaxed">{s.desc}</p>
+              <p className="text-[#666666] text-sm leading-relaxed flex-1">{s.desc}</p>
             </motion.div>
           ))}
         </div>
@@ -62,12 +64,12 @@ export default function HowItWorks() {
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, ease: "easeOut", delay: 0.4 }}
-          className="mt-8 flex items-center gap-6"
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.6, ease, delay: 0.35 }}
+          className="mt-10 flex items-center gap-6"
         >
           <a href="#pricing"
-            className="px-6 py-3 bg-[#E8242A] text-white text-sm font-bold hover:bg-[#C41E23] transition-colors">
+            className="px-6 py-3 rounded-xl bg-[#E8242A] text-white text-sm font-bold hover:bg-[#C41E23] transition-colors">
             Book a Demo
           </a>
           <p className="text-[#888888] text-sm">No IT involvement. Live in 48 hours.</p>

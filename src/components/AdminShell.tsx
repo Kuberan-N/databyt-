@@ -96,7 +96,7 @@ export default function AdminShell({ children }: { children: ReactNode }) {
   if (loading) {
     return (
       <div className="min-h-screen bg-[#F8F9FC] flex items-center justify-center">
-        <div className="w-8 h-8 border-2 border-[#1B2B6B]/20 border-t-[#1B2B6B] rounded-full animate-spin" />
+        <div className="w-8 h-8 border-2 border-[#E8242A]/20 border-t-[#E8242A] rounded-full animate-spin" />
       </div>
     );
   }
@@ -113,10 +113,10 @@ export default function AdminShell({ children }: { children: ReactNode }) {
       <div className="p-4 flex items-center justify-between border-b border-[#E2E8F0] h-16">
         <div className="flex items-center gap-2">
           <Logo className="text-lg" />
-          <span className="text-[10px] px-1.5 py-0.5 rounded bg-[#EEF2FF] text-[#1B2B6B] font-bold uppercase tracking-wider">Admin</span>
+          <span className="text-[10px] px-1.5 py-0.5 rounded bg-[#FEF2F2] text-[#E8242A] font-bold uppercase tracking-wider">Admin</span>
         </div>
         {mobile && (
-          <button onClick={() => setMobileOpen(false)} className="text-[#94A3B8] hover:text-[#1B2B6B]">
+          <button onClick={() => setMobileOpen(false)} className="text-[#94A3B8] hover:text-[#E8242A]">
             <X className="w-5 h-5" />
           </button>
         )}
@@ -128,10 +128,10 @@ export default function AdminShell({ children }: { children: ReactNode }) {
         <div className="relative">
           <button
             onClick={() => setOrgPickerOpen(o => !o)}
-            className="w-full flex items-center gap-2 px-3 py-2.5 rounded-lg bg-[#F8F9FC] border border-[#E2E8F0] hover:border-[#1B2B6B]/30 transition-colors text-left"
+            className="w-full flex items-center gap-2 px-3 py-2.5 rounded-lg bg-[#F8F9FC] border border-[#E2E8F0] hover:border-[#E8242A]/30 transition-colors text-left"
           >
-            <div className="w-6 h-6 rounded-md bg-[#EEF2FF] border border-[#1B2B6B]/20 flex items-center justify-center shrink-0">
-              <Building2 className="w-3 h-3 text-[#1B2B6B]" />
+            <div className="w-6 h-6 rounded-md bg-[#FEF2F2] border border-[#E8242A]/20 flex items-center justify-center shrink-0">
+              <Building2 className="w-3 h-3 text-[#E8242A]" />
             </div>
             <span className="flex-1 text-sm text-[#0F172A] truncate min-w-0">
               {orgsLoading ? "Loading..." : (selectedOrg?.name ?? "Select client")}
@@ -157,8 +157,8 @@ export default function AdminShell({ children }: { children: ReactNode }) {
                       onClick={() => { setSelectedOrg(org); setOrgPickerOpen(false); }}
                       className={`w-full flex items-center gap-3 px-3 py-2.5 text-sm transition-colors ${
                         selectedOrg?.id === org.id
-                          ? "bg-[#EEF2FF] text-[#1B2B6B]"
-                          : "text-[#475569] hover:bg-[#F8F9FC] hover:text-[#1B2B6B]"
+                          ? "bg-[#FEF2F2] text-[#E8242A]"
+                          : "text-[#475569] hover:bg-[#FFF1F2] hover:text-[#E8242A]"
                       }`}
                     >
                       <div className="w-5 h-5 rounded-md bg-[#F1F5F9] flex items-center justify-center shrink-0">
@@ -193,8 +193,8 @@ export default function AdminShell({ children }: { children: ReactNode }) {
               onClick={() => setMobileOpen(false)}
               className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all ${
                 isActive
-                  ? "bg-[#EEF2FF] text-[#1B2B6B]"
-                  : "text-[#64748B] hover:text-[#1B2B6B] hover:bg-[#F8F9FC]"
+                  ? "bg-[#FEF2F2] text-[#E8242A]"
+                  : "text-[#64748B] hover:text-[#E8242A] hover:bg-[#FFF1F2]"
               }`}
             >
               <link.icon className="w-4 h-4 shrink-0" />
@@ -217,7 +217,7 @@ export default function AdminShell({ children }: { children: ReactNode }) {
       {/* User */}
       <div className="border-t border-[#E2E8F0] p-3">
         <div className="flex items-center gap-3">
-          <div className="w-8 h-8 rounded-full bg-[#1B2B6B] flex items-center justify-center text-white text-xs font-bold shrink-0">
+          <div className="w-8 h-8 rounded-full bg-[#111111] flex items-center justify-center text-white text-xs font-bold shrink-0">
             {(user.email ?? "A").charAt(0).toUpperCase()}
           </div>
           <div className="flex-1 min-w-0">
@@ -268,7 +268,7 @@ export default function AdminShell({ children }: { children: ReactNode }) {
         <div className="flex-1 flex flex-col min-w-0">
           <header className="h-16 bg-white border-b border-[#E2E8F0] flex items-center justify-between px-4 sm:px-6 shrink-0">
             <div className="flex items-center gap-3">
-              <button className="lg:hidden text-[#64748B] hover:text-[#1B2B6B]" onClick={() => setMobileOpen(true)}>
+              <button className="lg:hidden text-[#64748B] hover:text-[#E8242A]" onClick={() => setMobileOpen(true)}>
                 <Menu className="w-5 h-5" />
               </button>
               <h1 className="text-sm font-semibold text-[#0F172A]">{currentLabel}</h1>
@@ -279,7 +279,7 @@ export default function AdminShell({ children }: { children: ReactNode }) {
               )}
             </div>
             <div className="flex items-center gap-2">
-              <a href="/dashboard" className="text-xs text-[#64748B] hover:text-[#1B2B6B] transition-colors px-3 py-1.5 rounded-lg border border-[#E2E8F0] hover:border-[#1B2B6B]/30">
+              <a href="/dashboard" className="text-xs text-[#64748B] hover:text-[#E8242A] transition-colors px-3 py-1.5 rounded-lg border border-[#E2E8F0] hover:border-[#E8242A]/30">
                 Client View
               </a>
             </div>
