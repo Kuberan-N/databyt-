@@ -70,6 +70,9 @@ export async function POST(req: NextRequest) {
     const orgName = org?.name ?? "Your Company";
     const signature = settings?.email_signature ?? `Best regards,\nAccounts Receivable Team\n${orgName}`;
 
+    const baseUrl = process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000";
+    const paymentLink = invoice.payment_link_url ?? `${baseUrl}/pay/${invoiceId}`;
+
     // Segment-aware tone modifier
     const segmentNote =
       customer?.segment === "strategic"
@@ -97,7 +100,8 @@ Draft a concise, professional dunning email. Rules:
 - Then blank line, then the email body
 - Address the customer by company name
 - Reference the specific invoice number and amount
-- Include a clear payment call to action
+- Include a clear payment call to action with this exact payment link: ${paymentLink}
+- Format the payment link as: Pay now: ${paymentLink}
 - Sign off with: ${signature}
 - Do NOT use placeholder text like [Your Name] — use the actual company name
 - Keep body under 150 words`;

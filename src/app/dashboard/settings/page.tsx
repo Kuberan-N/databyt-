@@ -26,6 +26,9 @@ const currencies = [
   { code: "AED", label: "AED — UAE Dirham" },
 ];
 
+const inputCls = "w-full bg-white border border-[#E2E8F0] rounded-xl px-4 py-3 text-[#0F172A] placeholder-[#94A3B8] focus:border-[#E8242A] focus:ring-1 focus:ring-[#E8242A]/20 outline-none transition-all text-sm";
+const selectCls = "w-full bg-white border border-[#E2E8F0] rounded-xl px-4 py-3 text-[#0F172A] focus:border-[#E8242A] focus:ring-1 focus:ring-[#E8242A]/20 outline-none transition-all text-sm appearance-none";
+
 export default function SettingsPage() {
   const { organization, orgUser, user, refreshOrganization } = useAuth();
 
@@ -37,16 +40,10 @@ export default function SettingsPage() {
   const [status, setStatus]                 = useState<"idle" | "success" | "error">("idle");
   const [statusMsg, setStatusMsg]           = useState("");
 
-  // Load existing values
   useEffect(() => {
     if (organization) setOrgName(organization.name);
     if (!organization) return;
-
-    db
-      .from("org_settings")
-      .select("*")
-      .eq("org_id", organization.id)
-      .single()
+    db.from("org_settings").select("*").eq("org_id", organization.id).single()
       .then(({ data }: { data: { timezone: string; currency: string; email_signature: string } | null }) => {
         if (data) {
           setTimezone(data.timezone ?? "America/New_York");
@@ -62,25 +59,15 @@ export default function SettingsPage() {
     setSaving(true);
     setStatus("idle");
 
-    // Update org name
     const { error: orgErr } = await db
-      .from("organizations")
-      .update({ name: orgName.trim() })
-      .eq("id", organization.id);
+      .from("organizations").update({ name: orgName.trim() }).eq("id", organization.id);
 
-    // Upsert org settings
-    const { error: settingsErr } = await db
-      .from("org_settings")
-      .upsert({
-        org_id: organization.id,
-        timezone,
-        currency,
-        email_signature: emailSignature,
-        updated_at: new Date().toISOString(),
-      }, { onConflict: "org_id" });
+    const { error: settingsErr } = await db.from("org_settings").upsert({
+      org_id: organization.id, timezone, currency, email_signature: emailSignature,
+      updated_at: new Date().toISOString(),
+    }, { onConflict: "org_id" });
 
     setSaving(false);
-
     if (orgErr || settingsErr) {
       setStatus("error");
       setStatusMsg(orgErr?.message ?? settingsErr?.message ?? "Failed to save.");
@@ -95,124 +82,73 @@ export default function SettingsPage() {
   return (
     <div className="space-y-6 max-w-2xl">
       <div>
-        <h2 className="text-2xl font-bold text-white">Settings</h2>
-        <p className="text-surface-400 text-sm mt-1">Manage your company profile and preferences.</p>
+        <h2 className="text-2xl font-bold text-[#0F172A]">Settings</h2>
+        <p className="text-[#64748B] text-sm mt-1">Manage your company profile and preferences.</p>
       </div>
 
       {status !== "idle" && (
-        <motion.div
-          initial={{ opacity: 0, y: -8 }}
-          animate={{ opacity: 1, y: 0 }}
+        <motion.div initial={{ opacity: 0, y: -8 }} animate={{ opacity: 1, y: 0 }}
           className={`flex items-center gap-2 px-4 py-3 rounded-xl text-sm ${
             status === "success"
-              ? "bg-success-500/10 border border-success-500/20 text-success-400"
-              : "bg-danger-500/10 border border-danger-500/20 text-danger-400"
-          }`}
-        >
-          {status === "success"
-            ? <CheckCircle className="w-4 h-4 shrink-0" />
-            : <AlertCircle className="w-4 h-4 shrink-0" />}
+              ? "bg-[#F0FDF4] border border-[#BBF7D0] text-[#16A34A]"
+              : "bg-[#FEF2F2] border border-[#FECACA] text-[#DC2626]"
+          }`}>
+          {status === "success" ? <CheckCircle className="w-4 h-4 shrink-0" /> : <AlertCircle className="w-4 h-4 shrink-0" />}
           {statusMsg}
         </motion.div>
       )}
 
       <form onSubmit={handleSave} className="space-y-5">
-        {/* Company Info */}
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="glass rounded-2xl p-6 space-y-5"
-        >
+        <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} className="glass rounded-2xl p-6 space-y-5">
           <div className="flex items-center gap-2 mb-1">
-            <Building2 className="w-4 h-4 text-surface-400" />
-            <h3 className="text-sm font-semibold text-white">Company Info</h3>
+            <Building2 className="w-4 h-4 text-[#94A3B8]" />
+            <h3 className="text-sm font-semibold text-[#0F172A]">Company Info</h3>
           </div>
-
           <div>
-            <label className="text-surface-300 text-sm font-medium mb-2 block">Company Name</label>
-            <input
-              type="text"
-              value={orgName}
-              onChange={(e) => setOrgName(e.target.value)}
-              placeholder="Acme Corp"
-              className="w-full bg-surface-800/50 border border-surface-700 rounded-xl px-4 py-3 text-white placeholder-surface-500 focus:border-primary-500 focus:ring-1 focus:ring-primary-500/30 outline-none transition-all text-sm"
-              required
-            />
+            <label className="text-[#475569] text-sm font-medium mb-2 block">Company Name</label>
+            <input type="text" value={orgName} onChange={(e) => setOrgName(e.target.value)}
+              placeholder="Acme Corp" className={inputCls} required />
           </div>
         </motion.div>
 
-        {/* Regional Settings */}
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.05 }}
-          className="glass rounded-2xl p-6 space-y-5"
-        >
+        <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.05 }}
+          className="glass rounded-2xl p-6 space-y-5">
           <div className="flex items-center gap-2 mb-1">
-            <Globe className="w-4 h-4 text-surface-400" />
-            <h3 className="text-sm font-semibold text-white">Regional</h3>
+            <Globe className="w-4 h-4 text-[#94A3B8]" />
+            <h3 className="text-sm font-semibold text-[#0F172A]">Regional</h3>
           </div>
-
           <div className="grid sm:grid-cols-2 gap-4">
             <div>
-              <label className="text-surface-300 text-sm font-medium mb-2 block">
-                <Clock className="w-3.5 h-3.5 inline mr-1.5 text-surface-500" />
-                Timezone
+              <label className="text-[#475569] text-sm font-medium mb-2 block">
+                <Clock className="w-3.5 h-3.5 inline mr-1.5 text-[#94A3B8]" />Timezone
               </label>
-              <select
-                value={timezone}
-                onChange={(e) => setTimezone(e.target.value)}
-                className="w-full bg-surface-800/50 border border-surface-700 rounded-xl px-4 py-3 text-white focus:border-primary-500 focus:ring-1 focus:ring-primary-500/30 outline-none transition-all text-sm appearance-none"
-              >
-                {timezones.map((tz) => (
-                  <option key={tz} value={tz}>{tz.replace("_", " ")}</option>
-                ))}
+              <select value={timezone} onChange={(e) => setTimezone(e.target.value)} className={selectCls}>
+                {timezones.map((tz) => <option key={tz} value={tz}>{tz.replace("_", " ")}</option>)}
               </select>
             </div>
             <div>
-              <label className="text-surface-300 text-sm font-medium mb-2 block">Currency</label>
-              <select
-                value={currency}
-                onChange={(e) => setCurrency(e.target.value)}
-                className="w-full bg-surface-800/50 border border-surface-700 rounded-xl px-4 py-3 text-white focus:border-primary-500 focus:ring-1 focus:ring-primary-500/30 outline-none transition-all text-sm appearance-none"
-              >
-                {currencies.map((c) => (
-                  <option key={c.code} value={c.code}>{c.label}</option>
-                ))}
+              <label className="text-[#475569] text-sm font-medium mb-2 block">Currency</label>
+              <select value={currency} onChange={(e) => setCurrency(e.target.value)} className={selectCls}>
+                {currencies.map((c) => <option key={c.code} value={c.code}>{c.label}</option>)}
               </select>
             </div>
           </div>
         </motion.div>
 
-        {/* Email Signature */}
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.1 }}
-          className="glass rounded-2xl p-6 space-y-4"
-        >
+        <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}
+          className="glass rounded-2xl p-6 space-y-4">
           <div className="flex items-center gap-2 mb-1">
-            <Mail className="w-4 h-4 text-surface-400" />
-            <h3 className="text-sm font-semibold text-white">Email Signature</h3>
+            <Mail className="w-4 h-4 text-[#94A3B8]" />
+            <h3 className="text-sm font-semibold text-[#0F172A]">Email Signature</h3>
           </div>
-          <p className="text-surface-500 text-xs -mt-2">
-            Appended to all collection emails sent on your behalf.
-          </p>
-          <textarea
-            value={emailSignature}
-            onChange={(e) => setEmailSignature(e.target.value)}
-            rows={4}
-            placeholder={`Best regards,\nThe ${orgName || "Finance"} Team\nphone: +1 (555) 000-0000`}
-            className="w-full bg-surface-800/50 border border-surface-700 rounded-xl px-4 py-3 text-white placeholder-surface-500 focus:border-primary-500 focus:ring-1 focus:ring-primary-500/30 outline-none transition-all text-sm resize-none font-mono"
-          />
+          <p className="text-[#94A3B8] text-xs -mt-2">Appended to all collection emails sent on your behalf.</p>
+          <textarea value={emailSignature} onChange={(e) => setEmailSignature(e.target.value)}
+            rows={4} placeholder={`Best regards,\nThe ${orgName || "Finance"} Team`}
+            className="w-full bg-white border border-[#E2E8F0] rounded-xl px-4 py-3 text-[#0F172A] placeholder-[#94A3B8] focus:border-[#E8242A] focus:ring-1 focus:ring-[#E8242A]/20 outline-none transition-all text-sm resize-none font-mono" />
         </motion.div>
 
-        {/* Save */}
-        <button
-          type="submit"
-          disabled={saving}
-          className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-primary-600 to-accent-600 text-white rounded-xl font-semibold hover:from-primary-500 hover:to-accent-500 transition-all disabled:opacity-50 disabled:cursor-not-allowed text-sm"
-        >
+        <button type="submit" disabled={saving}
+          className="flex items-center gap-2 px-6 py-3 bg-[#E8242A] text-white rounded-xl font-semibold hover:bg-[#C41E23] transition-colors disabled:opacity-50 disabled:cursor-not-allowed text-sm">
           {saving
             ? <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
             : <Save className="w-4 h-4" />}
@@ -220,61 +156,44 @@ export default function SettingsPage() {
         </button>
       </form>
 
-      {/* Account Info — read only */}
-      <motion.div
-        initial={{ opacity: 0, y: 16 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.15 }}
-        className="glass rounded-2xl p-6 space-y-4"
-      >
+      {/* Account Info */}
+      <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.15 }}
+        className="glass rounded-2xl p-6 space-y-4">
         <div className="flex items-center gap-2 mb-1">
-          <User className="w-4 h-4 text-surface-400" />
-          <h3 className="text-sm font-semibold text-white">Your Account</h3>
+          <User className="w-4 h-4 text-[#94A3B8]" />
+          <h3 className="text-sm font-semibold text-[#0F172A]">Your Account</h3>
         </div>
         <div className="grid sm:grid-cols-2 gap-4 text-sm">
-          <div>
-            <p className="text-surface-500 text-xs mb-1">Email</p>
-            <p className="text-white">{user?.email ?? "—"}</p>
-          </div>
-          <div>
-            <p className="text-surface-500 text-xs mb-1">Role</p>
-            <p className="text-white capitalize">{orgUser?.role ?? "admin"}</p>
-          </div>
-          <div>
-            <p className="text-surface-500 text-xs mb-1">Plan</p>
-            <p className="text-white capitalize">{organization?.plan_tier ?? "starter"}</p>
-          </div>
-          <div>
-            <p className="text-surface-500 text-xs mb-1">Member since</p>
-            <p className="text-white">
-              {organization?.created_at
-                ? new Date(organization.created_at).toLocaleDateString("en-US", { month: "long", year: "numeric" })
-                : "—"}
-            </p>
-          </div>
+          {[
+            { label: "Email", value: user?.email ?? "—" },
+            { label: "Role", value: orgUser?.role ?? "admin" },
+            { label: "Plan", value: organization?.plan_tier ?? "starter" },
+            { label: "Member since", value: organization?.created_at
+              ? new Date(organization.created_at).toLocaleDateString("en-US", { month: "long", year: "numeric" })
+              : "—" },
+          ].map(f => (
+            <div key={f.label}>
+              <p className="text-[#94A3B8] text-xs mb-1">{f.label}</p>
+              <p className="text-[#0F172A] capitalize">{f.value}</p>
+            </div>
+          ))}
         </div>
       </motion.div>
 
       {/* Security */}
-      <motion.div
-        initial={{ opacity: 0, y: 16 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.2 }}
-        className="glass rounded-2xl p-6"
-      >
+      <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}
+        className="glass rounded-2xl p-6">
         <div className="flex items-center gap-2 mb-4">
-          <Shield className="w-4 h-4 text-surface-400" />
-          <h3 className="text-sm font-semibold text-white">Security</h3>
+          <Shield className="w-4 h-4 text-[#94A3B8]" />
+          <h3 className="text-sm font-semibold text-[#0F172A]">Security</h3>
         </div>
         <div className="flex items-center justify-between">
           <div>
-            <p className="text-sm text-surface-300">Password</p>
-            <p className="text-xs text-surface-500 mt-0.5">Change your account password</p>
+            <p className="text-sm text-[#0F172A]">Password</p>
+            <p className="text-xs text-[#94A3B8] mt-0.5">Change your account password</p>
           </div>
-          <a
-            href="/auth/reset-password"
-            className="text-xs text-primary-400 font-medium px-3 py-1.5 rounded-lg border border-primary-500/20 bg-primary-500/10 hover:bg-primary-500/15 transition-colors"
-          >
+          <a href="/auth/reset-password"
+            className="text-xs text-[#E8242A] font-medium px-3 py-1.5 rounded-lg border border-[#E8242A]/20 bg-[#FEF2F2] hover:bg-[#FEE2E2] transition-colors">
             Change Password
           </a>
         </div>

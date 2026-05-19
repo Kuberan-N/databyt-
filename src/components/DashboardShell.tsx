@@ -5,18 +5,22 @@ import { useRouter, usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   LayoutDashboard, BarChart2, Send, Users, Settings,
-  LogOut, ChevronLeft, Menu, FileText,
+  LogOut, ChevronLeft, Menu, FileText, AlertTriangle,
+  TrendingUp, Plug,
 } from "lucide-react";
 import { useAuth } from "@/components/AuthProvider";
 import { Logo } from "@/components/Navbar";
 
 const sidebarLinks = [
-  { label: "Dashboard",   href: "/dashboard",             icon: LayoutDashboard },
-  { label: "AR Aging",    href: "/dashboard/ar-aging",    icon: BarChart2 },
-  { label: "Collections", href: "/dashboard/collections", icon: Send },
-  { label: "Customers",   href: "/dashboard/customers",   icon: Users },
-  { label: "Reports",     href: "/dashboard/reports",     icon: FileText },
-  { label: "Settings",    href: "/dashboard/settings",    icon: Settings },
+  { label: "Dashboard",    href: "/dashboard",               icon: LayoutDashboard },
+  { label: "AR Aging",     href: "/dashboard/ar-aging",      icon: BarChart2 },
+  { label: "Collections",  href: "/dashboard/collections",   icon: Send },
+  { label: "Disputes",     href: "/dashboard/disputes",      icon: AlertTriangle },
+  { label: "Analytics",    href: "/dashboard/analytics",     icon: TrendingUp },
+  { label: "Customers",    href: "/dashboard/customers",     icon: Users },
+  { label: "Reports",      href: "/dashboard/reports",       icon: FileText },
+  { label: "Integrations", href: "/dashboard/integrations",  icon: Plug },
+  { label: "Settings",     href: "/dashboard/settings",      icon: Settings },
 ];
 
 export default function DashboardShell({ children }: { children: ReactNode }) {
