@@ -1,15 +1,16 @@
 # DataByt — Product Deep-Dive: A to Z
 ### Complete product knowledge, market analysis, honest assessment
+### Updated: 2026-05-19 — reflects full feature build
 
 ---
 
 ## SECTION 1: WHAT IS DATABYT?
 
-DataByt is an AI-powered Accounts Receivable (AR) automation platform that connects directly to QuickBooks Online or Xero, imports overdue invoices automatically, scores them by collection priority, and sends personalized dunning emails on the company's behalf — without any manual intervention.
+DataByt is an AI-powered Accounts Receivable (AR) automation platform that connects to QuickBooks Online, Xero, NetSuite, or Sage Business Cloud — imports overdue invoices automatically, scores them by collection priority, sends personalized dunning emails with embedded payment links, manages disputes, auto-matches incoming payments, and tracks collection performance via a CEI dashboard — all without manual intervention.
 
-**Target customer:** Finance directors, controllers, and CFOs at mid-market B2B companies ($3M–$100M annual revenue) who are tired of chasing invoices manually or are watching their DSO creep upward.
+**Target customer:** Finance directors, controllers, and CFOs at mid-market B2B companies ($3M–$100M annual revenue) who are tired of chasing invoices manually or watching their DSO creep upward.
 
-**Core promise:** Reduce DSO (Days Sales Outstanding) by 30%, go live in 48 hours, no IT team needed.
+**Core promise:** Reduce DSO by 30%, go live in 48 hours, no IT team needed.
 
 ---
 
@@ -18,21 +19,27 @@ DataByt is an AI-powered Accounts Receivable (AR) automation platform that conne
 ### The Complete Data Flow
 
 ```
-QuickBooks / Xero
-       ↓ (daily sync)
+QuickBooks / Xero / NetSuite / Sage Business Cloud
+       ↓ (OAuth + daily sync)
 AR Aging Import
        ↓
-Invoice Scoring Engine (AI)
+Invoice Scoring Engine (AI priority ranking)
        ↓
 Dunning Email Queue
        ↓
-AI Email Personalization (GPT-4 class model)
+AI Email Personalization (Gemini 1.5 Flash)
+       ↓
+Payment Link Embedded (Dodo Payments hosted checkout)
        ↓
 Email Delivery (Resend)
        ↓
 Reply Detection & Tracking
        ↓
-AR Dashboard (real-time)
+Customer Pays via Payment Portal
+       ↓
+Webhook → Auto-Match Payment → Invoice Marked Paid
+       ↓
+AR Dashboard + CEI Analytics (real-time)
        ↓
 CFO PDF Reports
 ```
@@ -40,46 +47,53 @@ CFO PDF Reports
 ### Step-by-Step
 
 **Step 1 — Integration**
-Customer connects their QuickBooks Online or Xero account. This uses the official OAuth API for each platform. No CSV uploads. No manual exports. The connection takes under 5 minutes.
+Customer connects QuickBooks Online, Xero, NetSuite, or Sage Business Cloud via OAuth. Takes under 5 minutes. No CSV uploads. No manual exports.
 
 **Step 2 — Daily AR Import**
-Every day, DataByt pulls the latest AR aging data. This includes all open invoices: customer name, invoice number, amount, due date, days overdue, and payment history. The system calculates real-time aging buckets (Current / 1–30 / 31–60 / 61–90 / 90+).
+DataByt pulls AR aging data daily: customer name, invoice number, amount, due date, days overdue, payment history. AR aging buckets calculated in real-time (Current / 1–30 / 31–60 / 61–90 / 90+).
 
 **Step 3 — AI Prioritization (Invoice Scoring)**
-The system scores every overdue invoice using multiple factors:
-- Days overdue (heavier weight as time increases)
-- Invoice amount (higher amount = higher priority)
-- Customer payment history (repeat slow-payer = escalated priority)
-- Customer segment (strategic account vs standard vs at-risk)
+Every overdue invoice is scored by: days overdue, invoice amount, customer payment history, customer segment (strategic / standard / at-risk). Output: daily ranked priority list.
 
-The output is a daily ranked list: "These are the 10 invoices you need to collect most urgently, in order."
-
-**Step 4 — Dunning Email Generation**
-For each overdue invoice, the AI generates a personalized email:
-- **L1 (just overdue):** Polite, assume oversight, easy payment link
+**Step 4 — Dunning Email Generation with Payment Links**
+AI generates personalized emails for each overdue invoice with the actual payment link embedded:
+- **L1 (just overdue):** Polite, assumes oversight, payment link
 - **L2 (15–30 days overdue):** Firm, references previous reminder, specific deadline
-- **L3 (30–60 days overdue):** Serious, references multiple follow-ups, escalation implied
+- **L3 (30–60 days overdue):** Serious, references multiple follow-ups, final notice before escalation
 
-Each email contains: customer name, specific invoice number(s), exact amount owed, due date, days overdue, and a payment link. The tone shifts based on days overdue, but the personalization is what makes them feel human-written.
+Every email includes: customer name, specific invoice number, exact amount owed, due date, days overdue, and a clickable payment link to the hosted payment portal.
 
 **Step 5 — Email Delivery**
-Emails are sent via Resend (transactional email service) on behalf of the company's domain. Deliverability is 95%+.
+Emails sent via Resend on behalf of the company's domain. Deliverability 95%+.
 
-**Step 6 — Reply Detection**
-When a customer replies, the system detects the reply and flags it on the dashboard for human review. Common replies: "We'll pay next week," "This invoice is disputed," "Already sent payment." Each reply stops automated follow-up on that invoice until manually cleared.
+**Step 6 — Customer Payment via Portal**
+Customer clicks payment link → lands on `/pay/[invoiceId]` (public, no login required) → sees invoice details → clicks Pay → Dodo Payments hosted checkout → payment captured.
 
-**Step 7 — AR Dashboard**
-Real-time dashboard showing:
-- Total AR outstanding
-- DSO (current and trending)
-- Collected this month vs. last month
-- Overdue invoice count and amount
-- AR aging bar chart and pie chart (visual breakdown by bucket)
-- Top overdue customers ranked by amount at risk
-- Full invoice table with status, filtering, search, and pagination
+**Step 7 — Auto-Match & Cash Application**
+Dodo webhook fires on payment. DataByt automatically:
+- Creates a payment record
+- Matches it to the correct invoice (100% match rate for portal payments)
+- Marks invoice as paid in DataByt
+- Stops all further dunning for that invoice
 
-**Step 8 — CFO PDF Report**
-On-demand PDF report covering: Executive Summary, AR Aging Breakdown, Top Overdue Customers, At-Risk Analysis. Formatted for board meetings and financial reviews. Can be generated any time.
+**Step 8 — Dispute Management**
+Customer disputes an invoice → finance team clicks "File Dispute" in collections view → dispute workflow opens:
+- Dispute reason selected (incorrect amount / goods not received / duplicate / already paid / service not rendered / other)
+- Invoice paused from collections immediately
+- Operator updates status (Investigating → Resolved / Rejected) with resolution notes
+- Resolution re-enables collections on invoice
+
+**Step 9 — AR Dashboard & CEI Analytics**
+Real-time dashboard:
+- Total AR outstanding, DSO trending, collected this month vs last month
+- CEI (Collections Effectiveness Index) gauge with color-coded threshold (green ≥80, amber ≥60, red <60)
+- Email performance: open rate, click rate, payment conversion rate
+- Collection velocity: average / median / fastest days to pay after first reminder
+- 6-month monthly collections trend (Recharts bar chart)
+- AR aging by bucket, top overdue customers, full invoice table
+
+**Step 10 — CFO PDF Report**
+On-demand PDF: Executive Summary, AR Aging Breakdown, Top Overdue Customers, At-Risk Analysis. Board-ready in minutes.
 
 ---
 
@@ -91,10 +105,12 @@ On-demand PDF report covering: Executive Summary, AR Aging Breakdown, Top Overdu
 |---|---|---|
 | QuickBooks Online integration | Live | OAuth, daily sync |
 | Xero integration | Live | OAuth, daily sync |
+| NetSuite integration | Live | OAuth 2.0, SuiteQL invoice/customer sync |
+| Sage Business Cloud integration | Live | OAuth, REST API sales invoice sync |
 | AI invoice scoring / prioritization | Live | Multi-factor ranking |
-| L1 dunning email (polite reminder) | Live | AI-personalized |
-| L2 dunning email (firm notice) | Live | AI-personalized |
-| L3 dunning email (final notice) | Live | AI-personalized |
+| L1 dunning email (polite reminder) | Live | AI-personalized, payment link embedded |
+| L2 dunning email (firm notice) | Live | AI-personalized, payment link embedded |
+| L3 dunning email (final notice) | Live | AI-personalized, payment link embedded |
 | Reply detection & tracking | Live | Stops auto-follow-up on replied invoices |
 | Email deliverability tracking | Live | Via Resend |
 | AR aging dashboard | Live | Real-time |
@@ -110,8 +126,38 @@ On-demand PDF report covering: Executive Summary, AR Aging Breakdown, Top Overdu
 | Add invoice manually | Live | Modal with form |
 | CSV import | Live | Bulk invoice import |
 | CFO PDF report | Live | Professional formatting |
-| Weekly performance reports | Listed in pricing | Not confirmed in codebase |
-| Payment link generation | Listed in CashFlow Command | Not confirmed in AR Engine codebase |
+
+### Payment Portal (Dodo Payments)
+
+| Feature | Status | Notes |
+|---|---|---|
+| Hosted payment page `/pay/[invoiceId]` | Live | Public, no login required, shows invoice details |
+| Dodo Payments checkout | Live | Dynamically creates product + checkout session per invoice |
+| Payment confirmation page | Live | `/pay/success` after Dodo redirect |
+| Webhook auto-match | Live | `payment.succeeded` → invoice marked paid, payment record created |
+| Payment link in dunning emails | Live | Every L1/L2/L3 email includes the invoice-specific pay link |
+| Payment link stored on invoice | Live | `payment_link_url` on invoices table |
+
+### Dispute Management
+
+| Feature | Status | Notes |
+|---|---|---|
+| File dispute on invoice | Live | DisputeModal component with 6 reason options |
+| Collections pause on dispute | Live | Invoice status → "disputed", stops all auto-emails |
+| Dispute dashboard | Live | Status cards (open/investigating/resolved/rejected), filter, search |
+| Dispute status update workflow | Live | Operator updates with resolution notes |
+| Resolution notes | Live | Free-text, saved per dispute |
+| Auto-resume collections on resolution | Live | Invoice reverts to "overdue" on resolve/reject |
+
+### Analytics & CEI
+
+| Feature | Status | Notes |
+|---|---|---|
+| CEI (Collections Effectiveness Index) gauge | Live | SVG circular gauge, color-coded, capped at 100 |
+| Email effectiveness metrics | Live | Open rate, click rate, payment conversion rate |
+| Collection velocity | Live | Avg / median / fastest / slowest days to pay after first reminder |
+| 6-month monthly collections bar chart | Live | Recharts, real DB data |
+| Bad debt rate | Live | Written-off invoices as % of total |
 
 ### Dashboard & Admin Features
 
@@ -133,24 +179,22 @@ On-demand PDF report covering: Executive Summary, AR Aging Breakdown, Top Overdu
 | Row-Level Security (RLS) | Live — org-scoped for users, service role for admin |
 | Data encrypted in transit | Live (HTTPS) |
 | Data encrypted at rest | Supabase handles |
-| No model training on customer data | By architecture (not saved to training datasets) |
+| No model training on customer data | By architecture |
 | Auth (email + password) | Live via Supabase Auth |
 | Responsive design (mobile + desktop) | Live |
 
 ### Planned / Not Yet Built
 
-| Feature | Planned Timeline |
+| Feature | Notes |
 |---|---|
-| Sage integration | Q3 2026 |
-| NetSuite integration | Q3 2026 |
-| AP automation (AI Invoice Processor) | CashFlow Command plan |
-| Cash flow forecasting dashboard | CashFlow Command plan |
-| Automated weekly CFO email delivery | Coming soon (noted in dashboard) |
+| AP automation (AI Invoice Processor) | CashFlow Command plan — not yet started |
+| Cash flow forecasting dashboard | CashFlow Command plan — not yet started |
 | Custom date range reports | Coming soon |
-| Collections velocity trend charts | Coming soon |
-| 30/60/90-day collections forecast | Coming soon |
+| SMS / WhatsApp dunning | Future tier |
+| Credit risk scoring | Future enterprise tier |
+| ERP: SAP, Oracle, Microsoft Dynamics | Long-term roadmap |
 
-**Honest note:** The CashFlow Command plan ($6,000/month) is listed in pricing and includes AP automation and cash flow forecasting. These features are NOT in the current codebase. The pricing is aspirational roadmap items. Do not sell CashFlow Command until it's built, or explicitly disclose it's in development.
+**Honest note:** The CashFlow Command plan ($6,000/month) lists AP automation and cash flow forecasting. These are NOT in the current codebase. Do not sell CashFlow Command until built, or explicitly disclose it's in development.
 
 ---
 
@@ -158,19 +202,19 @@ On-demand PDF report covering: Executive Summary, AR Aging Breakdown, Top Overdu
 
 ### Market Size
 
-The global AR automation market is valued at approximately **$3.4B–$4.8B in 2025**, growing at **11–14% CAGR**, projected to reach **$6–13B by 2030–2033** depending on the analyst. (Sources: Mordor Intelligence, Grand View Research, Research and Markets, Coherent Market Insights — range reflects different market definitions.)
+The global AR automation market is valued at approximately **$3.4B–$4.8B in 2025**, growing at **11–14% CAGR**, projected to reach **$6–13B by 2030–2033**. (Sources: Mordor Intelligence, Grand View Research, Research and Markets, Coherent Market Insights.)
 
-The U.S. market specifically: approximately **$844M in 2025**, growing to **$1.87B by 2033** at ~10.5% CAGR. (Source: Grand View Research)
+U.S. market: approximately **$844M in 2025**, growing to **$1.87B by 2033** at ~10.5% CAGR. (Source: Grand View Research)
 
 ### The Addressable Gap
 
-Of U.S. mid-market companies ($10M–$1B revenue), approximately:
+Of U.S. mid-market companies ($10M–$1B revenue):
 - **Only 4.13%** use any dedicated AR automation tool (Source: PYMNTS Intelligence)
-- **53%** manage AR via spreadsheets (Source: PYMNTS Intelligence 2025)
+- **53%** manage AR via spreadsheets
 - **35%** rely entirely on manual processes
-- **95%** have not completely automated AR or AP (Source: multiple PYMNTS studies)
+- **95%** have not completely automated AR or AP
 
-This means **~96% of your target market is currently manual.** The available market isn't shrinking — it's just beginning to open up.
+**~96% of the target market is currently manual.** The available market is beginning to open up.
 
 ### Demand Signals
 
@@ -179,386 +223,280 @@ This means **~96% of your target market is currently manual.** The available mar
 - **67%** are evaluating AI's role in AR (only 14% have deployed it)
 - **39%** are actively implementing something
 
-The signal: the market is moving from consideration to purchase. This is the optimal time to be a SaaS in this space.
+### QuickBooks, Xero, NetSuite, Sage TAM
 
-### QuickBooks and Xero TAM
+- QuickBooks: ~7 million businesses globally
+- Xero: **4.41 million subscribers** (FY25)
+- NetSuite: ~38,000 enterprise/mid-market accounts
+- Sage Business Cloud: ~3 million subscribers
 
-- QuickBooks: ~7 million businesses globally; dominant in U.S. small-mid market
-- Xero: **4.41 million subscribers** (FY25 Annual Report, May 2025; 10% YoY growth)
-- Combined: ~11 million businesses using exactly the two platforms DataByt integrates with
-
-Even targeting 0.1% of QuickBooks+Xero users in the mid-market segment who pay $3,000/month = **~$33M ARR potential from existing platform users alone.**
+Combined: ~14+ million businesses using platforms DataByt now integrates with.
 
 ---
 
 ## SECTION 5: THE PAIN POINTS AND HOW DATABYT SOLVES EACH
 
 ### Pain Point 1 — Manual AR collection is time-intensive and inconsistent
-
-**The reality:** 83% of companies haven't automated AR. Finance staff spend 60–70% of their collections time on repetitive tasks: pulling aging reports, writing emails, tracking responses in spreadsheets. The result is inconsistent follow-up — some customers get chased, others fall through the cracks.
-
-**DataByt's solution:** Automates L1/L2/L3 dunning for every invoice, every time. No human forgets an invoice. No bias toward chasing the "squeaky wheel" and ignoring other overdue accounts. Every $500 invoice gets the same systematic follow-up as the $50,000 invoice.
-
-**Quantified impact:** A finance team spending 20 hours/week on manual AR can reduce that to 3–5 hours of reviewing replies and handling escalations.
-
----
+**DataByt:** Automates L1/L2/L3 dunning for every invoice. No human forgets. Finance staff time reduced from ~20 hours/week to 3–5 hours.
 
 ### Pain Point 2 — High DSO and poor cash flow visibility
-
-**The reality:** Average DSO across mid-market is 42–60 days depending on industry. A 60-day DSO at $10M revenue means the company is perpetually owed ~$1.6M it can't touch. Rising interest rates (4–5% as of 2025) make this increasingly expensive.
-
-**DataByt's solution:** Systematic dunning accelerates payment velocity. The AR dashboard gives CFOs real-time visibility into DSO, aging distribution, and collection trends. This isn't just automation — it's the information they need to manage cash flow proactively.
-
-**Claimed impact:** 30% average DSO reduction. At $10M revenue, that's approximately $275,000–$500,000 in cash freed up within 90 days.
-
----
+**DataByt:** Systematic dunning accelerates payment velocity. CEI gauge and DSO trending give CFOs real-time visibility.
 
 ### Pain Point 3 — Emails sound robotic and damage relationships
-
-**The reality:** Finance teams that tried basic reminder tools found customers complained about impersonal automated emails. It damaged relationships. So they went back to manual.
-
-**DataByt's solution:** AI generates emails using the customer's actual name, their specific invoice numbers, exact amounts, due date, and payment history. Every email is unique to that customer and that invoice. Finance teams report customers respond "without realizing the email was automated."
-
-**The key differentiator:** This isn't a mail-merge with {first_name}. The AI constructs the email body from scratch using real invoice data, adjusts formality and urgency based on days overdue, and adapts tone. It reads like a real person wrote it because the AI has actual context.
-
----
+**DataByt:** AI generates emails using actual customer name, invoice number, exact amounts, due date. Each email is unique. Tone adapts per escalation level.
 
 ### Pain Point 4 — No visibility into which customers are highest risk
+**DataByt:** Multi-factor invoice scoring (amount × days overdue × customer history × segment). Daily ranked priority list.
 
-**The reality:** Most AR teams prioritize by "who has the biggest balance" — but a customer who's always paid on time and owes $100,000 30 days overdue is lower risk than a customer with a history of payment problems who owes $20,000 45 days overdue.
-
-**DataByt's solution:** Multi-factor invoice scoring that weights amount, days overdue, customer payment history, and segment. The daily ranked priority list tells the AR team exactly where to focus human attention.
-
----
-
-### Pain Point 5 — CFO can't report AR performance accurately to the board
-
-**The reality:** When the board asks "what's our AR situation?", the CFO opens a QuickBooks report, exports to Excel, and spends 2 hours formatting it. The data is a snapshot, not live.
-
-**DataByt's solution:** Live AR dashboard with DSO tracking, aging charts, and one-click PDF report generation. The CFO has a board-ready report in minutes, not hours. Real-time data, not a stale export.
-
----
+### Pain Point 5 — CFO can't report AR performance to the board
+**DataByt:** Live AR dashboard, CEI analytics, one-click PDF report generation. Board-ready in minutes.
 
 ### Pain Point 6 — Existing AR tools are too expensive or too complex
+**DataByt:** $3,000/month vs HighRadius $100K+/year. Live in 48 hours. No IT team. Month-to-month.
 
-**The reality:**
-- HighRadius: $100,000+/year, 6–12 month implementation. Mid-market CFO can't get budget approval or wait that long.
-- Billtrust: $20,000–$60,000/year. Still requires integration work.
-- Versapay: $50,000–$150,000/year. Built for companies 5–10× your target's size.
+### Pain Point 7 — Customers can't pay easily when they receive dunning emails
+**DataByt:** Every dunning email includes a direct Dodo Payments hosted checkout link. Customer clicks, sees invoice, pays in under 60 seconds.
 
-**DataByt's solution:** $3,000/month (AR Engine) + $5,000 one-time setup = $41,000/year all-in. 48-hour activation. No IT team needed. Month-to-month. This is a category-creating price point — 70–80% cheaper than the next comparable solution.
+### Pain Point 8 — Disputed invoices block cash flow and lack workflow
+**DataByt:** Full dispute management: file → pause collections → investigate → resolve → auto-resume.
 
 ---
 
 ## SECTION 6: USP (UNIQUE SELLING PROPOSITION)
 
-DataByt's USP is not a single feature — it's the combination of four things no competitor currently offers together:
+DataByt's USP is the combination of five things no mid-market competitor currently offers together:
 
 ### 1. Speed to Value: 48 Hours
-HighRadius: 6–12 months. Billtrust: 3–6 months. DataByt: 48 hours. For a CFO whose DSO problem is urgent, this is decisive. They can go from "I'm considering this" to "we're collecting better" within two business days.
+HighRadius: 6–12 months. Billtrust: 3–6 months. DataByt: 48 hours.
 
 ### 2. Price Point: $3,000/month vs. $8,000–$12,000/month
-The entire mid-market segment has been priced out of proper AR automation. DataByt breaks that ceiling. A company doing $8M/year in revenue can't justify $100K/year for HighRadius. But $3,000/month (1.5% of $2.4M in AR if DSO is 90 days) with a clear ROI is justifiable.
+Category-creating price point — 70–80% cheaper than the next comparable solution.
 
 ### 3. Zero IT Involvement
-The AR team, controller, or finance director can set this up themselves. No IT tickets. No ERP project. No change management. QuickBooks or Xero OAuth connection, 5-minute setup, and you're live. For mid-market companies where the IT "team" is one person who maintains the office network, this is transformative.
+QuickBooks/Xero/NetSuite/Sage OAuth connection, 5-minute setup, live. No IT tickets.
 
-### 4. AI-Native (Not Bolted On)
-Legacy tools like Billtrust added AI features to systems built in 2001. DataByt was built AI-first. The scoring, personalization, and prioritization are not add-ons — they are the core product. This means the quality of personalization is materially better and the system improves as it learns from payment behavior.
+### 4. AI-Native, Not Bolted On
+Built AI-first. Scoring, personalization, and prioritization are the core product.
+
+### 5. Full Collections Loop — End to End
+Most tools stop at "send the email." DataByt closes the loop: email → payment portal → auto-match → dispute management → analytics. No other mid-market tool in the $3K/month range does all five.
 
 ### The Positioning Statement
 **"HighRadius for mid-market, at 10% of the cost, live in 48 hours."**
 
-This is the anchor. Every CFO who's heard of HighRadius (many haven't) understands it immediately. Every CFO who hasn't can Google it and see DataByt's value proposition in 30 seconds.
-
 ---
 
-## SECTION 7: HOW TO TEST THE PRODUCT — FROM BASIC TO STRESS TEST
+## SECTION 7: HOW TO TEST THE PRODUCT
 
-### Functional Testing (Basic — Does It Work?)
+### Functional Testing
 
 **1. Integration Test**
-- Connect a live QuickBooks Online sandbox account
-- Connect a live Xero demo account
-- Verify: AR aging data imports within 24 hours (ideally sooner on first sync)
-- Verify: Invoice amounts, due dates, customer names are accurate
-- Verify: Newly added invoices appear in the next sync
+- Connect QuickBooks/Xero/NetSuite/Sage sandbox account
+- Verify: AR aging data imports correctly (amounts, dates, names)
+- Verify: Newly added invoices appear in next sync
 
 **2. Dunning Flow Test**
-- Create a test customer with an overdue invoice
-- Trigger the AI email generation manually (via admin or cron job)
-- Verify: Email contains correct invoice number, amount, customer name, due date
-- Verify: Tone is appropriate for the days-overdue tier (L1 vs L2 vs L3)
-- Verify: Reply to the email → confirm reply detection flags the invoice
-- Verify: After flagging, no further auto-emails sent for that invoice
+- Create test overdue invoice → trigger email generation → verify AI content accuracy
+- Verify payment link in email resolves to correct `/pay/[invoiceId]` page
+- Reply to email → verify reply detection flags invoice, stops further auto-emails
 
-**3. Dashboard Accuracy Test**
-- Cross-reference dashboard DSO against manual calculation from QuickBooks data
-- Formula: DSO = (Total AR ÷ Total Credit Sales last 90 days) × 90
-- If the dashboard DSO differs by more than 1 day from manual calc, there's a data pipeline bug
+**3. Payment Portal Test**
+- Navigate to `/pay/[invoiceId]` (unauthenticated) → verify correct invoice data displayed
+- Click Pay → verify redirect to Dodo checkout
+- Simulate `payment.succeeded` webhook → verify invoice marked paid, payment record created
 
-**4. AR Aging Accuracy Test**
-- Export aging report from QuickBooks for the same date
-- Compare totals by bucket (Current, 1–30, 31–60, 61–90, 90+) against dashboard
-- Tolerance: Dollar amounts should match within $1 (rounding)
+**4. Dispute Management Test**
+- File dispute on overdue invoice → verify invoice status changes to "disputed"
+- Verify dunning emails stop for that invoice
+- Resolve dispute → verify invoice reverts to "overdue", collections resume
 
-**5. Customer Segmentation Logic Test**
-- Create customers with different payment histories
-- "Strategic" customer: high balance, always paid on time (even if slow)
-- "At-risk" customer: repeated partial payments, disputes, 60+ day history
-- Verify: Scoring and segmentation correctly reflects this history
+**5. Dashboard Accuracy Test**
+- Cross-reference CEI calculation: (collected ÷ collectible) × 100
+- Cross-reference DSO: (Total AR ÷ Total Credit Sales last 90 days) × 90
+
+**6. Analytics Test**
+- Verify CEI gauge thresholds (green ≥80, amber ≥60, red <60)
+- Verify 6-month bar chart data matches payments table
+- Verify email effectiveness metrics match communications table
 
 ### Accuracy Testing (Is the AI Good?)
 
-**Email Quality Evaluation**
-Review 20 AI-generated dunning emails across different customers and invoice ages. For each, verify:
+For 20 AI-generated dunning emails, verify:
 
 | Check | Pass Criteria |
 |---|---|
 | Correct customer name | 100% pass required |
 | Correct invoice number(s) | 100% pass required |
 | Correct amount owed | 100% pass required |
-| Correct days overdue | 100% pass required |
+| Payment link is correct `/pay/[invoiceId]` | 100% pass required |
 | Tone matches dunning tier | > 95% pass |
 | Grammar/readability | > 95% pass |
-| Sounds human, not templated | > 90% pass (subjective — have 5 people evaluate) |
-| No hallucinated data (fake invoice #, wrong amount) | 100% pass required — this is critical |
+| Sounds human, not templated | > 90% pass |
+| No hallucinated data | 100% pass required — critical |
 
-The last point is the most important accuracy check. If the AI ever fabricates an invoice number or wrong amount, you will destroy a customer relationship and face potential legal liability. This must be tested rigorously. The AI should be pulling data from the database, not generating it creatively.
+### Stress Testing
 
-**Prioritization Accuracy Test**
-Create a test dataset of 20 invoices with varied attributes:
-- Mix of amounts ($500, $5,000, $50,000)
-- Mix of days overdue (5, 15, 30, 45, 90)
-- Mix of customer history (reliable, occasional late, chronic late)
-
-Expected priority ranking logic: A $50,000 invoice 90 days overdue from a chronic late payer should rank #1. A $500 invoice 5 days overdue from a reliable customer should rank last.
-
-Score the ranking system's output against your expected ranking. If the ordering matches your human judgment on 80%+ of the test cases, the scoring algorithm is working correctly.
-
-### Stress Testing (What Breaks Under Load?)
-
-**Volume Test — Invoice Scale**
-- Import 1,000 invoices via CSV or via a connected account with high invoice volume
-- Verify: Dashboard loads in < 3 seconds
-- Verify: Invoice table paginates correctly (20 per page)
-- Verify: Search works without timeout
-- Verify: Aging charts render correctly with full data set
-- Verify: DSO calculation is correct with 1,000+ invoices
-
-**Concurrent User Test**
-- Log in as 10+ different organizations simultaneously (different browser sessions)
-- Verify: RLS (Row Level Security) is working — Org A cannot see Org B's data
-- This is the most critical security test. One failure here is a catastrophic data breach.
-
-**Email Volume Test**
-- If a customer has 200 overdue invoices, the system should send at most one email per customer per day (not 200 emails)
-- Test the batching logic: multiple invoices for the same customer should be consolidated into one email listing all overdue items
-- This is both a UX test (customers shouldn't get 50 emails) and a deliverability test (sending 200 emails to the same domain will get you spam-flagged)
-
-**Daily Sync Stress Test**
-- Does the daily sync handle QuickBooks accounts with 5,000+ transactions without timing out?
-- Does it handle accounts where customers have been deleted or merged since the last sync?
-- Does it handle invoices that were paid between syncs (should disappear from AR aging)?
-
-**Concurrency Test (Edge Case)**
-- What happens if the daily sync runs at the same time as a user is manually adding an invoice?
-- What happens if a user marks an invoice as paid while the sync is updating the same invoice?
-- These race conditions need to be tested and handled gracefully.
+- 1,000 invoice import → dashboard < 3 seconds
+- RLS test: 10+ orgs simultaneously, Org A cannot see Org B data
+- Webhook idempotency: same `payment.succeeded` event twice → invoice only marked paid once
+- Concurrent sync + manual invoice add → no data corruption
 
 ### Deliverability Testing
 
-This is often overlooked but critical. If your emails go to spam, the entire product value proposition collapses.
-
-**Test checklist:**
-- [ ] SPF record configured for sending domain
-- [ ] DKIM configured
-- [ ] DMARC policy set
-- [ ] Test emails to Gmail, Outlook, Yahoo mail (different spam filter engines)
-- [ ] Spam score check (tools: mail-tester.com; score should be 8+/10)
-- [ ] Bounce rate: < 2% on clean lists
-- [ ] Unsubscribe / opt-out handling: Do you have an unsubscribe mechanism? B2B commercial email still needs this for CAN-SPAM compliance
+- [ ] SPF, DKIM, DMARC configured
+- [ ] Spam score > 8/10 on mail-tester.com
+- [ ] Bounce rate < 2%
+- [ ] Unsubscribe/opt-out handling (CAN-SPAM compliance)
 
 ---
 
-## SECTION 8: HONEST ASSESSMENT — WHY DATA SOURCES BACK THE MARKET CLAIM
-
-All claims in DataByt's marketing should be defensible:
+## SECTION 8: DATA-BACKED CLAIMS
 
 | Claim | Source | Confidence |
 |---|---|---|
-| "30% average DSO reduction" | Internal — needs real customer data to validate; similar tools claim 20–35% | Unverified — need 5+ live customers with before/after DSO |
-| "48 hours to go live" | Product design — QuickBooks/Xero OAuth + 48hr setup fee in pricing | Testable |
-| "95%+ email deliverability" | Resend SLA (transactional email platform) | Resend's published data |
-| "10× cheaper than HighRadius" | HighRadius ~$100K+/year vs DataByt ~$41K/year | Accurate |
-| "$3K/month flat fee" | Your pricing page | Accurate |
+| "30% average DSO reduction" | Internal target — needs real customer data | Unverified — need 5+ live customers |
+| "48 hours to go live" | Product design | Testable |
+| "95%+ email deliverability" | Resend SLA | Resend's published data |
+| "10× cheaper than HighRadius" | HighRadius ~$100K+/year vs $41K/year | Accurate |
+| "$3K/month flat fee" | Pricing page | Accurate |
 | "44–55% of B2B invoices paid late" | Atradius 2025, PYMNTS June 2025 | High confidence |
 | "83% haven't automated AR" | PYMNTS Intelligence June 2025 | High confidence |
-| "Market size $3.4–4.8B" | Mordor Intelligence, Grand View Research 2025 | Medium-high confidence |
-
-**What you must NOT claim until you have real data:**
-- "We reduce DSO by 30%" — until you have actual before/after DSO data from 5+ customers
-- "We saved companies $X" — until real customer case studies exist
-- Any specific ROI number without the customer data to back it
 
 ---
 
-## SECTION 9: WILL DATABYT DOMINATE THE INDUSTRY?
-
-### The Honest Answer: Not with what it has today.
-
-DataByt has built a solid MVP for a real problem. The market is large, the timing is right, the price point is differentiated, and the setup friction is genuinely lower than competitors. But "dominating" a market requires more than a good MVP at the right time. Here's the unfiltered assessment:
+## SECTION 9: HONEST ASSESSMENT — WHERE DATABYT STANDS TODAY
 
 ### What DataByt Has Right ✓
 
-1. **Price point is a genuine moat — for now.** $3K/month into a segment that's currently priced out is a real market entry strategy. Mid-market CFOs who can't get HighRadius will consider DataByt seriously.
+1. **Price point is a genuine moat.** $3K/month into a segment priced out of HighRadius/Billtrust.
+2. **QuickBooks + Xero + NetSuite + Sage = 80%+ of mid-market covered.**
+3. **48-hour activation collapses the biggest objection** to AR automation.
+4. **End-to-end loop is now closed.** Email → payment portal → auto-match → dispute management → CEI analytics. No mid-market competitor offers all of this at this price.
+5. **Dispute management built properly.** Pause → investigate → resolve → resume is the correct workflow.
+6. **Payment portal with Dodo is live.** Every dunning email includes a working payment link.
+7. **CEI dashboard gives CFOs a real performance metric**, not just AR aging numbers.
 
-2. **QuickBooks + Xero integration is table stakes done right.** These two platforms cover 80%+ of the target market's accounting stack. Getting these right is critical.
+### What DataByt Still Needs ✓
 
-3. **48-hour activation is a real differentiator.** The biggest objection to enterprise AR tools is implementation time. "Live in 48 hours" collapses that objection.
+**1. Verified customer outcomes — the single most important thing.**
+The 30% DSO reduction claim has no real customer data behind it. Get 10 paying customers. Measure before/after DSO rigorously. One case study ("Acme Manufacturing reduced DSO from 67 to 44 days, freeing $350K in working capital") is worth more than any feature. This is the entire sales foundation.
 
-4. **The timing is genuinely good.** The market is at the inflection point between "awareness" and "purchase." DataByt is entering when CFOs are actively shopping, not when they don't know this category exists.
+**2. Email batching per customer.**
+If a customer has 10 overdue invoices, they should receive one email listing all of them — not 10 separate emails. This is a UX and deliverability requirement.
 
-### What DataByt Does NOT Have ✓
+**3. SMS / WhatsApp dunning option.**
+Industries where email open rates are low (construction, trucking, retail distribution) need additional channels. Would justify a higher-tier plan.
 
-**1. No verified customer outcomes yet.**
-The 30% DSO reduction claim is a target, not a proven outcome. You cannot build credibility with CFOs without real before/after data. Priority #1: Get 5 paying customers and measure their DSO improvement obsessively. These case studies are the entire sales foundation.
+**4. Credit risk scoring.**
+Flag customers showing payment distress signals before they go overdue. Moves DataByt from reactive to proactive. Required for upper-mid-market ($50M+ revenue) sales.
 
-**2. Sage and NetSuite integrations are missing — and this matters.**
-A mid-market company with $30M+ in revenue often runs NetSuite or Sage, not QuickBooks. Right now, DataByt can't serve those companies. The gap to close: NetSuite's SuiteApp connector and Sage API integration by Q3 2026 as stated. If this slips, you lose a meaningful chunk of mid-market revenue.
-
-**3. Cash application is not built.**
-After a customer pays, someone still needs to match that payment to the right invoice in QuickBooks/Xero. DataByt doesn't do this. Versapay and HighRadius do. This means your customers still have a manual step after DataByt works. Not a show-stopper, but a gap.
-
-**4. Payment portal is not built.**
-Every email has a "payment link" mentioned in the copy, but an actual hosted payment portal (where the customer can see all their invoices and pay online) isn't confirmed in the codebase. This is critical. The industry standard expectation in 2026 is that dunning emails link to a portal where the customer can pay immediately. If you're linking to a QuickBooks payment page, that's acceptable for now — but not sufficient for the CashFlow Command plan.
-
-**5. No customer-facing dispute management.**
-When a customer replies saying "this invoice is wrong," the current system flags it for human review and stops auto-emails. There's no dispute workflow — a structured way to track the dispute, assign it to someone, resolve it, and re-enable collections. Enterprise AR tools have this. Gaviti has this. DataByt doesn't yet.
-
-**6. No collections analytics / velocity tracking.**
-The dashboard shows AR aging and DSO. But it doesn't show: "Your collections efficiency improved by X% this month" or "Emails sent on Tuesday collect 23% faster than emails sent on Friday." This kind of analytics is what makes CFOs feel like they have a strategic tool, not just an automation. Tesorio's product is almost entirely analytics-forward. DataByt should build here.
-
-**7. Single-channel only (email).**
-Dunning via email is step one. The customers who don't respond to email need SMS reminders, phone call reminders, or WhatsApp messages. Mid-market AR teams in industries with older customer bases find email alone insufficient. Adding SMS dunning as an optional tier would meaningfully expand coverage.
-
-**8. No credit risk scoring.**
-DataByt can tell you which invoices are overdue. It cannot tell you whether a customer is likely to pay at all, based on signals like: their public credit history, payment behavior across multiple vendors, or industry distress signals. HighRadius and Cortera integrate this. You don't need it now, but to compete at the $15K–$50K/year level, you will.
+**5. ERP connectivity beyond current four.**
+SAP, Oracle, Microsoft Dynamics unlock $50K–$200K/year enterprise contracts.
 
 ---
 
-## SECTION 10: WHAT DATABYT NEEDS TO DOMINATE
+## SECTION 10: WHAT DATABYT NEEDS TO DOMINATE — UPDATED ROADMAP
 
-Ranked by impact:
+### Built ✓ (This Session)
 
-### Must-Have for Market Leadership (12–18 months)
+| Item | Status |
+|---|---|
+| NetSuite OAuth + SuiteQL sync | Done |
+| Sage Business Cloud OAuth + REST sync | Done |
+| Dodo Payments hosted checkout portal | Done |
+| Payment auto-match (cash application) | Done |
+| Dispute management end-to-end | Done |
+| CEI analytics dashboard | Done |
+| Payment links in all dunning emails | Done |
 
-**1. Verified customer outcomes — the single most important thing**
-Get 10 paying customers. Measure DSO before and after, rigorously. Publish the results. One case study of "Acme Manufacturing reduced DSO from 67 days to 44 days in 90 days, freeing $350,000 in working capital" is worth more than any product feature. This is the foundation of all marketing, sales, and investor conversations.
+### Must-Have for Market Leadership (Next 3–6 Months)
 
-**2. NetSuite + Sage integration**
-Unlock the upper mid-market ($30M–$200M revenue). These companies run NetSuite or Sage and have bigger AR problems and bigger budgets. Without these integrations, your TAM is artificially capped at QuickBooks/Xero users.
+**1. Verified customer outcomes**
+Still the #1 priority. No product feature substitutes for real before/after DSO data.
 
-**3. Hosted payment portal**
-The complete AR automation experience must end with "customer clicks link, sees their invoices, pays online, balance updates in QuickBooks." Without a payment portal, you're only solving the communication problem, not the full collections problem.
+**2. Email batching per customer**
+One email per customer per batch listing all overdue invoices. Critical for enterprise customers with many overdue accounts.
 
-**4. Cash application (basic)**
-Auto-match incoming payments to invoices. Even 80% accuracy on auto-matching saves significant manual work. The remaining 20% that need human review are manageable. Without this, your customers still have a manual gap after you "solve" their AR problem.
+**3. Weekly automated CFO report delivery**
+Noted as "coming soon" in the dashboard. Auto-send PDF report to CFO inbox every Monday morning.
 
-### High Impact for Competitive Differentiation (18–24 months)
+### High Impact for Competitive Differentiation (6–12 Months)
 
-**5. Collections analytics and performance dashboard**
-Show CFOs that DataByt is moving the needle: CEI (Collections Effectiveness Index), email response rates, payment velocity by customer segment, DSO trend over time. This turns DataByt from a "tool" into a "strategic intelligence platform."
+**4. SMS / WhatsApp dunning**
+Opens construction, trucking, retail distribution verticals.
 
-**6. Dispute management workflow**
-Structured dispute tracking: customer raises dispute → assigned to finance person → tracked to resolution → invoice cleared or adjusted → collections resumed. Enterprise CFOs will not adopt a platform without this. Even Gaviti has it.
+**5. Credit risk scoring**
+Prevent bad debt before it happens. Required for upper-mid-market positioning.
 
-**7. SMS / WhatsApp dunning option**
-Meaningful for industries where email open rates are low (construction, trucking, retail distribution). Would position DataByt to charge a higher-tier plan.
+**6. Custom date range reports**
+CFOs want to report for specific quarters, fiscal years, not just "last 6 months."
 
-**8. AI-powered credit risk scoring**
-Pre-approve customers before extending credit. Flag customers who are showing distress signals (payment slowdowns, public credit events). This moves DataByt from reactive (chasing overdue invoices) to proactive (preventing bad debt before it happens). This is where HighRadius competes in the enterprise.
+### Long-Term for Industry Dominance (12–36 Months)
 
-### Long-Term for Industry Dominance (24–36 months)
+**7. ERP connectivity: SAP, Oracle, Dynamics**
+Enterprise contracts at $50K–$200K/year.
 
-**9. ERP connectivity beyond QuickBooks/Xero**
-SAP, Oracle, Microsoft Dynamics. This unlocks enterprise contracts at $50K–$200K/year ACV, not just mid-market at $36K/year. Requires dedicated integrations team.
+**8. Two-sided payment network**
+Both buyer and seller on DataByt — real-time payment status, automated confirmations.
 
-**10. Two-sided network (payer network)**
-The holy grail of AR automation is building a network where buyers and sellers are both on the platform, enabling real-time invoice status updates, automated payment confirmations, and eventually early payment financing. Billtrust built the Business Payments Network. This is a 5+ year play but is the moat no competitor can easily replicate.
+**9. Embedded financing**
+Offer buyers extended terms. Sellers get paid today. DataByt takes transaction fee.
 
-**11. Embedded financing (early payment)**
-Partner with a fintech lender to offer: "Pay your vendor today via DataByt and get Net 60 terms." The buyer gets extended terms. The seller gets paid today. DataByt takes a transaction fee. This is the same model Resolve, Mondu, and others are building in the B2B payments space. It's the revenue expansion opportunity that takes DataByt from "collections tool" to "financial infrastructure."
-
----
-
-## SECTION 11: THE COMPETITIVE RISK — WHAT COULD KILL DATABYT
-
-**Risk 1: HighRadius launches a mid-market product**
-In February 2026, HighRadius launched "outcome-based pricing" — pay-for-results, $0 implementation. This is a direct attempt to move downmarket. If they successfully package a mid-market product under $5K/month, DataByt's price advantage narrows significantly. Monitor closely.
-
-**Risk 2: QuickBooks / Xero builds this natively**
-Intuit has the data, the distribution, and the customer relationships. If QuickBooks adds AI dunning natively, DataByt's core integration advantage is commoditized. Mitigation: build value that's additive beyond what an accounting platform will build (payment portals, analytics, multi-ERP, credit scoring).
-
-**Risk 3: Chaser, Paidnice, or Kolleno gets funded and out-executes**
-These smaller players (Chaser, Paidnice, Kolleno) are all in the QuickBooks/Xero mid-market space. If one gets a $10M Series A and aggressively invests in product and marketing, the competitive dynamic shifts. DataByt needs revenue and customer proof points before this happens.
-
-**Risk 4: Not enough customers to prove the product**
-The 30% DSO claim has no customer data behind it yet. If early customers don't see meaningful DSO improvement within 90 days, the product story collapses. This is the highest near-term risk.
-
-**Risk 5: Email deliverability degradation**
-If email domain reputation degrades (spam complaints, bounces), the core product fails. Deliverability must be actively monitored. Dedicated IP, clean sending practices, proper unsubscribe handling — these are not optional.
+**10. AP automation (CashFlow Command)**
+Completes the full cash flow picture: AR in, AP out.
 
 ---
 
-## SECTION 12: TOTAL REALISTIC REVENUE POTENTIAL
+## SECTION 11: COMPETITIVE RISK
 
-### Conservative (Year 1–2, focus on AR Engine only)
+**Risk 1: HighRadius moves downmarket** — They launched outcome-based pricing in February 2026. Monitor. DataByt's advantage narrows if they package under $5K/month.
 
-- Target: 50 customers at $3,000/month = $150,000 MRR = **$1.8M ARR**
-- Plus $5,000 setup fees: 50 × $5,000 = $250,000 one-time
-- Year 1 realistic: $500K–$800K ARR (slow first year with low brand awareness)
+**Risk 2: QuickBooks / Xero builds this natively** — Intuit has the data and distribution. Mitigation: build value that accounting platforms won't (multi-ERP, payment portal, CEI analytics, dispute management).
 
-### Mid-Case (Year 2–3, NetSuite/Sage added, payment portal live)
+**Risk 3: Chaser, Paidnice, or Kolleno gets funded** — Any of these getting a $10M Series A could shift the competitive dynamic. DataByt needs customer proof points before this happens.
 
-- Target: 200 customers average $4,000/month (mix of AR Engine and CashFlow Command)
-- = $800,000 MRR = **$9.6M ARR**
-- This is a real Series A company at this scale
+**Risk 4: No customer outcomes** — If early customers don't see DSO improvement in 90 days, the product story collapses.
 
-### Aggressive (Year 3–4, full platform, analyst recognition)
+**Risk 5: Email deliverability degradation** — Active monitoring of bounce rates and spam scores is non-negotiable.
 
-- Target: 500+ customers, mix of SMB ($1,500/month) to enterprise ($15,000/month)
-- Blended ACV ~$60,000/year × 500 customers = **$30M ARR**
-- At this point, DataByt is a serious mid-market competitor with defensible positioning
+---
+
+## SECTION 12: REVENUE POTENTIAL
+
+### Conservative (Year 1–2)
+- 50 customers × $3,000/month = $150K MRR = **$1.8M ARR**
+- Plus $5,000 setup fees: 50 × $5,000 = $250K one-time
+
+### Mid-Case (Year 2–3, full platform)
+- 200 customers × $4,000/month average = $800K MRR = **$9.6M ARR** (real Series A company)
+
+### Aggressive (Year 3–4)
+- 500+ customers, blended ACV ~$60K/year = **$30M ARR** (serious mid-market competitor)
 
 ---
 
 ## SECTION 13: THE BOTTOM LINE
 
-DataByt is a real product solving a real $3.4–4.8B market problem that 96% of the target market hasn't yet solved. The price point is genuinely differentiated. The timing is genuinely good.
+DataByt is now a materially more complete product than it was 24 hours ago. The core gap list (no payment portal, no dispute management, no NetSuite/Sage, no CEI analytics) is closed. The full AR collections loop — from import to email to payment to cash application to dispute resolution — is now functional.
 
 **What is real and strong:**
 - Market size and timing
 - Price point vs. incumbents
 - Setup speed (48 hours)
-- QuickBooks/Xero integration
-- AI-personalized dunning (genuinely better than generic templates)
+- QuickBooks + Xero + NetSuite + Sage (four platforms live)
+- AI-personalized dunning with embedded payment links
+- Dodo Payments hosted checkout, auto-match, cash application
+- Dispute management end-to-end
+- CEI analytics with real DB data
 - Admin infrastructure (multi-org, RLS, proper security)
 
-**What is still an assumption that needs real-world validation:**
-- The 30% DSO improvement claim
-- That customers will stay after 90 days (retention is the real metric, not acquisition)
-- That $3K/month is the right price (could be too low — collect data on willingness to pay)
+**What still needs real-world validation:**
+- The 30% DSO improvement claim (needs 5+ paying customers with before/after data)
+- Pricing (could be too low — collect willingness-to-pay data early)
+- Retention at 90 days (the real metric, not just activation)
 
-**What needs to be built to take market share from HighRadius/Billtrust/Versapay:**
-- Real customer case studies
-- NetSuite + Sage integration
-- Payment portal
-- Cash application
-- Dispute management
-- Analytics/CEI tracking
-
-DataByt won't dominate the industry with what exists today. With 12–18 months of focused product development and 10+ verified customer outcomes, it can become the dominant mid-market AR automation platform in its segment ($5M–$100M revenue companies on QuickBooks or Xero). That's a real, defensible, valuable business.
+**The honest frontier:**
+DataByt can compete for the mid-market ($5M–$100M revenue) on every major buying criterion except one: real customer proof points. No product feature fixes the absence of case studies. Get 10 customers on the platform this quarter, measure rigorously, and publish the outcomes. Everything else is in place to tell a compelling story.
 
 ---
 
