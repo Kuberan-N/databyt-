@@ -99,6 +99,18 @@ On-demand PDF: Executive Summary, AR Aging Breakdown, Top Overdue Customers, At-
 
 ## SECTION 3: COMPLETE FEATURE LIST
 
+### Collections Automation
+
+| Feature | Status | Notes |
+|---|---|---|
+| Automated dunning cron (Mon–Fri 8am UTC) | Live | Vercel Cron, CRON_SECRET secured |
+| Email batching per customer | Live | One consolidated email per customer per run |
+| Escalation levels L1/L2/L3 | Live | <10d polite, 10–29d firm, 30d+ final notice |
+| 3-day cooldown per customer | Live | Prevents over-contacting |
+| Opt-out / unsubscribe tokens | Live | CAN-SPAM compliant, base64url encoded |
+| Public /unsubscribe landing page | Live | Stores UNSUBSCRIBED flag in communications |
+| Pay link button on AR Aging table | Live | Generates Dodo checkout link, copies to clipboard |
+
 ### Core AR Automation Features
 
 | Feature | Status | Notes |
@@ -381,8 +393,8 @@ For 20 AI-generated dunning emails, verify:
 **1. Verified customer outcomes — the single most important thing.**
 The 30% DSO reduction claim has no real customer data behind it. Get 10 paying customers. Measure before/after DSO rigorously. One case study ("Acme Manufacturing reduced DSO from 67 to 44 days, freeing $350K in working capital") is worth more than any feature. This is the entire sales foundation.
 
-**2. Email batching per customer.**
-If a customer has 10 overdue invoices, they should receive one email listing all of them — not 10 separate emails. This is a UX and deliverability requirement.
+**2. Email batching per customer — DONE.**
+Collections cron now sends one consolidated email per customer listing all overdue invoices. Deliverability and UX requirement met.
 
 **3. SMS / WhatsApp dunning option.**
 Industries where email open rates are low (construction, trucking, retail distribution) need additional channels. Would justify a higher-tier plan.
@@ -397,7 +409,7 @@ SAP, Oracle, Microsoft Dynamics unlock $50K–$200K/year enterprise contracts.
 
 ## SECTION 10: WHAT DATABYT NEEDS TO DOMINATE — UPDATED ROADMAP
 
-### Built ✓ (This Session)
+### Built ✓ (Previous Sessions)
 
 | Item | Status |
 |---|---|
@@ -409,15 +421,26 @@ SAP, Oracle, Microsoft Dynamics unlock $50K–$200K/year enterprise contracts.
 | CEI analytics dashboard | Done |
 | Payment links in all dunning emails | Done |
 
+### Built ✓ (This Session — May 2026)
+
+| Item | Status |
+|---|---|
+| Collections automation engine (Vercel cron, Mon-Fri 8am UTC) | Done |
+| Email batching per customer (one email listing all overdue invoices) | Done |
+| L1/L2/L3 escalation logic in cron (10 days / 30 days thresholds) | Done |
+| 3-day cooldown per customer (no re-sending too frequently) | Done |
+| CAN-SPAM opt-out: unsubscribe token, `/unsubscribe` public page | Done |
+| UNSUBSCRIBED flag stored in communications table, checked before send | Done |
+| Pay link button on AR Aging table (generates + copies to clipboard) | Done |
+| Landing page full rewrite (world-class marketing copy) | Done |
+| Dashboard visibility fix (explicit hex colors, no invisible text) | Done |
+
 ### Must-Have for Market Leadership (Next 3–6 Months)
 
 **1. Verified customer outcomes**
 Still the #1 priority. No product feature substitutes for real before/after DSO data.
 
-**2. Email batching per customer**
-One email per customer per batch listing all overdue invoices. Critical for enterprise customers with many overdue accounts.
-
-**3. Weekly automated CFO report delivery**
+**2. Weekly automated CFO report delivery**
 Noted as "coming soon" in the dashboard. Auto-send PDF report to CFO inbox every Monday morning.
 
 ### High Impact for Competitive Differentiation (6–12 Months)
@@ -477,18 +500,21 @@ Completes the full cash flow picture: AR in, AP out.
 
 ## SECTION 13: THE BOTTOM LINE
 
-DataByt is now a materially more complete product than it was 24 hours ago. The core gap list (no payment portal, no dispute management, no NetSuite/Sage, no CEI analytics) is closed. The full AR collections loop — from import to email to payment to cash application to dispute resolution — is now functional.
+DataByt is now a fully automated AR collections platform. In the last two build sessions, every major gap was closed: payment portal, dispute management, NetSuite/Sage, CEI analytics, and now the collections automation engine (scheduled cron, email batching, CAN-SPAM compliance, opt-out handling). The landing page has been rewritten with world-class marketing copy. The product is deployable to paying customers today.
 
 **What is real and strong:**
 - Market size and timing
 - Price point vs. incumbents
 - Setup speed (48 hours)
 - QuickBooks + Xero + NetSuite + Sage (four platforms live)
-- AI-personalized dunning with embedded payment links
+- AI-personalized dunning with embedded payment links (Gemini 1.5 Flash)
 - Dodo Payments hosted checkout, auto-match, cash application
 - Dispute management end-to-end
 - CEI analytics with real DB data
 - Admin infrastructure (multi-org, RLS, proper security)
+- Fully automated collections cron (Mon–Fri, no human needed)
+- Email batching per customer (one email, all invoices, CAN-SPAM compliant)
+- World-class landing page with urgency-first positioning
 
 **What still needs real-world validation:**
 - The 30% DSO improvement claim (needs 5+ paying customers with before/after data)
