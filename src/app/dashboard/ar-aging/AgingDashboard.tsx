@@ -8,7 +8,7 @@ import {
 } from "recharts";
 import {
   DollarSign, Clock, TrendingUp, AlertTriangle,
-  RefreshCw, UserPlus, FileText, ArrowRight,
+  RefreshCw, UserPlus, FileText, ArrowRight, Link2, Check,
 } from "lucide-react";
 import { useAuth } from "@/components/AuthProvider";
 import {
@@ -45,7 +45,8 @@ export default function AgingDashboard({ readOnly = false }: { readOnly?: boolea
   const [showAddCustomer, setShowAddCustomer] = useState(false);
   const [showAddInvoice, setShowAddInvoice] = useState(false);
   const [search, setSearch] = useState("");
-  const [page, setPage] = useState(1);
+  const [page, setPage]         = useState(1);
+  const [copiedId, setCopied]   = useState<string | null>(null);
   const PER_PAGE = 20;
 
   const load = useCallback(async () => {
@@ -63,6 +64,27 @@ export default function AgingDashboard({ readOnly = false }: { readOnly?: boolea
   }, [organization, statusFilter]);
 
   useEffect(() => { load(); }, [load]);
+
+  async function generatePayLink(invoiceId: string) {
+    if (!organization) return;
+    try {
+      const res = await fetch("/api/payments/checkout", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ invoiceId, orgId: organization.id }),
+      });
+      const json = await res.json();
+      if (json.url) {
+        await navigator.clipboard.writeText(json.url);
+        setCopied(invoiceId);
+        setTimeout(() => setCopied(null), 3000);
+        // Update local state
+        setInvoices(prev => prev.map(i => i.id === invoiceId ? { ...i, payment_link_url: json.url } : i));
+      }
+    } catch {
+      // clipboard not available in some contexts
+    }
+  }
 
   async function markPaid(invoiceId: string) {
     await db.from("invoices").update({
@@ -277,11 +299,25 @@ export default function AgingDashboard({ readOnly = false }: { readOnly?: boolea
                   </td>
                   {!readOnly && (
                     <td className="px-4 py-3">
-                      {inv.status !== "paid" && (
-                        <button onClick={() => markPaid(inv.id)} className="text-xs text-[#16A34A] hover:text-[#15803D] font-medium transition-colors">
-                          Mark Paid
-                        </button>
-                      )}
+                      <div className="flex items-center gap-2">
+                        {inv.status !== "paid" && (
+                          <>
+                            <button
+                              onClick={() => generatePayLink(inv.id)}
+                              title="Generate & copy payment link"
+                              className="flex items-center gap-1 text-xs text-[#64748B] hover:text-[#E8242A] font-medium transition-colors"
+                            >
+                              {copiedId === inv.id
+                                ? <><Check className="w-3 h-3 text-[#16A34A]" /><span className="text-[#16A34A]">Copied</span></>
+                                : <><Link2 className="w-3 h-3" />Pay link</>}
+                            </button>
+                            <span className="text-[#E2E8F0]">·</span>
+                            <button onClick={() => markPaid(inv.id)} className="text-xs text-[#16A34A] hover:text-[#15803D] font-medium transition-colors">
+                              Mark paid
+                            </button>
+                          </>
+                        )}
+                      </div>
                     </td>
                   )}
                 </tr>
