@@ -1,35 +1,35 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Check } from "lucide-react";
+import { Check, ArrowRight } from "lucide-react";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
 const plans = [
   {
-    name: "AR Engine",
-    price: "$3,000",
-    period: "/month",
-    setup: "$5,000 one-time setup",
-    desc: "AI-powered AR collections for mid-market finance teams",
+    name:     "AR Engine",
+    price:    "$3,000",
+    period:   "/month",
+    setup:    "+ $5,000 one-time setup",
+    desc:     "Full AR collections automation for mid-market finance teams.",
     featured: false,
     features: [
-      "AI Collections Agent — full automation",
-      "Personalized dunning emails (L1/L2/L3)",
-      "AR aging dashboard & analytics",
-      "Customer segmentation",
-      "QuickBooks & Xero integration",
-      "Reply detection & tracking",
-      "Weekly performance reports",
+      "AI Collections Agent — fully automated",
+      "L1 / L2 / L3 dunning email sequences",
+      "Payment links in every email (Dodo Payments)",
+      "Dispute management portal",
+      "AR aging dashboard & CEI analytics",
+      "QuickBooks, Xero, NetSuite, Sage integration",
+      "Reply detection & opt-out handling",
       "Live in 48 hours",
     ],
   },
   {
-    name: "CashFlow Command",
-    price: "$6,000",
-    period: "/month",
-    setup: "$10,000 one-time setup",
-    desc: "Full cash flow command center — AR + AP + forecasting",
+    name:     "CashFlow Command",
+    price:    "$6,000",
+    period:   "/month",
+    setup:    "+ $10,000 one-time setup",
+    desc:     "Full cash flow command center — AR, AP, and forecasting.",
     featured: true,
     features: [
       "Everything in AR Engine, plus:",
@@ -37,80 +37,91 @@ const plans = [
       "Cash flow forecasting dashboard",
       "Multi-entity support",
       "Custom dunning sequences",
-      "Payment link generation",
       "Unlimited ERP integrations",
       "Dedicated CSM + priority support",
+      "Board-ready reporting suite",
     ],
   },
 ];
 
 export default function Pricing() {
   return (
-    <section id="pricing" className="bg-white py-28 border-b border-[#EBEBEB]">
+    <section id="pricing" className="bg-[#FAFAFA] py-20 border-b border-[#EBEBEB]">
       <div className="max-w-6xl mx-auto px-6">
 
         <motion.div
-          initial={{ opacity: 0, y: 24 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.7, ease }}
-          className="mb-14"
+          viewport={{ once: true, margin: "-60px" }}
+          transition={{ duration: 0.6, ease }}
+          className="mb-12"
         >
-          <h2 className="text-4xl sm:text-5xl font-black text-[#111111] leading-tight">
-            Pricing
+          <p className="text-[#E8242A] text-[11px] font-semibold uppercase tracking-widest mb-3">Pricing</p>
+          <h2 className="text-[30px] sm:text-[38px] font-bold text-[#111111] leading-[1.15] tracking-[-0.02em]">
+            Flat fee. No per-invoice charges.
           </h2>
-          <p className="mt-4 text-[#555555] text-lg max-w-xl">
-            Flat monthly fee. No per-invoice charges. 10× cheaper than HighRadius.
+          <p className="mt-3 text-[#666666] text-[15px] max-w-md">
+            10× cheaper than HighRadius. Month-to-month. Cancel anytime.
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-6">
+        <div className="grid md:grid-cols-2 gap-4 max-w-4xl">
           {plans.map((plan, i) => (
             <motion.div
               key={i}
-              initial={{ opacity: 0, y: 24 }}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-80px" }}
-              transition={{ duration: 0.6, ease, delay: i * 0.1 }}
-              className={`relative rounded-2xl p-10 flex flex-col bg-white ${
+              viewport={{ once: true, margin: "-40px" }}
+              transition={{ duration: 0.5, ease, delay: i * 0.08 }}
+              className={`relative rounded-xl p-7 flex flex-col ${
                 plan.featured
-                  ? "border-2 border-[#E8242A] shadow-lg shadow-[#E8242A]/10"
-                  : "border border-[#E2E8F0]"
+                  ? "bg-[#111111] border border-[#111111]"
+                  : "bg-white border border-[#E5E5E5]"
               }`}
             >
               {plan.featured && (
-                <div className="absolute -top-3.5 left-8">
-                  <span className="bg-[#E8242A] text-white text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-widest">
+                <div className="absolute -top-3 left-6">
+                  <span className="bg-[#E8242A] text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-widest">
                     Full Suite
                   </span>
                 </div>
               )}
 
-              <h3 className="text-xl font-black text-[#111111] mb-1">{plan.name}</h3>
-              <p className="text-sm text-[#888888] mb-8">{plan.desc}</p>
+              <p className={`text-[14px] font-bold mb-0.5 ${plan.featured ? "text-white" : "text-[#111111]"}`}>
+                {plan.name}
+              </p>
+              <p className={`text-[13px] mb-6 ${plan.featured ? "text-white/40" : "text-[#888888]"}`}>
+                {plan.desc}
+              </p>
 
-              <div className="mb-2">
-                <span className="text-5xl font-black text-[#111111]">{plan.price}</span>
-                <span className="text-base ml-1 text-[#888888]">{plan.period}</span>
+              <div className="mb-1">
+                <span className={`text-[40px] font-bold leading-none ${plan.featured ? "text-white" : "text-[#111111]"}`}>
+                  {plan.price}
+                </span>
+                <span className={`text-[15px] ml-1 ${plan.featured ? "text-white/40" : "text-[#999999]"}`}>
+                  {plan.period}
+                </span>
               </div>
-              <p className="text-sm text-[#AAAAAA] mb-8">+ {plan.setup}</p>
+              <p className={`text-[12px] mb-7 ${plan.featured ? "text-white/30" : "text-[#BBBBBB]"}`}>
+                {plan.setup}
+              </p>
 
               <a
                 href="#"
-                className={`py-3.5 rounded-xl text-center text-sm font-bold mb-10 transition-colors ${
+                className={`py-3 rounded-lg text-center text-[14px] font-semibold mb-7 transition-colors ${
                   plan.featured
                     ? "bg-[#E8242A] text-white hover:bg-[#C41E23]"
-                    : "bg-[#F4F4F4] text-[#111111] hover:bg-[#EBEBEB]"
+                    : "bg-[#F3F3F3] text-[#111111] hover:bg-[#EAEAEA]"
                 }`}
               >
                 Book a Demo
               </a>
 
-              <ul className="space-y-3 flex-1">
+              <ul className="space-y-2.5 flex-1">
                 {plan.features.map((f, j) => (
-                  <li key={j} className="flex items-start gap-3 text-sm">
-                    <Check className="w-4 h-4 mt-0.5 shrink-0 text-[#E8242A]" />
-                    <span className="text-[#555555]">{f}</span>
+                  <li key={j} className="flex items-start gap-2.5 text-[13px]">
+                    <Check className={`w-3.5 h-3.5 mt-0.5 shrink-0 ${plan.featured ? "text-[#E8242A]" : "text-[#E8242A]"}`} />
+                    <span className={plan.featured ? "text-white/70" : "text-[#555555]"}>{f}</span>
                   </li>
                 ))}
               </ul>
@@ -118,15 +129,21 @@ export default function Pricing() {
           ))}
         </div>
 
-        <motion.p
+        <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          className="mt-8 text-[#888888] text-sm"
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="mt-6 flex flex-wrap items-center gap-6 text-[#999999] text-[12px]"
         >
-          HighRadius starts at <span className="line-through">$30,000+/year</span>. DataByt AR Engine: $41,000/year all-in.
-        </motion.p>
+          <span>✓ Month-to-month, cancel anytime</span>
+          <span>✓ No IT team required</span>
+          <span>✓ Live in 48 hours</span>
+          <span>✓ CAN-SPAM compliant</span>
+          <span className="ml-auto">
+            HighRadius starts at <span className="line-through text-[#CCCCCC]">$100K+/year</span> — DataByt: $41K all-in
+          </span>
+        </motion.div>
 
       </div>
     </section>

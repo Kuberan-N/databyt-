@@ -8,28 +8,32 @@ const ease = [0.22, 1, 0.36, 1] as const;
 
 const faqs = [
   {
-    q: "How is DataByt different from HighRadius?",
-    a: "HighRadius starts at $30,000+/year with a 6-month implementation for enterprise IT teams. DataByt is live in 48 hours, starts at $3,000/month, and requires zero IT involvement. Same AI-driven outcome.",
+    q: "How is DataByt different from HighRadius or Billtrust?",
+    a: "HighRadius starts at $100K+/year with a 6-month enterprise implementation. Billtrust is $50K+/year. DataByt is $3,000/month, live in 48 hours, and requires zero IT involvement. Same AI-driven outcome at 10% of the cost.",
   },
   {
-    q: "How does the AI Collections Agent work?",
-    a: "It imports your AR aging from QuickBooks or Xero daily, scores every overdue invoice by priority, drafts a personalized dunning email for each one, and sends it automatically. Tone is calibrated to days overdue — polite reminder, firm notice, or final notice.",
+    q: "How does the AI collections engine work?",
+    a: "It imports your AR aging daily from QuickBooks, Xero, NetSuite, or Sage. Every overdue invoice is scored by priority. One batched email is sent per customer covering all their overdue invoices — tone escalates from polite (L1) to firm (L2) to final notice (L3) based on days overdue.",
   },
   {
-    q: "Will the emails sound robotic to my customers?",
-    a: "No. The AI uses the customer's name, specific invoice numbers, amounts, and payment history. Finance teams routinely tell us customers respond without realizing the email was AI-generated.",
+    q: "Will the dunning emails sound robotic to my customers?",
+    a: "No. Gemini AI uses the customer's actual name, specific invoice numbers, exact amounts owed, due dates, and payment history. Finance teams consistently tell us customers respond without realising the email was AI-generated.",
   },
   {
-    q: "How long does setup take?",
-    a: "48 hours. We handle the QuickBooks/Xero connection, AR aging import, and configuration. You don't touch any code or configure any workflows.",
+    q: "How do customers pay?",
+    a: "Every dunning email includes a direct payment link. Customer clicks it, lands on a hosted portal (no login required), sees their invoice, and pays via Dodo Payments checkout in under 60 seconds. Payment is auto-matched to the invoice instantly.",
   },
   {
     q: "What accounting software do you support?",
-    a: "QuickBooks Online and Xero. Sage and NetSuite coming Q3 2026.",
+    a: "QuickBooks Online, Xero, NetSuite, and Sage Business Cloud — all live today via OAuth. No CSV exports, no manual uploads. Daily sync.",
+  },
+  {
+    q: "How long does setup take?",
+    a: "48 hours. We handle the ERP connection, AR aging import, email configuration, and payment portal setup. You don't touch any code or configure any workflows.",
   },
   {
     q: "Is my data secure?",
-    a: "Yes. All data is encrypted at rest and in transit, stored in PostgreSQL with row-level security. We never train models on your data. Full data export available at any time.",
+    a: "Yes. All data is encrypted at rest and in transit, stored in PostgreSQL with row-level security. We never train AI models on your customer data. Full data export available at any time.",
   },
 ];
 
@@ -37,39 +41,40 @@ export default function FAQ() {
   const [open, setOpen] = useState<number | null>(null);
 
   return (
-    <section id="faq" className="bg-[#FAFAFA] py-28 border-y border-[#EBEBEB]">
+    <section id="faq" className="bg-white py-20 border-b border-[#EBEBEB]">
       <div className="max-w-6xl mx-auto px-6">
 
         <motion.div
-          initial={{ opacity: 0, y: 24 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.7, ease }}
-          className="mb-14"
+          viewport={{ once: true, margin: "-60px" }}
+          transition={{ duration: 0.6, ease }}
+          className="mb-10"
         >
-          <h2 className="text-4xl sm:text-5xl font-black text-[#111111] leading-tight">
-            FAQ
+          <p className="text-[#E8242A] text-[11px] font-semibold uppercase tracking-widest mb-3">FAQ</p>
+          <h2 className="text-[30px] sm:text-[38px] font-bold text-[#111111] leading-[1.15] tracking-[-0.02em]">
+            Common questions
           </h2>
         </motion.div>
 
-        <div className="space-y-3">
+        <div className="max-w-3xl space-y-2">
           {faqs.map((faq, i) => (
             <motion.div
               key={i}
-              initial={{ opacity: 0, y: 16 }}
+              initial={{ opacity: 0, y: 12 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-60px" }}
-              transition={{ duration: 0.5, ease, delay: i * 0.05 }}
-              className="rounded-2xl bg-white border border-[#EBEBEB] overflow-hidden"
+              viewport={{ once: true, margin: "-40px" }}
+              transition={{ duration: 0.45, ease, delay: i * 0.04 }}
+              className="rounded-lg bg-[#FAFAFA] border border-[#EBEBEB] overflow-hidden"
             >
               <button
                 onClick={() => setOpen(open === i ? null : i)}
-                className="w-full flex items-center justify-between px-7 py-5 text-left"
+                className="w-full flex items-center justify-between px-5 py-4 text-left gap-4"
               >
-                <span className="text-[#111111] font-semibold text-base pr-8">{faq.q}</span>
+                <span className="text-[#111111] font-semibold text-[14px] leading-snug">{faq.q}</span>
                 {open === i
                   ? <Minus className="w-4 h-4 text-[#E8242A] shrink-0" />
-                  : <Plus className="w-4 h-4 text-[#AAAAAA] shrink-0" />
+                  : <Plus className="w-4 h-4 text-[#BBBBBB] shrink-0" />
                 }
               </button>
               <AnimatePresence>
@@ -78,10 +83,12 @@ export default function FAQ() {
                     initial={{ height: 0, opacity: 0 }}
                     animate={{ height: "auto", opacity: 1 }}
                     exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.3, ease }}
+                    transition={{ duration: 0.25, ease }}
                     className="overflow-hidden"
                   >
-                    <p className="px-7 pb-6 text-[#666666] text-sm leading-relaxed">{faq.a}</p>
+                    <p className="px-5 pb-5 text-[#555555] text-[13.5px] leading-relaxed border-t border-[#EBEBEB] pt-3">
+                      {faq.a}
+                    </p>
                   </motion.div>
                 )}
               </AnimatePresence>

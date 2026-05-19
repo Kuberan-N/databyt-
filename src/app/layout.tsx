@@ -2,61 +2,52 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "DataByt CashFlow AI — Stop Losing $7,500/Month on Manual Invoicing",
+  title: "DataByt — AI-Powered AR Collections for Mid-Market B2B",
   description:
-    "AI-powered invoice processing + automated collections for small businesses. Process invoices in seconds, chase overdue payments automatically. From $49/month. Deployed in 1 hour.",
+    "Reduce DSO by 30% in 48 hours. AI dunning emails, Dodo Payments checkout, dispute management, and live CEI analytics. Connects to QuickBooks, Xero, NetSuite, Sage. $3,000/month.",
   keywords: [
-    "invoice automation",
     "accounts receivable automation",
-    "collections management",
-    "AP automation",
-    "AI invoicing",
+    "AR collections software",
     "dunning automation",
-    "QuickBooks integration",
     "reduce DSO",
-    "cash flow management",
-    "small business finance",
+    "QuickBooks AR automation",
+    "Xero collections",
+    "invoice collections AI",
+    "CEI dashboard",
+    "B2B collections",
+    "mid-market AR",
   ],
   openGraph: {
-    title: "DataByt CashFlow AI — AI Invoice Processing + Auto Collections",
+    title: "DataByt — AI AR Collections That Actually Close the Loop",
     description:
-      "Process invoices with 95%+ accuracy. Chase overdue payments automatically. From $49/month.",
+      "Import → Score → Email → Pay → Match → Dispute → Analyse. Live in 48 hours. 10× cheaper than HighRadius.",
     url: "https://databyt.in",
     siteName: "DataByt",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "DataByt CashFlow AI",
+    title: "DataByt — AI-Powered AR Collections",
     description:
-      "AI invoice processing + automated collections. From $49/month.",
+      "Reduce DSO by 30%. Live in 48 hours. $3,000/month flat.",
   },
-  robots: {
-    index: true,
-    follow: true,
-  },
+  robots: { index: true, follow: true },
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className="dark">
+    <html lang="en">
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link
-          rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossOrigin="anonymous"
-        />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
           rel="stylesheet"
         />
       </head>
-      <body className="bg-surface-950 text-white antialiased">{children}</body>
+      <body className="bg-white text-[#111111] antialiased">{children}</body>
     </html>
   );
 }

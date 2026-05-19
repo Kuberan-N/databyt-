@@ -60,7 +60,7 @@
   --color-surface-900: #FFFFFF;  /* was dark card bg → now white card */
   --color-surface-950: #F8F9FC;  /* was near-black → now off-white page */
 
-  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
   --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
 }
 
@@ -160,24 +160,28 @@ input[type="range"] {
   -webkit-appearance: none;
   appearance: none;
   width: 100%;
-  height: 4px;
+  height: 3px;
   border-radius: 2px;
   background: #E2E8F0;
   outline: none;
+  cursor: pointer;
 }
 input[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none;
   width: 18px;
   height: 18px;
   border-radius: 50%;
-  background: #1B2B6B;
+  background: #E8242A;
   cursor: pointer;
+  border: 2px solid white;
+  box-shadow: 0 1px 4px rgba(232,36,42,0.35);
 }
 input[type="range"]::-moz-range-thumb {
   width: 18px;
   height: 18px;
   border-radius: 50%;
-  background: #1B2B6B;
+  background: #E8242A;
   cursor: pointer;
-  border: none;
+  border: 2px solid white;
+  box-shadow: 0 1px 4px rgba(232,36,42,0.35);
 }

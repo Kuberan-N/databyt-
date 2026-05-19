@@ -6,24 +6,25 @@ import { Menu, X } from "lucide-react";
 
 const navLinks = [
   { label: "How It Works", href: "#how-it-works" },
-  { label: "Pricing",      href: "#pricing" },
-  { label: "FAQ",          href: "#faq" },
+  { label: "ROI Calculator", href: "#roi" },
+  { label: "Pricing",       href: "#pricing" },
+  { label: "FAQ",           href: "#faq" },
 ];
 
 export function Logo({ className = "" }: { className?: string }) {
   return (
-    <span className={`inline-flex items-center gap-2 select-none ${className}`}>
-      {/* SVG logomark: red rounded square with white "D" */}
+    <span className={`inline-flex items-center gap-2.5 select-none ${className}`}>
       <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <rect width="28" height="28" rx="7" fill="#E8242A" />
-        <path
-          d="M8 8H14.5C18.6421 8 22 11.134 22 15C22 18.866 18.6421 22 14.5 22H8V8Z"
-          fill="white"
-        />
-        <rect x="8" y="8" width="4" height="14" fill="#E8242A" />
+        <rect width="28" height="28" rx="6" fill="#E8242A" />
+        {/* Left vertical bar of D */}
+        <rect x="7" y="7" width="3.5" height="14" fill="white" />
+        {/* D arc — right bowl */}
+        <path d="M10.5 7H15C18.866 7 22 10.134 22 14C22 17.866 18.866 21 15 21H10.5V7Z" fill="white" />
+        {/* Inner cutout to make D hollow */}
+        <path d="M13.5 10.5H15C16.933 10.5 18.5 12.067 18.5 14C18.5 15.933 16.933 17.5 15 17.5H13.5V10.5Z" fill="#E8242A" />
       </svg>
-      <span className="font-black tracking-tight leading-none">
-        <span className="text-[#111111]">Data</span><span className="text-[#E8242A]">Byt</span>
+      <span className="font-bold tracking-[-0.03em] text-[#111111] leading-none">
+        Data<span className="text-[#E8242A]">Byt</span>
       </span>
     </span>
   );
@@ -33,34 +34,35 @@ export default function Navbar() {
   const [open, setOpen] = useState(false);
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-sm border-b border-[#E8E8E8]">
-      <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+    <nav className="fixed top-0 left-0 right-0 z-40 bg-white/98 backdrop-blur-md border-b border-[#F0F0F0]">
+      <div className="max-w-6xl mx-auto px-6 h-[60px] flex items-center justify-between">
 
         <a href="#" className="flex items-center">
-          <Logo className="text-xl" />
+          <Logo className="text-[17px]" />
         </a>
 
-        <div className="hidden md:flex items-center gap-10">
+        <div className="hidden md:flex items-center gap-8">
           {navLinks.map(l => (
             <a key={l.href} href={l.href}
-              className="text-[#444444] text-sm font-medium hover:text-[#E8242A] transition-colors">
+              className="text-[#555555] text-[13.5px] font-medium hover:text-[#111111] transition-colors">
               {l.label}
             </a>
           ))}
         </div>
 
-        <div className="hidden md:flex items-center gap-4">
-          <a href="/auth" className="text-sm font-medium text-[#555555] hover:text-[#111111] transition-colors">
+        <div className="hidden md:flex items-center gap-3">
+          <a href="/auth"
+            className="text-[13.5px] font-medium text-[#666666] hover:text-[#111111] transition-colors px-3 py-2">
             Sign in
           </a>
           <a href="#pricing"
-            className="px-5 py-2.5 rounded-lg bg-[#E8242A] text-white text-sm font-bold hover:bg-[#C41E23] transition-colors">
+            className="px-4 py-2 rounded-lg bg-[#E8242A] text-white text-[13.5px] font-semibold hover:bg-[#C41E23] transition-colors">
             Book a Demo
           </a>
         </div>
 
         <button
-          className="md:hidden text-[#111111] p-2"
+          className="md:hidden text-[#111111] p-2 rounded-md hover:bg-[#F5F5F5] transition-colors"
           onClick={() => setOpen(!open)}
           aria-label="Toggle menu"
         >
@@ -74,18 +76,18 @@ export default function Navbar() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden border-t border-[#EBEBEB] bg-white overflow-hidden"
+            className="md:hidden border-t border-[#F0F0F0] bg-white overflow-hidden"
           >
-            <div className="px-6 py-5 flex flex-col gap-4">
+            <div className="px-6 py-4 flex flex-col gap-1">
               {navLinks.map(l => (
                 <a key={l.href} href={l.href}
-                  className="text-[#333333] text-sm font-medium hover:text-[#E8242A] transition-colors"
+                  className="text-[#444444] text-sm font-medium hover:text-[#E8242A] transition-colors py-2.5"
                   onClick={() => setOpen(false)}>
                   {l.label}
                 </a>
               ))}
               <a href="#pricing"
-                className="mt-2 px-5 py-3 rounded-lg bg-[#E8242A] text-white text-sm font-bold text-center hover:bg-[#C41E23] transition-colors"
+                className="mt-3 px-4 py-3 rounded-lg bg-[#E8242A] text-white text-sm font-semibold text-center hover:bg-[#C41E23] transition-colors"
                 onClick={() => setOpen(false)}>
                 Book a Demo
               </a>
