@@ -52,7 +52,7 @@ const steps = [
 
 export default function HowItWorks() {
   return (
-    <section id="how-it-works" className="bg-[#FAFAFA] py-20 border-y border-[#EBEBEB]">
+    <section id="how-it-works" className="bg-white py-20 border-y border-[#E8E8E8]">
       <div className="max-w-6xl mx-auto px-6">
 
         <motion.div

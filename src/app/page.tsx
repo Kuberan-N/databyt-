@@ -9,7 +9,7 @@ import FinalCTA, { Footer } from "@/components/FinalCTA";
 
 export default function Home() {
   return (
-    <main className="bg-white">
+    <main className="bg-[#F8FAFC]">
       <Navbar />
       <Hero />
       <PainSection />

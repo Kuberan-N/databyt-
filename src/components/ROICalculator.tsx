@@ -30,7 +30,7 @@ export default function ROICalculator() {
   }, [revenueMillion, dso]);
 
   return (
-    <section id="roi" className="bg-white py-20 border-b border-[#EBEBEB]">
+    <section id="roi" className="bg-[#F8FAFC] py-20 border-b border-[#E8E8E8]">
       <div className="max-w-6xl mx-auto px-6">
 
         <motion.div

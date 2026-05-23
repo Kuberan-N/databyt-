@@ -65,7 +65,7 @@ const beforeAfter = [
 
 export default function PainSection() {
   return (
-    <section className="bg-white py-20 border-b border-[#EBEBEB]">
+    <section className="bg-[#F8FAFC] py-20 border-b border-[#E8E8E8]">
       <div className="max-w-6xl mx-auto px-6">
 
         {/* Section header */}

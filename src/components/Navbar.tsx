@@ -34,7 +34,7 @@ export default function Navbar() {
   const [open, setOpen] = useState(false);
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-40 bg-white/98 backdrop-blur-md border-b border-[#F0F0F0]">
+    <nav className="fixed top-0 left-0 right-0 z-40 bg-[#F8FAFC]/95 backdrop-blur-md border-b border-[#E2E8F0]">
       <div className="max-w-6xl mx-auto px-6 h-[60px] flex items-center justify-between">
 
         <a href="#" className="flex items-center">
