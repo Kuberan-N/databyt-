@@ -40,19 +40,19 @@ export default function PayButton({
   return (
     <>
       {error && (
-        <div className="mb-3 px-4 py-2.5 rounded-xl bg-[#EFF6FF] border border-[#FECACA] text-[#DC2626] text-sm">
+        <div className="mb-3 px-4 py-2.5 rounded-xl bg-[#EEF2FF] border border-[#FECACA] text-[#DC2626] text-sm">
           {error}
         </div>
       )}
       <button
         onClick={handlePay}
         disabled={loading}
-        className="w-full py-3.5 rounded-xl bg-[#2563EB] text-white font-bold text-sm hover:bg-[#1D4ED8] transition-colors disabled:opacity-60 flex items-center justify-center gap-2"
+        className="w-full py-3.5 rounded-xl bg-[#4F46E5] text-white font-bold text-sm hover:bg-[#4338CA] transition-colors disabled:opacity-60 flex items-center justify-center gap-2"
       >
         {loading ? (
           <>
             <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-            Preparing checkout…
+            Preparing checkoutâ€¦
           </>
         ) : (
           `Pay ${fmt(amount, currency)}`

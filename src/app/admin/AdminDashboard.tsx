@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
@@ -13,8 +13,8 @@ const fmt = (n: number) =>
 
 const PLAN_STYLE: Record<string, { color: string; bg: string; border: string }> = {
   starter: { color: "text-[#64748B]",   bg: "bg-[#F1F5F9]",         border: "border-[#E2E8F0]" },
-  growth:  { color: "text-[#4B5FA8]",   bg: "bg-[#EEF2FF]",         border: "border-[#1B2B6B]/20" },
-  scale:   { color: "text-[#2563EB]",   bg: "bg-[#FFF1F2]",         border: "border-[#2563EB]/20" },
+  growth:  { color: "text-[#4B5FA8]",   bg: "bg-[#EEF2FF]",         border: "border-[#3730A3]/20" },
+  scale:   { color: "text-[#4F46E5]",   bg: "bg-[#FFF1F2]",         border: "border-[#4F46E5]/20" },
 };
 
 const adminSecret = process.env.ADMIN_SECRET ?? "databyt-admin-2024";
@@ -43,7 +43,7 @@ export default function AdminDashboard() {
       .catch(() => setFailedJobsCount(null));
   }, []);
 
-  const btnBase = "flex items-center gap-2 px-4 py-2 rounded-lg border border-[#E2E8F0] text-[#64748B] text-sm hover:text-[#1B2B6B] hover:border-[#1B2B6B]/30 bg-white transition-all disabled:opacity-50";
+  const btnBase = "flex items-center gap-2 px-4 py-2 rounded-lg border border-[#E2E8F0] text-[#64748B] text-sm hover:text-[#3730A3] hover:border-[#3730A3]/30 bg-white transition-all disabled:opacity-50";
   const spinner = <div className="w-4 h-4 border-2 border-[#94A3B8]/30 border-t-[#94A3B8] rounded-full animate-spin" />;
 
   return (
@@ -170,7 +170,7 @@ export default function AdminDashboard() {
       {/* Overdue alert */}
       {!orgsLoading && totalOverdue > 0 && (
         <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }}
-          className="flex items-center justify-between px-5 py-3.5 rounded-2xl bg-[#EFF6FF] border border-[#EF4444]/20">
+          className="flex items-center justify-between px-5 py-3.5 rounded-2xl bg-[#EEF2FF] border border-[#EF4444]/20">
           <div className="flex items-center gap-3">
             <AlertTriangle className="w-4 h-4 text-[#DC2626] shrink-0" />
             <p className="text-sm text-[#991B1B]">
@@ -204,7 +204,7 @@ export default function AdminDashboard() {
               {orgsLoading ? (
                 <tr><td colSpan={8} className="text-center py-12 text-[#94A3B8]">
                   <div className="flex items-center justify-center gap-2">
-                    <div className="w-4 h-4 border-2 border-[#1B2B6B]/20 border-t-[#1B2B6B] rounded-full animate-spin" />
+                    <div className="w-4 h-4 border-2 border-[#3730A3]/20 border-t-[#3730A3] rounded-full animate-spin" />
                     Loading clients...
                   </div>
                 </td></tr>
@@ -219,8 +219,8 @@ export default function AdminDashboard() {
                     onClick={() => setSelectedOrg(isSelected ? org : org)}>
                     <td className="px-4 py-3.5">
                       <div className="flex items-center gap-2.5">
-                        <div className="w-7 h-7 rounded-lg bg-[#EEF2FF] border border-[#1B2B6B]/20 flex items-center justify-center shrink-0">
-                          <span className="text-[10px] font-bold text-[#1B2B6B]">{org.name.charAt(0).toUpperCase()}</span>
+                        <div className="w-7 h-7 rounded-lg bg-[#EEF2FF] border border-[#3730A3]/20 flex items-center justify-center shrink-0">
+                          <span className="text-[10px] font-bold text-[#3730A3]">{org.name.charAt(0).toUpperCase()}</span>
                         </div>
                         <div>
                           <p className="font-medium text-[#0F172A] text-xs">{org.name}</p>
@@ -231,7 +231,7 @@ export default function AdminDashboard() {
                     <td className="px-4 py-3.5">
                       <span className={`px-2 py-0.5 rounded-full text-[10px] font-medium border capitalize ${
                         org.status === "active"     ? "bg-[#F0FDF4] text-[#16A34A] border-[#16A34A]/20" :
-                        org.status === "onboarding" ? "bg-[#EEF2FF] text-[#1B2B6B] border-[#1B2B6B]/20" :
+                        org.status === "onboarding" ? "bg-[#EEF2FF] text-[#3730A3] border-[#3730A3]/20" :
                         org.status === "paused"     ? "bg-[#FFFBEB] text-[#D97706] border-[#F59E0B]/20" :
                         "bg-[#F1F5F9] text-[#94A3B8] border-[#E2E8F0]"
                       }`}>{org.status}</span>

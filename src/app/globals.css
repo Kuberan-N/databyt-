@@ -1,27 +1,27 @@
 @import "tailwindcss";
 
 @theme {
-  /* ─── Primary: Electric Red ─── */
-  --color-primary-50:  #FFF1F2;
-  --color-primary-100: #FFE4E6;
-  --color-primary-200: #BFDBFE;
-  --color-primary-300: #93C5FD;
-  --color-primary-400: #F36166;
-  --color-primary-500: #2563EB;
-  --color-primary-600: #1D4ED8;
-  --color-primary-700: #1E40AF;
-  --color-primary-800: #7A1218;
-  --color-primary-900: #5C0D12;
+  /* ─── Primary: Indigo ─── */
+  --color-primary-50:  #EEF2FF;
+  --color-primary-100: #E0E7FF;
+  --color-primary-200: #C7D2FE;
+  --color-primary-300: #A5B4FC;
+  --color-primary-400: #818CF8;
+  --color-primary-500: #4F46E5;
+  --color-primary-600: #4338CA;
+  --color-primary-700: #3730A3;
+  --color-primary-800: #312E81;
+  --color-primary-900: #1E1B4B;
 
-  /* ─── Accent: Sharp Red ─── */
-  --color-accent-50:  #FFF1F2;
-  --color-accent-100: #FFE4E6;
-  --color-accent-200: #BFDBFE;
-  --color-accent-300: #93C5FD;
-  --color-accent-400: #F36166;
-  --color-accent-500: #2563EB;
-  --color-accent-600: #1D4ED8;
-  --color-accent-700: #1E40AF;
+  /* ─── Accent: same as primary ─── */
+  --color-accent-50:  #EEF2FF;
+  --color-accent-100: #E0E7FF;
+  --color-accent-200: #C7D2FE;
+  --color-accent-300: #A5B4FC;
+  --color-accent-400: #818CF8;
+  --color-accent-500: #4F46E5;
+  --color-accent-600: #4338CA;
+  --color-accent-700: #3730A3;
 
   /* ─── Success: Green ─── */
   --color-success-50:  #F0FDF4;
@@ -37,30 +37,26 @@
   --color-warning-500: #D97706;
 
   /* ─── Danger: Red ─── */
-  --color-danger-50:  #EFF6FF;
-  --color-danger-100: #DBEAFE;
+  --color-danger-50:  #FEF2F2;
+  --color-danger-100: #FEE2E2;
   --color-danger-400: #EF4444;
   --color-danger-500: #DC2626;
   --color-danger-600: #B91C1C;
 
-  /* ─── Surface: Light scale (mapped for light theme) ───
-     Lower numbers = lighter grays (keep as-is).
-     Higher numbers = remapped FROM dark TO light so existing
-     bg-surface-900/950 class names become white/off-white cards.
-  ─── */
-  --color-surface-50:  #F8F9FC;  /* page bg */
+  /* ─── Surface: Light scale ─── */
+  --color-surface-50:  #F8F9FC;
   --color-surface-100: #F1F5F9;
-  --color-surface-200: #E2E8F0;  /* border */
+  --color-surface-200: #E2E8F0;
   --color-surface-300: #CBD5E1;
-  --color-surface-400: #94A3B8;  /* text muted */
-  --color-surface-500: #64748B;  /* text secondary */
-  --color-surface-600: #475569;  /* text body */
-  --color-surface-700: #E2E8F0;  /* was dark border → now light border */
-  --color-surface-800: #F8F9FC;  /* was dark inner → now off-white bg */
-  --color-surface-900: #FFFFFF;  /* was dark card bg → now white card */
-  --color-surface-950: #F8F9FC;  /* was near-black → now off-white page */
+  --color-surface-400: #94A3B8;
+  --color-surface-500: #64748B;
+  --color-surface-600: #475569;
+  --color-surface-700: #E2E8F0;
+  --color-surface-800: #F8F9FC;
+  --color-surface-900: #FFFFFF;
+  --color-surface-950: #F8F9FC;
 
-  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --font-sans: 'DM Sans', system-ui, -apple-system, sans-serif;
   --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
 }
 
@@ -74,7 +70,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background: #F8FAFC;
-  color: #111111;
+  color: #0F172A;
 }
 
 /* ─────────────────────────────────────────────────
@@ -86,36 +82,24 @@ body {
 ::-webkit-scrollbar-thumb:hover { background: #94A3B8; }
 
 /* ─────────────────────────────────────────────────
-   Card utility (replaces the old dark .glass)
+   Card utility
 ───────────────────────────────────────────────── */
 .glass {
   background: #FFFFFF;
   border: 1px solid #E2E8F0;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.07), 0 1px 2px rgba(0, 0, 0, 0.04);
-}
-
-/* Within glass cards: inherit dark text by default */
-.glass {
   color: #0F172A;
 }
 
-/* ─── Light-theme text fix ───
-   In the dark theme, text-white was used for card headings and metric values.
-   These CSS rules (outside @layer, so they beat Tailwind utilities) override
-   text-white to be dark within card contexts — while preserving white text
-   on colored buttons, badges, and icon squares.
-─── */
 .glass .text-white {
   color: #0F172A;
 }
 
-/* Keep white text when the element itself has a background color */
 .glass .text-white[class*="bg-"],
 .glass .text-white[class*="from-"] {
   color: #FFFFFF;
 }
 
-/* Keep white text when inside a colored container */
 .glass [class*="from-primary"] .text-white,
 .glass [class*="from-accent"]  .text-white,
 .glass [class*="from-success"] .text-white,
@@ -126,21 +110,20 @@ body {
 .glass [class*="bg-success"]   .text-white,
 .glass [class*="bg-warning"]   .text-white,
 .glass [class*="bg-danger"]    .text-white,
-/* Header bar and sidebar (not glass cards) */
 header .text-white,
 aside  .text-white {
   color: #FFFFFF;
 }
 
-/* ─── gradient-text: red ─── */
+/* ─── gradient-text ─── */
 .gradient-text {
-  background: linear-gradient(135deg, #2563EB 0%, #1D4ED8 100%);
+  background: linear-gradient(135deg, #4F46E5 0%, #4338CA 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
-/* ─── card utility (alias for explicit use in new components) ─── */
+/* ─── card utility ─── */
 .card {
   background: #FFFFFF;
   border: 1px solid #E2E8F0;
@@ -151,8 +134,8 @@ aside  .text-white {
 /* ─── Sidebar active nav item ─── */
 .nav-active {
   background: #EEF2FF;
-  border-left: 3px solid #1B2B6B;
-  color: #1B2B6B;
+  border-left: 3px solid #4F46E5;
+  color: #4F46E5;
 }
 
 /* ─── Range input ─── */
@@ -171,17 +154,17 @@ input[type="range"]::-webkit-slider-thumb {
   width: 18px;
   height: 18px;
   border-radius: 50%;
-  background: #2563EB;
+  background: #4F46E5;
   cursor: pointer;
   border: 2px solid white;
-  box-shadow: 0 1px 4px rgba(232,36,42,0.35);
+  box-shadow: 0 1px 4px rgba(79,70,229,0.4);
 }
 input[type="range"]::-moz-range-thumb {
   width: 18px;
   height: 18px;
   border-radius: 50%;
-  background: #2563EB;
+  background: #4F46E5;
   cursor: pointer;
   border: 2px solid white;
-  box-shadow: 0 1px 4px rgba(232,36,42,0.35);
+  box-shadow: 0 1px 4px rgba(79,70,229,0.4);
 }

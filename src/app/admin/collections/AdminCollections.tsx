@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useEffect, useState, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -47,12 +47,12 @@ function getEscalationLevel(daysOverdue: number): 1 | 2 | 3 {
 const LEVEL_STYLE = {
   1: { label: "L1", cls: "bg-[#F0FDF4] text-[#16A34A]" },
   2: { label: "L2", cls: "bg-[#FFFBEB] text-[#D97706]" },
-  3: { label: "L3", cls: "bg-[#EFF6FF] text-[#DC2626]" },
+  3: { label: "L3", cls: "bg-[#EEF2FF] text-[#DC2626]" },
 };
 
 const SEGMENT_STYLE: Record<string, string> = {
-  strategic: "bg-[#EEF2FF] text-[#1B2B6B] border-[#1B2B6B]/20",
-  at_risk:   "bg-[#EFF6FF] text-[#DC2626] border-[#EF4444]/20",
+  strategic: "bg-[#EEF2FF] text-[#3730A3] border-[#3730A3]/20",
+  at_risk:   "bg-[#EEF2FF] text-[#DC2626] border-[#EF4444]/20",
 };
 
 export default function AdminCollections() {
@@ -208,7 +208,7 @@ export default function AdminCollections() {
             {isPaused ? "Resume Collections" : "Pause Client"}
           </button>
           <button onClick={loadQueue}
-            className="flex items-center gap-2 px-3 py-2 rounded-lg border border-[#E2E8F0] bg-white text-[#64748B] text-xs hover:text-[#1B2B6B] hover:border-[#1B2B6B]/30 transition-all">
+            className="flex items-center gap-2 px-3 py-2 rounded-lg border border-[#E2E8F0] bg-white text-[#64748B] text-xs hover:text-[#3730A3] hover:border-[#3730A3]/30 transition-all">
             <RefreshCw className={`w-3.5 h-3.5 ${loading ? "animate-spin" : ""}`} />
           </button>
         </div>
@@ -225,7 +225,7 @@ export default function AdminCollections() {
 
       {loading ? (
         <div className="flex items-center justify-center py-20">
-          <div className="w-6 h-6 border-2 border-[#1B2B6B]/20 border-t-[#1B2B6B] rounded-full animate-spin" />
+          <div className="w-6 h-6 border-2 border-[#3730A3]/20 border-t-[#3730A3] rounded-full animate-spin" />
         </div>
       ) : queue.length === 0 ? (
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}
@@ -239,11 +239,11 @@ export default function AdminCollections() {
           {/* Bulk action bar */}
           <div className="flex items-center justify-between flex-wrap gap-3">
             <div className="flex items-center gap-3">
-              <button onClick={toggleSelectAll} className="flex items-center gap-1.5 text-xs text-[#64748B] hover:text-[#1B2B6B] transition-colors">
+              <button onClick={toggleSelectAll} className="flex items-center gap-1.5 text-xs text-[#64748B] hover:text-[#3730A3] transition-colors">
                 {allSelected ? (
-                  <CheckSquare className="w-4 h-4 text-[#1B2B6B]" />
+                  <CheckSquare className="w-4 h-4 text-[#3730A3]" />
                 ) : someSelected ? (
-                  <Minus className="w-4 h-4 text-[#1B2B6B]" />
+                  <Minus className="w-4 h-4 text-[#3730A3]" />
                 ) : (
                   <Square className="w-4 h-4" />
                 )}
@@ -258,9 +258,9 @@ export default function AdminCollections() {
                   className="flex items-center gap-2">
                   <span className="text-xs text-[#64748B]">{selected.length} selected</span>
                   <button onClick={bulkDraft} disabled={bulkDrafting || isPaused}
-                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#EEF2FF] border border-[#1B2B6B]/20 text-[#1B2B6B] text-xs font-medium hover:bg-[#E0E7FF] transition-all disabled:opacity-40">
+                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#EEF2FF] border border-[#3730A3]/20 text-[#3730A3] text-xs font-medium hover:bg-[#E0E7FF] transition-all disabled:opacity-40">
                     {bulkDrafting ? (
-                      <div className="w-3 h-3 border border-[#1B2B6B]/30 border-t-[#1B2B6B] rounded-full animate-spin" />
+                      <div className="w-3 h-3 border border-[#3730A3]/30 border-t-[#3730A3] rounded-full animate-spin" />
                     ) : (
                       <Edit3 className="w-3 h-3" />
                     )}
@@ -288,18 +288,18 @@ export default function AdminCollections() {
                   initial={{ opacity: 0, y: 12 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, x: -20 }}
-                  className={`glass rounded-2xl overflow-hidden transition-all ${item.selected ? "ring-1 ring-[#1B2B6B]/30" : ""}`}>
+                  className={`glass rounded-2xl overflow-hidden transition-all ${item.selected ? "ring-1 ring-[#3730A3]/30" : ""}`}>
 
                   {/* Row header */}
                   <div className="flex items-center gap-3 px-5 py-4">
                     <button onClick={() => toggleSelect(item.id)} className="shrink-0">
                       {item.selected
-                        ? <CheckSquare className="w-4 h-4 text-[#1B2B6B]" />
+                        ? <CheckSquare className="w-4 h-4 text-[#3730A3]" />
                         : <Square className="w-4 h-4 text-[#94A3B8] hover:text-[#64748B] transition-colors" />
                       }
                     </button>
 
-                    <div className="w-9 h-9 rounded-xl bg-[#EFF6FF] border border-[#EF4444]/20 flex items-center justify-center shrink-0">
+                    <div className="w-9 h-9 rounded-xl bg-[#EEF2FF] border border-[#EF4444]/20 flex items-center justify-center shrink-0">
                       <AlertTriangle className="w-4 h-4 text-[#DC2626]" />
                     </div>
 
@@ -314,7 +314,7 @@ export default function AdminCollections() {
 
                         {item.priority_score > 0 && (
                           <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded-md ${
-                            item.priority_score >= 70 ? "bg-[#EFF6FF] text-[#DC2626]" :
+                            item.priority_score >= 70 ? "bg-[#EEF2FF] text-[#DC2626]" :
                             item.priority_score >= 40 ? "bg-[#FFFBEB] text-[#D97706]" :
                             "bg-[#F1F5F9] text-[#64748B]"
                           }`}>
@@ -329,7 +329,7 @@ export default function AdminCollections() {
                         )}
 
                         {hasReply && (
-                          <span className="flex items-center gap-1 text-[10px] font-medium px-1.5 py-0.5 rounded-md bg-[#FFF1F2] border border-[#2563EB]/20 text-[#2563EB]">
+                          <span className="flex items-center gap-1 text-[10px] font-medium px-1.5 py-0.5 rounded-md bg-[#FFF1F2] border border-[#4F46E5]/20 text-[#4F46E5]">
                             <MessageSquare className="w-2.5 h-2.5" /> Reply
                           </span>
                         )}
@@ -355,13 +355,13 @@ export default function AdminCollections() {
                     <div className="flex items-center gap-2 shrink-0">
                       {!item.draftSubject && !item.drafting && !isPaused && (
                         <button onClick={() => draftEmail(item)}
-                          className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#EEF2FF] border border-[#1B2B6B]/20 text-[#1B2B6B] text-xs font-medium hover:bg-[#E0E7FF] transition-all">
+                          className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#EEF2FF] border border-[#3730A3]/20 text-[#3730A3] text-xs font-medium hover:bg-[#E0E7FF] transition-all">
                           <Edit3 className="w-3 h-3" /> Draft
                         </button>
                       )}
                       {item.drafting && (
                         <div className="flex items-center gap-1.5 px-3 py-1.5 text-xs text-[#64748B]">
-                          <div className="w-3 h-3 border border-[#1B2B6B]/30 border-t-[#1B2B6B] rounded-full animate-spin" />
+                          <div className="w-3 h-3 border border-[#3730A3]/30 border-t-[#3730A3] rounded-full animate-spin" />
                           Drafting...
                         </div>
                       )}
@@ -373,7 +373,7 @@ export default function AdminCollections() {
                         </button>
                       )}
                       <button onClick={() => skipItem(item.id)}
-                        className="p-1.5 rounded-lg text-[#94A3B8] hover:text-[#DC2626] hover:bg-[#EFF6FF] transition-all" title="Skip">
+                        className="p-1.5 rounded-lg text-[#94A3B8] hover:text-[#DC2626] hover:bg-[#EEF2FF] transition-all" title="Skip">
                         <XCircle className="w-4 h-4" />
                       </button>
                     </div>
@@ -397,7 +397,7 @@ export default function AdminCollections() {
                             <input
                               value={item.editedSubject ?? item.draftSubject}
                               onChange={e => setQueue(q => q.map(i => i.id === item.id ? { ...i, editedSubject: e.target.value } : i))}
-                              className="mt-1.5 w-full bg-white border border-[#E2E8F0] rounded-lg px-4 py-2.5 text-sm text-[#0F172A] focus:border-[#1B2B6B] focus:outline-none"
+                              className="mt-1.5 w-full bg-white border border-[#E2E8F0] rounded-lg px-4 py-2.5 text-sm text-[#0F172A] focus:border-[#3730A3] focus:outline-none"
                             />
                           </div>
                           <div>
@@ -406,14 +406,14 @@ export default function AdminCollections() {
                               value={item.editedBody ?? item.draftBody}
                               onChange={e => setQueue(q => q.map(i => i.id === item.id ? { ...i, editedBody: e.target.value } : i))}
                               rows={8}
-                              className="mt-1.5 w-full bg-white border border-[#E2E8F0] rounded-lg px-4 py-3 text-sm text-[#475569] leading-relaxed focus:border-[#1B2B6B] focus:outline-none resize-y"
+                              className="mt-1.5 w-full bg-white border border-[#E2E8F0] rounded-lg px-4 py-3 text-sm text-[#475569] leading-relaxed focus:border-[#3730A3] focus:outline-none resize-y"
                             />
                           </div>
                           <div className="flex items-center gap-3 pt-1">
                             <button
                               onClick={() => sendEmail(item)}
                               disabled={sendingId === item.id || isPaused || !item.customer.email}
-                              className="flex items-center gap-2 px-5 py-2.5 rounded-lg bg-[#1B2B6B] text-white text-sm font-semibold hover:bg-[#152356] transition-all disabled:opacity-50">
+                              className="flex items-center gap-2 px-5 py-2.5 rounded-lg bg-[#3730A3] text-white text-sm font-semibold hover:bg-[#152356] transition-all disabled:opacity-50">
                               {sendingId === item.id ? (
                                 <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
                               ) : (

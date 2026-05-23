@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { motion } from "framer-motion";
 import { Check, ArrowRight } from "lucide-react";
@@ -56,7 +56,7 @@ export default function Pricing() {
           transition={{ duration: 0.6, ease }}
           className="mb-12"
         >
-          <p className="text-[#2563EB] text-[11px] font-semibold uppercase tracking-widest mb-3">Pricing</p>
+          <p className="text-[#4F46E5] text-[11px] font-semibold uppercase tracking-widest mb-3">Pricing</p>
           <h2 className="text-[30px] sm:text-[38px] font-bold text-[#111111] leading-[1.15] tracking-[-0.02em]">
             Flat fee. No per-invoice charges.
           </h2>
@@ -81,7 +81,7 @@ export default function Pricing() {
             >
               {plan.featured && (
                 <div className="absolute -top-3 left-6">
-                  <span className="bg-[#2563EB] text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-widest">
+                  <span className="bg-[#4F46E5] text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-widest">
                     Full Suite
                   </span>
                 </div>
@@ -110,7 +110,7 @@ export default function Pricing() {
                 href="#"
                 className={`py-3 rounded-lg text-center text-[14px] font-semibold mb-7 transition-colors ${
                   plan.featured
-                    ? "bg-[#2563EB] text-white hover:bg-[#1D4ED8]"
+                    ? "bg-[#4F46E5] text-white hover:bg-[#4338CA]"
                     : "bg-[#F3F3F3] text-[#111111] hover:bg-[#EAEAEA]"
                 }`}
               >
@@ -120,7 +120,7 @@ export default function Pricing() {
               <ul className="space-y-2.5 flex-1">
                 {plan.features.map((f, j) => (
                   <li key={j} className="flex items-start gap-2.5 text-[13px]">
-                    <Check className={`w-3.5 h-3.5 mt-0.5 shrink-0 ${plan.featured ? "text-[#2563EB]" : "text-[#2563EB]"}`} />
+                    <Check className={`w-3.5 h-3.5 mt-0.5 shrink-0 ${plan.featured ? "text-[#4F46E5]" : "text-[#4F46E5]"}`} />
                     <span className={plan.featured ? "text-white/70" : "text-[#555555]"}>{f}</span>
                   </li>
                 ))}

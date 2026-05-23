@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
@@ -29,7 +29,7 @@ function DashboardMockup() {
         {/* Sidebar */}
         <div className="w-[148px] shrink-0 bg-white border-r border-[#F0F0F0] flex flex-col p-3 gap-0.5">
           <div className="flex items-center gap-2 px-2 py-2 mb-2">
-            <div className="w-5 h-5 rounded bg-[#2563EB] flex items-center justify-center shrink-0">
+            <div className="w-5 h-5 rounded bg-[#4F46E5] flex items-center justify-center shrink-0">
               <svg width="11" height="11" viewBox="0 0 11 11" fill="none">
                 <rect x="2" y="2" width="2" height="7" fill="white" />
                 <path d="M4 2h2.5C8.43 2 10 3.57 10 5.5S8.43 9 6.5 9H4V2Z" fill="white" />
@@ -47,7 +47,7 @@ function DashboardMockup() {
           ].map(item => (
             <div key={item.label}
               className={`px-2.5 py-1.5 rounded-lg text-[10px] font-medium ${
-                item.active ? "bg-[#EFF6FF] text-[#2563EB]" : "text-[#888888]"
+                item.active ? "bg-[#EEF2FF] text-[#4F46E5]" : "text-[#888888]"
               }`}>
               {item.label}
             </div>
@@ -60,7 +60,7 @@ function DashboardMockup() {
           {/* Top metric cards */}
           <div className="grid grid-cols-3 gap-2 mb-3">
             {[
-              { label: "Total AR Outstanding", value: "$847,200", sub: "↓ collecting fast", color: "#2563EB" },
+              { label: "Total AR Outstanding", value: "$847,200", sub: "↓ collecting fast", color: "#4F46E5" },
               { label: "Days Sales Outstanding", value: "42 days",    sub: "↓ 8 days this month", color: "#16A34A" },
               { label: "CEI Score",              value: "87%",        sub: "↑ excellent",          color: "#16A34A" },
             ].map(m => (
@@ -82,7 +82,7 @@ function DashboardMockup() {
               <div className="flex items-end gap-1" style={{ height: 64 }}>
                 {bars.map((h, i) => (
                   <div key={i} className="flex-1 rounded-t"
-                    style={{ height: `${h}%`, background: i === bars.length - 1 ? "#2563EB" : "#BFDBFE" }} />
+                    style={{ height: `${h}%`, background: i === bars.length - 1 ? "#4F46E5" : "#C7D2FE" }} />
                 ))}
               </div>
               <div className="flex justify-between mt-1.5">
@@ -97,12 +97,12 @@ function DashboardMockup() {
               <p className="text-[10px] font-semibold text-[#111111] mb-2">Overdue Invoices</p>
               {[
                 { name: "Acme Corp",     amt: "$12,400", tag: "L2", tagBg: "#FEF3C7", tagTx: "#D97706" },
-                { name: "TechFlow Inc",  amt: "$8,750",  tag: "L1", tagBg: "#EFF6FF", tagTx: "#2563EB" },
-                { name: "BuildRight Ltd",amt: "$5,200",  tag: "L3", tagBg: "#DBEAFE", tagTx: "#991B1B" },
+                { name: "TechFlow Inc",  amt: "$8,750",  tag: "L1", tagBg: "#EEF2FF", tagTx: "#4F46E5" },
+                { name: "BuildRight Ltd",amt: "$5,200",  tag: "L3", tagBg: "#E0E7FF", tagTx: "#991B1B" },
               ].map(inv => (
                 <div key={inv.name} className="flex items-center justify-between py-1.5 border-b border-[#F5F5F5] last:border-0 gap-2">
                   <span className="text-[9px] text-[#333333] font-medium truncate">{inv.name}</span>
-                  <span className="text-[9px] font-bold text-[#2563EB] shrink-0">{inv.amt}</span>
+                  <span className="text-[9px] font-bold text-[#4F46E5] shrink-0">{inv.amt}</span>
                   <span className="text-[8px] px-1.5 py-0.5 rounded-full font-semibold shrink-0"
                     style={{ background: inv.tagBg, color: inv.tagTx }}>{inv.tag}</span>
                 </div>
@@ -128,8 +128,8 @@ export default function Hero() {
           transition={{ duration: 0.4, ease }}
           className="flex justify-center mb-6"
         >
-          <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-[#BFDBFE] bg-[#EFF6FF] text-[#2563EB] text-[11px] font-semibold tracking-widest uppercase">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#2563EB] animate-pulse" />
+          <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-[#C7D2FE] bg-[#EEF2FF] text-[#4F46E5] text-[11px] font-semibold tracking-widest uppercase">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#4F46E5] animate-pulse" />
             AI-Powered AR Collections
           </span>
         </motion.div>
@@ -142,7 +142,7 @@ export default function Hero() {
           className="text-center text-[36px] sm:text-[48px] lg:text-[56px] font-bold text-[#111111] leading-[1.1] tracking-[-0.03em] mb-4 max-w-[760px] mx-auto"
         >
           Stop chasing invoices.<br />
-          <span className="text-[#2563EB]">DataByt collects them.</span>
+          <span className="text-[#4F46E5]">DataByt collects them.</span>
         </motion.h1>
 
         {/* Sub */}
@@ -164,7 +164,7 @@ export default function Hero() {
           className="flex flex-wrap justify-center gap-3 mb-8"
         >
           <a href="#pricing"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-[#2563EB] text-white text-[14px] font-semibold hover:bg-[#1D4ED8] transition-colors shadow-sm shadow-[#2563EB]/20">
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-[#4F46E5] text-white text-[14px] font-semibold hover:bg-[#4338CA] transition-colors shadow-sm shadow-[#4F46E5]/20">
             Book Free AR Audit
             <ArrowRight className="w-4 h-4" />
           </a>

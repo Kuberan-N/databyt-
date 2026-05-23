@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { motion } from "framer-motion";
 import { Star } from "lucide-react";
@@ -37,7 +37,7 @@ export default function Testimonials() {
           viewport={{ once: true }}
           className="text-center mb-14"
         >
-          <p className="text-xs font-bold uppercase tracking-widest text-[#2563EB] mb-4">Results</p>
+          <p className="text-xs font-bold uppercase tracking-widest text-[#4F46E5] mb-4">Results</p>
           <h2 className="text-3xl sm:text-4xl font-black text-[#0F172A] leading-tight">
             Finance teams that stopped chasing invoices manually
           </h2>
@@ -72,7 +72,7 @@ export default function Testimonials() {
 
               {/* Author */}
               <div className="flex items-center gap-3">
-                <div className="w-9 h-9 rounded-full bg-[#1B2B6B] flex items-center justify-center text-white text-xs font-black">
+                <div className="w-9 h-9 rounded-full bg-[#3730A3] flex items-center justify-center text-white text-xs font-black">
                   {t.name.split(" ").map(n => n[0]).join("")}
                 </div>
                 <div>

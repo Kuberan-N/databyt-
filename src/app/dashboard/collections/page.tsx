@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useEffect, useState, useCallback } from "react";
 import { motion } from "framer-motion";
@@ -59,8 +59,8 @@ export default function CollectionsPage() {
     sent:    "bg-[#F1F5F9] text-[#475569]",
     opened:  "bg-[#F0FDF4] text-[#16A34A]",
     clicked: "bg-[#ECFDF5] text-[#059669]",
-    bounced: "bg-[#EFF6FF] text-[#DC2626]",
-    failed:  "bg-[#EFF6FF] text-[#DC2626]",
+    bounced: "bg-[#EEF2FF] text-[#DC2626]",
+    failed:  "bg-[#EEF2FF] text-[#DC2626]",
   };
 
   return (
@@ -89,7 +89,7 @@ export default function CollectionsPage() {
       {/* Stats */}
       <div className="grid sm:grid-cols-3 gap-4">
         {[
-          { label: "Emails Sent This Month", value: loading ? "—" : (stats?.emailsSentThisMonth.toString() ?? "0"), icon: Mail, color: "#2563EB" },
+          { label: "Emails Sent This Month", value: loading ? "—" : (stats?.emailsSentThisMonth.toString() ?? "0"), icon: Mail, color: "#4F46E5" },
           { label: "In Reminder Stage", value: loading ? "—" : (stats?.remindedCount.toString() ?? "0"), icon: Clock, color: "#D97706" },
           { label: "Overdue Amount", value: loading ? "—" : fmt(stats?.overdueAmount ?? 0), icon: TrendingUp, color: "#DC2626" },
         ].map((s, i) => (
@@ -109,12 +109,12 @@ export default function CollectionsPage() {
       <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.15 }}
         className="glass rounded-2xl overflow-hidden">
         <div className="px-5 py-3.5 border-b border-[#E2E8F0] flex items-center gap-2">
-          <Send className="w-4 h-4 text-[#2563EB]" />
+          <Send className="w-4 h-4 text-[#4F46E5]" />
           <h3 className="text-sm font-semibold text-[#0F172A]">Recent Outreach</h3>
         </div>
         {loading ? (
           <div className="flex items-center justify-center py-10">
-            <div className="w-5 h-5 border-2 border-[#2563EB]/20 border-t-[#2563EB] rounded-full animate-spin" />
+            <div className="w-5 h-5 border-2 border-[#4F46E5]/20 border-t-[#4F46E5] rounded-full animate-spin" />
           </div>
         ) : !stats?.recentComms.length ? (
           <div className="flex flex-col items-center justify-center py-12 text-center">
@@ -126,8 +126,8 @@ export default function CollectionsPage() {
           <div>
             {stats.recentComms.map((c, i) => (
               <div key={i} className="flex items-center gap-4 px-5 py-3.5 border-t border-[#F1F5F9] hover:bg-[#FAFAFA] transition-colors">
-                <div className="w-7 h-7 rounded-lg bg-[#EFF6FF] border border-[#2563EB]/20 flex items-center justify-center shrink-0">
-                  <Mail className="w-3.5 h-3.5 text-[#2563EB]" />
+                <div className="w-7 h-7 rounded-lg bg-[#EEF2FF] border border-[#4F46E5]/20 flex items-center justify-center shrink-0">
+                  <Mail className="w-3.5 h-3.5 text-[#4F46E5]" />
                 </div>
                 <div className="flex-1 min-w-0">
                   <p className="text-sm text-[#0F172A] truncate">{c.subject ?? "Collections email"}</p>
@@ -155,8 +155,8 @@ export default function CollectionsPage() {
             { step: "03", title: "Dashboard Updates", desc: "Payments are reflected in your AR dashboard instantly. View DSO improvement in real time." },
           ].map(s => (
             <div key={s.step} className="flex gap-3">
-              <div className="w-6 h-6 rounded-full bg-[#EFF6FF] border border-[#2563EB]/20 flex items-center justify-center shrink-0 mt-0.5">
-                <span className="text-[10px] font-bold text-[#2563EB]">{s.step}</span>
+              <div className="w-6 h-6 rounded-full bg-[#EEF2FF] border border-[#4F46E5]/20 flex items-center justify-center shrink-0 mt-0.5">
+                <span className="text-[10px] font-bold text-[#4F46E5]">{s.step}</span>
               </div>
               <div>
                 <p className="text-sm font-medium text-[#0F172A]">{s.title}</p>

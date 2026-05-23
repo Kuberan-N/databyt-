@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useEffect, useState, useCallback } from "react";
 import { motion } from "framer-motion";
@@ -62,8 +62,8 @@ function StatusBadge({ status }: { status: IntegrationStatus | null }) {
   }
   const styles: Record<string, { bg: string; text: string; label: string }> = {
     connected: { bg: "bg-[#F0FDF4]", text: "text-[#16A34A]", label: "Connected" },
-    syncing:   { bg: "bg-[#EFF6FF]", text: "text-[#2563EB]", label: "Syncing…" },
-    error:     { bg: "bg-[#EFF6FF]", text: "text-[#DC2626]", label: "Error" },
+    syncing:   { bg: "bg-[#EEF2FF]", text: "text-[#4F46E5]", label: "Syncing…" },
+    error:     { bg: "bg-[#EEF2FF]", text: "text-[#DC2626]", label: "Error" },
   };
   const s = styles[status] ?? styles.connected;
   return (
@@ -175,7 +175,7 @@ function IntegrationCard({
               <button
                 onClick={handleSync}
                 disabled={syncing || info?.status === "syncing"}
-                className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-[#64748B] border border-[#E2E8F0] rounded-lg hover:text-[#2563EB] hover:border-[#2563EB]/30 transition-all disabled:opacity-50"
+                className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-[#64748B] border border-[#E2E8F0] rounded-lg hover:text-[#4F46E5] hover:border-[#4F46E5]/30 transition-all disabled:opacity-50"
               >
                 <RefreshCw className={`w-3.5 h-3.5 ${syncing ? "animate-spin" : ""}`} />
                 {syncing ? "Syncing…" : "Sync now"}
@@ -191,7 +191,7 @@ function IntegrationCard({
             <button
               onClick={handleConnect}
               disabled={connecting}
-              className="flex items-center gap-1.5 px-4 py-2 text-xs font-semibold bg-[#2563EB] text-white rounded-lg hover:bg-[#1D4ED8] transition-colors disabled:opacity-50"
+              className="flex items-center gap-1.5 px-4 py-2 text-xs font-semibold bg-[#4F46E5] text-white rounded-lg hover:bg-[#4338CA] transition-colors disabled:opacity-50"
             >
               <Plug className="w-3.5 h-3.5" />
               {connecting ? "Redirecting…" : "Connect"}
@@ -245,7 +245,7 @@ function IntegrationsContent() {
           className={`flex items-center gap-2 px-4 py-3 rounded-xl text-sm ${
             flash.ok
               ? "bg-[#F0FDF4] border border-[#BBF7D0] text-[#16A34A]"
-              : "bg-[#EFF6FF] border border-[#FECACA] text-[#DC2626]"
+              : "bg-[#EEF2FF] border border-[#FECACA] text-[#DC2626]"
           }`}
         >
           {flash.ok

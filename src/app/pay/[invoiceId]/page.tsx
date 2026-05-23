@@ -36,16 +36,16 @@ export default async function PayInvoicePage({
       <div className="w-full max-w-md">
         {/* Header */}
         <div className="text-center mb-8">
-          <div className="w-10 h-10 rounded-xl bg-[#2563EB] flex items-center justify-center mx-auto mb-3">
+          <div className="w-10 h-10 rounded-xl bg-[#4F46E5] flex items-center justify-center mx-auto mb-3">
             <svg width="20" height="20" viewBox="0 0 28 28" fill="none">
               <path
                 d="M6 6H14C18.4183 6 22 9.58172 22 14C22 18.4183 18.4183 22 14 22H6V6Z"
                 fill="white"
               />
-              <rect x="6" y="6" width="4" height="16" fill="#2563EB" />
+              <rect x="6" y="6" width="4" height="16" fill="#4F46E5" />
             </svg>
           </div>
-          <p className="text-xs font-semibold text-[#2563EB] uppercase tracking-widest">DataByt</p>
+          <p className="text-xs font-semibold text-[#4F46E5] uppercase tracking-widest">DataByt</p>
           <p className="text-[#94A3B8] text-sm mt-1">Secure payment portal</p>
         </div>
 
@@ -60,7 +60,7 @@ export default async function PayInvoicePage({
           <div className="px-6 py-5 space-y-3">
             {[
               { label: "Invoice number", value: invoice.invoice_number },
-              { label: "Bill to",        value: customer?.name ?? "—" },
+              { label: "Bill to",        value: customer?.name ?? "â€”" },
               { label: "Issue date",     value: new Date(invoice.issue_date).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" }) },
               { label: "Due date",       value: new Date(invoice.due_date).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" }) },
             ].map(({ label, value }) => (

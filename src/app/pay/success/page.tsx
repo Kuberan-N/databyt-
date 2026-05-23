@@ -1,4 +1,4 @@
-import Link from "next/link";
+﻿import Link from "next/link";
 
 export default function PaySuccessPage() {
   return (
@@ -25,7 +25,7 @@ export default function PaySuccessPage() {
           <div className="mt-6 pt-6 border-t border-[#F1F5F9]">
             <p className="text-xs text-[#94A3B8]">
               Powered by{" "}
-              <span className="font-semibold text-[#2563EB]">DataByt</span>
+              <span className="font-semibold text-[#4F46E5]">DataByt</span>
               {" "}· Payments by Dodo Payments
             </p>
           </div>

@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { createContext, useContext, useEffect, useState, ReactNode, useCallback } from "react";
 import { useRouter, usePathname } from "next/navigation";
@@ -96,7 +96,7 @@ export default function AdminShell({ children }: { children: ReactNode }) {
   if (loading) {
     return (
       <div className="min-h-screen bg-[#F8F9FC] flex items-center justify-center">
-        <div className="w-8 h-8 border-2 border-[#2563EB]/20 border-t-[#2563EB] rounded-full animate-spin" />
+        <div className="w-8 h-8 border-2 border-[#4F46E5]/20 border-t-[#4F46E5] rounded-full animate-spin" />
       </div>
     );
   }
@@ -113,10 +113,10 @@ export default function AdminShell({ children }: { children: ReactNode }) {
       <div className="p-4 flex items-center justify-between border-b border-[#E2E8F0] h-16">
         <div className="flex items-center gap-2">
           <Logo className="text-lg" />
-          <span className="text-[10px] px-1.5 py-0.5 rounded bg-[#EFF6FF] text-[#2563EB] font-bold uppercase tracking-wider">Admin</span>
+          <span className="text-[10px] px-1.5 py-0.5 rounded bg-[#EEF2FF] text-[#4F46E5] font-bold uppercase tracking-wider">Admin</span>
         </div>
         {mobile && (
-          <button onClick={() => setMobileOpen(false)} className="text-[#94A3B8] hover:text-[#2563EB]">
+          <button onClick={() => setMobileOpen(false)} className="text-[#94A3B8] hover:text-[#4F46E5]">
             <X className="w-5 h-5" />
           </button>
         )}
@@ -128,10 +128,10 @@ export default function AdminShell({ children }: { children: ReactNode }) {
         <div className="relative">
           <button
             onClick={() => setOrgPickerOpen(o => !o)}
-            className="w-full flex items-center gap-2 px-3 py-2.5 rounded-lg bg-[#F8F9FC] border border-[#E2E8F0] hover:border-[#2563EB]/30 transition-colors text-left"
+            className="w-full flex items-center gap-2 px-3 py-2.5 rounded-lg bg-[#F8F9FC] border border-[#E2E8F0] hover:border-[#4F46E5]/30 transition-colors text-left"
           >
-            <div className="w-6 h-6 rounded-md bg-[#EFF6FF] border border-[#2563EB]/20 flex items-center justify-center shrink-0">
-              <Building2 className="w-3 h-3 text-[#2563EB]" />
+            <div className="w-6 h-6 rounded-md bg-[#EEF2FF] border border-[#4F46E5]/20 flex items-center justify-center shrink-0">
+              <Building2 className="w-3 h-3 text-[#4F46E5]" />
             </div>
             <span className="flex-1 text-sm text-[#0F172A] truncate min-w-0">
               {orgsLoading ? "Loading..." : (selectedOrg?.name ?? "Select client")}
@@ -157,8 +157,8 @@ export default function AdminShell({ children }: { children: ReactNode }) {
                       onClick={() => { setSelectedOrg(org); setOrgPickerOpen(false); }}
                       className={`w-full flex items-center gap-3 px-3 py-2.5 text-sm transition-colors ${
                         selectedOrg?.id === org.id
-                          ? "bg-[#EFF6FF] text-[#2563EB]"
-                          : "text-[#475569] hover:bg-[#FFF1F2] hover:text-[#2563EB]"
+                          ? "bg-[#EEF2FF] text-[#4F46E5]"
+                          : "text-[#475569] hover:bg-[#FFF1F2] hover:text-[#4F46E5]"
                       }`}
                     >
                       <div className="w-5 h-5 rounded-md bg-[#F1F5F9] flex items-center justify-center shrink-0">
@@ -166,7 +166,7 @@ export default function AdminShell({ children }: { children: ReactNode }) {
                       </div>
                       <span className="flex-1 text-left truncate">{org.name}</span>
                       {org.overdueCount > 0 && (
-                        <span className="text-[10px] font-medium text-[#DC2626] bg-[#EFF6FF] border border-[#EF4444]/20 px-1.5 py-0.5 rounded-full">
+                        <span className="text-[10px] font-medium text-[#DC2626] bg-[#EEF2FF] border border-[#EF4444]/20 px-1.5 py-0.5 rounded-full">
                           {org.overdueCount}
                         </span>
                       )}
@@ -193,8 +193,8 @@ export default function AdminShell({ children }: { children: ReactNode }) {
               onClick={() => setMobileOpen(false)}
               className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all ${
                 isActive
-                  ? "bg-[#EFF6FF] text-[#2563EB]"
-                  : "text-[#64748B] hover:text-[#2563EB] hover:bg-[#FFF1F2]"
+                  ? "bg-[#EEF2FF] text-[#4F46E5]"
+                  : "text-[#64748B] hover:text-[#4F46E5] hover:bg-[#FFF1F2]"
               }`}
             >
               <link.icon className="w-4 h-4 shrink-0" />
@@ -206,7 +206,7 @@ export default function AdminShell({ children }: { children: ReactNode }) {
 
       {/* Alert badge */}
       {orgs.some(o => o.overdueCount > 0) && (
-        <div className="mx-3 mb-3 flex items-center gap-2 px-3 py-2.5 rounded-lg bg-[#EFF6FF] border border-[#EF4444]/20">
+        <div className="mx-3 mb-3 flex items-center gap-2 px-3 py-2.5 rounded-lg bg-[#EEF2FF] border border-[#EF4444]/20">
           <AlertCircle className="w-3.5 h-3.5 text-[#DC2626] shrink-0" />
           <span className="text-xs text-[#DC2626]">
             {orgs.reduce((s, o) => s + o.overdueCount, 0)} overdue across all clients
@@ -224,7 +224,7 @@ export default function AdminShell({ children }: { children: ReactNode }) {
             <p className="text-xs text-[#0F172A] font-medium truncate">{user.email}</p>
             <p className="text-[10px] text-[#94A3B8]">Operator</p>
           </div>
-          <button onClick={signOut} className="text-[#94A3B8] hover:text-[#2563EB] transition-colors p-1 shrink-0" title="Sign out">
+          <button onClick={signOut} className="text-[#94A3B8] hover:text-[#4F46E5] transition-colors p-1 shrink-0" title="Sign out">
             <LogOut className="w-4 h-4" />
           </button>
         </div>
@@ -268,7 +268,7 @@ export default function AdminShell({ children }: { children: ReactNode }) {
         <div className="flex-1 flex flex-col min-w-0">
           <header className="h-16 bg-white border-b border-[#E2E8F0] flex items-center justify-between px-4 sm:px-6 shrink-0">
             <div className="flex items-center gap-3">
-              <button className="lg:hidden text-[#64748B] hover:text-[#2563EB]" onClick={() => setMobileOpen(true)}>
+              <button className="lg:hidden text-[#64748B] hover:text-[#4F46E5]" onClick={() => setMobileOpen(true)}>
                 <Menu className="w-5 h-5" />
               </button>
               <h1 className="text-sm font-semibold text-[#0F172A]">{currentLabel}</h1>
@@ -279,7 +279,7 @@ export default function AdminShell({ children }: { children: ReactNode }) {
               )}
             </div>
             <div className="flex items-center gap-2">
-              <a href="/dashboard" className="text-xs text-[#64748B] hover:text-[#2563EB] transition-colors px-3 py-1.5 rounded-lg border border-[#E2E8F0] hover:border-[#2563EB]/30">
+              <a href="/dashboard" className="text-xs text-[#64748B] hover:text-[#4F46E5] transition-colors px-3 py-1.5 rounded-lg border border-[#E2E8F0] hover:border-[#4F46E5]/30">
                 Client View
               </a>
             </div>
