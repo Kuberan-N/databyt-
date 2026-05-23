@@ -58,7 +58,7 @@ export default function ReportsPage() {
       {/* Main report card */}
       <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} className="glass rounded-2xl p-6">
         <div className="flex items-start gap-4 mb-6">
-          <div className="w-12 h-12 rounded-2xl bg-[#E8242A] flex items-center justify-center shrink-0">
+          <div className="w-12 h-12 rounded-2xl bg-[#2563EB] flex items-center justify-center shrink-0">
             <FileText className="w-6 h-6 text-white" />
           </div>
           <div className="flex-1">
@@ -72,8 +72,8 @@ export default function ReportsPage() {
         <div className="grid sm:grid-cols-2 gap-3 mb-6">
           {reportSections.map((s, i) => (
             <div key={i} className="flex items-start gap-3 p-3.5 rounded-xl bg-[#F8F9FC] border border-[#E2E8F0]">
-              <div className="w-7 h-7 rounded-lg bg-[#FEF2F2] border border-[#E8242A]/20 flex items-center justify-center shrink-0 mt-0.5">
-                <s.icon className="w-3.5 h-3.5 text-[#E8242A]" />
+              <div className="w-7 h-7 rounded-lg bg-[#EFF6FF] border border-[#2563EB]/20 flex items-center justify-center shrink-0 mt-0.5">
+                <s.icon className="w-3.5 h-3.5 text-[#2563EB]" />
               </div>
               <div>
                 <p className="text-sm font-medium text-[#0F172A]">{s.title}</p>
@@ -99,7 +99,7 @@ export default function ReportsPage() {
         <button
           onClick={generatePDF}
           disabled={generating || !organization}
-          className="flex items-center gap-2 px-6 py-3 bg-[#E8242A] text-white rounded-xl font-semibold text-sm hover:bg-[#C41E23] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+          className="flex items-center gap-2 px-6 py-3 bg-[#2563EB] text-white rounded-xl font-semibold text-sm hover:bg-[#1D4ED8] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
         >
           {generating ? (
             <><Loader2 className="w-4 h-4 animate-spin" /> Generating PDF...</>

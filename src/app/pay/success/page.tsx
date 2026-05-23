@@ -25,7 +25,7 @@ export default function PaySuccessPage() {
           <div className="mt-6 pt-6 border-t border-[#F1F5F9]">
             <p className="text-xs text-[#94A3B8]">
               Powered by{" "}
-              <span className="font-semibold text-[#E8242A]">DataByt</span>
+              <span className="font-semibold text-[#2563EB]">DataByt</span>
               {" "}· Payments by Dodo Payments
             </p>
           </div>

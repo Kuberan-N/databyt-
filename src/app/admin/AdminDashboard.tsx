@@ -14,7 +14,7 @@ const fmt = (n: number) =>
 const PLAN_STYLE: Record<string, { color: string; bg: string; border: string }> = {
   starter: { color: "text-[#64748B]",   bg: "bg-[#F1F5F9]",         border: "border-[#E2E8F0]" },
   growth:  { color: "text-[#4B5FA8]",   bg: "bg-[#EEF2FF]",         border: "border-[#1B2B6B]/20" },
-  scale:   { color: "text-[#E8242A]",   bg: "bg-[#FFF1F2]",         border: "border-[#E8242A]/20" },
+  scale:   { color: "text-[#2563EB]",   bg: "bg-[#FFF1F2]",         border: "border-[#2563EB]/20" },
 };
 
 const adminSecret = process.env.ADMIN_SECRET ?? "databyt-admin-2024";
@@ -170,7 +170,7 @@ export default function AdminDashboard() {
       {/* Overdue alert */}
       {!orgsLoading && totalOverdue > 0 && (
         <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }}
-          className="flex items-center justify-between px-5 py-3.5 rounded-2xl bg-[#FEF2F2] border border-[#EF4444]/20">
+          className="flex items-center justify-between px-5 py-3.5 rounded-2xl bg-[#EFF6FF] border border-[#EF4444]/20">
           <div className="flex items-center gap-3">
             <AlertTriangle className="w-4 h-4 text-[#DC2626] shrink-0" />
             <p className="text-sm text-[#991B1B]">

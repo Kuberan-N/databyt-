@@ -62,10 +62,10 @@ export default function HowItWorks() {
           transition={{ duration: 0.6, ease }}
           className="mb-12"
         >
-          <p className="text-[#E8242A] text-[11px] font-semibold uppercase tracking-widest mb-3">The Product</p>
+          <p className="text-[#2563EB] text-[11px] font-semibold uppercase tracking-widest mb-3">The Product</p>
           <h2 className="text-[30px] sm:text-[38px] font-bold text-[#111111] leading-[1.15] tracking-[-0.02em] max-w-[580px]">
             The complete AR loop.<br />
-            <span className="text-[#E8242A]">Closed end-to-end.</span>
+            <span className="text-[#2563EB]">Closed end-to-end.</span>
           </h2>
           <p className="text-[#666666] text-[15px] mt-3 max-w-[480px] leading-relaxed">
             Most tools stop at "send the email." DataByt closes the full loop:
@@ -84,10 +84,10 @@ export default function HowItWorks() {
               className="p-6 rounded-xl bg-white border border-[#E8E8E8] flex flex-col"
             >
               <div className="flex items-center justify-between mb-5">
-                <div className="w-9 h-9 rounded-lg bg-[#FEF2F2] flex items-center justify-center">
-                  <s.icon className="w-[18px] h-[18px] text-[#E8242A]" />
+                <div className="w-9 h-9 rounded-lg bg-[#EFF6FF] flex items-center justify-center">
+                  <s.icon className="w-[18px] h-[18px] text-[#2563EB]" />
                 </div>
-                <span className="text-[#E8242A] font-bold text-[13px]">{s.num}</span>
+                <span className="text-[#2563EB] font-bold text-[13px]">{s.num}</span>
               </div>
               <h3 className="text-[#111111] font-semibold text-[14px] mb-2.5 leading-snug">{s.title}</h3>
               <p className="text-[#666666] text-[13px] leading-relaxed flex-1">{s.desc}</p>
@@ -108,7 +108,7 @@ export default function HowItWorks() {
           className="mt-10 flex flex-col sm:flex-row items-start sm:items-center gap-4"
         >
           <a href="#pricing"
-            className="inline-flex items-center gap-2 px-5 py-3 rounded-lg bg-[#E8242A] text-white text-[14px] font-semibold hover:bg-[#C41E23] transition-colors">
+            className="inline-flex items-center gap-2 px-5 py-3 rounded-lg bg-[#2563EB] text-white text-[14px] font-semibold hover:bg-[#1D4ED8] transition-colors">
             Book a Demo
             <ArrowRight className="w-4 h-4" />
           </a>

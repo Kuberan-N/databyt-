@@ -4,24 +4,24 @@
   /* ─── Primary: Electric Red ─── */
   --color-primary-50:  #FFF1F2;
   --color-primary-100: #FFE4E6;
-  --color-primary-200: #FECDD3;
-  --color-primary-300: #FDA4AF;
+  --color-primary-200: #BFDBFE;
+  --color-primary-300: #93C5FD;
   --color-primary-400: #F36166;
-  --color-primary-500: #E8242A;
-  --color-primary-600: #C41E23;
-  --color-primary-700: #9C181D;
+  --color-primary-500: #2563EB;
+  --color-primary-600: #1D4ED8;
+  --color-primary-700: #1E40AF;
   --color-primary-800: #7A1218;
   --color-primary-900: #5C0D12;
 
   /* ─── Accent: Sharp Red ─── */
   --color-accent-50:  #FFF1F2;
   --color-accent-100: #FFE4E6;
-  --color-accent-200: #FECDD3;
-  --color-accent-300: #FDA4AF;
+  --color-accent-200: #BFDBFE;
+  --color-accent-300: #93C5FD;
   --color-accent-400: #F36166;
-  --color-accent-500: #E8242A;
-  --color-accent-600: #C41E23;
-  --color-accent-700: #9C181D;
+  --color-accent-500: #2563EB;
+  --color-accent-600: #1D4ED8;
+  --color-accent-700: #1E40AF;
 
   /* ─── Success: Green ─── */
   --color-success-50:  #F0FDF4;
@@ -37,8 +37,8 @@
   --color-warning-500: #D97706;
 
   /* ─── Danger: Red ─── */
-  --color-danger-50:  #FEF2F2;
-  --color-danger-100: #FEE2E2;
+  --color-danger-50:  #EFF6FF;
+  --color-danger-100: #DBEAFE;
   --color-danger-400: #EF4444;
   --color-danger-500: #DC2626;
   --color-danger-600: #B91C1C;
@@ -134,7 +134,7 @@ aside  .text-white {
 
 /* ─── gradient-text: red ─── */
 .gradient-text {
-  background: linear-gradient(135deg, #E8242A 0%, #C41E23 100%);
+  background: linear-gradient(135deg, #2563EB 0%, #1D4ED8 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -171,7 +171,7 @@ input[type="range"]::-webkit-slider-thumb {
   width: 18px;
   height: 18px;
   border-radius: 50%;
-  background: #E8242A;
+  background: #2563EB;
   cursor: pointer;
   border: 2px solid white;
   box-shadow: 0 1px 4px rgba(232,36,42,0.35);
@@ -180,7 +180,7 @@ input[type="range"]::-moz-range-thumb {
   width: 18px;
   height: 18px;
   border-radius: 50%;
-  background: #E8242A;
+  background: #2563EB;
   cursor: pointer;
   border: 2px solid white;
   box-shadow: 0 1px 4px rgba(232,36,42,0.35);

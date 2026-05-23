@@ -51,7 +51,7 @@ export default function FAQ() {
           transition={{ duration: 0.6, ease }}
           className="mb-10"
         >
-          <p className="text-[#E8242A] text-[11px] font-semibold uppercase tracking-widest mb-3">FAQ</p>
+          <p className="text-[#2563EB] text-[11px] font-semibold uppercase tracking-widest mb-3">FAQ</p>
           <h2 className="text-[30px] sm:text-[38px] font-bold text-[#111111] leading-[1.15] tracking-[-0.02em]">
             Common questions
           </h2>
@@ -73,7 +73,7 @@ export default function FAQ() {
               >
                 <span className="text-[#111111] font-semibold text-[14px] leading-snug">{faq.q}</span>
                 {open === i
-                  ? <Minus className="w-4 h-4 text-[#E8242A] shrink-0" />
+                  ? <Minus className="w-4 h-4 text-[#2563EB] shrink-0" />
                   : <Plus className="w-4 h-4 text-[#BBBBBB] shrink-0" />
                 }
               </button>

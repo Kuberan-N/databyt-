@@ -27,7 +27,7 @@ export default function FinalCTA() {
         >
           {urgency.map((u, i) => (
             <div key={i} className="px-5 py-5 rounded-xl border border-white/[0.07] bg-white/[0.03]">
-              <p className="text-[28px] font-bold text-[#E8242A] mb-1.5 leading-none">{u.value}</p>
+              <p className="text-[28px] font-bold text-[#2563EB] mb-1.5 leading-none">{u.value}</p>
               <p className="text-white/40 text-[13px] leading-snug">{u.label}</p>
             </div>
           ))}
@@ -41,13 +41,13 @@ export default function FinalCTA() {
           transition={{ duration: 0.6, ease, delay: 0.08 }}
           className="max-w-2xl"
         >
-          <p className="text-[#E8242A] text-[11px] font-semibold uppercase tracking-widest mb-4">
+          <p className="text-[#2563EB] text-[11px] font-semibold uppercase tracking-widest mb-4">
             Free AR Audit — No commitment
           </p>
           <h2 className="text-[32px] sm:text-[42px] font-bold text-white leading-[1.1] tracking-[-0.025em] mb-5">
             Every week you wait,<br />
             your invoices age{" "}
-            <span className="text-[#E8242A]">7 more days.</span>
+            <span className="text-[#2563EB]">7 more days.</span>
           </h2>
           <p className="text-white/45 text-[15px] mb-7 max-w-lg leading-relaxed">
             30-minute call. We&apos;ll audit your current AR process, calculate your DSO cost,
@@ -58,7 +58,7 @@ export default function FinalCTA() {
           <div className="flex flex-col sm:flex-row gap-3 mb-7">
             <a
               href="#pricing"
-              className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-[#E8242A] text-white text-[14px] font-semibold hover:bg-[#C41E23] transition-colors"
+              className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-[#2563EB] text-white text-[14px] font-semibold hover:bg-[#1D4ED8] transition-colors"
             >
               Book Free AR Audit
               <ArrowRight className="w-4 h-4" />
@@ -91,15 +91,15 @@ export function Footer() {
         <Logo className="text-[16px]" />
 
         <div className="flex flex-wrap items-center gap-6 text-[#888888] text-[13px]">
-          <a href="#how-it-works" className="hover:text-[#E8242A] transition-colors">How It Works</a>
-          <a href="#roi"          className="hover:text-[#E8242A] transition-colors">ROI Calculator</a>
-          <a href="#pricing"      className="hover:text-[#E8242A] transition-colors">Pricing</a>
-          <a href="#faq"          className="hover:text-[#E8242A] transition-colors">FAQ</a>
-          <a href="/dashboard"    className="hover:text-[#E8242A] transition-colors">Dashboard</a>
+          <a href="#how-it-works" className="hover:text-[#2563EB] transition-colors">How It Works</a>
+          <a href="#roi"          className="hover:text-[#2563EB] transition-colors">ROI Calculator</a>
+          <a href="#pricing"      className="hover:text-[#2563EB] transition-colors">Pricing</a>
+          <a href="#faq"          className="hover:text-[#2563EB] transition-colors">FAQ</a>
+          <a href="/dashboard"    className="hover:text-[#2563EB] transition-colors">Dashboard</a>
         </div>
 
         <a href="mailto:kuberan@databyt.in"
-          className="flex items-center gap-2 text-[#888888] text-[13px] hover:text-[#E8242A] transition-colors">
+          className="flex items-center gap-2 text-[#888888] text-[13px] hover:text-[#2563EB] transition-colors">
           <Mail className="w-3.5 h-3.5" />
           kuberan@databyt.in
         </a>

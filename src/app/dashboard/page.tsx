@@ -16,8 +16,8 @@ const BUCKETS = [
   { label: "Current",    color: "#16A34A", track: "#DCFCE7" },
   { label: "1–30 days",  color: "#D97706", track: "#FEF3C7" },
   { label: "31–60 days", color: "#EA580C", track: "#FFEDD5" },
-  { label: "61–90 days", color: "#DC2626", track: "#FEE2E2" },
-  { label: "90+ days",   color: "#991B1B", track: "#FEE2E2" },
+  { label: "61–90 days", color: "#DC2626", track: "#DBEAFE" },
+  { label: "90+ days",   color: "#991B1B", track: "#DBEAFE" },
 ];
 
 export default function DashboardOverview() {
@@ -53,8 +53,8 @@ export default function DashboardOverview() {
       value: loading ? "—" : fmt(metrics?.totalOutstanding ?? 0),
       sub:   loading ? "Loading…" : `${metrics?.customerCount ?? 0} active customers`,
       icon: DollarSign,
-      iconBg: "#FEF2F2",
-      iconColor: "#E8242A",
+      iconBg: "#EFF6FF",
+      iconColor: "#2563EB",
     },
     {
       label: "Days Sales Outstanding",
@@ -81,7 +81,7 @@ export default function DashboardOverview() {
       value: loading ? "—" : `${metrics?.overdueCount ?? 0}`,
       sub:   loading ? "Loading…" : fmt(metrics?.overdueAmount ?? 0) + " at risk",
       icon: AlertTriangle,
-      iconBg: "#FEF2F2",
+      iconBg: "#EFF6FF",
       iconColor: "#DC2626",
     },
   ];
@@ -105,7 +105,7 @@ export default function DashboardOverview() {
         </div>
         <button
           onClick={load}
-          className="flex items-center gap-2 px-3 py-2 rounded-lg border border-[#E2E8F0] text-[#64748B] text-sm hover:text-[#E8242A] hover:border-[#E8242A]/30 transition-all"
+          className="flex items-center gap-2 px-3 py-2 rounded-lg border border-[#E2E8F0] text-[#64748B] text-sm hover:text-[#2563EB] hover:border-[#2563EB]/30 transition-all"
         >
           <RefreshCw className={`w-4 h-4 ${loading ? "animate-spin" : ""}`} />
         </button>
@@ -143,7 +143,7 @@ export default function DashboardOverview() {
           <div className="flex items-center justify-between mb-5">
             <h3 className="text-sm font-semibold text-[#0F172A]">AR Aging Buckets</h3>
             <a href="/dashboard/ar-aging"
-              className="text-[#E8242A] hover:text-[#C41E23] text-xs font-medium flex items-center gap-1 transition-colors">
+              className="text-[#2563EB] hover:text-[#1D4ED8] text-xs font-medium flex items-center gap-1 transition-colors">
               Full report <ArrowRight className="w-3 h-3" />
             </a>
           </div>
@@ -183,14 +183,14 @@ export default function DashboardOverview() {
           <div className="flex items-center justify-between mb-5">
             <h3 className="text-sm font-semibold text-[#0F172A]">Top Overdue Customers</h3>
             <a href="/dashboard/customers"
-              className="text-[#E8242A] hover:text-[#C41E23] text-xs font-medium flex items-center gap-1 transition-colors">
+              className="text-[#2563EB] hover:text-[#1D4ED8] text-xs font-medium flex items-center gap-1 transition-colors">
               All customers <ArrowRight className="w-3 h-3" />
             </a>
           </div>
 
           {loading ? (
             <div className="flex justify-center py-10">
-              <div className="w-5 h-5 border-2 border-[#E8242A]/20 border-t-[#E8242A] rounded-full animate-spin" />
+              <div className="w-5 h-5 border-2 border-[#2563EB]/20 border-t-[#2563EB] rounded-full animate-spin" />
             </div>
           ) : overdue.length > 0 ? (
             <div className="space-y-1">
@@ -254,7 +254,7 @@ export default function DashboardOverview() {
                 className="flex-1 rounded-t-sm transition-all"
                 style={{
                   height: `${Math.min(height, 100)}%`,
-                  background: isHigh ? "#FEE2E2" : "#F1F5F9",
+                  background: isHigh ? "#DBEAFE" : "#F1F5F9",
                   opacity: hasData ? 1 : 0.4,
                 }}
               />
@@ -273,7 +273,7 @@ export default function DashboardOverview() {
           {hasData && (
             <span className={`text-xs font-medium px-2 py-0.5 rounded-full ${
               (metrics?.dso ?? 0) > 45
-                ? "bg-[#FEF2F2] text-[#DC2626]"
+                ? "bg-[#EFF6FF] text-[#DC2626]"
                 : "bg-[#F0FDF4] text-[#16A34A]"
             }`}>
               {(metrics?.dso ?? 0) > 45 ? "Above target" : "On track"}

@@ -15,16 +15,16 @@ export function Logo({ className = "" }: { className?: string }) {
   return (
     <span className={`inline-flex items-center gap-2.5 select-none ${className}`}>
       <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <rect width="28" height="28" rx="6" fill="#E8242A" />
+        <rect width="28" height="28" rx="6" fill="#2563EB" />
         {/* Left vertical bar of D */}
         <rect x="7" y="7" width="3.5" height="14" fill="white" />
         {/* D arc — right bowl */}
         <path d="M10.5 7H15C18.866 7 22 10.134 22 14C22 17.866 18.866 21 15 21H10.5V7Z" fill="white" />
         {/* Inner cutout to make D hollow */}
-        <path d="M13.5 10.5H15C16.933 10.5 18.5 12.067 18.5 14C18.5 15.933 16.933 17.5 15 17.5H13.5V10.5Z" fill="#E8242A" />
+        <path d="M13.5 10.5H15C16.933 10.5 18.5 12.067 18.5 14C18.5 15.933 16.933 17.5 15 17.5H13.5V10.5Z" fill="#2563EB" />
       </svg>
       <span className="font-bold tracking-[-0.03em] text-[#111111] leading-none">
-        Data<span className="text-[#E8242A]">Byt</span>
+        Data<span className="text-[#2563EB]">Byt</span>
       </span>
     </span>
   );
@@ -56,7 +56,7 @@ export default function Navbar() {
             Sign in
           </a>
           <a href="#pricing"
-            className="px-4 py-2 rounded-lg bg-[#E8242A] text-white text-[13.5px] font-semibold hover:bg-[#C41E23] transition-colors">
+            className="px-4 py-2 rounded-lg bg-[#2563EB] text-white text-[13.5px] font-semibold hover:bg-[#1D4ED8] transition-colors">
             Book a Demo
           </a>
         </div>
@@ -81,13 +81,13 @@ export default function Navbar() {
             <div className="px-6 py-4 flex flex-col gap-1">
               {navLinks.map(l => (
                 <a key={l.href} href={l.href}
-                  className="text-[#444444] text-sm font-medium hover:text-[#E8242A] transition-colors py-2.5"
+                  className="text-[#444444] text-sm font-medium hover:text-[#2563EB] transition-colors py-2.5"
                   onClick={() => setOpen(false)}>
                   {l.label}
                 </a>
               ))}
               <a href="#pricing"
-                className="mt-3 px-4 py-3 rounded-lg bg-[#E8242A] text-white text-sm font-semibold text-center hover:bg-[#C41E23] transition-colors"
+                className="mt-3 px-4 py-3 rounded-lg bg-[#2563EB] text-white text-sm font-semibold text-center hover:bg-[#1D4ED8] transition-colors"
                 onClick={() => setOpen(false)}>
                 Book a Demo
               </a>

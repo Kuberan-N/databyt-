@@ -47,12 +47,12 @@ function getEscalationLevel(daysOverdue: number): 1 | 2 | 3 {
 const LEVEL_STYLE = {
   1: { label: "L1", cls: "bg-[#F0FDF4] text-[#16A34A]" },
   2: { label: "L2", cls: "bg-[#FFFBEB] text-[#D97706]" },
-  3: { label: "L3", cls: "bg-[#FEF2F2] text-[#DC2626]" },
+  3: { label: "L3", cls: "bg-[#EFF6FF] text-[#DC2626]" },
 };
 
 const SEGMENT_STYLE: Record<string, string> = {
   strategic: "bg-[#EEF2FF] text-[#1B2B6B] border-[#1B2B6B]/20",
-  at_risk:   "bg-[#FEF2F2] text-[#DC2626] border-[#EF4444]/20",
+  at_risk:   "bg-[#EFF6FF] text-[#DC2626] border-[#EF4444]/20",
 };
 
 export default function AdminCollections() {
@@ -299,7 +299,7 @@ export default function AdminCollections() {
                       }
                     </button>
 
-                    <div className="w-9 h-9 rounded-xl bg-[#FEF2F2] border border-[#EF4444]/20 flex items-center justify-center shrink-0">
+                    <div className="w-9 h-9 rounded-xl bg-[#EFF6FF] border border-[#EF4444]/20 flex items-center justify-center shrink-0">
                       <AlertTriangle className="w-4 h-4 text-[#DC2626]" />
                     </div>
 
@@ -314,7 +314,7 @@ export default function AdminCollections() {
 
                         {item.priority_score > 0 && (
                           <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded-md ${
-                            item.priority_score >= 70 ? "bg-[#FEF2F2] text-[#DC2626]" :
+                            item.priority_score >= 70 ? "bg-[#EFF6FF] text-[#DC2626]" :
                             item.priority_score >= 40 ? "bg-[#FFFBEB] text-[#D97706]" :
                             "bg-[#F1F5F9] text-[#64748B]"
                           }`}>
@@ -329,7 +329,7 @@ export default function AdminCollections() {
                         )}
 
                         {hasReply && (
-                          <span className="flex items-center gap-1 text-[10px] font-medium px-1.5 py-0.5 rounded-md bg-[#FFF1F2] border border-[#E8242A]/20 text-[#E8242A]">
+                          <span className="flex items-center gap-1 text-[10px] font-medium px-1.5 py-0.5 rounded-md bg-[#FFF1F2] border border-[#2563EB]/20 text-[#2563EB]">
                             <MessageSquare className="w-2.5 h-2.5" /> Reply
                           </span>
                         )}
@@ -373,7 +373,7 @@ export default function AdminCollections() {
                         </button>
                       )}
                       <button onClick={() => skipItem(item.id)}
-                        className="p-1.5 rounded-lg text-[#94A3B8] hover:text-[#DC2626] hover:bg-[#FEF2F2] transition-all" title="Skip">
+                        className="p-1.5 rounded-lg text-[#94A3B8] hover:text-[#DC2626] hover:bg-[#EFF6FF] transition-all" title="Skip">
                         <XCircle className="w-4 h-4" />
                       </button>
                     </div>

@@ -38,7 +38,7 @@ export default function DashboardShell({ children }: { children: ReactNode }) {
     return (
       <div className="min-h-screen bg-[#F8F9FC] flex items-center justify-center">
         <div className="flex flex-col items-center gap-4">
-          <div className="w-10 h-10 border-2 border-[#E8242A]/20 border-t-[#E8242A] rounded-full animate-spin" />
+          <div className="w-10 h-10 border-2 border-[#2563EB]/20 border-t-[#2563EB] rounded-full animate-spin" />
           <p className="text-[#64748B] text-sm">Loading dashboard...</p>
         </div>
       </div>
@@ -75,12 +75,12 @@ export default function DashboardShell({ children }: { children: ReactNode }) {
           </AnimatePresence>
           {!sidebarOpen && (
             <div className="mx-auto">
-              <span className="font-black text-[#E8242A] text-lg">D</span>
+              <span className="font-black text-[#2563EB] text-lg">D</span>
             </div>
           )}
           <button
             onClick={() => setSidebarOpen(!sidebarOpen)}
-            className="text-[#94A3B8] hover:text-[#E8242A] transition-colors p-1 shrink-0"
+            className="text-[#94A3B8] hover:text-[#2563EB] transition-colors p-1 shrink-0"
           >
             <ChevronLeft className={`w-4 h-4 transition-transform ${!sidebarOpen ? "rotate-180" : ""}`} />
           </button>
@@ -98,8 +98,8 @@ export default function DashboardShell({ children }: { children: ReactNode }) {
                 href={link.href}
                 className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all ${
                   isActive
-                    ? "bg-[#FEF2F2] text-[#E8242A]"
-                    : "text-[#64748B] hover:text-[#E8242A] hover:bg-[#FFF1F2]"
+                    ? "bg-[#EFF6FF] text-[#2563EB]"
+                    : "text-[#64748B] hover:text-[#2563EB] hover:bg-[#FFF1F2]"
                 } ${!sidebarOpen ? "justify-center" : ""}`}
                 title={!sidebarOpen ? link.label : undefined}
               >
@@ -143,7 +143,7 @@ export default function DashboardShell({ children }: { children: ReactNode }) {
             {sidebarOpen && (
               <button
                 onClick={signOut}
-                className="text-[#94A3B8] hover:text-[#E8242A] transition-colors p-1 shrink-0"
+                className="text-[#94A3B8] hover:text-[#2563EB] transition-colors p-1 shrink-0"
                 title="Sign out"
               >
                 <LogOut className="w-4 h-4" />
@@ -184,7 +184,7 @@ export default function DashboardShell({ children }: { children: ReactNode }) {
                       key={link.href}
                       href={link.href}
                       className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all ${
-                        isActive ? "bg-[#FEF2F2] text-[#E8242A]" : "text-[#64748B] hover:text-[#E8242A] hover:bg-[#FFF1F2]"
+                        isActive ? "bg-[#EFF6FF] text-[#2563EB]" : "text-[#64748B] hover:text-[#2563EB] hover:bg-[#FFF1F2]"
                       }`}
                       onClick={() => setMobileMenuOpen(false)}
                     >
@@ -197,7 +197,7 @@ export default function DashboardShell({ children }: { children: ReactNode }) {
               <div className="border-t border-[#E2E8F0] p-4">
                 <button
                   onClick={() => { signOut(); setMobileMenuOpen(false); }}
-                  className="flex items-center gap-2 text-[#64748B] hover:text-[#E8242A] text-sm"
+                  className="flex items-center gap-2 text-[#64748B] hover:text-[#2563EB] text-sm"
                 >
                   <LogOut className="w-4 h-4" />
                   Sign Out
@@ -212,14 +212,14 @@ export default function DashboardShell({ children }: { children: ReactNode }) {
       <div className="flex-1 flex flex-col min-w-0">
         <header className="h-16 bg-white border-b border-[#E2E8F0] flex items-center justify-between px-4 sm:px-6 shrink-0">
           <div className="flex items-center gap-3">
-            <button className="lg:hidden text-[#64748B] hover:text-[#E8242A]" onClick={() => setMobileMenuOpen(true)}>
+            <button className="lg:hidden text-[#64748B] hover:text-[#2563EB]" onClick={() => setMobileMenuOpen(true)}>
               <Menu className="w-5 h-5" />
             </button>
             <h1 className="text-base font-semibold text-[#0F172A]">{currentPage}</h1>
           </div>
           <div className="flex items-center gap-3">
-            <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#FEF2F2] border border-[#E8242A]/20">
-              <span className="text-xs font-medium text-[#E8242A] capitalize">
+            <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#EFF6FF] border border-[#2563EB]/20">
+              <span className="text-xs font-medium text-[#2563EB] capitalize">
                 {organization?.plan_tier ?? "starter"}
               </span>
             </div>
