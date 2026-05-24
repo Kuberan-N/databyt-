@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useEffect, useState, useCallback } from "react";
 import { motion } from "framer-motion";
@@ -56,7 +56,7 @@ export default function CollectionsPage() {
   useEffect(() => { load(); }, [load]);
 
   const statusStyle: Record<string, string> = {
-    sent:    "bg-[#F1F5F9] text-[#475569]",
+    sent:    "bg-[#F1F5F9] text-[#111111]",
     opened:  "bg-[#F0FDF4] text-[#16A34A]",
     clicked: "bg-[#ECFDF5] text-[#059669]",
     bounced: "bg-[#EEF2FF] text-[#DC2626]",
@@ -67,7 +67,7 @@ export default function CollectionsPage() {
     <div className="space-y-6 max-w-3xl">
       <div>
         <h2 className="text-2xl font-bold text-[#0F172A]">Collections</h2>
-        <p className="text-[#64748B] text-sm mt-1">
+        <p className="text-[#222222] text-sm mt-1">
           Your DataByt AI agent manages collections on your behalf. Here&apos;s the live status.
         </p>
       </div>
@@ -100,7 +100,7 @@ export default function CollectionsPage() {
               <s.icon className="w-4 h-4" style={{ color: s.color }} />
             </div>
             <p className="text-2xl font-bold text-[#0F172A]">{s.value}</p>
-            <p className="text-[#64748B] text-xs mt-0.5">{s.label}</p>
+            <p className="text-[#222222] text-xs mt-0.5">{s.label}</p>
           </motion.div>
         ))}
       </div>
@@ -118,9 +118,9 @@ export default function CollectionsPage() {
           </div>
         ) : !stats?.recentComms.length ? (
           <div className="flex flex-col items-center justify-center py-12 text-center">
-            <CheckCircle className="w-8 h-8 text-[#CBD5E1] mb-3" />
-            <p className="text-[#94A3B8] text-sm">No emails sent yet.</p>
-            <p className="text-[#CBD5E1] text-xs mt-1">AI will begin outreach on overdue invoices shortly.</p>
+            <CheckCircle className="w-8 h-8 text-[#444444] mb-3" />
+            <p className="text-[#333333] text-sm">No emails sent yet.</p>
+            <p className="text-[#444444] text-xs mt-1">AI will begin outreach on overdue invoices shortly.</p>
           </div>
         ) : (
           <div>
@@ -131,11 +131,11 @@ export default function CollectionsPage() {
                 </div>
                 <div className="flex-1 min-w-0">
                   <p className="text-sm text-[#0F172A] truncate">{c.subject ?? "Collections email"}</p>
-                  <p className="text-xs text-[#94A3B8] mt-0.5">
+                  <p className="text-xs text-[#333333] mt-0.5">
                     {new Date(c.sent_at).toLocaleDateString("en-US", { month: "short", day: "numeric", hour: "2-digit", minute: "2-digit" })}
                   </p>
                 </div>
-                <span className={`text-xs px-2.5 py-0.5 rounded-full font-medium capitalize ${statusStyle[c.status] ?? "bg-[#F1F5F9] text-[#64748B]"}`}>
+                <span className={`text-xs px-2.5 py-0.5 rounded-full font-medium capitalize ${statusStyle[c.status] ?? "bg-[#F1F5F9] text-[#222222]"}`}>
                   {c.status}
                 </span>
               </div>
@@ -160,7 +160,7 @@ export default function CollectionsPage() {
               </div>
               <div>
                 <p className="text-sm font-medium text-[#0F172A]">{s.title}</p>
-                <p className="text-xs text-[#64748B] mt-0.5 leading-relaxed">{s.desc}</p>
+                <p className="text-xs text-[#222222] mt-0.5 leading-relaxed">{s.desc}</p>
               </div>
             </div>
           ))}

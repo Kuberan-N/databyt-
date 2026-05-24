@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useEffect, useState, useCallback } from "react";
 import { motion } from "framer-motion";
@@ -97,7 +97,7 @@ export default function DashboardOverview() {
             Welcome back,{" "}
             <span className="gradient-text">{orgName}</span>
           </h2>
-          <p className="text-[#64748B] mt-1 text-sm">
+          <p className="text-[#222222] mt-1 text-sm">
             {hasData
               ? "Here's your AR collections overview."
               : "Your AR command center. Connect an integration or import data to see live metrics."}
@@ -105,7 +105,7 @@ export default function DashboardOverview() {
         </div>
         <button
           onClick={load}
-          className="flex items-center gap-2 px-3 py-2 rounded-lg border border-[#E2E8F0] text-[#64748B] text-sm hover:text-[#4F46E5] hover:border-[#4F46E5]/30 transition-all"
+          className="flex items-center gap-2 px-3 py-2 rounded-lg border border-[#E2E8F0] text-[#222222] text-sm hover:text-[#4F46E5] hover:border-[#4F46E5]/30 transition-all"
         >
           <RefreshCw className={`w-4 h-4 ${loading ? "animate-spin" : ""}`} />
         </button>
@@ -126,8 +126,8 @@ export default function DashboardOverview() {
               <m.icon className="w-4 h-4" style={{ color: m.iconColor }} />
             </div>
             <p className="text-2xl font-bold text-[#0F172A]">{m.value}</p>
-            <p className="text-xs font-medium text-[#64748B] mt-1">{m.label}</p>
-            <p className="text-xs text-[#94A3B8] mt-0.5">{m.sub}</p>
+            <p className="text-xs font-medium text-[#222222] mt-1">{m.label}</p>
+            <p className="text-xs text-[#333333] mt-0.5">{m.sub}</p>
           </motion.div>
         ))}
       </div>
@@ -157,7 +157,7 @@ export default function DashboardOverview() {
                 <div key={b.label}>
                   <div className="flex justify-between text-xs mb-1.5">
                     <span className="text-[#0F172A] font-medium">{b.label}</span>
-                    <span className="text-[#64748B]">
+                    <span className="text-[#222222]">
                       {fmt(amount)}{count > 0 ? ` · ${count} inv` : ""}
                     </span>
                   </div>
@@ -197,10 +197,10 @@ export default function DashboardOverview() {
               {overdue.slice(0, 5).map((c, i) => (
                 <div key={c.id}
                   className="flex items-center gap-3 py-2.5 border-b border-[#F1F5F9] last:border-0">
-                  <span className="text-xs text-[#94A3B8] w-4 shrink-0">{i + 1}</span>
+                  <span className="text-xs text-[#333333] w-4 shrink-0">{i + 1}</span>
                   <div className="flex-1 min-w-0">
                     <p className="text-sm text-[#0F172A] font-medium truncate">{c.name}</p>
-                    <p className="text-xs text-[#94A3B8]">
+                    <p className="text-xs text-[#333333]">
                       {c.invoiceCount} inv · {c.maxDaysOverdue}d overdue
                     </p>
                   </div>
@@ -211,12 +211,12 @@ export default function DashboardOverview() {
           ) : (
             <div className="flex flex-col items-center justify-center py-10 text-center">
               <div className="w-12 h-12 rounded-xl bg-[#F8F9FC] border border-[#E2E8F0] flex items-center justify-center mb-3">
-                <Users className="w-6 h-6 text-[#94A3B8]" />
+                <Users className="w-6 h-6 text-[#333333]" />
               </div>
-              <p className="text-[#64748B] text-sm font-medium mb-1">
+              <p className="text-[#222222] text-sm font-medium mb-1">
                 {hasData ? "All customers are current" : "No overdue customers yet"}
               </p>
-              <p className="text-[#94A3B8] text-xs max-w-[200px] leading-relaxed">
+              <p className="text-[#333333] text-xs max-w-[200px] leading-relaxed">
                 {hasData
                   ? "Great — no overdue accounts."
                   : "Connect an integration or import invoices to get started."}
@@ -235,11 +235,11 @@ export default function DashboardOverview() {
       >
         <div className="flex items-center justify-between mb-1">
           <h3 className="text-sm font-semibold text-[#0F172A]">DSO Trend</h3>
-          <span className="text-xs text-[#64748B] px-2 py-1 rounded-lg bg-[#F8F9FC] border border-[#E2E8F0]">
+          <span className="text-xs text-[#222222] px-2 py-1 rounded-lg bg-[#F8F9FC] border border-[#E2E8F0]">
             Last 30 days
           </span>
         </div>
-        <p className="text-[#94A3B8] text-xs mb-6">
+        <p className="text-[#333333] text-xs mb-6">
           Days Sales Outstanding — lower is better. Target: under 45 days.
         </p>
         <div className="flex items-end justify-between gap-1 h-20 px-1">
@@ -262,7 +262,7 @@ export default function DashboardOverview() {
           })}
         </div>
         <div className="flex items-center justify-between mt-3">
-          <p className="text-[#94A3B8] text-xs">
+          <p className="text-[#333333] text-xs">
             {hasData ? `Current DSO: ` : "Import data to see real DSO trend"}
             {hasData && (
               <span className={`font-semibold ${(metrics?.dso ?? 0) > 45 ? "text-[#DC2626]" : "text-[#16A34A]"}`}>

@@ -1,4 +1,4 @@
-﻿import Link from "next/link";
+import Link from "next/link";
 
 export default function PaySuccessPage() {
   return (
@@ -12,18 +12,18 @@ export default function PaySuccessPage() {
           </div>
 
           <h1 className="text-2xl font-bold text-[#0F172A] mb-2">Payment received</h1>
-          <p className="text-[#64748B] text-sm leading-relaxed">
+          <p className="text-[#222222] text-sm leading-relaxed">
             Thank you — your payment has been processed successfully.
             You will receive a confirmation email shortly.
           </p>
 
           <div className="mt-8 p-4 rounded-xl bg-[#F8F9FC] border border-[#E2E8F0] text-left space-y-1">
-            <p className="text-xs text-[#94A3B8]">What happens next</p>
+            <p className="text-xs text-[#333333]">What happens next</p>
             <p className="text-sm text-[#0F172A]">Your invoice will be marked as paid and collections activity will stop automatically.</p>
           </div>
 
           <div className="mt-6 pt-6 border-t border-[#F1F5F9]">
-            <p className="text-xs text-[#94A3B8]">
+            <p className="text-xs text-[#333333]">
               Powered by{" "}
               <span className="font-semibold text-[#4F46E5]">DataByt</span>
               {" "}· Payments by Dodo Payments
@@ -33,7 +33,7 @@ export default function PaySuccessPage() {
 
         <Link
           href="/"
-          className="mt-6 inline-block text-sm text-[#94A3B8] hover:text-[#64748B] transition-colors"
+          className="mt-6 inline-block text-sm text-[#333333] hover:text-[#222222] transition-colors"
         >
           Return to homepage
         </Link>

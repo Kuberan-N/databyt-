@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { motion } from "framer-motion";
 import { Star } from "lucide-react";
@@ -60,7 +60,7 @@ export default function Testimonials() {
                 ))}
               </div>
 
-              <p className="text-[#475569] text-sm leading-relaxed italic flex-1 mb-5">
+              <p className="text-[#111111] text-sm leading-relaxed italic flex-1 mb-5">
                 &ldquo;{t.quote}&rdquo;
               </p>
 
@@ -77,7 +77,7 @@ export default function Testimonials() {
                 </div>
                 <div>
                   <p className="text-[#0F172A] text-sm font-semibold">{t.name}</p>
-                  <p className="text-[#94A3B8] text-xs">{t.role}</p>
+                  <p className="text-[#333333] text-xs">{t.role}</p>
                 </div>
               </div>
             </motion.div>

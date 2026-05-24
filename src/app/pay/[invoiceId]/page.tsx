@@ -46,13 +46,13 @@ export default async function PayInvoicePage({
             </svg>
           </div>
           <p className="text-xs font-semibold text-[#4F46E5] uppercase tracking-widest">DataByt</p>
-          <p className="text-[#94A3B8] text-sm mt-1">Secure payment portal</p>
+          <p className="text-[#333333] text-sm mt-1">Secure payment portal</p>
         </div>
 
         <div className="bg-white rounded-2xl border border-[#E2E8F0] shadow-sm overflow-hidden">
           {/* Invoice header */}
           <div className="px-6 py-5 border-b border-[#F1F5F9]">
-            <p className="text-xs text-[#94A3B8] font-medium uppercase tracking-wider mb-1">Invoice from</p>
+            <p className="text-xs text-[#333333] font-medium uppercase tracking-wider mb-1">Invoice from</p>
             <p className="text-[#0F172A] font-semibold text-base">{org?.name ?? "Unknown Company"}</p>
           </div>
 
@@ -60,12 +60,12 @@ export default async function PayInvoicePage({
           <div className="px-6 py-5 space-y-3">
             {[
               { label: "Invoice number", value: invoice.invoice_number },
-              { label: "Bill to",        value: customer?.name ?? "â€”" },
+              { label: "Bill to",        value: customer?.name ?? "Ã¢â‚¬â€" },
               { label: "Issue date",     value: new Date(invoice.issue_date).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" }) },
               { label: "Due date",       value: new Date(invoice.due_date).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" }) },
             ].map(({ label, value }) => (
               <div key={label} className="flex justify-between items-center">
-                <span className="text-[#94A3B8] text-sm">{label}</span>
+                <span className="text-[#333333] text-sm">{label}</span>
                 <span className="text-[#0F172A] text-sm font-medium">{value}</span>
               </div>
             ))}
@@ -74,7 +74,7 @@ export default async function PayInvoicePage({
           {/* Amount */}
           <div className="px-6 py-5 bg-[#FAFAFA] border-t border-[#F1F5F9] border-b">
             <div className="flex justify-between items-center">
-              <span className="text-[#64748B] text-sm font-medium">Amount due</span>
+              <span className="text-[#222222] text-sm font-medium">Amount due</span>
               <span className="text-[#0F172A] text-2xl font-bold">
                 {fmt(invoice.amount, invoice.currency ?? "USD")}
               </span>
@@ -94,7 +94,7 @@ export default async function PayInvoicePage({
               <PayButton invoiceId={invoiceId} orgId={invoice.org_id} amount={invoice.amount} currency={invoice.currency ?? "USD"} />
             )}
 
-            <p className="text-center text-xs text-[#94A3B8] mt-4">
+            <p className="text-center text-xs text-[#333333] mt-4">
               Secured by DataByt &middot; Payments processed by Dodo Payments
             </p>
           </div>

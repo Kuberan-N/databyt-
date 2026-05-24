@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useEffect, useState, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -180,9 +180,9 @@ export default function AdminCollections() {
   if (!selectedOrg) {
     return (
       <div className="flex flex-col items-center justify-center py-24 text-center">
-        <AlertTriangle className="w-10 h-10 text-[#94A3B8] mb-4" />
+        <AlertTriangle className="w-10 h-10 text-[#333333] mb-4" />
         <p className="text-[#0F172A] font-medium">No client selected</p>
-        <p className="text-[#64748B] text-sm mt-1">Select a client from the org switcher in the sidebar.</p>
+        <p className="text-[#222222] text-sm mt-1">Select a client from the org switcher in the sidebar.</p>
       </div>
     );
   }
@@ -193,7 +193,7 @@ export default function AdminCollections() {
       <div className="flex items-center justify-between flex-wrap gap-3">
         <div>
           <h2 className="text-2xl font-bold text-[#0F172A]">Collections Queue</h2>
-          <p className="text-[#64748B] text-sm mt-1">
+          <p className="text-[#222222] text-sm mt-1">
             {selectedOrg.name} — review, edit, and approve outreach emails.
           </p>
         </div>
@@ -208,7 +208,7 @@ export default function AdminCollections() {
             {isPaused ? "Resume Collections" : "Pause Client"}
           </button>
           <button onClick={loadQueue}
-            className="flex items-center gap-2 px-3 py-2 rounded-lg border border-[#E2E8F0] bg-white text-[#64748B] text-xs hover:text-[#3730A3] hover:border-[#3730A3]/30 transition-all">
+            className="flex items-center gap-2 px-3 py-2 rounded-lg border border-[#E2E8F0] bg-white text-[#222222] text-xs hover:text-[#3730A3] hover:border-[#3730A3]/30 transition-all">
             <RefreshCw className={`w-3.5 h-3.5 ${loading ? "animate-spin" : ""}`} />
           </button>
         </div>
@@ -232,14 +232,14 @@ export default function AdminCollections() {
           className="flex flex-col items-center justify-center py-20 text-center">
           <CheckCircle className="w-12 h-12 text-[#16A34A] mb-4" />
           <p className="text-[#0F172A] font-semibold text-lg">Queue is clear</p>
-          <p className="text-[#64748B] text-sm mt-1">No overdue or reminded invoices for {selectedOrg.name}.</p>
+          <p className="text-[#222222] text-sm mt-1">No overdue or reminded invoices for {selectedOrg.name}.</p>
         </motion.div>
       ) : (
         <div className="space-y-3">
           {/* Bulk action bar */}
           <div className="flex items-center justify-between flex-wrap gap-3">
             <div className="flex items-center gap-3">
-              <button onClick={toggleSelectAll} className="flex items-center gap-1.5 text-xs text-[#64748B] hover:text-[#3730A3] transition-colors">
+              <button onClick={toggleSelectAll} className="flex items-center gap-1.5 text-xs text-[#222222] hover:text-[#3730A3] transition-colors">
                 {allSelected ? (
                   <CheckSquare className="w-4 h-4 text-[#3730A3]" />
                 ) : someSelected ? (
@@ -249,14 +249,14 @@ export default function AdminCollections() {
                 )}
                 {allSelected ? "Deselect all" : "Select all"}
               </button>
-              <span className="text-xs text-[#94A3B8]">{queue.length} invoice{queue.length !== 1 ? "s" : ""}</span>
+              <span className="text-xs text-[#333333]">{queue.length} invoice{queue.length !== 1 ? "s" : ""}</span>
             </div>
 
             <AnimatePresence>
               {selected.length > 0 && (
                 <motion.div initial={{ opacity: 0, y: -4 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -4 }}
                   className="flex items-center gap-2">
-                  <span className="text-xs text-[#64748B]">{selected.length} selected</span>
+                  <span className="text-xs text-[#222222]">{selected.length} selected</span>
                   <button onClick={bulkDraft} disabled={bulkDrafting || isPaused}
                     className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#EEF2FF] border border-[#3730A3]/20 text-[#3730A3] text-xs font-medium hover:bg-[#E0E7FF] transition-all disabled:opacity-40">
                     {bulkDrafting ? (
@@ -267,7 +267,7 @@ export default function AdminCollections() {
                     Draft {selected.filter(i => !i.draftSubject).length} emails
                   </button>
                   <button onClick={bulkSkip}
-                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#F1F5F9] text-[#475569] text-xs font-medium hover:bg-[#E2E8F0] transition-all">
+                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#F1F5F9] text-[#111111] text-xs font-medium hover:bg-[#E2E8F0] transition-all">
                     <XCircle className="w-3 h-3" />
                     Skip {selected.length}
                   </button>
@@ -295,7 +295,7 @@ export default function AdminCollections() {
                     <button onClick={() => toggleSelect(item.id)} className="shrink-0">
                       {item.selected
                         ? <CheckSquare className="w-4 h-4 text-[#3730A3]" />
-                        : <Square className="w-4 h-4 text-[#94A3B8] hover:text-[#64748B] transition-colors" />
+                        : <Square className="w-4 h-4 text-[#333333] hover:text-[#222222] transition-colors" />
                       }
                     </button>
 
@@ -306,7 +306,7 @@ export default function AdminCollections() {
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-2 flex-wrap">
                         <p className="text-sm font-semibold text-[#0F172A]">{item.customer.name}</p>
-                        <span className="text-xs text-[#64748B]">{item.invoice_number}</span>
+                        <span className="text-xs text-[#222222]">{item.invoice_number}</span>
 
                         <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded-md ${levelStyle.cls}`}>
                           {levelStyle.label}
@@ -316,7 +316,7 @@ export default function AdminCollections() {
                           <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded-md ${
                             item.priority_score >= 70 ? "bg-[#EEF2FF] text-[#DC2626]" :
                             item.priority_score >= 40 ? "bg-[#FFFBEB] text-[#D97706]" :
-                            "bg-[#F1F5F9] text-[#64748B]"
+                            "bg-[#F1F5F9] text-[#222222]"
                           }`}>
                             P{Math.round(item.priority_score)}
                           </span>
@@ -341,7 +341,7 @@ export default function AdminCollections() {
                           <Clock className="w-3 h-3" />{item.days_overdue}d overdue
                         </span>
                         {item.customer.email ? (
-                          <span className="flex items-center gap-1 text-xs text-[#64748B]">
+                          <span className="flex items-center gap-1 text-xs text-[#222222]">
                             <Mail className="w-3 h-3" />{item.customer.email}
                           </span>
                         ) : (
@@ -360,20 +360,20 @@ export default function AdminCollections() {
                         </button>
                       )}
                       {item.drafting && (
-                        <div className="flex items-center gap-1.5 px-3 py-1.5 text-xs text-[#64748B]">
+                        <div className="flex items-center gap-1.5 px-3 py-1.5 text-xs text-[#222222]">
                           <div className="w-3 h-3 border border-[#3730A3]/30 border-t-[#3730A3] rounded-full animate-spin" />
                           Drafting...
                         </div>
                       )}
                       {item.draftSubject && (
                         <button onClick={() => toggleExpand(item.id)}
-                          className="flex items-center gap-1 px-3 py-1.5 rounded-lg bg-[#F1F5F9] text-[#475569] text-xs font-medium hover:bg-[#E2E8F0] transition-all">
+                          className="flex items-center gap-1 px-3 py-1.5 rounded-lg bg-[#F1F5F9] text-[#111111] text-xs font-medium hover:bg-[#E2E8F0] transition-all">
                           <Eye className="w-3 h-3" />
                           {item.expanded ? <ChevronUp className="w-3 h-3" /> : <ChevronDown className="w-3 h-3" />}
                         </button>
                       )}
                       <button onClick={() => skipItem(item.id)}
-                        className="p-1.5 rounded-lg text-[#94A3B8] hover:text-[#DC2626] hover:bg-[#EEF2FF] transition-all" title="Skip">
+                        className="p-1.5 rounded-lg text-[#333333] hover:text-[#DC2626] hover:bg-[#EEF2FF] transition-all" title="Skip">
                         <XCircle className="w-4 h-4" />
                       </button>
                     </div>
@@ -393,7 +393,7 @@ export default function AdminCollections() {
                         className="border-t border-[#E2E8F0] overflow-hidden">
                         <div className="px-5 py-4 space-y-3">
                           <div>
-                            <label className="text-[10px] font-semibold text-[#94A3B8] uppercase tracking-wider">Subject</label>
+                            <label className="text-[10px] font-semibold text-[#333333] uppercase tracking-wider">Subject</label>
                             <input
                               value={item.editedSubject ?? item.draftSubject}
                               onChange={e => setQueue(q => q.map(i => i.id === item.id ? { ...i, editedSubject: e.target.value } : i))}
@@ -401,12 +401,12 @@ export default function AdminCollections() {
                             />
                           </div>
                           <div>
-                            <label className="text-[10px] font-semibold text-[#94A3B8] uppercase tracking-wider">Body</label>
+                            <label className="text-[10px] font-semibold text-[#333333] uppercase tracking-wider">Body</label>
                             <textarea
                               value={item.editedBody ?? item.draftBody}
                               onChange={e => setQueue(q => q.map(i => i.id === item.id ? { ...i, editedBody: e.target.value } : i))}
                               rows={8}
-                              className="mt-1.5 w-full bg-white border border-[#E2E8F0] rounded-lg px-4 py-3 text-sm text-[#475569] leading-relaxed focus:border-[#3730A3] focus:outline-none resize-y"
+                              className="mt-1.5 w-full bg-white border border-[#E2E8F0] rounded-lg px-4 py-3 text-sm text-[#111111] leading-relaxed focus:border-[#3730A3] focus:outline-none resize-y"
                             />
                           </div>
                           <div className="flex items-center gap-3 pt-1">
@@ -422,7 +422,7 @@ export default function AdminCollections() {
                               Approve & Send
                             </button>
                             <button onClick={() => draftEmail(item)}
-                              className="text-xs text-[#64748B] hover:text-[#475569] transition-colors">
+                              className="text-xs text-[#222222] hover:text-[#111111] transition-colors">
                               Regenerate draft
                             </button>
                           </div>

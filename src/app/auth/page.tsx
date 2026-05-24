@@ -58,13 +58,11 @@ export default function AuthPage() {
   return (
     <div className="min-h-screen flex">
 
-      {/* ── Left panel — dark ── */}
+      {/* Left panel - dark */}
       <div className="hidden lg:flex lg:w-1/2 bg-[#0F172A] flex-col justify-center px-16 relative overflow-hidden">
-        {/* Subtle glow */}
         <div className="absolute top-1/4 -left-24 w-80 h-80 bg-[#4F46E5]/20 rounded-full blur-[120px] pointer-events-none" />
         <div className="absolute bottom-1/4 right-0 w-64 h-64 bg-[#4F46E5]/10 rounded-full blur-[100px] pointer-events-none" />
 
-        {/* Logo */}
         <div className="flex items-center gap-2.5 mb-12 relative z-10">
           <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
             <rect width="28" height="28" rx="6" fill="#4F46E5" />
@@ -77,7 +75,6 @@ export default function AuthPage() {
           </span>
         </div>
 
-        {/* Headline */}
         <div className="relative z-10 max-w-sm">
           <h1 className="text-[36px] font-bold text-white leading-[1.15] tracking-[-0.025em] mb-4">
             Stop chasing<br />
@@ -87,7 +84,6 @@ export default function AuthPage() {
             AI-powered AR automation that gets you paid faster — no awkward calls needed.
           </p>
 
-          {/* Benefits */}
           <div className="space-y-3.5">
             {benefits.map((b, i) => (
               <motion.div
@@ -104,7 +100,6 @@ export default function AuthPage() {
           </div>
         </div>
 
-        {/* Bottom badge */}
         <div className="relative z-10 mt-14">
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/10 bg-white/5">
             <span className="w-1.5 h-1.5 rounded-full bg-[#4ADE80] animate-pulse" />
@@ -113,14 +108,13 @@ export default function AuthPage() {
         </div>
       </div>
 
-      {/* ── Right panel — light ── */}
+      {/* Right panel - light */}
       <div className="flex-1 flex items-center justify-center p-8 bg-[#F8FAFC]">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           className="w-full max-w-md"
         >
-          {/* Mobile logo */}
           <div className="lg:hidden flex items-center gap-2.5 mb-8 justify-center">
             <svg width="24" height="24" viewBox="0 0 28 28" fill="none">
               <rect width="28" height="28" rx="6" fill="#4F46E5" />
@@ -135,7 +129,7 @@ export default function AuthPage() {
 
           <div className="bg-white rounded-2xl border border-[#E2E8F0] shadow-[0_4px_24px_rgba(0,0,0,0.06)] p-8">
             <h2 className="text-[22px] font-bold text-[#0F172A] mb-1">{title}</h2>
-            <p className="text-[#64748B] text-[13.5px] mb-7">{subtitle}</p>
+            <p className="text-[#222222] text-[13.5px] mb-7">{subtitle}</p>
 
             {error && (
               <div className="flex items-center gap-2 bg-red-50 border border-red-200 rounded-xl px-4 py-3 mb-5 text-red-600 text-[13px]">
@@ -155,13 +149,13 @@ export default function AuthPage() {
                 <div>
                   <label className="text-[#0F172A] text-[13px] font-medium mb-1.5 block">Company Name</label>
                   <div className="relative">
-                    <Building2 className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#94A3B8]" />
+                    <Building2 className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#333333]" />
                     <input
                       type="text"
                       value={companyName}
                       onChange={e => setCompanyName(e.target.value)}
                       placeholder="Acme Corp"
-                      className="w-full bg-white border border-[#E2E8F0] rounded-xl pl-10 pr-4 py-3 text-[#0F172A] text-[14px] placeholder-[#CBD5E1] focus:border-[#4F46E5] focus:ring-2 focus:ring-[#4F46E5]/10 transition-all outline-none"
+                      className="w-full bg-white border border-[#E2E8F0] rounded-xl pl-10 pr-4 py-3 text-[#0F172A] text-[14px] placeholder-[#444444] focus:border-[#4F46E5] focus:ring-2 focus:ring-[#4F46E5]/10 transition-all outline-none"
                       required
                     />
                   </div>
@@ -171,13 +165,13 @@ export default function AuthPage() {
               <div>
                 <label className="text-[#0F172A] text-[13px] font-medium mb-1.5 block">Email</label>
                 <div className="relative">
-                  <Mail className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#94A3B8]" />
+                  <Mail className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#333333]" />
                   <input
                     type="email"
                     value={email}
                     onChange={e => setEmail(e.target.value)}
                     placeholder="you@company.com"
-                    className="w-full bg-white border border-[#E2E8F0] rounded-xl pl-10 pr-4 py-3 text-[#0F172A] text-[14px] placeholder-[#CBD5E1] focus:border-[#4F46E5] focus:ring-2 focus:ring-[#4F46E5]/10 transition-all outline-none"
+                    className="w-full bg-white border border-[#E2E8F0] rounded-xl pl-10 pr-4 py-3 text-[#0F172A] text-[14px] placeholder-[#444444] focus:border-[#4F46E5] focus:ring-2 focus:ring-[#4F46E5]/10 transition-all outline-none"
                     required
                   />
                 </div>
@@ -187,20 +181,20 @@ export default function AuthPage() {
                 <div>
                   <label className="text-[#0F172A] text-[13px] font-medium mb-1.5 block">Password</label>
                   <div className="relative">
-                    <Lock className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#94A3B8]" />
+                    <Lock className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#333333]" />
                     <input
                       type={showPassword ? "text" : "password"}
                       value={password}
                       onChange={e => setPassword(e.target.value)}
                       placeholder="Min. 8 characters"
-                      className="w-full bg-white border border-[#E2E8F0] rounded-xl pl-10 pr-11 py-3 text-[#0F172A] text-[14px] placeholder-[#CBD5E1] focus:border-[#4F46E5] focus:ring-2 focus:ring-[#4F46E5]/10 transition-all outline-none"
+                      className="w-full bg-white border border-[#E2E8F0] rounded-xl pl-10 pr-11 py-3 text-[#0F172A] text-[14px] placeholder-[#444444] focus:border-[#4F46E5] focus:ring-2 focus:ring-[#4F46E5]/10 transition-all outline-none"
                       minLength={8}
                       required
                     />
                     <button
                       type="button"
                       onClick={() => setShowPassword(!showPassword)}
-                      className="absolute right-3.5 top-1/2 -translate-y-1/2 text-[#94A3B8] hover:text-[#64748B] transition-colors"
+                      className="absolute right-3.5 top-1/2 -translate-y-1/2 text-[#333333] hover:text-[#222222] transition-colors"
                     >
                       {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                     </button>
@@ -209,7 +203,7 @@ export default function AuthPage() {
                     <button
                       type="button"
                       onClick={() => { setMode("forgot"); reset(); }}
-                      className="text-[12px] text-[#94A3B8] hover:text-[#4F46E5] transition-colors mt-2 block text-right w-full"
+                      className="text-[12px] text-[#333333] hover:text-[#4F46E5] transition-colors mt-2 block text-right w-full"
                     >
                       Forgot password?
                     </button>
@@ -229,7 +223,7 @@ export default function AuthPage() {
               </button>
             </form>
 
-            <p className="text-center text-[#94A3B8] text-[13px] mt-5">
+            <p className="text-center text-[#333333] text-[13px] mt-5">
               {mode === "signup" ? (
                 <>Already have an account?{" "}
                   <button onClick={() => { setMode("login"); reset(); }} className="text-[#4F46E5] hover:text-[#4338CA] font-medium">Sign in</button>
@@ -244,7 +238,7 @@ export default function AuthPage() {
             </p>
           </div>
 
-          <p className="text-center text-[#CBD5E1] text-[12px] mt-5">
+          <p className="text-center text-[#444444] text-[12px] mt-5">
             Your data is encrypted and never shared.
           </p>
         </motion.div>

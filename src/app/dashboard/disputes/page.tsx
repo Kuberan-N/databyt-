@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useEffect, useState, useCallback } from "react";
 import { motion } from "framer-motion";
@@ -13,7 +13,7 @@ const STATUS_STYLES: Record<DisputeStatus, { bg: string; text: string; label: st
   open:          { bg: "bg-[#FFFBEB]", text: "text-[#D97706]",  label: "Open" },
   investigating: { bg: "bg-[#EEF2FF]", text: "text-[#4F46E5]",  label: "Investigating" },
   resolved:      { bg: "bg-[#F0FDF4]", text: "text-[#16A34A]",  label: "Resolved" },
-  rejected:      { bg: "bg-[#F1F5F9]", text: "text-[#64748B]",  label: "Rejected" },
+  rejected:      { bg: "bg-[#F1F5F9]", text: "text-[#222222]",  label: "Rejected" },
 };
 
 const REASON_LABELS: Record<string, string> = {
@@ -78,10 +78,10 @@ export default function DisputesPage() {
       <div className="flex items-center justify-between flex-wrap gap-3">
         <div>
           <h2 className="text-2xl font-bold text-[#0F172A]">Disputes</h2>
-          <p className="text-[#64748B] text-sm mt-1">Track and resolve invoice disputes</p>
+          <p className="text-[#222222] text-sm mt-1">Track and resolve invoice disputes</p>
         </div>
         <button onClick={load}
-          className="flex items-center gap-2 px-3 py-2 rounded-lg border border-[#E2E8F0] text-[#64748B] text-sm hover:text-[#4F46E5] hover:border-[#4F46E5]/30 transition-all">
+          className="flex items-center gap-2 px-3 py-2 rounded-lg border border-[#E2E8F0] text-[#222222] text-sm hover:text-[#4F46E5] hover:border-[#4F46E5]/30 transition-all">
           <RefreshCw className={`w-4 h-4 ${loading ? "animate-spin" : ""}`} />
         </button>
       </div>
@@ -92,7 +92,7 @@ export default function DisputesPage() {
           { key: "open",          label: "Open",          icon: AlertTriangle, color: "#D97706" },
           { key: "investigating", label: "Investigating", icon: Clock,         color: "#4F46E5" },
           { key: "resolved",      label: "Resolved",      icon: CheckCircle,   color: "#16A34A" },
-          { key: "rejected",      label: "Rejected",      icon: CheckCircle,   color: "#94A3B8" },
+          { key: "rejected",      label: "Rejected",      icon: CheckCircle,   color: "#333333" },
         ].map((s, i) => (
           <motion.button key={s.key}
             initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.05 }}
@@ -103,7 +103,7 @@ export default function DisputesPage() {
               <s.icon className="w-4 h-4" style={{ color: s.color }} />
             </div>
             <p className="text-xl font-bold text-[#0F172A]">{counts[s.key as DisputeStatus]}</p>
-            <p className="text-xs text-[#64748B] mt-0.5">{s.label}</p>
+            <p className="text-xs text-[#222222] mt-0.5">{s.label}</p>
           </motion.button>
         ))}
       </div>
@@ -114,9 +114,9 @@ export default function DisputesPage() {
         <div className="px-5 py-4 border-b border-[#E2E8F0] flex items-center gap-3 flex-wrap">
           <h3 className="text-sm font-semibold text-[#0F172A] flex-1">All Disputes</h3>
           <div className="flex items-center gap-2 bg-white border border-[#E2E8F0] rounded-lg px-3 py-1.5 w-48">
-            <Search className="w-3.5 h-3.5 text-[#94A3B8]" />
+            <Search className="w-3.5 h-3.5 text-[#333333]" />
             <input value={search} onChange={e => setSearch(e.target.value)}
-              placeholder="Search..." className="text-xs outline-none flex-1 text-[#0F172A] placeholder-[#94A3B8]" />
+              placeholder="Search..." className="text-xs outline-none flex-1 text-[#0F172A] placeholder-[#333333]" />
           </div>
         </div>
 
@@ -125,7 +125,7 @@ export default function DisputesPage() {
             <thead>
               <tr className="border-b border-[#E2E8F0]">
                 {["Customer", "Invoice", "Amount", "Reason", "Status", "Filed", "Actions"].map(h => (
-                  <th key={h} className="text-left text-[#94A3B8] px-4 py-3 font-medium whitespace-nowrap">{h}</th>
+                  <th key={h} className="text-left text-[#333333] px-4 py-3 font-medium whitespace-nowrap">{h}</th>
                 ))}
               </tr>
             </thead>
@@ -135,7 +135,7 @@ export default function DisputesPage() {
                   <div className="w-5 h-5 border-2 border-[#4F46E5]/20 border-t-[#4F46E5] rounded-full animate-spin mx-auto" />
                 </td></tr>
               ) : filtered.length === 0 ? (
-                <tr><td colSpan={7} className="text-center py-12 text-[#94A3B8]">
+                <tr><td colSpan={7} className="text-center py-12 text-[#333333]">
                   {disputes.length === 0 ? "No disputes filed yet" : "No disputes match your search"}
                 </td></tr>
               ) : filtered.map(d => {
@@ -143,20 +143,20 @@ export default function DisputesPage() {
                 return (
                   <tr key={d.id} className="border-t border-[#F1F5F9] hover:bg-[#FAFAFA] transition-colors">
                     <td className="px-4 py-3 text-[#0F172A] font-medium">{d.customer_name ?? "—"}</td>
-                    <td className="px-4 py-3 text-[#64748B]">{d.invoice_number ?? "—"}</td>
+                    <td className="px-4 py-3 text-[#222222]">{d.invoice_number ?? "—"}</td>
                     <td className="px-4 py-3 text-[#0F172A] font-semibold">{d.invoice_amount ? fmt(d.invoice_amount) : "—"}</td>
-                    <td className="px-4 py-3 text-[#64748B]">{REASON_LABELS[d.reason] ?? d.reason}</td>
+                    <td className="px-4 py-3 text-[#222222]">{REASON_LABELS[d.reason] ?? d.reason}</td>
                     <td className="px-4 py-3">
                       <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${s.bg} ${s.text}`}>{s.label}</span>
                     </td>
-                    <td className="px-4 py-3 text-[#94A3B8]">
+                    <td className="px-4 py-3 text-[#333333]">
                       {new Date(d.created_at).toLocaleDateString("en-US", { month: "short", day: "numeric" })}
                     </td>
                     <td className="px-4 py-3">
                       {(d.status === "open" || d.status === "investigating") && (
                         <div className="relative">
                           <button onClick={() => setDropdown(openDropdown === d.id ? null : d.id)}
-                            className="flex items-center gap-1 text-xs text-[#64748B] hover:text-[#4F46E5] transition-colors font-medium px-2 py-1 rounded-lg border border-[#E2E8F0] hover:border-[#4F46E5]/30">
+                            className="flex items-center gap-1 text-xs text-[#222222] hover:text-[#4F46E5] transition-colors font-medium px-2 py-1 rounded-lg border border-[#E2E8F0] hover:border-[#4F46E5]/30">
                             Update <ChevronDown className="w-3 h-3" />
                           </button>
                           {openDropdown === d.id && (
@@ -166,12 +166,12 @@ export default function DisputesPage() {
                                 rows={2}
                                 value={resolutionNotes[d.id] ?? ""}
                                 onChange={e => setNotes(n => ({ ...n, [d.id]: e.target.value }))}
-                                className="w-full text-xs border border-[#E2E8F0] rounded-lg px-2 py-1.5 resize-none outline-none focus:border-[#4F46E5] text-[#0F172A] placeholder-[#94A3B8]"
+                                className="w-full text-xs border border-[#E2E8F0] rounded-lg px-2 py-1.5 resize-none outline-none focus:border-[#4F46E5] text-[#0F172A] placeholder-[#333333]"
                               />
                               {[
                                 { status: "investigating" as DisputeStatus, label: "→ Investigating", color: "text-[#4F46E5]" },
                                 { status: "resolved" as DisputeStatus,      label: "✓ Mark Resolved", color: "text-[#16A34A]" },
-                                { status: "rejected" as DisputeStatus,      label: "✗ Reject Dispute", color: "text-[#64748B]" },
+                                { status: "rejected" as DisputeStatus,      label: "✗ Reject Dispute", color: "text-[#222222]" },
                               ].map(opt => (
                                 <button key={opt.status}
                                   disabled={updating === d.id}
@@ -185,7 +185,7 @@ export default function DisputesPage() {
                         </div>
                       )}
                       {(d.status === "resolved" || d.status === "rejected") && (
-                        <span className="text-[#94A3B8]">
+                        <span className="text-[#333333]">
                           {d.resolved_at ? new Date(d.resolved_at).toLocaleDateString("en-US", { month: "short", day: "numeric" }) : "—"}
                         </span>
                       )}

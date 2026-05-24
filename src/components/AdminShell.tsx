@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { createContext, useContext, useEffect, useState, ReactNode, useCallback } from "react";
 import { useRouter, usePathname } from "next/navigation";
@@ -116,7 +116,7 @@ export default function AdminShell({ children }: { children: ReactNode }) {
           <span className="text-[10px] px-1.5 py-0.5 rounded bg-[#EEF2FF] text-[#4F46E5] font-bold uppercase tracking-wider">Admin</span>
         </div>
         {mobile && (
-          <button onClick={() => setMobileOpen(false)} className="text-[#94A3B8] hover:text-[#4F46E5]">
+          <button onClick={() => setMobileOpen(false)} className="text-[#333333] hover:text-[#4F46E5]">
             <X className="w-5 h-5" />
           </button>
         )}
@@ -124,7 +124,7 @@ export default function AdminShell({ children }: { children: ReactNode }) {
 
       {/* Org switcher */}
       <div className="p-3 border-b border-[#E2E8F0]">
-        <p className="text-[10px] font-bold text-[#94A3B8] uppercase tracking-wider mb-2 px-1">Client</p>
+        <p className="text-[10px] font-bold text-[#333333] uppercase tracking-wider mb-2 px-1">Client</p>
         <div className="relative">
           <button
             onClick={() => setOrgPickerOpen(o => !o)}
@@ -136,7 +136,7 @@ export default function AdminShell({ children }: { children: ReactNode }) {
             <span className="flex-1 text-sm text-[#0F172A] truncate min-w-0">
               {orgsLoading ? "Loading..." : (selectedOrg?.name ?? "Select client")}
             </span>
-            <ChevronDown className={`w-3.5 h-3.5 text-[#94A3B8] shrink-0 transition-transform ${orgPickerOpen ? "rotate-180" : ""}`} />
+            <ChevronDown className={`w-3.5 h-3.5 text-[#333333] shrink-0 transition-transform ${orgPickerOpen ? "rotate-180" : ""}`} />
           </button>
 
           <AnimatePresence>
@@ -149,7 +149,7 @@ export default function AdminShell({ children }: { children: ReactNode }) {
                 className="absolute left-0 right-0 top-full mt-1 bg-white border border-[#E2E8F0] rounded-xl shadow-lg z-50 overflow-hidden"
               >
                 {orgs.length === 0 ? (
-                  <div className="px-4 py-3 text-xs text-[#94A3B8]">No clients yet</div>
+                  <div className="px-4 py-3 text-xs text-[#333333]">No clients yet</div>
                 ) : (
                   orgs.map(org => (
                     <button
@@ -158,11 +158,11 @@ export default function AdminShell({ children }: { children: ReactNode }) {
                       className={`w-full flex items-center gap-3 px-3 py-2.5 text-sm transition-colors ${
                         selectedOrg?.id === org.id
                           ? "bg-[#EEF2FF] text-[#4F46E5]"
-                          : "text-[#475569] hover:bg-[#FFF1F2] hover:text-[#4F46E5]"
+                          : "text-[#111111] hover:bg-[#FFF1F2] hover:text-[#4F46E5]"
                       }`}
                     >
                       <div className="w-5 h-5 rounded-md bg-[#F1F5F9] flex items-center justify-center shrink-0">
-                        <span className="text-[10px] font-bold text-[#64748B]">{org.name.charAt(0).toUpperCase()}</span>
+                        <span className="text-[10px] font-bold text-[#222222]">{org.name.charAt(0).toUpperCase()}</span>
                       </div>
                       <span className="flex-1 text-left truncate">{org.name}</span>
                       {org.overdueCount > 0 && (
@@ -174,7 +174,7 @@ export default function AdminShell({ children }: { children: ReactNode }) {
                   ))
                 )}
                 <div className="border-t border-[#F1F5F9] px-3 py-2">
-                  <span className="text-[10px] text-[#94A3B8]">{orgs.length} client{orgs.length !== 1 ? "s" : ""} total</span>
+                  <span className="text-[10px] text-[#333333]">{orgs.length} client{orgs.length !== 1 ? "s" : ""} total</span>
                 </div>
               </motion.div>
             )}
@@ -194,7 +194,7 @@ export default function AdminShell({ children }: { children: ReactNode }) {
               className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all ${
                 isActive
                   ? "bg-[#EEF2FF] text-[#4F46E5]"
-                  : "text-[#64748B] hover:text-[#4F46E5] hover:bg-[#FFF1F2]"
+                  : "text-[#222222] hover:text-[#4F46E5] hover:bg-[#FFF1F2]"
               }`}
             >
               <link.icon className="w-4 h-4 shrink-0" />
@@ -222,9 +222,9 @@ export default function AdminShell({ children }: { children: ReactNode }) {
           </div>
           <div className="flex-1 min-w-0">
             <p className="text-xs text-[#0F172A] font-medium truncate">{user.email}</p>
-            <p className="text-[10px] text-[#94A3B8]">Operator</p>
+            <p className="text-[10px] text-[#333333]">Operator</p>
           </div>
-          <button onClick={signOut} className="text-[#94A3B8] hover:text-[#4F46E5] transition-colors p-1 shrink-0" title="Sign out">
+          <button onClick={signOut} className="text-[#333333] hover:text-[#4F46E5] transition-colors p-1 shrink-0" title="Sign out">
             <LogOut className="w-4 h-4" />
           </button>
         </div>
@@ -268,18 +268,18 @@ export default function AdminShell({ children }: { children: ReactNode }) {
         <div className="flex-1 flex flex-col min-w-0">
           <header className="h-16 bg-white border-b border-[#E2E8F0] flex items-center justify-between px-4 sm:px-6 shrink-0">
             <div className="flex items-center gap-3">
-              <button className="lg:hidden text-[#64748B] hover:text-[#4F46E5]" onClick={() => setMobileOpen(true)}>
+              <button className="lg:hidden text-[#222222] hover:text-[#4F46E5]" onClick={() => setMobileOpen(true)}>
                 <Menu className="w-5 h-5" />
               </button>
               <h1 className="text-sm font-semibold text-[#0F172A]">{currentLabel}</h1>
               {selectedOrg && (
-                <span className="hidden sm:inline text-xs text-[#94A3B8]">
+                <span className="hidden sm:inline text-xs text-[#333333]">
                   — {selectedOrg.name}
                 </span>
               )}
             </div>
             <div className="flex items-center gap-2">
-              <a href="/dashboard" className="text-xs text-[#64748B] hover:text-[#4F46E5] transition-colors px-3 py-1.5 rounded-lg border border-[#E2E8F0] hover:border-[#4F46E5]/30">
+              <a href="/dashboard" className="text-xs text-[#222222] hover:text-[#4F46E5] transition-colors px-3 py-1.5 rounded-lg border border-[#E2E8F0] hover:border-[#4F46E5]/30">
                 Client View
               </a>
             </div>

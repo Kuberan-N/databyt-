@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -61,7 +61,7 @@ export default function DisputeModal({
     }
   }
 
-  const inputCls = "w-full bg-white border border-[#E2E8F0] rounded-xl px-4 py-3 text-[#0F172A] placeholder-[#94A3B8] focus:border-[#4F46E5] focus:ring-1 focus:ring-[#4F46E5]/20 outline-none transition-all text-sm";
+  const inputCls = "w-full bg-white border border-[#E2E8F0] rounded-xl px-4 py-3 text-[#0F172A] placeholder-[#333333] focus:border-[#4F46E5] focus:ring-1 focus:ring-[#4F46E5]/20 outline-none transition-all text-sm";
 
   return (
     <AnimatePresence>
@@ -87,10 +87,10 @@ export default function DisputeModal({
                   </div>
                   <div>
                     <h3 className="text-sm font-semibold text-[#0F172A]">File a Dispute</h3>
-                    <p className="text-xs text-[#94A3B8]">Invoice {invoiceNumber} · {fmt(invoiceAmount)}</p>
+                    <p className="text-xs text-[#333333]">Invoice {invoiceNumber} · {fmt(invoiceAmount)}</p>
                   </div>
                 </div>
-                <button onClick={onClose} className="text-[#94A3B8] hover:text-[#64748B] transition-colors p-1">
+                <button onClick={onClose} className="text-[#333333] hover:text-[#222222] transition-colors p-1">
                   <X className="w-4 h-4" />
                 </button>
               </div>
@@ -103,7 +103,7 @@ export default function DisputeModal({
                 )}
 
                 <div>
-                  <label className="text-[#475569] text-sm font-medium mb-2 block">Reason for dispute</label>
+                  <label className="text-[#111111] text-sm font-medium mb-2 block">Reason for dispute</label>
                   <select value={reason} onChange={e => setReason(e.target.value as DisputeReason)}
                     className={inputCls + " appearance-none"}>
                     {REASONS.map(r => <option key={r.value} value={r.value}>{r.label}</option>)}
@@ -111,15 +111,15 @@ export default function DisputeModal({
                 </div>
 
                 <div>
-                  <label className="text-[#475569] text-sm font-medium mb-2 block">
-                    Description <span className="text-[#94A3B8] font-normal">(optional)</span>
+                  <label className="text-[#111111] text-sm font-medium mb-2 block">
+                    Description <span className="text-[#333333] font-normal">(optional)</span>
                   </label>
                   <textarea
                     value={description}
                     onChange={e => setDescription(e.target.value)}
                     rows={3}
                     placeholder="Provide any additional context..."
-                    className="w-full bg-white border border-[#E2E8F0] rounded-xl px-4 py-3 text-[#0F172A] placeholder-[#94A3B8] focus:border-[#4F46E5] focus:ring-1 focus:ring-[#4F46E5]/20 outline-none transition-all text-sm resize-none"
+                    className="w-full bg-white border border-[#E2E8F0] rounded-xl px-4 py-3 text-[#0F172A] placeholder-[#333333] focus:border-[#4F46E5] focus:ring-1 focus:ring-[#4F46E5]/20 outline-none transition-all text-sm resize-none"
                   />
                 </div>
 
@@ -132,7 +132,7 @@ export default function DisputeModal({
 
                 <div className="flex gap-3 pt-1">
                   <button type="button" onClick={onClose}
-                    className="flex-1 px-4 py-2.5 rounded-xl border border-[#E2E8F0] text-[#64748B] text-sm font-medium hover:bg-[#F8F9FC] transition-colors">
+                    className="flex-1 px-4 py-2.5 rounded-xl border border-[#E2E8F0] text-[#222222] text-sm font-medium hover:bg-[#F8F9FC] transition-colors">
                     Cancel
                   </button>
                   <button type="submit" disabled={saving}

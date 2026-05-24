@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useEffect, useState, ReactNode } from "react";
 import { useRouter, usePathname } from "next/navigation";
@@ -39,7 +39,7 @@ export default function DashboardShell({ children }: { children: ReactNode }) {
       <div className="min-h-screen bg-[#F8F9FC] flex items-center justify-center">
         <div className="flex flex-col items-center gap-4">
           <div className="w-10 h-10 border-2 border-[#4F46E5]/20 border-t-[#4F46E5] rounded-full animate-spin" />
-          <p className="text-[#64748B] text-sm">Loading dashboard...</p>
+          <p className="text-[#222222] text-sm">Loading dashboard...</p>
         </div>
       </div>
     );
@@ -80,7 +80,7 @@ export default function DashboardShell({ children }: { children: ReactNode }) {
           )}
           <button
             onClick={() => setSidebarOpen(!sidebarOpen)}
-            className="text-[#94A3B8] hover:text-[#4F46E5] transition-colors p-1 shrink-0"
+            className="text-[#333333] hover:text-[#4F46E5] transition-colors p-1 shrink-0"
           >
             <ChevronLeft className={`w-4 h-4 transition-transform ${!sidebarOpen ? "rotate-180" : ""}`} />
           </button>
@@ -99,7 +99,7 @@ export default function DashboardShell({ children }: { children: ReactNode }) {
                 className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all ${
                   isActive
                     ? "bg-[#EEF2FF] text-[#4F46E5]"
-                    : "text-[#64748B] hover:text-[#4F46E5] hover:bg-[#FFF1F2]"
+                    : "text-[#222222] hover:text-[#4F46E5] hover:bg-[#FFF1F2]"
                 } ${!sidebarOpen ? "justify-center" : ""}`}
                 title={!sidebarOpen ? link.label : undefined}
               >
@@ -136,14 +136,14 @@ export default function DashboardShell({ children }: { children: ReactNode }) {
                   className="flex-1 min-w-0"
                 >
                   <p className="text-sm text-[#0F172A] font-medium truncate">{organization?.name ?? "My Company"}</p>
-                  <p className="text-xs text-[#94A3B8] truncate capitalize">{orgUser?.role ?? "admin"}</p>
+                  <p className="text-xs text-[#333333] truncate capitalize">{orgUser?.role ?? "admin"}</p>
                 </motion.div>
               )}
             </AnimatePresence>
             {sidebarOpen && (
               <button
                 onClick={signOut}
-                className="text-[#94A3B8] hover:text-[#4F46E5] transition-colors p-1 shrink-0"
+                className="text-[#333333] hover:text-[#4F46E5] transition-colors p-1 shrink-0"
                 title="Sign out"
               >
                 <LogOut className="w-4 h-4" />
@@ -184,7 +184,7 @@ export default function DashboardShell({ children }: { children: ReactNode }) {
                       key={link.href}
                       href={link.href}
                       className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all ${
-                        isActive ? "bg-[#EEF2FF] text-[#4F46E5]" : "text-[#64748B] hover:text-[#4F46E5] hover:bg-[#FFF1F2]"
+                        isActive ? "bg-[#EEF2FF] text-[#4F46E5]" : "text-[#222222] hover:text-[#4F46E5] hover:bg-[#FFF1F2]"
                       }`}
                       onClick={() => setMobileMenuOpen(false)}
                     >
@@ -197,7 +197,7 @@ export default function DashboardShell({ children }: { children: ReactNode }) {
               <div className="border-t border-[#E2E8F0] p-4">
                 <button
                   onClick={() => { signOut(); setMobileMenuOpen(false); }}
-                  className="flex items-center gap-2 text-[#64748B] hover:text-[#4F46E5] text-sm"
+                  className="flex items-center gap-2 text-[#222222] hover:text-[#4F46E5] text-sm"
                 >
                   <LogOut className="w-4 h-4" />
                   Sign Out
@@ -212,7 +212,7 @@ export default function DashboardShell({ children }: { children: ReactNode }) {
       <div className="flex-1 flex flex-col min-w-0">
         <header className="h-16 bg-white border-b border-[#E2E8F0] flex items-center justify-between px-4 sm:px-6 shrink-0">
           <div className="flex items-center gap-3">
-            <button className="lg:hidden text-[#64748B] hover:text-[#4F46E5]" onClick={() => setMobileMenuOpen(true)}>
+            <button className="lg:hidden text-[#222222] hover:text-[#4F46E5]" onClick={() => setMobileMenuOpen(true)}>
               <Menu className="w-5 h-5" />
             </button>
             <h1 className="text-base font-semibold text-[#0F172A]">{currentPage}</h1>

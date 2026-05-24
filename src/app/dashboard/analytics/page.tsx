@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useEffect, useState, useCallback } from "react";
 import { motion } from "framer-motion";
@@ -33,8 +33,8 @@ function StatCard({
         <Icon className="w-4 h-4" style={{ color: iconColor }} />
       </div>
       <p className="text-2xl font-bold text-[#0F172A]">{value}</p>
-      <p className="text-[#64748B] text-xs mt-0.5">{label}</p>
-      {sub && <p className="text-[#94A3B8] text-xs mt-0.5">{sub}</p>}
+      <p className="text-[#222222] text-xs mt-0.5">{label}</p>
+      {sub && <p className="text-[#333333] text-xs mt-0.5">{sub}</p>}
     </motion.div>
   );
 }
@@ -55,7 +55,7 @@ function CEIGauge({ value, prev }: { value: number; prev: number }) {
         </svg>
         <div className="absolute inset-0 flex flex-col items-center justify-center">
           <span className="text-3xl font-black text-[#0F172A]">{value}%</span>
-          <span className="text-xs text-[#64748B]">CEI</span>
+          <span className="text-xs text-[#222222]">CEI</span>
         </div>
       </div>
       <div className="flex items-center gap-1.5 mt-3">
@@ -63,12 +63,12 @@ function CEIGauge({ value, prev }: { value: number; prev: number }) {
           ? <TrendingUp className="w-3.5 h-3.5 text-green-600" />
           : diff < 0
           ? <TrendingDown className="w-3.5 h-3.5 text-red-500" />
-          : <Minus className="w-3.5 h-3.5 text-[#94A3B8]" />}
-        <span className={`text-xs font-medium ${diff > 0 ? "text-green-600" : diff < 0 ? "text-red-500" : "text-[#94A3B8]"}`}>
+          : <Minus className="w-3.5 h-3.5 text-[#333333]" />}
+        <span className={`text-xs font-medium ${diff > 0 ? "text-green-600" : diff < 0 ? "text-red-500" : "text-[#333333]"}`}>
           {diff > 0 ? "+" : ""}{diff}% vs last month
         </span>
       </div>
-      <p className="text-xs text-[#94A3B8] mt-1">
+      <p className="text-xs text-[#333333] mt-1">
         {value >= 80 ? "Excellent — top quartile" : value >= 60 ? "Good — room to improve" : "Needs attention"}
       </p>
     </div>
@@ -110,10 +110,10 @@ export default function AnalyticsPage() {
       <div className="flex items-center justify-between">
         <div>
           <h2 className="text-2xl font-bold text-[#0F172A]">Analytics</h2>
-          <p className="text-[#64748B] text-sm mt-1">Collections performance and AR intelligence</p>
+          <p className="text-[#222222] text-sm mt-1">Collections performance and AR intelligence</p>
         </div>
         <button onClick={load}
-          className="flex items-center gap-2 px-3 py-2 rounded-lg border border-[#E2E8F0] text-[#64748B] text-sm hover:text-[#4F46E5] hover:border-[#4F46E5]/30 transition-all">
+          className="flex items-center gap-2 px-3 py-2 rounded-lg border border-[#E2E8F0] text-[#222222] text-sm hover:text-[#4F46E5] hover:border-[#4F46E5]/30 transition-all">
           <RefreshCw className={`w-4 h-4 ${loading ? "animate-spin" : ""}`} />
         </button>
       </div>
@@ -137,7 +137,7 @@ export default function AnalyticsPage() {
           <div className="flex items-center justify-between mb-2">
             <div>
               <h3 className="text-sm font-semibold text-[#0F172A]">Collections Effectiveness Index</h3>
-              <p className="text-xs text-[#64748B] mt-0.5">
+              <p className="text-xs text-[#222222] mt-0.5">
                 (Collected ÷ Collectible) × 100 — target: 80%+
               </p>
             </div>
@@ -147,17 +147,17 @@ export default function AnalyticsPage() {
               <CEIGauge value={d.cei.cei} prev={d.cei.prevCei} />
               <div className="grid grid-cols-2 gap-3 mt-2">
                 <div className="p-3 rounded-xl bg-[#F8F9FC] border border-[#E2E8F0]">
-                  <p className="text-xs text-[#64748B]">Collected</p>
+                  <p className="text-xs text-[#222222]">Collected</p>
                   <p className="text-base font-bold text-[#0F172A] mt-0.5">{fmt(d.cei.collected)}</p>
                 </div>
                 <div className="p-3 rounded-xl bg-[#F8F9FC] border border-[#E2E8F0]">
-                  <p className="text-xs text-[#64748B]">Collectible AR</p>
+                  <p className="text-xs text-[#222222]">Collectible AR</p>
                   <p className="text-base font-bold text-[#0F172A] mt-0.5">{fmt(d.cei.collectible)}</p>
                 </div>
               </div>
             </>
           ) : (
-            <div className="flex items-center justify-center h-48 text-[#94A3B8] text-sm">No data yet</div>
+            <div className="flex items-center justify-center h-48 text-[#333333] text-sm">No data yet</div>
           )}
         </motion.div>
 
@@ -167,14 +167,14 @@ export default function AnalyticsPage() {
           {d && d.emailEffectiveness.totalSent > 0 ? (
             <div className="space-y-4">
               {[
-                { label: "Sent", value: d.emailEffectiveness.totalSent, color: "#64748B", pct: 100 },
+                { label: "Sent", value: d.emailEffectiveness.totalSent, color: "#222222", pct: 100 },
                 { label: "Opened", value: d.emailEffectiveness.opened, color: "#D97706", pct: d.emailEffectiveness.openRate },
                 { label: "Clicked", value: d.emailEffectiveness.clicked, color: "#16A34A", pct: d.emailEffectiveness.totalSent > 0 ? Math.round((d.emailEffectiveness.clicked / d.emailEffectiveness.totalSent) * 100) : 0 },
                 { label: "Bounced", value: d.emailEffectiveness.bounced, color: "#DC2626", pct: d.emailEffectiveness.totalSent > 0 ? Math.round((d.emailEffectiveness.bounced / d.emailEffectiveness.totalSent) * 100) : 0 },
               ].map((row) => (
                 <div key={row.label}>
                   <div className="flex items-center justify-between mb-1">
-                    <span className="text-xs text-[#64748B]">{row.label}</span>
+                    <span className="text-xs text-[#222222]">{row.label}</span>
                     <span className="text-xs font-medium text-[#0F172A]">{row.value} ({row.pct}%)</span>
                   </div>
                   <div className="h-2 rounded-full bg-[#F1F5F9]">
@@ -185,13 +185,13 @@ export default function AnalyticsPage() {
               ))}
               <div className="pt-3 border-t border-[#E2E8F0]">
                 <div className="flex items-center justify-between">
-                  <span className="text-xs text-[#64748B]">Payment conversion (dunned → paid)</span>
+                  <span className="text-xs text-[#222222]">Payment conversion (dunned → paid)</span>
                   <span className="text-sm font-bold text-[#4F46E5]">{d.emailEffectiveness.paymentConversionRate}%</span>
                 </div>
               </div>
             </div>
           ) : (
-            <div className="flex items-center justify-center h-48 text-[#94A3B8] text-sm">No emails sent yet</div>
+            <div className="flex items-center justify-center h-48 text-[#333333] text-sm">No emails sent yet</div>
           )}
         </motion.div>
       </div>
@@ -203,8 +203,8 @@ export default function AnalyticsPage() {
         {d && d.monthlyTrend.some(m => m.collected > 0) ? (
           <ResponsiveContainer width="100%" height={220}>
             <BarChart data={d.monthlyTrend} barSize={36}>
-              <XAxis dataKey="month" tick={{ fill: "#94A3B8", fontSize: 11 }} axisLine={false} tickLine={false} />
-              <YAxis tick={{ fill: "#94A3B8", fontSize: 11 }} axisLine={false} tickLine={false}
+              <XAxis dataKey="month" tick={{ fill: "#333333", fontSize: 11 }} axisLine={false} tickLine={false} />
+              <YAxis tick={{ fill: "#333333", fontSize: 11 }} axisLine={false} tickLine={false}
                 tickFormatter={(v) => `$${(v / 1000).toFixed(0)}k`} />
               <Tooltip
                 contentStyle={{ background: "#FFFFFF", border: "1px solid #E2E8F0", borderRadius: 12, fontSize: 12, color: "#0F172A" }}
@@ -214,7 +214,7 @@ export default function AnalyticsPage() {
             </BarChart>
           </ResponsiveContainer>
         ) : (
-          <div className="flex items-center justify-center h-52 text-[#94A3B8] text-sm">
+          <div className="flex items-center justify-center h-52 text-[#333333] text-sm">
             No payment data yet — collections will appear here once invoices are paid
           </div>
         )}
@@ -225,7 +225,7 @@ export default function AnalyticsPage() {
         <StatCard label="Fastest Payment" value={`${d?.velocity.fastestPaymentDays ?? 0}d`}
           sub="After first reminder" icon={TrendingUp} iconColor="#16A34A" delay={0.35} />
         <StatCard label="Median Pay Speed" value={`${d?.velocity.medianDaysToPayAfterReminder ?? 0}d`}
-          sub="P50 days after reminder" icon={Clock} iconColor="#64748B" delay={0.38} />
+          sub="P50 days after reminder" icon={Clock} iconColor="#222222" delay={0.38} />
         <StatCard label="Slowest Payment" value={`${d?.velocity.slowestPaymentDays ?? 0}d`}
           sub="Worst-case observed" icon={TrendingDown} iconColor="#D97706" delay={0.41} />
         <StatCard label="Bad Debt Rate" value={`${d?.badDebtRate ?? 0}%`}

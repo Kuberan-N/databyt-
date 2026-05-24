@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
@@ -12,7 +12,7 @@ const fmt = (n: number) =>
   new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }).format(n);
 
 const PLAN_STYLE: Record<string, { color: string; bg: string; border: string }> = {
-  starter: { color: "text-[#64748B]",   bg: "bg-[#F1F5F9]",         border: "border-[#E2E8F0]" },
+  starter: { color: "text-[#222222]",   bg: "bg-[#F1F5F9]",         border: "border-[#E2E8F0]" },
   growth:  { color: "text-[#4B5FA8]",   bg: "bg-[#EEF2FF]",         border: "border-[#3730A3]/20" },
   scale:   { color: "text-[#4F46E5]",   bg: "bg-[#FFF1F2]",         border: "border-[#4F46E5]/20" },
 };
@@ -43,15 +43,15 @@ export default function AdminDashboard() {
       .catch(() => setFailedJobsCount(null));
   }, []);
 
-  const btnBase = "flex items-center gap-2 px-4 py-2 rounded-lg border border-[#E2E8F0] text-[#64748B] text-sm hover:text-[#3730A3] hover:border-[#3730A3]/30 bg-white transition-all disabled:opacity-50";
-  const spinner = <div className="w-4 h-4 border-2 border-[#94A3B8]/30 border-t-[#94A3B8] rounded-full animate-spin" />;
+  const btnBase = "flex items-center gap-2 px-4 py-2 rounded-lg border border-[#E2E8F0] text-[#222222] text-sm hover:text-[#3730A3] hover:border-[#3730A3]/30 bg-white transition-all disabled:opacity-50";
+  const spinner = <div className="w-4 h-4 border-2 border-[#333333]/30 border-t-[#333333] rounded-full animate-spin" />;
 
   return (
     <div className="space-y-6 max-w-6xl">
       <div className="flex items-center justify-between flex-wrap gap-3">
         <div>
           <h2 className="text-2xl font-bold text-[#0F172A]">Overview</h2>
-          <p className="text-[#64748B] text-sm mt-1">Cross-client AR health and activity.</p>
+          <p className="text-[#222222] text-sm mt-1">Cross-client AR health and activity.</p>
         </div>
         <div className="flex items-center gap-2 flex-wrap">
           <button
@@ -132,7 +132,7 @@ export default function AdminDashboard() {
               <s.icon className="w-4 h-4 text-white" />
             </div>
             <p className="text-2xl font-bold text-[#0F172A]">{orgsLoading ? "—" : s.value}</p>
-            <p className="text-[#64748B] text-xs mt-0.5">{s.label}</p>
+            <p className="text-[#222222] text-xs mt-0.5">{s.label}</p>
           </motion.div>
         ))}
       </div>
@@ -142,7 +142,7 @@ export default function AdminDashboard() {
         <div className="flex gap-3 flex-wrap">
           {[scoreResult, classifyResult, reportResult].filter(Boolean).map((msg, i) => (
             <motion.div key={i} initial={{ opacity: 0 }} animate={{ opacity: 1 }}
-              className="flex-1 px-4 py-2.5 rounded-xl bg-[#F8F9FC] border border-[#E2E8F0] text-sm text-[#475569] text-center">
+              className="flex-1 px-4 py-2.5 rounded-xl bg-[#F8F9FC] border border-[#E2E8F0] text-sm text-[#111111] text-center">
               {msg}
             </motion.div>
           ))}
@@ -189,27 +189,27 @@ export default function AdminDashboard() {
         className="glass rounded-2xl overflow-hidden">
         <div className="px-5 py-3.5 border-b border-[#E2E8F0] flex items-center justify-between">
           <h3 className="text-sm font-semibold text-[#0F172A]">Client Organizations</h3>
-          <span className="text-xs text-[#94A3B8]">{orgs.length} total</span>
+          <span className="text-xs text-[#333333]">{orgs.length} total</span>
         </div>
         <div className="overflow-x-auto">
           <table className="w-full text-xs">
             <thead>
               <tr className="border-b border-[#E2E8F0]">
                 {["Organization", "Status", "MRR", "Plan", "AR Outstanding", "Overdue", "Emails/mo", "Joined"].map(h => (
-                  <th key={h} className="text-left text-[#94A3B8] px-4 py-3 font-medium whitespace-nowrap">{h}</th>
+                  <th key={h} className="text-left text-[#333333] px-4 py-3 font-medium whitespace-nowrap">{h}</th>
                 ))}
               </tr>
             </thead>
             <tbody>
               {orgsLoading ? (
-                <tr><td colSpan={8} className="text-center py-12 text-[#94A3B8]">
+                <tr><td colSpan={8} className="text-center py-12 text-[#333333]">
                   <div className="flex items-center justify-center gap-2">
                     <div className="w-4 h-4 border-2 border-[#3730A3]/20 border-t-[#3730A3] rounded-full animate-spin" />
                     Loading clients...
                   </div>
                 </td></tr>
               ) : orgs.length === 0 ? (
-                <tr><td colSpan={8} className="text-center py-12 text-[#94A3B8]">No client organizations yet</td></tr>
+                <tr><td colSpan={8} className="text-center py-12 text-[#333333]">No client organizations yet</td></tr>
               ) : orgs.map(org => {
                 const planStyle = PLAN_STYLE[org.plan_tier] ?? PLAN_STYLE.starter;
                 const isSelected = selectedOrg?.id === org.id;
@@ -224,7 +224,7 @@ export default function AdminDashboard() {
                         </div>
                         <div>
                           <p className="font-medium text-[#0F172A] text-xs">{org.name}</p>
-                          <p className="text-[#94A3B8] text-[10px] mt-0.5">{org.userCount} user{org.userCount !== 1 ? "s" : ""}</p>
+                          <p className="text-[#333333] text-[10px] mt-0.5">{org.userCount} user{org.userCount !== 1 ? "s" : ""}</p>
                         </div>
                       </div>
                     </td>
@@ -233,11 +233,11 @@ export default function AdminDashboard() {
                         org.status === "active"     ? "bg-[#F0FDF4] text-[#16A34A] border-[#16A34A]/20" :
                         org.status === "onboarding" ? "bg-[#EEF2FF] text-[#3730A3] border-[#3730A3]/20" :
                         org.status === "paused"     ? "bg-[#FFFBEB] text-[#D97706] border-[#F59E0B]/20" :
-                        "bg-[#F1F5F9] text-[#94A3B8] border-[#E2E8F0]"
+                        "bg-[#F1F5F9] text-[#333333] border-[#E2E8F0]"
                       }`}>{org.status}</span>
                     </td>
-                    <td className="px-4 py-3.5 text-[#475569]">
-                      {org.mrr != null ? fmt(org.mrr) : <span className="text-[#94A3B8]">—</span>}
+                    <td className="px-4 py-3.5 text-[#111111]">
+                      {org.mrr != null ? fmt(org.mrr) : <span className="text-[#333333]">—</span>}
                     </td>
                     <td className="px-4 py-3.5">
                       <span className={`px-2 py-0.5 rounded-full text-[10px] font-medium border capitalize ${planStyle.color} ${planStyle.bg} ${planStyle.border}`}>
@@ -255,8 +255,8 @@ export default function AdminDashboard() {
                         <span className="text-[#16A34A]">None</span>
                       )}
                     </td>
-                    <td className="px-4 py-3.5 text-[#64748B]">{org.emailsSentThisMonth}</td>
-                    <td className="px-4 py-3.5 text-[#94A3B8]">
+                    <td className="px-4 py-3.5 text-[#222222]">{org.emailsSentThisMonth}</td>
+                    <td className="px-4 py-3.5 text-[#333333]">
                       {new Date(org.created_at).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}
                     </td>
                   </tr>

@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useEffect, useState, useCallback } from "react";
 import { motion } from "framer-motion";
@@ -58,7 +58,7 @@ const providers: ProviderConfig[] = [
 
 function StatusBadge({ status }: { status: IntegrationStatus | null }) {
   if (!status || status === "disconnected") {
-    return <span className="text-xs text-[#94A3B8] font-medium">Not connected</span>;
+    return <span className="text-xs text-[#333333] font-medium">Not connected</span>;
   }
   const styles: Record<string, { bg: string; text: string; label: string }> = {
     connected: { bg: "bg-[#F0FDF4]", text: "text-[#16A34A]", label: "Connected" },
@@ -151,10 +151,10 @@ function IntegrationCard({
             <h3 className="text-sm font-semibold text-[#0F172A]">{provider.label}</h3>
             <StatusBadge status={info?.status ?? null} />
           </div>
-          <p className="text-xs text-[#64748B] mt-1 leading-relaxed">{provider.description}</p>
+          <p className="text-xs text-[#222222] mt-1 leading-relaxed">{provider.description}</p>
 
           {isConnected && info?.last_sync_at && (
-            <div className="flex items-center gap-1.5 mt-2 text-xs text-[#94A3B8]">
+            <div className="flex items-center gap-1.5 mt-2 text-xs text-[#333333]">
               <Clock className="w-3 h-3" />
               Last sync: {new Date(info.last_sync_at).toLocaleString("en-US", { month: "short", day: "numeric", hour: "2-digit", minute: "2-digit" })}
               {info.last_sync_count != null && ` · ${info.last_sync_count} records`}
@@ -175,14 +175,14 @@ function IntegrationCard({
               <button
                 onClick={handleSync}
                 disabled={syncing || info?.status === "syncing"}
-                className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-[#64748B] border border-[#E2E8F0] rounded-lg hover:text-[#4F46E5] hover:border-[#4F46E5]/30 transition-all disabled:opacity-50"
+                className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-[#222222] border border-[#E2E8F0] rounded-lg hover:text-[#4F46E5] hover:border-[#4F46E5]/30 transition-all disabled:opacity-50"
               >
                 <RefreshCw className={`w-3.5 h-3.5 ${syncing ? "animate-spin" : ""}`} />
                 {syncing ? "Syncing…" : "Sync now"}
               </button>
               <button
                 onClick={handleDisconnect}
-                className="px-3 py-1.5 text-xs font-medium text-[#64748B] border border-[#E2E8F0] rounded-lg hover:text-[#DC2626] hover:border-[#DC2626]/30 transition-all"
+                className="px-3 py-1.5 text-xs font-medium text-[#222222] border border-[#E2E8F0] rounded-lg hover:text-[#DC2626] hover:border-[#DC2626]/30 transition-all"
               >
                 Disconnect
               </button>
@@ -233,7 +233,7 @@ function IntegrationsContent() {
     <div className="space-y-6 max-w-2xl">
       <div>
         <h2 className="text-2xl font-bold text-[#0F172A]">Integrations</h2>
-        <p className="text-[#64748B] text-sm mt-1">
+        <p className="text-[#222222] text-sm mt-1">
           Connect your accounting systems to sync invoices and customers automatically.
         </p>
       </div>
@@ -273,10 +273,10 @@ function IntegrationsContent() {
         className="glass rounded-2xl p-6"
       >
         <h3 className="text-sm font-semibold text-[#0F172A] mb-1">Coming soon</h3>
-        <p className="text-xs text-[#94A3B8] mb-4">These integrations are in development.</p>
+        <p className="text-xs text-[#333333] mb-4">These integrations are in development.</p>
         <div className="flex flex-wrap gap-3">
           {["QuickBooks Online", "Xero", "FreshBooks", "Zoho Books"].map((name) => (
-            <span key={name} className="px-3 py-1.5 text-xs text-[#94A3B8] border border-[#E2E8F0] rounded-lg bg-[#FAFAFA]">
+            <span key={name} className="px-3 py-1.5 text-xs text-[#333333] border border-[#E2E8F0] rounded-lg bg-[#FAFAFA]">
               {name}
             </span>
           ))}

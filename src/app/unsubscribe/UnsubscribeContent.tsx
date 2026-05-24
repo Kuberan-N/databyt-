@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
@@ -21,14 +21,14 @@ export default function UnsubscribeContent() {
                 </svg>
               </div>
               <h1 className="text-xl font-bold text-[#0F172A] mb-2">You've been unsubscribed</h1>
-              <p className="text-[#64748B] text-sm leading-relaxed">
+              <p className="text-[#222222] text-sm leading-relaxed">
                 {email ? (
                   <><span className="font-medium text-[#0F172A]">{email}</span> will no longer receive collection reminders.</>
                 ) : (
                   "You will no longer receive collection reminders."
                 )}
               </p>
-              <p className="text-[#94A3B8] text-xs mt-4 leading-relaxed">
+              <p className="text-[#333333] text-xs mt-4 leading-relaxed">
                 If you have outstanding invoices, please contact the sender directly to arrange payment.
               </p>
             </>
@@ -40,25 +40,25 @@ export default function UnsubscribeContent() {
                 </svg>
               </div>
               <h1 className="text-xl font-bold text-[#0F172A] mb-2">Invalid unsubscribe link</h1>
-              <p className="text-[#64748B] text-sm">
+              <p className="text-[#222222] text-sm">
                 This link may have expired or is invalid. Please contact the sender directly to opt out.
               </p>
             </>
           ) : (
             <>
               <div className="w-5 h-5 border-2 border-[#4F46E5]/20 border-t-[#4F46E5] rounded-full animate-spin mx-auto mb-4" />
-              <p className="text-[#64748B] text-sm">Processing…</p>
+              <p className="text-[#222222] text-sm">Processing…</p>
             </>
           )}
 
           <div className="mt-8 pt-6 border-t border-[#F1F5F9]">
-            <p className="text-xs text-[#94A3B8]">
+            <p className="text-xs text-[#333333]">
               Powered by <span className="font-semibold text-[#4F46E5]">DataByt</span>
             </p>
           </div>
         </div>
 
-        <Link href="/" className="mt-5 inline-block text-sm text-[#94A3B8] hover:text-[#64748B] transition-colors">
+        <Link href="/" className="mt-5 inline-block text-sm text-[#333333] hover:text-[#222222] transition-colors">
           Return to homepage
         </Link>
       </div>

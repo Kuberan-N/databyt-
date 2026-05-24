@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useEffect, useState, useCallback } from "react";
 import { motion } from "framer-motion";
@@ -23,17 +23,17 @@ const fmt = (n: number) =>
   new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }).format(n);
 
 const STATUS_COLORS: Record<string, string> = {
-  open:        "bg-[#F1F5F9] text-[#475569]",
+  open:        "bg-[#F1F5F9] text-[#111111]",
   reminded:    "bg-[#FFFBEB] text-[#D97706]",
   overdue:     "bg-[#EEF2FF] text-[#DC2626]",
   paid:        "bg-[#F0FDF4] text-[#16A34A]",
-  written_off: "bg-[#F8F9FC] text-[#94A3B8]",
+  written_off: "bg-[#F8F9FC] text-[#333333]",
 };
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const db = supabase as any;
 
-const btnBase = "flex items-center gap-2 px-3 py-2 rounded-lg border border-[#E2E8F0] bg-white text-[#64748B] text-sm hover:text-[#4F46E5] hover:border-[#4F46E5]/30 transition-all";
+const btnBase = "flex items-center gap-2 px-3 py-2 rounded-lg border border-[#E2E8F0] bg-white text-[#222222] text-sm hover:text-[#4F46E5] hover:border-[#4F46E5]/30 transition-all";
 
 export default function AgingDashboard({ readOnly = false }: { readOnly?: boolean }) {
   const { organization } = useAuth();
@@ -116,7 +116,7 @@ export default function AgingDashboard({ readOnly = false }: { readOnly?: boolea
       <div className="flex items-center justify-center min-h-[60vh]">
         <div className="flex flex-col items-center gap-3">
           <div className="w-10 h-10 border-2 border-[#4F46E5]/20 border-t-[#4F46E5] rounded-full animate-spin" />
-          <p className="text-[#64748B] text-sm">Loading AR data...</p>
+          <p className="text-[#222222] text-sm">Loading AR data...</p>
         </div>
       </div>
     );
@@ -134,7 +134,7 @@ export default function AgingDashboard({ readOnly = false }: { readOnly?: boolea
       <div className="flex items-center justify-between flex-wrap gap-3">
         <div>
           <h2 className="text-2xl font-bold text-[#0F172A]">AR Aging</h2>
-          <p className="text-[#64748B] text-sm mt-1">Live accounts receivable overview</p>
+          <p className="text-[#222222] text-sm mt-1">Live accounts receivable overview</p>
         </div>
         {!readOnly && (
           <div className="flex gap-2">
@@ -166,8 +166,8 @@ export default function AgingDashboard({ readOnly = false }: { readOnly?: boolea
               </div>
             </div>
             <p className="text-2xl font-bold text-[#0F172A]">{m.value}</p>
-            <p className="text-[#64748B] text-xs mt-0.5">{m.label}</p>
-            <p className="text-[#94A3B8] text-xs mt-0.5">{m.sub}</p>
+            <p className="text-[#222222] text-xs mt-0.5">{m.label}</p>
+            <p className="text-[#333333] text-xs mt-0.5">{m.sub}</p>
           </motion.div>
         ))}
       </div>
@@ -178,8 +178,8 @@ export default function AgingDashboard({ readOnly = false }: { readOnly?: boolea
           <h3 className="text-sm font-semibold text-[#0F172A] mb-5">Aging Buckets</h3>
           <ResponsiveContainer width="100%" height={200}>
             <BarChart data={metrics?.agingBuckets ?? []} barSize={32}>
-              <XAxis dataKey="label" tick={{ fill: "#94A3B8", fontSize: 11 }} axisLine={false} tickLine={false} />
-              <YAxis tick={{ fill: "#94A3B8", fontSize: 11 }} axisLine={false} tickLine={false} tickFormatter={(v) => `$${(v/1000).toFixed(0)}k`} />
+              <XAxis dataKey="label" tick={{ fill: "#333333", fontSize: 11 }} axisLine={false} tickLine={false} />
+              <YAxis tick={{ fill: "#333333", fontSize: 11 }} axisLine={false} tickLine={false} tickFormatter={(v) => `$${(v/1000).toFixed(0)}k`} />
               <Tooltip
                 contentStyle={{ background: "#FFFFFF", border: "1px solid #E2E8F0", borderRadius: 12, fontSize: 12, color: "#0F172A" }}
                 formatter={(v) => [fmt(Number(v ?? 0)), "Amount"]}
@@ -203,11 +203,11 @@ export default function AgingDashboard({ readOnly = false }: { readOnly?: boolea
                   contentStyle={{ background: "#FFFFFF", border: "1px solid #E2E8F0", borderRadius: 12, fontSize: 12, color: "#0F172A" }}
                   formatter={(v) => fmt(Number(v ?? 0))}
                 />
-                <Legend iconSize={10} wrapperStyle={{ fontSize: 11, color: "#64748B" }} />
+                <Legend iconSize={10} wrapperStyle={{ fontSize: 11, color: "#222222" }} />
               </PieChart>
             </ResponsiveContainer>
           ) : (
-            <div className="flex items-center justify-center h-48 text-[#94A3B8] text-sm">No data yet</div>
+            <div className="flex items-center justify-center h-48 text-[#333333] text-sm">No data yet</div>
           )}
         </motion.div>
       </div>
@@ -224,15 +224,15 @@ export default function AgingDashboard({ readOnly = false }: { readOnly?: boolea
           <div className="space-y-2">
             {overdue.slice(0, 5).map((c, i) => (
               <div key={c.id} className="flex items-center gap-4 py-2.5 border-b border-[#E2E8F0] last:border-0">
-                <span className="text-xs text-[#94A3B8] w-4">{i + 1}</span>
+                <span className="text-xs text-[#333333] w-4">{i + 1}</span>
                 <div className="flex-1 min-w-0">
                   <p className="text-sm text-[#0F172A] font-medium truncate">{c.name}</p>
-                  <p className="text-xs text-[#64748B]">{c.invoiceCount} invoice{c.invoiceCount !== 1 ? "s" : ""} · {c.maxDaysOverdue}d overdue</p>
+                  <p className="text-xs text-[#222222]">{c.invoiceCount} invoice{c.invoiceCount !== 1 ? "s" : ""} · {c.maxDaysOverdue}d overdue</p>
                 </div>
                 <span className={`text-xs px-2 py-0.5 rounded-full capitalize border ${
                   c.segment === "strategic" ? "bg-[#EEF2FF] text-[#4F46E5] border-[#4F46E5]/20" :
                   c.segment === "at_risk"   ? "bg-[#EEF2FF] text-[#DC2626] border-[#EF4444]/20" :
-                  "bg-[#F1F5F9] text-[#64748B] border-[#E2E8F0]"
+                  "bg-[#F1F5F9] text-[#222222] border-[#E2E8F0]"
                 }`}>{c.segment.replace("_", " ")}</span>
                 <span className="text-sm font-bold text-[#0F172A]">{fmt(c.totalOwed)}</span>
               </div>
@@ -249,7 +249,7 @@ export default function AgingDashboard({ readOnly = false }: { readOnly?: boolea
             value={search}
             onChange={e => { setSearch(e.target.value); setPage(1); }}
             placeholder="Search..."
-            className="bg-white border border-[#E2E8F0] rounded-lg px-3 py-1.5 text-xs text-[#0F172A] placeholder-[#94A3B8] focus:border-[#4F46E5] outline-none w-48"
+            className="bg-white border border-[#E2E8F0] rounded-lg px-3 py-1.5 text-xs text-[#0F172A] placeholder-[#333333] focus:border-[#4F46E5] outline-none w-48"
           />
           <div className="flex gap-1">
             {[["all","All"],["overdue","Overdue"],["open","Open"],["paid","Paid"]].map(([val, lbl]) => (
@@ -264,7 +264,7 @@ export default function AgingDashboard({ readOnly = false }: { readOnly?: boolea
                   (val === "open" && statusFilter.length === 1 && statusFilter[0] === "open") ||
                   (val === "paid" && statusFilter.length === 1 && statusFilter[0] === "paid")
                     ? "bg-[#EEF2FF] text-[#4F46E5] border border-[#4F46E5]/20"
-                    : "text-[#64748B] hover:text-[#4F46E5] border border-transparent"
+                    : "text-[#222222] hover:text-[#4F46E5] border border-transparent"
                 }`}
               >{lbl}</button>
             ))}
@@ -276,19 +276,19 @@ export default function AgingDashboard({ readOnly = false }: { readOnly?: boolea
             <thead>
               <tr className="border-b border-[#E2E8F0]">
                 {[...["Customer","Invoice #","Amount","Due Date","Days Overdue","Status"], ...(!readOnly ? ["Action"] : [])].map(h => (
-                  <th key={h} className="text-left text-[#94A3B8] px-4 py-3 font-medium whitespace-nowrap">{h}</th>
+                  <th key={h} className="text-left text-[#333333] px-4 py-3 font-medium whitespace-nowrap">{h}</th>
                 ))}
               </tr>
             </thead>
             <tbody>
               {paginated.length === 0 ? (
-                <tr><td colSpan={readOnly ? 6 : 7} className="text-center py-12 text-[#94A3B8] text-sm">No invoices found</td></tr>
+                <tr><td colSpan={readOnly ? 6 : 7} className="text-center py-12 text-[#333333] text-sm">No invoices found</td></tr>
               ) : paginated.map((inv) => (
                 <tr key={inv.id} className="border-t border-[#F1F5F9] hover:bg-[#F8F9FC] transition-colors">
                   <td className="px-4 py-3 text-[#0F172A] font-medium">{inv.customer_name ?? "—"}</td>
-                  <td className="px-4 py-3 text-[#64748B]">{inv.invoice_number}</td>
+                  <td className="px-4 py-3 text-[#222222]">{inv.invoice_number}</td>
                   <td className="px-4 py-3 text-[#0F172A] font-semibold">{fmt(inv.amount)}</td>
-                  <td className="px-4 py-3 text-[#64748B]">{inv.due_date}</td>
+                  <td className="px-4 py-3 text-[#222222]">{inv.due_date}</td>
                   <td className="px-4 py-3">
                     <span className={`font-semibold ${inv.days_overdue > 60 ? "text-[#DC2626]" : inv.days_overdue > 30 ? "text-[#D97706]" : inv.days_overdue > 0 ? "text-[#F59E0B]" : "text-[#16A34A]"}`}>
                       {inv.days_overdue > 0 ? `${inv.days_overdue}d` : "Current"}
@@ -305,7 +305,7 @@ export default function AgingDashboard({ readOnly = false }: { readOnly?: boolea
                             <button
                               onClick={() => generatePayLink(inv.id)}
                               title="Generate & copy payment link"
-                              className="flex items-center gap-1 text-xs text-[#64748B] hover:text-[#4F46E5] font-medium transition-colors"
+                              className="flex items-center gap-1 text-xs text-[#222222] hover:text-[#4F46E5] font-medium transition-colors"
                             >
                               {copiedId === inv.id
                                 ? <><Check className="w-3 h-3 text-[#16A34A]" /><span className="text-[#16A34A]">Copied</span></>
@@ -327,12 +327,12 @@ export default function AgingDashboard({ readOnly = false }: { readOnly?: boolea
         </div>
 
         {totalPages > 1 && (
-          <div className="px-5 py-3 border-t border-[#E2E8F0] flex items-center justify-between text-xs text-[#64748B]">
+          <div className="px-5 py-3 border-t border-[#E2E8F0] flex items-center justify-between text-xs text-[#222222]">
             <span>{filtered.length} total</span>
             <div className="flex gap-1">
               {Array.from({ length: totalPages }, (_, i) => i + 1).map(p => (
                 <button key={p} onClick={() => setPage(p)}
-                  className={`w-7 h-7 rounded-lg font-medium transition-all ${p === page ? "bg-[#EEF2FF] text-[#4F46E5]" : "hover:bg-[#F1F5F9] text-[#64748B]"}`}>
+                  className={`w-7 h-7 rounded-lg font-medium transition-all ${p === page ? "bg-[#EEF2FF] text-[#4F46E5]" : "hover:bg-[#F1F5F9] text-[#222222]"}`}>
                   {p}
                 </button>
               ))}

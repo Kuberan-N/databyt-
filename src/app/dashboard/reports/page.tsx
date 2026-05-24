@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useState } from "react";
 import { motion } from "framer-motion";
@@ -52,7 +52,7 @@ export default function ReportsPage() {
     <div className="space-y-6 max-w-3xl">
       <div>
         <h2 className="text-2xl font-bold text-[#0F172A]">Reports</h2>
-        <p className="text-[#64748B] text-sm mt-1">Generate CFO-ready AR reports for board meetings and financial reviews.</p>
+        <p className="text-[#222222] text-sm mt-1">Generate CFO-ready AR reports for board meetings and financial reviews.</p>
       </div>
 
       {/* Main report card */}
@@ -63,7 +63,7 @@ export default function ReportsPage() {
           </div>
           <div className="flex-1">
             <h3 className="text-lg font-semibold text-[#0F172A]">CFO AR Collections Report</h3>
-            <p className="text-[#64748B] text-sm mt-0.5">
+            <p className="text-[#222222] text-sm mt-0.5">
               A professionally formatted PDF report covering all key AR metrics, aging breakdown, and top overdue customers.
             </p>
           </div>
@@ -77,7 +77,7 @@ export default function ReportsPage() {
               </div>
               <div>
                 <p className="text-sm font-medium text-[#0F172A]">{s.title}</p>
-                <p className="text-xs text-[#64748B] mt-0.5 leading-relaxed">{s.desc}</p>
+                <p className="text-xs text-[#222222] mt-0.5 leading-relaxed">{s.desc}</p>
               </div>
             </div>
           ))}
@@ -119,8 +119,8 @@ export default function ReportsPage() {
             "Collections velocity trend charts",
             "Forecast: projected collections next 30/60/90 days",
           ].map((f, i) => (
-            <div key={i} className="flex items-center gap-3 text-sm text-[#64748B]">
-              <div className="w-1.5 h-1.5 rounded-full bg-[#CBD5E1] shrink-0" />
+            <div key={i} className="flex items-center gap-3 text-sm text-[#222222]">
+              <div className="w-1.5 h-1.5 rounded-full bg-[#444444] shrink-0" />
               {f}
             </div>
           ))}
