@@ -55,9 +55,9 @@ export default function Navbar() {
             className="text-[13.5px] font-medium text-[#111111] hover:text-[#111111] transition-colors px-3 py-2">
             Sign in
           </a>
-          <a href="#pricing"
+          <a href="/auth"
             className="px-4 py-2 rounded-lg bg-[#4F46E5] text-white text-[13.5px] font-semibold hover:bg-[#4338CA] transition-colors">
-            Book a Demo
+            Get Started Free
           </a>
         </div>
 
@@ -86,10 +86,10 @@ export default function Navbar() {
                   {l.label}
                 </a>
               ))}
-              <a href="#pricing"
+              <a href="/auth"
                 className="mt-3 px-4 py-3 rounded-lg bg-[#4F46E5] text-white text-sm font-semibold text-center hover:bg-[#4338CA] transition-colors"
                 onClick={() => setOpen(false)}>
-                Book a Demo
+                Get Started Free
               </a>
             </div>
           </motion.div>

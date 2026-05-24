@@ -107,14 +107,14 @@ export default function Pricing() {
               </p>
 
               <a
-                href="#"
+                href="/auth"
                 className={`py-3 rounded-lg text-center text-[14px] font-semibold mb-7 transition-colors ${
                   plan.featured
                     ? "bg-[#4F46E5] text-white hover:bg-[#4338CA]"
                     : "bg-[#F3F3F3] text-[#111111] hover:bg-[#EAEAEA]"
                 }`}
               >
-                Book a Demo
+                Get Started Free
               </a>
 
               <ul className="space-y-2.5 flex-1">

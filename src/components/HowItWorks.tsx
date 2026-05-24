@@ -107,9 +107,9 @@ export default function HowItWorks() {
           transition={{ duration: 0.5, ease, delay: 0.3 }}
           className="mt-10 flex flex-col sm:flex-row items-start sm:items-center gap-4"
         >
-          <a href="#pricing"
+          <a href="/auth"
             className="inline-flex items-center gap-2 px-5 py-3 rounded-lg bg-[#4F46E5] text-white text-[14px] font-semibold hover:bg-[#4338CA] transition-colors">
-            Book a Demo
+            Get Started Free
             <ArrowRight className="w-4 h-4" />
           </a>
           <p className="text-[#333333] text-[13px]">No IT team. Live in 48 hours. Month-to-month.</p>
