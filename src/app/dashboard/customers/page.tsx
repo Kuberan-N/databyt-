@@ -98,14 +98,14 @@ export default function CustomersPage() {
       <div className="flex items-center justify-between flex-wrap gap-3">
         <div>
           <h2 className="text-2xl font-bold text-white">Customers</h2>
-          <p className="text-surface-400 text-sm mt-1">Your accounts receivable customer list.</p>
+          <p className="text-[#333333] text-sm mt-1">Your accounts receivable customer list.</p>
         </div>
       </div>
 
       {/* Search + filter */}
       <div className="flex gap-3 flex-wrap">
         <div className="relative flex-1 min-w-[200px]">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-surface-500" />
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#333333]" />
           <input type="text" value={search} onChange={e => setSearch(e.target.value)}
             placeholder="Search customers by name or email..."
             className="w-full bg-surface-800/50 border border-surface-700 rounded-xl pl-10 pr-4 py-2.5 text-sm text-white placeholder-surface-500 focus:border-primary-500 focus:outline-none transition-colors" />
@@ -116,7 +116,7 @@ export default function CustomersPage() {
               className={`px-3 py-2 rounded-xl text-xs font-medium transition-all capitalize ${
                 segmentFilter === s
                   ? "bg-primary-500/15 text-primary-400 border border-primary-500/30"
-                  : "border border-surface-700 text-surface-400 hover:text-white"
+                  : "border border-surface-700 text-[#333333] hover:text-white"
               }`}>
               {s === "at_risk" ? "At Risk" : s.charAt(0).toUpperCase() + s.slice(1)}
             </button>
@@ -140,7 +140,7 @@ export default function CustomersPage() {
                 <span className={`text-sm font-semibold ${style.color}`}>{s.label}</span>
                 <span className="text-2xl font-bold text-white">{segmentCounts[s.key as keyof typeof segmentCounts]}</span>
               </div>
-              <p className="text-xs text-surface-500">{s.desc}</p>
+              <p className="text-xs text-[#333333]">{s.desc}</p>
             </motion.div>
           );
         })}
@@ -148,7 +148,7 @@ export default function CustomersPage() {
 
       {/* Customer table */}
       <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="glass rounded-2xl overflow-hidden">
-        <div className="grid grid-cols-6 gap-2 px-5 py-3 border-b border-surface-800 text-xs font-medium text-surface-500 uppercase tracking-wider">
+        <div className="grid grid-cols-6 gap-2 px-5 py-3 border-b border-surface-800 text-xs font-medium text-[#333333] uppercase tracking-wider">
           <span className="col-span-2">Customer</span>
           <span>Outstanding</span>
           <span>Invoices</span>
@@ -163,12 +163,12 @@ export default function CustomersPage() {
         ) : filtered.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-16 text-center px-8">
             <div className="w-14 h-14 rounded-2xl bg-surface-800 flex items-center justify-center mb-4">
-              <Users className="w-7 h-7 text-surface-600" />
+              <Users className="w-7 h-7 text-[#222222]" />
             </div>
             <p className="text-white font-medium mb-1">
               {customers.length === 0 ? "No customers yet" : "No customers match your search"}
             </p>
-            <p className="text-surface-500 text-sm max-w-xs leading-relaxed">
+            <p className="text-[#333333] text-sm max-w-xs leading-relaxed">
               {customers.length === 0
                 ? "Your DataByt operator will import your AR data."
                 : "Try adjusting your search or filter."}
@@ -183,12 +183,12 @@ export default function CustomersPage() {
                   <div className="col-span-2 min-w-0">
                     <p className="text-sm font-medium text-white truncate">{c.name}</p>
                     <div className="flex items-center gap-3 mt-0.5">
-                      {c.email && <span className="text-xs text-surface-500 flex items-center gap-1 truncate"><Mail className="w-3 h-3 shrink-0" />{c.email}</span>}
-                      {c.phone && <span className="text-xs text-surface-500 flex items-center gap-1"><Phone className="w-3 h-3 shrink-0" />{c.phone}</span>}
+                      {c.email && <span className="text-xs text-[#333333] flex items-center gap-1 truncate"><Mail className="w-3 h-3 shrink-0" />{c.email}</span>}
+                      {c.phone && <span className="text-xs text-[#333333] flex items-center gap-1"><Phone className="w-3 h-3 shrink-0" />{c.phone}</span>}
                     </div>
                   </div>
                   <div>
-                    <p className={`text-sm font-semibold ${c.outstanding > 0 ? "text-white" : "text-surface-500"}`}>{fmt(c.outstanding)}</p>
+                    <p className={`text-sm font-semibold ${c.outstanding > 0 ? "text-white" : "text-[#333333]"}`}>{fmt(c.outstanding)}</p>
                     {c.overdueCount > 0 && (
                       <p className="text-xs text-danger-400 flex items-center gap-1 mt-0.5">
                         <AlertTriangle className="w-3 h-3" />{c.overdueCount} overdue
@@ -196,12 +196,12 @@ export default function CustomersPage() {
                     )}
                   </div>
                   <div>
-                    <p className="text-sm text-surface-300">{c.invoiceCount}</p>
-                    <p className="text-xs text-surface-600">open</p>
+                    <p className="text-sm text-[#444444]">{c.invoiceCount}</p>
+                    <p className="text-xs text-[#222222]">open</p>
                   </div>
                   <div className="flex items-center gap-1">
-                    <CreditCard className="w-3.5 h-3.5 text-surface-600" />
-                    <span className="text-sm text-surface-400">Net {c.payment_terms}</span>
+                    <CreditCard className="w-3.5 h-3.5 text-[#222222]" />
+                    <span className="text-sm text-[#333333]">Net {c.payment_terms}</span>
                   </div>
                   <div>
                     <span className={`text-xs px-2 py-0.5 rounded-full font-medium capitalize border ${style.color} ${style.bg} ${style.border}`}>

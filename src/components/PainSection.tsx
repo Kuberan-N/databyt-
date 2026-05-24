@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { motion } from "framer-motion";
 import { ArrowRight, X, Check } from "lucide-react";
@@ -96,11 +96,11 @@ export default function PainSection() {
             >
               <div className="mb-4">
                 <p className="text-[32px] font-bold text-[#4F46E5] leading-none">{p.stat}</p>
-                <p className="text-[11px] text-[#888888] mt-0.5 font-medium">{p.context}</p>
+                <p className="text-[11px] text-[#333333] mt-0.5 font-medium">{p.context}</p>
               </div>
               <p className="text-[13.5px] text-[#333333] font-medium leading-snug mb-2 flex-1">{p.problem}</p>
               <p className="text-[12px] text-[#4F46E5] font-semibold mb-3">{p.cost}</p>
-              <p className="text-[11px] text-[#BBBBBB]">Source: {p.source}</p>
+              <p className="text-[11px] text-[#555555]">Source: {p.source}</p>
             </motion.div>
           ))}
         </div>
@@ -133,7 +133,7 @@ export default function PainSection() {
                 className={`grid grid-cols-2 border-t border-[#F0F0F0] ${i % 2 === 1 ? "bg-[#FAFAFA]" : "bg-white"}`}>
                 <div className="px-5 py-4 flex items-start gap-2.5 border-r border-[#EBEBEB]">
                   <X className="w-3 h-3 text-[#DC2626] mt-0.5 shrink-0" />
-                  <p className="text-[13px] text-[#666666] leading-snug">{row.before}</p>
+                  <p className="text-[13px] text-[#111111] leading-snug">{row.before}</p>
                 </div>
                 <div className="px-5 py-4 flex items-start gap-2.5">
                   <Check className="w-3 h-3 text-[#16A34A] mt-0.5 shrink-0" />

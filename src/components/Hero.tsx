@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
@@ -18,7 +18,7 @@ function DashboardMockup() {
           <div className="w-2.5 h-2.5 rounded-full bg-[#FFBD2E]" />
           <div className="w-2.5 h-2.5 rounded-full bg-[#28C840]" />
         </div>
-        <div className="flex-1 bg-white border border-[#E2E8F0] rounded-md px-3 py-1 text-[11px] text-[#AAAAAA] text-center">
+        <div className="flex-1 bg-white border border-[#E2E8F0] rounded-md px-3 py-1 text-[11px] text-[#555555] text-center">
           app.databyt.in/dashboard
         </div>
       </div>
@@ -47,7 +47,7 @@ function DashboardMockup() {
           ].map(item => (
             <div key={item.label}
               className={`px-2.5 py-1.5 rounded-lg text-[10px] font-medium ${
-                item.active ? "bg-[#EEF2FF] text-[#4F46E5]" : "text-[#888888]"
+                item.active ? "bg-[#EEF2FF] text-[#4F46E5]" : "text-[#333333]"
               }`}>
               {item.label}
             </div>
@@ -65,7 +65,7 @@ function DashboardMockup() {
               { label: "CEI Score",              value: "87%",        sub: "↑ excellent",          color: "#16A34A" },
             ].map(m => (
               <div key={m.label} className="bg-white rounded-xl border border-[#EBEBEB] p-3">
-                <p className="text-[9px] text-[#888888] mb-1.5 leading-none">{m.label}</p>
+                <p className="text-[9px] text-[#333333] mb-1.5 leading-none">{m.label}</p>
                 <p className="text-[14px] font-bold text-[#111111] leading-none mb-1">{m.value}</p>
                 <p className="text-[9px] font-medium" style={{ color: m.color }}>{m.sub}</p>
               </div>
@@ -77,7 +77,7 @@ function DashboardMockup() {
             <div className="bg-white rounded-xl border border-[#EBEBEB] p-3">
               <div className="flex items-center justify-between mb-3">
                 <p className="text-[10px] font-semibold text-[#111111]">Collections Trend</p>
-                <span className="text-[9px] text-[#AAAAAA]">6 months</span>
+                <span className="text-[9px] text-[#555555]">6 months</span>
               </div>
               <div className="flex items-end gap-1" style={{ height: 64 }}>
                 {bars.map((h, i) => (
@@ -87,7 +87,7 @@ function DashboardMockup() {
               </div>
               <div className="flex justify-between mt-1.5">
                 {["Dec", "Jan", "Feb", "Mar", "Apr", "May"].map(m => (
-                  <span key={m} className="text-[8px] text-[#CCCCCC]">{m}</span>
+                  <span key={m} className="text-[8px] text-[#777777]">{m}</span>
                 ))}
               </div>
             </div>
@@ -150,7 +150,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, ease, delay: 0.1 }}
-          className="text-center text-[16px] text-[#666666] max-w-[480px] mx-auto mb-8 leading-[1.7]"
+          className="text-center text-[16px] text-[#111111] max-w-[480px] mx-auto mb-8 leading-[1.7]"
         >
           AI dunning emails with payment links, dispute management,
           and live CEI analytics — connected to your accounting system in 48 hours.
@@ -169,7 +169,7 @@ export default function Hero() {
             <ArrowRight className="w-4 h-4" />
           </a>
           <a href="#roi"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-lg border border-[#E2E8F0] bg-white text-[#333333] text-[14px] font-medium hover:border-[#CCCCCC] transition-colors">
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-lg border border-[#E2E8F0] bg-white text-[#333333] text-[14px] font-medium hover:border-[#777777] transition-colors">
             Calculate My Savings
           </a>
         </motion.div>
@@ -181,9 +181,9 @@ export default function Hero() {
           transition={{ duration: 0.4, ease, delay: 0.2 }}
           className="flex flex-wrap justify-center items-center gap-2 mb-10"
         >
-          <span className="text-[11px] text-[#AAAAAA] font-medium mr-1">Integrates with</span>
+          <span className="text-[11px] text-[#555555] font-medium mr-1">Integrates with</span>
           {integrations.map(l => (
-            <span key={l} className="px-3 py-1 rounded-md border border-[#E5E5E5] bg-white text-[11px] font-medium text-[#555555]">
+            <span key={l} className="px-3 py-1 rounded-md border border-[#E5E5E5] bg-white text-[11px] font-medium text-[#111111]">
               {l}
             </span>
           ))}

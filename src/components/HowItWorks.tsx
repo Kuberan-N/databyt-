@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { motion } from "framer-motion";
 import { ArrowRight, Database, Brain, Mail, CreditCard, AlertTriangle, BarChart2 } from "lucide-react";
@@ -67,7 +67,7 @@ export default function HowItWorks() {
             The complete AR loop.<br />
             <span className="text-[#4F46E5]">Closed end-to-end.</span>
           </h2>
-          <p className="text-[#666666] text-[15px] mt-3 max-w-[480px] leading-relaxed">
+          <p className="text-[#111111] text-[15px] mt-3 max-w-[480px] leading-relaxed">
             Most tools stop at "send the email." DataByt closes the full loop:
             import → score → email → pay → match → dispute → analytics.
           </p>
@@ -90,7 +90,7 @@ export default function HowItWorks() {
                 <span className="text-[#4F46E5] font-bold text-[13px]">{s.num}</span>
               </div>
               <h3 className="text-[#111111] font-semibold text-[14px] mb-2.5 leading-snug">{s.title}</h3>
-              <p className="text-[#666666] text-[13px] leading-relaxed flex-1">{s.desc}</p>
+              <p className="text-[#111111] text-[13px] leading-relaxed flex-1">{s.desc}</p>
               <div className="mt-4">
                 <span className="inline-flex px-2.5 py-1 rounded-full bg-[#F0FDF4] border border-[#BBF7D0] text-[#16A34A] text-[11px] font-semibold">
                   {s.tag}
@@ -112,7 +112,7 @@ export default function HowItWorks() {
             Book a Demo
             <ArrowRight className="w-4 h-4" />
           </a>
-          <p className="text-[#999999] text-[13px]">No IT team. Live in 48 hours. Month-to-month.</p>
+          <p className="text-[#333333] text-[13px]">No IT team. Live in 48 hours. Month-to-month.</p>
         </motion.div>
 
       </div>

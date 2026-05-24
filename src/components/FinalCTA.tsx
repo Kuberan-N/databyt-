@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { motion } from "framer-motion";
 import { ArrowRight, Mail } from "lucide-react";
@@ -90,7 +90,7 @@ export function Footer() {
       <div className="max-w-6xl mx-auto px-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5">
         <Logo className="text-[16px]" />
 
-        <div className="flex flex-wrap items-center gap-6 text-[#888888] text-[13px]">
+        <div className="flex flex-wrap items-center gap-6 text-[#333333] text-[13px]">
           <a href="#how-it-works" className="hover:text-[#4F46E5] transition-colors">How It Works</a>
           <a href="#roi"          className="hover:text-[#4F46E5] transition-colors">ROI Calculator</a>
           <a href="#pricing"      className="hover:text-[#4F46E5] transition-colors">Pricing</a>
@@ -99,18 +99,18 @@ export function Footer() {
         </div>
 
         <a href="mailto:kuberan@databyt.in"
-          className="flex items-center gap-2 text-[#888888] text-[13px] hover:text-[#4F46E5] transition-colors">
+          className="flex items-center gap-2 text-[#333333] text-[13px] hover:text-[#4F46E5] transition-colors">
           <Mail className="w-3.5 h-3.5" />
           kuberan@databyt.in
         </a>
       </div>
 
-      <div className="max-w-6xl mx-auto px-6 mt-6 pt-5 border-t border-[#F0F0F0] flex flex-col sm:flex-row items-center justify-between gap-3 text-[#CCCCCC] text-[12px]">
+      <div className="max-w-6xl mx-auto px-6 mt-6 pt-5 border-t border-[#F0F0F0] flex flex-col sm:flex-row items-center justify-between gap-3 text-[#777777] text-[12px]">
         <p>© 2026 DataByt. AR automation for mid-market B2B.</p>
         <div className="flex gap-5">
-          <a href="#" className="hover:text-[#777777] transition-colors">Privacy</a>
-          <a href="#" className="hover:text-[#777777] transition-colors">Terms</a>
-          <a href="#" className="hover:text-[#777777] transition-colors">Security</a>
+          <a href="#" className="hover:text-[#111111] transition-colors">Privacy</a>
+          <a href="#" className="hover:text-[#111111] transition-colors">Terms</a>
+          <a href="#" className="hover:text-[#111111] transition-colors">Security</a>
         </div>
       </div>
     </footer>

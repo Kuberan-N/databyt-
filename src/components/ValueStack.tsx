@@ -34,7 +34,7 @@ export default function ValueStack() {
             An offer so good,{" "}
             <span className="gradient-text">saying no feels like a mistake.</span>
           </h2>
-          <p className="text-surface-400 text-lg">
+          <p className="text-[#333333] text-lg">
             We take on the risk. You keep the upside.
           </p>
         </motion.div>
@@ -58,9 +58,9 @@ export default function ValueStack() {
               >
                 <div className="flex items-center gap-3">
                   <Check className="w-5 h-5 text-success-400 shrink-0" />
-                  <span className="text-surface-200">{s.item}</span>
+                  <span className="text-[#111111]">{s.item}</span>
                 </div>
-                <span className="text-surface-500 line-through text-sm font-mono">
+                <span className="text-[#333333] line-through text-sm font-mono">
                   {s.value}
                 </span>
               </motion.div>
@@ -69,14 +69,14 @@ export default function ValueStack() {
 
           {/* Total */}
           <div className="bg-surface-800/50 rounded-2xl p-6 text-center">
-            <p className="text-surface-400 text-sm mb-1">Total value</p>
-            <p className="text-3xl font-black text-surface-500 line-through mb-4">
+            <p className="text-[#333333] text-sm mb-1">Total value</p>
+            <p className="text-3xl font-black text-[#333333] line-through mb-4">
               ${totalValue.toLocaleString()}+/yr
             </p>
-            <p className="text-surface-200 text-lg mb-2">Your investment</p>
+            <p className="text-[#111111] text-lg mb-2">Your investment</p>
             <p className="text-5xl font-black gradient-text">From $49/month</p>
-            <p className="text-surface-400 text-sm mt-2">
-              That&apos;s $588/yr — <span className="text-success-400 font-semibold">95% off</span> the total value
+            <p className="text-[#333333] text-sm mt-2">
+              That&apos;s $588/yr â€” <span className="text-success-400 font-semibold">95% off</span> the total value
             </p>
           </div>
 
@@ -84,35 +84,35 @@ export default function ValueStack() {
           <div className="mt-8 grid sm:grid-cols-2 gap-4">
             <div className="glass-light rounded-xl p-4">
               <p className="text-sm text-white font-semibold mb-1">
-                🔒 Performance Guarantee
+                ðŸ”’ Performance Guarantee
               </p>
-              <p className="text-surface-400 text-xs">
+              <p className="text-[#333333] text-xs">
                 If your flagged queue doesn&apos;t drop 50% in 30 days, we work
                 for free until it does.
               </p>
             </div>
             <div className="glass-light rounded-xl p-4">
               <p className="text-sm text-white font-semibold mb-1">
-                💸 60-Day Money Back
+                ðŸ’¸ 60-Day Money Back
               </p>
-              <p className="text-surface-400 text-xs">
+              <p className="text-[#333333] text-xs">
                 Not satisfied? Full refund. No questions. You keep all processed
                 data.
               </p>
             </div>
             <div className="glass-light rounded-xl p-4">
               <p className="text-sm text-white font-semibold mb-1">
-                📦 Full Data Portability
+                ðŸ“¦ Full Data Portability
               </p>
-              <p className="text-surface-400 text-xs">
+              <p className="text-[#333333] text-xs">
                 Cancel anytime. Full Postgres dump + JSON export within 24 hours.
               </p>
             </div>
             <div className="glass-light rounded-xl p-4">
               <p className="text-sm text-white font-semibold mb-1">
-                🧪 Try Before You Buy
+                ðŸ§ª Try Before You Buy
               </p>
-              <p className="text-surface-400 text-xs">
+              <p className="text-[#333333] text-xs">
                 We process 10 of your real invoices live before you spend a cent.
               </p>
             </div>

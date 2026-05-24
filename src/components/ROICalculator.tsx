@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useState, useMemo } from "react";
 import { motion } from "framer-motion";
@@ -65,7 +65,7 @@ export default function ROICalculator() {
               {/* Revenue slider */}
               <div>
                 <div className="flex items-center justify-between mb-3">
-                  <label className="text-[13px] text-[#555555]">Annual Revenue</label>
+                  <label className="text-[13px] text-[#111111]">Annual Revenue</label>
                   <span className="text-[14px] font-bold text-[#111111]">${revenueMillion}M</span>
                 </div>
                 <input
@@ -76,15 +76,15 @@ export default function ROICalculator() {
                   style={{ accentColor: "#4F46E5" }}
                 />
                 <div className="flex justify-between mt-1.5">
-                  <span className="text-[11px] text-[#BBBBBB]">$1M</span>
-                  <span className="text-[11px] text-[#BBBBBB]">$100M</span>
+                  <span className="text-[11px] text-[#555555]">$1M</span>
+                  <span className="text-[11px] text-[#555555]">$100M</span>
                 </div>
               </div>
 
               {/* DSO slider */}
               <div>
                 <div className="flex items-center justify-between mb-3">
-                  <label className="text-[13px] text-[#555555]">Current DSO (Days Sales Outstanding)</label>
+                  <label className="text-[13px] text-[#111111]">Current DSO (Days Sales Outstanding)</label>
                   <span className="text-[14px] font-bold text-[#111111]">{dso} days</span>
                 </div>
                 <input
@@ -95,17 +95,17 @@ export default function ROICalculator() {
                   style={{ accentColor: "#4F46E5" }}
                 />
                 <div className="flex justify-between mt-1.5">
-                  <span className="text-[11px] text-[#BBBBBB]">20 days</span>
-                  <span className="text-[11px] text-[#BBBBBB]">120 days</span>
+                  <span className="text-[11px] text-[#555555]">20 days</span>
+                  <span className="text-[11px] text-[#555555]">120 days</span>
                 </div>
               </div>
             </div>
 
             {/* Current AR balance */}
             <div className="mt-7 p-4 rounded-lg bg-[#F9F9F9] border border-[#EDEDED]">
-              <p className="text-[11px] text-[#888888] font-medium mb-1">Cash currently locked in AR</p>
+              <p className="text-[11px] text-[#333333] font-medium mb-1">Cash currently locked in AR</p>
               <p className="text-[28px] font-bold text-[#111111]">{fmt(r.arBalance)}</p>
-              <p className="text-[11px] text-[#AAAAAA] mt-1">
+              <p className="text-[11px] text-[#555555] mt-1">
                 = (${revenueMillion}M ÷ 365) × {dso} days
               </p>
             </div>
@@ -158,7 +158,7 @@ export default function ROICalculator() {
               </div>
             </div>
 
-            <p className="text-[11px] text-[#AAAAAA] leading-relaxed">
+            <p className="text-[11px] text-[#555555] leading-relaxed">
               Based on 30% DSO reduction (DataByt average) and 8% cost of capital.
               Labor savings and bad debt reduction not included — those add further upside.
             </p>

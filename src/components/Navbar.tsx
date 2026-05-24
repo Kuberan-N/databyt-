@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -44,7 +44,7 @@ export default function Navbar() {
         <div className="hidden md:flex items-center gap-8">
           {navLinks.map(l => (
             <a key={l.href} href={l.href}
-              className="text-[#555555] text-[13.5px] font-medium hover:text-[#111111] transition-colors">
+              className="text-[#111111] text-[13.5px] font-medium hover:text-[#111111] transition-colors">
               {l.label}
             </a>
           ))}
@@ -52,7 +52,7 @@ export default function Navbar() {
 
         <div className="hidden md:flex items-center gap-3">
           <a href="/auth"
-            className="text-[13.5px] font-medium text-[#666666] hover:text-[#111111] transition-colors px-3 py-2">
+            className="text-[13.5px] font-medium text-[#111111] hover:text-[#111111] transition-colors px-3 py-2">
             Sign in
           </a>
           <a href="#pricing"

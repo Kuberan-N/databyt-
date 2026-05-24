@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { motion } from "framer-motion";
 import { Check, ArrowRight } from "lucide-react";
@@ -60,7 +60,7 @@ export default function Pricing() {
           <h2 className="text-[30px] sm:text-[38px] font-bold text-[#111111] leading-[1.15] tracking-[-0.02em]">
             Flat fee. No per-invoice charges.
           </h2>
-          <p className="mt-3 text-[#666666] text-[15px] max-w-md">
+          <p className="mt-3 text-[#111111] text-[15px] max-w-md">
             10× cheaper than HighRadius. Month-to-month. Cancel anytime.
           </p>
         </motion.div>
@@ -90,7 +90,7 @@ export default function Pricing() {
               <p className={`text-[14px] font-bold mb-0.5 ${plan.featured ? "text-white" : "text-[#111111]"}`}>
                 {plan.name}
               </p>
-              <p className={`text-[13px] mb-6 ${plan.featured ? "text-white/40" : "text-[#888888]"}`}>
+              <p className={`text-[13px] mb-6 ${plan.featured ? "text-white/40" : "text-[#333333]"}`}>
                 {plan.desc}
               </p>
 
@@ -98,11 +98,11 @@ export default function Pricing() {
                 <span className={`text-[40px] font-bold leading-none ${plan.featured ? "text-white" : "text-[#111111]"}`}>
                   {plan.price}
                 </span>
-                <span className={`text-[15px] ml-1 ${plan.featured ? "text-white/40" : "text-[#999999]"}`}>
+                <span className={`text-[15px] ml-1 ${plan.featured ? "text-white/40" : "text-[#333333]"}`}>
                   {plan.period}
                 </span>
               </div>
-              <p className={`text-[12px] mb-7 ${plan.featured ? "text-white/30" : "text-[#BBBBBB]"}`}>
+              <p className={`text-[12px] mb-7 ${plan.featured ? "text-white/30" : "text-[#555555]"}`}>
                 {plan.setup}
               </p>
 
@@ -121,7 +121,7 @@ export default function Pricing() {
                 {plan.features.map((f, j) => (
                   <li key={j} className="flex items-start gap-2.5 text-[13px]">
                     <Check className={`w-3.5 h-3.5 mt-0.5 shrink-0 ${plan.featured ? "text-[#4F46E5]" : "text-[#4F46E5]"}`} />
-                    <span className={plan.featured ? "text-white/70" : "text-[#555555]"}>{f}</span>
+                    <span className={plan.featured ? "text-white/70" : "text-[#111111]"}>{f}</span>
                   </li>
                 ))}
               </ul>
@@ -134,14 +134,14 @@ export default function Pricing() {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.2 }}
-          className="mt-6 flex flex-wrap items-center gap-6 text-[#999999] text-[12px]"
+          className="mt-6 flex flex-wrap items-center gap-6 text-[#333333] text-[12px]"
         >
           <span>✓ Month-to-month, cancel anytime</span>
           <span>✓ No IT team required</span>
           <span>✓ Live in 48 hours</span>
           <span>✓ CAN-SPAM compliant</span>
           <span className="ml-auto">
-            HighRadius starts at <span className="line-through text-[#CCCCCC]">$100K+/year</span> — DataByt: $41K all-in
+            HighRadius starts at <span className="line-through text-[#777777]">$100K+/year</span> — DataByt: $41K all-in
           </span>
         </motion.div>
 

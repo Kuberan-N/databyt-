@@ -72,29 +72,29 @@ export default function AddInvoiceModal({ open, onClose, onSaved, preselectedCus
             <div className="glass rounded-2xl p-6 w-full max-w-md">
               <div className="flex items-center justify-between mb-5">
                 <h3 className="text-lg font-semibold text-white">Add Invoice</h3>
-                <button onClick={onClose} className="text-surface-500 hover:text-white"><X className="w-5 h-5" /></button>
+                <button onClick={onClose} className="text-[#333333] hover:text-white"><X className="w-5 h-5" /></button>
               </div>
               {error && <div className="text-danger-400 text-sm mb-4 px-3 py-2 bg-danger-500/10 rounded-xl">{error}</div>}
               <form onSubmit={handleSave} className="space-y-4">
                 <div>
-                  <label className="text-surface-300 text-sm font-medium mb-1.5 block">Customer *</label>
+                  <label className="text-[#444444] text-sm font-medium mb-1.5 block">Customer *</label>
                   <div className="relative">
                     <select value={customerId} onChange={e => setCustomerId(e.target.value)} required
                       className="w-full bg-surface-800/50 border border-surface-700 rounded-xl px-4 py-2.5 text-white text-sm focus:border-primary-500 outline-none appearance-none">
                       <option value="">Select customer...</option>
                       {customers.map(c => <option key={c.id} value={c.id}>{c.name}</option>)}
                     </select>
-                    <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-surface-500 pointer-events-none" />
+                    <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#333333] pointer-events-none" />
                   </div>
                 </div>
                 <div className="grid grid-cols-2 gap-3">
                   <div>
-                    <label className="text-surface-300 text-sm font-medium mb-1.5 block">Invoice # *</label>
+                    <label className="text-[#444444] text-sm font-medium mb-1.5 block">Invoice # *</label>
                     <input value={invoiceNumber} onChange={e => setInvoiceNumber(e.target.value)} required placeholder="INV-001"
                       className="w-full bg-surface-800/50 border border-surface-700 rounded-xl px-4 py-2.5 text-white text-sm placeholder-surface-500 focus:border-primary-500 outline-none" />
                   </div>
                   <div>
-                    <label className="text-surface-300 text-sm font-medium mb-1.5 block">Currency</label>
+                    <label className="text-[#444444] text-sm font-medium mb-1.5 block">Currency</label>
                     <select value={currency} onChange={e => setCurrency(e.target.value)}
                       className="w-full bg-surface-800/50 border border-surface-700 rounded-xl px-4 py-2.5 text-white text-sm focus:border-primary-500 outline-none appearance-none">
                       {["USD","EUR","GBP","CAD","AUD"].map(c => <option key={c}>{c}</option>)}
@@ -102,27 +102,27 @@ export default function AddInvoiceModal({ open, onClose, onSaved, preselectedCus
                   </div>
                 </div>
                 <div>
-                  <label className="text-surface-300 text-sm font-medium mb-1.5 block">Amount *</label>
+                  <label className="text-[#444444] text-sm font-medium mb-1.5 block">Amount *</label>
                   <div className="relative">
-                    <span className="absolute left-3 top-1/2 -translate-y-1/2 text-surface-500 text-sm">$</span>
+                    <span className="absolute left-3 top-1/2 -translate-y-1/2 text-[#333333] text-sm">$</span>
                     <input value={amount} onChange={e => setAmount(e.target.value)} required type="number" min="0" step="0.01" placeholder="0.00"
                       className="w-full bg-surface-800/50 border border-surface-700 rounded-xl pl-7 pr-4 py-2.5 text-white text-sm placeholder-surface-500 focus:border-primary-500 outline-none" />
                   </div>
                 </div>
                 <div className="grid grid-cols-2 gap-3">
                   <div>
-                    <label className="text-surface-300 text-sm font-medium mb-1.5 block">Issue Date *</label>
+                    <label className="text-[#444444] text-sm font-medium mb-1.5 block">Issue Date *</label>
                     <input type="date" value={issueDate} onChange={e => setIssueDate(e.target.value)} required
                       className="w-full bg-surface-800/50 border border-surface-700 rounded-xl px-4 py-2.5 text-white text-sm focus:border-primary-500 outline-none" />
                   </div>
                   <div>
-                    <label className="text-surface-300 text-sm font-medium mb-1.5 block">Due Date *</label>
+                    <label className="text-[#444444] text-sm font-medium mb-1.5 block">Due Date *</label>
                     <input type="date" value={dueDate} onChange={e => setDueDate(e.target.value)} required
                       className="w-full bg-surface-800/50 border border-surface-700 rounded-xl px-4 py-2.5 text-white text-sm focus:border-primary-500 outline-none" />
                   </div>
                 </div>
                 <div className="flex gap-3 pt-1">
-                  <button type="button" onClick={onClose} className="flex-1 py-2.5 rounded-xl border border-surface-700 text-surface-400 text-sm">Cancel</button>
+                  <button type="button" onClick={onClose} className="flex-1 py-2.5 rounded-xl border border-surface-700 text-[#333333] text-sm">Cancel</button>
                   <button type="submit" disabled={saving}
                     className="flex-1 flex items-center justify-center gap-2 py-2.5 rounded-xl bg-gradient-to-r from-primary-600 to-accent-600 text-white text-sm font-semibold disabled:opacity-50">
                     {saving ? <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" /> : <><Save className="w-4 h-4" />Save</>}
