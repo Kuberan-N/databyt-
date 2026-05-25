@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Save, Building2, Globe, Mail, Clock, CheckCircle, AlertCircle, User, Shield } from "lucide-react";
+import { Save, Building2, Globe, Mail, Clock, CheckCircle, AlertCircle, User, Shield, Lightbulb, Send } from "lucide-react";
 import { useAuth } from "@/components/AuthProvider";
 import { supabase } from "@/lib/supabase";
 
@@ -39,6 +39,12 @@ export default function SettingsPage() {
   const [saving, setSaving]                 = useState(false);
   const [status, setStatus]                 = useState<"idle" | "success" | "error">("idle");
   const [statusMsg, setStatusMsg]           = useState("");
+
+  const [frTitle, setFrTitle]           = useState("");
+  const [frCategory, setFrCategory]     = useState("Collections");
+  const [frDesc, setFrDesc]             = useState("");
+  const [frSending, setFrSending]       = useState(false);
+  const [frStatus, setFrStatus]         = useState<"idle" | "sent" | "error">("idle");
 
   useEffect(() => {
     if (organization) setOrgName(organization.name);
@@ -77,6 +83,31 @@ export default function SettingsPage() {
       await refreshOrganization();
       setTimeout(() => setStatus("idle"), 3000);
     }
+  }
+
+  async function handleFeatureRequest(e: React.FormEvent) {
+    e.preventDefault();
+    setFrSending(true);
+    setFrStatus("idle");
+    try {
+      const res = await fetch("/api/feature-request", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          title: frTitle,
+          description: frDesc,
+          category: frCategory,
+          userEmail: user?.email,
+          orgName: organization?.name,
+        }),
+      });
+      if (!res.ok) throw new Error();
+      setFrStatus("sent");
+      setFrTitle(""); setFrDesc(""); setFrCategory("Collections");
+    } catch {
+      setFrStatus("error");
+    }
+    setFrSending(false);
   }
 
   return (
@@ -193,10 +224,87 @@ export default function SettingsPage() {
             <p className="text-xs text-[#333333] mt-0.5">Change your account password</p>
           </div>
           <a href="/auth/reset-password"
-            className="text-xs text-[#000000] font-medium px-3 py-1.5 rounded-lg border border-[#000000]/20 bg-[#F3F3F3] hover:bg-[#E0E7FF] transition-colors">
+            className="text-xs text-[#000000] font-medium px-3 py-1.5 rounded-lg border border-[#000000]/20 bg-[#F3F3F3] hover:bg-[#EBEBEB] transition-colors">
             Change Password
           </a>
         </div>
+      </motion.div>
+
+      {/* Feature Request */}
+      <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.25 }}
+        className="glass rounded-2xl p-6">
+        <div className="flex items-center gap-2 mb-1">
+          <Lightbulb className="w-4 h-4 text-[#333333]" />
+          <h3 className="text-sm font-semibold text-[#0F172A]">Request a Feature</h3>
+        </div>
+        <p className="text-xs text-[#555555] mb-5">
+          Tell us what would make DataByt better for you. We review every request and reply within{" "}
+          <strong className="text-[#0F172A]">2 working days</strong> — whether it&apos;s feasible or not.
+        </p>
+
+        {frStatus === "sent" ? (
+          <div className="flex items-start gap-3 bg-[#F0FDF4] border border-[#BBF7D0] rounded-xl px-4 py-4">
+            <CheckCircle className="w-4 h-4 text-[#16A34A] shrink-0 mt-0.5" />
+            <div>
+              <p className="text-sm font-semibold text-[#16A34A]">Request sent!</p>
+              <p className="text-xs text-[#555555] mt-0.5">
+                We&apos;ll email you at <strong>{user?.email}</strong> within 2 working days with our assessment.
+              </p>
+            </div>
+          </div>
+        ) : (
+          <form onSubmit={handleFeatureRequest} className="space-y-4">
+            {frStatus === "error" && (
+              <div className="flex items-center gap-2 bg-red-50 border border-red-200 rounded-xl px-4 py-3 text-red-600 text-xs">
+                <AlertCircle className="w-4 h-4 shrink-0" />
+                Failed to send. Please try again.
+              </div>
+            )}
+            <div className="grid sm:grid-cols-2 gap-4">
+              <div>
+                <label className="text-[#111111] text-xs font-medium mb-1.5 block">Feature title</label>
+                <input
+                  type="text"
+                  value={frTitle}
+                  onChange={e => setFrTitle(e.target.value)}
+                  placeholder="e.g. Bulk email pause"
+                  className={inputCls}
+                  required
+                />
+              </div>
+              <div>
+                <label className="text-[#111111] text-xs font-medium mb-1.5 block">Category</label>
+                <select value={frCategory} onChange={e => setFrCategory(e.target.value)} className={selectCls}>
+                  {["Collections","Disputes","Analytics","Integrations","Reports","Payments","UI / UX","Other"].map(c => (
+                    <option key={c} value={c}>{c}</option>
+                  ))}
+                </select>
+              </div>
+            </div>
+            <div>
+              <label className="text-[#111111] text-xs font-medium mb-1.5 block">Description</label>
+              <textarea
+                value={frDesc}
+                onChange={e => setFrDesc(e.target.value)}
+                rows={4}
+                placeholder="Describe what you'd like to do and why it matters to your team..."
+                className="w-full bg-white border border-[#E2E8F0] rounded-xl px-4 py-3 text-[#0F172A] placeholder-[#999] focus:border-[#000000] focus:ring-1 focus:ring-[#000000]/20 outline-none transition-all text-sm resize-none"
+                required
+              />
+            </div>
+            <button
+              type="submit"
+              disabled={frSending}
+              className="flex items-center gap-2 px-5 py-2.5 bg-[#000000] text-white rounded-xl text-sm font-semibold hover:bg-[#111111] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              {frSending
+                ? <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                : <Send className="w-3.5 h-3.5" />
+              }
+              {frSending ? "Sending..." : "Submit Request"}
+            </button>
+          </form>
+        )}
       </motion.div>
     </div>
   );

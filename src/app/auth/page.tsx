@@ -71,14 +71,14 @@ export default function AuthPage() {
             <path d="M13.5 10.5H15C16.933 10.5 18.5 12.067 18.5 14C18.5 15.933 16.933 17.5 15 17.5H13.5V10.5Z" fill="#000000" />
           </svg>
           <span className="font-bold text-[17px] tracking-[-0.03em] text-white leading-none">
-            Data<span className="text-[#000000]">Byt</span>
+            DataByt
           </span>
         </div>
 
         <div className="relative z-10 max-w-sm">
           <h1 className="text-[36px] font-bold text-white leading-[1.15] tracking-[-0.025em] mb-4">
             Stop chasing<br />
-            invoices <span className="text-[#000000]">manually.</span>
+            invoices <span className="text-white/50">manually.</span>
           </h1>
           <p className="text-white/50 text-[15px] leading-relaxed mb-10">
             AI-powered AR automation that gets you paid faster — no awkward calls needed.
@@ -93,7 +93,7 @@ export default function AuthPage() {
                 transition={{ delay: 0.1 + i * 0.07 }}
                 className="flex items-center gap-3"
               >
-                <CheckCircle className="w-4 h-4 text-[#000000] shrink-0" />
+                <CheckCircle className="w-4 h-4 text-[#4ADE80] shrink-0" />
                 <span className="text-white/75 text-[13.5px]">{b}</span>
               </motion.div>
             ))}
@@ -103,7 +103,7 @@ export default function AuthPage() {
         <div className="relative z-10 mt-14">
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/10 bg-white/5">
             <span className="w-1.5 h-1.5 rounded-full bg-[#4ADE80] animate-pulse" />
-            <span className="text-white/50 text-[11px] font-medium">Live in 48 hours · $3,000/month · Month-to-month</span>
+            <span className="text-white/50 text-[11px] font-medium">30-day free trial · From $2,000/month · Month-to-month</span>
           </div>
         </div>
       </div>
