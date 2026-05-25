@@ -27,7 +27,7 @@ export default function FinalCTA() {
         >
           {urgency.map((u, i) => (
             <div key={i} className="px-5 py-5 rounded-xl border border-white/[0.07] bg-white/[0.03]">
-              <p className="text-[28px] font-bold text-[#000000] mb-1.5 leading-none">{u.value}</p>
+              <p className="text-[28px] font-bold text-white mb-1.5 leading-none">{u.value}</p>
               <p className="text-white/40 text-[13px] leading-snug">{u.label}</p>
             </div>
           ))}
@@ -41,13 +41,13 @@ export default function FinalCTA() {
           transition={{ duration: 0.6, ease, delay: 0.08 }}
           className="max-w-2xl"
         >
-          <p className="text-[#000000] text-[11px] font-semibold uppercase tracking-widest mb-4">
+          <p className="text-white/50 text-[11px] font-semibold uppercase tracking-widest mb-4">
             Free AR Audit — No commitment
           </p>
-          <h2 className="text-[32px] sm:text-[42px] font-bold text-white leading-[1.1] tracking-[-0.025em] mb-5">
+          <h2 className="text-[32px] sm:text-[42px] font-extrabold text-white leading-[1.1] tracking-[-0.025em] mb-5">
             Every week you wait,<br />
             your invoices age{" "}
-            <span className="text-[#000000]">7 more days.</span>
+            <span className="text-white/60">7 more days.</span>
           </h2>
           <p className="text-white/45 text-[15px] mb-7 max-w-lg leading-relaxed">
             30-minute call. We&apos;ll audit your current AR process, calculate your DSO cost,
@@ -58,7 +58,7 @@ export default function FinalCTA() {
           <div className="flex flex-col sm:flex-row gap-3 mb-7">
             <a
               href="#pricing"
-              className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-[#000000] text-white text-[14px] font-semibold hover:bg-[#111111] transition-colors"
+              className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-white text-[#111111] text-[14px] font-semibold hover:bg-[#F3F3F3] transition-colors"
             >
               Book Free AR Audit
               <ArrowRight className="w-4 h-4" />

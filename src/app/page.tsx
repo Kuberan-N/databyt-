@@ -5,7 +5,7 @@ import HowItWorks from "@/components/HowItWorks";
 import ROICalculator from "@/components/ROICalculator";
 import Pricing from "@/components/Pricing";
 import FAQ from "@/components/FAQ";
-import FinalCTA, { Footer } from "@/components/FinalCTA";
+import { Footer } from "@/components/FinalCTA";
 
 export default function Home() {
   return (
@@ -17,7 +17,6 @@ export default function Home() {
       <ROICalculator />
       <Pricing />
       <FAQ />
-      <FinalCTA />
       <Footer />
     </main>
   );

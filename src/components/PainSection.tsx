@@ -77,7 +77,7 @@ export default function PainSection() {
           className="mb-12"
         >
           <p className="text-[#000000] text-[11px] font-semibold uppercase tracking-widest mb-3">The Problem</p>
-          <h2 className="text-[30px] sm:text-[38px] font-bold text-[#111111] leading-[1.15] tracking-[-0.02em] max-w-[540px]">
+          <h2 className="text-[30px] sm:text-[38px] font-extrabold text-[#111111] leading-[1.15] tracking-[-0.02em] max-w-[540px]">
             Manual AR doesn&apos;t just cost time.<br />
             <span className="text-[#000000]">It costs working capital.</span>
           </h2>
@@ -162,7 +162,7 @@ export default function PainSection() {
             </p>
           </div>
           <a href="#pricing"
-            className="inline-flex items-center gap-2 px-5 py-3 rounded-lg bg-[#000000] text-white text-[14px] font-semibold hover:bg-[#111111] transition-colors shrink-0">
+            className="inline-flex items-center gap-2 px-5 py-3 rounded-lg bg-white text-[#111111] text-[14px] font-semibold hover:bg-[#F3F3F3] transition-colors shrink-0">
             See Full Pricing
             <ArrowRight className="w-4 h-4" />
           </a>

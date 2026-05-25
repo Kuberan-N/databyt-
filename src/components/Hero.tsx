@@ -139,7 +139,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.55, ease, delay: 0.05 }}
-          className="text-center text-[36px] sm:text-[48px] lg:text-[56px] font-bold text-[#111111] leading-[1.1] tracking-[-0.03em] mb-4 max-w-[760px] mx-auto"
+          className="text-center text-[36px] sm:text-[48px] lg:text-[56px] font-extrabold text-[#111111] leading-[1.1] tracking-[-0.03em] mb-4 max-w-[760px] mx-auto"
         >
           Stop chasing invoices.<br />
           <span className="text-[#000000]">DataByt collects them.</span>
