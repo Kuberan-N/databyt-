@@ -56,7 +56,8 @@
   --color-surface-900: #FFFFFF;
   --color-surface-950: #F8F9FC;
 
-  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --font-sans: 'DM Sans', system-ui, -apple-system, sans-serif;
+  --font-display: 'Syne', system-ui, sans-serif;
   --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
 }
 
@@ -72,6 +73,8 @@ body {
   background: #F8FAFC;
   color: #0F172A;
 }
+
+h1, h2 { font-family: var(--font-display); }
 
 /* ─────────────────────────────────────────────────
    Scrollbar

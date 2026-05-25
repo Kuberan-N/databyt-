@@ -9,8 +9,8 @@ const ease = [0.22, 1, 0.36, 1] as const;
 const plans = [
   {
     name:     "AR Engine",
-    monthly:  2500,
-    annual:   25000,
+    monthly:  2000,
+    annual:   20000,
     period:   "/month",
     note:     "30-day free trial. No credit card.",
     desc:     "Full AR collections automation for mid-market finance teams.",
@@ -28,8 +28,8 @@ const plans = [
   },
   {
     name:     "CashFlow Command",
-    monthly:  5000,
-    annual:   50000,
+    monthly:  4000,
+    annual:   40000,
     period:   "/month",
     note:     "30-day free trial. No credit card.",
     desc:     "Full cash flow command center — AR, AP, and forecasting.",
@@ -213,7 +213,7 @@ export default function Pricing() {
           <span>&#10003; Live in 48 hours</span>
           <span>&#10003; CAN-SPAM compliant</span>
           <span className="ml-auto text-[#777777]">
-            HighRadius starts at <span className="line-through">$100K+/year</span> &mdash; DataByt: from $25K/yr
+            HighRadius starts at <span className="line-through">$100K+/year</span> &mdash; DataByt: from $20K/yr
           </span>
         </motion.div>
 

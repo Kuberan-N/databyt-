@@ -1,6 +1,7 @@
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import PainSection from "@/components/PainSection";
+import ResearchSection from "@/components/ResearchSection";
 import HowItWorks from "@/components/HowItWorks";
 import ROICalculator from "@/components/ROICalculator";
 import Pricing from "@/components/Pricing";
@@ -13,6 +14,7 @@ export default function Home() {
       <Navbar />
       <Hero />
       <PainSection />
+      <ResearchSection />
       <HowItWorks />
       <ROICalculator />
       <Pricing />
