@@ -92,7 +92,7 @@ export default function CostCalculator() {
               <div className="text-2xl font-bold text-white mt-2">
                 ${hourlyRate}/hr{" "}
                 <span className="text-[#333333] text-xs font-normal">
-                  US avg: $20â€“25 (BLS, 2025)
+                  US avg: $20-25 (BLS, 2025)
                 </span>
               </div>
             </div>
@@ -158,7 +158,7 @@ export default function CostCalculator() {
                 ${fmt(cashUnlocked)}
               </div>
               <div className="text-[#333333] text-xs mt-1">
-                DSO: {manualDSO} â†’ {aiDSO} days
+                DSO: {manualDSO} to {aiDSO} days
               </div>
             </div>
           </div>
@@ -178,7 +178,7 @@ export default function CostCalculator() {
               href="#pricing"
               className="px-6 py-3 bg-gradient-to-r from-primary-600 to-accent-600 rounded-full text-white font-semibold text-sm hover:from-primary-500 hover:to-accent-500 transition-all"
             >
-              Start saving today â†’
+              Start saving today
             </a>
           </div>
         </motion.div>

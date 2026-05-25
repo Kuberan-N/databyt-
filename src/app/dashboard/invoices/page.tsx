@@ -70,7 +70,7 @@ export default function InvoicesPage() {
       const demoInvoice: DemoInvoice = {
         id: crypto.randomUUID(),
         vendor_name: "Processing...",
-        invoice_number: "â€”",
+        invoice_number: "?€”",
         amount: 0,
         due_date: new Date().toISOString().split("T")[0],
         status: "extracting",
@@ -169,7 +169,7 @@ export default function InvoicesPage() {
                 : "Drag & drop invoices here"}
             </p>
             <p className="text-[#333333] text-sm mt-1">
-              PDF, Excel, PNG, JPG â€” any format. AI extracts data at 95%+ accuracy.
+              PDF, Excel, PNG, JPG ?€” any format. AI extracts data at 95%+ accuracy.
             </p>
           </div>
           {uploadingFile && (
@@ -251,7 +251,7 @@ export default function InvoicesPage() {
                       <td className="px-6 py-4 text-white text-sm font-semibold">
                         {inv.amount > 0
                           ? `$${new Intl.NumberFormat("en-US").format(inv.amount)}`
-                          : "â€”"}
+                          : "?€”"}
                       </td>
                       <td className="px-6 py-4">
                         <span
@@ -283,7 +283,7 @@ export default function InvoicesPage() {
                             </span>
                           </div>
                         ) : (
-                          <span className="text-[#222222] text-xs">â€”</span>
+                          <span className="text-[#222222] text-xs">?€”</span>
                         )}
                       </td>
                       <td className="px-6 py-4 text-right">

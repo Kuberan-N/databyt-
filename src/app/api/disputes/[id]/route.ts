@@ -36,7 +36,10 @@ export async function PATCH(
     .select("invoice_id, status")
     .single();
 
-  if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+  if (error) {
+    if (error.code === "42P01") return NextResponse.json({ error: "Disputes table not set up" }, { status: 503 });
+    return NextResponse.json({ error: error.message }, { status: 500 });
+  }
 
   // If resolved/rejected, revert invoice status to overdue so collections can resume
   if (dispute && (body.status === "resolved" || body.status === "rejected")) {
@@ -56,6 +59,9 @@ export async function DELETE(
 ) {
   const { id } = await params;
   const { error } = await db.from("disputes").delete().eq("id", id);
-  if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+  if (error) {
+    if (error.code === "42P01") return NextResponse.json({ error: "Disputes table not set up" }, { status: 503 });
+    return NextResponse.json({ error: error.message }, { status: 500 });
+  }
   return NextResponse.json({ ok: true });
 }

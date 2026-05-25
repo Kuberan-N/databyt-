@@ -78,9 +78,9 @@ export interface ReportData {
 
 const BUCKET_COLORS: Record<string, string> = {
   "Current":    "#22c55e",
-  "1â€“30 days":  "#facc15",
-  "31â€“60 days": "#f97316",
-  "61â€“90 days": "#ef4444",
+  "1-30 days":  "#facc15",
+  "31-60 days": "#f97316",
+  "61-90 days": "#ef4444",
   "90+ days":   "#991b1b",
 };
 
@@ -144,7 +144,7 @@ export function CFOReport({ data }: { data: ReportData }) {
               <View key={b.label} style={s.bucketBar}>
                 <View style={s.barLabel}>
                   <Text style={{ fontSize: 10, color: colors.text }}>{b.label}</Text>
-                  <Text style={{ fontSize: 10, color: colors.muted }}>{fmt(b.amount)} Â· {b.count} inv</Text>
+                  <Text style={{ fontSize: 10, color: colors.muted }}>{fmt(b.amount)} · {b.count} inv</Text>
                 </View>
                 <View style={s.barTrack}>
                   <View style={[s.barFill, { width: `${Math.min(pct, 100)}%`, backgroundColor: barColor }]} />
@@ -181,8 +181,8 @@ export function CFOReport({ data }: { data: ReportData }) {
 
         {/* Footer */}
         <View style={s.footer} fixed>
-          <Text style={s.footerText}>DataByt AR Collections Â· Confidential</Text>
-          <Text style={s.footerText}>{data.orgName} Â· Generated {data.generatedAt}</Text>
+          <Text style={s.footerText}>DataByt AR Collections · Confidential</Text>
+          <Text style={s.footerText}>{data.orgName} · Generated {data.generatedAt}</Text>
         </View>
       </Page>
     </Document>

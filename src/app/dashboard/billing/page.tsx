@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 
-export const metadata: Metadata = { title: "Billing â€” DataByt" };
+export const metadata: Metadata = { title: "Billing - DataByt" };
 
 export default function BillingPage() {
   return (

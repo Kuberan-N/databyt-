@@ -76,7 +76,7 @@ export default function ValueStack() {
             <p className="text-[#111111] text-lg mb-2">Your investment</p>
             <p className="text-5xl font-black gradient-text">From $49/month</p>
             <p className="text-[#333333] text-sm mt-2">
-              That&apos;s $588/yr â€” <span className="text-success-400 font-semibold">95% off</span> the total value
+              That&apos;s $5$588/yr - <span className="text-success-400 font-semibold">95% off</span> the total value
             </p>
           </div>
 

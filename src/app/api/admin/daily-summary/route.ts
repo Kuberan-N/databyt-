@@ -25,7 +25,7 @@ export async function POST(req: NextRequest) {
 
   // Parallel fetch of daily stats
   const [orgsRes, emailsTodayRes, overdueRes, failedJobsTodayRes] = await Promise.all([
-    db.from("organizations").select("id", { count: "exact", head: true }).eq("status", "active"),
+    db.from("organizations").select("id", { count: "exact", head: true }),
     db.from("communications").select("id", { count: "exact", head: true })
       .eq("direction", "outbound").gte("sent_at", todayStart),
     db.from("invoices").select("amount").in("status", ["overdue", "reminded"]),

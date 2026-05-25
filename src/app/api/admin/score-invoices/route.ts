@@ -135,8 +135,6 @@ export async function POST(req: NextRequest) {
   let query = db.from("organizations").select("id, name");
   if (orgIdOverride) {
     query = query.eq("id", orgIdOverride);
-  } else {
-    query = query.eq("status", "active");
   }
   const { data: orgs } = await query;
 

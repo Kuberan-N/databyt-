@@ -54,7 +54,7 @@ export async function GET(req: NextRequest) {
 
     const expiresAt = new Date(Date.now() + tokens.expires_in * 1000).toISOString();
 
-    await db.from("integrations").upsert({
+    const { error: upsertErr } = await db.from("integrations").upsert({
       org_id: orgId,
       provider: "quickbooks",
       access_token: tokens.access_token,
@@ -65,6 +65,8 @@ export async function GET(req: NextRequest) {
       error_message: null,
       updated_at: new Date().toISOString(),
     }, { onConflict: "org_id,provider" });
+
+    if (upsertErr) throw new Error(upsertErr.message);
 
     return NextResponse.redirect(`${baseUrl}/dashboard/integrations?connected=QuickBooks+Online`);
   } catch (err) {

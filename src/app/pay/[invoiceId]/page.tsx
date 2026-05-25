@@ -60,7 +60,7 @@ export default async function PayInvoicePage({
           <div className="px-6 py-5 space-y-3">
             {[
               { label: "Invoice number", value: invoice.invoice_number },
-              { label: "Bill to",        value: customer?.name ?? "Ã¢â‚¬â€" },
+              { label: "Bill to",        value: customer?.name ?? "-" },
               { label: "Issue date",     value: new Date(invoice.issue_date).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" }) },
               { label: "Due date",       value: new Date(invoice.due_date).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" }) },
             ].map(({ label, value }) => (

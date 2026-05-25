@@ -45,9 +45,9 @@ export async function POST(req: NextRequest) {
 
     const bucketDefs = [
       { label: "Current",    min: -Infinity, max: 0,        color: "#22c55e" },
-      { label: "1–30 days",  min: 1,         max: 30,       color: "#facc15" },
-      { label: "31–60 days", min: 31,        max: 60,       color: "#f97316" },
-      { label: "61–90 days", min: 61,        max: 90,       color: "#ef4444" },
+      { label: "1-30 days",  min: 1,         max: 30,       color: "#facc15" },
+      { label: "31-60 days", min: 31,        max: 60,       color: "#f97316" },
+      { label: "61-90 days", min: 61,        max: 90,       color: "#ef4444" },
       { label: "90+ days",   min: 91,        max: Infinity,  color: "#991b1b" },
     ];
     const agingBuckets = bucketDefs.map(b => {

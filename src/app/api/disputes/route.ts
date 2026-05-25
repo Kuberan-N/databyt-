@@ -23,7 +23,10 @@ export async function GET(req: NextRequest) {
     .eq("org_id", orgId)
     .order("created_at", { ascending: false });
 
-  if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+  if (error) {
+    if (error.code === "42P01") return NextResponse.json({ disputes: [] });
+    return NextResponse.json({ error: error.message }, { status: 500 });
+  }
 
   const disputes = (data ?? []).map((d: {
     id: string; org_id: string; invoice_id: string; customer_id: string;
@@ -65,7 +68,12 @@ export async function POST(req: NextRequest) {
     status: "open",
   }).select().single();
 
-  if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+  if (error) {
+    if (error.code === "42P01") {
+      return NextResponse.json({ error: "Disputes feature requires database setup. Please run the migration SQL in Supabase." }, { status: 503 });
+    }
+    return NextResponse.json({ error: error.message }, { status: 500 });
+  }
 
   // Mark invoice as disputed — pause collections on it
   await db.from("invoices").update({ status: "disputed" }).eq("id", invoiceId);

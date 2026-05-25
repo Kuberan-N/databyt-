@@ -16,7 +16,7 @@ export interface OrgHealthRow {
   mrr: number | null;
   contract_start: string | null;
   contract_end: string | null;
-  status: "active" | "onboarding" | "paused" | "churned";
+  status: string | null;
   created_at: string;
   userCount: number;
   customerCount: number;
@@ -34,14 +34,14 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
-  const { data: orgs } = await db.from("organizations").select("id, name, plan_tier, mrr, contract_start, contract_end, status, created_at").order("created_at", { ascending: false });
+  const { data: orgs } = await db.from("organizations").select("id, name, plan_tier, mrr, contract_start, contract_end, created_at").order("created_at", { ascending: false });
   if (!orgs) return NextResponse.json({ orgs: [] });
 
   const now = new Date();
   const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1).toISOString();
 
   const results: OrgHealthRow[] = await Promise.all(
-    orgs.map(async (org: { id: string; name: string; plan_tier: string; mrr: number | null; contract_start: string | null; contract_end: string | null; status: "active" | "onboarding" | "paused" | "churned"; created_at: string }) => {
+    orgs.map(async (org: { id: string; name: string; plan_tier: string; mrr: number | null; contract_start: string | null; contract_end: string | null; created_at: string }) => {
       const [usersRes, customersRes, invoicesRes, commsRes] = await Promise.all([
         db.from("users").select("id", { count: "exact", head: true }).eq("org_id", org.id),
         db.from("customers").select("id", { count: "exact", head: true }).eq("org_id", org.id),
@@ -59,7 +59,7 @@ export async function GET(req: NextRequest) {
         mrr: org.mrr,
         contract_start: org.contract_start,
         contract_end: org.contract_end,
-        status: org.status,
+        status: null,
         created_at: org.created_at,
         userCount: usersRes.count ?? 0,
         customerCount: customersRes.count ?? 0,

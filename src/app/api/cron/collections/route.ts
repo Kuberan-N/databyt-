@@ -30,7 +30,7 @@ function escalationLevel(daysOverdue: number): 1 | 2 | 3 {
 const TONE: Record<number, string> = {
   1: `polite and friendly reminder. Open warmly, assume the customer may have simply overlooked this. Make a soft ask. Keep it brief.`,
   2: `professional and direct. Reference that previous reminders have gone unanswered. Set a clear payment deadline. Mention that continued non-payment may affect their account standing.`,
-  3: `serious and firm â€” this is a final notice before escalating internally. Offer a payment plan as a resolution option. Frame this as a final opportunity to resolve the matter. Do NOT threaten legal action.`,
+  3: `serious and firm - this is a final notice before escalating internally. Offer a payment plan as a resolution option. Frame this as a final opportunity to resolve the matter. Do NOT threaten legal action.`,
 };
 
 interface Invoice {
@@ -70,15 +70,15 @@ async function buildBatchedEmail(
     .sort((a, b) => b.days_overdue - a.days_overdue)
     .map(inv => {
       const payLink = inv.payment_link_url ?? `${baseUrl}/pay/${inv.id}`;
-      return `  â€¢ Invoice ${inv.invoice_number} â€” ${fmtCurrency(inv.amount, inv.currency)} â€” ${inv.days_overdue}d overdue â€” Pay: ${payLink}`;
+      return `  * Invoice ${inv.invoice_number} - ${fmtCurrency(inv.amount, inv.currency)} - ${inv.days_overdue}d overdue - Pay: ${payLink}`;
     })
     .join("\n");
 
   const segmentNote =
     customer.segment === "strategic"
-      ? "IMPORTANT: This is a high-value strategic customer â€” be extra courteous and emphasise the relationship."
+      ? "IMPORTANT: This is a high-value strategic customer - be extra courteous and emphasise the relationship."
       : customer.segment === "at_risk"
-      ? "NOTE: This customer has a history of late payments â€” be firm and concise."
+      ? "NOTE: This customer has a history of late payments - be firm and concise."
       : "";
 
   const prompt = `You are an accounts receivable specialist drafting a dunning email on behalf of ${customer.org_name}.
@@ -108,7 +108,7 @@ Rules:
 
   const lines       = raw.split("\n");
   const subjectLine = lines.find(l => l.startsWith("SUBJECT:")) ?? "";
-  const subject     = subjectLine.replace("SUBJECT:", "").trim() || `Payment required â€” ${fmtCurrency(totalOwed, currency)}`;
+  const subject     = subjectLine.replace("SUBJECT:", "").trim() || `Payment required - ${fmtCurrency(totalOwed, currency)}`;
   const bodyStart   = lines.findIndex(l => l.startsWith("SUBJECT:")) + 2;
   const body        = lines.slice(bodyStart).join("\n").trim();
 
@@ -173,7 +173,7 @@ export async function GET(req: NextRequest) {
 
       const optedOutIds = new Set<string>((optouts ?? []).map((o: { customer_id: string }) => o.customer_id));
 
-      // Check cooldown â€” customers emailed in last COOLDOWN_DAYS days
+      // Check cooldown - customers emailed in last COOLDOWN_DAYS days
       const cooldownDate = new Date(Date.now() - COOLDOWN_DAYS * 86_400_000).toISOString();
       const { data: recentComms } = await db
         .from("communications")
