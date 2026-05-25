@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { motion, useInView, useMotionValue, animate } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import { ArrowRight, X, Check, ExternalLink } from "lucide-react";
 
 const ease = [0.22, 1, 0.36, 1] as const;
@@ -32,18 +32,19 @@ function CounterStat({
 
   useEffect(() => {
     if (!inView || !isNumeric || !ref.current) return;
-    const v = useMotionValue(0);
-    const controls = animate(v, numericPart, {
-      duration: 1.6,
-      delay: i * 0.08,
-      ease: "easeOut",
-      onUpdate: (val) => {
-        if (ref.current) {
-          ref.current.textContent = Math.round(val) + suffix;
-        }
-      },
-    });
-    return controls.stop;
+    const duration = 1600;
+    const startTime = Date.now() + i * 80;
+    let raf: number;
+    const tick = () => {
+      const elapsed = Date.now() - startTime;
+      if (elapsed < 0) { raf = requestAnimationFrame(tick); return; }
+      const progress = Math.min(elapsed / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      if (ref.current) ref.current.textContent = Math.round(eased * numericPart) + suffix;
+      if (progress < 1) raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [inView]);
 
