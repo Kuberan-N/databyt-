@@ -52,7 +52,7 @@ export default function AuthPage() {
   }
 
   const title = mode === "signup" ? "Create your account" : mode === "login" ? "Welcome back" : "Reset password";
-  const subtitle = mode === "signup" ? "No credit card required." : mode === "login" ? "Sign in to your DataByt dashboard." : "We'll send a reset link to your email.";
+  const subtitle = mode === "signup" ? "30-day free trial. No credit card required." : mode === "login" ? "Sign in to your DataByt dashboard." : "We'll send a reset link to your email.";
   const submitLabel = mode === "signup" ? "Create Account" : mode === "login" ? "Sign In" : "Send Reset Link";
 
   return (

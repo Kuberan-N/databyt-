@@ -109,10 +109,10 @@ export default function HowItWorks() {
         >
           <a href="/auth"
             className="inline-flex items-center gap-2 px-5 py-3 rounded-lg bg-[#4F46E5] text-white text-[14px] font-semibold hover:bg-[#4338CA] transition-colors">
-            Get Started Free
+            Start Free Trial
             <ArrowRight className="w-4 h-4" />
           </a>
-          <p className="text-[#333333] text-[13px]">No IT team. Live in 48 hours. Month-to-month.</p>
+          <p className="text-[#333333] text-[13px]">30 days free. No credit card. Live in 48 hours.</p>
         </motion.div>
 
       </div>

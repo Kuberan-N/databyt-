@@ -57,7 +57,7 @@ export default function Navbar() {
           </a>
           <a href="/auth"
             className="px-4 py-2 rounded-lg bg-[#4F46E5] text-white text-[13.5px] font-semibold hover:bg-[#4338CA] transition-colors">
-            Get Started Free
+            Start Free Trial
           </a>
         </div>
 
@@ -89,7 +89,7 @@ export default function Navbar() {
               <a href="/auth"
                 className="mt-3 px-4 py-3 rounded-lg bg-[#4F46E5] text-white text-sm font-semibold text-center hover:bg-[#4338CA] transition-colors"
                 onClick={() => setOpen(false)}>
-                Get Started Free
+                Start Free Trial
               </a>
             </div>
           </motion.div>

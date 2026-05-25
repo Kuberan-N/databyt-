@@ -61,8 +61,12 @@ export default function Pricing() {
             Flat fee. No per-invoice charges.
           </h2>
           <p className="mt-3 text-[#111111] text-[15px] max-w-md">
-            10× cheaper than HighRadius. Month-to-month. Cancel anytime.
+            10x cheaper than HighRadius. Month-to-month. Cancel anytime.
           </p>
+          <div className="mt-4 inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#F0FDF4] border border-[#BBF7D0]">
+            <span className="w-2 h-2 rounded-full bg-[#16A34A]" />
+            <span className="text-[#16A34A] text-[13px] font-semibold">30-day free trial — no credit card required</span>
+          </div>
         </motion.div>
 
         <div className="grid md:grid-cols-2 gap-4 max-w-4xl mx-auto">
@@ -114,7 +118,7 @@ export default function Pricing() {
                     : "bg-[#F3F3F3] text-[#111111] hover:bg-[#EAEAEA]"
                 }`}
               >
-                Get Started Free
+                Start 30-Day Free Trial
               </a>
 
               <ul className="space-y-2.5 flex-1">
@@ -136,6 +140,7 @@ export default function Pricing() {
           transition={{ duration: 0.5, delay: 0.2 }}
           className="mt-6 flex flex-wrap items-center gap-6 text-[#333333] text-[12px]"
         >
+          <span>✓ 30-day free trial</span>
           <span>✓ Month-to-month, cancel anytime</span>
           <span>✓ No IT team required</span>
           <span>✓ Live in 48 hours</span>

@@ -6,7 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import {
   LayoutDashboard, BarChart2, Send, Users, Settings,
   LogOut, ChevronLeft, Menu, FileText, AlertTriangle,
-  TrendingUp, Plug,
+  TrendingUp, Plug, Clock,
 } from "lucide-react";
 import { useAuth } from "@/components/AuthProvider";
 import { Logo } from "@/components/Navbar";
@@ -23,12 +23,21 @@ const sidebarLinks = [
   { label: "Settings",     href: "/dashboard/settings",      icon: Settings },
 ];
 
+function getTrialDaysLeft(createdAt: string | null | undefined): number | null {
+  if (!createdAt) return null;
+  const created = new Date(createdAt).getTime();
+  const now = Date.now();
+  const daysSince = Math.floor((now - created) / 86_400_000);
+  return 30 - daysSince;
+}
+
 export default function DashboardShell({ children }: { children: ReactNode }) {
   const { user, organization, orgUser, loading, signOut } = useAuth();
   const router = useRouter();
   const pathname = usePathname();
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const trialDaysLeft = getTrialDaysLeft((organization as { created_at?: string } | null)?.created_at);
 
   useEffect(() => {
     if (!loading && !user) router.push("/auth");
@@ -228,6 +237,28 @@ export default function DashboardShell({ children }: { children: ReactNode }) {
             </div>
           </div>
         </header>
+
+        {/* Trial banner */}
+        {trialDaysLeft !== null && trialDaysLeft <= 30 && (
+          <div className={`px-4 sm:px-6 py-2 flex items-center gap-2 text-xs font-medium ${
+            trialDaysLeft <= 0
+              ? "bg-red-50 border-b border-red-200 text-red-700"
+              : trialDaysLeft <= 7
+              ? "bg-amber-50 border-b border-amber-200 text-amber-700"
+              : "bg-[#EEF2FF] border-b border-[#4F46E5]/20 text-[#4F46E5]"
+          }`}>
+            <Clock className="w-3.5 h-3.5 shrink-0" />
+            {trialDaysLeft <= 0
+              ? "Your 30-day free trial has ended. Contact us to continue using DataByt."
+              : `Free trial: ${trialDaysLeft} day${trialDaysLeft !== 1 ? "s" : ""} remaining. No credit card needed yet.`}
+            {trialDaysLeft <= 7 && (
+              <a href="mailto:kuberanoh@gmail.com?subject=DataByt%20Plan%20Upgrade"
+                className="ml-auto underline font-semibold">
+                Talk to us
+              </a>
+            )}
+          </div>
+        )}
 
         <main className="flex-1 overflow-auto p-4 sm:p-6 lg:p-8">
           {children}
