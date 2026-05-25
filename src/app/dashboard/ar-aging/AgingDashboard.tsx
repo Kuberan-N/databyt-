@@ -25,7 +25,7 @@ const fmt = (n: number) =>
 const STATUS_COLORS: Record<string, string> = {
   open:        "bg-[#F1F5F9] text-[#111111]",
   reminded:    "bg-[#FFFBEB] text-[#D97706]",
-  overdue:     "bg-[#EEF2FF] text-[#DC2626]",
+  overdue:     "bg-[#ECFDF5] text-[#DC2626]",
   paid:        "bg-[#F0FDF4] text-[#16A34A]",
   written_off: "bg-[#F8F9FC] text-[#333333]",
 };
@@ -33,7 +33,7 @@ const STATUS_COLORS: Record<string, string> = {
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const db = supabase as any;
 
-const btnBase = "flex items-center gap-2 px-3 py-2 rounded-lg border border-[#E2E8F0] bg-white text-[#222222] text-sm hover:text-[#4F46E5] hover:border-[#4F46E5]/30 transition-all";
+const btnBase = "flex items-center gap-2 px-3 py-2 rounded-lg border border-[#E2E8F0] bg-white text-[#222222] text-sm hover:text-[#059669] hover:border-[#059669]/30 transition-all";
 
 export default function AgingDashboard({ readOnly = false }: { readOnly?: boolean }) {
   const { organization } = useAuth();
@@ -115,7 +115,7 @@ export default function AgingDashboard({ readOnly = false }: { readOnly?: boolea
     return (
       <div className="flex items-center justify-center min-h-[60vh]">
         <div className="flex flex-col items-center gap-3">
-          <div className="w-10 h-10 border-2 border-[#4F46E5]/20 border-t-[#4F46E5] rounded-full animate-spin" />
+          <div className="w-10 h-10 border-2 border-[#059669]/20 border-t-[#059669] rounded-full animate-spin" />
           <p className="text-[#222222] text-sm">Loading AR data...</p>
         </div>
       </div>
@@ -217,7 +217,7 @@ export default function AgingDashboard({ readOnly = false }: { readOnly?: boolea
         <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }} className="glass rounded-2xl p-6">
           <div className="flex items-center justify-between mb-4">
             <h3 className="text-sm font-semibold text-[#0F172A]">Top Overdue Customers</h3>
-            <a href="/dashboard/collections" className="text-xs text-[#4F46E5] font-medium flex items-center gap-1 hover:text-[#4338CA]">
+            <a href="/dashboard/collections" className="text-xs text-[#059669] font-medium flex items-center gap-1 hover:text-[#047857]">
               Start collecting <ArrowRight className="w-3 h-3" />
             </a>
           </div>
@@ -230,8 +230,8 @@ export default function AgingDashboard({ readOnly = false }: { readOnly?: boolea
                   <p className="text-xs text-[#222222]">{c.invoiceCount} invoice{c.invoiceCount !== 1 ? "s" : ""} · {c.maxDaysOverdue}d overdue</p>
                 </div>
                 <span className={`text-xs px-2 py-0.5 rounded-full capitalize border ${
-                  c.segment === "strategic" ? "bg-[#EEF2FF] text-[#4F46E5] border-[#4F46E5]/20" :
-                  c.segment === "at_risk"   ? "bg-[#EEF2FF] text-[#DC2626] border-[#EF4444]/20" :
+                  c.segment === "strategic" ? "bg-[#ECFDF5] text-[#059669] border-[#059669]/20" :
+                  c.segment === "at_risk"   ? "bg-[#ECFDF5] text-[#DC2626] border-[#EF4444]/20" :
                   "bg-[#F1F5F9] text-[#222222] border-[#E2E8F0]"
                 }`}>{c.segment.replace("_", " ")}</span>
                 <span className="text-sm font-bold text-[#0F172A]">{fmt(c.totalOwed)}</span>
@@ -249,7 +249,7 @@ export default function AgingDashboard({ readOnly = false }: { readOnly?: boolea
             value={search}
             onChange={e => { setSearch(e.target.value); setPage(1); }}
             placeholder="Search..."
-            className="bg-white border border-[#E2E8F0] rounded-lg px-3 py-1.5 text-xs text-[#0F172A] placeholder-[#333333] focus:border-[#4F46E5] outline-none w-48"
+            className="bg-white border border-[#E2E8F0] rounded-lg px-3 py-1.5 text-xs text-[#0F172A] placeholder-[#333333] focus:border-[#059669] outline-none w-48"
           />
           <div className="flex gap-1">
             {[["all","All"],["overdue","Overdue"],["open","Open"],["paid","Paid"]].map(([val, lbl]) => (
@@ -263,8 +263,8 @@ export default function AgingDashboard({ readOnly = false }: { readOnly?: boolea
                   (val === "overdue" && statusFilter.includes("overdue") && !statusFilter.includes("paid")) ||
                   (val === "open" && statusFilter.length === 1 && statusFilter[0] === "open") ||
                   (val === "paid" && statusFilter.length === 1 && statusFilter[0] === "paid")
-                    ? "bg-[#EEF2FF] text-[#4F46E5] border border-[#4F46E5]/20"
-                    : "text-[#222222] hover:text-[#4F46E5] border border-transparent"
+                    ? "bg-[#ECFDF5] text-[#059669] border border-[#059669]/20"
+                    : "text-[#222222] hover:text-[#059669] border border-transparent"
                 }`}
               >{lbl}</button>
             ))}
@@ -305,7 +305,7 @@ export default function AgingDashboard({ readOnly = false }: { readOnly?: boolea
                             <button
                               onClick={() => generatePayLink(inv.id)}
                               title="Generate & copy payment link"
-                              className="flex items-center gap-1 text-xs text-[#222222] hover:text-[#4F46E5] font-medium transition-colors"
+                              className="flex items-center gap-1 text-xs text-[#222222] hover:text-[#059669] font-medium transition-colors"
                             >
                               {copiedId === inv.id
                                 ? <><Check className="w-3 h-3 text-[#16A34A]" /><span className="text-[#16A34A]">Copied</span></>
@@ -332,7 +332,7 @@ export default function AgingDashboard({ readOnly = false }: { readOnly?: boolea
             <div className="flex gap-1">
               {Array.from({ length: totalPages }, (_, i) => i + 1).map(p => (
                 <button key={p} onClick={() => setPage(p)}
-                  className={`w-7 h-7 rounded-lg font-medium transition-all ${p === page ? "bg-[#EEF2FF] text-[#4F46E5]" : "hover:bg-[#F1F5F9] text-[#222222]"}`}>
+                  className={`w-7 h-7 rounded-lg font-medium transition-all ${p === page ? "bg-[#ECFDF5] text-[#059669]" : "hover:bg-[#F1F5F9] text-[#222222]"}`}>
                   {p}
                 </button>
               ))}

@@ -10,7 +10,7 @@ const plans = [
     name:     "AR Engine",
     price:    "$3,000",
     period:   "/month",
-    setup:    "+ $5,000 one-time setup",
+    note:     "30-day free trial. Then month-to-month.",
     desc:     "Full AR collections automation for mid-market finance teams.",
     featured: false,
     features: [
@@ -28,7 +28,7 @@ const plans = [
     name:     "CashFlow Command",
     price:    "$6,000",
     period:   "/month",
-    setup:    "+ $10,000 one-time setup",
+    note:     "30-day free trial. Then month-to-month.",
     desc:     "Full cash flow command center — AR, AP, and forecasting.",
     featured: true,
     features: [
@@ -56,7 +56,7 @@ export default function Pricing() {
           transition={{ duration: 0.6, ease }}
           className="mb-12"
         >
-          <p className="text-[#4F46E5] text-[11px] font-semibold uppercase tracking-widest mb-3">Pricing</p>
+          <p className="text-[#059669] text-[11px] font-semibold uppercase tracking-widest mb-3">Pricing</p>
           <h2 className="text-[30px] sm:text-[38px] font-bold text-[#111111] leading-[1.15] tracking-[-0.02em]">
             Flat fee. No per-invoice charges.
           </h2>
@@ -85,7 +85,7 @@ export default function Pricing() {
             >
               {plan.featured && (
                 <div className="absolute -top-3 left-6">
-                  <span className="bg-[#4F46E5] text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-widest">
+                  <span className="bg-[#059669] text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-widest">
                     Full Suite
                   </span>
                 </div>
@@ -106,15 +106,15 @@ export default function Pricing() {
                   {plan.period}
                 </span>
               </div>
-              <p className={`text-[12px] mb-7 ${plan.featured ? "text-white/30" : "text-[#555555]"}`}>
-                {plan.setup}
+              <p className={`text-[12px] mb-7 ${plan.featured ? "text-white/40" : "text-[#16A34A]"}`}>
+                {plan.note}
               </p>
 
               <a
                 href="/auth"
                 className={`py-3 rounded-lg text-center text-[14px] font-semibold mb-7 transition-colors ${
                   plan.featured
-                    ? "bg-[#4F46E5] text-white hover:bg-[#4338CA]"
+                    ? "bg-[#059669] text-white hover:bg-[#047857]"
                     : "bg-[#F3F3F3] text-[#111111] hover:bg-[#EAEAEA]"
                 }`}
               >
@@ -124,7 +124,7 @@ export default function Pricing() {
               <ul className="space-y-2.5 flex-1">
                 {plan.features.map((f, j) => (
                   <li key={j} className="flex items-start gap-2.5 text-[13px]">
-                    <Check className={`w-3.5 h-3.5 mt-0.5 shrink-0 ${plan.featured ? "text-[#4F46E5]" : "text-[#4F46E5]"}`} />
+                    <Check className={`w-3.5 h-3.5 mt-0.5 shrink-0 ${plan.featured ? "text-[#059669]" : "text-[#059669]"}`} />
                     <span className={plan.featured ? "text-white/70" : "text-[#111111]"}>{f}</span>
                   </li>
                 ))}
@@ -140,13 +140,13 @@ export default function Pricing() {
           transition={{ duration: 0.5, delay: 0.2 }}
           className="mt-6 flex flex-wrap items-center gap-6 text-[#333333] text-[12px]"
         >
-          <span>✓ 30-day free trial</span>
+          <span>✓ 30-day free trial, no credit card</span>
           <span>✓ Month-to-month, cancel anytime</span>
           <span>✓ No IT team required</span>
           <span>✓ Live in 48 hours</span>
           <span>✓ CAN-SPAM compliant</span>
           <span className="ml-auto">
-            HighRadius starts at <span className="line-through text-[#777777]">$100K+/year</span> — DataByt: $41K all-in
+            HighRadius starts at <span className="line-through text-[#777777]">$100K+/year</span> — DataByt: from $3K/mo
           </span>
         </motion.div>
 

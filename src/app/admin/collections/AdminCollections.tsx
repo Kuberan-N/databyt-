@@ -47,12 +47,12 @@ function getEscalationLevel(daysOverdue: number): 1 | 2 | 3 {
 const LEVEL_STYLE = {
   1: { label: "L1", cls: "bg-[#F0FDF4] text-[#16A34A]" },
   2: { label: "L2", cls: "bg-[#FFFBEB] text-[#D97706]" },
-  3: { label: "L3", cls: "bg-[#EEF2FF] text-[#DC2626]" },
+  3: { label: "L3", cls: "bg-[#ECFDF5] text-[#DC2626]" },
 };
 
 const SEGMENT_STYLE: Record<string, string> = {
-  strategic: "bg-[#EEF2FF] text-[#3730A3] border-[#3730A3]/20",
-  at_risk:   "bg-[#EEF2FF] text-[#DC2626] border-[#EF4444]/20",
+  strategic: "bg-[#ECFDF5] text-[#3730A3] border-[#3730A3]/20",
+  at_risk:   "bg-[#ECFDF5] text-[#DC2626] border-[#EF4444]/20",
 };
 
 export default function AdminCollections() {
@@ -258,7 +258,7 @@ export default function AdminCollections() {
                   className="flex items-center gap-2">
                   <span className="text-xs text-[#222222]">{selected.length} selected</span>
                   <button onClick={bulkDraft} disabled={bulkDrafting || isPaused}
-                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#EEF2FF] border border-[#3730A3]/20 text-[#3730A3] text-xs font-medium hover:bg-[#E0E7FF] transition-all disabled:opacity-40">
+                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#ECFDF5] border border-[#3730A3]/20 text-[#3730A3] text-xs font-medium hover:bg-[#E0E7FF] transition-all disabled:opacity-40">
                     {bulkDrafting ? (
                       <div className="w-3 h-3 border border-[#3730A3]/30 border-t-[#3730A3] rounded-full animate-spin" />
                     ) : (
@@ -299,7 +299,7 @@ export default function AdminCollections() {
                       }
                     </button>
 
-                    <div className="w-9 h-9 rounded-xl bg-[#EEF2FF] border border-[#EF4444]/20 flex items-center justify-center shrink-0">
+                    <div className="w-9 h-9 rounded-xl bg-[#ECFDF5] border border-[#EF4444]/20 flex items-center justify-center shrink-0">
                       <AlertTriangle className="w-4 h-4 text-[#DC2626]" />
                     </div>
 
@@ -314,7 +314,7 @@ export default function AdminCollections() {
 
                         {item.priority_score > 0 && (
                           <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded-md ${
-                            item.priority_score >= 70 ? "bg-[#EEF2FF] text-[#DC2626]" :
+                            item.priority_score >= 70 ? "bg-[#ECFDF5] text-[#DC2626]" :
                             item.priority_score >= 40 ? "bg-[#FFFBEB] text-[#D97706]" :
                             "bg-[#F1F5F9] text-[#222222]"
                           }`}>
@@ -329,7 +329,7 @@ export default function AdminCollections() {
                         )}
 
                         {hasReply && (
-                          <span className="flex items-center gap-1 text-[10px] font-medium px-1.5 py-0.5 rounded-md bg-[#FFF1F2] border border-[#4F46E5]/20 text-[#4F46E5]">
+                          <span className="flex items-center gap-1 text-[10px] font-medium px-1.5 py-0.5 rounded-md bg-[#FFF1F2] border border-[#059669]/20 text-[#059669]">
                             <MessageSquare className="w-2.5 h-2.5" /> Reply
                           </span>
                         )}
@@ -355,7 +355,7 @@ export default function AdminCollections() {
                     <div className="flex items-center gap-2 shrink-0">
                       {!item.draftSubject && !item.drafting && !isPaused && (
                         <button onClick={() => draftEmail(item)}
-                          className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#EEF2FF] border border-[#3730A3]/20 text-[#3730A3] text-xs font-medium hover:bg-[#E0E7FF] transition-all">
+                          className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#ECFDF5] border border-[#3730A3]/20 text-[#3730A3] text-xs font-medium hover:bg-[#E0E7FF] transition-all">
                           <Edit3 className="w-3 h-3" /> Draft
                         </button>
                       )}
@@ -373,7 +373,7 @@ export default function AdminCollections() {
                         </button>
                       )}
                       <button onClick={() => skipItem(item.id)}
-                        className="p-1.5 rounded-lg text-[#333333] hover:text-[#DC2626] hover:bg-[#EEF2FF] transition-all" title="Skip">
+                        className="p-1.5 rounded-lg text-[#333333] hover:text-[#DC2626] hover:bg-[#ECFDF5] transition-all" title="Skip">
                         <XCircle className="w-4 h-4" />
                       </button>
                     </div>

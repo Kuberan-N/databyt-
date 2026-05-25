@@ -62,10 +62,10 @@ export default function HowItWorks() {
           transition={{ duration: 0.6, ease }}
           className="mb-12"
         >
-          <p className="text-[#4F46E5] text-[11px] font-semibold uppercase tracking-widest mb-3">The Product</p>
+          <p className="text-[#059669] text-[11px] font-semibold uppercase tracking-widest mb-3">The Product</p>
           <h2 className="text-[30px] sm:text-[38px] font-bold text-[#111111] leading-[1.15] tracking-[-0.02em] max-w-[580px]">
             The complete AR loop.<br />
-            <span className="text-[#4F46E5]">Closed end-to-end.</span>
+            <span className="text-[#059669]">Closed end-to-end.</span>
           </h2>
           <p className="text-[#111111] text-[15px] mt-3 max-w-[480px] leading-relaxed">
             Most tools stop at "send the email." DataByt closes the full loop:
@@ -84,10 +84,10 @@ export default function HowItWorks() {
               className="p-6 rounded-xl bg-white border border-[#E8E8E8] flex flex-col"
             >
               <div className="flex items-center justify-between mb-5">
-                <div className="w-9 h-9 rounded-lg bg-[#EEF2FF] flex items-center justify-center">
-                  <s.icon className="w-[18px] h-[18px] text-[#4F46E5]" />
+                <div className="w-9 h-9 rounded-lg bg-[#ECFDF5] flex items-center justify-center">
+                  <s.icon className="w-[18px] h-[18px] text-[#059669]" />
                 </div>
-                <span className="text-[#4F46E5] font-bold text-[13px]">{s.num}</span>
+                <span className="text-[#059669] font-bold text-[13px]">{s.num}</span>
               </div>
               <h3 className="text-[#111111] font-semibold text-[14px] mb-2.5 leading-snug">{s.title}</h3>
               <p className="text-[#111111] text-[13px] leading-relaxed flex-1">{s.desc}</p>
@@ -108,7 +108,7 @@ export default function HowItWorks() {
           className="mt-10 flex flex-col sm:flex-row items-start sm:items-center gap-4"
         >
           <a href="/auth"
-            className="inline-flex items-center gap-2 px-5 py-3 rounded-lg bg-[#4F46E5] text-white text-[14px] font-semibold hover:bg-[#4338CA] transition-colors">
+            className="inline-flex items-center gap-2 px-5 py-3 rounded-lg bg-[#059669] text-white text-[14px] font-semibold hover:bg-[#047857] transition-colors">
             Start Free Trial
             <ArrowRight className="w-4 h-4" />
           </a>

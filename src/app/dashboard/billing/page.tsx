@@ -38,12 +38,12 @@ export default function BillingPage() {
       }`}>
         <div className="flex items-start gap-4">
           <div className={`w-10 h-10 rounded-full flex items-center justify-center shrink-0 ${
-            isExpired ? "bg-red-100" : isActive ? "bg-[#EEF2FF]" : "bg-gray-100"
+            isExpired ? "bg-red-100" : isActive ? "bg-[#ECFDF5]" : "bg-gray-100"
           }`}>
             {isExpired
               ? <AlertCircle className="w-5 h-5 text-red-500" />
               : isActive
-              ? <Clock className="w-5 h-5 text-[#4F46E5]" />
+              ? <Clock className="w-5 h-5 text-[#059669]" />
               : <CheckCircle className="w-5 h-5 text-gray-400" />}
           </div>
           <div className="flex-1">
@@ -82,7 +82,7 @@ export default function BillingPage() {
                 : "Full AR Collections Automation"}
             </p>
           </div>
-          <span className="px-3 py-1 rounded-full bg-[#EEF2FF] text-[#4F46E5] text-xs font-semibold">
+          <span className="px-3 py-1 rounded-full bg-[#ECFDF5] text-[#059669] text-xs font-semibold">
             {isActive ? "Trial Active" : isExpired ? "Trial Ended" : "Active"}
           </span>
         </div>
@@ -97,7 +97,7 @@ export default function BillingPage() {
         </p>
         <a
           href="mailto:kuberanoh@gmail.com?subject=DataByt%20Plan%20Upgrade%20Request"
-          className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-[#4F46E5] text-white text-[13.5px] font-semibold hover:bg-[#4338CA] transition-colors"
+          className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-[#059669] text-white text-[13.5px] font-semibold hover:bg-[#047857] transition-colors"
         >
           Talk to us about upgrading
           <ArrowRight className="w-4 h-4" />
