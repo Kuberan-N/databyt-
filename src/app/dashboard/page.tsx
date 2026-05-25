@@ -16,8 +16,8 @@ const BUCKETS = [
   { label: "Current",    color: "#16A34A", track: "#DCFCE7" },
   { label: "1–30 days",  color: "#000000", track: "#FEF3C7" },
   { label: "31–60 days", color: "#EA580C", track: "#FFEDD5" },
-  { label: "61–90 days", color: "#DC2626", track: "#E0E7FF" },
-  { label: "90+ days",   color: "#991B1B", track: "#E0E7FF" },
+  { label: "61–90 days", color: "#DC2626", track: "#F3F3F3" },
+  { label: "90+ days",   color: "#991B1B", track: "#F3F3F3" },
 ];
 
 export default function DashboardOverview() {
@@ -254,7 +254,7 @@ export default function DashboardOverview() {
                 className="flex-1 rounded-t-sm transition-all"
                 style={{
                   height: `${Math.min(height, 100)}%`,
-                  background: isHigh ? "#E0E7FF" : "#F1F5F9",
+                  background: isHigh ? "#F3F3F3" : "#F1F5F9",
                   opacity: hasData ? 1 : 0.4,
                 }}
               />

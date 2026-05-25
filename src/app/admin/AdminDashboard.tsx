@@ -13,7 +13,7 @@ const fmt = (n: number) =>
 
 const PLAN_STYLE: Record<string, { color: string; bg: string; border: string }> = {
   starter: { color: "text-[#222222]",   bg: "bg-[#F1F5F9]",         border: "border-[#E2E8F0]" },
-  growth:  { color: "text-[#4B5FA8]",   bg: "bg-[#F3F3F3]",         border: "border-[#3730A3]/20" },
+  growth:  { color: "text-[#555555]",   bg: "bg-[#F3F3F3]",         border: "border-[#111111]/20" },
   scale:   { color: "text-[#000000]",   bg: "bg-[#FFF1F2]",         border: "border-[#000000]/20" },
 };
 
@@ -43,7 +43,7 @@ export default function AdminDashboard() {
       .catch(() => setFailedJobsCount(null));
   }, []);
 
-  const btnBase = "flex items-center gap-2 px-4 py-2 rounded-lg border border-[#E2E8F0] text-[#222222] text-sm hover:text-[#3730A3] hover:border-[#3730A3]/30 bg-white transition-all disabled:opacity-50";
+  const btnBase = "flex items-center gap-2 px-4 py-2 rounded-lg border border-[#E2E8F0] text-[#222222] text-sm hover:text-[#111111] hover:border-[#111111]/30 bg-white transition-all disabled:opacity-50";
   const spinner = <div className="w-4 h-4 border-2 border-[#333333]/30 border-t-[#333333] rounded-full animate-spin" />;
 
   return (
@@ -204,7 +204,7 @@ export default function AdminDashboard() {
               {orgsLoading ? (
                 <tr><td colSpan={8} className="text-center py-12 text-[#333333]">
                   <div className="flex items-center justify-center gap-2">
-                    <div className="w-4 h-4 border-2 border-[#3730A3]/20 border-t-[#3730A3] rounded-full animate-spin" />
+                    <div className="w-4 h-4 border-2 border-[#111111]/20 border-t-[#111111] rounded-full animate-spin" />
                     Loading clients...
                   </div>
                 </td></tr>
@@ -219,8 +219,8 @@ export default function AdminDashboard() {
                     onClick={() => setSelectedOrg(isSelected ? org : org)}>
                     <td className="px-4 py-3.5">
                       <div className="flex items-center gap-2.5">
-                        <div className="w-7 h-7 rounded-lg bg-[#F3F3F3] border border-[#3730A3]/20 flex items-center justify-center shrink-0">
-                          <span className="text-[10px] font-bold text-[#3730A3]">{org.name.charAt(0).toUpperCase()}</span>
+                        <div className="w-7 h-7 rounded-lg bg-[#F3F3F3] border border-[#111111]/20 flex items-center justify-center shrink-0">
+                          <span className="text-[10px] font-bold text-[#111111]">{org.name.charAt(0).toUpperCase()}</span>
                         </div>
                         <div>
                           <p className="font-medium text-[#0F172A] text-xs">{org.name}</p>
@@ -231,7 +231,7 @@ export default function AdminDashboard() {
                     <td className="px-4 py-3.5">
                       <span className={`px-2 py-0.5 rounded-full text-[10px] font-medium border capitalize ${
                         org.status === "active"     ? "bg-[#F0FDF4] text-[#16A34A] border-[#16A34A]/20" :
-                        org.status === "onboarding" ? "bg-[#F3F3F3] text-[#3730A3] border-[#3730A3]/20" :
+                        org.status === "onboarding" ? "bg-[#F3F3F3] text-[#111111] border-[#111111]/20" :
                         org.status === "paused"     ? "bg-[#F3F3F3] text-[#000000] border-[#F59E0B]/20" :
                         "bg-[#F1F5F9] text-[#333333] border-[#E2E8F0]"
                       }`}>{org.status}</span>

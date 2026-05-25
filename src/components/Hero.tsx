@@ -158,7 +158,7 @@ const stats = [
 
 export default function Hero() {
   return (
-    <section className="bg-[#F8FAFC] pt-24 pb-0 overflow-hidden">
+    <section className="relative bg-[#F8FAFC] pt-24 pb-0 overflow-hidden">
       {/* Subtle grid background */}
       <div className="absolute inset-0 pointer-events-none" style={{
         backgroundImage: "radial-gradient(circle at 1px 1px, #E5E5E5 1px, transparent 0)",

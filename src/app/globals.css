@@ -1,27 +1,27 @@
 @import "tailwindcss";
 
 @theme {
-  /* ─── Primary: Indigo ─── */
-  --color-primary-50:  #F3F3F3;
-  --color-primary-100: #E0E7FF;
-  --color-primary-200: #C7D2FE;
-  --color-primary-300: #A5B4FC;
-  --color-primary-400: #818CF8;
+  /* ─── Primary: Black/Grey ─── */
+  --color-primary-50:  #F8F8F8;
+  --color-primary-100: #F3F3F3;
+  --color-primary-200: #E5E5E5;
+  --color-primary-300: #D4D4D4;
+  --color-primary-400: #999999;
   --color-primary-500: #000000;
   --color-primary-600: #111111;
-  --color-primary-700: #3730A3;
-  --color-primary-800: #312E81;
-  --color-primary-900: #1E1B4B;
+  --color-primary-700: #222222;
+  --color-primary-800: #333333;
+  --color-primary-900: #444444;
 
   /* ─── Accent: same as primary ─── */
-  --color-accent-50:  #F3F3F3;
-  --color-accent-100: #E0E7FF;
-  --color-accent-200: #C7D2FE;
-  --color-accent-300: #A5B4FC;
-  --color-accent-400: #818CF8;
+  --color-accent-50:  #F8F8F8;
+  --color-accent-100: #F3F3F3;
+  --color-accent-200: #E5E5E5;
+  --color-accent-300: #D4D4D4;
+  --color-accent-400: #999999;
   --color-accent-500: #000000;
   --color-accent-600: #111111;
-  --color-accent-700: #3730A3;
+  --color-accent-700: #222222;
 
   /* ─── Success: Green ─── */
   --color-success-50:  #F0FDF4;

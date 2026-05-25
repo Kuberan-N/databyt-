@@ -51,7 +51,7 @@ const LEVEL_STYLE = {
 };
 
 const SEGMENT_STYLE: Record<string, string> = {
-  strategic: "bg-[#F3F3F3] text-[#3730A3] border-[#3730A3]/20",
+  strategic: "bg-[#F3F3F3] text-[#111111] border-[#111111]/20",
   at_risk:   "bg-[#F3F3F3] text-[#DC2626] border-[#EF4444]/20",
 };
 
@@ -208,7 +208,7 @@ export default function AdminCollections() {
             {isPaused ? "Resume Collections" : "Pause Client"}
           </button>
           <button onClick={loadQueue}
-            className="flex items-center gap-2 px-3 py-2 rounded-lg border border-[#E2E8F0] bg-white text-[#222222] text-xs hover:text-[#3730A3] hover:border-[#3730A3]/30 transition-all">
+            className="flex items-center gap-2 px-3 py-2 rounded-lg border border-[#E2E8F0] bg-white text-[#222222] text-xs hover:text-[#111111] hover:border-[#111111]/30 transition-all">
             <RefreshCw className={`w-3.5 h-3.5 ${loading ? "animate-spin" : ""}`} />
           </button>
         </div>
@@ -225,7 +225,7 @@ export default function AdminCollections() {
 
       {loading ? (
         <div className="flex items-center justify-center py-20">
-          <div className="w-6 h-6 border-2 border-[#3730A3]/20 border-t-[#3730A3] rounded-full animate-spin" />
+          <div className="w-6 h-6 border-2 border-[#111111]/20 border-t-[#111111] rounded-full animate-spin" />
         </div>
       ) : queue.length === 0 ? (
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}
@@ -239,11 +239,11 @@ export default function AdminCollections() {
           {/* Bulk action bar */}
           <div className="flex items-center justify-between flex-wrap gap-3">
             <div className="flex items-center gap-3">
-              <button onClick={toggleSelectAll} className="flex items-center gap-1.5 text-xs text-[#222222] hover:text-[#3730A3] transition-colors">
+              <button onClick={toggleSelectAll} className="flex items-center gap-1.5 text-xs text-[#222222] hover:text-[#111111] transition-colors">
                 {allSelected ? (
-                  <CheckSquare className="w-4 h-4 text-[#3730A3]" />
+                  <CheckSquare className="w-4 h-4 text-[#111111]" />
                 ) : someSelected ? (
-                  <Minus className="w-4 h-4 text-[#3730A3]" />
+                  <Minus className="w-4 h-4 text-[#111111]" />
                 ) : (
                   <Square className="w-4 h-4" />
                 )}
@@ -258,9 +258,9 @@ export default function AdminCollections() {
                   className="flex items-center gap-2">
                   <span className="text-xs text-[#222222]">{selected.length} selected</span>
                   <button onClick={bulkDraft} disabled={bulkDrafting || isPaused}
-                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#F3F3F3] border border-[#3730A3]/20 text-[#3730A3] text-xs font-medium hover:bg-[#E0E7FF] transition-all disabled:opacity-40">
+                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#F3F3F3] border border-[#111111]/20 text-[#111111] text-xs font-medium hover:bg-[#F3F3F3] transition-all disabled:opacity-40">
                     {bulkDrafting ? (
-                      <div className="w-3 h-3 border border-[#3730A3]/30 border-t-[#3730A3] rounded-full animate-spin" />
+                      <div className="w-3 h-3 border border-[#111111]/30 border-t-[#111111] rounded-full animate-spin" />
                     ) : (
                       <Edit3 className="w-3 h-3" />
                     )}
@@ -288,13 +288,13 @@ export default function AdminCollections() {
                   initial={{ opacity: 0, y: 12 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, x: -20 }}
-                  className={`glass rounded-2xl overflow-hidden transition-all ${item.selected ? "ring-1 ring-[#3730A3]/30" : ""}`}>
+                  className={`glass rounded-2xl overflow-hidden transition-all ${item.selected ? "ring-1 ring-[#111111]/30" : ""}`}>
 
                   {/* Row header */}
                   <div className="flex items-center gap-3 px-5 py-4">
                     <button onClick={() => toggleSelect(item.id)} className="shrink-0">
                       {item.selected
-                        ? <CheckSquare className="w-4 h-4 text-[#3730A3]" />
+                        ? <CheckSquare className="w-4 h-4 text-[#111111]" />
                         : <Square className="w-4 h-4 text-[#333333] hover:text-[#222222] transition-colors" />
                       }
                     </button>
@@ -355,13 +355,13 @@ export default function AdminCollections() {
                     <div className="flex items-center gap-2 shrink-0">
                       {!item.draftSubject && !item.drafting && !isPaused && (
                         <button onClick={() => draftEmail(item)}
-                          className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#F3F3F3] border border-[#3730A3]/20 text-[#3730A3] text-xs font-medium hover:bg-[#E0E7FF] transition-all">
+                          className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#F3F3F3] border border-[#111111]/20 text-[#111111] text-xs font-medium hover:bg-[#F3F3F3] transition-all">
                           <Edit3 className="w-3 h-3" /> Draft
                         </button>
                       )}
                       {item.drafting && (
                         <div className="flex items-center gap-1.5 px-3 py-1.5 text-xs text-[#222222]">
-                          <div className="w-3 h-3 border border-[#3730A3]/30 border-t-[#3730A3] rounded-full animate-spin" />
+                          <div className="w-3 h-3 border border-[#111111]/30 border-t-[#111111] rounded-full animate-spin" />
                           Drafting...
                         </div>
                       )}
@@ -397,7 +397,7 @@ export default function AdminCollections() {
                             <input
                               value={item.editedSubject ?? item.draftSubject}
                               onChange={e => setQueue(q => q.map(i => i.id === item.id ? { ...i, editedSubject: e.target.value } : i))}
-                              className="mt-1.5 w-full bg-white border border-[#E2E8F0] rounded-lg px-4 py-2.5 text-sm text-[#0F172A] focus:border-[#3730A3] focus:outline-none"
+                              className="mt-1.5 w-full bg-white border border-[#E2E8F0] rounded-lg px-4 py-2.5 text-sm text-[#0F172A] focus:border-[#111111] focus:outline-none"
                             />
                           </div>
                           <div>
@@ -406,14 +406,14 @@ export default function AdminCollections() {
                               value={item.editedBody ?? item.draftBody}
                               onChange={e => setQueue(q => q.map(i => i.id === item.id ? { ...i, editedBody: e.target.value } : i))}
                               rows={8}
-                              className="mt-1.5 w-full bg-white border border-[#E2E8F0] rounded-lg px-4 py-3 text-sm text-[#111111] leading-relaxed focus:border-[#3730A3] focus:outline-none resize-y"
+                              className="mt-1.5 w-full bg-white border border-[#E2E8F0] rounded-lg px-4 py-3 text-sm text-[#111111] leading-relaxed focus:border-[#111111] focus:outline-none resize-y"
                             />
                           </div>
                           <div className="flex items-center gap-3 pt-1">
                             <button
                               onClick={() => sendEmail(item)}
                               disabled={sendingId === item.id || isPaused || !item.customer.email}
-                              className="flex items-center gap-2 px-5 py-2.5 rounded-lg bg-[#3730A3] text-white text-sm font-semibold hover:bg-[#152356] transition-all disabled:opacity-50">
+                              className="flex items-center gap-2 px-5 py-2.5 rounded-lg bg-[#111111] text-white text-sm font-semibold hover:bg-[#000000] transition-all disabled:opacity-50">
                               {sendingId === item.id ? (
                                 <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
                               ) : (

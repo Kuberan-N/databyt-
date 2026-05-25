@@ -72,7 +72,7 @@ export default function Testimonials() {
 
               {/* Author */}
               <div className="flex items-center gap-3">
-                <div className="w-9 h-9 rounded-full bg-[#3730A3] flex items-center justify-center text-white text-xs font-black">
+                <div className="w-9 h-9 rounded-full bg-[#111111] flex items-center justify-center text-white text-xs font-black">
                   {t.name.split(" ").map(n => n[0]).join("")}
                 </div>
                 <div>

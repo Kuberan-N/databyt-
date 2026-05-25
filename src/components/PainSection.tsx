@@ -26,9 +26,9 @@ function CounterStat({
   const ref = useRef<HTMLParagraphElement>(null);
   const wrapRef = useRef<HTMLDivElement>(null);
   const inView = useInView(wrapRef, { once: true, margin: "-40px" });
-  const isNumeric = /^\d/.test(stat);
-  const numericPart = parseFloat(stat.replace(/[^0-9.]/g, ""));
-  const suffix = stat.replace(/[0-9.]/g, "").trim();
+  const isNumeric = /^\d+%$/.test(stat.trim());
+  const numericPart = isNumeric ? parseFloat(stat) : 0;
+  const suffix = "%";
 
   useEffect(() => {
     if (!inView || !isNumeric || !ref.current) return;
