@@ -2,25 +2,25 @@
 
 @theme {
   /* ─── Primary: Indigo ─── */
-  --color-primary-50:  #ECFDF5;
+  --color-primary-50:  #F0FDFA;
   --color-primary-100: #E0E7FF;
   --color-primary-200: #C7D2FE;
   --color-primary-300: #A5B4FC;
   --color-primary-400: #818CF8;
-  --color-primary-500: #059669;
-  --color-primary-600: #047857;
+  --color-primary-500: #0D9488;
+  --color-primary-600: #0F766E;
   --color-primary-700: #3730A3;
   --color-primary-800: #312E81;
   --color-primary-900: #1E1B4B;
 
   /* ─── Accent: same as primary ─── */
-  --color-accent-50:  #ECFDF5;
+  --color-accent-50:  #F0FDFA;
   --color-accent-100: #E0E7FF;
   --color-accent-200: #C7D2FE;
   --color-accent-300: #A5B4FC;
   --color-accent-400: #818CF8;
-  --color-accent-500: #059669;
-  --color-accent-600: #047857;
+  --color-accent-500: #0D9488;
+  --color-accent-600: #0F766E;
   --color-accent-700: #3730A3;
 
   /* ─── Success: Green ─── */
@@ -117,7 +117,7 @@ aside  .text-white {
 
 /* ─── gradient-text ─── */
 .gradient-text {
-  background: linear-gradient(135deg, #059669 0%, #047857 100%);
+  background: linear-gradient(135deg, #0D9488 0%, #0F766E 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -133,9 +133,9 @@ aside  .text-white {
 
 /* ─── Sidebar active nav item ─── */
 .nav-active {
-  background: #ECFDF5;
-  border-left: 3px solid #059669;
-  color: #059669;
+  background: #F0FDFA;
+  border-left: 3px solid #0D9488;
+  color: #0D9488;
 }
 
 /* ─── Range input ─── */
@@ -154,7 +154,7 @@ input[type="range"]::-webkit-slider-thumb {
   width: 18px;
   height: 18px;
   border-radius: 50%;
-  background: #059669;
+  background: #0D9488;
   cursor: pointer;
   border: 2px solid white;
   box-shadow: 0 1px 4px rgba(79,70,229,0.4);
@@ -163,7 +163,7 @@ input[type="range"]::-moz-range-thumb {
   width: 18px;
   height: 18px;
   border-radius: 50%;
-  background: #059669;
+  background: #0D9488;
   cursor: pointer;
   border: 2px solid white;
   box-shadow: 0 1px 4px rgba(79,70,229,0.4);

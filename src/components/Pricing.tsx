@@ -56,7 +56,7 @@ export default function Pricing() {
           transition={{ duration: 0.6, ease }}
           className="mb-12"
         >
-          <p className="text-[#059669] text-[11px] font-semibold uppercase tracking-widest mb-3">Pricing</p>
+          <p className="text-[#0D9488] text-[11px] font-semibold uppercase tracking-widest mb-3">Pricing</p>
           <h2 className="text-[30px] sm:text-[38px] font-bold text-[#111111] leading-[1.15] tracking-[-0.02em]">
             Flat fee. No per-invoice charges.
           </h2>
@@ -85,7 +85,7 @@ export default function Pricing() {
             >
               {plan.featured && (
                 <div className="absolute -top-3 left-6">
-                  <span className="bg-[#059669] text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-widest">
+                  <span className="bg-[#0D9488] text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-widest">
                     Full Suite
                   </span>
                 </div>
@@ -114,7 +114,7 @@ export default function Pricing() {
                 href="/auth"
                 className={`py-3 rounded-lg text-center text-[14px] font-semibold mb-7 transition-colors ${
                   plan.featured
-                    ? "bg-[#059669] text-white hover:bg-[#047857]"
+                    ? "bg-[#0D9488] text-white hover:bg-[#0F766E]"
                     : "bg-[#F3F3F3] text-[#111111] hover:bg-[#EAEAEA]"
                 }`}
               >
@@ -124,7 +124,7 @@ export default function Pricing() {
               <ul className="space-y-2.5 flex-1">
                 {plan.features.map((f, j) => (
                   <li key={j} className="flex items-start gap-2.5 text-[13px]">
-                    <Check className={`w-3.5 h-3.5 mt-0.5 shrink-0 ${plan.featured ? "text-[#059669]" : "text-[#059669]"}`} />
+                    <Check className={`w-3.5 h-3.5 mt-0.5 shrink-0 ${plan.featured ? "text-[#0D9488]" : "text-[#0D9488]"}`} />
                     <span className={plan.featured ? "text-white/70" : "text-[#111111]"}>{f}</span>
                   </li>
                 ))}

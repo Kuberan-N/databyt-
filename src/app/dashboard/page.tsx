@@ -53,8 +53,8 @@ export default function DashboardOverview() {
       value: loading ? "—" : fmt(metrics?.totalOutstanding ?? 0),
       sub:   loading ? "Loading…" : `${metrics?.customerCount ?? 0} active customers`,
       icon: DollarSign,
-      iconBg: "#ECFDF5",
-      iconColor: "#059669",
+      iconBg: "#F0FDFA",
+      iconColor: "#0D9488",
     },
     {
       label: "Days Sales Outstanding",
@@ -81,7 +81,7 @@ export default function DashboardOverview() {
       value: loading ? "—" : `${metrics?.overdueCount ?? 0}`,
       sub:   loading ? "Loading…" : fmt(metrics?.overdueAmount ?? 0) + " at risk",
       icon: AlertTriangle,
-      iconBg: "#ECFDF5",
+      iconBg: "#F0FDFA",
       iconColor: "#DC2626",
     },
   ];
@@ -105,7 +105,7 @@ export default function DashboardOverview() {
         </div>
         <button
           onClick={load}
-          className="flex items-center gap-2 px-3 py-2 rounded-lg border border-[#E2E8F0] text-[#222222] text-sm hover:text-[#059669] hover:border-[#059669]/30 transition-all"
+          className="flex items-center gap-2 px-3 py-2 rounded-lg border border-[#E2E8F0] text-[#222222] text-sm hover:text-[#0D9488] hover:border-[#0D9488]/30 transition-all"
         >
           <RefreshCw className={`w-4 h-4 ${loading ? "animate-spin" : ""}`} />
         </button>
@@ -143,7 +143,7 @@ export default function DashboardOverview() {
           <div className="flex items-center justify-between mb-5">
             <h3 className="text-sm font-semibold text-[#0F172A]">AR Aging Buckets</h3>
             <a href="/dashboard/ar-aging"
-              className="text-[#059669] hover:text-[#047857] text-xs font-medium flex items-center gap-1 transition-colors">
+              className="text-[#0D9488] hover:text-[#0F766E] text-xs font-medium flex items-center gap-1 transition-colors">
               Full report <ArrowRight className="w-3 h-3" />
             </a>
           </div>
@@ -183,14 +183,14 @@ export default function DashboardOverview() {
           <div className="flex items-center justify-between mb-5">
             <h3 className="text-sm font-semibold text-[#0F172A]">Top Overdue Customers</h3>
             <a href="/dashboard/customers"
-              className="text-[#059669] hover:text-[#047857] text-xs font-medium flex items-center gap-1 transition-colors">
+              className="text-[#0D9488] hover:text-[#0F766E] text-xs font-medium flex items-center gap-1 transition-colors">
               All customers <ArrowRight className="w-3 h-3" />
             </a>
           </div>
 
           {loading ? (
             <div className="flex justify-center py-10">
-              <div className="w-5 h-5 border-2 border-[#059669]/20 border-t-[#059669] rounded-full animate-spin" />
+              <div className="w-5 h-5 border-2 border-[#0D9488]/20 border-t-[#0D9488] rounded-full animate-spin" />
             </div>
           ) : overdue.length > 0 ? (
             <div className="space-y-1">
@@ -273,7 +273,7 @@ export default function DashboardOverview() {
           {hasData && (
             <span className={`text-xs font-medium px-2 py-0.5 rounded-full ${
               (metrics?.dso ?? 0) > 45
-                ? "bg-[#ECFDF5] text-[#DC2626]"
+                ? "bg-[#F0FDFA] text-[#DC2626]"
                 : "bg-[#F0FDF4] text-[#16A34A]"
             }`}>
               {(metrics?.dso ?? 0) > 45 ? "Above target" : "On track"}

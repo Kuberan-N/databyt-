@@ -60,25 +60,25 @@ export default function AuthPage() {
 
       {/* Left panel - dark */}
       <div className="hidden lg:flex lg:w-1/2 bg-[#0F172A] flex-col justify-center px-16 relative overflow-hidden">
-        <div className="absolute top-1/4 -left-24 w-80 h-80 bg-[#059669]/20 rounded-full blur-[120px] pointer-events-none" />
-        <div className="absolute bottom-1/4 right-0 w-64 h-64 bg-[#059669]/10 rounded-full blur-[100px] pointer-events-none" />
+        <div className="absolute top-1/4 -left-24 w-80 h-80 bg-[#0D9488]/20 rounded-full blur-[120px] pointer-events-none" />
+        <div className="absolute bottom-1/4 right-0 w-64 h-64 bg-[#0D9488]/10 rounded-full blur-[100px] pointer-events-none" />
 
         <div className="flex items-center gap-2.5 mb-12 relative z-10">
           <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
-            <rect width="28" height="28" rx="6" fill="#059669" />
+            <rect width="28" height="28" rx="6" fill="#0D9488" />
             <rect x="7" y="7" width="3.5" height="14" fill="white" />
             <path d="M10.5 7H15C18.866 7 22 10.134 22 14C22 17.866 18.866 21 15 21H10.5V7Z" fill="white" />
-            <path d="M13.5 10.5H15C16.933 10.5 18.5 12.067 18.5 14C18.5 15.933 16.933 17.5 15 17.5H13.5V10.5Z" fill="#059669" />
+            <path d="M13.5 10.5H15C16.933 10.5 18.5 12.067 18.5 14C18.5 15.933 16.933 17.5 15 17.5H13.5V10.5Z" fill="#0D9488" />
           </svg>
           <span className="font-bold text-[17px] tracking-[-0.03em] text-white leading-none">
-            Data<span className="text-[#059669]">Byt</span>
+            Data<span className="text-[#0D9488]">Byt</span>
           </span>
         </div>
 
         <div className="relative z-10 max-w-sm">
           <h1 className="text-[36px] font-bold text-white leading-[1.15] tracking-[-0.025em] mb-4">
             Stop chasing<br />
-            invoices <span className="text-[#059669]">manually.</span>
+            invoices <span className="text-[#0D9488]">manually.</span>
           </h1>
           <p className="text-white/50 text-[15px] leading-relaxed mb-10">
             AI-powered AR automation that gets you paid faster — no awkward calls needed.
@@ -93,7 +93,7 @@ export default function AuthPage() {
                 transition={{ delay: 0.1 + i * 0.07 }}
                 className="flex items-center gap-3"
               >
-                <CheckCircle className="w-4 h-4 text-[#059669] shrink-0" />
+                <CheckCircle className="w-4 h-4 text-[#0D9488] shrink-0" />
                 <span className="text-white/75 text-[13.5px]">{b}</span>
               </motion.div>
             ))}
@@ -117,13 +117,13 @@ export default function AuthPage() {
         >
           <div className="lg:hidden flex items-center gap-2.5 mb-8 justify-center">
             <svg width="24" height="24" viewBox="0 0 28 28" fill="none">
-              <rect width="28" height="28" rx="6" fill="#059669" />
+              <rect width="28" height="28" rx="6" fill="#0D9488" />
               <rect x="7" y="7" width="3.5" height="14" fill="white" />
               <path d="M10.5 7H15C18.866 7 22 10.134 22 14C22 17.866 18.866 21 15 21H10.5V7Z" fill="white" />
-              <path d="M13.5 10.5H15C16.933 10.5 18.5 12.067 18.5 14C18.5 15.933 16.933 17.5 15 17.5H13.5V10.5Z" fill="#059669" />
+              <path d="M13.5 10.5H15C16.933 10.5 18.5 12.067 18.5 14C18.5 15.933 16.933 17.5 15 17.5H13.5V10.5Z" fill="#0D9488" />
             </svg>
             <span className="font-bold text-[17px] tracking-[-0.03em] text-[#0F172A] leading-none">
-              Data<span className="text-[#059669]">Byt</span>
+              Data<span className="text-[#0D9488]">Byt</span>
             </span>
           </div>
 
@@ -155,7 +155,7 @@ export default function AuthPage() {
                       value={companyName}
                       onChange={e => setCompanyName(e.target.value)}
                       placeholder="Acme Corp"
-                      className="w-full bg-white border border-[#E2E8F0] rounded-xl pl-10 pr-4 py-3 text-[#0F172A] text-[14px] placeholder-[#444444] focus:border-[#059669] focus:ring-2 focus:ring-[#059669]/10 transition-all outline-none"
+                      className="w-full bg-white border border-[#E2E8F0] rounded-xl pl-10 pr-4 py-3 text-[#0F172A] text-[14px] placeholder-[#444444] focus:border-[#0D9488] focus:ring-2 focus:ring-[#0D9488]/10 transition-all outline-none"
                       required
                     />
                   </div>
@@ -171,7 +171,7 @@ export default function AuthPage() {
                     value={email}
                     onChange={e => setEmail(e.target.value)}
                     placeholder="you@company.com"
-                    className="w-full bg-white border border-[#E2E8F0] rounded-xl pl-10 pr-4 py-3 text-[#0F172A] text-[14px] placeholder-[#444444] focus:border-[#059669] focus:ring-2 focus:ring-[#059669]/10 transition-all outline-none"
+                    className="w-full bg-white border border-[#E2E8F0] rounded-xl pl-10 pr-4 py-3 text-[#0F172A] text-[14px] placeholder-[#444444] focus:border-[#0D9488] focus:ring-2 focus:ring-[#0D9488]/10 transition-all outline-none"
                     required
                   />
                 </div>
@@ -187,7 +187,7 @@ export default function AuthPage() {
                       value={password}
                       onChange={e => setPassword(e.target.value)}
                       placeholder="Min. 8 characters"
-                      className="w-full bg-white border border-[#E2E8F0] rounded-xl pl-10 pr-11 py-3 text-[#0F172A] text-[14px] placeholder-[#444444] focus:border-[#059669] focus:ring-2 focus:ring-[#059669]/10 transition-all outline-none"
+                      className="w-full bg-white border border-[#E2E8F0] rounded-xl pl-10 pr-11 py-3 text-[#0F172A] text-[14px] placeholder-[#444444] focus:border-[#0D9488] focus:ring-2 focus:ring-[#0D9488]/10 transition-all outline-none"
                       minLength={8}
                       required
                     />
@@ -203,7 +203,7 @@ export default function AuthPage() {
                     <button
                       type="button"
                       onClick={() => { setMode("forgot"); reset(); }}
-                      className="text-[12px] text-[#333333] hover:text-[#059669] transition-colors mt-2 block text-right w-full"
+                      className="text-[12px] text-[#333333] hover:text-[#0D9488] transition-colors mt-2 block text-right w-full"
                     >
                       Forgot password?
                     </button>
@@ -214,7 +214,7 @@ export default function AuthPage() {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full py-3 bg-[#059669] text-white rounded-xl text-[14px] font-semibold hover:bg-[#047857] transition-colors flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed mt-2"
+                className="w-full py-3 bg-[#0D9488] text-white rounded-xl text-[14px] font-semibold hover:bg-[#0F766E] transition-colors flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed mt-2"
               >
                 {loading
                   ? <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
@@ -226,14 +226,14 @@ export default function AuthPage() {
             <p className="text-center text-[#333333] text-[13px] mt-5">
               {mode === "signup" ? (
                 <>Already have an account?{" "}
-                  <button onClick={() => { setMode("login"); reset(); }} className="text-[#059669] hover:text-[#047857] font-medium">Sign in</button>
+                  <button onClick={() => { setMode("login"); reset(); }} className="text-[#0D9488] hover:text-[#0F766E] font-medium">Sign in</button>
                 </>
               ) : mode === "login" ? (
                 <>Don&apos;t have an account?{" "}
-                  <button onClick={() => { setMode("signup"); reset(); }} className="text-[#059669] hover:text-[#047857] font-medium">Get started</button>
+                  <button onClick={() => { setMode("signup"); reset(); }} className="text-[#0D9488] hover:text-[#0F766E] font-medium">Get started</button>
                 </>
               ) : (
-                <button onClick={() => { setMode("login"); reset(); }} className="text-[#059669] hover:text-[#047857] font-medium">Back to sign in</button>
+                <button onClick={() => { setMode("login"); reset(); }} className="text-[#0D9488] hover:text-[#0F766E] font-medium">Back to sign in</button>
               )}
             </p>
           </div>
