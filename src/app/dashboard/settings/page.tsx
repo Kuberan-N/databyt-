@@ -26,8 +26,8 @@ const currencies = [
   { code: "AED", label: "AED — UAE Dirham" },
 ];
 
-const inputCls = "w-full bg-white border border-[#E2E8F0] rounded-xl px-4 py-3 text-[#0F172A] placeholder-[#333333] focus:border-[#D97706] focus:ring-1 focus:ring-[#D97706]/20 outline-none transition-all text-sm";
-const selectCls = "w-full bg-white border border-[#E2E8F0] rounded-xl px-4 py-3 text-[#0F172A] focus:border-[#D97706] focus:ring-1 focus:ring-[#D97706]/20 outline-none transition-all text-sm appearance-none";
+const inputCls = "w-full bg-white border border-[#E2E8F0] rounded-xl px-4 py-3 text-[#0F172A] placeholder-[#333333] focus:border-[#000000] focus:ring-1 focus:ring-[#000000]/20 outline-none transition-all text-sm";
+const selectCls = "w-full bg-white border border-[#E2E8F0] rounded-xl px-4 py-3 text-[#0F172A] focus:border-[#000000] focus:ring-1 focus:ring-[#000000]/20 outline-none transition-all text-sm appearance-none";
 
 export default function SettingsPage() {
   const { organization, orgUser, user, refreshOrganization } = useAuth();
@@ -91,7 +91,7 @@ export default function SettingsPage() {
           className={`flex items-center gap-2 px-4 py-3 rounded-xl text-sm ${
             status === "success"
               ? "bg-[#F0FDF4] border border-[#BBF7D0] text-[#16A34A]"
-              : "bg-[#FFFBEB] border border-[#FECACA] text-[#DC2626]"
+              : "bg-[#F3F3F3] border border-[#FECACA] text-[#DC2626]"
           }`}>
           {status === "success" ? <CheckCircle className="w-4 h-4 shrink-0" /> : <AlertCircle className="w-4 h-4 shrink-0" />}
           {statusMsg}
@@ -144,11 +144,11 @@ export default function SettingsPage() {
           <p className="text-[#333333] text-xs -mt-2">Appended to all collection emails sent on your behalf.</p>
           <textarea value={emailSignature} onChange={(e) => setEmailSignature(e.target.value)}
             rows={4} placeholder={`Best regards,\nThe ${orgName || "Finance"} Team`}
-            className="w-full bg-white border border-[#E2E8F0] rounded-xl px-4 py-3 text-[#0F172A] placeholder-[#333333] focus:border-[#D97706] focus:ring-1 focus:ring-[#D97706]/20 outline-none transition-all text-sm resize-none font-mono" />
+            className="w-full bg-white border border-[#E2E8F0] rounded-xl px-4 py-3 text-[#0F172A] placeholder-[#333333] focus:border-[#000000] focus:ring-1 focus:ring-[#000000]/20 outline-none transition-all text-sm resize-none font-mono" />
         </motion.div>
 
         <button type="submit" disabled={saving}
-          className="flex items-center gap-2 px-6 py-3 bg-[#D97706] text-white rounded-xl font-semibold hover:bg-[#B45309] transition-colors disabled:opacity-50 disabled:cursor-not-allowed text-sm">
+          className="flex items-center gap-2 px-6 py-3 bg-[#000000] text-white rounded-xl font-semibold hover:bg-[#111111] transition-colors disabled:opacity-50 disabled:cursor-not-allowed text-sm">
           {saving
             ? <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
             : <Save className="w-4 h-4" />}
@@ -193,7 +193,7 @@ export default function SettingsPage() {
             <p className="text-xs text-[#333333] mt-0.5">Change your account password</p>
           </div>
           <a href="/auth/reset-password"
-            className="text-xs text-[#D97706] font-medium px-3 py-1.5 rounded-lg border border-[#D97706]/20 bg-[#FFFBEB] hover:bg-[#E0E7FF] transition-colors">
+            className="text-xs text-[#000000] font-medium px-3 py-1.5 rounded-lg border border-[#000000]/20 bg-[#F3F3F3] hover:bg-[#E0E7FF] transition-colors">
             Change Password
           </a>
         </div>

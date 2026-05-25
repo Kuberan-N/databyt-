@@ -40,10 +40,10 @@ export default function ROICalculator() {
           transition={{ duration: 0.6, ease }}
           className="mb-12"
         >
-          <p className="text-[#D97706] text-[11px] font-semibold uppercase tracking-widest mb-3">ROI Calculator</p>
+          <p className="text-[#000000] text-[11px] font-semibold uppercase tracking-widest mb-3">ROI Calculator</p>
           <h2 className="text-[30px] sm:text-[38px] font-bold text-[#111111] leading-[1.15] tracking-[-0.02em]">
             See exactly what DataByt<br className="hidden sm:block" />{" "}
-            <span className="text-[#D97706]">saves your business.</span>
+            <span className="text-[#000000]">saves your business.</span>
           </h2>
           <p className="text-[#666] text-[15px] mt-3 max-w-md leading-relaxed">
             Move the sliders. The savings update in real time.
@@ -73,7 +73,7 @@ export default function ROICalculator() {
                   value={revenueMillion}
                   onChange={e => setRevenueMillion(Number(e.target.value))}
                   className="w-full"
-                  style={{ accentColor: "#D97706" }}
+                  style={{ accentColor: "#000000" }}
                 />
                 <div className="flex justify-between mt-1.5">
                   <span className="text-[11px] text-[#555555]">$1M</span>
@@ -92,7 +92,7 @@ export default function ROICalculator() {
                   value={dso}
                   onChange={e => setDso(Number(e.target.value))}
                   className="w-full"
-                  style={{ accentColor: "#D97706" }}
+                  style={{ accentColor: "#000000" }}
                 />
                 <div className="flex justify-between mt-1.5">
                   <span className="text-[11px] text-[#555555]">20 days</span>
@@ -124,7 +124,7 @@ export default function ROICalculator() {
                 <span className="text-[13px] text-white/50 mb-1 leading-none">DSO</span>
                 <span className="text-[22px] font-bold text-white leading-none line-through decoration-white/30">{dso}d</span>
                 <span className="text-[13px] text-white/50 mb-1 leading-none">→</span>
-                <span className="text-[22px] font-bold text-[#D97706] leading-none">{r.newDso}d</span>
+                <span className="text-[22px] font-bold text-[#000000] leading-none">{r.newDso}d</span>
               </div>
 
               <p className="text-[36px] font-bold text-white mt-4 leading-none">{fmt(r.cashFreed)}</p>
@@ -145,7 +145,7 @@ export default function ROICalculator() {
             </div>
 
             {/* Red card — net benefit */}
-            <div className="rounded-xl bg-[#D97706] p-5 text-white flex items-center justify-between">
+            <div className="rounded-xl bg-[#000000] p-5 text-white flex items-center justify-between">
               <div>
                 <p className="text-white/70 text-[11px] font-semibold mb-1">Net annual benefit</p>
                 <p className="text-[28px] font-bold leading-none">

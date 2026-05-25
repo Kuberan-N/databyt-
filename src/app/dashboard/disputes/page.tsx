@@ -10,8 +10,8 @@ const fmt = (n: number) =>
   new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }).format(n);
 
 const STATUS_STYLES: Record<DisputeStatus, { bg: string; text: string; label: string }> = {
-  open:          { bg: "bg-[#FFFBEB]", text: "text-[#D97706]",  label: "Open" },
-  investigating: { bg: "bg-[#FFFBEB]", text: "text-[#D97706]",  label: "Investigating" },
+  open:          { bg: "bg-[#F3F3F3]", text: "text-[#000000]",  label: "Open" },
+  investigating: { bg: "bg-[#F3F3F3]", text: "text-[#000000]",  label: "Investigating" },
   resolved:      { bg: "bg-[#F0FDF4]", text: "text-[#16A34A]",  label: "Resolved" },
   rejected:      { bg: "bg-[#F1F5F9]", text: "text-[#222222]",  label: "Rejected" },
 };
@@ -81,7 +81,7 @@ export default function DisputesPage() {
           <p className="text-[#222222] text-sm mt-1">Track and resolve invoice disputes</p>
         </div>
         <button onClick={load}
-          className="flex items-center gap-2 px-3 py-2 rounded-lg border border-[#E2E8F0] text-[#222222] text-sm hover:text-[#D97706] hover:border-[#D97706]/30 transition-all">
+          className="flex items-center gap-2 px-3 py-2 rounded-lg border border-[#E2E8F0] text-[#222222] text-sm hover:text-[#000000] hover:border-[#000000]/30 transition-all">
           <RefreshCw className={`w-4 h-4 ${loading ? "animate-spin" : ""}`} />
         </button>
       </div>
@@ -89,15 +89,15 @@ export default function DisputesPage() {
       {/* Status cards */}
       <div className="grid sm:grid-cols-4 gap-4">
         {[
-          { key: "open",          label: "Open",          icon: AlertTriangle, color: "#D97706" },
-          { key: "investigating", label: "Investigating", icon: Clock,         color: "#D97706" },
+          { key: "open",          label: "Open",          icon: AlertTriangle, color: "#000000" },
+          { key: "investigating", label: "Investigating", icon: Clock,         color: "#000000" },
           { key: "resolved",      label: "Resolved",      icon: CheckCircle,   color: "#16A34A" },
           { key: "rejected",      label: "Rejected",      icon: CheckCircle,   color: "#333333" },
         ].map((s, i) => (
           <motion.button key={s.key}
             initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.05 }}
             onClick={() => setFilter(filter === s.key as DisputeStatus ? "all" : s.key as DisputeStatus)}
-            className={`glass rounded-2xl p-4 text-left transition-all ${filter === s.key ? "ring-2 ring-[#D97706]" : ""}`}>
+            className={`glass rounded-2xl p-4 text-left transition-all ${filter === s.key ? "ring-2 ring-[#000000]" : ""}`}>
             <div className="w-8 h-8 rounded-lg flex items-center justify-center mb-2"
               style={{ background: `${s.color}18` }}>
               <s.icon className="w-4 h-4" style={{ color: s.color }} />
@@ -132,7 +132,7 @@ export default function DisputesPage() {
             <tbody>
               {loading ? (
                 <tr><td colSpan={7} className="text-center py-12">
-                  <div className="w-5 h-5 border-2 border-[#D97706]/20 border-t-[#D97706] rounded-full animate-spin mx-auto" />
+                  <div className="w-5 h-5 border-2 border-[#000000]/20 border-t-[#000000] rounded-full animate-spin mx-auto" />
                 </td></tr>
               ) : filtered.length === 0 ? (
                 <tr><td colSpan={7} className="text-center py-12 text-[#333333]">
@@ -156,7 +156,7 @@ export default function DisputesPage() {
                       {(d.status === "open" || d.status === "investigating") && (
                         <div className="relative">
                           <button onClick={() => setDropdown(openDropdown === d.id ? null : d.id)}
-                            className="flex items-center gap-1 text-xs text-[#222222] hover:text-[#D97706] transition-colors font-medium px-2 py-1 rounded-lg border border-[#E2E8F0] hover:border-[#D97706]/30">
+                            className="flex items-center gap-1 text-xs text-[#222222] hover:text-[#000000] transition-colors font-medium px-2 py-1 rounded-lg border border-[#E2E8F0] hover:border-[#000000]/30">
                             Update <ChevronDown className="w-3 h-3" />
                           </button>
                           {openDropdown === d.id && (
@@ -166,10 +166,10 @@ export default function DisputesPage() {
                                 rows={2}
                                 value={resolutionNotes[d.id] ?? ""}
                                 onChange={e => setNotes(n => ({ ...n, [d.id]: e.target.value }))}
-                                className="w-full text-xs border border-[#E2E8F0] rounded-lg px-2 py-1.5 resize-none outline-none focus:border-[#D97706] text-[#0F172A] placeholder-[#333333]"
+                                className="w-full text-xs border border-[#E2E8F0] rounded-lg px-2 py-1.5 resize-none outline-none focus:border-[#000000] text-[#0F172A] placeholder-[#333333]"
                               />
                               {[
-                                { status: "investigating" as DisputeStatus, label: "→ Investigating", color: "text-[#D97706]" },
+                                { status: "investigating" as DisputeStatus, label: "→ Investigating", color: "text-[#000000]" },
                                 { status: "resolved" as DisputeStatus,      label: "✓ Mark Resolved", color: "text-[#16A34A]" },
                                 { status: "rejected" as DisputeStatus,      label: "✗ Reject Dispute", color: "text-[#222222]" },
                               ].map(opt => (

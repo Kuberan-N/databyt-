@@ -36,16 +36,16 @@ export default async function PayInvoicePage({
       <div className="w-full max-w-md">
         {/* Header */}
         <div className="text-center mb-8">
-          <div className="w-10 h-10 rounded-xl bg-[#D97706] flex items-center justify-center mx-auto mb-3">
+          <div className="w-10 h-10 rounded-xl bg-[#000000] flex items-center justify-center mx-auto mb-3">
             <svg width="20" height="20" viewBox="0 0 28 28" fill="none">
               <path
                 d="M6 6H14C18.4183 6 22 9.58172 22 14C22 18.4183 18.4183 22 14 22H6V6Z"
                 fill="white"
               />
-              <rect x="6" y="6" width="4" height="16" fill="#D97706" />
+              <rect x="6" y="6" width="4" height="16" fill="#000000" />
             </svg>
           </div>
-          <p className="text-xs font-semibold text-[#D97706] uppercase tracking-widest">DataByt</p>
+          <p className="text-xs font-semibold text-[#000000] uppercase tracking-widest">DataByt</p>
           <p className="text-[#333333] text-sm mt-1">Secure payment portal</p>
         </div>
 
@@ -101,7 +101,7 @@ export default async function PayInvoicePage({
         </div>
 
         {invoice.status === "disputed" && (
-          <p className="text-center text-xs text-[#D97706] mt-4">
+          <p className="text-center text-xs text-[#000000] mt-4">
             This invoice is under dispute. Please contact the sender before paying.
           </p>
         )}

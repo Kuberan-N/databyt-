@@ -17,7 +17,7 @@ const fmt = (n: number) =>
   new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }).format(n);
 
 function StatCard({
-  label, value, sub, icon: Icon, iconColor = "#D97706", delay = 0,
+  label, value, sub, icon: Icon, iconColor = "#000000", delay = 0,
 }: {
   label: string; value: string; sub?: string;
   icon: React.ElementType; iconColor?: string; delay?: number;
@@ -40,7 +40,7 @@ function StatCard({
 }
 
 function CEIGauge({ value, prev }: { value: number; prev: number }) {
-  const color = value >= 80 ? "#16A34A" : value >= 60 ? "#D97706" : "#DC2626";
+  const color = value >= 80 ? "#16A34A" : value >= 60 ? "#000000" : "#DC2626";
   const diff = value - prev;
   return (
     <div className="flex flex-col items-center justify-center py-6">
@@ -97,7 +97,7 @@ export default function AnalyticsPage() {
 
   const spinner = (
     <div className="flex items-center justify-center min-h-[60vh]">
-      <div className="w-8 h-8 border-2 border-[#D97706]/20 border-t-[#D97706] rounded-full animate-spin" />
+      <div className="w-8 h-8 border-2 border-[#000000]/20 border-t-[#000000] rounded-full animate-spin" />
     </div>
   );
 
@@ -113,7 +113,7 @@ export default function AnalyticsPage() {
           <p className="text-[#222222] text-sm mt-1">Collections performance and AR intelligence</p>
         </div>
         <button onClick={load}
-          className="flex items-center gap-2 px-3 py-2 rounded-lg border border-[#E2E8F0] text-[#222222] text-sm hover:text-[#D97706] hover:border-[#D97706]/30 transition-all">
+          className="flex items-center gap-2 px-3 py-2 rounded-lg border border-[#E2E8F0] text-[#222222] text-sm hover:text-[#000000] hover:border-[#000000]/30 transition-all">
           <RefreshCw className={`w-4 h-4 ${loading ? "animate-spin" : ""}`} />
         </button>
       </div>
@@ -125,7 +125,7 @@ export default function AnalyticsPage() {
         <StatCard label="Payment Conversion" value={`${d?.emailEffectiveness.paymentConversionRate ?? 0}%`}
           sub="Dunned invoices that paid" icon={CheckCircle} iconColor="#16A34A" delay={0.05} />
         <StatCard label="Avg Days to Pay" value={`${d?.velocity.avgDaysToPayAfterReminder ?? 0}d`}
-          sub="After first reminder email" icon={Clock} iconColor="#D97706" delay={0.1} />
+          sub="After first reminder email" icon={Clock} iconColor="#000000" delay={0.1} />
         <StatCard label="Active Disputes" value={d?.activeDisputes.toString() ?? "0"}
           sub={`${d?.resolvedDisputes ?? 0} resolved`} icon={AlertTriangle} iconColor="#DC2626" delay={0.15} />
       </div>
@@ -168,7 +168,7 @@ export default function AnalyticsPage() {
             <div className="space-y-4">
               {[
                 { label: "Sent", value: d.emailEffectiveness.totalSent, color: "#222222", pct: 100 },
-                { label: "Opened", value: d.emailEffectiveness.opened, color: "#D97706", pct: d.emailEffectiveness.openRate },
+                { label: "Opened", value: d.emailEffectiveness.opened, color: "#000000", pct: d.emailEffectiveness.openRate },
                 { label: "Clicked", value: d.emailEffectiveness.clicked, color: "#16A34A", pct: d.emailEffectiveness.totalSent > 0 ? Math.round((d.emailEffectiveness.clicked / d.emailEffectiveness.totalSent) * 100) : 0 },
                 { label: "Bounced", value: d.emailEffectiveness.bounced, color: "#DC2626", pct: d.emailEffectiveness.totalSent > 0 ? Math.round((d.emailEffectiveness.bounced / d.emailEffectiveness.totalSent) * 100) : 0 },
               ].map((row) => (
@@ -186,7 +186,7 @@ export default function AnalyticsPage() {
               <div className="pt-3 border-t border-[#E2E8F0]">
                 <div className="flex items-center justify-between">
                   <span className="text-xs text-[#222222]">Payment conversion (dunned → paid)</span>
-                  <span className="text-sm font-bold text-[#D97706]">{d.emailEffectiveness.paymentConversionRate}%</span>
+                  <span className="text-sm font-bold text-[#000000]">{d.emailEffectiveness.paymentConversionRate}%</span>
                 </div>
               </div>
             </div>
@@ -210,7 +210,7 @@ export default function AnalyticsPage() {
                 contentStyle={{ background: "#FFFFFF", border: "1px solid #E2E8F0", borderRadius: 12, fontSize: 12, color: "#0F172A" }}
                 formatter={(v) => [fmt(Number(v)), "Collected"]}
               />
-              <Bar dataKey="collected" fill="#D97706" radius={[6, 6, 0, 0]} />
+              <Bar dataKey="collected" fill="#000000" radius={[6, 6, 0, 0]} />
             </BarChart>
           </ResponsiveContainer>
         ) : (
@@ -227,15 +227,15 @@ export default function AnalyticsPage() {
         <StatCard label="Median Pay Speed" value={`${d?.velocity.medianDaysToPayAfterReminder ?? 0}d`}
           sub="P50 days after reminder" icon={Clock} iconColor="#222222" delay={0.38} />
         <StatCard label="Slowest Payment" value={`${d?.velocity.slowestPaymentDays ?? 0}d`}
-          sub="Worst-case observed" icon={TrendingDown} iconColor="#D97706" delay={0.41} />
+          sub="Worst-case observed" icon={TrendingDown} iconColor="#000000" delay={0.41} />
         <StatCard label="Bad Debt Rate" value={`${d?.badDebtRate ?? 0}%`}
           sub={`${fmt(d?.totalWrittenOff ?? 0)} written off`} icon={DollarSign} iconColor="#DC2626" delay={0.44} />
       </div>
 
       {/* CEI explanation */}
       <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5 }}
-        className="rounded-2xl p-5 bg-[#FFFBEB] border border-[#D97706]/15">
-        <p className="text-xs font-semibold text-[#D97706] mb-1">What is CEI?</p>
+        className="rounded-2xl p-5 bg-[#F3F3F3] border border-[#000000]/15">
+        <p className="text-xs font-semibold text-[#000000] mb-1">What is CEI?</p>
         <p className="text-xs text-[#7F1D1D] leading-relaxed">
           The Collections Effectiveness Index measures how much of your collectible AR you actually collected in a period.
           100% = you collected everything. 80%+ is excellent. Below 60% means invoices are aging into bad debt.

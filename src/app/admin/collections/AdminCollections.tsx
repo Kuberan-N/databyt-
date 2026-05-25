@@ -46,13 +46,13 @@ function getEscalationLevel(daysOverdue: number): 1 | 2 | 3 {
 
 const LEVEL_STYLE = {
   1: { label: "L1", cls: "bg-[#F0FDF4] text-[#16A34A]" },
-  2: { label: "L2", cls: "bg-[#FFFBEB] text-[#D97706]" },
-  3: { label: "L3", cls: "bg-[#FFFBEB] text-[#DC2626]" },
+  2: { label: "L2", cls: "bg-[#F3F3F3] text-[#000000]" },
+  3: { label: "L3", cls: "bg-[#F3F3F3] text-[#DC2626]" },
 };
 
 const SEGMENT_STYLE: Record<string, string> = {
-  strategic: "bg-[#FFFBEB] text-[#3730A3] border-[#3730A3]/20",
-  at_risk:   "bg-[#FFFBEB] text-[#DC2626] border-[#EF4444]/20",
+  strategic: "bg-[#F3F3F3] text-[#3730A3] border-[#3730A3]/20",
+  at_risk:   "bg-[#F3F3F3] text-[#DC2626] border-[#EF4444]/20",
 };
 
 export default function AdminCollections() {
@@ -202,7 +202,7 @@ export default function AdminCollections() {
             className={`flex items-center gap-2 px-3 py-2 rounded-lg border text-xs font-medium transition-all disabled:opacity-50 ${
               isPaused
                 ? "border-[#16A34A]/30 bg-[#F0FDF4] text-[#16A34A] hover:bg-[#DCFCE7]"
-                : "border-[#F59E0B]/30 bg-[#FFFBEB] text-[#D97706] hover:bg-[#FEF3C7]"
+                : "border-[#F59E0B]/30 bg-[#F3F3F3] text-[#000000] hover:bg-[#FEF3C7]"
             }`}>
             {isPaused ? <PlayCircle className="w-3.5 h-3.5" /> : <PauseCircle className="w-3.5 h-3.5" />}
             {isPaused ? "Resume Collections" : "Pause Client"}
@@ -217,8 +217,8 @@ export default function AdminCollections() {
       {/* Paused banner */}
       {isPaused && (
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}
-          className="flex items-center gap-3 px-5 py-3.5 rounded-2xl bg-[#FFFBEB] border border-[#F59E0B]/20">
-          <PauseCircle className="w-4 h-4 text-[#D97706] shrink-0" />
+          className="flex items-center gap-3 px-5 py-3.5 rounded-2xl bg-[#F3F3F3] border border-[#F59E0B]/20">
+          <PauseCircle className="w-4 h-4 text-[#000000] shrink-0" />
           <p className="text-sm text-[#92400E]">Collections are paused for {selectedOrg.name}. No emails will be drafted or sent until resumed.</p>
         </motion.div>
       )}
@@ -258,7 +258,7 @@ export default function AdminCollections() {
                   className="flex items-center gap-2">
                   <span className="text-xs text-[#222222]">{selected.length} selected</span>
                   <button onClick={bulkDraft} disabled={bulkDrafting || isPaused}
-                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#FFFBEB] border border-[#3730A3]/20 text-[#3730A3] text-xs font-medium hover:bg-[#E0E7FF] transition-all disabled:opacity-40">
+                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#F3F3F3] border border-[#3730A3]/20 text-[#3730A3] text-xs font-medium hover:bg-[#E0E7FF] transition-all disabled:opacity-40">
                     {bulkDrafting ? (
                       <div className="w-3 h-3 border border-[#3730A3]/30 border-t-[#3730A3] rounded-full animate-spin" />
                     ) : (
@@ -299,7 +299,7 @@ export default function AdminCollections() {
                       }
                     </button>
 
-                    <div className="w-9 h-9 rounded-xl bg-[#FFFBEB] border border-[#EF4444]/20 flex items-center justify-center shrink-0">
+                    <div className="w-9 h-9 rounded-xl bg-[#F3F3F3] border border-[#EF4444]/20 flex items-center justify-center shrink-0">
                       <AlertTriangle className="w-4 h-4 text-[#DC2626]" />
                     </div>
 
@@ -314,8 +314,8 @@ export default function AdminCollections() {
 
                         {item.priority_score > 0 && (
                           <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded-md ${
-                            item.priority_score >= 70 ? "bg-[#FFFBEB] text-[#DC2626]" :
-                            item.priority_score >= 40 ? "bg-[#FFFBEB] text-[#D97706]" :
+                            item.priority_score >= 70 ? "bg-[#F3F3F3] text-[#DC2626]" :
+                            item.priority_score >= 40 ? "bg-[#F3F3F3] text-[#000000]" :
                             "bg-[#F1F5F9] text-[#222222]"
                           }`}>
                             P{Math.round(item.priority_score)}
@@ -329,7 +329,7 @@ export default function AdminCollections() {
                         )}
 
                         {hasReply && (
-                          <span className="flex items-center gap-1 text-[10px] font-medium px-1.5 py-0.5 rounded-md bg-[#FFF1F2] border border-[#D97706]/20 text-[#D97706]">
+                          <span className="flex items-center gap-1 text-[10px] font-medium px-1.5 py-0.5 rounded-md bg-[#FFF1F2] border border-[#000000]/20 text-[#000000]">
                             <MessageSquare className="w-2.5 h-2.5" /> Reply
                           </span>
                         )}
@@ -345,7 +345,7 @@ export default function AdminCollections() {
                             <Mail className="w-3 h-3" />{item.customer.email}
                           </span>
                         ) : (
-                          <span className="text-xs text-[#D97706] flex items-center gap-1">
+                          <span className="text-xs text-[#000000] flex items-center gap-1">
                             <AlertTriangle className="w-3 h-3" /> No email on file
                           </span>
                         )}
@@ -355,7 +355,7 @@ export default function AdminCollections() {
                     <div className="flex items-center gap-2 shrink-0">
                       {!item.draftSubject && !item.drafting && !isPaused && (
                         <button onClick={() => draftEmail(item)}
-                          className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#FFFBEB] border border-[#3730A3]/20 text-[#3730A3] text-xs font-medium hover:bg-[#E0E7FF] transition-all">
+                          className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#F3F3F3] border border-[#3730A3]/20 text-[#3730A3] text-xs font-medium hover:bg-[#E0E7FF] transition-all">
                           <Edit3 className="w-3 h-3" /> Draft
                         </button>
                       )}
@@ -373,7 +373,7 @@ export default function AdminCollections() {
                         </button>
                       )}
                       <button onClick={() => skipItem(item.id)}
-                        className="p-1.5 rounded-lg text-[#333333] hover:text-[#DC2626] hover:bg-[#FFFBEB] transition-all" title="Skip">
+                        className="p-1.5 rounded-lg text-[#333333] hover:text-[#DC2626] hover:bg-[#F3F3F3] transition-all" title="Skip">
                         <XCircle className="w-4 h-4" />
                       </button>
                     </div>

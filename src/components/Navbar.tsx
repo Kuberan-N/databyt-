@@ -15,16 +15,16 @@ export function Logo({ className = "" }: { className?: string }) {
   return (
     <span className={`inline-flex items-center gap-2.5 select-none ${className}`}>
       <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <rect width="28" height="28" rx="6" fill="#D97706" />
+        <rect width="28" height="28" rx="6" fill="#000000" />
         {/* Left vertical bar of D */}
         <rect x="7" y="7" width="3.5" height="14" fill="white" />
         {/* D arc — right bowl */}
         <path d="M10.5 7H15C18.866 7 22 10.134 22 14C22 17.866 18.866 21 15 21H10.5V7Z" fill="white" />
         {/* Inner cutout to make D hollow */}
-        <path d="M13.5 10.5H15C16.933 10.5 18.5 12.067 18.5 14C18.5 15.933 16.933 17.5 15 17.5H13.5V10.5Z" fill="#D97706" />
+        <path d="M13.5 10.5H15C16.933 10.5 18.5 12.067 18.5 14C18.5 15.933 16.933 17.5 15 17.5H13.5V10.5Z" fill="#000000" />
       </svg>
       <span className="font-bold tracking-[-0.03em] text-[#111111] leading-none">
-        Data<span className="text-[#D97706]">Byt</span>
+        Data<span className="text-[#000000]">Byt</span>
       </span>
     </span>
   );
@@ -56,7 +56,7 @@ export default function Navbar() {
             Sign in
           </a>
           <a href="/auth"
-            className="px-4 py-2 rounded-lg bg-[#D97706] text-white text-[13.5px] font-semibold hover:bg-[#B45309] transition-colors">
+            className="px-4 py-2 rounded-lg bg-[#000000] text-white text-[13.5px] font-semibold hover:bg-[#111111] transition-colors">
             Start Free Trial
           </a>
         </div>
@@ -81,13 +81,13 @@ export default function Navbar() {
             <div className="px-6 py-4 flex flex-col gap-1">
               {navLinks.map(l => (
                 <a key={l.href} href={l.href}
-                  className="text-[#444444] text-sm font-medium hover:text-[#D97706] transition-colors py-2.5"
+                  className="text-[#444444] text-sm font-medium hover:text-[#000000] transition-colors py-2.5"
                   onClick={() => setOpen(false)}>
                   {l.label}
                 </a>
               ))}
               <a href="/auth"
-                className="mt-3 px-4 py-3 rounded-lg bg-[#D97706] text-white text-sm font-semibold text-center hover:bg-[#B45309] transition-colors"
+                className="mt-3 px-4 py-3 rounded-lg bg-[#000000] text-white text-sm font-semibold text-center hover:bg-[#111111] transition-colors"
                 onClick={() => setOpen(false)}>
                 Start Free Trial
               </a>

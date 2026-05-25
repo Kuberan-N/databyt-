@@ -2,25 +2,25 @@
 
 @theme {
   /* ─── Primary: Indigo ─── */
-  --color-primary-50:  #FFFBEB;
+  --color-primary-50:  #F3F3F3;
   --color-primary-100: #E0E7FF;
   --color-primary-200: #C7D2FE;
   --color-primary-300: #A5B4FC;
   --color-primary-400: #818CF8;
-  --color-primary-500: #D97706;
-  --color-primary-600: #B45309;
+  --color-primary-500: #000000;
+  --color-primary-600: #111111;
   --color-primary-700: #3730A3;
   --color-primary-800: #312E81;
   --color-primary-900: #1E1B4B;
 
   /* ─── Accent: same as primary ─── */
-  --color-accent-50:  #FFFBEB;
+  --color-accent-50:  #F3F3F3;
   --color-accent-100: #E0E7FF;
   --color-accent-200: #C7D2FE;
   --color-accent-300: #A5B4FC;
   --color-accent-400: #818CF8;
-  --color-accent-500: #D97706;
-  --color-accent-600: #B45309;
+  --color-accent-500: #000000;
+  --color-accent-600: #111111;
   --color-accent-700: #3730A3;
 
   /* ─── Success: Green ─── */
@@ -31,10 +31,10 @@
   --color-success-600: #15803D;
 
   /* ─── Warning: Amber ─── */
-  --color-warning-50:  #FFFBEB;
+  --color-warning-50:  #F3F3F3;
   --color-warning-100: #FEF3C7;
   --color-warning-400: #F59E0B;
-  --color-warning-500: #D97706;
+  --color-warning-500: #000000;
 
   /* ─── Danger: Red ─── */
   --color-danger-50:  #FEF2F2;
@@ -117,7 +117,7 @@ aside  .text-white {
 
 /* ─── gradient-text ─── */
 .gradient-text {
-  background: linear-gradient(135deg, #D97706 0%, #B45309 100%);
+  background: linear-gradient(135deg, #000000 0%, #111111 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -133,9 +133,9 @@ aside  .text-white {
 
 /* ─── Sidebar active nav item ─── */
 .nav-active {
-  background: #FFFBEB;
-  border-left: 3px solid #D97706;
-  color: #D97706;
+  background: #F3F3F3;
+  border-left: 3px solid #000000;
+  color: #000000;
 }
 
 /* ─── Range input ─── */
@@ -154,7 +154,7 @@ input[type="range"]::-webkit-slider-thumb {
   width: 18px;
   height: 18px;
   border-radius: 50%;
-  background: #D97706;
+  background: #000000;
   cursor: pointer;
   border: 2px solid white;
   box-shadow: 0 1px 4px rgba(79,70,229,0.4);
@@ -163,7 +163,7 @@ input[type="range"]::-moz-range-thumb {
   width: 18px;
   height: 18px;
   border-radius: 50%;
-  background: #D97706;
+  background: #000000;
   cursor: pointer;
   border: 2px solid white;
   box-shadow: 0 1px 4px rgba(79,70,229,0.4);

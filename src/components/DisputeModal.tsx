@@ -61,7 +61,7 @@ export default function DisputeModal({
     }
   }
 
-  const inputCls = "w-full bg-white border border-[#E2E8F0] rounded-xl px-4 py-3 text-[#0F172A] placeholder-[#333333] focus:border-[#D97706] focus:ring-1 focus:ring-[#D97706]/20 outline-none transition-all text-sm";
+  const inputCls = "w-full bg-white border border-[#E2E8F0] rounded-xl px-4 py-3 text-[#0F172A] placeholder-[#333333] focus:border-[#000000] focus:ring-1 focus:ring-[#000000]/20 outline-none transition-all text-sm";
 
   return (
     <AnimatePresence>
@@ -82,8 +82,8 @@ export default function DisputeModal({
             >
               <div className="flex items-center justify-between px-6 py-4 border-b border-[#E2E8F0]">
                 <div className="flex items-center gap-2">
-                  <div className="w-8 h-8 rounded-lg bg-[#FFFBEB] flex items-center justify-center">
-                    <AlertTriangle className="w-4 h-4 text-[#D97706]" />
+                  <div className="w-8 h-8 rounded-lg bg-[#F3F3F3] flex items-center justify-center">
+                    <AlertTriangle className="w-4 h-4 text-[#000000]" />
                   </div>
                   <div>
                     <h3 className="text-sm font-semibold text-[#0F172A]">File a Dispute</h3>
@@ -97,7 +97,7 @@ export default function DisputeModal({
 
               <form onSubmit={handleSubmit} className="p-6 space-y-4">
                 {error && (
-                  <div className="px-4 py-3 rounded-xl bg-[#FFFBEB] border border-[#FECACA] text-[#DC2626] text-sm">
+                  <div className="px-4 py-3 rounded-xl bg-[#F3F3F3] border border-[#FECACA] text-[#DC2626] text-sm">
                     {error}
                   </div>
                 )}
@@ -119,11 +119,11 @@ export default function DisputeModal({
                     onChange={e => setDescription(e.target.value)}
                     rows={3}
                     placeholder="Provide any additional context..."
-                    className="w-full bg-white border border-[#E2E8F0] rounded-xl px-4 py-3 text-[#0F172A] placeholder-[#333333] focus:border-[#D97706] focus:ring-1 focus:ring-[#D97706]/20 outline-none transition-all text-sm resize-none"
+                    className="w-full bg-white border border-[#E2E8F0] rounded-xl px-4 py-3 text-[#0F172A] placeholder-[#333333] focus:border-[#000000] focus:ring-1 focus:ring-[#000000]/20 outline-none transition-all text-sm resize-none"
                   />
                 </div>
 
-                <div className="p-3 rounded-xl bg-[#FFFBEB] border border-[#FEF08A]">
+                <div className="p-3 rounded-xl bg-[#F3F3F3] border border-[#FEF08A]">
                   <p className="text-xs text-[#713F12]">
                     Filing a dispute will pause automated collections on this invoice until resolved.
                     Your DataByt operator will investigate and respond within 2 business days.
@@ -136,7 +136,7 @@ export default function DisputeModal({
                     Cancel
                   </button>
                   <button type="submit" disabled={saving}
-                    className="flex-1 px-4 py-2.5 rounded-xl bg-[#D97706] text-white text-sm font-bold hover:bg-[#B45309] transition-colors disabled:opacity-50">
+                    className="flex-1 px-4 py-2.5 rounded-xl bg-[#000000] text-white text-sm font-bold hover:bg-[#111111] transition-colors disabled:opacity-50">
                     {saving ? "Filing..." : "File Dispute"}
                   </button>
                 </div>

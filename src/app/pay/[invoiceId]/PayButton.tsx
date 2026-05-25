@@ -40,14 +40,14 @@ export default function PayButton({
   return (
     <>
       {error && (
-        <div className="mb-3 px-4 py-2.5 rounded-xl bg-[#FFFBEB] border border-[#FECACA] text-[#DC2626] text-sm">
+        <div className="mb-3 px-4 py-2.5 rounded-xl bg-[#F3F3F3] border border-[#FECACA] text-[#DC2626] text-sm">
           {error}
         </div>
       )}
       <button
         onClick={handlePay}
         disabled={loading}
-        className="w-full py-3.5 rounded-xl bg-[#D97706] text-white font-bold text-sm hover:bg-[#B45309] transition-colors disabled:opacity-60 flex items-center justify-center gap-2"
+        className="w-full py-3.5 rounded-xl bg-[#000000] text-white font-bold text-sm hover:bg-[#111111] transition-colors disabled:opacity-60 flex items-center justify-center gap-2"
       >
         {loading ? (
           <>

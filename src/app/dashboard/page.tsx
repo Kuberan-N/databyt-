@@ -14,7 +14,7 @@ const fmt = (n: number) =>
 
 const BUCKETS = [
   { label: "Current",    color: "#16A34A", track: "#DCFCE7" },
-  { label: "1–30 days",  color: "#D97706", track: "#FEF3C7" },
+  { label: "1–30 days",  color: "#000000", track: "#FEF3C7" },
   { label: "31–60 days", color: "#EA580C", track: "#FFEDD5" },
   { label: "61–90 days", color: "#DC2626", track: "#E0E7FF" },
   { label: "90+ days",   color: "#991B1B", track: "#E0E7FF" },
@@ -53,8 +53,8 @@ export default function DashboardOverview() {
       value: loading ? "—" : fmt(metrics?.totalOutstanding ?? 0),
       sub:   loading ? "Loading…" : `${metrics?.customerCount ?? 0} active customers`,
       icon: DollarSign,
-      iconBg: "#FFFBEB",
-      iconColor: "#D97706",
+      iconBg: "#F3F3F3",
+      iconColor: "#000000",
     },
     {
       label: "Days Sales Outstanding",
@@ -63,8 +63,8 @@ export default function DashboardOverview() {
         ? (metrics?.dso && metrics.dso > 45 ? "⚠ Above 45-day target" : "✓ Within 45-day target")
         : "Import invoices to calculate",
       icon: Clock,
-      iconBg: "#FFFBEB",
-      iconColor: "#D97706",
+      iconBg: "#F3F3F3",
+      iconColor: "#000000",
     },
     {
       label: "Collected This Month",
@@ -81,7 +81,7 @@ export default function DashboardOverview() {
       value: loading ? "—" : `${metrics?.overdueCount ?? 0}`,
       sub:   loading ? "Loading…" : fmt(metrics?.overdueAmount ?? 0) + " at risk",
       icon: AlertTriangle,
-      iconBg: "#FFFBEB",
+      iconBg: "#F3F3F3",
       iconColor: "#DC2626",
     },
   ];
@@ -105,7 +105,7 @@ export default function DashboardOverview() {
         </div>
         <button
           onClick={load}
-          className="flex items-center gap-2 px-3 py-2 rounded-lg border border-[#E2E8F0] text-[#222222] text-sm hover:text-[#D97706] hover:border-[#D97706]/30 transition-all"
+          className="flex items-center gap-2 px-3 py-2 rounded-lg border border-[#E2E8F0] text-[#222222] text-sm hover:text-[#000000] hover:border-[#000000]/30 transition-all"
         >
           <RefreshCw className={`w-4 h-4 ${loading ? "animate-spin" : ""}`} />
         </button>
@@ -143,7 +143,7 @@ export default function DashboardOverview() {
           <div className="flex items-center justify-between mb-5">
             <h3 className="text-sm font-semibold text-[#0F172A]">AR Aging Buckets</h3>
             <a href="/dashboard/ar-aging"
-              className="text-[#D97706] hover:text-[#B45309] text-xs font-medium flex items-center gap-1 transition-colors">
+              className="text-[#000000] hover:text-[#111111] text-xs font-medium flex items-center gap-1 transition-colors">
               Full report <ArrowRight className="w-3 h-3" />
             </a>
           </div>
@@ -183,14 +183,14 @@ export default function DashboardOverview() {
           <div className="flex items-center justify-between mb-5">
             <h3 className="text-sm font-semibold text-[#0F172A]">Top Overdue Customers</h3>
             <a href="/dashboard/customers"
-              className="text-[#D97706] hover:text-[#B45309] text-xs font-medium flex items-center gap-1 transition-colors">
+              className="text-[#000000] hover:text-[#111111] text-xs font-medium flex items-center gap-1 transition-colors">
               All customers <ArrowRight className="w-3 h-3" />
             </a>
           </div>
 
           {loading ? (
             <div className="flex justify-center py-10">
-              <div className="w-5 h-5 border-2 border-[#D97706]/20 border-t-[#D97706] rounded-full animate-spin" />
+              <div className="w-5 h-5 border-2 border-[#000000]/20 border-t-[#000000] rounded-full animate-spin" />
             </div>
           ) : overdue.length > 0 ? (
             <div className="space-y-1">
@@ -273,7 +273,7 @@ export default function DashboardOverview() {
           {hasData && (
             <span className={`text-xs font-medium px-2 py-0.5 rounded-full ${
               (metrics?.dso ?? 0) > 45
-                ? "bg-[#FFFBEB] text-[#DC2626]"
+                ? "bg-[#F3F3F3] text-[#DC2626]"
                 : "bg-[#F0FDF4] text-[#16A34A]"
             }`}>
               {(metrics?.dso ?? 0) > 45 ? "Above target" : "On track"}

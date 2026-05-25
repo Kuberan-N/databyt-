@@ -89,7 +89,7 @@ function StatusBadge({ status }: { status: IntegrationStatus | null }) {
   }
   const styles: Record<string, { bg: string; text: string; label: string }> = {
     connected: { bg: "bg-[#F0FDF4]", text: "text-[#16A34A]", label: "Connected" },
-    syncing:   { bg: "bg-[#FFFBEB]", text: "text-[#D97706]", label: "Syncing..." },
+    syncing:   { bg: "bg-[#F3F3F3]", text: "text-[#000000]", label: "Syncing..." },
     error:     { bg: "bg-[#FEF2F2]", text: "text-[#DC2626]", label: "Error" },
   };
   const s = styles[status] ?? styles.connected;
@@ -203,7 +203,7 @@ function IntegrationCard({
               <button
                 onClick={handleSync}
                 disabled={syncing || info?.status === "syncing"}
-                className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-[#222222] border border-[#E2E8F0] rounded-lg hover:text-[#D97706] hover:border-[#D97706]/30 transition-all disabled:opacity-50"
+                className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-[#222222] border border-[#E2E8F0] rounded-lg hover:text-[#000000] hover:border-[#000000]/30 transition-all disabled:opacity-50"
               >
                 <RefreshCw className={`w-3.5 h-3.5 ${syncing ? "animate-spin" : ""}`} />
                 {syncing ? "Syncing..." : "Sync now"}
@@ -219,7 +219,7 @@ function IntegrationCard({
             <button
               onClick={handleConnect}
               disabled={connecting}
-              className="flex items-center gap-1.5 px-4 py-2 text-xs font-semibold bg-[#D97706] text-white rounded-lg hover:bg-[#B45309] transition-colors disabled:opacity-50"
+              className="flex items-center gap-1.5 px-4 py-2 text-xs font-semibold bg-[#000000] text-white rounded-lg hover:bg-[#111111] transition-colors disabled:opacity-50"
             >
               <Plug className="w-3.5 h-3.5" />
               {connecting ? "Redirecting..." : "Connect"}
