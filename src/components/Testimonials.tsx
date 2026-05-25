@@ -37,7 +37,7 @@ export default function Testimonials() {
           viewport={{ once: true }}
           className="text-center mb-14"
         >
-          <p className="text-xs font-bold uppercase tracking-widest text-[#0D9488] mb-4">Results</p>
+          <p className="text-xs font-bold uppercase tracking-widest text-[#D97706] mb-4">Results</p>
           <h2 className="text-3xl sm:text-4xl font-black text-[#0F172A] leading-tight">
             Finance teams that stopped chasing invoices manually
           </h2>

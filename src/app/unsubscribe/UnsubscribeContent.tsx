@@ -34,7 +34,7 @@ export default function UnsubscribeContent() {
             </>
           ) : error ? (
             <>
-              <div className="w-14 h-14 rounded-full bg-[#F0FDFA] flex items-center justify-center mx-auto mb-5">
+              <div className="w-14 h-14 rounded-full bg-[#FFFBEB] flex items-center justify-center mx-auto mb-5">
                 <svg className="w-7 h-7 text-[#DC2626]" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
                 </svg>
@@ -46,14 +46,14 @@ export default function UnsubscribeContent() {
             </>
           ) : (
             <>
-              <div className="w-5 h-5 border-2 border-[#0D9488]/20 border-t-[#0D9488] rounded-full animate-spin mx-auto mb-4" />
+              <div className="w-5 h-5 border-2 border-[#D97706]/20 border-t-[#D97706] rounded-full animate-spin mx-auto mb-4" />
               <p className="text-[#222222] text-sm">Processing…</p>
             </>
           )}
 
           <div className="mt-8 pt-6 border-t border-[#F1F5F9]">
             <p className="text-xs text-[#333333]">
-              Powered by <span className="font-semibold text-[#0D9488]">DataByt</span>
+              Powered by <span className="font-semibold text-[#D97706]">DataByt</span>
             </p>
           </div>
         </div>

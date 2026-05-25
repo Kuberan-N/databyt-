@@ -13,8 +13,8 @@ const fmt = (n: number) =>
 
 const PLAN_STYLE: Record<string, { color: string; bg: string; border: string }> = {
   starter: { color: "text-[#222222]",   bg: "bg-[#F1F5F9]",         border: "border-[#E2E8F0]" },
-  growth:  { color: "text-[#4B5FA8]",   bg: "bg-[#F0FDFA]",         border: "border-[#3730A3]/20" },
-  scale:   { color: "text-[#0D9488]",   bg: "bg-[#FFF1F2]",         border: "border-[#0D9488]/20" },
+  growth:  { color: "text-[#4B5FA8]",   bg: "bg-[#FFFBEB]",         border: "border-[#3730A3]/20" },
+  scale:   { color: "text-[#D97706]",   bg: "bg-[#FFF1F2]",         border: "border-[#D97706]/20" },
 };
 
 const adminSecret = process.env.ADMIN_SECRET ?? "databyt-admin-2024";
@@ -170,7 +170,7 @@ export default function AdminDashboard() {
       {/* Overdue alert */}
       {!orgsLoading && totalOverdue > 0 && (
         <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }}
-          className="flex items-center justify-between px-5 py-3.5 rounded-2xl bg-[#F0FDFA] border border-[#EF4444]/20">
+          className="flex items-center justify-between px-5 py-3.5 rounded-2xl bg-[#FFFBEB] border border-[#EF4444]/20">
           <div className="flex items-center gap-3">
             <AlertTriangle className="w-4 h-4 text-[#DC2626] shrink-0" />
             <p className="text-sm text-[#991B1B]">
@@ -215,11 +215,11 @@ export default function AdminDashboard() {
                 const isSelected = selectedOrg?.id === org.id;
                 return (
                   <tr key={org.id}
-                    className={`border-t border-[#F1F5F9] hover:bg-[#F8F9FC] transition-colors cursor-pointer ${isSelected ? "bg-[#F0FDFA]" : ""}`}
+                    className={`border-t border-[#F1F5F9] hover:bg-[#F8F9FC] transition-colors cursor-pointer ${isSelected ? "bg-[#FFFBEB]" : ""}`}
                     onClick={() => setSelectedOrg(isSelected ? org : org)}>
                     <td className="px-4 py-3.5">
                       <div className="flex items-center gap-2.5">
-                        <div className="w-7 h-7 rounded-lg bg-[#F0FDFA] border border-[#3730A3]/20 flex items-center justify-center shrink-0">
+                        <div className="w-7 h-7 rounded-lg bg-[#FFFBEB] border border-[#3730A3]/20 flex items-center justify-center shrink-0">
                           <span className="text-[10px] font-bold text-[#3730A3]">{org.name.charAt(0).toUpperCase()}</span>
                         </div>
                         <div>
@@ -231,7 +231,7 @@ export default function AdminDashboard() {
                     <td className="px-4 py-3.5">
                       <span className={`px-2 py-0.5 rounded-full text-[10px] font-medium border capitalize ${
                         org.status === "active"     ? "bg-[#F0FDF4] text-[#16A34A] border-[#16A34A]/20" :
-                        org.status === "onboarding" ? "bg-[#F0FDFA] text-[#3730A3] border-[#3730A3]/20" :
+                        org.status === "onboarding" ? "bg-[#FFFBEB] text-[#3730A3] border-[#3730A3]/20" :
                         org.status === "paused"     ? "bg-[#FFFBEB] text-[#D97706] border-[#F59E0B]/20" :
                         "bg-[#F1F5F9] text-[#333333] border-[#E2E8F0]"
                       }`}>{org.status}</span>

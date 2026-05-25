@@ -17,7 +17,7 @@ const fmt = (n: number) =>
   new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }).format(n);
 
 function StatCard({
-  label, value, sub, icon: Icon, iconColor = "#0D9488", delay = 0,
+  label, value, sub, icon: Icon, iconColor = "#D97706", delay = 0,
 }: {
   label: string; value: string; sub?: string;
   icon: React.ElementType; iconColor?: string; delay?: number;
@@ -97,7 +97,7 @@ export default function AnalyticsPage() {
 
   const spinner = (
     <div className="flex items-center justify-center min-h-[60vh]">
-      <div className="w-8 h-8 border-2 border-[#0D9488]/20 border-t-[#0D9488] rounded-full animate-spin" />
+      <div className="w-8 h-8 border-2 border-[#D97706]/20 border-t-[#D97706] rounded-full animate-spin" />
     </div>
   );
 
@@ -113,7 +113,7 @@ export default function AnalyticsPage() {
           <p className="text-[#222222] text-sm mt-1">Collections performance and AR intelligence</p>
         </div>
         <button onClick={load}
-          className="flex items-center gap-2 px-3 py-2 rounded-lg border border-[#E2E8F0] text-[#222222] text-sm hover:text-[#0D9488] hover:border-[#0D9488]/30 transition-all">
+          className="flex items-center gap-2 px-3 py-2 rounded-lg border border-[#E2E8F0] text-[#222222] text-sm hover:text-[#D97706] hover:border-[#D97706]/30 transition-all">
           <RefreshCw className={`w-4 h-4 ${loading ? "animate-spin" : ""}`} />
         </button>
       </div>
@@ -186,7 +186,7 @@ export default function AnalyticsPage() {
               <div className="pt-3 border-t border-[#E2E8F0]">
                 <div className="flex items-center justify-between">
                   <span className="text-xs text-[#222222]">Payment conversion (dunned → paid)</span>
-                  <span className="text-sm font-bold text-[#0D9488]">{d.emailEffectiveness.paymentConversionRate}%</span>
+                  <span className="text-sm font-bold text-[#D97706]">{d.emailEffectiveness.paymentConversionRate}%</span>
                 </div>
               </div>
             </div>
@@ -210,7 +210,7 @@ export default function AnalyticsPage() {
                 contentStyle={{ background: "#FFFFFF", border: "1px solid #E2E8F0", borderRadius: 12, fontSize: 12, color: "#0F172A" }}
                 formatter={(v) => [fmt(Number(v)), "Collected"]}
               />
-              <Bar dataKey="collected" fill="#0D9488" radius={[6, 6, 0, 0]} />
+              <Bar dataKey="collected" fill="#D97706" radius={[6, 6, 0, 0]} />
             </BarChart>
           </ResponsiveContainer>
         ) : (
@@ -234,8 +234,8 @@ export default function AnalyticsPage() {
 
       {/* CEI explanation */}
       <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5 }}
-        className="rounded-2xl p-5 bg-[#F0FDFA] border border-[#0D9488]/15">
-        <p className="text-xs font-semibold text-[#0D9488] mb-1">What is CEI?</p>
+        className="rounded-2xl p-5 bg-[#FFFBEB] border border-[#D97706]/15">
+        <p className="text-xs font-semibold text-[#D97706] mb-1">What is CEI?</p>
         <p className="text-xs text-[#7F1D1D] leading-relaxed">
           The Collections Effectiveness Index measures how much of your collectible AR you actually collected in a period.
           100% = you collected everything. 80%+ is excellent. Below 60% means invoices are aging into bad debt.

@@ -76,10 +76,10 @@ export default function PainSection() {
           transition={{ duration: 0.6, ease }}
           className="mb-12"
         >
-          <p className="text-[#0D9488] text-[11px] font-semibold uppercase tracking-widest mb-3">The Problem</p>
+          <p className="text-[#D97706] text-[11px] font-semibold uppercase tracking-widest mb-3">The Problem</p>
           <h2 className="text-[30px] sm:text-[38px] font-bold text-[#111111] leading-[1.15] tracking-[-0.02em] max-w-[540px]">
             Manual AR doesn&apos;t just cost time.<br />
-            <span className="text-[#0D9488]">It costs working capital.</span>
+            <span className="text-[#D97706]">It costs working capital.</span>
           </h2>
         </motion.div>
 
@@ -95,11 +95,11 @@ export default function PainSection() {
               className="p-5 rounded-xl bg-[#FAFAFA] border border-[#EBEBEB] flex flex-col"
             >
               <div className="mb-4">
-                <p className="text-[32px] font-bold text-[#0D9488] leading-none">{p.stat}</p>
+                <p className="text-[32px] font-bold text-[#D97706] leading-none">{p.stat}</p>
                 <p className="text-[11px] text-[#333333] mt-0.5 font-medium">{p.context}</p>
               </div>
               <p className="text-[13.5px] text-[#333333] font-medium leading-snug mb-2 flex-1">{p.problem}</p>
-              <p className="text-[12px] text-[#0D9488] font-semibold mb-3">{p.cost}</p>
+              <p className="text-[12px] text-[#D97706] font-semibold mb-3">{p.cost}</p>
               <p className="text-[11px] text-[#555555]">Source: {p.source}</p>
             </motion.div>
           ))}
@@ -119,7 +119,7 @@ export default function PainSection() {
 
           <div className="rounded-xl border border-[#E5E5E5] overflow-hidden">
             <div className="grid grid-cols-2">
-              <div className="px-5 py-2.5 bg-[#F0FDFA] flex items-center gap-1.5">
+              <div className="px-5 py-2.5 bg-[#FFFBEB] flex items-center gap-1.5">
                 <X className="w-3.5 h-3.5 text-[#DC2626]" />
                 <span className="text-[11px] font-semibold text-[#DC2626] uppercase tracking-wider">Without DataByt</span>
               </div>
@@ -162,7 +162,7 @@ export default function PainSection() {
             </p>
           </div>
           <a href="#pricing"
-            className="inline-flex items-center gap-2 px-5 py-3 rounded-lg bg-[#0D9488] text-white text-[14px] font-semibold hover:bg-[#0F766E] transition-colors shrink-0">
+            className="inline-flex items-center gap-2 px-5 py-3 rounded-lg bg-[#D97706] text-white text-[14px] font-semibold hover:bg-[#B45309] transition-colors shrink-0">
             See Full Pricing
             <ArrowRight className="w-4 h-4" />
           </a>
