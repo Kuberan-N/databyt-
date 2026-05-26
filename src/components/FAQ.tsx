@@ -21,7 +21,7 @@ const faqs = [
   },
   {
     q: "How do customers pay?",
-    a: "Every dunning email includes a direct payment link. Customer clicks it, lands on a hosted portal (no login required), sees their invoice, and pays via Dodo Payments checkout in under 60 seconds. Payment is auto-matched to the invoice instantly.",
+    a: "Every dunning email includes a direct payment link that goes to your own payment portal — Stripe, Razorpay, bank transfer, or any URL you configure. The customer clicks it, pays through a page they already trust, and you mark the invoice paid. No third-party payment processor lock-in.",
   },
   {
     q: "What accounting software do you support?",

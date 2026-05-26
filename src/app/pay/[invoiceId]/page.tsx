@@ -95,7 +95,7 @@ export default async function PayInvoicePage({
             )}
 
             <p className="text-center text-xs text-[#333333] mt-4">
-              Secured by DataByt &middot; Payments processed by Dodo Payments
+              Secured by DataByt
             </p>
           </div>
         </div>
