@@ -2,9 +2,7 @@
 
 import { useEffect, useState, useCallback } from "react";
 import { motion } from "framer-motion";
-import {
-  Users, Search, Mail, Phone, CreditCard, AlertTriangle,
-} from "lucide-react";
+import { Users, Search, Mail, Phone, CreditCard, AlertTriangle } from "lucide-react";
 import { useAuth } from "@/components/AuthProvider";
 import { supabase } from "@/lib/supabase";
 
@@ -28,9 +26,9 @@ const fmt = (n: number) =>
   new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }).format(n);
 
 const SEGMENT_STYLE: Record<string, { color: string; bg: string; border: string }> = {
-  strategic: { color: "text-primary-400", bg: "bg-primary-500/10", border: "border-primary-500/20" },
-  standard:  { color: "text-success-400", bg: "bg-success-500/10", border: "border-success-500/20" },
-  at_risk:   { color: "text-danger-400",  bg: "bg-danger-500/10",  border: "border-danger-500/20" },
+  strategic: { color: "text-[#000000]",  bg: "bg-[#F3F3F3]",  border: "border-[#000000]/20" },
+  standard:  { color: "text-[#16A34A]",  bg: "bg-[#F0FDF4]",  border: "border-[#BBF7D0]" },
+  at_risk:   { color: "text-[#DC2626]",  bg: "bg-[#FEF2F2]",  border: "border-[#FECACA]" },
 };
 
 export default function CustomersPage() {
@@ -52,7 +50,6 @@ export default function CustomersPage() {
 
     if (!custData) { setLoading(false); return; }
 
-    // Aggregate invoice data per customer
     const { data: invData } = await db
       .from("invoices")
       .select("customer_id, amount, days_overdue, status")
@@ -68,12 +65,10 @@ export default function CustomersPage() {
       invMap.set(inv.customer_id, e);
     }
 
-    const rows: CustomerRow[] = custData.map((c: CustomerRow) => ({
+    setCustomers(custData.map((c: CustomerRow) => ({
       ...c,
       ...(invMap.get(c.id) ?? { outstanding: 0, invoiceCount: 0, overdueCount: 0 }),
-    }));
-
-    setCustomers(rows);
+    })));
     setLoading(false);
   }, [organization]);
 
@@ -95,11 +90,9 @@ export default function CustomersPage() {
 
   return (
     <div className="space-y-6 max-w-5xl">
-      <div className="flex items-center justify-between flex-wrap gap-3">
-        <div>
-          <h2 className="text-2xl font-bold text-white">Customers</h2>
-          <p className="text-[#333333] text-sm mt-1">Your accounts receivable customer list.</p>
-        </div>
+      <div>
+        <h2 className="text-2xl font-bold text-[#0F172A]">Customers</h2>
+        <p className="text-[#222222] text-sm mt-1">Your accounts receivable customer list.</p>
       </div>
 
       {/* Search + filter */}
@@ -108,17 +101,17 @@ export default function CustomersPage() {
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#333333]" />
           <input type="text" value={search} onChange={e => setSearch(e.target.value)}
             placeholder="Search customers by name or email..."
-            className="w-full bg-surface-800/50 border border-surface-700 rounded-xl pl-10 pr-4 py-2.5 text-sm text-white placeholder-surface-500 focus:border-primary-500 focus:outline-none transition-colors" />
+            className="w-full bg-white border border-[#E2E8F0] rounded-xl pl-10 pr-4 py-2.5 text-sm text-[#0F172A] placeholder-[#333333] focus:border-[#000000] focus:outline-none transition-colors" />
         </div>
         <div className="flex gap-1">
           {["all", "strategic", "standard", "at_risk"].map(s => (
             <button key={s} onClick={() => setSegmentFilter(s)}
-              className={`px-3 py-2 rounded-xl text-xs font-medium transition-all capitalize ${
+              className={`px-3 py-2 rounded-xl text-xs font-medium transition-all ${
                 segmentFilter === s
-                  ? "bg-primary-500/15 text-primary-400 border border-primary-500/30"
-                  : "border border-surface-700 text-[#333333] hover:text-white"
+                  ? "bg-[#F3F3F3] text-[#000000] border border-[#000000]/20"
+                  : "border border-[#E2E8F0] text-[#333333] hover:text-[#000000]"
               }`}>
-              {s === "at_risk" ? "At Risk" : s.charAt(0).toUpperCase() + s.slice(1)}
+              {s === "at_risk" ? "At Risk" : s === "all" ? "All" : s.charAt(0).toUpperCase() + s.slice(1)}
             </button>
           ))}
         </div>
@@ -134,11 +127,11 @@ export default function CustomersPage() {
           const style = SEGMENT_STYLE[s.key];
           return (
             <motion.div key={s.key} initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}
-              className={`rounded-xl p-4 border ${style.bg} ${style.border} cursor-pointer`}
+              className={`rounded-xl p-4 border cursor-pointer transition-all hover:shadow-sm ${style.bg} ${style.border}`}
               onClick={() => setSegmentFilter(segmentFilter === s.key ? "all" : s.key)}>
               <div className="flex items-center justify-between mb-1">
                 <span className={`text-sm font-semibold ${style.color}`}>{s.label}</span>
-                <span className="text-2xl font-bold text-white">{segmentCounts[s.key as keyof typeof segmentCounts]}</span>
+                <span className="text-2xl font-bold text-[#0F172A]">{segmentCounts[s.key as keyof typeof segmentCounts]}</span>
               </div>
               <p className="text-xs text-[#333333]">{s.desc}</p>
             </motion.div>
@@ -148,7 +141,7 @@ export default function CustomersPage() {
 
       {/* Customer table */}
       <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="glass rounded-2xl overflow-hidden">
-        <div className="grid grid-cols-6 gap-2 px-5 py-3 border-b border-surface-800 text-xs font-medium text-[#333333] uppercase tracking-wider">
+        <div className="grid grid-cols-6 gap-2 px-5 py-3 border-b border-[#E2E8F0] text-xs font-medium text-[#333333] uppercase tracking-wider">
           <span className="col-span-2">Customer</span>
           <span>Outstanding</span>
           <span>Invoices</span>
@@ -158,19 +151,19 @@ export default function CustomersPage() {
 
         {loading ? (
           <div className="flex items-center justify-center py-16">
-            <div className="w-6 h-6 border-2 border-primary-500/30 border-t-primary-500 rounded-full animate-spin" />
+            <div className="w-6 h-6 border-2 border-[#000000]/20 border-t-[#000000] rounded-full animate-spin" />
           </div>
         ) : filtered.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-16 text-center px-8">
-            <div className="w-14 h-14 rounded-2xl bg-surface-800 flex items-center justify-center mb-4">
-              <Users className="w-7 h-7 text-[#222222]" />
+            <div className="w-14 h-14 rounded-2xl bg-[#F3F3F3] flex items-center justify-center mb-4">
+              <Users className="w-7 h-7 text-[#333333]" />
             </div>
-            <p className="text-white font-medium mb-1">
+            <p className="text-[#0F172A] font-medium mb-1">
               {customers.length === 0 ? "No customers yet" : "No customers match your search"}
             </p>
             <p className="text-[#333333] text-sm max-w-xs leading-relaxed">
               {customers.length === 0
-                ? "Your DataByt operator will import your AR data."
+                ? "Sync your QuickBooks account to import customers automatically."
                 : "Try adjusting your search or filter."}
             </p>
           </div>
@@ -179,28 +172,28 @@ export default function CustomersPage() {
             {filtered.map((c) => {
               const style = SEGMENT_STYLE[c.segment] ?? SEGMENT_STYLE.standard;
               return (
-                <div key={c.id} className="grid grid-cols-6 gap-2 px-5 py-3.5 border-t border-surface-800/50 hover:bg-surface-800/20 transition-colors items-center">
+                <div key={c.id} className="grid grid-cols-6 gap-2 px-5 py-3.5 border-t border-[#F1F5F9] hover:bg-[#FAFAFA] transition-colors items-center">
                   <div className="col-span-2 min-w-0">
-                    <p className="text-sm font-medium text-white truncate">{c.name}</p>
+                    <p className="text-sm font-medium text-[#0F172A] truncate">{c.name}</p>
                     <div className="flex items-center gap-3 mt-0.5">
                       {c.email && <span className="text-xs text-[#333333] flex items-center gap-1 truncate"><Mail className="w-3 h-3 shrink-0" />{c.email}</span>}
                       {c.phone && <span className="text-xs text-[#333333] flex items-center gap-1"><Phone className="w-3 h-3 shrink-0" />{c.phone}</span>}
                     </div>
                   </div>
                   <div>
-                    <p className={`text-sm font-semibold ${c.outstanding > 0 ? "text-white" : "text-[#333333]"}`}>{fmt(c.outstanding)}</p>
+                    <p className={`text-sm font-semibold ${c.outstanding > 0 ? "text-[#0F172A]" : "text-[#333333]"}`}>{fmt(c.outstanding)}</p>
                     {c.overdueCount > 0 && (
-                      <p className="text-xs text-danger-400 flex items-center gap-1 mt-0.5">
+                      <p className="text-xs text-[#DC2626] flex items-center gap-1 mt-0.5">
                         <AlertTriangle className="w-3 h-3" />{c.overdueCount} overdue
                       </p>
                     )}
                   </div>
                   <div>
-                    <p className="text-sm text-[#444444]">{c.invoiceCount}</p>
-                    <p className="text-xs text-[#222222]">open</p>
+                    <p className="text-sm text-[#0F172A]">{c.invoiceCount}</p>
+                    <p className="text-xs text-[#333333]">open</p>
                   </div>
                   <div className="flex items-center gap-1">
-                    <CreditCard className="w-3.5 h-3.5 text-[#222222]" />
+                    <CreditCard className="w-3.5 h-3.5 text-[#333333]" />
                     <span className="text-sm text-[#333333]">Net {c.payment_terms}</span>
                   </div>
                   <div>
@@ -214,7 +207,6 @@ export default function CustomersPage() {
           </div>
         )}
       </motion.div>
-
     </div>
   );
 }

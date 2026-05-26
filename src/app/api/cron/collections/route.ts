@@ -125,7 +125,7 @@ export async function GET(req: NextRequest) {
     }
   }
 
-  const baseUrl   = process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000";
+  const baseUrl   = process.env.NEXT_PUBLIC_APP_URL ?? "https://www.databyt.in";
   const fromEmail = process.env.RESEND_FROM_EMAIL ?? "collections@databyt.io";
   const inboundDomain = process.env.RESEND_INBOUND_DOMAIN;
 
