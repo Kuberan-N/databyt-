@@ -84,13 +84,13 @@ export default function ReportsPage() {
         </div>
 
         {error && (
-          <div className="mb-4 px-4 py-3 rounded-xl bg-danger-500/10 border border-danger-500/20 text-danger-400 text-sm">
+          <div className="mb-4 px-4 py-3 rounded-xl bg-[#FEF2F2] border border-[#FECACA] text-[#DC2626] text-sm">
             {error}
           </div>
         )}
 
         {done && (
-          <div className="mb-4 px-4 py-3 rounded-xl bg-success-500/10 border border-success-500/20 text-success-400 text-sm flex items-center gap-2">
+          <div className="mb-4 px-4 py-3 rounded-xl bg-[#F0FDF4] border border-[#BBF7D0] text-[#16A34A] text-sm flex items-center gap-2">
             <CheckCircle className="w-4 h-4 shrink-0" />
             Report downloaded successfully.
           </div>

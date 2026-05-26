@@ -236,7 +236,7 @@ export default function AnalyticsPage() {
       <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5 }}
         className="rounded-2xl p-5 bg-[#F3F3F3] border border-[#000000]/15">
         <p className="text-xs font-semibold text-[#000000] mb-1">What is CEI?</p>
-        <p className="text-xs text-[#7F1D1D] leading-relaxed">
+        <p className="text-xs text-[#333333] leading-relaxed">
           The Collections Effectiveness Index measures how much of your collectible AR you actually collected in a period.
           100% = you collected everything. 80%+ is excellent. Below 60% means invoices are aging into bad debt.
           Industry average for manual teams is ~65–72%. DataByt&apos;s AI-driven collections target 80%+.

@@ -8,7 +8,7 @@ import {
 } from "recharts";
 import {
   DollarSign, Clock, TrendingUp, AlertTriangle,
-  RefreshCw, UserPlus, FileText, ArrowRight, Link2, Check,
+  RefreshCw, UserPlus, FileText, ArrowRight, Link2, Check, Send,
 } from "lucide-react";
 import { useAuth } from "@/components/AuthProvider";
 import {
@@ -17,6 +17,7 @@ import {
 } from "@/lib/ar-data";
 import AddCustomerModal from "@/components/AddCustomerModal";
 import AddInvoiceModal from "@/components/AddInvoiceModal";
+import EmailDraftModal from "@/components/EmailDraftModal";
 import { supabase } from "@/lib/supabase";
 
 const fmt = (n: number) =>
@@ -47,6 +48,7 @@ export default function AgingDashboard({ readOnly = false }: { readOnly?: boolea
   const [search, setSearch] = useState("");
   const [page, setPage]         = useState(1);
   const [copiedId, setCopied]   = useState<string | null>(null);
+  const [emailTarget, setEmailTarget] = useState<InvoiceRow | null>(null);
   const PER_PAGE = 20;
 
   const load = useCallback(async () => {
@@ -154,14 +156,14 @@ export default function AgingDashboard({ readOnly = false }: { readOnly?: boolea
       {/* Metric cards */}
       <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {[
-          { label: "Total AR Outstanding", value: fmt(metrics?.totalOutstanding ?? 0), sub: `${metrics?.customerCount ?? 0} customers`, icon: DollarSign, color: "from-primary-500 to-primary-600" },
-          { label: "Days Sales Outstanding", value: `${metrics?.dso ?? 0} days`, sub: metrics?.dso && metrics.dso > 45 ? "Above 45d target" : "Within target", icon: Clock, color: "from-warning-400 to-warning-500" },
-          { label: "Collected This Month", value: fmt(metrics?.collectedThisMonth ?? 0), sub: `${collectionTrend >= 0 ? "+" : ""}${collectionTrend}% vs last month`, icon: TrendingUp, color: "from-success-400 to-success-500" },
-          { label: "Overdue Invoices", value: `${metrics?.overdueCount ?? 0}`, sub: fmt(metrics?.overdueAmount ?? 0) + " at risk", icon: AlertTriangle, color: "from-danger-400 to-danger-500" },
+          { label: "Total AR Outstanding", value: fmt(metrics?.totalOutstanding ?? 0), sub: `${metrics?.customerCount ?? 0} customers`, icon: DollarSign, bg: "#111111" },
+          { label: "Days Sales Outstanding", value: `${metrics?.dso ?? 0} days`, sub: metrics?.dso && metrics.dso > 45 ? "Above 45d target" : "Within target", icon: Clock, bg: "#111111" },
+          { label: "Collected This Month", value: fmt(metrics?.collectedThisMonth ?? 0), sub: `${collectionTrend >= 0 ? "+" : ""}${collectionTrend}% vs last month`, icon: TrendingUp, bg: "#16A34A" },
+          { label: "Overdue Invoices", value: `${metrics?.overdueCount ?? 0}`, sub: fmt(metrics?.overdueAmount ?? 0) + " at risk", icon: AlertTriangle, bg: "#DC2626" },
         ].map((m, i) => (
           <motion.div key={i} initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.05 }} className="glass rounded-2xl p-5">
             <div className="flex items-center justify-between mb-4">
-              <div className={`w-9 h-9 rounded-xl bg-gradient-to-br ${m.color} flex items-center justify-center`}>
+              <div className="w-9 h-9 rounded-xl flex items-center justify-center" style={{ background: m.bg }}>
                 <m.icon className="w-4 h-4 text-white" />
               </div>
             </div>
@@ -299,9 +301,15 @@ export default function AgingDashboard({ readOnly = false }: { readOnly?: boolea
                   </td>
                   {!readOnly && (
                     <td className="px-4 py-3">
-                      <div className="flex items-center gap-2">
+                      <div className="flex items-center gap-2 flex-wrap">
                         {inv.status !== "paid" && (
                           <>
+                            <button
+                              onClick={() => setEmailTarget(inv)}
+                              className="flex items-center gap-1 text-xs text-[#000000] font-semibold bg-[#F3F3F3] px-2 py-1 rounded-lg hover:bg-[#E5E5E5] transition-colors"
+                            >
+                              <Send className="w-3 h-3" />Email
+                            </button>
                             <button
                               onClick={() => generatePayLink(inv.id)}
                               title="Generate & copy payment link"
@@ -346,6 +354,19 @@ export default function AgingDashboard({ readOnly = false }: { readOnly?: boolea
           <AddCustomerModal open={showAddCustomer} onClose={() => setShowAddCustomer(false)} onSaved={load} />
           <AddInvoiceModal open={showAddInvoice} onClose={() => setShowAddInvoice(false)} onSaved={load} />
         </>
+      )}
+
+      {emailTarget && organization && (
+        <EmailDraftModal
+          invoiceId={emailTarget.id}
+          invoiceNumber={emailTarget.invoice_number}
+          customerName={emailTarget.customer_name ?? "Customer"}
+          customerEmail={emailTarget.customer_email ?? ""}
+          daysOverdue={emailTarget.days_overdue}
+          orgId={organization.id}
+          onClose={() => setEmailTarget(null)}
+          onSent={() => { setEmailTarget(null); load(); }}
+        />
       )}
     </div>
   );
