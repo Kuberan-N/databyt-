@@ -2,54 +2,36 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Check, ArrowRight, Zap } from "lucide-react";
+import { Check, ArrowRight, Zap, Lock } from "lucide-react";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
-const plans = [
-  {
-    name:     "AR Engine",
-    monthly:  2000,
-    annual:   20000,
-    period:   "/month",
-    note:     "30-day free trial. No credit card.",
-    desc:     "Full AR collections automation for mid-market finance teams.",
-    featured: false,
-    features: [
-      "AI Collections Agent — fully automated",
-      "L1 / L2 / L3 dunning email sequences",
-      "Payment links in every email (Stripe, Razorpay, or any provider)",
-      "Dispute management portal",
-      "AR aging dashboard & CEI analytics",
-      "QuickBooks Online & Xero integration",
-      "Reply detection & opt-out handling",
-      "Live in 48 hours",
-    ],
-  },
-  {
-    name:     "CashFlow Command",
-    monthly:  4000,
-    annual:   40000,
-    period:   "/month",
-    note:     "30-day free trial. No credit card.",
-    desc:     "Full cash flow command center — AR, AP, and forecasting.",
-    featured: true,
-    badge:    "Most Popular",
-    features: [
-      "Everything in AR Engine, plus:",
-      "AI Invoice Processor (AP automation)",
-      "Cash flow forecasting dashboard",
-      "Multi-entity support",
-      "Custom dunning sequences",
-      "Unlimited ERP integrations",
-      "Dedicated CSM + priority support",
-      "Board-ready reporting suite",
-    ],
-  },
+const MONTHLY  = 2000;
+const ANNUAL   = 20000;           // 10 months × $2,000 — 2 months free
+const ANN_MO   = Math.round(ANNUAL / 12);   // $1,667 effective per month
+const SAVING   = MONTHLY * 12 - ANNUAL;     // $4,000
+
+const features = [
+  "AI Collections Agent — fully automated",
+  "L1 → L2 → L3 escalating dunning emails",
+  "Payment links in every email (Stripe, Razorpay, any provider)",
+  "Dispute management — file, pause, investigate, resolve",
+  "AR aging dashboard & live CEI gauge",
+  "QuickBooks Online & Xero OAuth integration",
+  "Reply detection & unsubscribe handling",
+  "AI Invoice Processor (AP automation)",
+  "Cash flow forecasting dashboard",
+  "Multi-entity support",
+  "Custom dunning sequences",
+  "Board-ready PDF reporting suite",
+  "Live in 48 hours — full setup handled for you",
+  "Dedicated onboarding + priority support",
 ];
 
 export default function Pricing() {
   const [yearly, setYearly] = useState(true);
+
+  const displayPrice = yearly ? ANN_MO : MONTHLY;
 
   return (
     <section id="pricing" className="bg-white py-20 border-b border-[#E8E8E8]">
@@ -60,14 +42,29 @@ export default function Pricing() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-60px" }}
           transition={{ duration: 0.6, ease }}
-          className="mb-10"
+          className="mb-8"
         >
           <p className="text-[#000000] text-[11px] font-semibold uppercase tracking-widest mb-3">Pricing</p>
           <h2 className="text-[30px] sm:text-[38px] font-extrabold text-[#111111] leading-[1.15] tracking-[-0.02em]">
-            Flat fee. No per-invoice charges.
+            One plan. Everything included.
           </h2>
-          <p className="mt-3 text-[#111111] text-[15px] max-w-md">
-            10× cheaper than HighRadius. Start free, scale when you&apos;re ready.
+          <p className="mt-3 text-[#555555] text-[15px] max-w-md">
+            No feature tiers. No per-invoice charges. No surprises. 10× cheaper than HighRadius.
+          </p>
+        </motion.div>
+
+        {/* Founding rate banner */}
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.4, ease }}
+          className="flex items-center gap-3 mb-8 px-5 py-3.5 rounded-xl bg-[#F0FDF4] border border-[#BBF7D0]"
+        >
+          <Lock className="w-4 h-4 text-[#16A34A] shrink-0" />
+          <p className="text-[13px] text-[#15803D]">
+            <span className="font-bold">Founding customer rate — </span>
+            first 20 clients lock in $2,000/month forever. Price rises to $4,000/month after that.
           </p>
         </motion.div>
 
@@ -82,9 +79,7 @@ export default function Pricing() {
           <button
             onClick={() => setYearly(false)}
             className={`px-4 py-2 rounded-lg text-[13px] font-semibold transition-all ${
-              !yearly
-                ? "bg-[#111111] text-white"
-                : "text-[#555555] hover:text-[#111111]"
+              !yearly ? "bg-[#111111] text-white" : "text-[#555555] hover:text-[#111111]"
             }`}
           >
             Monthly
@@ -92,7 +87,7 @@ export default function Pricing() {
 
           <div
             onClick={() => setYearly(y => !y)}
-            className="relative w-11 h-6 rounded-full bg-[#E5E5E5] cursor-pointer transition-colors"
+            className="relative w-11 h-6 rounded-full cursor-pointer transition-colors"
             style={{ background: yearly ? "#111111" : "#E5E5E5" }}
           >
             <div
@@ -104,116 +99,118 @@ export default function Pricing() {
           <button
             onClick={() => setYearly(true)}
             className={`px-4 py-2 rounded-lg text-[13px] font-semibold transition-all flex items-center gap-2 ${
-              yearly
-                ? "bg-[#111111] text-white"
-                : "text-[#555555] hover:text-[#111111]"
+              yearly ? "bg-[#111111] text-white" : "text-[#555555] hover:text-[#111111]"
             }`}
           >
-            Yearly
+            Annual
             <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-[#F0FDF4] border border-[#BBF7D0] text-[#16A34A] text-[10px] font-bold">
               <Zap className="w-2.5 h-2.5" />
-              2 months free
+              Save ${SAVING.toLocaleString()}
             </span>
           </button>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-4 max-w-4xl mx-auto">
-          {plans.map((plan, i) => {
-            const displayPrice = yearly
-              ? Math.round(plan.annual / 12)
-              : plan.monthly;
-            const savings = plan.monthly * 12 - plan.annual;
+        {/* Single plan card */}
+        <div className="max-w-2xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-40px" }}
+            transition={{ duration: 0.5, ease }}
+            className="relative rounded-2xl bg-[#111111] p-8 flex flex-col"
+          >
+            <div className="absolute -top-3.5 left-1/2 -translate-x-1/2">
+              <span className="bg-[#16A34A] text-white text-[10px] font-bold px-4 py-1.5 rounded-full uppercase tracking-widest shadow-sm whitespace-nowrap">
+                Everything Included · Founding Rate
+              </span>
+            </div>
 
-            return (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-40px" }}
-                transition={{ duration: 0.5, ease, delay: i * 0.08 }}
-                className={`relative rounded-xl p-7 flex flex-col ${
-                  plan.featured
-                    ? "bg-[#111111] border border-[#111111]"
-                    : "bg-white border border-[#E5E5E5]"
-                }`}
-              >
-                {plan.featured && plan.badge && (
-                  <div className="absolute -top-3 left-6">
-                    <span className="bg-white text-[#111111] text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-widest shadow-sm">
-                      {plan.badge}
+            <p className="text-white/50 text-[13px] mb-1 mt-2">DataByt Pro</p>
+            <p className="text-white/30 text-[12px] mb-6">
+              The complete AR collections platform for mid-market finance teams.
+            </p>
+
+            {/* Price */}
+            <div className="mb-6">
+              <div className="flex items-end gap-1.5 mb-2">
+                <span className="text-[54px] font-extrabold text-white leading-none">
+                  ${displayPrice.toLocaleString()}
+                </span>
+                <span className="text-[16px] text-white/40 mb-2">/month</span>
+              </div>
+
+              {yearly ? (
+                <>
+                  <p className="text-[13px] text-white/40 mb-4">
+                    Billed ${ANNUAL.toLocaleString()}/year —{" "}
+                    <span className="text-[#4ADE80] font-semibold">
+                      you save ${SAVING.toLocaleString()} (2 full months free)
                     </span>
-                  </div>
-                )}
-
-                <p className={`text-[14px] font-bold mb-0.5 ${plan.featured ? "text-white" : "text-[#111111]"}`}>
-                  {plan.name}
-                </p>
-                <p className={`text-[13px] mb-6 ${plan.featured ? "text-white/40" : "text-[#555555]"}`}>
-                  {plan.desc}
-                </p>
-
-                <div className="mb-1 flex items-end gap-1.5">
-                  <span className={`text-[40px] font-extrabold leading-none ${plan.featured ? "text-white" : "text-[#111111]"}`}>
-                    ${displayPrice.toLocaleString()}
-                  </span>
-                  <span className={`text-[14px] mb-1.5 ${plan.featured ? "text-white/40" : "text-[#555555]"}`}>
-                    /month
-                  </span>
-                </div>
-
-                {yearly ? (
-                  <div className="mb-7 flex items-center gap-2">
-                    <p className={`text-[12px] ${plan.featured ? "text-white/40" : "text-[#555555]"}`}>
-                      Billed ${plan.annual.toLocaleString()}/year
-                    </p>
-                    <span className="text-[11px] font-semibold text-[#16A34A] bg-[#F0FDF4] px-2 py-0.5 rounded-full">
-                      Save ${savings.toLocaleString()}
-                    </span>
-                  </div>
-                ) : (
-                  <p className={`text-[12px] mb-7 ${plan.featured ? "text-white/40" : "text-[#16A34A]"}`}>
-                    {plan.note}
                   </p>
-                )}
+                  {/* Side-by-side comparison — the Hormozi math made visible */}
+                  <div className="grid grid-cols-2 gap-3 mb-6">
+                    <div className="rounded-xl bg-white/5 p-3.5 border border-white/10">
+                      <p className="text-[10px] text-white/30 mb-1.5 uppercase tracking-wider">Monthly billing</p>
+                      <p className="text-[20px] font-bold text-white/30 line-through">
+                        ${(MONTHLY * 12).toLocaleString()}/yr
+                      </p>
+                      <p className="text-[10px] text-white/25 mt-0.5">You pay $4,000 more for the same product</p>
+                    </div>
+                    <div className="rounded-xl bg-[#16A34A]/15 p-3.5 border border-[#16A34A]/25">
+                      <p className="text-[10px] text-[#4ADE80] mb-1.5 uppercase tracking-wider">Annual billing ✓</p>
+                      <p className="text-[20px] font-bold text-white">
+                        ${ANNUAL.toLocaleString()}/yr
+                      </p>
+                      <p className="text-[10px] text-[#4ADE80] mt-0.5">2 months free — the smart choice</p>
+                    </div>
+                  </div>
+                </>
+              ) : (
+                <div className="mb-6 p-3.5 rounded-xl bg-white/5 border border-white/10">
+                  <p className="text-[12px] text-white/40">
+                    Switch to annual billing →{" "}
+                    <span className="text-[#4ADE80] font-semibold">
+                      save ${SAVING.toLocaleString()}/year (2 months free)
+                    </span>
+                  </p>
+                </div>
+              )}
+            </div>
 
-                <a
-                  href="/auth"
-                  className={`py-3 rounded-lg text-center text-[14px] font-semibold mb-7 transition-colors ${
-                    plan.featured
-                      ? "bg-white text-[#111111] hover:bg-[#F3F3F3]"
-                      : "bg-[#111111] text-white hover:bg-[#000000]"
-                  }`}
-                >
-                  Start 30-Day Free Trial
-                </a>
+            <a
+              href="/auth"
+              className="flex items-center justify-center gap-2 py-3.5 rounded-xl bg-white text-[#111111] text-[14px] font-bold mb-8 hover:bg-[#F3F3F3] transition-colors group"
+            >
+              Start 30-Day Free Trial — No Credit Card
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+            </a>
 
-                <ul className="space-y-2.5 flex-1">
-                  {plan.features.map((f, j) => (
-                    <li key={j} className="flex items-start gap-2.5 text-[13px]">
-                      <Check className={`w-3.5 h-3.5 mt-0.5 shrink-0 ${plan.featured ? "text-white/60" : "text-[#000000]"}`} />
-                      <span className={plan.featured ? "text-white/70" : "text-[#111111]"}>{f}</span>
-                    </li>
-                  ))}
-                </ul>
-              </motion.div>
-            );
-          })}
+            <ul className="grid sm:grid-cols-2 gap-x-8 gap-y-2.5">
+              {features.map((f, j) => (
+                <li key={j} className="flex items-start gap-2.5 text-[13px]">
+                  <Check className="w-3.5 h-3.5 mt-0.5 shrink-0 text-[#4ADE80]" />
+                  <span className="text-white/70">{f}</span>
+                </li>
+              ))}
+            </ul>
+          </motion.div>
         </div>
 
+        {/* Trust bar */}
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.2 }}
-          className="mt-6 flex flex-wrap items-center gap-6 text-[#555555] text-[12px]"
+          className="mt-8 flex flex-wrap items-center justify-center gap-5 text-[#555555] text-[12px]"
         >
-          <span>&#10003; 30-day free trial, no credit card</span>
-          <span>&#10003; Month-to-month or annual — cancel anytime</span>
-          <span>&#10003; No IT team required</span>
+          <span>&#10003; 30-day free trial</span>
+          <span>&#10003; No credit card required</span>
+          <span>&#10003; Cancel anytime</span>
           <span>&#10003; Live in 48 hours</span>
           <span>&#10003; CAN-SPAM compliant</span>
-          <span className="ml-auto text-[#777777]">
-            HighRadius starts at <span className="line-through">$100K+/year</span> &mdash; DataByt: from $20K/yr
+          <span className="text-[#777777]">
+            HighRadius: <span className="line-through">$100K+/yr</span> · Billtrust: <span className="line-through">$50K+/yr</span> · DataByt Pro: $20K/yr
           </span>
         </motion.div>
 

@@ -9,7 +9,11 @@ const ease = [0.22, 1, 0.36, 1] as const;
 const faqs = [
   {
     q: "How is DataByt different from HighRadius or Billtrust?",
-    a: "HighRadius starts at $100K+/year with a 6-month enterprise implementation. Billtrust is $50K+/year. DataByt starts at $20,000/year ($2,000/month billed annually), live in 48 hours, zero IT involvement. Same AI-driven outcome at a fraction of the cost.",
+    a: "HighRadius starts at $100K+/year with a 6-month enterprise implementation. Billtrust is $50K+/year. DataByt Pro is $20,000/year billed annually — live in 48 hours, zero IT involvement, everything included. Same AI-driven outcome at one-fifth the cost.",
+  },
+  {
+    q: "Why only one plan?",
+    a: "Because feature tiers are a distraction. You need the full AR loop — import, score, email, dispute, analytics — or you don't. Giving you a lite version just means you get lite results. DataByt Pro includes everything, and we handle the setup. You focus on your business.",
   },
   {
     q: "How does the AI collections engine work?",

@@ -4,6 +4,7 @@ import PainSection from "@/components/PainSection";
 import ResearchSection from "@/components/ResearchSection";
 import HowItWorks from "@/components/HowItWorks";
 import ROICalculator from "@/components/ROICalculator";
+import ValueStack from "@/components/ValueStack";
 import Pricing from "@/components/Pricing";
 import FAQ from "@/components/FAQ";
 import { Footer } from "@/components/FinalCTA";
@@ -17,6 +18,7 @@ export default function Home() {
       <ResearchSection />
       <HowItWorks />
       <ROICalculator />
+      <ValueStack />
       <Pricing />
       <FAQ />
       <Footer />
