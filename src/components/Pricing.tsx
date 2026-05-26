@@ -21,7 +21,7 @@ const plans = [
       "Payment links in every email (Dodo Payments)",
       "Dispute management portal",
       "AR aging dashboard & CEI analytics",
-      "QuickBooks, Xero, NetSuite, Sage integration",
+      "QuickBooks Online & Xero integration",
       "Reply detection & opt-out handling",
       "Live in 48 hours",
     ],

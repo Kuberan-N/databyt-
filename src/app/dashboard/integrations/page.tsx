@@ -55,32 +55,6 @@ const providers: ProviderConfig[] = [
       </svg>
     ),
   },
-  {
-    key: "netsuite",
-    label: "NetSuite",
-    description: "Import open invoices and customers via SuiteQL. Syncs AR aging automatically.",
-    apiRoute: "/api/integrations/netsuite",
-    syncRoute: "/api/integrations/netsuite/sync",
-    logo: (
-      <svg viewBox="0 0 40 40" className="w-8 h-8" fill="none">
-        <rect width="40" height="40" rx="8" fill="#1F7ACA" />
-        <text x="20" y="27" textAnchor="middle" fontSize="14" fontWeight="bold" fill="white" fontFamily="sans-serif">NS</text>
-      </svg>
-    ),
-  },
-  {
-    key: "sage",
-    label: "Sage Business Cloud",
-    description: "Pull outstanding sales invoices from Sage Accounting via REST API.",
-    apiRoute: "/api/integrations/sage",
-    syncRoute: "/api/integrations/sage/sync",
-    logo: (
-      <svg viewBox="0 0 40 40" className="w-8 h-8" fill="none">
-        <rect width="40" height="40" rx="8" fill="#00B259" />
-        <text x="20" y="27" textAnchor="middle" fontSize="14" fontWeight="bold" fill="white" fontFamily="sans-serif">SG</text>
-      </svg>
-    ),
-  },
 ];
 
 function StatusBadge({ status }: { status: IntegrationStatus | null }) {

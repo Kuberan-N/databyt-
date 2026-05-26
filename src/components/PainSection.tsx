@@ -121,7 +121,7 @@ const pains = [
 const beforeAfter = [
   {
     before: "Manually pulling AR aging from QuickBooks every Monday",
-    after:  "Auto-synced daily from QuickBooks, Xero, NetSuite, or Sage",
+    after:  "Auto-synced daily from QuickBooks Online or Xero",
   },
   {
     before: "Writing individual dunning emails per invoice",

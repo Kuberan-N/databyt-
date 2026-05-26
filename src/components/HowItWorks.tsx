@@ -10,7 +10,7 @@ const steps = [
     num:   "01",
     icon:  Database,
     title: "Connect your accounting system",
-    desc:  "OAuth connection to QuickBooks, Xero, NetSuite, or Sage. AR aging data imported automatically every day. No CSV exports. No manual uploads.",
+    desc:  "OAuth connection to QuickBooks Online or Xero. AR aging data imported automatically every day. No CSV exports. No manual uploads.",
     tag:   "5-min setup",
   },
   {

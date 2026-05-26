@@ -4,7 +4,7 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "DataByt — AI-Powered AR Collections for Mid-Market B2B",
   description:
-    "Reduce DSO by 30% in 48 hours. AI dunning emails, Dodo Payments checkout, dispute management, and live CEI analytics. Connects to QuickBooks, Xero, NetSuite, Sage. $3,000/month.",
+    "Reduce DSO by 30% in 48 hours. AI dunning emails, Dodo Payments checkout, dispute management, and live CEI analytics. Connects to QuickBooks Online and Xero. From $2,000/month.",
   keywords: [
     "accounts receivable automation",
     "AR collections software",

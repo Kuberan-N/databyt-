@@ -6,7 +6,7 @@ import { ArrowRight, TrendingDown, Clock, DollarSign } from "lucide-react";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
-const integrations = ["QuickBooks", "Xero", "NetSuite", "Sage"];
+const integrations = ["QuickBooks", "Xero"];
 
 function AnimatedCounter({
   target,

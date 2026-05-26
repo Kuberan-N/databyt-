@@ -13,7 +13,7 @@ const faqs = [
   },
   {
     q: "How does the AI collections engine work?",
-    a: "It imports your AR aging daily from QuickBooks, Xero, NetSuite, or Sage. Every overdue invoice is scored by priority. One batched email is sent per customer covering all their overdue invoices — tone escalates from polite (L1) to firm (L2) to final notice (L3) based on days overdue.",
+    a: "It imports your AR aging daily from QuickBooks Online or Xero. Every overdue invoice is scored by priority. One batched email is sent per customer covering all their overdue invoices — tone escalates from polite (L1) to firm (L2) to final notice (L3) based on days overdue.",
   },
   {
     q: "Will the dunning emails sound robotic to my customers?",
@@ -25,7 +25,7 @@ const faqs = [
   },
   {
     q: "What accounting software do you support?",
-    a: "QuickBooks Online, Xero, NetSuite, and Sage Business Cloud — all live today via OAuth. No CSV exports, no manual uploads. Daily sync.",
+    a: "QuickBooks Online and Xero — both live via OAuth. No CSV exports, no manual uploads. Daily sync keeps your AR aging up to date automatically.",
   },
   {
     q: "How long does setup take?",
