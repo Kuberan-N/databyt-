@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "DataByt — AI-Powered AR Collections",
     description:
-      "Reduce DSO by 30%. Live in 48 hours. $3,000/month flat.",
+      "Reduce DSO by 30%. Live in 48 hours. From $2,000/month.",
   },
   robots: { index: true, follow: true },
 };

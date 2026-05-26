@@ -92,8 +92,7 @@ export default function BillingPage() {
       <div className="rounded-xl border border-[#E2E8F0] bg-white p-6">
         <p className="text-[12px] text-[#888888] font-semibold uppercase tracking-widest mb-3">Ready to upgrade?</p>
         <p className="text-[#333333] text-sm mb-4">
-          After your trial, AR Engine is $3,000/month + $5,000 one-time setup.
-          CashFlow Command is $6,000/month + $10,000 setup.
+          After your trial, DataByt Pro is $2,000/month (billed monthly) or $20,000/year — 2 months free. Founding customer rate locked in for life.
         </p>
         <a
           href="mailto:kuberanoh@gmail.com?subject=DataByt%20Plan%20Upgrade%20Request"

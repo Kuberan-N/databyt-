@@ -138,8 +138,8 @@ export default function ROICalculator() {
                 </div>
                 <div>
                   <p className="text-white/35 text-[11px] mb-1">DataByt costs</p>
-                  <p className="text-[20px] font-bold text-white">$36K/yr</p>
-                  <p className="text-white/25 text-[10px] mt-0.5">$3,000/month flat</p>
+                  <p className="text-[20px] font-bold text-white">$24K/yr</p>
+                  <p className="text-white/25 text-[10px] mt-0.5">$2,000/month flat</p>
                 </div>
               </div>
             </div>
@@ -165,7 +165,7 @@ export default function ROICalculator() {
 
             <a href="#pricing"
               className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-lg bg-[#111111] text-white text-[14px] font-semibold hover:bg-[#1A1A1A] transition-colors">
-              Get Started — $3,000/Month
+              Get Started — $2,000/Month
               <ArrowRight className="w-4 h-4" />
             </a>
           </div>
