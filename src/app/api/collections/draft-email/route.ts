@@ -70,7 +70,7 @@ export async function POST(req: NextRequest) {
     const orgName = org?.name ?? "Your Company";
     const signature = settings?.email_signature ?? `Best regards,\nAccounts Receivable Team\n${orgName}`;
 
-    const baseUrl = process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000";
+    const baseUrl = process.env.NEXT_PUBLIC_APP_URL ?? "https://www.databyt.in";
     const paymentLink = invoice.payment_link_url ?? `${baseUrl}/pay/${invoiceId}`;
 
     // Segment-aware tone modifier

@@ -45,7 +45,7 @@ export async function POST(req: NextRequest) {
 
     const amountCents = Math.round(invoice.amount * 100);
     const currency = (invoice.currency ?? "USD").toUpperCase();
-    const baseUrl = process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000";
+    const baseUrl = process.env.NEXT_PUBLIC_APP_URL ?? "https://www.databyt.in";
 
     const dodo = getDodoClient();
 
