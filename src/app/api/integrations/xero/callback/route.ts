@@ -11,7 +11,9 @@ const db = supabaseAdmin as any;
 export async function GET(req: NextRequest) {
   const code    = req.nextUrl.searchParams.get("code");
   const state   = req.nextUrl.searchParams.get("state");
-  const baseUrl = process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000";
+  const host    = req.headers.get("x-forwarded-host") ?? req.headers.get("host") ?? "www.databyt.in";
+  const proto   = req.headers.get("x-forwarded-proto") ?? "https";
+  const baseUrl = `${proto}://${host}`;
 
   if (!code || !state) {
     return NextResponse.redirect(`${baseUrl}/dashboard/integrations?error=xero_denied`);
@@ -26,7 +28,7 @@ export async function GET(req: NextRequest) {
 
   const clientId     = process.env.XERO_CLIENT_ID!;
   const clientSecret = process.env.XERO_CLIENT_SECRET!;
-  const redirectUri  = `${baseUrl}/api/integrations/xero/callback`;
+  const redirectUri  = `${proto}://${host}/api/integrations/xero/callback`;
 
   try {
     const tokenRes = await fetch("https://identity.xero.com/connect/token", {

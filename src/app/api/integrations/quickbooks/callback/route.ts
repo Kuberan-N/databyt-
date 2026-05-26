@@ -12,7 +12,9 @@ export async function GET(req: NextRequest) {
   const code    = req.nextUrl.searchParams.get("code");
   const state   = req.nextUrl.searchParams.get("state");
   const realmId = req.nextUrl.searchParams.get("realmId");
-  const baseUrl = process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000";
+  const host    = req.headers.get("x-forwarded-host") ?? req.headers.get("host") ?? "www.databyt.in";
+  const proto   = req.headers.get("x-forwarded-proto") ?? "https";
+  const baseUrl = `${proto}://${host}`;
 
   if (!code || !state || !realmId) {
     return NextResponse.redirect(`${baseUrl}/dashboard/integrations?error=quickbooks_denied`);
@@ -27,7 +29,7 @@ export async function GET(req: NextRequest) {
 
   const clientId     = process.env.QUICKBOOKS_CLIENT_ID!;
   const clientSecret = process.env.QUICKBOOKS_CLIENT_SECRET!;
-  const redirectUri  = `${baseUrl}/api/integrations/quickbooks/callback`;
+  const redirectUri  = `${proto}://${host}/api/integrations/quickbooks/callback`;
 
   try {
     const tokenRes = await fetch("https://oauth.platform.intuit.com/oauth2/v1/tokens/bearer", {

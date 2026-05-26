@@ -27,8 +27,9 @@ export async function POST(req: NextRequest) {
   if (!orgId) return NextResponse.json({ error: "orgId required" }, { status: 400 });
 
   const clientId   = process.env.QUICKBOOKS_CLIENT_ID;
-  const baseUrl    = process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000";
-  const redirectUri = `${baseUrl}/api/integrations/quickbooks/callback`;
+  const host    = req.headers.get("x-forwarded-host") ?? req.headers.get("host") ?? "www.databyt.in";
+  const proto   = req.headers.get("x-forwarded-proto") ?? "https";
+  const redirectUri = `${proto}://${host}/api/integrations/quickbooks/callback`;
 
   if (!clientId) {
     return NextResponse.json({ error: "QuickBooks credentials not configured" }, { status: 503 });
