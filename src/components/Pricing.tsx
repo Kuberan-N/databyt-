@@ -18,7 +18,7 @@ const plans = [
     features: [
       "AI Collections Agent — fully automated",
       "L1 / L2 / L3 dunning email sequences",
-      "Payment links in every email (Dodo Payments)",
+      "Payment links in every email (Stripe, Razorpay, or any provider)",
       "Dispute management portal",
       "AR aging dashboard & CEI analytics",
       "QuickBooks Online & Xero integration",

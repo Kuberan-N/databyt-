@@ -47,42 +47,36 @@ export default function AgingDashboard({ readOnly = false }: { readOnly?: boolea
   const [showAddInvoice, setShowAddInvoice] = useState(false);
   const [search, setSearch] = useState("");
   const [page, setPage]         = useState(1);
-  const [copiedId, setCopied]   = useState<string | null>(null);
-  const [emailTarget, setEmailTarget] = useState<InvoiceRow | null>(null);
+  const [copiedId, setCopied]           = useState<string | null>(null);
+  const [emailTarget, setEmailTarget]   = useState<InvoiceRow | null>(null);
+  const [payTemplate, setPayTemplate]   = useState<string | null>(null);
   const PER_PAGE = 20;
 
   const load = useCallback(async () => {
     if (!organization) return;
     setLoading(true);
-    const [m, o, inv] = await Promise.all([
+    const [m, o, inv, settings] = await Promise.all([
       fetchARMetrics(organization.id),
       fetchOverdueCustomers(organization.id),
       fetchInvoicesWithCustomers(organization.id, statusFilter),
+      db.from("org_settings").select("payment_link_template").eq("org_id", organization.id).single(),
     ]);
     setMetrics(m);
     setOverdue(o);
     setInvoices(inv);
+    setPayTemplate(settings?.data?.payment_link_template ?? null);
     setLoading(false);
   }, [organization, statusFilter]);
 
   useEffect(() => { load(); }, [load]);
 
-  async function generatePayLink(invoiceId: string) {
-    if (!organization) return;
+  async function copyPayLink(inv: InvoiceRow) {
+    if (!payTemplate) return;
+    const url = payTemplate.replace("{invoice_number}", inv.invoice_number);
     try {
-      const res = await fetch("/api/payments/checkout", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ invoiceId, orgId: organization.id }),
-      });
-      const json = await res.json();
-      if (json.url) {
-        await navigator.clipboard.writeText(json.url);
-        setCopied(invoiceId);
-        setTimeout(() => setCopied(null), 3000);
-        // Update local state
-        setInvoices(prev => prev.map(i => i.id === invoiceId ? { ...i, payment_link_url: json.url } : i));
-      }
+      await navigator.clipboard.writeText(url);
+      setCopied(inv.id);
+      setTimeout(() => setCopied(null), 3000);
     } catch {
       // clipboard not available in some contexts
     }
@@ -311,8 +305,9 @@ export default function AgingDashboard({ readOnly = false }: { readOnly?: boolea
                               <Send className="w-3 h-3" />Email
                             </button>
                             <button
-                              onClick={() => generatePayLink(inv.id)}
-                              title="Generate & copy payment link"
+                              onClick={() => copyPayLink(inv)}
+                              title={payTemplate ? "Copy payment link" : "No payment link configured — set one in Settings"}
+                              disabled={!payTemplate}
                               className="flex items-center gap-1 text-xs text-[#222222] hover:text-[#000000] font-medium transition-colors"
                             >
                               {copiedId === inv.id

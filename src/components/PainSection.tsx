@@ -129,7 +129,7 @@ const beforeAfter = [
   },
   {
     before: "Copying payment details into every email",
-    after:  "Dodo Payments link embedded in every email automatically",
+    after:  "Your payment link — Stripe, Razorpay, bank transfer — auto-embedded in every email",
   },
   {
     before: "Tracking disputes in a spreadsheet",
@@ -137,7 +137,7 @@ const beforeAfter = [
   },
   {
     before: "Asking 'did they pay?' and updating QuickBooks manually",
-    after:  "Payment webhook auto-matches and marks invoice paid in seconds",
+    after:  "Mark invoice paid in one click — QuickBooks stays in sync automatically",
   },
   {
     before: "CFO asks for AR report → 2 hours of Excel",

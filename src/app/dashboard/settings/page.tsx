@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Save, Building2, Globe, Mail, Clock, CheckCircle, AlertCircle, User, Shield, Lightbulb, Send } from "lucide-react";
+import { Save, Building2, Globe, Mail, Clock, CheckCircle, AlertCircle, User, Shield, Lightbulb, Send, Link } from "lucide-react";
 import { useAuth } from "@/components/AuthProvider";
 import { supabase } from "@/lib/supabase";
 
@@ -35,7 +35,8 @@ export default function SettingsPage() {
   const [orgName, setOrgName]               = useState("");
   const [timezone, setTimezone]             = useState("America/New_York");
   const [currency, setCurrency]             = useState("USD");
-  const [emailSignature, setEmailSignature] = useState("");
+  const [emailSignature, setEmailSignature]         = useState("");
+  const [paymentLinkTemplate, setPaymentLinkTemplate] = useState("");
   const [saving, setSaving]                 = useState(false);
   const [status, setStatus]                 = useState<"idle" | "success" | "error">("idle");
   const [statusMsg, setStatusMsg]           = useState("");
@@ -50,11 +51,12 @@ export default function SettingsPage() {
     if (organization) setOrgName(organization.name);
     if (!organization) return;
     db.from("org_settings").select("*").eq("org_id", organization.id).single()
-      .then(({ data }: { data: { timezone: string; currency: string; email_signature: string } | null }) => {
+      .then(({ data }: { data: { timezone: string; currency: string; email_signature: string; payment_link_template: string } | null }) => {
         if (data) {
           setTimezone(data.timezone ?? "America/New_York");
           setCurrency(data.currency ?? "USD");
           setEmailSignature(data.email_signature ?? "");
+          setPaymentLinkTemplate(data.payment_link_template ?? "");
         }
       });
   }, [organization]);
@@ -70,6 +72,7 @@ export default function SettingsPage() {
 
     const { error: settingsErr } = await db.from("org_settings").upsert({
       org_id: organization.id, timezone, currency, email_signature: emailSignature,
+      payment_link_template: paymentLinkTemplate.trim() || null,
       updated_at: new Date().toISOString(),
     }, { onConflict: "org_id" });
 
@@ -176,6 +179,36 @@ export default function SettingsPage() {
           <textarea value={emailSignature} onChange={(e) => setEmailSignature(e.target.value)}
             rows={4} placeholder={`Best regards,\nThe ${orgName || "Finance"} Team`}
             className="w-full bg-white border border-[#E2E8F0] rounded-xl px-4 py-3 text-[#0F172A] placeholder-[#333333] focus:border-[#000000] focus:ring-1 focus:ring-[#000000]/20 outline-none transition-all text-sm resize-none font-mono" />
+        </motion.div>
+
+        <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.15 }}
+          className="glass rounded-2xl p-6 space-y-4">
+          <div className="flex items-center gap-2 mb-1">
+            <Link className="w-4 h-4 text-[#333333]" />
+            <h3 className="text-sm font-semibold text-[#0F172A]">Payment Collection</h3>
+          </div>
+          <p className="text-[#333333] text-xs -mt-2">
+            Add your payment portal link here — Stripe, Razorpay, bank transfer page, or any URL your customers use to pay you.
+            Use <code className="bg-[#F3F3F3] px-1 py-0.5 rounded text-[#000000] font-mono">{"{invoice_number}"}</code> as a placeholder and DataByt will swap it with the real invoice number in every email.
+          </p>
+          <div>
+            <label className="text-[#111111] text-sm font-medium mb-2 block">Payment Link Template</label>
+            <input
+              type="url"
+              value={paymentLinkTemplate}
+              onChange={e => setPaymentLinkTemplate(e.target.value)}
+              placeholder="https://pay.yourcompany.com/invoice/{invoice_number}"
+              className={inputCls}
+            />
+          </div>
+          {paymentLinkTemplate && (
+            <div className="rounded-xl bg-[#F3F3F3] border border-[#000000]/10 px-4 py-3">
+              <p className="text-[10px] text-[#555555] uppercase tracking-wider font-medium mb-1">Preview for invoice #INV-0042</p>
+              <p className="text-xs text-[#0F172A] break-all font-mono">
+                {paymentLinkTemplate.replace("{invoice_number}", "INV-0042")}
+              </p>
+            </div>
+          )}
         </motion.div>
 
         <button type="submit" disabled={saving}

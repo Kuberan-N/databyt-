@@ -30,9 +30,9 @@ const steps = [
   {
     num:   "04",
     icon:  CreditCard,
-    title: "Customer pays via hosted portal",
-    desc:  "Customer clicks link → sees their invoice → pays via Dodo Payments checkout in under 60 seconds. No login required. Payment auto-matched instantly.",
-    tag:   "One-click payment",
+    title: "Customer pays via your payment link",
+    desc:  "Paste in your Stripe, Razorpay, or bank transfer URL. DataByt fills in the invoice number automatically and embeds it in every email. No payment processor lock-in.",
+    tag:   "Works with any provider",
   },
   {
     num:   "05",

@@ -58,7 +58,7 @@ interface Customer {
 async function buildBatchedEmail(
   customer: Customer,
   level: 1 | 2 | 3,
-  baseUrl: string,
+  paymentLinkTemplate: string | null,
 ): Promise<{ subject: string; body: string }> {
   const fmtCurrency = (n: number, c = "USD") =>
     new Intl.NumberFormat("en-US", { style: "currency", currency: c, maximumFractionDigits: 0 }).format(n);
@@ -69,8 +69,11 @@ async function buildBatchedEmail(
   const invoiceLines = customer.invoices
     .sort((a, b) => b.days_overdue - a.days_overdue)
     .map(inv => {
-      const payLink = inv.payment_link_url ?? `${baseUrl}/pay/${inv.id}`;
-      return `  * Invoice ${inv.invoice_number} - ${fmtCurrency(inv.amount, inv.currency)} - ${inv.days_overdue}d overdue - Pay: ${payLink}`;
+      const payLink = paymentLinkTemplate
+        ? paymentLinkTemplate.replace("{invoice_number}", inv.invoice_number)
+        : inv.payment_link_url ?? null;
+      const payPart = payLink ? ` - Pay: ${payLink}` : "";
+      return `  * Invoice ${inv.invoice_number} - ${fmtCurrency(inv.amount, inv.currency)} - ${inv.days_overdue}d overdue${payPart}`;
     })
     .join("\n");
 
@@ -96,8 +99,8 @@ Rules:
 - Start with: SUBJECT: [your subject line]
 - Then blank line, then the email body
 - Address the customer by company name
-- List all overdue invoices clearly with their amounts and payment links
-- Include a primary payment call to action using the first invoice's payment link if there is one invoice, or list all links if multiple
+- List all overdue invoices clearly with their amounts${paymentLinkTemplate ? " and payment links" : ""}
+- ${paymentLinkTemplate ? "Include a primary payment call to action using the payment links listed above" : "Ask the customer to contact us to arrange payment — no payment portal link is available"}
 - Sign off with: ${customer.org_signature}
 - Do NOT use placeholder text
 - Keep body under 200 words`;
@@ -145,12 +148,13 @@ export async function GET(req: NextRequest) {
     try {
       const { data: settings } = await db
         .from("org_settings")
-        .select("email_signature, currency")
+        .select("email_signature, currency, payment_link_template")
         .eq("org_id", org.id)
         .single();
 
       const signature = settings?.email_signature
         ?? `Best regards,\nAccounts Receivable Team\n${org.name}`;
+      const paymentLinkTemplate: string | null = settings?.payment_link_template ?? null;
 
       // Fetch overdue/reminded invoices with customer emails
       const { data: invoices } = await db
@@ -213,7 +217,7 @@ export async function GET(req: NextRequest) {
           const maxDaysOverdue = Math.max(...customer.invoices.map(i => i.days_overdue));
           const level = escalationLevel(maxDaysOverdue);
 
-          const { subject, body } = await buildBatchedEmail(customer, level, baseUrl);
+          const { subject, body } = await buildBatchedEmail(customer, level, paymentLinkTemplate);
 
           const replyTo = inboundDomain
             ? `reply+${customer.invoices[0].id}@${inboundDomain}`

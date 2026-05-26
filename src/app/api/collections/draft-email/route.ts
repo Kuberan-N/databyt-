@@ -58,7 +58,7 @@ export async function POST(req: NextRequest) {
     if (!invoice) return NextResponse.json({ error: "Invoice not found" }, { status: 404 });
 
     const { data: org } = await db.from("organizations").select("name").eq("id", orgId).single();
-    const { data: settings } = await db.from("org_settings").select("email_signature, currency").eq("org_id", orgId).single();
+    const { data: settings } = await db.from("org_settings").select("email_signature, currency, payment_link_template").eq("org_id", orgId).single();
 
     const customer = invoice.customers;
     const currency = new Intl.NumberFormat("en-US", {
@@ -70,8 +70,10 @@ export async function POST(req: NextRequest) {
     const orgName = org?.name ?? "Your Company";
     const signature = settings?.email_signature ?? `Best regards,\nAccounts Receivable Team\n${orgName}`;
 
-    const baseUrl = process.env.NEXT_PUBLIC_APP_URL ?? "https://www.databyt.in";
-    const paymentLink = invoice.payment_link_url ?? `${baseUrl}/pay/${invoiceId}`;
+    const template: string | null = settings?.payment_link_template ?? null;
+    const paymentLink = template
+      ? template.replace("{invoice_number}", invoice.invoice_number)
+      : (invoice.payment_link_url ?? null);
 
     // Segment-aware tone modifier
     const segmentNote =
@@ -80,6 +82,10 @@ export async function POST(req: NextRequest) {
         : customer?.segment === "at_risk"
         ? "NOTE: This customer has a history of late payments — be firm, clear, and concise. Do not be aggressive."
         : "";
+
+    const paymentInstruction = paymentLink
+      ? `- Include a clear payment call to action with this exact payment link: ${paymentLink}\n- Format the payment link as: Pay now: ${paymentLink}`
+      : "- Ask them to reply to this email to arrange payment — no payment link available";
 
     const prompt = `You are an accounts receivable specialist drafting a dunning email on behalf of ${orgName}.
 
@@ -100,8 +106,7 @@ Draft a concise, professional dunning email. Rules:
 - Then blank line, then the email body
 - Address the customer by company name
 - Reference the specific invoice number and amount
-- Include a clear payment call to action with this exact payment link: ${paymentLink}
-- Format the payment link as: Pay now: ${paymentLink}
+${paymentInstruction}
 - Sign off with: ${signature}
 - Do NOT use placeholder text like [Your Name] — use the actual company name
 - Keep body under 150 words`;
