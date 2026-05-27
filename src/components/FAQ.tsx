@@ -55,7 +55,6 @@ export default function FAQ() {
           transition={{ duration: 0.6, ease }}
           className="mb-10"
         >
-          <p className="text-[#4F46E5] text-[11px] font-semibold uppercase tracking-widest mb-3">FAQ</p>
           <h2 className="text-[30px] sm:text-[38px] font-bold text-[#111111] leading-[1.15] tracking-[-0.02em]">
             Common questions
           </h2>

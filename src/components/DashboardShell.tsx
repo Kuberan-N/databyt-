@@ -227,11 +227,6 @@ export default function DashboardShell({ children }: { children: ReactNode }) {
             <h1 className="text-base font-semibold text-[#0F172A]">{currentPage}</h1>
           </div>
           <div className="flex items-center gap-3">
-            <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#F3F3F3] border border-[#000000]/20">
-              <span className="text-xs font-medium text-[#000000] capitalize">
-                {organization?.plan_tier ?? "starter"}
-              </span>
-            </div>
             <div className="w-8 h-8 rounded-full bg-[#111111] flex items-center justify-center text-white text-xs font-bold">
               {initials}
             </div>

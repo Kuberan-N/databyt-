@@ -291,7 +291,7 @@ export default function SettingsPage() {
           {[
             { label: "Email", value: user?.email ?? "—" },
             { label: "Role", value: orgUser?.role ?? "admin" },
-            { label: "Plan", value: organization?.plan_tier ?? "starter" },
+            { label: "Plan", value: "DataByt Pro" },
             { label: "Member since", value: organization?.created_at
               ? new Date(organization.created_at).toLocaleDateString("en-US", { month: "long", year: "numeric" })
               : "—" },

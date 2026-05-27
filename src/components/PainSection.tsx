@@ -160,7 +160,6 @@ export default function PainSection() {
           transition={{ duration: 0.7, ease }}
           className="mb-12"
         >
-          <p className="text-[#4F46E5] text-[11px] font-semibold uppercase tracking-widest mb-3">The Problem</p>
           <h2 className="text-[30px] sm:text-[38px] font-extrabold text-[#111111] leading-[1.15] tracking-[-0.02em] max-w-[560px]">
             Manual AR doesn&apos;t just cost time.<br />
             <span className="text-[#555555]">It costs working capital.</span>

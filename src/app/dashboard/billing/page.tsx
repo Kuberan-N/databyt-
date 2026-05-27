@@ -73,13 +73,9 @@ export default function BillingPage() {
         <p className="text-[12px] text-[#888888] font-semibold uppercase tracking-widest mb-4">Current Plan</p>
         <div className="flex items-center justify-between">
           <div>
-            <p className="text-[#111111] font-bold text-lg capitalize">
-              {organization?.plan_tier ?? "Starter"} Plan
-            </p>
+            <p className="text-[#111111] font-bold text-lg">DataByt Pro</p>
             <p className="text-[#555555] text-sm mt-0.5">
-              {String(organization?.plan_tier ?? "") === "cashflow_command"
-                ? "Full AR + AP + Cash Flow Forecasting"
-                : "Full AR Collections Automation"}
+              Full AR Collections Automation — everything included
             </p>
           </div>
           <span className="px-3 py-1 rounded-full bg-[#F3F3F3] text-[#000000] text-xs font-semibold">
