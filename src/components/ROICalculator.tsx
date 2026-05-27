@@ -44,7 +44,7 @@ export default function ROICalculator() {
             See exactly what DataByt<br className="hidden sm:block" />{" "}
             <span className="text-[#000000]">saves your business.</span>
           </h2>
-          <p className="text-[#666] text-[15px] mt-3 max-w-md leading-relaxed">
+          <p className="text-[#333333] text-[15px] mt-3 max-w-md leading-relaxed">
             Move the sliders. The savings update in real time.
           </p>
         </motion.div>
@@ -72,11 +72,11 @@ export default function ROICalculator() {
                   value={revenueMillion}
                   onChange={e => setRevenueMillion(Number(e.target.value))}
                   className="w-full"
-                  style={{ accentColor: "#000000" }}
+                  style={{ accentColor: "#4F46E5" }}
                 />
                 <div className="flex justify-between mt-1.5">
-                  <span className="text-[11px] text-[#555555]">$1M</span>
-                  <span className="text-[11px] text-[#555555]">$100M</span>
+                  <span className="text-[11px] text-[#333333]">$1M</span>
+                  <span className="text-[11px] text-[#333333]">$100M</span>
                 </div>
               </div>
 
@@ -91,11 +91,11 @@ export default function ROICalculator() {
                   value={dso}
                   onChange={e => setDso(Number(e.target.value))}
                   className="w-full"
-                  style={{ accentColor: "#000000" }}
+                  style={{ accentColor: "#4F46E5" }}
                 />
                 <div className="flex justify-between mt-1.5">
-                  <span className="text-[11px] text-[#555555]">20 days</span>
-                  <span className="text-[11px] text-[#555555]">120 days</span>
+                  <span className="text-[11px] text-[#333333]">20 days</span>
+                  <span className="text-[11px] text-[#333333]">120 days</span>
                 </div>
               </div>
             </div>
@@ -104,7 +104,7 @@ export default function ROICalculator() {
             <div className="mt-7 p-4 rounded-lg bg-[#F9F9F9] border border-[#EDEDED]">
               <p className="text-[11px] text-[#333333] font-medium mb-1">Cash currently locked in AR</p>
               <p className="text-[28px] font-bold text-[#111111]">{fmt(r.arBalance)}</p>
-              <p className="text-[11px] text-[#555555] mt-1">
+              <p className="text-[11px] text-[#333333] mt-1">
                 = (${revenueMillion}M ÷ 365) × {dso} days
               </p>
             </div>
@@ -157,13 +157,13 @@ export default function ROICalculator() {
               </div>
             </div>
 
-            <p className="text-[11px] text-[#555555] leading-relaxed">
+            <p className="text-[11px] text-[#333333] leading-relaxed">
               Based on 30% DSO reduction (DataByt average) and 8% cost of capital.
               Labor savings and bad debt reduction not included — those add further upside.
             </p>
 
             <a href="#pricing"
-              className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-lg bg-[#111111] text-white text-[14px] font-semibold hover:bg-[#1A1A1A] transition-colors">
+              className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-lg bg-[#4F46E5] text-white text-[14px] font-semibold hover:bg-[#4338CA] transition-colors">
               Get Started — $2,000/Month
               <ArrowRight className="w-4 h-4" />
             </a>

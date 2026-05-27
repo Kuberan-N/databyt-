@@ -133,7 +133,7 @@ function DashboardMockup() {
               {[
                 { name: "Acme Corp",     amt: "$12,400", tag: "L2", tagBg: "#FEF3C7", tagTx: "#92400E" },
                 { name: "TechFlow Inc",  amt: "$8,750",  tag: "L1", tagBg: "#F3F3F3", tagTx: "#111111" },
-                { name: "BuildRight Ltd",amt: "$5,200",  tag: "L3", tagBg: "#FEE2E2", tagTx: "#991B1B" },
+                { name: "BuildRight Ltd",amt: "$5,200",  tag: "L3", tagBg: "#FEE2E2", tagTx: "#312E81" },
               ].map(inv => (
                 <div key={inv.name} className="flex items-center justify-between py-1.5 border-b border-[#F5F5F5] last:border-0 gap-2">
                   <span className="text-[9px] text-[#555555] font-medium truncate">{inv.name}</span>
@@ -151,9 +151,9 @@ function DashboardMockup() {
 }
 
 const stats = [
-  { icon: TrendingDown, prefix: "", target: 30, suffix: "%", label: "avg DSO reduction", color: "#16A34A" },
-  { icon: Clock,        prefix: "", target: 48, suffix: "hrs", label: "to live collections", color: "#111111" },
-  { icon: DollarSign,  prefix: "$", target: 847, suffix: "K", label: "avg AR recovered/mo", color: "#111111" },
+  { icon: TrendingDown, prefix: "", target: 30, suffix: "%", label: "avg DSO reduction", color: "#4F46E5" },
+  { icon: Clock,        prefix: "", target: 48, suffix: "hrs", label: "to live collections", color: "#4F46E5" },
+  { icon: DollarSign,  prefix: "$", target: 847, suffix: "K", label: "avg AR recovered/mo", color: "#4F46E5" },
 ];
 
 export default function Hero() {
@@ -176,7 +176,7 @@ export default function Hero() {
           className="flex justify-center mb-7"
         >
           <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[#D4D4D4] bg-white text-[#111111] text-[11px] font-semibold tracking-widest uppercase shadow-sm">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#16A34A] animate-pulse" />
+            <span className="w-1.5 h-1.5 rounded-full bg-[#4F46E5] animate-pulse" />
             AI-Powered AR Collections
           </span>
         </motion.div>
@@ -198,7 +198,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease, delay: 0.12 }}
-          className="text-center text-[17px] text-[#555555] max-w-[500px] mx-auto mb-9 leading-[1.7] font-[450]"
+          className="text-center text-[17px] text-[#333333] max-w-[500px] mx-auto mb-9 leading-[1.7] font-[450]"
         >
           AI dunning emails, dispute management, and live CEI analytics —
           connected to your accounting system in 48 hours.
@@ -212,12 +212,12 @@ export default function Hero() {
           className="flex flex-wrap justify-center gap-3 mb-10"
         >
           <a href="/auth"
-            className="group inline-flex items-center gap-2 px-7 py-3.5 rounded-xl bg-[#111111] text-white text-[14px] font-semibold hover:bg-[#000000] transition-all shadow-lg shadow-black/15 hover:shadow-black/25 hover:-translate-y-0.5">
+            className="group inline-flex items-center gap-2 px-7 py-3.5 rounded-xl bg-[#4F46E5] text-white text-[14px] font-semibold hover:bg-[#4338CA] transition-all shadow-lg shadow-[#4F46E5]/25 hover:shadow-[#4F46E5]/40 hover:-translate-y-0.5">
             Start Free Trial
             <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
           </a>
           <a href="#roi"
-            className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl border border-[#E2E8F0] bg-white text-[#333333] text-[14px] font-medium hover:border-[#999999] hover:-translate-y-0.5 transition-all">
+            className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl border border-[#E2E8F0] bg-white text-[#333333] text-[14px] font-medium hover:border-[#4F46E5]/40 hover:-translate-y-0.5 transition-all">
             Calculate My Savings
           </a>
         </motion.div>
@@ -231,11 +231,11 @@ export default function Hero() {
         >
           {stats.map((s, i) => (
             <div key={i} className="flex items-center gap-2.5">
-              <div className="w-8 h-8 rounded-lg bg-white border border-[#E5E5E5] flex items-center justify-center shadow-sm">
-                <s.icon className="w-3.5 h-3.5 text-[#111111]" />
+              <div className="w-8 h-8 rounded-lg bg-[#EEF2FF] border border-[#4F46E5]/20 flex items-center justify-center shadow-sm">
+                <s.icon className="w-3.5 h-3.5 text-[#4F46E5]" />
               </div>
               <div>
-                <p className="text-[16px] font-extrabold text-[#111111] leading-none">
+                <p className="text-[16px] font-extrabold leading-none" style={{ color: s.color }}>
                   <AnimatedCounter
                     target={s.target}
                     prefix={s.prefix}
@@ -243,7 +243,7 @@ export default function Hero() {
                     duration={1.6 + i * 0.2}
                   />
                 </p>
-                <p className="text-[11px] text-[#777777] mt-0.5">{s.label}</p>
+                <p className="text-[11px] text-[#333333] mt-0.5">{s.label}</p>
               </div>
             </div>
           ))}
@@ -256,7 +256,7 @@ export default function Hero() {
           transition={{ duration: 0.4, ease, delay: 0.28 }}
           className="flex flex-wrap justify-center items-center gap-2 mb-12"
         >
-          <span className="text-[11px] text-[#888888] font-medium mr-1">Integrates with</span>
+          <span className="text-[11px] text-[#333333] font-medium mr-1">Integrates with</span>
           {integrations.map(l => (
             <span key={l} className="px-3 py-1.5 rounded-lg border border-[#E5E5E5] bg-white text-[11px] font-semibold text-[#333333] shadow-sm">
               {l}

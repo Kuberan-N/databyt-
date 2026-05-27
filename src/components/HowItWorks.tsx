@@ -64,9 +64,9 @@ export default function HowItWorks() {
         >
           <h2 className="text-[30px] sm:text-[38px] font-extrabold text-[#111111] leading-[1.15] tracking-[-0.02em] max-w-[600px]">
             The complete AR loop.<br />
-            <span className="text-[#555555]">Closed end-to-end.</span>
+            <span className="text-[#4F46E5]">Closed end-to-end.</span>
           </h2>
-          <p className="text-[#555555] text-[15px] mt-4 max-w-[480px] leading-relaxed">
+          <p className="text-[#333333] text-[15px] mt-4 max-w-[480px] leading-relaxed">
             Most tools stop at &quot;send the email.&quot; DataByt closes the full loop:
             import → score → email → pay → match → dispute → analytics.
           </p>
@@ -81,20 +81,20 @@ export default function HowItWorks() {
               viewport={{ once: true, margin: "-40px" }}
               transition={{ duration: 0.55, ease, delay: i * 0.07 }}
               whileHover={{ y: -5, transition: { duration: 0.2, ease: "easeOut" } }}
-              className="group p-6 rounded-xl bg-white border border-[#E8E8E8] hover:border-[#C8C8C8] hover:shadow-[0_12px_40px_-12px_rgba(0,0,0,0.12)] transition-all flex flex-col cursor-default"
+              className="group p-6 rounded-xl bg-white border border-[#E8E8E8] hover:border-[#4F46E5]/40 hover:shadow-[0_12px_40px_-12px_rgba(79,70,229,0.15)] transition-all flex flex-col cursor-default"
             >
               <div className="flex items-start justify-between mb-6">
                 <motion.div
-                  className="w-10 h-10 rounded-xl bg-[#F3F3F3] group-hover:bg-[#111111] flex items-center justify-center transition-colors duration-300"
+                  className="w-10 h-10 rounded-xl bg-[#EEF2FF] group-hover:bg-[#4F46E5] flex items-center justify-center transition-colors duration-300"
                 >
-                  <s.icon className="w-[18px] h-[18px] text-[#555555] group-hover:text-white transition-colors duration-300" />
+                  <s.icon className="w-[18px] h-[18px] text-[#4F46E5] group-hover:text-white transition-colors duration-300" />
                 </motion.div>
-                <span className="text-[#CCCCCC] font-bold text-[22px] leading-none tabular-nums">{s.num}</span>
+                <span className="text-[#4F46E5]/40 font-bold text-[22px] leading-none tabular-nums">{s.num}</span>
               </div>
               <h3 className="text-[#111111] font-semibold text-[14px] mb-3 leading-snug">{s.title}</h3>
-              <p className="text-[#555555] text-[13px] leading-relaxed flex-1">{s.desc}</p>
+              <p className="text-[#333333] text-[13px] leading-relaxed flex-1">{s.desc}</p>
               <div className="mt-5">
-                <span className="inline-flex px-2.5 py-1 rounded-full bg-[#F3F3F3] text-[#333333] text-[11px] font-semibold group-hover:bg-[#111111] group-hover:text-white transition-colors duration-300">
+                <span className="inline-flex px-2.5 py-1 rounded-full bg-[#EEF2FF] text-[#4F46E5] text-[11px] font-semibold group-hover:bg-[#4F46E5] group-hover:text-white transition-colors duration-300">
                   {s.tag}
                 </span>
               </div>
@@ -110,11 +110,11 @@ export default function HowItWorks() {
           className="mt-12 flex flex-col sm:flex-row items-start sm:items-center gap-4"
         >
           <a href="/auth"
-            className="group inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-[#111111] text-white text-[14px] font-semibold hover:bg-[#000000] hover:shadow-lg hover:shadow-black/15 hover:-translate-y-0.5 transition-all">
+            className="group inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-[#4F46E5] text-white text-[14px] font-semibold hover:bg-[#4338CA] hover:shadow-lg hover:shadow-[#4F46E5]/25 hover:-translate-y-0.5 transition-all">
             Start Free Trial
             <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
           </a>
-          <p className="text-[#777777] text-[13px]">30 days free · No credit card · Live in 48 hours</p>
+          <p className="text-[#333333] text-[13px]">30 days free · No credit card · Live in 48 hours</p>
         </motion.div>
 
       </div>

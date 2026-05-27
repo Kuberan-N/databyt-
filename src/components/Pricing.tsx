@@ -45,7 +45,7 @@ export default function Pricing() {
           <h2 className="text-[30px] sm:text-[38px] font-extrabold text-[#111111] leading-[1.15] tracking-[-0.02em]">
             One plan. Everything included.
           </h2>
-          <p className="mt-3 text-[#555555] text-[15px] max-w-md">
+          <p className="mt-3 text-[#333333] text-[15px] max-w-md">
             No feature tiers. No per-invoice charges. No surprises. 10× cheaper than HighRadius.
           </p>
         </motion.div>
@@ -56,10 +56,10 @@ export default function Pricing() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.4, ease }}
-          className="flex items-center gap-3 mb-8 px-5 py-3.5 rounded-xl bg-[#F0FDF4] border border-[#BBF7D0]"
+          className="flex items-center gap-3 mb-8 px-5 py-3.5 rounded-xl bg-[#EEF2FF] border border-[#4F46E5]/30"
         >
-          <Lock className="w-4 h-4 text-[#16A34A] shrink-0" />
-          <p className="text-[13px] text-[#15803D]">
+          <Lock className="w-4 h-4 text-[#4F46E5] shrink-0" />
+          <p className="text-[13px] text-[#312E81]">
             <span className="font-bold">Founding customer rate — </span>
             first 20 clients lock in $2,000/month forever. Price rises to $4,000/month after that.
           </p>
@@ -76,7 +76,7 @@ export default function Pricing() {
           <button
             onClick={() => setYearly(false)}
             className={`px-4 py-2 rounded-lg text-[13px] font-semibold transition-all ${
-              !yearly ? "bg-[#111111] text-white" : "text-[#555555] hover:text-[#111111]"
+              !yearly ? "bg-[#111111] text-white" : "text-[#333333] hover:text-[#111111]"
             }`}
           >
             Monthly
@@ -96,11 +96,11 @@ export default function Pricing() {
           <button
             onClick={() => setYearly(true)}
             className={`px-4 py-2 rounded-lg text-[13px] font-semibold transition-all flex items-center gap-2 ${
-              yearly ? "bg-[#111111] text-white" : "text-[#555555] hover:text-[#111111]"
+              yearly ? "bg-[#111111] text-white" : "text-[#333333] hover:text-[#111111]"
             }`}
           >
             Annual
-            <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-[#F0FDF4] border border-[#BBF7D0] text-[#16A34A] text-[10px] font-bold">
+            <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-[#EEF2FF] border border-[#4F46E5]/40 text-[#312E81] text-[10px] font-bold">
               <Zap className="w-2.5 h-2.5" />
               Save ${SAVING.toLocaleString()}
             </span>
@@ -117,7 +117,7 @@ export default function Pricing() {
             className="relative rounded-2xl bg-[#111111] p-8 flex flex-col"
           >
             <div className="absolute -top-3.5 left-1/2 -translate-x-1/2">
-              <span className="bg-[#16A34A] text-white text-[10px] font-bold px-4 py-1.5 rounded-full uppercase tracking-widest shadow-sm whitespace-nowrap">
+              <span className="bg-[#4F46E5] text-white text-[10px] font-bold px-4 py-1.5 rounded-full uppercase tracking-widest shadow-sm whitespace-nowrap">
                 Everything Included · Founding Rate
               </span>
             </div>
@@ -140,7 +140,7 @@ export default function Pricing() {
                 <>
                   <p className="text-[13px] text-white/40 mb-4">
                     Billed ${ANNUAL.toLocaleString()}/year —{" "}
-                    <span className="text-[#4ADE80] font-semibold">
+                    <span className="text-[#A5B4FC] font-semibold">
                       you save ${SAVING.toLocaleString()} (2 full months free)
                     </span>
                   </p>
@@ -153,12 +153,12 @@ export default function Pricing() {
                       </p>
                       <p className="text-[10px] text-white/25 mt-0.5">You pay $4,000 more for the same product</p>
                     </div>
-                    <div className="rounded-xl bg-[#16A34A]/15 p-3.5 border border-[#16A34A]/25">
-                      <p className="text-[10px] text-[#4ADE80] mb-1.5 uppercase tracking-wider">Annual billing ✓</p>
+                    <div className="rounded-xl bg-[#4F46E5]/15 p-3.5 border border-[#4F46E5]/30">
+                      <p className="text-[10px] text-[#A5B4FC] mb-1.5 uppercase tracking-wider">Annual billing ✓</p>
                       <p className="text-[20px] font-bold text-white">
                         ${ANNUAL.toLocaleString()}/yr
                       </p>
-                      <p className="text-[10px] text-[#4ADE80] mt-0.5">2 months free — the smart choice</p>
+                      <p className="text-[10px] text-[#A5B4FC] mt-0.5">2 months free — the smart choice</p>
                     </div>
                   </div>
                 </>
@@ -166,7 +166,7 @@ export default function Pricing() {
                 <div className="mb-6 p-3.5 rounded-xl bg-white/5 border border-white/10">
                   <p className="text-[12px] text-white/40">
                     Switch to annual billing →{" "}
-                    <span className="text-[#4ADE80] font-semibold">
+                    <span className="text-[#A5B4FC] font-semibold">
                       save ${SAVING.toLocaleString()}/year (2 months free)
                     </span>
                   </p>
@@ -185,7 +185,7 @@ export default function Pricing() {
             <ul className="grid sm:grid-cols-2 gap-x-8 gap-y-2.5">
               {features.map((f, j) => (
                 <li key={j} className="flex items-start gap-2.5 text-[13px]">
-                  <Check className="w-3.5 h-3.5 mt-0.5 shrink-0 text-[#4ADE80]" />
+                  <Check className="w-3.5 h-3.5 mt-0.5 shrink-0 text-[#A5B4FC]" />
                   <span className="text-white/70">{f}</span>
                 </li>
               ))}
@@ -199,14 +199,14 @@ export default function Pricing() {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.2 }}
-          className="mt-8 flex flex-wrap items-center justify-center gap-5 text-[#555555] text-[12px]"
+          className="mt-8 flex flex-wrap items-center justify-center gap-5 text-[#333333] text-[12px]"
         >
           <span>&#10003; 30-day free trial</span>
           <span>&#10003; No credit card required</span>
           <span>&#10003; Cancel anytime</span>
           <span>&#10003; Live in 48 hours</span>
           <span>&#10003; CAN-SPAM compliant</span>
-          <span className="text-[#777777]">
+          <span className="text-[#333333]">
             HighRadius: <span className="line-through">$100K+/yr</span> · Billtrust: <span className="line-through">$50K+/yr</span> · DataByt Pro: $20K/yr
           </span>
         </motion.div>

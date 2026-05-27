@@ -68,7 +68,7 @@ export default function FAQ() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-40px" }}
               transition={{ duration: 0.45, ease, delay: i * 0.04 }}
-              className="rounded-lg bg-[#FAFAFA] border border-[#EBEBEB] overflow-hidden"
+              className="rounded-lg bg-white border border-[#EBEBEB] overflow-hidden"
             >
               <button
                 onClick={() => setOpen(open === i ? null : i)}
@@ -76,8 +76,8 @@ export default function FAQ() {
               >
                 <span className="text-[#111111] font-semibold text-[14px] leading-snug">{faq.q}</span>
                 {open === i
-                  ? <Minus className="w-4 h-4 text-[#000000] shrink-0" />
-                  : <Plus className="w-4 h-4 text-[#555555] shrink-0" />
+                  ? <Minus className="w-4 h-4 text-[#4F46E5] shrink-0" />
+                  : <Plus className="w-4 h-4 text-[#4F46E5] shrink-0" />
                 }
               </button>
               <AnimatePresence>
@@ -89,7 +89,7 @@ export default function FAQ() {
                     transition={{ duration: 0.25, ease }}
                     className="overflow-hidden"
                   >
-                    <p className="px-5 pb-5 text-[#111111] text-[13.5px] leading-relaxed border-t border-[#EBEBEB] pt-3">
+                    <p className="px-5 pb-5 text-[#222222] text-[13.5px] leading-relaxed border-t border-[#EEF2FF] pt-3">
                       {faq.a}
                     </p>
                   </motion.div>

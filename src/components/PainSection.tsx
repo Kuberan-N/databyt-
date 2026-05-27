@@ -63,11 +63,11 @@ function CounterStat({
       <div className="mb-4">
         <p
           ref={ref}
-          className="text-[36px] font-extrabold text-[#111111] leading-none"
+          className="text-[36px] font-extrabold text-[#4F46E5] leading-none"
         >
           {stat}
         </p>
-        <p className="text-[11px] text-[#777777] mt-1 font-medium">{context}</p>
+        <p className="text-[11px] text-[#4F46E5] mt-1 font-semibold">{context}</p>
       </div>
       <p className="text-[13.5px] text-[#333333] font-medium leading-snug mb-2 flex-1">{problem}</p>
       <p className="text-[12px] text-[#111111] font-semibold mb-3">{cost}</p>
@@ -75,7 +75,7 @@ function CounterStat({
         href={href}
         target="_blank"
         rel="noopener noreferrer"
-        className="flex items-center gap-1.5 text-[11px] text-[#999999] hover:text-[#555555] transition-colors"
+        className="flex items-center gap-1.5 text-[11px] text-[#4F46E5]/50 hover:text-[#4F46E5] transition-colors"
         onClick={e => e.stopPropagation()}
       >
         <ExternalLink className="w-3 h-3" />
@@ -162,7 +162,7 @@ export default function PainSection() {
         >
           <h2 className="text-[30px] sm:text-[38px] font-extrabold text-[#111111] leading-[1.15] tracking-[-0.02em] max-w-[560px]">
             Manual AR doesn&apos;t just cost time.<br />
-            <span className="text-[#555555]">It costs working capital.</span>
+            <span className="text-[#4F46E5]">It costs working capital.</span>
           </h2>
         </motion.div>
 
@@ -182,20 +182,20 @@ export default function PainSection() {
           className="flex flex-col sm:flex-row mb-12 overflow-hidden rounded-xl border border-[#EBEBEB] bg-white divide-y sm:divide-y-0 sm:divide-x divide-[#EBEBEB]"
         >
           <div className="flex-1 px-6 py-5">
-            <p className="text-[30px] font-extrabold text-[#111111] leading-none">
-              $39K<span className="text-[14px] text-[#777777] font-medium ml-1">/year</span>
+            <p className="text-[30px] font-extrabold text-[#4F46E5] leading-none">
+              $39K<span className="text-[14px] text-[#333333] font-medium ml-1">/year</span>
             </p>
-            <p className="text-[13px] font-semibold text-[#333333] mt-1.5">Average annual AR overhead per company</p>
-            <p className="text-[11px] text-[#888888] mt-1 leading-relaxed">
+            <p className="text-[13px] font-semibold text-[#111111] mt-1.5">Average annual AR overhead per company</p>
+            <p className="text-[11px] text-[#333333] mt-1 leading-relaxed">
               Late-payment admin, dispute handling, and bad debt write-offs · Kaplan Group
             </p>
           </div>
           <div className="flex-1 px-6 py-5">
-            <p className="text-[30px] font-extrabold text-[#111111] leading-none">
-              16<span className="text-[14px] text-[#777777] font-medium ml-1">hrs/day</span>
+            <p className="text-[30px] font-extrabold text-[#4F46E5] leading-none">
+              16<span className="text-[14px] text-[#333333] font-medium ml-1">hrs/day</span>
             </p>
-            <p className="text-[13px] font-semibold text-[#333333] mt-1.5">Manual cash posting per finance team</p>
-            <p className="text-[11px] text-[#888888] mt-1 leading-relaxed">
+            <p className="text-[13px] font-semibold text-[#111111] mt-1.5">Manual cash posting per finance team</p>
+            <p className="text-[11px] text-[#333333] mt-1 leading-relaxed">
               Equivalent to $88,660/year in pure labor cost — automated end-to-end by DataByt · Versapay 2024
             </p>
           </div>
@@ -235,7 +235,7 @@ export default function PainSection() {
               >
                 <div className="px-5 py-4 flex items-start gap-2.5 border-r border-[#EBEBEB]">
                   <X className="w-3 h-3 text-[#DC2626] mt-0.5 shrink-0" />
-                  <p className="text-[13px] text-[#555555] leading-snug">{row.before}</p>
+                  <p className="text-[13px] text-[#333333] leading-snug">{row.before}</p>
                 </div>
                 <div className="px-5 py-4 flex items-start gap-2.5">
                   <Check className="w-3 h-3 text-[#16A34A] mt-0.5 shrink-0" />

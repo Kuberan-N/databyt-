@@ -57,9 +57,9 @@ export default function ValueStack() {
 
           <h2 className="text-[30px] sm:text-[38px] font-extrabold text-[#111111] leading-[1.15] tracking-[-0.02em] mb-4">
             An offer so good,<br />
-            <span className="text-[#555555]">saying no feels like a mistake.</span>
+            <span className="text-[#4F46E5]">saying no feels like a mistake.</span>
           </h2>
-          <p className="text-[#555555] text-[15px] max-w-md mx-auto">
+          <p className="text-[#333333] text-[15px] max-w-md mx-auto">
             We take on the risk. You keep the upside.
           </p>
         </motion.div>
@@ -73,7 +73,7 @@ export default function ValueStack() {
         >
           {/* Stack items */}
           <div className="p-8 border-b border-[#F0F0F0]">
-            <p className="text-[11px] font-semibold text-[#555555] uppercase tracking-wider mb-5">What you get — and what it costs elsewhere</p>
+            <p className="text-[11px] font-semibold text-[#4F46E5] uppercase tracking-wider mb-5">What you get — and what it costs elsewhere</p>
             <div className="space-y-3">
               {stackItems.map((s, i) => (
                 <motion.div
@@ -85,10 +85,10 @@ export default function ValueStack() {
                   className="flex items-center justify-between py-3 border-b border-[#F5F5F5] last:border-0"
                 >
                   <div className="flex items-center gap-3">
-                    <Check className="w-4 h-4 text-[#16A34A] shrink-0" />
+                    <Check className="w-4 h-4 text-[#4F46E5] shrink-0" />
                     <span className="text-[13.5px] text-[#111111]">{s.item}</span>
                   </div>
-                  <span className="text-[13px] text-[#999999] line-through font-mono shrink-0 ml-4">{s.value}</span>
+                  <span className="text-[13px] text-[#333333]/40 line-through font-mono shrink-0 ml-4">{s.value}</span>
                 </motion.div>
               ))}
             </div>
@@ -106,7 +106,7 @@ export default function ValueStack() {
                 <p className="text-[46px] font-extrabold text-white leading-none">
                   ${databytPrice.toLocaleString()}<span className="text-[20px] text-white/30 font-medium">/yr</span>
                 </p>
-                <p className="text-[#4ADE80] text-[13px] mt-2 font-semibold">
+                <p className="text-[#A5B4FC] text-[13px] mt-2 font-semibold">
                   You save ${(totalValue - databytPrice).toLocaleString()}+ per year
                 </p>
               </div>
@@ -133,7 +133,7 @@ export default function ValueStack() {
               className="rounded-xl p-5 bg-white border border-[#E5E5E5]"
             >
               <p className="text-[15px] mb-1">{g.emoji} <span className="font-semibold text-[#111111] text-[13px]">{g.title}</span></p>
-              <p className="text-[#555555] text-[12px] leading-relaxed">{g.desc}</p>
+              <p className="text-[#333333] text-[12px] leading-relaxed">{g.desc}</p>
             </motion.div>
           ))}
         </div>

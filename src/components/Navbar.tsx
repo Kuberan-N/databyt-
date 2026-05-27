@@ -56,7 +56,7 @@ export default function Navbar() {
             Sign in
           </a>
           <a href="/auth"
-            className="px-4 py-2 rounded-lg bg-[#000000] text-white text-[13.5px] font-semibold hover:bg-[#111111] transition-colors">
+            className="px-4 py-2 rounded-lg bg-[#4F46E5] text-white text-[13.5px] font-semibold hover:bg-[#4338CA] transition-colors">
             Start Free Trial
           </a>
         </div>
@@ -81,13 +81,13 @@ export default function Navbar() {
             <div className="px-6 py-4 flex flex-col gap-1">
               {navLinks.map(l => (
                 <a key={l.href} href={l.href}
-                  className="text-[#444444] text-sm font-medium hover:text-[#000000] transition-colors py-2.5"
+                  className="text-[#222222] text-sm font-medium hover:text-[#4F46E5] transition-colors py-2.5"
                   onClick={() => setOpen(false)}>
                   {l.label}
                 </a>
               ))}
               <a href="/auth"
-                className="mt-3 px-4 py-3 rounded-lg bg-[#000000] text-white text-sm font-semibold text-center hover:bg-[#111111] transition-colors"
+                className="mt-3 px-4 py-3 rounded-lg bg-[#4F46E5] text-white text-sm font-semibold text-center hover:bg-[#4338CA] transition-colors"
                 onClick={() => setOpen(false)}>
                 Start Free Trial
               </a>
