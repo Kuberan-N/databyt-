@@ -11,7 +11,7 @@ import {
   CheckCircle, Minus, RefreshCw, DollarSign,
 } from "lucide-react";
 import { useAuth } from "@/components/AuthProvider";
-import { fetchAnalyticsData, type AnalyticsData } from "@/lib/analytics-data";
+import { fetchAnalyticsData, fetchCashFlowForecast, type AnalyticsData, type CashFlowForecast } from "@/lib/analytics-data";
 
 const fmt = (n: number) =>
   new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }).format(n);
@@ -78,14 +78,19 @@ function CEIGauge({ value, prev }: { value: number; prev: number }) {
 export default function AnalyticsPage() {
   const { organization } = useAuth();
   const [data, setData] = useState<AnalyticsData | null>(null);
+  const [cashFlow, setCashFlow] = useState<CashFlowForecast | null>(null);
   const [loading, setLoading] = useState(true);
 
   const load = useCallback(async () => {
     if (!organization) return;
     setLoading(true);
     try {
-      const result = await fetchAnalyticsData(organization.id);
+      const [result, cfResult] = await Promise.all([
+        fetchAnalyticsData(organization.id),
+        fetchCashFlowForecast(organization.id),
+      ]);
       setData(result);
+      setCashFlow(cfResult);
     } catch {
       // show empty state
     } finally {
@@ -218,6 +223,56 @@ export default function AnalyticsPage() {
             No payment data yet — collections will appear here once invoices are paid
           </div>
         )}
+      </motion.div>
+
+      {/* Cash Flow Forecast */}
+      <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.32 }}
+        className="glass rounded-2xl p-6">
+        <div className="flex items-center justify-between mb-5">
+          <div>
+            <h3 className="text-sm font-semibold text-[#0F172A]">Expected Cash Inflows — AR Forecast</h3>
+            <p className="text-xs text-[#333333] mt-0.5">Overdue invoices by collection window · older = lower recovery likelihood</p>
+          </div>
+          {cashFlow && cashFlow.totalExpected > 0 && (
+            <span className="text-sm font-bold text-[#0F172A]">{fmt(cashFlow.totalExpected)} total</span>
+          )}
+        </div>
+        {cashFlow && cashFlow.totalExpected > 0 ? (
+          <div className="space-y-4">
+            {cashFlow.buckets.map((bucket, i) => {
+              const pct = cashFlow.totalExpected > 0
+                ? Math.round((bucket.expectedAmount / cashFlow.totalExpected) * 100)
+                : 0;
+              const barColor = i === 0 ? "#16A34A" : i === 1 ? "#CA8A04" : i === 2 ? "#EA580C" : "#DC2626";
+              const label = i === 0 ? "High likelihood" : i === 1 ? "Moderate" : i === 2 ? "At risk" : "Critical";
+              return (
+                <div key={bucket.label}>
+                  <div className="flex items-center justify-between mb-1.5">
+                    <div className="flex items-center gap-2">
+                      <div className="w-2 h-2 rounded-full shrink-0" style={{ background: barColor }} />
+                      <span className="text-xs text-[#333333]">{bucket.label} overdue</span>
+                      <span className="text-xs text-[#888888]">· {bucket.invoiceCount} inv · {label}</span>
+                    </div>
+                    <span className="text-xs font-semibold text-[#0F172A]">
+                      {fmt(bucket.expectedAmount)} ({pct}%)
+                    </span>
+                  </div>
+                  <div className="h-2 rounded-full bg-[#F1F5F9]">
+                    <div className="h-2 rounded-full transition-all duration-700"
+                      style={{ width: `${pct}%`, background: barColor }} />
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        ) : (
+          <div className="flex items-center justify-center h-28 text-[#333333] text-sm">
+            No overdue invoices — great job!
+          </div>
+        )}
+        <p className="text-xs text-[#555555] mt-4 border-t border-[#E2E8F0] pt-3">
+          Amounts shown are total outstanding per aging bucket. Invoices 90+ days overdue have significantly lower collection rates on average.
+        </p>
       </motion.div>
 
       {/* Velocity + Bad Debt row */}

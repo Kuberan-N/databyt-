@@ -19,10 +19,8 @@ const features = [
   "AR aging dashboard & live CEI gauge",
   "QuickBooks Online & Xero OAuth integration",
   "Reply detection & unsubscribe handling",
-  "AI Invoice Processor (AP automation)",
-  "Cash flow forecasting dashboard",
-  "Multi-entity support",
-  "Custom dunning sequences",
+  "Cash flow forecast dashboard",
+  "Custom dunning sequences & cooldown rules",
   "Board-ready PDF reporting suite",
   "Live in 48 hours — full setup handled for you",
   "Dedicated onboarding + priority support",
@@ -44,7 +42,7 @@ export default function Pricing() {
           transition={{ duration: 0.6, ease }}
           className="mb-8"
         >
-          <p className="text-[#000000] text-[11px] font-semibold uppercase tracking-widest mb-3">Pricing</p>
+          <p className="text-[#4F46E5] text-[11px] font-semibold uppercase tracking-widest mb-3">Pricing</p>
           <h2 className="text-[30px] sm:text-[38px] font-extrabold text-[#111111] leading-[1.15] tracking-[-0.02em]">
             One plan. Everything included.
           </h2>

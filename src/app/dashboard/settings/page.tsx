@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Save, Building2, Globe, Mail, Clock, CheckCircle, AlertCircle, User, Shield, Lightbulb, Send, Link } from "lucide-react";
+import { Save, Building2, Globe, Mail, Clock, CheckCircle, AlertCircle, User, Shield, Lightbulb, Send, Link, SlidersHorizontal } from "lucide-react";
 import { useAuth } from "@/components/AuthProvider";
 import { supabase } from "@/lib/supabase";
 
@@ -37,6 +37,10 @@ export default function SettingsPage() {
   const [currency, setCurrency]             = useState("USD");
   const [emailSignature, setEmailSignature]         = useState("");
   const [paymentLinkTemplate, setPaymentLinkTemplate] = useState("");
+  const [dunningL1, setDunningL1] = useState(1);
+  const [dunningL2, setDunningL2] = useState(10);
+  const [dunningL3, setDunningL3] = useState(30);
+  const [cooldown, setCooldown]   = useState(3);
   const [saving, setSaving]                 = useState(false);
   const [status, setStatus]                 = useState<"idle" | "success" | "error">("idle");
   const [statusMsg, setStatusMsg]           = useState("");
@@ -51,12 +55,17 @@ export default function SettingsPage() {
     if (organization) setOrgName(organization.name);
     if (!organization) return;
     db.from("org_settings").select("*").eq("org_id", organization.id).single()
-      .then(({ data }: { data: { timezone: string; currency: string; email_signature: string; payment_link_template: string } | null }) => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      .then(({ data }: { data: any | null }) => {
         if (data) {
           setTimezone(data.timezone ?? "America/New_York");
           setCurrency(data.currency ?? "USD");
           setEmailSignature(data.email_signature ?? "");
           setPaymentLinkTemplate(data.payment_link_template ?? "");
+          setDunningL1(data.dunning_l1_days ?? 1);
+          setDunningL2(data.dunning_l2_days ?? 10);
+          setDunningL3(data.dunning_l3_days ?? 30);
+          setCooldown(data.dunning_cooldown_days ?? 3);
         }
       });
   }, [organization]);
@@ -73,6 +82,10 @@ export default function SettingsPage() {
     const { error: settingsErr } = await db.from("org_settings").upsert({
       org_id: organization.id, timezone, currency, email_signature: emailSignature,
       payment_link_template: paymentLinkTemplate.trim() || null,
+      dunning_l1_days: dunningL1,
+      dunning_l2_days: dunningL2,
+      dunning_l3_days: dunningL3,
+      dunning_cooldown_days: cooldown,
       updated_at: new Date().toISOString(),
     }, { onConflict: "org_id" });
 
@@ -209,6 +222,53 @@ export default function SettingsPage() {
               </p>
             </div>
           )}
+        </motion.div>
+
+        <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}
+          className="glass rounded-2xl p-6 space-y-4">
+          <div className="flex items-center gap-2 mb-1">
+            <SlidersHorizontal className="w-4 h-4 text-[#333333]" />
+            <h3 className="text-sm font-semibold text-[#0F172A]">Collection Rules</h3>
+          </div>
+          <p className="text-[#333333] text-xs -mt-2">
+            Set when each dunning level fires. L1 is a polite reminder, L2 is firm, L3 is a final notice.
+            Cooldown prevents emails being sent to the same customer too frequently.
+          </p>
+          <div className="grid sm:grid-cols-2 gap-4">
+            <div>
+              <label className="text-[#111111] text-xs font-medium mb-1.5 block">
+                L1 — Polite reminder (after X days overdue)
+              </label>
+              <input type="number" min={1} max={7} value={dunningL1}
+                onChange={e => setDunningL1(Number(e.target.value))} className={inputCls} />
+            </div>
+            <div>
+              <label className="text-[#111111] text-xs font-medium mb-1.5 block">
+                L2 — Firm reminder (after X days overdue)
+              </label>
+              <input type="number" min={5} max={30} value={dunningL2}
+                onChange={e => setDunningL2(Number(e.target.value))} className={inputCls} />
+            </div>
+            <div>
+              <label className="text-[#111111] text-xs font-medium mb-1.5 block">
+                L3 — Final notice (after X days overdue)
+              </label>
+              <input type="number" min={20} max={90} value={dunningL3}
+                onChange={e => setDunningL3(Number(e.target.value))} className={inputCls} />
+            </div>
+            <div>
+              <label className="text-[#111111] text-xs font-medium mb-1.5 block">
+                Email cooldown (min days between emails per customer)
+              </label>
+              <input type="number" min={1} max={14} value={cooldown}
+                onChange={e => setCooldown(Number(e.target.value))} className={inputCls} />
+            </div>
+          </div>
+          <div className="rounded-lg bg-[#F3F3F3] border border-[#E2E8F0] px-4 py-3">
+            <p className="text-[11px] text-[#555555]">
+              Current schedule: L1 after <strong>{dunningL1}d</strong> → L2 after <strong>{dunningL2}d</strong> → L3 after <strong>{dunningL3}d</strong> · min <strong>{cooldown}d</strong> between emails
+            </p>
+          </div>
         </motion.div>
 
         <button type="submit" disabled={saving}

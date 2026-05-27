@@ -17,13 +17,16 @@ const db = supabaseAdmin as any;
 const resend = new Resend(process.env.RESEND_API_KEY);
 const genAI  = new GoogleGenerativeAI(process.env.GEMINI_API_KEY ?? "");
 
-// Minimum days between emails per customer
-const COOLDOWN_DAYS = 3;
+// Default thresholds (overridden per-org from org_settings)
+const DEFAULT_COOLDOWN = 3;
+const DEFAULT_L1 = 1;
+const DEFAULT_L2 = 10;
+const DEFAULT_L3 = 30;
 
-// Days-overdue thresholds for escalation level
-function escalationLevel(daysOverdue: number): 1 | 2 | 3 {
-  if (daysOverdue >= 30) return 3;
-  if (daysOverdue >= 10) return 2;
+function escalationLevel(daysOverdue: number, l1: number, l2: number, l3: number): 1 | 2 | 3 {
+  if (daysOverdue >= l3) return 3;
+  if (daysOverdue >= l2) return 2;
+  if (daysOverdue >= l1) return 1;
   return 1;
 }
 
@@ -148,13 +151,17 @@ export async function GET(req: NextRequest) {
     try {
       const { data: settings } = await db
         .from("org_settings")
-        .select("email_signature, currency, payment_link_template")
+        .select("email_signature, currency, payment_link_template, dunning_l1_days, dunning_l2_days, dunning_l3_days, dunning_cooldown_days")
         .eq("org_id", org.id)
         .single();
 
       const signature = settings?.email_signature
         ?? `Best regards,\nAccounts Receivable Team\n${org.name}`;
       const paymentLinkTemplate: string | null = settings?.payment_link_template ?? null;
+      const cooldownDays: number = settings?.dunning_cooldown_days ?? DEFAULT_COOLDOWN;
+      const l1: number = settings?.dunning_l1_days ?? DEFAULT_L1;
+      const l2: number = settings?.dunning_l2_days ?? DEFAULT_L2;
+      const l3: number = settings?.dunning_l3_days ?? DEFAULT_L3;
 
       // Fetch overdue/reminded invoices with customer emails
       const { data: invoices } = await db
@@ -177,8 +184,8 @@ export async function GET(req: NextRequest) {
 
       const optedOutIds = new Set<string>((optouts ?? []).map((o: { customer_id: string }) => o.customer_id));
 
-      // Check cooldown - customers emailed in last COOLDOWN_DAYS days
-      const cooldownDate = new Date(Date.now() - COOLDOWN_DAYS * 86_400_000).toISOString();
+      // Check cooldown - customers emailed in last cooldownDays days
+      const cooldownDate = new Date(Date.now() - cooldownDays * 86_400_000).toISOString();
       const { data: recentComms } = await db
         .from("communications")
         .select("customer_id")
@@ -215,7 +222,7 @@ export async function GET(req: NextRequest) {
       for (const customer of byCustomer.values()) {
         try {
           const maxDaysOverdue = Math.max(...customer.invoices.map(i => i.days_overdue));
-          const level = escalationLevel(maxDaysOverdue);
+          const level = escalationLevel(maxDaysOverdue, l1, l2, l3);
 
           const { subject, body } = await buildBatchedEmail(customer, level, paymentLinkTemplate);
 

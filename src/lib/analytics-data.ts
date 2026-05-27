@@ -50,6 +50,50 @@ export interface AnalyticsData {
   resolvedDisputes: number;
 }
 
+export interface CashFlowBucket {
+  label: string;
+  daysRange: string;
+  expectedAmount: number;
+  invoiceCount: number;
+}
+
+export interface CashFlowForecast {
+  buckets: CashFlowBucket[];
+  totalExpected: number;
+}
+
+export async function fetchCashFlowForecast(orgId: string): Promise<CashFlowForecast> {
+  const { data } = await db
+    .from("invoices")
+    .select("id, amount, days_overdue")
+    .eq("org_id", orgId)
+    .in("status", ["open", "overdue", "reminded"])
+    .gt("days_overdue", 0);
+
+  const items: Array<{ id: string; amount: number; days_overdue: number }> = data ?? [];
+
+  const buckets = [
+    { label: "0 – 30 days", daysRange: "0–30", min: 0, max: 30, expectedAmount: 0, invoiceCount: 0 },
+    { label: "31 – 60 days", daysRange: "31–60", min: 31, max: 60, expectedAmount: 0, invoiceCount: 0 },
+    { label: "61 – 90 days", daysRange: "61–90", min: 61, max: 90, expectedAmount: 0, invoiceCount: 0 },
+    { label: "90 + days", daysRange: "90+", min: 91, max: Infinity, expectedAmount: 0, invoiceCount: 0 },
+  ];
+
+  for (const inv of items) {
+    const bucket = buckets.find(b => inv.days_overdue >= b.min && inv.days_overdue <= b.max);
+    if (bucket) { bucket.expectedAmount += inv.amount; bucket.invoiceCount++; }
+  }
+
+  const totalExpected = buckets.reduce((s, b) => s + b.expectedAmount, 0);
+
+  return {
+    buckets: buckets.map(({ label, daysRange, expectedAmount, invoiceCount }) => ({
+      label, daysRange, expectedAmount, invoiceCount,
+    })),
+    totalExpected,
+  };
+}
+
 function weekLabel(date: Date): string {
   const month = date.toLocaleString("en-US", { month: "short" });
   const weekOfMonth = Math.ceil(date.getDate() / 7);

@@ -26,9 +26,11 @@ function CounterStat({
   const ref = useRef<HTMLParagraphElement>(null);
   const wrapRef = useRef<HTMLDivElement>(null);
   const inView = useInView(wrapRef, { once: true, margin: "-40px" });
-  const isNumeric = /^\d+%$/.test(stat.trim());
+  const isPercent = /^\d+%$/.test(stat.trim());
+  const isPureNum = /^\d+$/.test(stat.trim());
+  const isNumeric = isPercent || isPureNum;
   const numericPart = isNumeric ? parseFloat(stat) : 0;
-  const suffix = "%";
+  const suffix = isPercent ? "%" : "";
 
   useEffect(() => {
     if (!inView || !isNumeric || !ref.current) return;
@@ -85,36 +87,36 @@ function CounterStat({
 
 const pains = [
   {
-    stat:    "60–70%",
-    context: "of finance staff time",
-    problem: "Spent chasing invoices manually — not doing actual finance work.",
-    cost:    "~$36,000/year per person in wasted labor",
-    source:  "PYMNTS Intelligence, 2025",
-    href:    "https://www.pymnts.com/news/b2b-payments/",
-  },
-  {
-    stat:    "42–60",
-    context: "days average DSO",
-    problem: "At $10M revenue, that's $1.6M you can't access or invest.",
-    cost:    "Every extra DSO day costs ~$2,700 in opportunity cost",
-    source:  "Atradius Payment Report, 2025",
+    stat:    "55%",
+    context: "of B2B invoices paid late",
+    problem: "More than half the invoices you send won't be paid on time — choking your cash flow.",
+    cost:    "$39,406/year average AR overhead per company",
+    source:  "Atradius Payment Report, 2024",
     href:    "https://atradius.com/reports/",
   },
   {
-    stat:    "83%",
-    context: "of companies",
-    problem: "Haven't automated AR — despite 44% of B2B invoices being paid late.",
-    cost:    "Manual work that software handles 24/7 at zero marginal cost",
-    source:  "PYMNTS Intelligence, June 2025",
+    stat:    "77%",
+    context: "of AR teams are backed up",
+    problem: "Finance staff spending all day chasing invoices instead of doing actual finance work.",
+    cost:    "16 hrs/day in manual cash posting — $88,660/year in wasted labor",
+    source:  "Versapay AR Survey, 2024",
+    href:    "https://versapay.com/resources/",
+  },
+  {
+    stat:    "81%",
+    context: "report increasing payment delays",
+    problem: "Customers are getting slower at paying — and manual AR can't scale to keep up.",
+    cost:    "Every extra day is working capital you can't invest or deploy",
+    source:  "PYMNTS Intelligence, 2023",
     href:    "https://www.pymnts.com/news/b2b-payments/",
   },
   {
-    stat:    "∞",
-    context: "days in limbo",
-    problem: "Disputed invoices halt all collections, age further, stay stuck in email threads.",
-    cost:    "No workflow means no resolution means uncollected cash",
-    source:  "IOFM AR Benchmark, 2025",
-    href:    "https://www.iofm.com",
+    stat:    "67",
+    context: "days average DSO",
+    problem: "Mid-market companies wait 2.4× longer than agreed payment terms to get paid.",
+    cost:    "At $10M revenue, that's $1.8M locked in AR you can't access",
+    source:  "Atradius Payment Report, 2024",
+    href:    "https://atradius.com/reports/",
   },
 ];
 
@@ -158,7 +160,7 @@ export default function PainSection() {
           transition={{ duration: 0.7, ease }}
           className="mb-12"
         >
-          <p className="text-[#000000] text-[11px] font-semibold uppercase tracking-widest mb-3">The Problem</p>
+          <p className="text-[#4F46E5] text-[11px] font-semibold uppercase tracking-widest mb-3">The Problem</p>
           <h2 className="text-[30px] sm:text-[38px] font-extrabold text-[#111111] leading-[1.15] tracking-[-0.02em] max-w-[560px]">
             Manual AR doesn&apos;t just cost time.<br />
             <span className="text-[#555555]">It costs working capital.</span>
@@ -166,11 +168,39 @@ export default function PainSection() {
         </motion.div>
 
         {/* Pain point cards */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-16">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-8">
           {pains.map((p, i) => (
             <CounterStat key={i} {...p} i={i} />
           ))}
         </div>
+
+        {/* Research data strip */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-40px" }}
+          transition={{ duration: 0.5, ease }}
+          className="flex flex-col sm:flex-row mb-12 overflow-hidden rounded-xl border border-[#EBEBEB] bg-white divide-y sm:divide-y-0 sm:divide-x divide-[#EBEBEB]"
+        >
+          <div className="flex-1 px-6 py-5">
+            <p className="text-[30px] font-extrabold text-[#111111] leading-none">
+              $39K<span className="text-[14px] text-[#777777] font-medium ml-1">/year</span>
+            </p>
+            <p className="text-[13px] font-semibold text-[#333333] mt-1.5">Average annual AR overhead per company</p>
+            <p className="text-[11px] text-[#888888] mt-1 leading-relaxed">
+              Late-payment admin, dispute handling, and bad debt write-offs · Kaplan Group
+            </p>
+          </div>
+          <div className="flex-1 px-6 py-5">
+            <p className="text-[30px] font-extrabold text-[#111111] leading-none">
+              16<span className="text-[14px] text-[#777777] font-medium ml-1">hrs/day</span>
+            </p>
+            <p className="text-[13px] font-semibold text-[#333333] mt-1.5">Manual cash posting per finance team</p>
+            <p className="text-[11px] text-[#888888] mt-1 leading-relaxed">
+              Equivalent to $88,660/year in pure labor cost — automated end-to-end by DataByt · Versapay 2024
+            </p>
+          </div>
+        </motion.div>
 
         {/* Before / After */}
         <motion.div

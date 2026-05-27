@@ -79,7 +79,7 @@ export default function ResearchSection() {
           transition={{ duration: 0.65, ease }}
           className="mb-12"
         >
-          <p className="text-[#000000] text-[11px] font-semibold uppercase tracking-widest mb-3">Research & Data</p>
+          <p className="text-[#4F46E5] text-[11px] font-semibold uppercase tracking-widest mb-3">Research & Data</p>
           <h2 className="text-[30px] sm:text-[38px] font-extrabold text-[#111111] leading-[1.15] tracking-[-0.02em] max-w-[560px]">
             The AR crisis is documented.
             <br />

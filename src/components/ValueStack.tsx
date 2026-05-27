@@ -54,7 +54,7 @@ export default function ValueStack() {
           transition={{ duration: 0.6, ease }}
           className="text-center mb-12"
         >
-          <p className="text-[#000000] text-[11px] font-semibold uppercase tracking-widest mb-3">The Offer</p>
+          <p className="text-[#4F46E5] text-[11px] font-semibold uppercase tracking-widest mb-3">The Offer</p>
           <h2 className="text-[30px] sm:text-[38px] font-extrabold text-[#111111] leading-[1.15] tracking-[-0.02em] mb-4">
             An offer so good,<br />
             <span className="text-[#555555]">saying no feels like a mistake.</span>
