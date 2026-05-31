@@ -42,7 +42,9 @@ const db = supabaseAdmin as any;
 
 export async function POST(req: NextRequest) {
   try {
-    const { invoiceId, orgId, escalationLevel } = (await req.json()) as DraftEmailRequest;
+    let parsed: DraftEmailRequest;
+    try { parsed = (await req.json()) as DraftEmailRequest; } catch { return NextResponse.json({ error: "Invalid request body" }, { status: 400 }); }
+    const { invoiceId, orgId, escalationLevel } = parsed;
 
     if (!invoiceId || !orgId || ![1, 2, 3].includes(escalationLevel)) {
       return NextResponse.json({ error: "Invalid request" }, { status: 400 });

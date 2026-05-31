@@ -14,11 +14,8 @@ export async function PATCH(
   { params }: { params: Promise<{ id: string }> }
 ) {
   const { id } = await params;
-  const body = await req.json() as {
-    status?: DisputeStatus;
-    resolution_notes?: string;
-    assigned_to?: string;
-  };
+  let body: { status?: DisputeStatus; resolution_notes?: string; assigned_to?: string };
+  try { body = await req.json(); } catch { return NextResponse.json({ error: "Invalid request body" }, { status: 400 }); }
 
   const update: Record<string, unknown> = {};
   if (body.status) update.status = body.status;

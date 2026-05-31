@@ -23,7 +23,9 @@ export async function GET(req: NextRequest) {
 }
 
 export async function POST(req: NextRequest) {
-  const { orgId } = await req.json() as { orgId: string };
+  let body: { orgId?: string };
+  try { body = await req.json(); } catch { return NextResponse.json({ error: "orgId required" }, { status: 400 }); }
+  const { orgId } = body;
   if (!orgId) return NextResponse.json({ error: "orgId required" }, { status: 400 });
 
   const clientId   = process.env.QUICKBOOKS_CLIENT_ID;

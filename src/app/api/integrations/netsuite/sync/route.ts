@@ -51,7 +51,7 @@ async function refreshNetsuiteToken(orgId: string, integration: Record<string, s
 }
 
 export async function POST(req: NextRequest) {
-  const { orgId } = await req.json() as { orgId: string };
+  let _b: {orgId?:string}; try{_b=await req.json()}catch{return NextResponse.json({error:"orgId required"},{status:400})} const {orgId}=_b;
   if (!orgId) return NextResponse.json({ error: "orgId required" }, { status: 400 });
 
   const { data: integration, error } = await db

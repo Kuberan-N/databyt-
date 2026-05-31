@@ -14,7 +14,9 @@ const db = supabaseAdmin as any;
 
 export async function POST(req: NextRequest) {
   try {
-    const { orgId } = await req.json();
+    let body: { orgId?: string };
+    try { body = await req.json(); } catch { return NextResponse.json({ error: "orgId required" }, { status: 400 }); }
+    const { orgId } = body;
     if (!orgId) return NextResponse.json({ error: "orgId required" }, { status: 400 });
 
     const now = new Date();

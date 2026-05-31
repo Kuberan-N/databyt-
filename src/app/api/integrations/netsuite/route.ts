@@ -25,7 +25,7 @@ export async function GET(req: NextRequest) {
 
 // POST /api/integrations/netsuite — initiate OAuth
 export async function POST(req: NextRequest) {
-  const { orgId } = await req.json() as { orgId: string };
+  let _b: {orgId?:string}; try{_b=await req.json()}catch{return NextResponse.json({error:"orgId required"},{status:400})} const {orgId}=_b;
   if (!orgId) return NextResponse.json({ error: "orgId required" }, { status: 400 });
 
   const clientId     = process.env.NETSUITE_CLIENT_ID;
