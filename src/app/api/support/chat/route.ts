@@ -1,51 +1,29 @@
 import { NextRequest, NextResponse } from "next/server";
-import { createClient } from "@supabase/supabase-js";
-
-const supabaseAdmin = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_ROLE_KEY!
-);
 
 export async function POST(req: NextRequest) {
   const agentUrl = process.env.SUPPORT_AGENT_URL;
 
-  // Agent not deployed yet — return a graceful holding message
   if (!agentUrl) {
     return NextResponse.json({
       reply: "AI support is coming soon! For now, email us at support@databyt.in.",
     });
   }
 
-  const authHeader = req.headers.get("authorization");
-  if (!authHeader) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  // org context comes directly from the client (already in auth session — no server DNS call needed)
+  const { message, sessionId, orgId, orgName, userId } =
+    await req.json() as { message: string; sessionId: string; orgId: string; orgName: string; userId: string };
 
-  const token = authHeader.replace("Bearer ", "");
-  const { data: { user }, error: authError } = await supabaseAdmin.auth.getUser(token);
-  if (authError || !user) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-
-  // Get the user's org so we can inject it — agent never asks for it
-  const { data: orgUser } = await supabaseAdmin
-    .from("users")
-    .select("org_id")
-    .eq("id", user.id)
-    .single();
-
-  const { data: org } = orgUser?.org_id
-    ? await supabaseAdmin.from("organizations").select("id, name").eq("id", orgUser.org_id).single()
-    : { data: null };
-
-  const { message, sessionId } = await req.json() as { message: string; sessionId: string };
   if (!message?.trim()) return NextResponse.json({ error: "Empty message" }, { status: 400 });
+  if (!userId) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
-  // Prepend org context — the agent never needs to ask "what company are you?"
-  const contextualMessage = org
-    ? `[Context: org_id="${org.id}", org_name="${org.name}". Use these for all data lookups — never ask the user for their org_id or company name.]\n\n${message}`
+  const contextualMessage = orgId && orgName
+    ? `[Context: org_id="${orgId}", org_name="${orgName}". Use these for all data lookups — never ask the user for their org_id or company name.]\n\n${message}`
     : message;
 
-  const sid = sessionId ?? user.id;
+  const sid = sessionId ?? userId;
 
-  // Create session first (idempotent — safe to call even if it already exists)
-  await fetch(`${agentUrl}/apps/support_agent/users/${user.id}/sessions/${sid}`, {
+  // Create session first (idempotent)
+  await fetch(`${agentUrl}/apps/support_agent/users/${userId}/sessions/${sid}`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: "{}",
@@ -56,7 +34,7 @@ export async function POST(req: NextRequest) {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
       app_name: "support_agent",
-      user_id: user.id,
+      user_id: userId,
       session_id: sid,
       new_message: {
         role: "user",
@@ -70,10 +48,15 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ reply: "Sorry, the support agent is unavailable right now." });
   }
 
-  // ADK returns a single event object (not an array)
-  const event: { content?: { role?: string; parts?: Array<{ text?: string }> } } = await agentRes.json();
-  const reply = event?.content?.parts?.[0]?.text
-    ?? "I'm not sure how to help with that. Please contact support@databyt.in.";
+  type Event = { content?: { role?: string; parts?: Array<{ text?: string }> } };
+  const raw: Event | Event[] = await agentRes.json();
+  const events: Event[] = Array.isArray(raw) ? raw : [raw];
+
+  let reply = "I'm not sure how to help with that. Please contact support@databyt.in.";
+  for (let i = events.length - 1; i >= 0; i--) {
+    const text = events[i]?.content?.parts?.[0]?.text;
+    if (text) { reply = text; break; }
+  }
 
   return NextResponse.json({ reply });
 }

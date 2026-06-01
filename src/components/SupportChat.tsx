@@ -3,7 +3,6 @@
 import { useState, useRef, useEffect } from "react";
 import { MessageCircle, X, Send, Bot } from "lucide-react";
 import { useAuth } from "@/components/AuthProvider";
-import { supabase } from "@/lib/supabase";
 
 interface Message {
   role: "user" | "agent";
@@ -16,7 +15,7 @@ const WELCOME: Message = {
 };
 
 export default function SupportChat() {
-  const { user } = useAuth();
+  const { user, organization, orgUser } = useAuth();
   const [open, setOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([WELCOME]);
   const [input, setInput] = useState("");
@@ -42,14 +41,16 @@ export default function SupportChat() {
     setLoading(true);
 
     try {
-      const { data: { session } } = await supabase.auth.getSession();
       const res = await fetch("/api/support/chat", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${session?.access_token ?? ""}`,
-        },
-        body: JSON.stringify({ message: text, sessionId }),
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          message: text,
+          sessionId,
+          userId: user?.id,
+          orgId: orgUser?.org_id,
+          orgName: organization?.name,
+        }),
       });
 
       const data = await res.json();
