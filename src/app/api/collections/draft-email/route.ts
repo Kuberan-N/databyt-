@@ -113,7 +113,7 @@ ${paymentInstruction}
 - Do NOT use placeholder text like [Your Name] — use the actual company name
 - Keep body under 150 words`;
 
-    const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
+    const model = genAI.getGenerativeModel({ model: "gemini-3.5-flash" });
     const result = await model.generateContent(prompt);
     const raw = result.response.text();
 

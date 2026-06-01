@@ -108,7 +108,7 @@ Rules:
 - Do NOT use placeholder text
 - Keep body under 200 words`;
 
-  const model  = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
+  const model  = genAI.getGenerativeModel({ model: "gemini-3.5-flash" });
   const result = await model.generateContent(prompt);
   const raw    = result.response.text();
 
