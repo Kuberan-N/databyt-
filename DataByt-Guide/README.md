@@ -1,31 +1,57 @@
-# DataByt — Master Guide Index
+# DataByt — Master Guide
 
-Read in order. Each file builds on the previous one.
+Read in order. Each file builds on the previous.
 
 ---
 
-| # | File | What You Learn |
-|---|------|---------------|
-| 0 | [architecture.md](architecture.md) | Full system flow diagram (Mermaid — open preview in VSCode) |
-| 1 | [02-tech-stack-story.md](02-tech-stack-story.md) | TypeScript + Next.js + Supabase explained as a story |
-| 2 | [03-phase1-invoice-and-quickbooks.md](03-phase1-invoice-and-quickbooks.md) | What an invoice is, what QuickBooks is, what DSO and CEI mean |
-| 3 | [04-phase2-oauth-and-sync.md](04-phase2-oauth-and-sync.md) | How DataByt connects to QuickBooks, what syncs daily |
-| 4 | [05-phase3-ai-email-engine.md](05-phase3-ai-email-engine.md) | How Gemini writes dunning emails, L1/L2/L3, payment links |
-| 5 | [06-phase4-customer-response.md](06-phase4-customer-response.md) | What happens after email — customer pays or ignores |
-| 6 | [07-phase5-disputes.md](07-phase5-disputes.md) | Dispute workflow, escalation, what happens at L3 |
-| 7 | [08-phase6-analytics-and-reports.md](08-phase6-analytics-and-reports.md) | DSO, CEI, cash flow forecast, board PDF report |
-| 8 | [09-end-to-end-testing.md](09-end-to-end-testing.md) | The 8-step test that proves 100% product |
+## 📁 01-product-guide — Learn the Product
+
+| File | What You Learn |
+|------|---------------|
+| [architecture.md](01-product-guide/architecture.md) | Full system flow diagram (open in VSCode preview) |
+| [02-tech-stack-story.md](01-product-guide/02-tech-stack-story.md) | TypeScript + Next.js + Supabase as a story |
+| [03-phase1-invoice-and-quickbooks.md](01-product-guide/03-phase1-invoice-and-quickbooks.md) | Invoice basics, QuickBooks, DSO, CEI, AR Aging |
+| [04-phase2-oauth-and-sync.md](01-product-guide/04-phase2-oauth-and-sync.md) | OAuth connection, daily sync, real QB JSON |
+| [05-phase3-ai-email-engine.md](01-product-guide/05-phase3-ai-email-engine.md) | AI email engine, L1/L2/L3, payment links |
+| [06-phase4-customer-response.md](01-product-guide/06-phase4-customer-response.md) | Customer pays vs ignores, escalation, partial payment |
+| [07-phase5-disputes.md](01-product-guide/07-phase5-disputes.md) | Dispute workflow, pause collections, resolution |
+| [08-phase6-analytics-and-reports.md](01-product-guide/08-phase6-analytics-and-reports.md) | DSO, CEI, cash flow forecast, board PDF |
+
+---
+
+## 📁 02-diagrams — Visual Diagrams
+
+| File | What It Is |
+|------|-----------|
+| [DataByt-Flow-Diagram.pdf](02-diagrams/DataByt-Flow-Diagram.pdf) | FRS-style flow diagram — open to view |
+| [flow-diagram.html](02-diagrams/flow-diagram.html) | Same diagram as HTML — open in browser |
+| [generate-pdf.js](02-diagrams/generate-pdf.js) | Script to regenerate the PDF |
+
+---
+
+## 📁 03-testing — Test the Product
+
+| File | What It Is |
+|------|-----------|
+| [09-end-to-end-testing.md](03-testing/09-end-to-end-testing.md) | 8-step test that proves 100% working product |
+
+---
+
+## 📁 04-marketing — Launch Strategy
+
+| File | What It Is |
+|------|-----------|
+| [linkedin-30day-launch.md](04-marketing/linkedin-30day-launch.md) | 30-day LinkedIn plan — 100 CFO followers + 30 full post scripts |
 
 ---
 
 ## How to Use This Guide
 
 ```
-Step 1: Read architecture.md first (the full picture)
-Step 2: Read each phase document in order
-Step 3: After each phase — do the self-test at the bottom
-Step 4: Run the 8-step test in 09-end-to-end-testing.md
-Step 5: You now own and understand DataByt completely
+1. Read 01-product-guide/ in order (start with architecture.md)
+2. Do the self-test at the bottom of each phase doc
+3. Run the 8-step test in 03-testing/
+4. Start the 30-day LinkedIn plan in 04-marketing/
 ```
 
 ---
@@ -34,13 +60,11 @@ Step 5: You now own and understand DataByt completely
 
 | I want to know... | Go to |
 |-------------------|-------|
-| What is an invoice? | 03-phase1 |
-| How does QB connect? | 04-phase2 |
-| How does the AI email work? | 05-phase3 |
-| What happens when customer pays? | 06-phase4 |
-| How do I handle a dispute? | 07-phase5 |
-| What do the analytics mean? | 08-phase6 |
-| How do I test everything? | 09-end-to-end |
-| What is DSO? | 03-phase1 + 08-phase6 |
-| What is CEI? | 08-phase6 |
-| Where is the code for X? | Each phase doc has a "Where in Codebase" section |
+| What is an invoice? | 01-product-guide/03-phase1 |
+| How does QB OAuth work? | 01-product-guide/04-phase2 |
+| How does the AI email work? | 01-product-guide/05-phase3 |
+| What happens when customer pays? | 01-product-guide/06-phase4 |
+| How do I handle a dispute? | 01-product-guide/07-phase5 |
+| What do analytics mean? | 01-product-guide/08-phase6 |
+| How do I test everything? | 03-testing/09-end-to-end-testing |
+| How do I get first clients? | 04-marketing/linkedin-30day-launch |

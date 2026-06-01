@@ -37,9 +37,8 @@ export default function Testimonials() {
           viewport={{ once: true }}
           className="text-center mb-14"
         >
-          <p className="text-xs font-bold uppercase tracking-widest text-[#000000] mb-4">Results</p>
-          <h2 className="text-3xl sm:text-4xl font-black text-[#0F172A] leading-tight">
-            Finance teams that stopped chasing invoices manually
+          <h2 className="text-[30px] sm:text-[38px] font-extrabold text-[#111111] leading-[1.15] tracking-[-0.02em]">
+            Finance teams that stopped<br className="hidden sm:block" /> chasing invoices manually.
           </h2>
         </motion.div>
 
@@ -65,7 +64,7 @@ export default function Testimonials() {
               </p>
 
               {/* Metric badge */}
-              <div className="bg-[#16A34A] rounded-xl px-4 py-2.5 mb-4">
+              <div className="bg-[#4F46E5] rounded-xl px-4 py-2.5 mb-4">
                 <p className="text-white text-sm font-bold">{t.metric}</p>
                 <p className="text-white/70 text-xs">{t.company}</p>
               </div>

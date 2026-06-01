@@ -5,9 +5,10 @@ import ResearchSection from "@/components/ResearchSection";
 import HowItWorks from "@/components/HowItWorks";
 import ROICalculator from "@/components/ROICalculator";
 import ValueStack from "@/components/ValueStack";
+import Testimonials from "@/components/Testimonials";
 import Pricing from "@/components/Pricing";
 import FAQ from "@/components/FAQ";
-import { Footer } from "@/components/FinalCTA";
+import FinalCTA, { Footer } from "@/components/FinalCTA";
 
 export default function Home() {
   return (
@@ -19,8 +20,10 @@ export default function Home() {
       <HowItWorks />
       <ROICalculator />
       <ValueStack />
+      <Testimonials />
       <Pricing />
       <FAQ />
+      <FinalCTA />
       <Footer />
     </main>
   );
