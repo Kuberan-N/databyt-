@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>DataByt Support Agent — Implementation Report</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: Arial, Helvetica, sans-serif; color: #1a1a1a; line-height: 1.55; font-size: 11px; }
+  .page { max-width: 820px; margin: 0 auto; padding: 32px 40px; }
+
+  /* Cover */
+  .cover { background: linear-gradient(135deg,#1E1B4B 0%,#4F46E5 100%); color:#fff; padding:60px 40px; border-radius:0; }
+  .cover .kicker { font-size:11px; letter-spacing:3px; text-transform:uppercase; color:#C7D2FE; font-weight:700; }
+  .cover h1 { font-size:34px; font-weight:800; margin:14px 0 8px; letter-spacing:-0.5px; line-height:1.1; }
+  .cover .sub { font-size:14px; color:#E0E7FF; max-width:560px; }
+  .cover .meta { margin-top:28px; font-size:11px; color:#A5B4FC; }
+
+  h2 { font-size:18px; font-weight:800; color:#1E1B4B; margin:26px 0 4px; padding-bottom:6px; border-bottom:2px solid #EEF2FF; letter-spacing:-0.3px; }
+  h2 .num { color:#4F46E5; }
+  h3 { font-size:13px; font-weight:700; color:#312E81; margin:16px 0 6px; }
+  p { margin:6px 0; }
+  ul, ol { margin:6px 0 6px 18px; }
+  li { margin:3px 0; }
+  strong { color:#111; }
+  code { background:#F1F5F9; color:#4338CA; padding:1px 5px; border-radius:3px; font-family:'Courier New',monospace; font-size:10px; }
+  pre { background:#0F172A; color:#E2E8F0; padding:14px 16px; border-radius:8px; font-family:'Courier New',monospace; font-size:9.5px; line-height:1.45; overflow:hidden; white-space:pre-wrap; margin:10px 0; }
+  pre .c { color:#94A3B8; }
+
+  table { width:100%; border-collapse:collapse; margin:10px 0; font-size:10px; }
+  th { background:#4F46E5; color:#fff; text-align:left; padding:7px 9px; font-weight:700; }
+  td { padding:6px 9px; border-bottom:1px solid #E5E7EB; vertical-align:top; }
+  tr:nth-child(even) td { background:#F8FAFC; }
+
+  .callout { background:#EEF2FF; border-left:4px solid #4F46E5; padding:12px 16px; border-radius:0 6px 6px 0; margin:12px 0; font-size:10.5px; }
+  .callout.warn { background:#FEF2F2; border-left-color:#DC2626; }
+  .callout.win  { background:#F0FDF4; border-left-color:#16A34A; }
+
+  .pill { display:inline-block; padding:1px 8px; border-radius:10px; font-size:9px; font-weight:700; }
+  .p-crit { background:#FEE2E2; color:#991B1B; }
+  .p-use  { background:#FEF3C7; color:#92400E; }
+  .p-later{ background:#DCFCE7; color:#166534; }
+
+  .lead { font-size:12.5px; color:#334155; background:#F8FAFC; padding:12px 16px; border-radius:8px; border:1px solid #E2E8F0; margin:10px 0; }
+  .page-break { page-break-before: always; }
+  @media print {
+    .page { padding:22px 30px; }
+    @page { size:A4 portrait; margin:0; }
+    pre, table, .callout { page-break-inside: avoid; }
+    h2 { page-break-after: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<div class="cover">
+  <p class="kicker">DataByt · Engineering Plan</p>
+  <h1>Support Agent Implementation Report</h1>
+  <p class="sub">Building a vertical AI support agent with Google ADK that resolves 70%+ of customer tickets autonomously — so DataByt can run solo until revenue justifies a support hire.</p>
+  <p class="meta">Google ADK (TypeScript) · Gemini · pgvector · Supabase · Next.js &nbsp;|&nbsp; v1.0 · June 2026</p>
+</div>
+
+<div class="page">
+
+  <h2><span class="num">0.</span> The Strategy</h2>
+  <p class="lead">Customer support is where most solo-founder SaaS dies. A CFO paying ₹39,000/month expects an answer in minutes, not "I'll get back to you." You cannot be awake 24/7 — an AI agent that knows DataByt deeply is your unfair advantage.</p>
+
+  <h3>The bet: VERTICAL, not horizontal</h3>
+  <p>Zendesk AI and Intercom Fin are <em>horizontal</em> — they know nothing about AR, dunning, QuickBooks OAuth, or your product. Your agent knows DataByt better than any human rep, because it is trained on your docs and your past tickets, and it can take real actions inside your system.</p>
+
+  <pre><span class="c">Horizontal support AI            Your vertical agent</span>
+"Let me find that for you"       "Your QuickBooks token expired 14 days
+generic · hallucinates            ago — I've flagged it, here's the
+knows nothing about AR            2-click reconnect link"
+can't take actions                checks invoice status, resends emails,
+                                  reconnects integrations, then replies</pre>
+
+  <h3>The 70/30 rule</h3>
+  <ul>
+    <li><strong>70% of tickets</strong> are repetitive ("how do I connect QuickBooks", "where's my data", "an email didn't send") → agent auto-resolves.</li>
+    <li><strong>30% need you</strong> (billing disputes, bugs, angry customers) → agent escalates with full context so your reply takes 2 minutes, not 20.</li>
+  </ul>
+
+  <h2><span class="num">1.</span> What is Google ADK?</h2>
+  <p><strong>ADK = Agent Development Kit</strong> — Google's open-source agent framework. It got official <strong>TypeScript support (adk-js) in December 2025</strong>. That matters: DataByt is TypeScript, so you keep ONE language across your whole stack.</p>
+
+  <table>
+    <tr><th>Concept</th><th>What it is</th><th>DataByt example</th></tr>
+    <tr><td><strong>Agent</strong></td><td>LLM + instructions + tools</td><td>The "Support Agent"</td></tr>
+    <tr><td><strong>Tool</strong></td><td>A function the agent can call</td><td><code>getInvoiceStatus()</code></td></tr>
+    <tr><td><strong>Sub-agent</strong></td><td>Specialised agent it delegates to</td><td>Classifier, Resolver</td></tr>
+    <tr><td><strong>Runner</strong></td><td>Executes an agent turn</td><td>Runs when a ticket arrives</td></tr>
+    <tr><td><strong>Session</strong></td><td>One conversation thread</td><td>One support ticket</td></tr>
+    <tr><td><strong>State</strong></td><td>Memory within a session</td><td>"already tried reconnecting"</td></tr>
+    <tr><td><strong>Memory</strong></td><td>Knowledge across sessions</td><td>"this org always has QB issues"</td></tr>
+    <tr><td><strong>Callbacks</strong></td><td>Hooks before/after calls</td><td>Logging, guardrails, cost</td></tr>
+    <tr><td><strong>Workflow agents</strong></td><td>Sequential/Parallel/Loop</td><td>Classify → Retrieve → Resolve</td></tr>
+  </table>
+
+  <div class="callout"><strong>Why ADK for support (LangGraph for collections):</strong> ADK has native Gemini/Vertex integration (cheapest on your credits), built-in tool-calling + sessions (less boilerplate), and Google's Agent Engine can host it later. Learning both ADK + LangGraph makes you employable in both ecosystems. You're learning <em>concepts</em> — agents, tools, RAG, memory, eval — which transfer everywhere.</div>
+
+  <div class="page-break"></div>
+
+  <h2><span class="num">2.</span> The Architecture</h2>
+  <pre>                    CUSTOMER RAISES A TICKET
+              (dashboard form OR reply-to email)
+                            │
+                            ▼
+              1. INTAKE  — store ticket, create session
+                            │
+                            ▼
+              2. CLASSIFIER AGENT — category · severity · area
+                            │
+                            ▼
+              3. RETRIEVAL (RAG) — search KB + past tickets (pgvector)
+                            │
+                            ▼
+              4. RESOLVER AGENT — confident? need a tool/action?
+                       │                    │
+                CONFIDENT ✅           NOT CONFIDENT ❌
+                       ▼                    ▼
+        5A. ACTION AGENT             5B. ESCALATE
+        resend email · check QB ·    notify Kuberan with
+        reconnect link · reply       full context (Slack/email)
+                       │                    │
+                       ▼                    ▼
+              6. REPLY + LOG + SLA TIMER
+              email/dashboard reply · log every decision ·
+              track resolution time</pre>
+
+  <h3>How it slots into your stack</h3>
+  <table>
+    <tr><th>Existing</th><th>New (support agent)</th></tr>
+    <tr><td>Next.js + TypeScript</td><td>ADK agents run inside API routes</td></tr>
+    <tr><td>Supabase (Postgres)</td><td>+ support_tickets, ticket_messages, kb_documents</td></tr>
+    <tr><td>pgvector (in Supabase)</td><td>embeddings for RAG (KB + past tickets)</td></tr>
+    <tr><td>Gemini API</td><td>the LLM powering every agent</td></tr>
+    <tr><td>Resend</td><td>inbound = email→ticket · outbound = replies</td></tr>
+    <tr><td>Vercel cron</td><td>SLA breach checker</td></tr>
+  </table>
+  <div class="callout win"><strong>Key decision:</strong> the agent runs <strong>inside your Next.js app</strong> (in <code>/api/support/*</code> routes). No separate Python service, no Cloud Run. One deploy, one language, one bill.</div>
+
+  <h2><span class="num">3.</span> Tools To Learn</h2>
+  <h3>A. Inside GCP</h3>
+  <table>
+    <tr><th>Tool</th><th>Why</th><th>Priority</th><th>Time</th></tr>
+    <tr><td>Google ADK (adk-js)</td><td>The agent framework</td><td><span class="pill p-crit">Critical</span></td><td>1 wk</td></tr>
+    <tr><td>Gemini API</td><td>Tool-calling, structured output</td><td><span class="pill p-crit">Critical</span></td><td>2 d</td></tr>
+    <tr><td>Vertex AI (basics)</td><td>Where Gemini scales; Agent Engine</td><td><span class="pill p-use">Useful</span></td><td>2 d</td></tr>
+    <tr><td>GCP billing / credits</td><td>Manage 3-month runway</td><td><span class="pill p-crit">Critical</span></td><td>1 d</td></tr>
+    <tr><td>Cloud Logging</td><td>See agent behaviour in prod</td><td><span class="pill p-later">Later</span></td><td>1 d</td></tr>
+  </table>
+  <div class="callout warn"><strong>Skip for now (saves money):</strong> Vertex Vector Search (expensive — use pgvector), Agent Engine hosting (run in Next.js first), Document AI, Dialogflow (legacy).</div>
+
+  <h3>B. Outside GCP (smart-money tools)</h3>
+  <table>
+    <tr><th>Tool</th><th>Why</th><th>Cost</th><th>Priority</th></tr>
+    <tr><td>pgvector (Supabase)</td><td>Agent memory + RAG, already in stack</td><td>Free</td><td><span class="pill p-crit">Critical</span></td></tr>
+    <tr><td>Langfuse (self-host)</td><td>Trace every decision, debug, track cost</td><td>~$5 VPS</td><td><span class="pill p-crit">Critical</span></td></tr>
+    <tr><td>Resend Inbound</td><td>Email reply → ticket</td><td>Free tier</td><td><span class="pill p-crit">Critical</span></td></tr>
+    <tr><td>Trigger.dev / Vercel Cron</td><td>SLA checks, async work</td><td>Free tier</td><td><span class="pill p-use">Useful</span></td></tr>
+    <tr><td>Zod</td><td>Validate agent output (in your deps)</td><td>Free</td><td><span class="pill p-use">Useful</span></td></tr>
+  </table>
+
+  <div class="page-break"></div>
+
+  <h2><span class="num">4.</span> Implementation in the Codebase</h2>
+  <h3>New tables (Supabase)</h3>
+  <pre><span class="c">-- Tickets</span>
+CREATE TABLE support_tickets (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  org_id UUID NOT NULL REFERENCES organizations(id),
+  subject TEXT NOT NULL,
+  status TEXT DEFAULT 'open',     <span class="c">-- open|resolved|escalated|closed</span>
+  category TEXT, severity TEXT,
+  resolved_by TEXT,               <span class="c">-- 'agent' | 'human'</span>
+  created_at TIMESTAMPTZ DEFAULT now(),
+  resolved_at TIMESTAMPTZ, sla_due_at TIMESTAMPTZ
+);
+
+<span class="c">-- Knowledge base with embeddings</span>
+CREATE EXTENSION IF NOT EXISTS vector;
+CREATE TABLE kb_documents (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  title TEXT, content TEXT,
+  embedding vector(768),          <span class="c">-- text-embedding-004</span>
+  source TEXT, created_at TIMESTAMPTZ DEFAULT now()
+);</pre>
+
+  <h3>New folder structure</h3>
+  <pre>src/lib/support-agent/
+├── agents/   classifier.ts · resolver.ts · orchestrator.ts
+├── tools/    getInvoiceStatus · getIntegrationStatus ·
+│             resendEmail · searchKnowledge · escalateToHuman
+├── memory/   pgvector.ts   (embed + retrieve)
+├── runner.ts                (ADK runner entrypoint)
+└── types.ts
+
+src/app/api/support/
+├── ticket/route.ts          POST: create ticket → run agent
+├── reply/route.ts           POST: customer replies → continue
+└── sla-check/route.ts       GET (cron): flag SLA breaches
+
+src/app/dashboard/support/page.tsx   ticket queue UI
+src/app/api/webhooks/support-inbound/route.ts   email → ticket</pre>
+
+  <div class="callout win"><strong>Your secret weapon — the seed step:</strong> embed your existing <code>DataByt-Guide/</code> docs into <code>kb_documents</code>. The agent's knowledge IS your documentation. Every doc you write makes the agent smarter, for free. Past resolved tickets get embedded too — so it compounds.</div>
+
+  <h2><span class="num">5.</span> Build &amp; Test</h2>
+  <h3>Build sequence (~3 weeks of focused work)</h3>
+  <pre>1  Tables + migration                         1 d
+2  Embed guide docs into kb_documents         1 d
+3  searchKnowledge tool (pgvector RAG)         2 d
+4  Classifier agent (category/severity)        2 d
+5  Resolver agent (answer vs escalate)         3 d
+6  Action tools (invoice, integration, resend) 3 d
+7  escalateToHuman (Slack/email notify)        1 d
+8  Support dashboard page                       2 d
+9  Resend inbound webhook (email→ticket)        2 d
+10 SLA cron + Langfuse observability            2 d</pre>
+
+  <h3>How to test — the discipline that makes it reliable</h3>
+  <p><strong>1. Golden test set</strong> — 30 real CFO questions with expected behaviour:</p>
+  <pre>"How do I connect QuickBooks?"      → auto-resolve, KB answer
+"My invoices aren't syncing"        → check integration tool
+"I want a refund"                   → escalate to human
+"Change my dunning to 5 days"       → KB answer + settings link
+"An email bounced, can you resend?" → resendEmail tool</pre>
+  <p><strong>2. Run the eval</strong> — for each: correct category? correct resolve-vs-escalate? right answer? right tool?</p>
+  <p><strong>3. Drive it like a user</strong> — submit tickets through the form and reply-to email; watch in Langfuse. A blank reply or wrong tool call is a failure.</p>
+  <div class="callout warn"><strong>The escalation safety net:</strong> when confidence is low, it MUST escalate — never guess. A wrong confident answer to a CFO is worse than an honest escalation. Test this path hardest.</div>
+
+  <div class="page-break"></div>
+
+  <h2><span class="num">6.</span> Managing 3 Months on Credits</h2>
+  <table>
+    <tr><th>Cost source</th><th>Risk</th><th>Mitigation</th></tr>
+    <tr><td>Gemini tokens</td><td>Medium</td><td>Use <strong>Flash</strong> not Pro; cache the system prompt</td></tr>
+    <tr><td>Embeddings</td><td>Low</td><td>Embed docs once, not per query</td></tr>
+    <tr><td>Vector DB</td><td><strong>HIGH</strong></td><td>Use <strong>pgvector (free)</strong>, NOT Vertex Vector Search</td></tr>
+    <tr><td>Agent hosting</td><td><strong>HIGH</strong></td><td>Run in <strong>Next.js routes</strong>, NOT Cloud Run/Agent Engine</td></tr>
+    <tr><td>Observability</td><td>Medium</td><td><strong>Langfuse self-hosted</strong>, not paid tiers</td></tr>
+    <tr><td>Over-calling LLM</td><td>Medium</td><td>Cheap classifier first; deep-resolve only when needed</td></tr>
+  </table>
+
+  <h3>Lean monthly cost (pre-first-client)</h3>
+  <pre>Gemini Flash (~500 tickets/mo)        ~$5-15
+Embeddings (one-time + queries)       ~$1
+pgvector (Supabase — already paying)  $0
+Langfuse (self-host Railway/Fly)      ~$5
+Resend inbound (free tier)            $0
+──────────────────────────────────────────
+Total NEW spend                       ~$10-20/month</pre>
+  <div class="callout"><strong>Credit discipline:</strong> Set GCP <strong>budget alerts at 25/50/75%</strong> on day 1. Use Gemini Flash everywhere. Cache the system prompt (Gemini context caching = big savings). Log token cost per ticket in Langfuse so you see exactly what each resolution costs. Your 3-month credits are better spent on the heavier <em>collections</em> agent — support barely touches them.</div>
+
+  <h2><span class="num">7.</span> The 6-Week Plan (Learn + Build Together)</h2>
+  <div class="callout"><strong>Rule:</strong> never learn for more than 2 days without building the thing you learned inside DataByt.</div>
+  <pre><strong>WEEK 1 — Foundations</strong>
+  Learn  Gemini tool-calling, structured output (Zod)
+  Build  searchKnowledge tool + embed guide docs
+  Ship   ask a question → get a KB answer (test script)
+
+<strong>WEEK 2 — ADK core</strong>
+  Learn  Agent, Tool, Runner, Session, State
+  Build  Classifier agent
+  Ship   ticket → classified correctly
+
+<strong>WEEK 3 — Resolution</strong>
+  Learn  ADK multi-agent (sequential), confidence
+  Build  Resolver agent (answer vs escalate)
+  Ship   70% of golden-set auto-answered
+
+<strong>WEEK 4 — Actions</strong>
+  Learn  Tool design, guardrails via callbacks
+  Build  Action tools (invoice, integration, resend)
+  Ship   agent takes a real action and replies
+
+<strong>WEEK 5 — Human loop + intake</strong>
+  Learn  Memory, escalation patterns, Resend inbound
+  Build  escalateToHuman + email→ticket + dashboard
+  Ship   email in → resolve or escalate → you notified
+
+<strong>WEEK 6 — Reliability</strong>
+  Learn  Eval, Langfuse, cost tracking
+  Build  golden eval set + SLA cron + budget alerts
+  Ship   measured 70%+ auto-resolution, fully traceable</pre>
+
+  <h2><span class="num">8.</span> What "Monopoly" Looks Like</h2>
+  <div class="callout win">After 6 weeks you have what competitors at your price point do not:
+  <ul style="margin-top:6px;">
+    <li>A support agent that knows AR, dunning, QuickBooks, disputes cold</li>
+    <li>Resolves 70% of tickets in &lt;2 minutes, 24/7</li>
+    <li>Takes real actions — not just "here's a help article"</li>
+    <li>Escalates the hard 30% with full context</li>
+    <li>Gets smarter with every resolved ticket (they become KB)</li>
+    <li>Costs ~$15/month · lets you serve 20+ clients solo before hiring</li>
+  </ul>
+  A CFO who gets an instant, correct, action-taking answer at 11pm tells other CFOs. That word-of-mouth is the moat.</div>
+
+  <p style="margin-top:24px; text-align:center; color:#64748B; font-size:10px; font-style:italic;">Build the support agent. Resolve 70% automatically. Stay solo until revenue says otherwise.<br>That is how a one-person SaaS competes with funded teams.</p>
+
+</div>
+</body>
+</html>

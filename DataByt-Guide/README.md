@@ -45,6 +45,15 @@ Read in order. Each file builds on the previous.
 
 ---
 
+## 📁 05-support-agent — AI Support Agent (Google ADK)
+
+| File | What It Is |
+|------|-----------|
+| [support-agent-plan.md](05-support-agent/support-agent-plan.md) | Full implementation report — ADK, tools to learn, codebase plan, 6-week build, cost management |
+| [DataByt-Support-Agent-Plan.pdf](05-support-agent/DataByt-Support-Agent-Plan.pdf) | Same report as a styled PDF |
+
+---
+
 ## How to Use This Guide
 
 ```
