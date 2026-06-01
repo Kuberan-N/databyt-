@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>DataByt Support Agent — Build Manual</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family: Arial, Helvetica, sans-serif; color:#1a1a1a; line-height:1.55; font-size:11px; }
+  .page { max-width:820px; margin:0 auto; padding:30px 40px; }
+
+  .cover { background:linear-gradient(135deg,#052e2b 0%,#16A34A 100%); color:#fff; padding:60px 44px; }
+  .cover .kicker { font-size:11px; letter-spacing:3px; text-transform:uppercase; color:#BBF7D0; font-weight:700; }
+  .cover h1 { font-size:34px; font-weight:800; margin:14px 0 8px; letter-spacing:-0.5px; line-height:1.1; }
+  .cover .sub { font-size:14px; color:#DCFCE7; max-width:580px; }
+  .cover .note { display:inline-block; margin-top:18px; background:rgba(255,255,255,0.12); border:1px solid rgba(255,255,255,0.25); padding:9px 14px; border-radius:8px; font-size:11px; color:#F0FDF4; max-width:580px; }
+  .cover .meta { margin-top:22px; font-size:11px; color:#86EFAC; }
+
+  .part { background:#052e2b; color:#fff; padding:16px 20px; border-radius:10px; margin:24px 0 12px; }
+  .part .p-k { font-size:10px; letter-spacing:2px; text-transform:uppercase; color:#86EFAC; font-weight:700; }
+  .part h2 { font-size:20px; font-weight:800; margin-top:3px; border:none; padding:0; color:#fff; }
+  .part .t { font-size:10px; color:#BBF7D0; margin-top:3px; }
+
+  h2 { font-size:16px; font-weight:800; color:#052e2b; margin:20px 0 4px; padding-bottom:5px; border-bottom:2px solid #DCFCE7; letter-spacing:-0.2px; }
+  h3 { font-size:12.5px; font-weight:700; color:#166534; margin:14px 0 5px; }
+  p { margin:6px 0; }
+  ul, ol { margin:6px 0 6px 18px; }
+  li { margin:3px 0; }
+  strong { color:#111; }
+  code { background:#F1F5F9; color:#15803D; padding:1px 5px; border-radius:3px; font-family:'Courier New',monospace; font-size:10px; }
+  pre { background:#0F172A; color:#E2E8F0; padding:13px 15px; border-radius:8px; font-family:'Courier New',monospace; font-size:9.2px; line-height:1.5; white-space:pre-wrap; margin:9px 0; }
+  pre .c { color:#94A3B8; }
+  pre .k { color:#C4B5FD; }
+  pre .s { color:#86EFAC; }
+  pre.ps { background:#012456; }
+
+  table { width:100%; border-collapse:collapse; margin:10px 0; font-size:9.5px; }
+  th { background:#16A34A; color:#fff; text-align:left; padding:6px 8px; font-weight:700; }
+  td { padding:5px 8px; border-bottom:1px solid #E5E7EB; vertical-align:top; }
+  tr:nth-child(even) td { background:#F8FAFC; }
+
+  .check { background:#F0FDF4; border:2px solid #16A34A; border-radius:8px; padding:11px 15px; margin:11px 0; font-size:10.5px; }
+  .check .h { font-weight:800; color:#15803D; font-size:11px; margin-bottom:3px; }
+  .broke { background:#FEF2F2; border-left:4px solid #DC2626; padding:10px 14px; border-radius:0 6px 6px 0; margin:9px 0; font-size:10px; }
+  .broke .h { font-weight:800; color:#B91C1C; margin-bottom:2px; }
+  .callout { background:#EFF6FF; border-left:4px solid #2563EB; padding:10px 14px; border-radius:0 6px 6px 0; margin:10px 0; font-size:10.5px; }
+
+  .filelabel { display:inline-block; background:#15803D; color:#fff; font-size:9px; font-weight:700; padding:2px 8px; border-radius:4px 4px 0 0; margin-bottom:-4px; }
+  .lead { font-size:12.5px; color:#334155; background:#F8FAFC; padding:12px 16px; border-radius:8px; border:1px solid #E2E8F0; margin:10px 0; }
+
+  .page-break { page-break-before:always; }
+  @media print {
+    .page { padding:22px 30px; }
+    @page { size:A4 portrait; margin:0; }
+    pre, table, .check, .broke, .part, .callout { page-break-inside:avoid; }
+    h2, h3 { page-break-after:avoid; }
+  }
+</style>
+</head>
+<body>
+
+<div class="cover">
+  <p class="kicker">DataByt · Hands-On Build Manual</p>
+  <h1>Support Agent — The Build Manual</h1>
+  <p class="sub">A complete, copy-paste, do-it-without-help guide. Every command, every file in full, every screen you'll see, and every error with its fix.</p>
+  <div class="note"><strong>This manual assumes you are alone.</strong> No Claude Code, no searching needed. Follow it top to bottom, pass every ✅ checkpoint, and you'll have a live AI support agent answering customers inside DataByt.</div>
+  <p class="meta">Windows / PowerShell · Python ADK · Gemini Flash · Supabase · Cloud Run · Next.js &nbsp;|&nbsp; ~1 focused day</p>
+</div>
+
+<div class="page">
+
+  <h2>How this manual works</h2>
+  <p>You build in <strong>7 parts</strong>. Each ends with a <strong>✅ CHECKPOINT</strong> — something you can see that proves it worked. <strong>Don't move on until the checkpoint passes.</strong> If it fails, the <strong>🔧 IF IT BROKE</strong> box tells you exactly what to do.</p>
+  <table>
+    <tr><th>Part</th><th>What you build</th><th>Time</th><th>You'll see</th></tr>
+    <tr><td>0</td><td>Setup</td><td>15 min</td><td>tools installed</td></tr>
+    <tr><td>1</td><td>Hello Agent</td><td>20 min</td><td>an agent talks to you in a browser</td></tr>
+    <tr><td>2</td><td>Agent + Tool</td><td>30 min</td><td>it calls a function, uses the result</td></tr>
+    <tr><td>3</td><td>Knowledge Agent</td><td>30 min</td><td>it answers "how do I..." questions</td></tr>
+    <tr><td>4</td><td>The Manager (multi-agent)</td><td>45 min</td><td>it routes tickets to 3 specialists</td></tr>
+    <tr><td>5</td><td>Real DataByt Data</td><td>45 min</td><td>it reads your actual Supabase invoices</td></tr>
+    <tr><td>6</td><td>Deploy to the Internet</td><td>45 min</td><td>it's live on a public URL</td></tr>
+    <tr><td>7</td><td>Wire into DataByt</td><td>30 min</td><td>dashboard → agent → reply</td></tr>
+  </table>
+
+  <div class="part"><p class="p-k">Part 0</p><h2>Setup (do this once)</h2><p class="t">15 minutes</p></div>
+  <h3>0.1 — Check Python</h3>
+  <pre class="ps">python --version          <span class="c"># expect: Python 3.11.x  (any 3.10+ ok)</span></pre>
+  <div class="broke"><span class="h">🔧 IF IT BROKE</span> "not recognized" → install from python.org, <strong>tick "Add Python to PATH"</strong>, reopen PowerShell.</div>
+  <h3>0.2–0.4 — Folder, venv, install</h3>
+  <pre class="ps">cd d:\AI\DP\databyt-saas
+mkdir agents
+cd agents
+python -m venv .venv
+.venv\Scripts\Activate.ps1     <span class="c"># prompt should now show (.venv)</span>
+pip install google-adk         <span class="c"># ends: Successfully installed google-adk-...</span></pre>
+  <div class="broke"><span class="h">🔧 IF IT BROKE</span> "running scripts is disabled": run once →
+  <code>Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned</code>, then activate again.</div>
+  <h3>0.5 — Get your free Gemini key</h3>
+  <p>Open <strong>aistudio.google.com/apikey</strong> → sign in → <strong>Create API key</strong> → copy it (looks like <code>AIzaSy...</code>).</p>
+  <div class="check"><div class="h">✅ CHECKPOINT 0</div><code>adk --version</code> → shows a version like <code>1.x.x</code>. If yes, Part 0 done.
+  <br><strong>🔧 If "adk not recognized":</strong> venv isn't active — re-run <code>.venv\Scripts\Activate.ps1</code> (prompt must show <code>(.venv)</code>).</div>
+
+  <div class="part"><p class="p-k">Part 1</p><h2>Hello Agent</h2><p class="t">20 minutes · the simplest agent, talking in a browser</p></div>
+  <pre class="ps">mkdir support_agent
+cd support_agent</pre>
+  <p>Create <strong>three files</strong> inside <code>support_agent/</code>:</p>
+  <p class="filelabel">__init__.py</p>
+  <pre><span class="k">from</span> . <span class="k">import</span> agent</pre>
+  <p class="filelabel">.env  (paste your real key, no quotes, no spaces)</p>
+  <pre>GOOGLE_GENAI_USE_VERTEXAI=FALSE
+GOOGLE_API_KEY=AIzaSy_paste_your_real_key_here</pre>
+  <p class="filelabel">agent.py</p>
+  <pre><span class="k">from</span> google.adk.agents <span class="k">import</span> Agent
+
+root_agent = Agent(
+    name=<span class="s">"support_agent"</span>,
+    model=<span class="s">"gemini-2.0-flash"</span>,
+    description=<span class="s">"DataByt customer support assistant."</span>,
+    instruction=<span class="s">"""
+    You are DataByt's friendly support assistant. DataByt automates
+    accounts-receivable collections for finance teams. Greet warmly,
+    answer clearly and concisely. If unsure, say so — never make up facts.
+    """</span>,
+)</pre>
+  <p>Go UP to the <code>agents</code> folder and launch the UI:</p>
+  <pre class="ps">cd ..
+adk web                  <span class="c"># expect: Uvicorn running on http://127.0.0.1:8000</span></pre>
+  <div class="check"><div class="h">✅ CHECKPOINT 1</div>Open <strong>localhost:8000</strong> → pick <code>support_agent</code> in the dropdown → type <code>Hi, what is DataByt?</code> → it replies with a friendly explanation. <strong>You just built and ran your first AI agent. 🎉</strong></div>
+  <div class="broke"><span class="h">🔧 IF IT BROKE</span>
+  <ul>
+    <li><strong>Dropdown empty</strong> → you ran <code>adk web</code> from the wrong folder. Be in <code>agents</code> (which <em>contains</em> support_agent). Ctrl-C, re-run.</li>
+    <li><strong>API key / 403 error</strong> → <code>.env</code> key wrong. Re-copy. Line must be exactly <code>GOOGLE_API_KEY=AIza...</code></li>
+    <li><strong>ModuleNotFoundError</strong> → venv not active. Ctrl-C → activate → re-run.</li>
+  </ul>
+  Stop the server any time with <strong>Ctrl-C</strong>.</div>
+
+  <div class="part"><p class="p-k">Part 2</p><h2>Agent + Tool (giving it hands)</h2><p class="t">30 minutes · fake data, works instantly</p></div>
+  <p>Stop the server. Replace <code>support_agent/agent.py</code>:</p>
+  <pre><span class="k">from</span> google.adk.agents <span class="k">import</span> Agent
+
+<span class="k">def</span> get_invoice_count(status: str) -> dict:
+    <span class="s">"""Returns how many invoices have a given status.
+    Args:
+        status: One of 'open', 'overdue', or 'paid'.
+    """</span>
+    fake = {<span class="s">"open"</span>: 12, <span class="s">"overdue"</span>: 5, <span class="s">"paid"</span>: 240}
+    <span class="k">if</span> status <span class="k">not in</span> fake:
+        <span class="k">return</span> {<span class="s">"status"</span>: <span class="s">"error"</span>, <span class="s">"message"</span>: <span class="s">f"Unknown status '{status}'."</span>}
+    <span class="k">return</span> {<span class="s">"status"</span>: <span class="s">"success"</span>, <span class="s">"count"</span>: fake[status]}
+
+root_agent = Agent(
+    name=<span class="s">"support_agent"</span>, model=<span class="s">"gemini-2.0-flash"</span>,
+    description=<span class="s">"Support assistant that can check invoice counts."</span>,
+    instruction=<span class="s">"""When asked how many invoices are open/overdue/paid,
+    ALWAYS use get_invoice_count. Never guess. Report it in a friendly sentence."""</span>,
+    tools=[get_invoice_count],
+)</pre>
+  <div class="check"><div class="h">✅ CHECKPOINT 2</div><code>adk web</code> → ask <code>How many invoices are overdue?</code> → it replies <strong>5</strong>. Click the <strong>Events</strong> panel → you see it called <code>get_invoice_count(status="overdue")</code> and got <code>count: 5</code>. <strong>That panel is how you debug everything from now on.</strong></div>
+  <div class="broke"><span class="h">🔧 IF IT BROKE</span> Made up a number without the tool → docstring unclear or instruction too soft. Keep the exact docstring; the agent reads it to know what the tool does.</div>
+
+  <div class="page-break"></div>
+
+  <div class="part"><p class="p-k">Part 3</p><h2>Knowledge Agent (answers "how do I…")</h2><p class="t">30 minutes · knowledge lives in the instruction (simple, works now)</p></div>
+  <pre class="ps">mkdir knowledge_agent
+cd knowledge_agent
+copy ..\support_agent\.env .env       <span class="c"># reuse the same key</span></pre>
+  <p><code>__init__.py</code> → <code>from . import agent</code>. Then <code>agent.py</code>:</p>
+  <pre>root_agent = Agent(
+  name=<span class="s">"knowledge_agent"</span>, model=<span class="s">"gemini-2.0-flash"</span>,
+  description=<span class="s">"Answers how-to and product questions about DataByt."</span>,
+  instruction=<span class="s">"""Answer using ONLY this knowledge. If not here, say you're
+  not sure and offer a human. Never invent steps.
+  - CONNECT QB/XERO: Dashboard > Integrations > Connect, log in, Allow. ~5 min.
+  - DUNNING: one email per customer, tone L1/L2/L3 by days late.
+    Change thresholds in Settings > Collection Rules.
+  - PAYMENT LINKS: set your own in Settings > Payment Collection.
+  - DISPUTES: file on AR Aging; collections pause; resolve to resume.
+  - REPORTS: Dashboard > Reports > Generate PDF Report.
+  - PRICING: one plan, founding rate locked for first 20, 30-day free trial."""</span>,
+)</pre>
+  <div class="check"><div class="h">✅ CHECKPOINT 3</div>Pick <code>knowledge_agent</code> → ask <code>How do I connect QuickBooks?</code> → gives the steps. Ask <code>What is the capital of France?</code> → it says it's not sure / offers a human. <strong>That "I don't know" is correct</strong> — it won't lie to customers.</div>
+
+  <div class="part"><p class="p-k">Part 4</p><h2>The Manager (multi-agent routing)</h2><p class="t">45 minutes · the heart of the system</p></div>
+  <p>Replace <code>support_agent/agent.py</code> with the full manager + 3 specialists (the manager routes; specialists do the work):</p>
+  <pre><span class="c"># --- tool for the account specialist (fake for now) ---</span>
+<span class="k">def</span> get_invoice_count(status: str) -> dict:
+    <span class="s">"""Returns count of invoices with a status. Args: status: open/overdue/paid."""</span>
+    fake = {<span class="s">"open"</span>: 12, <span class="s">"overdue"</span>: 5, <span class="s">"paid"</span>: 240}
+    <span class="k">return</span> {<span class="s">"status"</span>:<span class="s">"success"</span>, <span class="s">"count"</span>: fake.get(status, 0)}
+
+knowledge_agent  = Agent(name=<span class="s">"knowledge_agent"</span>, model=<span class="s">"gemini-2.0-flash"</span>,
+  description=<span class="s">"Answers how-to/product questions."</span>, instruction=<span class="s">"...(knowledge)..."</span>)
+
+account_agent    = Agent(name=<span class="s">"account_agent"</span>, model=<span class="s">"gemini-2.0-flash"</span>,
+  description=<span class="s">"Checks invoice/account data."</span>,
+  instruction=<span class="s">"Call get_invoice_count for counts. Never guess."</span>,
+  tools=[get_invoice_count])
+
+escalation_agent = Agent(name=<span class="s">"escalation_agent"</span>, model=<span class="s">"gemini-2.0-flash"</span>,
+  description=<span class="s">"Refunds, billing disputes, bugs, upset customers."</span>,
+  instruction=<span class="s">"Apologise briefly, say a human will follow up shortly."</span>)
+
+root_agent = Agent(name=<span class="s">"support_manager"</span>, model=<span class="s">"gemini-2.0-flash"</span>,
+  instruction=<span class="s">"""Route each message:
+    'How do I...', product/pricing  -> knowledge_agent
+    'How many invoices...', status   -> account_agent
+    refunds/disputes/bugs/anger/unclear -> escalation_agent
+    Always route. Don't answer specialist questions yourself."""</span>,
+  sub_agents=[knowledge_agent, account_agent, escalation_agent])</pre>
+  <p class="callout"><strong>Full code is in <code>build-manual.md</code></strong> (the specialist instructions are abbreviated above to fit the page — copy them in full from the markdown file).</p>
+  <div class="check"><div class="h">✅ CHECKPOINT 4</div>Pick <code>support_agent</code> (now the manager). Send 3 messages, watch <strong>Events</strong> each time:
+  <ul><li><code>How do I connect QuickBooks?</code> → transfers to <strong>knowledge_agent</strong></li>
+  <li><code>How many invoices are overdue?</code> → <strong>account_agent</strong> → tool → <strong>5</strong></li>
+  <li><code>I want a refund</code> → <strong>escalation_agent</strong> → human follow-up</li></ul>
+  All three route right → <strong>you built a real multi-agent system.</strong></div>
+  <div class="broke"><span class="h">🔧 IF IT BROKE</span> Everything goes to one specialist → make each specialist's <code>description</code> clearly state what it handles (the manager uses descriptions to decide). Answers without transferring → strengthen "Always route."</div>
+
+  <div class="part"><p class="p-k">Part 5</p><h2>Real DataByt Data (read live invoices)</h2><p class="t">45 minutes · replace fake data with your Supabase</p></div>
+  <pre class="ps">pip install supabase</pre>
+  <p>Add to <code>support_agent/.env</code> (get values from Vercel env vars or Supabase → Settings → API → <strong>service_role</strong> key):</p>
+  <pre>SUPABASE_URL=https://yourproject.supabase.co
+SUPABASE_SERVICE_KEY=your_service_role_key</pre>
+  <p>Replace ONLY the <code>get_invoice_count</code> function:</p>
+  <pre><span class="k">import</span> os
+<span class="k">from</span> supabase <span class="k">import</span> create_client
+_sb = create_client(os.environ[<span class="s">"SUPABASE_URL"</span>], os.environ[<span class="s">"SUPABASE_SERVICE_KEY"</span>])
+
+<span class="k">def</span> get_invoice_count(status: str, org_id: str) -> dict:
+    <span class="s">"""Count invoices for an org by status. Args: status, org_id."""</span>
+    <span class="k">try</span>:
+        res = (_sb.table(<span class="s">"invoices"</span>).select(<span class="s">"id"</span>, count=<span class="s">"exact"</span>)
+               .eq(<span class="s">"org_id"</span>, org_id).eq(<span class="s">"status"</span>, status).execute())
+        <span class="k">return</span> {<span class="s">"status"</span>:<span class="s">"success"</span>, <span class="s">"count"</span>: res.count <span class="k">or</span> 0}
+    <span class="k">except</span> Exception <span class="k">as</span> e:
+        <span class="k">return</span> {<span class="s">"status"</span>:<span class="s">"error"</span>, <span class="s">"message"</span>: str(e)}</pre>
+  <div class="check"><div class="h">✅ CHECKPOINT 5</div><code>adk web</code> → ask <code>How many overdue invoices does org abc-123 have?</code> (use a real org_id from your <code>organizations</code> table) → returns the <strong>real</strong> count from your database.</div>
+  <div class="broke"><span class="h">🔧 IF IT BROKE</span> <code>KeyError: SUPABASE_URL</code> → env line missing in <code>support_agent/.env</code>. Auth error → you used the anon key; use the <strong>service_role</strong> key.</div>
+
+  <div class="page-break"></div>
+
+  <div class="part"><p class="p-k">Part 6</p><h2>Deploy to the Internet (Cloud Run)</h2><p class="t">45 minutes · scales to zero = near-free</p></div>
+  <p>Install <strong>Google Cloud CLI</strong> from cloud.google.com/sdk/docs/install (Windows installer, defaults). Reopen PowerShell, reactivate venv. Then:</p>
+  <pre class="ps">gcloud auth login                          <span class="c"># browser opens, sign in</span>
+gcloud config set project YOUR_PROJECT_ID
+gcloud services enable run.googleapis.com aiplatform.googleapis.com</pre>
+  <p>Create <code>support_agent/requirements.txt</code>:</p>
+  <pre>google-adk
+supabase</pre>
+  <p>Deploy (from the <code>agents</code> folder):</p>
+  <pre class="ps">adk deploy cloud_run --project YOUR_PROJECT_ID --region us-central1 .\support_agent
+<span class="c"># when asked "Allow unauthenticated invocations?" type:  y</span></pre>
+  <p>Set the production env vars (Cloud Run can't read your local <code>.env</code>):</p>
+  <pre class="ps">gcloud run services update support-agent --region us-central1 `
+  --set-env-vars GOOGLE_API_KEY=AIza...,SUPABASE_URL=https://...,SUPABASE_SERVICE_KEY=...</pre>
+  <div class="check"><div class="h">✅ CHECKPOINT 6</div>Deploy prints <code>Service URL: https://support-agent-xxxx-uc.a.run.app</code> — copy it. In a new PowerShell: <code>curl https://...run.app/list-apps</code> → JSON containing <code>support_agent</code>. <strong>Your agent is live on the internet. 🎉</strong></div>
+  <div class="broke"><span class="h">🔧 IF IT BROKE</span> Billing error → console.cloud.google.com → Billing → link your credits to the project. Build failed → ensure <code>requirements.txt</code> exists with <code>google-adk</code> and <code>supabase</code>, redeploy.</div>
+
+  <div class="part"><p class="p-k">Part 7</p><h2>Wire It Into DataByt</h2><p class="t">30 minutes · TypeScript, in your existing app</p></div>
+  <p>In Vercel → Settings → Environment Variables, add <code>SUPPORT_AGENT_URL</code> = your Cloud Run URL (no trailing slash). Then create <code>src/app/api/support/route.ts</code>:</p>
+  <pre><span class="k">export async function</span> POST(req: NextRequest) {
+  <span class="k">let</span> body; <span class="k">try</span> { body = <span class="k">await</span> req.json(); }
+  <span class="k">catch</span> { <span class="k">return</span> NextResponse.json({ error:<span class="s">"Invalid body"</span> }, { status:400 }); }
+  <span class="k">const</span> { message, orgId, ticketId } = body;
+  <span class="k">if</span> (!message) <span class="k">return</span> NextResponse.json({ error:<span class="s">"message required"</span> }, { status:400 });
+
+  <span class="k">const</span> sid = ticketId ?? crypto.randomUUID();
+  <span class="k">const</span> uid = orgId ?? <span class="s">"anonymous"</span>;
+  <span class="c">// 1) create a session</span>
+  <span class="k">await</span> fetch(<span class="s">`${AGENT_URL}/apps/support_agent/users/${uid}/sessions/${sid}`</span>,
+    { method:<span class="s">"POST"</span>, headers:{<span class="s">"Content-Type"</span>:<span class="s">"application/json"</span>}, body:<span class="s">"{}"</span> }).catch(()=>{});
+  <span class="c">// 2) run the agent</span>
+  <span class="k">const</span> r = <span class="k">await</span> fetch(<span class="s">`${AGENT_URL}/run`</span>, { method:<span class="s">"POST"</span>,
+    headers:{<span class="s">"Content-Type"</span>:<span class="s">"application/json"</span>},
+    body: JSON.stringify({ app_name:<span class="s">"support_agent"</span>, user_id:uid,
+      session_id:sid, new_message:{ role:<span class="s">"user"</span>, parts:[{ text:message }] } }) });
+  <span class="k">const</span> events = <span class="k">await</span> r.json();
+  <span class="k">const</span> last = Array.isArray(events) ? events[events.length-1] : events;
+  <span class="k">const</span> reply = last?.content?.parts?.map((p)=>p.text).join(<span class="s">""</span>) ?? <span class="s">"Sorry…"</span>;
+  <span class="k">return</span> NextResponse.json({ reply });
+}</pre>
+  <p class="callout"><strong>Full route (with imports + the <code>AGENT_URL</code> const) is in <code>build-manual.md</code>.</strong></p>
+  <div class="check"><div class="h">✅ CHECKPOINT 7</div>Commit + push (Vercel deploys). Then test live:
+  <pre class="ps">curl -Method POST https://www.databyt.in/api/support `
+  -Headers @{ "Content-Type"="application/json" } `
+  -Body '{"message":"I want a refund","orgId":"test","ticketId":"t2"}'</pre>
+  Sensible reply (escalation) → <strong>your agent is in production, end to end: DataByt → Cloud Run → Gemini → reply. 🎉🎉</strong></div>
+  <div class="broke"><span class="h">🔧 IF IT BROKE</span> <strong>502</strong> → <code>SUPPORT_AGENT_URL</code> wrong/missing in Vercel (no trailing slash). <strong>Empty reply</strong> → <code>console.log(JSON.stringify(events))</code>, look at the shape, adjust the last-event extraction. The text is always in some event's <code>content.parts[].text</code>.</div>
+
+  <div class="part"><p class="p-k">Part 8 &amp; 9</p><h2>Troubleshooting Bible + Going Solo</h2></div>
+  <h3>The universal 4-step debug</h3>
+  <ol>
+    <li><strong>Read the actual error's LAST line.</strong> The fix is usually named there.</li>
+    <li><strong>Is the venv active?</strong> Prompt must show <code>(.venv)</code>. 80% of "it suddenly broke" is this.</li>
+    <li><strong>Right folder?</strong> <code>adk web</code> runs from the folder that <em>contains</em> your agent folders.</li>
+    <li><strong>Did you save the file?</strong> Edits don't count until saved; ADK auto-reloads on save.</li>
+  </ol>
+  <table>
+    <tr><th>Error contains</th><th>Fix</th></tr>
+    <tr><td><code>adk is not recognized</code></td><td>activate venv: <code>.venv\Scripts\Activate.ps1</code></td></tr>
+    <tr><td><code>ModuleNotFoundError: google</code></td><td><code>pip install google-adk</code></td></tr>
+    <tr><td><code>API key not valid</code> / 403</td><td>re-copy key into <code>.env</code></td></tr>
+    <tr><td>dropdown empty</td><td><code>cd</code> to the parent of your agent folder</td></tr>
+    <tr><td><code>KeyError: SUPABASE_URL</code></td><td>add it to that agent's <code>.env</code></td></tr>
+    <tr><td>agent invents data</td><td>add "always use the tool / never guess"</td></tr>
+    <tr><td>Cloud Run billing error</td><td>console → Billing → link project</td></tr>
+    <tr><td><code>502</code> from /api/support</td><td>fix <code>SUPPORT_AGENT_URL</code> in Vercel</td></tr>
+  </table>
+  <h3>When you're stuck without help</h3>
+  <ul>
+    <li><strong>Copy the exact error line into Google.</strong> First result usually has it.</li>
+    <li><strong>Official docs:</strong> <code>google.github.io/adk-docs</code> — Get Started + Tutorials mirror this manual.</li>
+    <li><strong>Change one thing at a time.</strong> Never change three then run.</li>
+    <li><strong>The Events panel is truth.</strong> It shows exactly which tool the agent called with what args. Read it before guessing.</li>
+  </ul>
+
+  <div class="check" style="margin-top:18px;"><div class="h">🏁 WHAT YOU'LL HAVE BUILT</div>
+  An AI support agent that: runs in a visual UI locally · routes tickets to 3 specialists · reads your REAL Supabase invoices · is live on Cloud Run (near-free) · is wired into DataByt at <code>/api/support</code> · answers a customer end-to-end. <strong>You built that.</strong></div>
+
+  <p style="margin-top:16px; text-align:center; color:#64748B; font-size:10px; font-style:italic;">You don't need Claude Code to follow this. Go top to bottom, pass every checkpoint,<br>and read every error out loud. That's the whole skill. Build it.</p>
+
+</div>
+</body>
+</html>

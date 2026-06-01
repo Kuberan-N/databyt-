@@ -59,7 +59,11 @@ Read in order. Each file builds on the previous.
 | File | What It Is |
 |------|-----------|
 | [adk-mastery.md](06-adk-mastery/adk-mastery.md) | Full ADK course — 10 Python lessons (agents, tools, multi-agent, pipelines, callbacks, RAG), build the DataByt support agent, deploy to Cloud Run, wire into the codebase, Vertex ecosystem |
-| [DataByt-ADK-Mastery.pdf](06-adk-mastery/DataByt-ADK-Mastery.pdf) | Same course as a styled PDF |
+| [DataByt-ADK-Mastery.pdf](06-adk-mastery/DataByt-ADK-Mastery.pdf) | The course as a styled PDF (learn the concepts) |
+| [build-manual.md](06-adk-mastery/build-manual.md) | **The hands-on Build Manual** — 7 parts, every command + full file + checkpoint + fix. Build the live agent solo, no help needed |
+| [DataByt-Support-Agent-Build-Manual.pdf](06-adk-mastery/DataByt-Support-Agent-Build-Manual.pdf) | The Build Manual as a styled PDF — follow it while coding |
+
+> **Which to use:** Read `DataByt-ADK-Mastery.pdf` first to understand ADK. Then follow `DataByt-Support-Agent-Build-Manual.pdf` step-by-step to actually build and ship it.
 
 ---
 
