@@ -2,11 +2,15 @@ const puppeteer = require('puppeteer-core');
 const path = require('path');
 
 const CHROME = 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe';
-const HTML   = path.resolve(__dirname, 'adk-mastery.html');
-const OUT    = path.resolve(__dirname, 'DataByt-ADK-Mastery.pdf');
+const HTML   = path.resolve(__dirname, 'master-guide.html');
+const OUT    = path.resolve(__dirname, 'DataByt-ADK-Master-Guide.pdf');
 
 (async () => {
-  const browser = await puppeteer.launch({ executablePath: CHROME, headless: 'new', args: ['--no-sandbox'] });
+  const browser = await puppeteer.launch({
+    executablePath: CHROME,
+    headless: 'new',
+    args: ['--no-sandbox'],
+  });
   const page = await browser.newPage();
   await page.goto(`file:///${HTML.replace(/\\/g, '/')}`, { waitUntil: 'networkidle0' });
   await page.pdf({
