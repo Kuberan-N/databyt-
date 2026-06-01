@@ -54,6 +54,15 @@ Read in order. Each file builds on the previous.
 
 ---
 
+## 📁 06-adk-mastery — Learn ADK (Baby → Master)
+
+| File | What It Is |
+|------|-----------|
+| [adk-mastery.md](06-adk-mastery/adk-mastery.md) | Full ADK course — 10 Python lessons (agents, tools, multi-agent, pipelines, callbacks, RAG), build the DataByt support agent, deploy to Cloud Run, wire into the codebase, Vertex ecosystem |
+| [DataByt-ADK-Mastery.pdf](06-adk-mastery/DataByt-ADK-Mastery.pdf) | Same course as a styled PDF |
+
+---
+
 ## How to Use This Guide
 
 ```

@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>ADK Mastery — Baby to Master</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family: Arial, Helvetica, sans-serif; color:#1a1a1a; line-height:1.55; font-size:11px; }
+  .page { max-width:820px; margin:0 auto; padding:30px 40px; }
+
+  .cover { background:linear-gradient(135deg,#0B1020 0%,#4F46E5 100%); color:#fff; padding:64px 44px; }
+  .cover .kicker { font-size:11px; letter-spacing:3px; text-transform:uppercase; color:#C7D2FE; font-weight:700; }
+  .cover h1 { font-size:36px; font-weight:800; margin:14px 0 8px; letter-spacing:-0.5px; line-height:1.08; }
+  .cover .sub { font-size:14px; color:#E0E7FF; max-width:580px; }
+  .cover .meta { margin-top:30px; font-size:11px; color:#A5B4FC; }
+  .cover .model { display:inline-block; margin-top:18px; background:rgba(255,255,255,0.12); border:1px solid rgba(255,255,255,0.25); padding:8px 14px; border-radius:8px; font-size:11px; color:#EEF2FF; }
+
+  .part { background:#1E1B4B; color:#fff; padding:18px 22px; border-radius:10px; margin:26px 0 14px; }
+  .part .p-k { font-size:10px; letter-spacing:2px; text-transform:uppercase; color:#A5B4FC; font-weight:700; }
+  .part h2 { font-size:21px; font-weight:800; margin-top:3px; border:none; padding:0; color:#fff; }
+
+  h2 { font-size:17px; font-weight:800; color:#1E1B4B; margin:22px 0 4px; padding-bottom:5px; border-bottom:2px solid #EEF2FF; letter-spacing:-0.3px; }
+  h2 .num { color:#4F46E5; }
+  h3 { font-size:13px; font-weight:700; color:#312E81; margin:15px 0 5px; }
+  p { margin:6px 0; }
+  ul, ol { margin:6px 0 6px 18px; }
+  li { margin:3px 0; }
+  strong { color:#111; }
+  em { color:#4338CA; font-style:italic; }
+  code { background:#F1F5F9; color:#4338CA; padding:1px 5px; border-radius:3px; font-family:'Courier New',monospace; font-size:10px; }
+  pre { background:#0F172A; color:#E2E8F0; padding:13px 15px; border-radius:8px; font-family:'Courier New',monospace; font-size:9.3px; line-height:1.5; white-space:pre-wrap; margin:9px 0; }
+  pre .c { color:#94A3B8; }
+  pre .k { color:#C4B5FD; }
+  pre .s { color:#86EFAC; }
+
+  table { width:100%; border-collapse:collapse; margin:10px 0; font-size:10px; }
+  th { background:#4F46E5; color:#fff; text-align:left; padding:7px 9px; font-weight:700; }
+  td { padding:6px 9px; border-bottom:1px solid #E5E7EB; vertical-align:top; }
+  tr:nth-child(even) td { background:#F8FAFC; }
+
+  .callout { background:#EEF2FF; border-left:4px solid #4F46E5; padding:11px 15px; border-radius:0 6px 6px 0; margin:11px 0; font-size:10.5px; }
+  .callout.warn { background:#FEF2F2; border-left-color:#DC2626; }
+  .callout.win  { background:#F0FDF4; border-left-color:#16A34A; }
+  .callout.key  { background:#FEF9C3; border-left-color:#CA8A04; }
+
+  .lead { font-size:12.5px; color:#334155; background:#F8FAFC; padding:12px 16px; border-radius:8px; border:1px solid #E2E8F0; margin:10px 0; }
+  .lesson { display:inline-block; background:#4F46E5; color:#fff; font-size:10px; font-weight:700; padding:2px 9px; border-radius:10px; margin-right:6px; }
+
+  .page-break { page-break-before:always; }
+  @media print {
+    .page { padding:22px 30px; }
+    @page { size:A4 portrait; margin:0; }
+    pre, table, .callout, .part { page-break-inside:avoid; }
+    h2, h3 { page-break-after:avoid; }
+  }
+</style>
+</head>
+<body>
+
+<div class="cover">
+  <p class="kicker">DataByt · Engineering Curriculum</p>
+  <h1>ADK Mastery</h1>
+  <p class="sub">Learn Google's Agent Development Kit from baby steps to master — in Python — then ship a real support agent into DataByt production. Agents, multi-agents, sub-agents, pipelines, the visual UI, and the Vertex ecosystem, explained as simply as possible.</p>
+  <div class="model">Brain + Instructions + Tools — that's an agent. Everything else is plumbing.</div>
+  <p class="meta">Python ADK · Gemini Flash · adk web UI · Cloud Run · pgvector · Vertex AI &nbsp;|&nbsp; v1.0 · June 2026</p>
+</div>
+
+<div class="page">
+
+  <h2>The 30-Second Mental Model</h2>
+  <p>An <strong>agent</strong> is just three things glued together:</p>
+  <pre>┌──────────────────────────────────────┐
+│  AGENT                               │
+│    1. A BRAIN      (the LLM — Gemini) │
+│    2. INSTRUCTIONS (what its job is)  │
+│    3. TOOLS        (things it can DO) │
+└──────────────────────────────────────┘</pre>
+  <p>Everything else in ADK — sessions, memory, multi-agent, callbacks — is plumbing around these three. Hold this picture the whole way through.</p>
+  <div class="callout"><strong>Analogy:</strong> an agent is a new employee. The <strong>brain</strong> is their intelligence (Gemini), the <strong>instructions</strong> are their job description, the <strong>tools</strong> are the systems they're allowed to use. A <strong>multi-agent system</strong> is a team with a manager who routes work to the right specialist.</p>
+
+  <div class="part"><p class="p-k">Part A</p><h2>Learn ADK in Python — Baby → Master</h2></div>
+  <p>We learn in Python because that's where ADK is most mature, where the visual UI (<code>adk web</code>) lives, and where the Google ecosystem (Vertex) plugs in cleanly. Understand it here, and moving to DataByt is easy.</p>
+
+  <h2><span class="lesson">Lesson 0</span>Setup (15 minutes, once)</h2>
+  <pre><span class="c"># clean folder + virtual env</span>
+mkdir adk-learning && cd adk-learning
+python -m venv .venv
+.venv\Scripts\activate           <span class="c"># Windows  (Mac: source .venv/bin/activate)</span>
+pip install google-adk</pre>
+  <p>Get a key at <strong>aistudio.google.com/apikey</strong>. ADK wants each agent in its own folder with two files:</p>
+  <pre>greeting_agent/
+├── __init__.py    <span class="c"># one line:  from . import agent</span>
+├── agent.py       <span class="c"># your agent</span>
+└── .env           <span class="c"># GOOGLE_API_KEY=...  &  GOOGLE_GENAI_USE_VERTEXAI=FALSE</span></pre>
+
+  <h2><span class="lesson">Lesson 1</span>Your First Agent</h2>
+  <pre><span class="k">from</span> google.adk.agents <span class="k">import</span> Agent
+
+root_agent = Agent(
+    name=<span class="s">"greeting_agent"</span>,
+    model=<span class="s">"gemini-2.0-flash"</span>,
+    description=<span class="s">"A friendly agent that greets people."</span>,
+    instruction=<span class="s">"""
+    You are a warm, friendly assistant.
+    Greet the user by name if they give it.
+    Keep replies to one or two sentences.
+    """</span>,
+)</pre>
+  <ul>
+    <li><code>root_agent</code> — ADK looks for this exact variable name. Always name your top agent this.</li>
+    <li><code>gemini-2.0-flash</code> — the cheap, fast model. Use it for everything until you have a reason not to.</li>
+    <li><code>instruction</code> — the job description. <strong>90% of agent quality is here.</strong></li>
+  </ul>
+  <div class="callout win"><strong>The magic moment — the visual UI.</strong> From the parent folder run <code>adk web</code>, open <strong>localhost:8000</strong>: a dropdown to pick your agent, a chat box, an <strong>Events</strong> panel (every step it took), a <strong>State</strong> panel (its memory), a <strong>Trace</strong> view. You build every agent here first and watch what it does. The UI turns the invisible — an LLM thinking — into something you can see.</div>
+
+  <h2><span class="lesson">Lesson 2</span>Tools — giving the agent hands</h2>
+  <p>An agent with no tools can only <em>talk</em>. A tool lets it <em>do</em>. In Python a tool is a normal function with type hints and a docstring — ADK reads the docstring to know when to use it.</p>
+  <pre><span class="k">def</span> get_invoice_count(status: str) -> dict:
+    <span class="s">"""Returns how many invoices have a given status.
+    Args:
+        status: One of 'open', 'overdue', or 'paid'.
+    """</span>
+    data = {<span class="s">"open"</span>: 12, <span class="s">"overdue"</span>: 5, <span class="s">"paid"</span>: 240}
+    <span class="k">return</span> {<span class="s">"status"</span>: <span class="s">"success"</span>, <span class="s">"count"</span>: data.get(status, 0)}
+
+root_agent = Agent(
+    name=<span class="s">"ar_helper"</span>, model=<span class="s">"gemini-2.0-flash"</span>,
+    instruction=<span class="s">"Use get_invoice_count for counts. Never guess numbers."</span>,
+    tools=[get_invoice_count],
+)</pre>
+  <p>Ask <em>"How many invoices are overdue?"</em> and watch Events: the agent calls <code>get_invoice_count("overdue")</code>, gets <code>5</code>, writes a sentence with it.</p>
+  <div class="callout key"><strong>Golden rules of tools:</strong> the docstring is the instruction manual — write it like you're training a new hire. One job per tool. Always return a dict with a <code>status</code> key. Type-hint every argument — that's how ADK tells Gemini what to pass.</div>
+
+  <h2><span class="lesson">Lesson 3</span>Sessions &amp; State — memory in a conversation</h2>
+  <p>A <strong>session</strong> is one conversation. <strong>State</strong> is the agent's scratchpad — a notebook it writes in between turns.</p>
+  <pre><span class="k">from</span> google.adk.tools.tool_context <span class="k">import</span> ToolContext
+
+<span class="k">def</span> remember_company(name: str, tool_context: ToolContext) -> dict:
+    <span class="s">"""Saves the user's company name for later."""</span>
+    tool_context.state[<span class="s">"company_name"</span>] = name   <span class="c"># write to the notebook</span>
+    <span class="k">return</span> {<span class="s">"status"</span>: <span class="s">"success"</span>, <span class="s">"saved"</span>: name}</pre>
+  <p>Any tool that takes <code>tool_context: ToolContext</code> can read/write <code>state</code>. In <code>adk web</code>, the State panel shows <code>company_name</code> appear — the agent's memory, made visible.</p>
+  <p><strong>The <code>output_key</code> shortcut</strong> auto-saves an agent's whole reply to state: <code>Agent(..., output_key="last_summary")</code>. This is the conveyor belt that moves data between steps in a pipeline.</p>
+  <table>
+    <tr><th>Prefix</th><th>Lives for</th><th>Example</th></tr>
+    <tr><td>(none)</td><td>this session</td><td><code>state["current_ticket"]</code></td></tr>
+    <tr><td><code>user:</code></td><td>all sessions for this user</td><td><code>state["user:tone"]</code></td></tr>
+    <tr><td><code>app:</code></td><td>everyone, app-wide</td><td><code>state["app:hours"]</code></td></tr>
+    <tr><td><code>temp:</code></td><td>this turn only</td><td><code>state["temp:raw"]</code></td></tr>
+  </table>
+
+  <div class="page-break"></div>
+
+  <h2><span class="lesson">Lesson 4</span>Multi-Agent — a Manager &amp; Specialists</h2>
+  <p>Instead of one agent doing everything badly, build <strong>specialists</strong> and a <strong>manager</strong> that routes to them.</p>
+  <pre>billing_agent = Agent(name=<span class="s">"billing_agent"</span>, model=<span class="s">"gemini-2.0-flash"</span>,
+    description=<span class="s">"Handles billing, pricing, refunds, invoices."</span>,
+    instruction=<span class="s">"You are a billing specialist."</span>)
+
+tech_agent = Agent(name=<span class="s">"tech_agent"</span>, model=<span class="s">"gemini-2.0-flash"</span>,
+    description=<span class="s">"Handles QuickBooks, Xero, syncing, OAuth."</span>,
+    instruction=<span class="s">"You are a technical support specialist."</span>)
+
+root_agent = Agent(name=<span class="s">"support_manager"</span>, model=<span class="s">"gemini-2.0-flash"</span>,
+    instruction=<span class="s">"""Route the ticket:
+      billing/pricing/refunds/invoices -> billing_agent
+      QuickBooks/Xero/sync/connection  -> tech_agent
+      Do not answer specialist questions yourself. Route them."""</span>,
+    sub_agents=[billing_agent, tech_agent])   <span class="c"># the team</span></pre>
+  <p>The key line is <code>sub_agents=[...]</code>. The manager can <strong>transfer</strong> control to whichever specialist fits. Ask <em>"Why won't my QuickBooks sync?"</em> and watch Events: the manager transfers to <code>tech_agent</code>, which answers.</p>
+  <div class="callout key"><strong>This is the single most important pattern in ADK.</strong> A manager + specialists. It's how you handle many request types without one giant unmaintainable instruction. Specialists can have their own specialists — that's a tree. Don't over-nest early; two levels is plenty.</div>
+
+  <h2><span class="lesson">Lesson 5</span>Workflow Agents — controlled pipelines</h2>
+  <p>Manager-routing is <em>LLM-decided</em>. Sometimes you want a <strong>guaranteed order</strong>. Three workflow agents do that:</p>
+  <pre><span class="k">from</span> google.adk.agents <span class="k">import</span> SequentialAgent
+
+classifier = Agent(..., instruction=<span class="s">"Classify: billing/technical/how-to."</span>,
+                   output_key=<span class="s">"category"</span>)
+responder  = Agent(..., instruction=<span class="s">"Category is {category}. Write a reply."</span>)
+
+pipeline = SequentialAgent(name=<span class="s">"support_pipeline"</span>,
+                           sub_agents=[classifier, responder])  <span class="c"># in order</span>
+root_agent = pipeline</pre>
+  <p><code>{category}</code> pulls what the classifier saved via <code>output_key</code> — <strong>state is the conveyor belt</strong>.</p>
+  <table>
+    <tr><th>You want…</th><th>Use</th></tr>
+    <tr><td>The LLM to decide who handles it</td><td><code>sub_agents</code> on a normal Agent</td></tr>
+    <tr><td>A guaranteed step-by-step order</td><td><code>SequentialAgent</code></td></tr>
+    <tr><td>Several independent things at once (faster)</td><td><code>ParallelAgent</code></td></tr>
+    <tr><td>Repeat-until-good</td><td><code>LoopAgent</code> (<code>max_iterations</code>)</td></tr>
+  </table>
+
+  <h2><span class="lesson">Lesson 6</span>Agent-as-a-Tool — clean delegation</h2>
+  <p>Sometimes you don't want to <em>transfer</em> — you want one agent to <em>call</em> another and get an answer back, like a function.</p>
+  <pre><span class="k">from</span> google.adk.tools <span class="k">import</span> agent_tool
+
+translator = Agent(name=<span class="s">"translator"</span>, model=<span class="s">"gemini-2.0-flash"</span>,
+    instruction=<span class="s">"Translate the text to formal business English."</span>)
+
+main_agent = Agent(name=<span class="s">"email_writer"</span>, model=<span class="s">"gemini-2.0-flash"</span>,
+    instruction=<span class="s">"Write dunning emails. Use the translator tool to formalise."</span>,
+    tools=[agent_tool.AgentTool(agent=translator)])</pre>
+  <p><strong>Transfer vs Agent-as-Tool:</strong> transfer hands over the whole conversation (route to billing); Agent-as-Tool keeps the main agent in charge — it calls the helper, gets a result, continues (go translate this, then come back).</p>
+
+  <h2><span class="lesson">Lesson 7</span>Callbacks — guardrails &amp; control</h2>
+  <p>Callbacks are hooks that run <em>around</em> the agent's steps — security checkpoints for safety, logging, cost.</p>
+  <pre><span class="k">def</span> block_bad(callback_context, llm_request):
+    <span class="s">"""Runs BEFORE the LLM. Returning a response blocks the call."""</span>
+    text = llm_request.contents[-1].parts[0].text.lower()
+    <span class="k">if</span> <span class="s">"delete everything"</span> <span class="k">in</span> text:
+        <span class="k">return</span> LlmResponse(...)   <span class="c"># short-circuit, never calls LLM</span>
+    <span class="k">return</span> <span class="k">None</span>             <span class="c"># None = proceed normally</span>
+
+agent = Agent(..., before_model_callback=block_bad)</pre>
+  <table>
+    <tr><th>Callback</th><th>Use it for</th></tr>
+    <tr><td><code>before_model_callback</code></td><td>guardrails — block/modify input before the LLM</td></tr>
+    <tr><td><code>after_model_callback</code></td><td>filter or redact output</td></tr>
+    <tr><td><code>before_tool_callback</code></td><td>validate args, block a dangerous tool call</td></tr>
+    <tr><td><code>after_tool_callback</code></td><td>reshape a tool's result</td></tr>
+    <tr><td><code>before/after_agent_callback</code></td><td>skip the agent / final logging</td></tr>
+  </table>
+  <p>For DataByt the big two: <code>before_model</code> (don't promise refunds it can't give) and <code>before_tool</code> (don't resend an email without org permission).</p>
+
+  <div class="page-break"></div>
+
+  <h2><span class="lesson">Lesson 8</span>Memory &amp; RAG — knowledge across conversations</h2>
+  <p><strong>State</strong> is memory <em>within</em> one conversation. <strong>Memory / RAG</strong> is knowledge <em>across</em> conversations and from your documents. This is how the agent learns DataByt's whole knowledge base.</p>
+  <pre>Your docs -> chopped into chunks -> turned into "embeddings"
+(numbers that capture meaning) -> stored in a vector database
+
+User asks -> question -> embedding -> find most similar chunks ->
+hand them to the agent -> it answers using YOUR docs</pre>
+  <div class="callout win"><strong>The big idea:</strong> the agent's knowledge IS your documentation. Every guide doc you write becomes something it can retrieve and answer from. Your <code>DataByt-Guide/</code> folder is the agent's brain food. For DataByt we store embeddings in <strong>pgvector inside Supabase</strong> — already there, no new vendor, no cost.</div>
+
+  <h2><span class="lesson">Lesson 9</span>Models &amp; the Vertex Switch</h2>
+  <p>Everything so far ran on the simple <strong>Gemini API</strong> (a <code>GOOGLE_API_KEY</code>). <strong>Vertex AI</strong> is the same Gemini, inside Google Cloud, with enterprise features. You flip to it by changing <code>.env</code> — no code change:</p>
+  <pre>GOOGLE_GENAI_USE_VERTEXAI=TRUE
+GOOGLE_CLOUD_PROJECT=your-project-id
+GOOGLE_CLOUD_LOCATION=us-central1</pre>
+  <p>You'd do this at production time to run on your Cloud account and credits. ADK can also use non-Gemini models via <code>LiteLlm</code> — but for DataByt, stick with Gemini Flash (cheapest, credits cover it). You're not locked in.</p>
+
+  <h2><span class="lesson">Lesson 10</span>Where You Are Now</h2>
+  <div class="callout"><strong>If you did Lessons 0–9, you can already:</strong> build a single agent · give it tools · give it memory · build a manager + specialists · build Sequential/Parallel/Loop pipelines · have agents call each other · add guardrails · understand RAG and Vertex. <strong>That's the whole toolbox.</strong> A "complex agent" is just these pieces combined well — there is no secret Lesson 50.</div>
+
+  <div class="part"><p class="p-k">Part B</p><h2>Build the DataByt Support Agent (Python)</h2></div>
+  <p>Assemble the pieces into the real thing — a support agent that resolves 70% of tickets. It's just Lesson 4 (manager + specialists) + Lesson 2 (tools) + Lesson 8 (RAG). Nothing new.</p>
+  <pre>support_manager  (routes the ticket)
+├── knowledge_agent  -> answers "how do I..." via RAG over DataByt-Guide
+├── account_agent    -> checks real data
+│      tools: get_invoice_status, get_integration_status, resend_email
+└── escalation_agent -> hands hard tickets to Kuberan with full context
+       tools: escalate_to_human</pre>
+
+  <h3>The manager (the heart of it)</h3>
+  <pre>root_agent = Agent(name=<span class="s">"support_manager"</span>, model=<span class="s">"gemini-2.0-flash"</span>,
+  instruction=<span class="s">"""Route each ticket:
+    'How do I...', product questions      -> knowledge_agent
+    status of invoice / sync / connection -> account_agent
+    refunds, disputes, bugs, anger, unclear -> escalation_agent
+    Always route. Never invent an answer yourself."""</span>,
+  sub_agents=[knowledge_agent, account_agent, escalation_agent])</pre>
+  <p>An action tool the account agent uses:</p>
+  <pre><span class="k">def</span> get_invoice_status(invoice_number: str, org_id: str) -> dict:
+    <span class="s">"""Looks up one invoice's current status."""</span>
+    r = httpx.get(<span class="s">f"{DATABYT_API}/invoices/lookup"</span>,
+                  params={<span class="s">"invoice_number"</span>: invoice_number, <span class="s">"org_id"</span>: org_id})
+    <span class="k">return</span> {<span class="s">"status"</span>: <span class="s">"success"</span>, <span class="s">"invoice"</span>: r.json()}</pre>
+  <div class="callout"><strong>Test it in the UI.</strong> Run <code>adk web</code> and throw real tickets: <em>"How do I connect QuickBooks?"</em> (-> knowledge), <em>"Is INV-1042 paid?"</em> (-> account, calls the tool), <em>"I want a refund"</em> (-> escalation). The Events panel is your test harness — wrong routing? fix the manager's instruction and retry. No deploy needed to test.</div>
+
+  <div class="page-break"></div>
+
+  <div class="part"><p class="p-k">Part C</p><h2>Get It Into DataByt Production (the easy way)</h2></div>
+  <div class="lead"><strong>The honest truth, simply:</strong> ADK is most reliable in Python. DataByt is TypeScript. The cleanest bridge is — run the Python agent as a tiny service, and have DataByt call it over HTTPS. This is not scary. Google gives you a one-command deploy.</div>
+  <pre>Customer -> DataByt (Next.js / Vercel) -> /api/support route
+                                              |  fetch() HTTPS
+                                              v
+                                  ADK agent (Python) on Cloud Run
+                                  (scales to zero = ₹0 when idle)
+                                              |
+                          calls DataByt's API (invoice status) + Gemini</pre>
+
+  <h3>Step 1 — make the agent an API</h3>
+  <pre>adk api_server      <span class="c"># serves your agent with a /run endpoint at :8000</span></pre>
+  <h3>Step 2 — deploy to Cloud Run (one command)</h3>
+  <pre>gcloud auth login
+gcloud config set project YOUR_PROJECT_ID
+adk deploy cloud_run --project YOUR_PROJECT_ID \
+  --region us-central1 ./support_manager
+<span class="c"># ~3 min later -> https://support-manager-xxxxx-uc.a.run.app</span></pre>
+  <p>That's your agent, live, on your Cloud credits, scaling to zero. <strong>Even easier:</strong> <code>adk deploy agent_engine</code> hosts it fully-managed by Google <em>with a built-in UI + tracing dashboard</em> (Part D).</p>
+  <h3>Step 3 — wire DataByt to call it (one route)</h3>
+  <pre><span class="c">// src/app/api/support/route.ts</span>
+<span class="k">export async function</span> POST(req: NextRequest) {
+  <span class="k">const</span> { message, orgId, ticketId } = <span class="k">await</span> req.json();
+  <span class="k">const</span> r = <span class="k">await</span> fetch(<span class="s">`${AGENT_URL}/run`</span>, {
+    method: <span class="s">"POST"</span>,
+    headers: { <span class="s">"Content-Type"</span>: <span class="s">"application/json"</span> },
+    body: JSON.stringify({
+      app_name: <span class="s">"support_manager"</span>, user_id: orgId, session_id: ticketId,
+      new_message: { role: <span class="s">"user"</span>, parts: [{ text: message }] },
+    }),
+  });
+  <span class="k">return</span> NextResponse.json({ reply: <span class="k">await</span> r.json() });
+}</pre>
+  <p>Add <code>SUPPORT_AGENT_URL</code> to Vercel env vars. <strong>That's the whole integration</strong> — one route, one env var.</p>
+  <h3>Step 4 — push to production</h3>
+  <pre>adk deploy cloud_run ...      <span class="c"># redeploy the agent when it changes</span>
+git push                      <span class="c"># Vercel auto-deploys DataByt</span></pre>
+  <p>No Docker to hand-write, no Kubernetes, no servers to manage.</p>
+  <div class="callout win"><strong>My recommendation for you, right now:</strong> (1) Learn &amp; prototype in Python ADK — the UI makes learning 10× faster. (2) Ship via Cloud Run — genuinely one command, scales to zero. (3) Later, if the second service annoys you, port the proven agent to TypeScript in-process (DataByt already calls Gemini in TS) — by then you'll understand it cold and the port is an afternoon. <strong>Don't optimise for "one language" before you've shipped. Optimise for understanding fast and shipping reliably.</strong></div>
+
+  <div class="part"><p class="p-k">Part D</p><h2>The UI &amp; the Ecosystem (Vertex, simply)</h2></div>
+  <h3>The <code>adk web</code> dev UI — your daily driver</h3>
+  <p>Run it locally; this is where you live while building. <strong>Chat</strong> (talk like a customer), <strong>Events</strong> (every routing + tool call — this is how you debug), <strong>State</strong> (live memory), <strong>Trace</strong> (timing), <strong>Eval</strong> (run saved test questions).</p>
+  <div class="callout key"><strong>95% of your ADK time is in <code>adk web</code>.</strong> When the agent misbehaves, the Events panel tells you exactly where. Master this one screen and you've mastered the workflow.</div>
+  <h3>Vertex AI — only the 3 pieces DataByt needs</h3>
+  <table>
+    <tr><th>Vertex piece</th><th>What it does for you</th><th>When</th></tr>
+    <tr><td>Vertex AI Studio</td><td>Try prompts / pick models on your Cloud project</td><td>While tuning instructions</td></tr>
+    <tr><td>Agent Engine</td><td>Managed agent hosting + built-in trace/monitoring UI</td><td>When you deploy for real</td></tr>
+    <tr><td>Cloud Logging</td><td>Every production run, errors, token usage</td><td>After launch, watch health</td></tr>
+  </table>
+  <div class="callout warn"><strong>Ignore for now</strong> (for big ML teams, not a solo AR SaaS): Vertex Vector Search (use pgvector — free), Model Garden tuning, Pipelines, Feature Store, BigQuery ML, Dataflow.</div>
+  <p><strong>Agent Engine's UI</strong> is your production cockpit: chat with the live agent, see traces of real customer tickets, watch token cost per request, spot failures. It's <code>adk web</code> for your live agent, hosted by Google.</p>
+
+  <div class="part"><p class="p-k">Part E</p><h2>Your Learning Path &amp; Checklist</h2></div>
+  <pre><span class="k">WEEK 1 — Single agents &amp; tools</span>   (Lessons 0–3)
+  Build 3 toy agents in adk web. Comfortable with Agent, instruction,
+  tools, state. -> an agent that uses a tool and remembers something.
+
+<span class="k">WEEK 2 — Multi-agent &amp; pipelines</span>  (Lessons 4–7)
+  Build manager+specialists, add a guardrail. Routing feels natural.
+  -> the DataByt support tree, routing correctly in the UI.
+
+<span class="k">WEEK 3 — Knowledge &amp; ship</span>         (Lesson 8–9 + Parts B–C)
+  Add RAG over DataByt-Guide, deploy to Cloud Run, wire /api/support.
+  -> a customer asks "how do I connect QuickBooks" and the LIVE agent answers.</pre>
+  <div class="callout key"><strong>The one rule that makes you a master:</strong> never learn for more than two days without building the thing in <code>adk web</code>. Reading about agents teaches you nothing. Watching the Events panel show a wrong routing decision, fixing the instruction, and seeing it route right — <em>that</em> is the learning. Live in the UI.</div>
+
+  <h3>Quick glossary</h3>
+  <table>
+    <tr><th>Word</th><th>Plain meaning</th><th>Word</th><th>Plain meaning</th></tr>
+    <tr><td>Agent</td><td>brain + instructions + tools</td><td>Transfer</td><td>hand the whole convo to a sub-agent</td></tr>
+    <tr><td>Tool</td><td>a function the agent can call</td><td>AgentTool</td><td>call another agent like a function</td></tr>
+    <tr><td>Instruction</td><td>the agent's job description</td><td>SequentialAgent</td><td>run steps in fixed order</td></tr>
+    <tr><td>Session</td><td>one conversation</td><td>ParallelAgent</td><td>run steps at once</td></tr>
+    <tr><td>State</td><td>notebook within a conversation</td><td>LoopAgent</td><td>repeat until good</td></tr>
+    <tr><td>Memory</td><td>knowledge across convos / docs</td><td>Callback</td><td>hook before/after a step</td></tr>
+    <tr><td>Sub-agent</td><td>a specialist a manager routes to</td><td>RAG</td><td>search your docs before answering</td></tr>
+    <tr><td>Cloud Run</td><td>cheap hosting, scales to zero</td><td>Agent Engine</td><td>Google's managed agent hosting + UI</td></tr>
+  </table>
+
+  <p style="margin-top:22px; text-align:center; color:#64748B; font-size:10px; font-style:italic;">You started as a baby. Do the three weeks, live in <code>adk web</code>, and you finish a master —<br>with a real support agent answering real CFOs in production. That is the whole game.</p>
+
+</div>
+</body>
+</html>
