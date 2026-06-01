@@ -42,13 +42,22 @@ export async function POST(req: NextRequest) {
     ? `[Context: org_id="${org.id}", org_name="${org.name}". Use these for all data lookups — never ask the user for their org_id or company name.]\n\n${message}`
     : message;
 
+  const sid = sessionId ?? user.id;
+
+  // Create session first (idempotent — safe to call even if it already exists)
+  await fetch(`${agentUrl}/apps/support_agent/users/${user.id}/sessions/${sid}`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: "{}",
+  });
+
   const agentRes = await fetch(`${agentUrl}/run`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
       app_name: "support_agent",
       user_id: user.id,
-      session_id: sessionId ?? user.id,
+      session_id: sid,
       new_message: {
         role: "user",
         parts: [{ text: contextualMessage }],
@@ -61,17 +70,10 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ reply: "Sorry, the support agent is unavailable right now." });
   }
 
-  const events: Array<{ content?: { role?: string; parts?: Array<{ text?: string }> } }> = await agentRes.json();
-
-  // Find the last model text response from the events array
-  let reply = "I'm not sure how to help with that. Please contact support@databyt.in.";
-  for (let i = events.length - 1; i >= 0; i--) {
-    const content = events[i]?.content;
-    if (content?.role === "model" && content?.parts?.[0]?.text) {
-      reply = content.parts[0].text;
-      break;
-    }
-  }
+  // ADK returns a single event object (not an array)
+  const event: { content?: { role?: string; parts?: Array<{ text?: string }> } } = await agentRes.json();
+  const reply = event?.content?.parts?.[0]?.text
+    ?? "I'm not sure how to help with that. Please contact support@databyt.in.";
 
   return NextResponse.json({ reply });
 }
