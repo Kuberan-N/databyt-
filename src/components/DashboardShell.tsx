@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 import { useAuth } from "@/components/AuthProvider";
 import { Logo } from "@/components/Navbar";
+import SupportChat from "@/components/SupportChat";
 
 const sidebarLinks = [
   { label: "Dashboard",    href: "/dashboard",               icon: LayoutDashboard },
@@ -259,6 +260,8 @@ export default function DashboardShell({ children }: { children: ReactNode }) {
           {children}
         </main>
       </div>
+
+      <SupportChat />
     </div>
   );
 }

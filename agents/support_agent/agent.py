@@ -9,26 +9,45 @@ _supabase = create_client(
     os.environ["SUPABASE_SERVICE_KEY"],
 )
 
+def get_org_id(org_name: str) -> dict:
+    """Looks up an organisation's UUID by its name.
+
+    Args:
+        org_name: The organisation name the customer provided (e.g. 'Dinemetrics').
+    """
+    try:
+        response = (
+            _supabase
+            .table("organizations")
+            .select("id, name")
+            .ilike("name", f"%{org_name}%")
+            .limit(1)
+            .execute()
+        )
+        if response.data:
+            return {"status": "success", "org_id": response.data[0]["id"], "org_name": response.data[0]["name"]}
+        return {"status": "not_found", "message": f"No organisation found matching '{org_name}'."}
+    except Exception as e:
+        return {"status": "error", "message": str(e)}
+
+
 def get_invoice_count(status: str, org_id: str) -> dict:
     """Returns how many invoices an organisation has with a given status.
 
     Args:
         status: One of 'open', 'overdue', or 'paid'.
-        org_id: The organisation's unique ID (UUID string).
+        org_id: The organisation's UUID (use get_org_id first if you only have the name).
     """
-
     try:
         response = (
             _supabase
-            .table("invoices")                 # which table to query
-            .select("id", count="exact")       # select id column, get exact count
-            .eq("org_id", org_id)              # filter: org_id must match
-            .eq("status", status)              # filter: status must match
-            .execute()                         # run the query
+            .table("invoices")
+            .select("id", count="exact")
+            .eq("org_id", org_id)
+            .eq("status", status)
+            .execute()
         )
-
         return {"status": "success", "count": response.count or 0}
-
     except Exception as e:
         return {"status": "error", "message": str(e)}
 
@@ -56,12 +75,21 @@ account_agent = Agent(
  model="gemini-3.5-flash",
  description="Checks the customer's invoice counts and account status data.",
  instruction="""
- You look up real account data for the customer.
- When asked how many invoices are open, overdue, or paid,
- ALWAYS call the get_invoice_count tool.
- Never guess numbers. Report what the tool returns clearly.
+ You look up real account data for customers.
+
+ WORKFLOW — follow this every time:
+ Step 1: If the customer gave their company/org name, call get_org_id(org_name) first.
+ Step 2: Use the org_id returned to call get_invoice_count(status, org_id).
+ Step 3: Report the result clearly.
+
+ RULES:
+ - NEVER ask the user for a UUID or org_id — they won't know it.
+ - If you have a company name, always use get_org_id first.
+ - If no name was provided, ask: "What is your company name?"
+ - For "how many invoices" with no status specified, check all three: open, overdue, paid.
+ - Always report numbers clearly e.g. "You have 5 overdue invoices."
  """,
- tools=[get_invoice_count],
+ tools=[get_org_id, get_invoice_count],
 )
 
 
