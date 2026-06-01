@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { ArrowRight, X, Check, ExternalLink } from "lucide-react";
+import type { Locale, LocaleConfig } from "@/lib/geo";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
@@ -85,40 +86,7 @@ function CounterStat({
   );
 }
 
-const pains = [
-  {
-    stat:    "55%",
-    context: "of B2B invoices paid late",
-    problem: "More than half the invoices you send won't be paid on time — choking your cash flow.",
-    cost:    "$39,406/year average AR overhead per company",
-    source:  "Atradius Payment Report, 2024",
-    href:    "https://atradius.com/reports/",
-  },
-  {
-    stat:    "77%",
-    context: "of AR teams are backed up",
-    problem: "Finance staff spending all day chasing invoices instead of doing actual finance work.",
-    cost:    "16 hrs/day in manual cash posting — $88,660/year in wasted labor",
-    source:  "Versapay AR Survey, 2024",
-    href:    "https://versapay.com/resources/",
-  },
-  {
-    stat:    "81%",
-    context: "report increasing payment delays",
-    problem: "Customers are getting slower at paying — and manual AR can't scale to keep up.",
-    cost:    "Every extra day is working capital you can't invest or deploy",
-    source:  "PYMNTS Intelligence, 2023",
-    href:    "https://www.pymnts.com/news/b2b-payments/",
-  },
-  {
-    stat:    "67",
-    context: "days average DSO",
-    problem: "Mid-market companies wait 2.4× longer than agreed payment terms to get paid.",
-    cost:    "At $10M revenue, that's $1.8M locked in AR you can't access",
-    source:  "Atradius Payment Report, 2024",
-    href:    "https://atradius.com/reports/",
-  },
-];
+// pains array is now built inside the component (locale-aware)
 
 const beforeAfter = [
   {
@@ -147,7 +115,46 @@ const beforeAfter = [
   },
 ];
 
-export default function PainSection() {
+export default function PainSection({ locale = "INTL", cfg }: { locale?: Locale; cfg?: LocaleConfig }) {
+  const isIN = locale === "IN";
+  const overhead  = cfg?.arOverheadStat  ?? "$39K";
+  const labor     = cfg?.laborCostStat   ?? "$88K";
+
+  const pains = [
+    {
+      stat:    "55%",
+      context: "of B2B invoices paid late",
+      problem: "More than half the invoices you send won't be paid on time — choking your cash flow.",
+      cost:    isIN ? "₹32L/year average AR overhead per company" : "$39,406/year average AR overhead per company",
+      source:  "Atradius Payment Report, 2024",
+      href:    "https://atradius.com/reports/",
+    },
+    {
+      stat:    "77%",
+      context: "of AR teams are backed up",
+      problem: "Finance staff spending all day chasing invoices instead of doing actual finance work.",
+      cost:    isIN ? "16 hrs/day in manual cash posting — ₹72L/year in wasted labor" : "16 hrs/day in manual cash posting — $88,660/year in wasted labor",
+      source:  "Versapay AR Survey, 2024",
+      href:    "https://versapay.com/resources/",
+    },
+    {
+      stat:    "81%",
+      context: "report increasing payment delays",
+      problem: "Customers are getting slower at paying — and manual AR can't scale to keep up.",
+      cost:    "Every extra day is working capital you can't invest or deploy",
+      source:  "PYMNTS Intelligence, 2023",
+      href:    "https://www.pymnts.com/news/b2b-payments/",
+    },
+    {
+      stat:    "67",
+      context: "days average DSO",
+      problem: "Mid-market companies wait 2.4× longer than agreed payment terms to get paid.",
+      cost:    isIN ? "At ₹83Cr revenue, that's ₹15Cr locked in AR you can't access" : "At $10M revenue, that's $1.8M locked in AR you can't access",
+      source:  "Atradius Payment Report, 2024",
+      href:    "https://atradius.com/reports/",
+    },
+  ];
+
   return (
     <section className="bg-[#F8FAFC] py-20 border-b border-[#E8E8E8]">
       <div className="max-w-6xl mx-auto px-6">
@@ -183,7 +190,7 @@ export default function PainSection() {
         >
           <div className="flex-1 px-6 py-5">
             <p className="text-[30px] font-extrabold text-[#4F46E5] leading-none">
-              $39K<span className="text-[14px] text-[#333333] font-medium ml-1">/year</span>
+              {overhead}<span className="text-[14px] text-[#333333] font-medium ml-1">/year</span>
             </p>
             <p className="text-[13px] font-semibold text-[#111111] mt-1.5">Average annual AR overhead per company</p>
             <p className="text-[11px] text-[#333333] mt-1 leading-relaxed">
@@ -196,7 +203,7 @@ export default function PainSection() {
             </p>
             <p className="text-[13px] font-semibold text-[#111111] mt-1.5">Manual cash posting per finance team</p>
             <p className="text-[11px] text-[#333333] mt-1 leading-relaxed">
-              Equivalent to $88,660/year in pure labor cost — automated end-to-end by DataByt · Versapay 2024
+              Equivalent to {labor}/year in pure labor cost — automated end-to-end by DataByt · Versapay 2024
             </p>
           </div>
         </motion.div>
@@ -257,10 +264,12 @@ export default function PainSection() {
           <div>
             <p className="text-white/40 text-[13px] mb-1">Full AR automation, starting at</p>
             <p className="text-[46px] font-extrabold text-white leading-none">
-              $20K<span className="text-[20px] text-white/30 font-medium">/year</span>
+              {isIN ? "₹3.9L" : "$20K"}<span className="text-[20px] text-white/30 font-medium">/year</span>
             </p>
             <p className="text-white/30 text-[13px] mt-2">
-              HighRadius: $100K+/yr &nbsp;·&nbsp; Billtrust: $50K+/yr &nbsp;·&nbsp; DataByt: from $20K/yr
+              {isIN
+                ? "HighRadius: ₹80L+/yr  ·  Billtrust: ₹40L+/yr  ·  DataByt: from ₹3.9L/yr"
+                : "HighRadius: $100K+/yr  ·  Billtrust: $50K+/yr  ·  DataByt: from $20K/yr"}
             </p>
           </div>
           <a href="#pricing"

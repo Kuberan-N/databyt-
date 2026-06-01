@@ -3,16 +3,19 @@
 import { motion } from "framer-motion";
 import { ArrowRight, Mail } from "lucide-react";
 import { Logo } from "@/components/Navbar";
+import type { Locale, LocaleConfig } from "@/lib/geo";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
-const urgency = [
-  { value: "7 days",  label: "Every week you wait, your invoices age this much more" },
-  { value: "$2,700",  label: "Opportunity cost of one extra DSO day at $10M revenue" },
-  { value: "48 hrs",  label: "From signup to fully automated collections" },
-];
+export default function FinalCTA({ locale = "INTL", cfg }: { locale?: Locale; cfg?: LocaleConfig }) {
+  const oppCost = cfg?.urgencyOppCost ?? "$2,700";
+  const oppAt   = locale === "IN" ? "₹83Cr revenue" : "$10M revenue";
+  const urgency = [
+    { value: "7 days",  label: "Every week you wait, your invoices age this much more" },
+    { value: oppCost,   label: `Opportunity cost of one extra DSO day at ${oppAt}` },
+    { value: "48 hrs",  label: "From signup to fully automated collections" },
+  ];
 
-export default function FinalCTA() {
   return (
     <section className="bg-[#070707] py-20">
       <div className="max-w-6xl mx-auto px-6">

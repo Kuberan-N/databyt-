@@ -3,31 +3,37 @@
 import { useState, useMemo } from "react";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
+import { fmtCurrency, getLocaleConfig } from "@/lib/geo";
+import type { Locale, LocaleConfig } from "@/lib/geo";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
-function fmt(n: number): string {
-  if (n >= 1_000_000) return `$${(n / 1_000_000).toFixed(1)}M`;
-  if (n >= 1_000)     return `$${Math.round(n / 1000)}K`;
-  return `$${Math.round(n)}`;
-}
+export default function ROICalculator({ locale = "INTL", cfg }: { locale?: Locale; cfg?: LocaleConfig }) {
+  const c = cfg ?? getLocaleConfig(locale === "IN" ? "IN" : "US");
+  const fmt = (n: number) => fmtCurrency(n, locale);
 
-export default function ROICalculator() {
-  const [revenueMillion, setRevenueMillion] = useState(10);
-  const [dso, setDso] = useState(55);
+  const [revenue, setRevenue] = useState(c.roiRevenueDefault);
+  const [dso, setDso] = useState(c.roiDsoDefault);
 
   const r = useMemo(() => {
-    const annualRev   = revenueMillion * 1_000_000;
+    const annualRev   = revenue * c.roiRevenueToBaseUnit;
     const dailyRev    = annualRev / 365;
     const arBalance   = dailyRev * dso;
     const newDso      = Math.round(dso * 0.70);
     const cashFreed   = dailyRev * (dso - newDso);
     const annualGain  = cashFreed * 0.08;          // 8% cost of capital
-    const databytCost = 36_000;                     // $3K × 12
+    const databytCost = c.roiDataBytCostYear;
     const netBenefit  = annualGain - databytCost;
     const roi         = Math.round((annualGain / databytCost) * 100);
     return { arBalance, cashFreed, annualGain, newDso, netBenefit, roi, databytCost };
-  }, [revenueMillion, dso]);
+  }, [revenue, dso, c]);
+
+  const revPrefix = locale === "IN" ? "₹" : "$";
+  const revMinLabel = `${revPrefix}${c.roiRevenueMin}${locale === "IN" ? "Cr" : "M"}`;
+  const revMaxLabel = `${revPrefix}${c.roiRevenueMax}${locale === "IN" ? "Cr" : "M"}`;
+  const costMonthlyLabel = locale === "IN"
+    ? `${fmt(c.roiDataBytMonthly)}/month effective`
+    : `${fmt(c.roiDataBytMonthly)}/month flat`;
 
   return (
     <section id="roi" className="bg-[#F8FAFC] py-20 border-b border-[#E8E8E8]">
@@ -65,18 +71,18 @@ export default function ROICalculator() {
               <div>
                 <div className="flex items-center justify-between mb-3">
                   <label className="text-[13px] text-[#111111]">Annual Revenue</label>
-                  <span className="text-[14px] font-bold text-[#111111]">${revenueMillion}M</span>
+                  <span className="text-[14px] font-bold text-[#111111]">{revPrefix}{revenue}{locale === "IN" ? "Cr" : "M"}</span>
                 </div>
                 <input
-                  type="range" min={1} max={100} step={1}
-                  value={revenueMillion}
-                  onChange={e => setRevenueMillion(Number(e.target.value))}
+                  type="range" min={c.roiRevenueMin} max={c.roiRevenueMax} step={c.roiRevenueStep}
+                  value={revenue}
+                  onChange={e => setRevenue(Number(e.target.value))}
                   className="w-full"
                   style={{ accentColor: "#4F46E5" }}
                 />
                 <div className="flex justify-between mt-1.5">
-                  <span className="text-[11px] text-[#333333]">$1M</span>
-                  <span className="text-[11px] text-[#333333]">$100M</span>
+                  <span className="text-[11px] text-[#333333]">{revMinLabel}</span>
+                  <span className="text-[11px] text-[#333333]">{revMaxLabel}</span>
                 </div>
               </div>
 
@@ -105,7 +111,7 @@ export default function ROICalculator() {
               <p className="text-[11px] text-[#333333] font-medium mb-1">Cash currently locked in AR</p>
               <p className="text-[28px] font-bold text-[#111111]">{fmt(r.arBalance)}</p>
               <p className="text-[11px] text-[#333333] mt-1">
-                = (${revenueMillion}M ÷ 365) × {dso} days
+                = ({revPrefix}{revenue}{locale === "IN" ? "Cr" : "M"} ÷ 365) × {dso} days
               </p>
             </div>
           </div>
@@ -123,7 +129,7 @@ export default function ROICalculator() {
                 <span className="text-[13px] text-white/50 mb-1 leading-none">DSO</span>
                 <span className="text-[22px] font-bold text-white leading-none line-through decoration-white/30">{dso}d</span>
                 <span className="text-[13px] text-white/50 mb-1 leading-none">→</span>
-                <span className="text-[22px] font-bold text-[#000000] leading-none">{r.newDso}d</span>
+                <span className="text-[22px] font-bold text-[#A5B4FC] leading-none">{r.newDso}d</span>
               </div>
 
               <p className="text-[36px] font-bold text-white mt-4 leading-none">{fmt(r.cashFreed)}</p>
@@ -137,13 +143,13 @@ export default function ROICalculator() {
                 </div>
                 <div>
                   <p className="text-white/35 text-[11px] mb-1">DataByt costs</p>
-                  <p className="text-[20px] font-bold text-white">$24K/yr</p>
-                  <p className="text-white/25 text-[10px] mt-0.5">$2,000/month flat</p>
+                  <p className="text-[20px] font-bold text-white">{fmt(c.roiDataBytCostYear)}/yr</p>
+                  <p className="text-white/25 text-[10px] mt-0.5">{costMonthlyLabel}</p>
                 </div>
               </div>
             </div>
 
-            {/* Red card — net benefit */}
+            {/* Net benefit card */}
             <div className="rounded-xl bg-[#000000] p-5 text-white flex items-center justify-between">
               <div>
                 <p className="text-white/70 text-[11px] font-semibold mb-1">Net annual benefit</p>
@@ -164,7 +170,7 @@ export default function ROICalculator() {
 
             <a href="#pricing"
               className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-lg bg-[#4F46E5] text-white text-[14px] font-semibold hover:bg-[#4338CA] transition-colors">
-              Get Started — $2,000/Month
+              Get Started — {fmt(c.foundingMonthly)}/Month
               <ArrowRight className="w-4 h-4" />
             </a>
           </div>

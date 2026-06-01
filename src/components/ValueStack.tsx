@@ -2,10 +2,11 @@
 
 import { motion } from "framer-motion";
 import { Check, ArrowRight } from "lucide-react";
+import type { Locale, LocaleConfig } from "@/lib/geo";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
-const stackItems = [
+const stackItemsINTL = [
   { item: "AI Collections Agent (Tesorio / YayPay equivalent)", value: "$24,000/yr" },
   { item: "AP Invoice Automation (AvidXchange / Stampli equivalent)", value: "$18,000/yr" },
   { item: "ERP Integration & Daily Sync", value: "$6,000/yr" },
@@ -16,8 +17,16 @@ const stackItems = [
   { item: "Priority support (12 months)", value: "$2,400/yr" },
 ];
 
-const totalValue = 71000;
-const databytPrice = 20000;
+const stackItemsIN = [
+  { item: "AI Collections Agent (Tesorio / YayPay equivalent)", value: "₹20L/yr" },
+  { item: "AP Invoice Automation (AvidXchange / Stampli equivalent)", value: "₹15L/yr" },
+  { item: "ERP Integration & Daily Sync", value: "₹5L/yr" },
+  { item: "Dispute Management Portal", value: "₹5L/yr" },
+  { item: "AR Analytics + CEI Dashboard", value: "₹5L/yr" },
+  { item: "Done-for-you deployment & onboarding", value: "₹4L" },
+  { item: "Board-ready PDF reporting suite", value: "₹3L/yr" },
+  { item: "Priority support (12 months)", value: "₹2L/yr" },
+];
 
 const guarantees = [
   {
@@ -42,7 +51,13 @@ const guarantees = [
   },
 ];
 
-export default function ValueStack() {
+export default function ValueStack({ locale = "INTL", cfg }: { locale?: Locale; cfg?: LocaleConfig }) {
+  const isIN = locale === "IN";
+  const stackItems   = isIN ? stackItemsIN : stackItemsINTL;
+  const totalLabel   = isIN ? "₹59L+" : "$71,000+";
+  const priceLabel   = isIN ? "₹3.9L" : `$${(cfg?.foundingAnnual ?? 20000).toLocaleString()}`;
+  const saveLabel    = isIN ? "₹55L+" : "$51,000+";
+
   return (
     <section className="bg-[#F8FAFC] py-20 border-b border-[#E8E8E8]">
       <div className="max-w-4xl mx-auto px-6">
@@ -100,14 +115,14 @@ export default function ValueStack() {
               <div>
                 <p className="text-white/40 text-[13px] mb-1">If bought separately</p>
                 <p className="text-[32px] font-extrabold text-white/30 line-through leading-none mb-4">
-                  ${totalValue.toLocaleString()}+/yr
+                  {totalLabel}/yr
                 </p>
                 <p className="text-white/50 text-[13px] mb-1">DataByt Pro — everything above</p>
                 <p className="text-[46px] font-extrabold text-white leading-none">
-                  ${databytPrice.toLocaleString()}<span className="text-[20px] text-white/30 font-medium">/yr</span>
+                  {priceLabel}<span className="text-[20px] text-white/30 font-medium">/yr</span>
                 </p>
                 <p className="text-[#A5B4FC] text-[13px] mt-2 font-semibold">
-                  You save ${(totalValue - databytPrice).toLocaleString()}+ per year
+                  You save {saveLabel} per year
                 </p>
               </div>
               <a

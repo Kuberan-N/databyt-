@@ -4,7 +4,7 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "DataByt — AI-Powered AR Collections for Mid-Market B2B",
   description:
-    "Reduce DSO by 30% in 48 hours. AI dunning emails, dispute management, and live CEI analytics. Works with Stripe, Razorpay, or any payment provider. Connects to QuickBooks Online and Xero. From $2,000/month.",
+    "Reduce DSO by 30% in 48 hours. AI dunning emails, dispute management, and live CEI analytics. Works with Stripe, Razorpay, or any payment provider. Connects to QuickBooks Online and Xero. One flat plan, everything included.",
   keywords: [
     "accounts receivable automation",
     "AR collections software",
@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "DataByt — AI-Powered AR Collections",
     description:
-      "Reduce DSO by 30%. Live in 48 hours. From $2,000/month.",
+      "Reduce DSO by 30%. Live in 48 hours. One flat plan, everything included.",
   },
   robots: { index: true, follow: true },
 };

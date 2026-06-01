@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { motion, useInView, useMotionValue, animate } from "framer-motion";
 import { ArrowRight, TrendingDown, Clock, DollarSign } from "lucide-react";
+import type { Locale, LocaleConfig } from "@/lib/geo";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
@@ -47,8 +48,21 @@ function AnimatedCounter({
   );
 }
 
-function DashboardMockup() {
+function DashboardMockup({ locale = "INTL" }: { locale?: Locale }) {
+  const isIN = locale === "IN";
   const bars = [38, 52, 45, 68, 61, 82];
+  const arTotal = isIN ? "₹6.8Cr" : "$847,200";
+  const overdue = isIN
+    ? [
+        { name: "Sterling Corp",   amt: "₹9,90,000", tag: "L2", tagBg: "#FEF3C7", tagTx: "#92400E" },
+        { name: "TechFlow Pvt",    amt: "₹7,00,000", tag: "L1", tagBg: "#F3F3F3", tagTx: "#111111" },
+        { name: "BuildRight Ltd",  amt: "₹4,15,000", tag: "L3", tagBg: "#FEE2E2", tagTx: "#312E81" },
+      ]
+    : [
+        { name: "Acme Corp",     amt: "$12,400", tag: "L2", tagBg: "#FEF3C7", tagTx: "#92400E" },
+        { name: "TechFlow Inc",  amt: "$8,750",  tag: "L1", tagBg: "#F3F3F3", tagTx: "#111111" },
+        { name: "BuildRight Ltd",amt: "$5,200",  tag: "L3", tagBg: "#FEE2E2", tagTx: "#312E81" },
+      ];
   return (
     <div className="w-full rounded-2xl border border-[#E2E8F0] shadow-[0_40px_100px_-20px_rgba(0,0,0,0.18)] overflow-hidden bg-white">
       {/* Browser chrome */}
@@ -97,7 +111,7 @@ function DashboardMockup() {
         <div className="flex-1 bg-[#F8FAFC] p-4 overflow-hidden">
           <div className="grid grid-cols-3 gap-2 mb-3">
             {[
-              { label: "Total AR Outstanding", value: "$847,200", sub: "↓ collecting fast", color: "#000000" },
+              { label: "Total AR Outstanding", value: arTotal, sub: "↓ collecting fast", color: "#000000" },
               { label: "Days Sales Outstanding", value: "42 days",    sub: "↓ 8 days this month", color: "#16A34A" },
               { label: "CEI Score",              value: "87%",        sub: "↑ excellent",          color: "#16A34A" },
             ].map(m => (
@@ -130,11 +144,7 @@ function DashboardMockup() {
 
             <div className="bg-white rounded-xl border border-[#EBEBEB] p-3">
               <p className="text-[10px] font-semibold text-[#111111] mb-2">Overdue Invoices</p>
-              {[
-                { name: "Acme Corp",     amt: "$12,400", tag: "L2", tagBg: "#FEF3C7", tagTx: "#92400E" },
-                { name: "TechFlow Inc",  amt: "$8,750",  tag: "L1", tagBg: "#F3F3F3", tagTx: "#111111" },
-                { name: "BuildRight Ltd",amt: "$5,200",  tag: "L3", tagBg: "#FEE2E2", tagTx: "#312E81" },
-              ].map(inv => (
+              {overdue.map(inv => (
                 <div key={inv.name} className="flex items-center justify-between py-1.5 border-b border-[#F5F5F5] last:border-0 gap-2">
                   <span className="text-[9px] text-[#555555] font-medium truncate">{inv.name}</span>
                   <span className="text-[9px] font-bold text-[#111111] shrink-0">{inv.amt}</span>
@@ -150,13 +160,14 @@ function DashboardMockup() {
   );
 }
 
-const stats = [
-  { icon: TrendingDown, prefix: "", target: 30, suffix: "%", label: "avg DSO reduction", color: "#4F46E5" },
-  { icon: Clock,        prefix: "", target: 48, suffix: "hrs", label: "to live collections", color: "#4F46E5" },
-  { icon: DollarSign,  prefix: "$", target: 847, suffix: "K", label: "avg AR recovered/mo", color: "#4F46E5" },
-];
-
-export default function Hero() {
+export default function Hero({ locale = "INTL", cfg }: { locale?: Locale; cfg?: LocaleConfig }) {
+  const arStat = locale === "IN" ? { prefix: "₹", target: 7, suffix: "Cr" } : { prefix: "$", target: 847, suffix: "K" };
+  const stats = [
+    { icon: TrendingDown, prefix: "",            target: 30,          suffix: "%",       label: "avg DSO reduction",    color: "#4F46E5" },
+    { icon: Clock,        prefix: "",            target: 48,          suffix: "hrs",     label: "to live collections",  color: "#4F46E5" },
+    { icon: DollarSign,   prefix: arStat.prefix, target: arStat.target, suffix: arStat.suffix, label: "avg AR recovered/mo", color: "#4F46E5" },
+  ];
+  void cfg;
   return (
     <section className="relative bg-[#F8FAFC] pt-24 pb-0 overflow-hidden">
       {/* Subtle grid background */}
@@ -271,7 +282,7 @@ export default function Hero() {
           transition={{ duration: 0.9, ease, delay: 0.3 }}
           className="relative"
         >
-          <DashboardMockup />
+          <DashboardMockup locale={locale} />
           <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-[#F8FAFC] to-transparent pointer-events-none" />
         </motion.div>
 

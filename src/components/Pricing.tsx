@@ -3,13 +3,10 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Check, ArrowRight, Zap, Lock } from "lucide-react";
+import { getLocaleConfig } from "@/lib/geo";
+import type { Locale, LocaleConfig } from "@/lib/geo";
 
 const ease = [0.22, 1, 0.36, 1] as const;
-
-const MONTHLY  = 2000;
-const ANNUAL   = 20000;           // 10 months × $2,000 — 2 months free
-const ANN_MO   = Math.round(ANNUAL / 12);   // $1,667 effective per month
-const SAVING   = MONTHLY * 12 - ANNUAL;     // $4,000
 
 const features = [
   "AI Collections Agent — fully automated",
@@ -26,10 +23,27 @@ const features = [
   "Dedicated onboarding + priority support",
 ];
 
-export default function Pricing() {
+export default function Pricing({ locale = "INTL", cfg }: { locale?: Locale; cfg?: LocaleConfig }) {
+  const c = cfg ?? getLocaleConfig(locale === "IN" ? "IN" : "US");
   const [yearly, setYearly] = useState(true);
 
+  // Full-number formatter with locale-correct comma grouping
+  const sym = locale === "IN" ? "₹" : "$";
+  const grp = locale === "IN" ? "en-IN" : "en-US";
+  const m = (n: number) => `${sym}${n.toLocaleString(grp)}`;
+
+  const MONTHLY  = c.foundingMonthly;
+  const ANNUAL   = c.foundingAnnual;
+  const ANN_MO   = c.annualMonthlyEffective;
+  const SAVING   = c.annualSaving;
+  const STANDARD = c.standardMonthly;
+
   const displayPrice = yearly ? ANN_MO : MONTHLY;
+
+  // Competitor comparison labels
+  const cmpHigh = locale === "IN" ? "₹80L+/yr" : "$100K+/yr";
+  const cmpBill = locale === "IN" ? "₹40L+/yr" : "$50K+/yr";
+  const cmpUs   = locale === "IN" ? "₹3.9L/yr" : "$20K/yr";
 
   return (
     <section id="pricing" className="bg-white py-20 border-b border-[#E8E8E8]">
@@ -61,7 +75,7 @@ export default function Pricing() {
           <Lock className="w-4 h-4 text-[#4F46E5] shrink-0" />
           <p className="text-[13px] text-[#312E81]">
             <span className="font-bold">Founding customer rate — </span>
-            first 20 clients lock in $2,000/month forever. Price rises to $4,000/month after that.
+            first 20 clients lock in {m(MONTHLY)}/month forever. Price rises to {m(STANDARD)}/month after that.
           </p>
         </motion.div>
 
@@ -102,7 +116,7 @@ export default function Pricing() {
             Annual
             <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-[#EEF2FF] border border-[#4F46E5]/40 text-[#312E81] text-[10px] font-bold">
               <Zap className="w-2.5 h-2.5" />
-              Save ${SAVING.toLocaleString()}
+              Save {m(SAVING)}
             </span>
           </button>
         </motion.div>
@@ -131,7 +145,7 @@ export default function Pricing() {
             <div className="mb-6">
               <div className="flex items-end gap-1.5 mb-2">
                 <span className="text-[54px] font-extrabold text-white leading-none">
-                  ${displayPrice.toLocaleString()}
+                  {m(displayPrice)}
                 </span>
                 <span className="text-[16px] text-white/40 mb-2">/month</span>
               </div>
@@ -139,9 +153,9 @@ export default function Pricing() {
               {yearly ? (
                 <>
                   <p className="text-[13px] text-white/40 mb-4">
-                    Billed ${ANNUAL.toLocaleString()}/year —{" "}
+                    Billed {m(ANNUAL)}/year —{" "}
                     <span className="text-[#A5B4FC] font-semibold">
-                      you save ${SAVING.toLocaleString()} (2 full months free)
+                      you save {m(SAVING)} (2 full months free)
                     </span>
                   </p>
                   {/* Side-by-side comparison — the Hormozi math made visible */}
@@ -149,14 +163,14 @@ export default function Pricing() {
                     <div className="rounded-xl bg-white/5 p-3.5 border border-white/10">
                       <p className="text-[10px] text-white/30 mb-1.5 uppercase tracking-wider">Monthly billing</p>
                       <p className="text-[20px] font-bold text-white/30 line-through">
-                        ${(MONTHLY * 12).toLocaleString()}/yr
+                        {m(MONTHLY * 12)}/yr
                       </p>
-                      <p className="text-[10px] text-white/25 mt-0.5">You pay $4,000 more for the same product</p>
+                      <p className="text-[10px] text-white/25 mt-0.5">You pay {m(SAVING)} more for the same product</p>
                     </div>
                     <div className="rounded-xl bg-[#4F46E5]/15 p-3.5 border border-[#4F46E5]/30">
                       <p className="text-[10px] text-[#A5B4FC] mb-1.5 uppercase tracking-wider">Annual billing ✓</p>
                       <p className="text-[20px] font-bold text-white">
-                        ${ANNUAL.toLocaleString()}/yr
+                        {m(ANNUAL)}/yr
                       </p>
                       <p className="text-[10px] text-[#A5B4FC] mt-0.5">2 months free — the smart choice</p>
                     </div>
@@ -167,7 +181,7 @@ export default function Pricing() {
                   <p className="text-[12px] text-white/40">
                     Switch to annual billing →{" "}
                     <span className="text-[#A5B4FC] font-semibold">
-                      save ${SAVING.toLocaleString()}/year (2 months free)
+                      save {m(SAVING)}/year (2 months free)
                     </span>
                   </p>
                 </div>
@@ -207,7 +221,7 @@ export default function Pricing() {
           <span>&#10003; Live in 48 hours</span>
           <span>&#10003; CAN-SPAM compliant</span>
           <span className="text-[#333333]">
-            HighRadius: <span className="line-through">$100K+/yr</span> · Billtrust: <span className="line-through">$50K+/yr</span> · DataByt Pro: $20K/yr
+            HighRadius: <span className="line-through">{cmpHigh}</span> · Billtrust: <span className="line-through">{cmpBill}</span> · DataByt Pro: {cmpUs}
           </span>
         </motion.div>
 

@@ -3,10 +3,11 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Plus, Minus } from "lucide-react";
+import type { Locale } from "@/lib/geo";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
-const faqs = [
+const faqsINTL = [
   {
     q: "How is DataByt different from HighRadius or Billtrust?",
     a: "HighRadius starts at $100K+/year with a 6-month enterprise implementation. Billtrust is $50K+/year. DataByt Pro is $20,000/year billed annually — live in 48 hours, zero IT involvement, everything included. Same AI-driven outcome at one-fifth the cost.",
@@ -41,7 +42,17 @@ const faqs = [
   },
 ];
 
-export default function FAQ() {
+const faqsIN = faqsINTL.map((f, i) =>
+  i === 0
+    ? {
+        q: f.q,
+        a: "HighRadius starts at ₹80L+/year with a 6-month enterprise implementation. Billtrust is ₹40L+/year. DataByt Pro is ₹3,90,000/year billed annually — live in 48 hours, zero IT involvement, everything included. Same AI-driven outcome at one-fifth the cost.",
+      }
+    : f
+);
+
+export default function FAQ({ locale = "INTL" }: { locale?: Locale }) {
+  const faqs = locale === "IN" ? faqsIN : faqsINTL;
   const [open, setOpen] = useState<number | null>(null);
 
   return (

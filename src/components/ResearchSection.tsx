@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { ExternalLink, TrendingDown, Clock, Users, AlertCircle } from "lucide-react";
+import type { Locale } from "@/lib/geo";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
@@ -25,6 +26,7 @@ const findings = [
   {
     stat:    "42–60",
     finding: "days is the average DSO for mid-market B2B companies. Every extra day costs ~$2,700 at $10M revenue.",
+    findingIN: "days is the average DSO for mid-market B2B companies. Every extra day costs ~₹2.2L at ₹83Cr revenue.",
     source:  "Atradius Payment Report",
     year:    "2025",
     href:    "https://atradius.com/reports/",
@@ -67,7 +69,8 @@ const sources = [
   },
 ];
 
-export default function ResearchSection() {
+export default function ResearchSection({ locale = "INTL" }: { locale?: Locale }) {
+  const isIN = locale === "IN";
   return (
     <section className="bg-white py-20 border-b border-[#E8E8E8]">
       <div className="max-w-6xl mx-auto px-6">
@@ -110,7 +113,7 @@ export default function ResearchSection() {
                   <f.icon className="w-4 h-4 text-[#4F46E5] group-hover:text-white transition-colors" />
                 </div>
               </div>
-              <p className="text-[14px] text-[#333333] leading-snug mb-4">{f.finding}</p>
+              <p className="text-[14px] text-[#333333] leading-snug mb-4">{isIN && "findingIN" in f ? (f as { findingIN: string }).findingIN : f.finding}</p>
               <div className="flex items-center gap-2">
                 <ExternalLink className="w-3 h-3 text-[#4F46E5]/40 group-hover:text-[#4F46E5] transition-colors" />
                 <span className="text-[12px] text-[#333333] group-hover:text-[#111111] transition-colors">

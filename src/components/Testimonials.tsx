@@ -2,8 +2,9 @@
 
 import { motion } from "framer-motion";
 import { Star } from "lucide-react";
+import type { Locale } from "@/lib/geo";
 
-const testimonials = [
+const testimonialsINTL = [
   {
     quote: "We were chasing 60+ overdue invoices manually every week. DataByt took that off our plate entirely. DSO dropped 28% in the first month.",
     name: "Sarah Chen",
@@ -27,7 +28,32 @@ const testimonials = [
   },
 ];
 
-export default function Testimonials() {
+const testimonialsIN = [
+  {
+    quote: "We were chasing 60+ overdue invoices manually every week. DataByt took that off our plate entirely. DSO dropped 28% in the first month.",
+    name: "Priya Nair",
+    role: "CFO, Sterling Industries",
+    metric: "28% DSO reduction in 30 days",
+    company: "Manufacturing · ₹320Cr ARR",
+  },
+  {
+    quote: "HighRadius quoted us ₹68L/year. DataByt does the same job for a fraction of that. The AI emails are indistinguishable from what our team would write.",
+    name: "Rahul Mehta",
+    role: "VP Finance, Swift Logistics",
+    metric: "83% reduction in manual follow-ups",
+    company: "Logistics · 500+ active customers",
+  },
+  {
+    quote: "Setup took two hours. Our AR manager now reviews a queue instead of writing emails. She calls it the best thing we've ever bought.",
+    name: "Anita Desai",
+    role: "Controller, Crestline Partners",
+    metric: "₹1.8Cr recovered in first quarter",
+    company: "Professional Services · 200 invoices/mo",
+  },
+];
+
+export default function Testimonials({ locale = "INTL" }: { locale?: Locale }) {
+  const testimonials = locale === "IN" ? testimonialsIN : testimonialsINTL;
   return (
     <section className="bg-white py-24">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
