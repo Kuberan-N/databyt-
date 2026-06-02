@@ -68,8 +68,10 @@ export default function DashboardShell({ children }: { children: ReactNode }) {
       <motion.aside
         initial={false}
         animate={{ width: sidebarOpen ? 240 : 68 }}
-        className="hidden lg:flex flex-col bg-white border-r border-[#E2E8F0] overflow-hidden shrink-0"
+        className="hidden lg:flex flex-col bg-white border-r border-[#E2E8F0] overflow-hidden shrink-0 relative"
       >
+        {/* Brand accent strip at top */}
+        <div className="absolute top-0 left-0 right-0 h-0.5 brand-gradient" />
         {/* Logo */}
         <div className="p-4 flex items-center justify-between border-b border-[#E2E8F0] h-16">
           <AnimatePresence>
@@ -108,8 +110,8 @@ export default function DashboardShell({ children }: { children: ReactNode }) {
                 href={link.href}
                 className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all ${
                   isActive
-                    ? "bg-[#F3F3F3] text-[#000000]"
-                    : "text-[#222222] hover:text-[#000000] hover:bg-[#FFF1F2]"
+                    ? "bg-[#EEF2FF] text-[#4338CA] border-l-[3px] border-[#4F46E5] font-semibold"
+                    : "text-[#475569] hover:text-[#0F172A] hover:bg-[#F8F9FC] border-l-[3px] border-transparent"
                 } ${!sidebarOpen ? "justify-center" : ""}`}
                 title={!sidebarOpen ? link.label : undefined}
               >
@@ -194,7 +196,7 @@ export default function DashboardShell({ children }: { children: ReactNode }) {
                       key={link.href}
                       href={link.href}
                       className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all ${
-                        isActive ? "bg-[#F3F3F3] text-[#000000]" : "text-[#222222] hover:text-[#000000] hover:bg-[#FFF1F2]"
+                        isActive ? "bg-[#EEF2FF] text-[#4338CA] border-l-[3px] border-[#4F46E5] font-semibold" : "text-[#475569] hover:text-[#0F172A] hover:bg-[#F8F9FC] border-l-[3px] border-transparent"
                       }`}
                       onClick={() => setMobileMenuOpen(false)}
                     >

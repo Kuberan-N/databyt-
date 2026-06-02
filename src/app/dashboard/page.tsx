@@ -1,14 +1,33 @@
 "use client";
 
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback, useRef } from "react";
 import { motion } from "framer-motion";
 import {
   DollarSign, Clock, TrendingUp, ArrowRight,
-  AlertTriangle, Users, RefreshCw, Sparkles, FileSpreadsheet,
-  Target, BarChart2, Mail, MessageSquare,
+  AlertTriangle, RefreshCw, Sparkles, FileSpreadsheet,
+  Target, BarChart2, Mail, Users,
 } from "lucide-react";
 import { useAuth } from "@/components/AuthProvider";
 import { fetchARMetrics, fetchOverdueCustomers, ARMetrics, OverdueCustomer } from "@/lib/ar-data";
+
+// Count-up animation hook
+function useCountUp(target: number, duration = 900) {
+  const [value, setValue] = useState(0);
+  const rafRef = useRef<number>(0);
+  useEffect(() => {
+    if (target === 0) { setValue(0); return; }
+    const start = performance.now();
+    const animate = (now: number) => {
+      const p = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - p, 3);
+      setValue(Math.round(target * eased));
+      if (p < 1) rafRef.current = requestAnimationFrame(animate);
+    };
+    rafRef.current = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(rafRef.current);
+  }, [target, duration]);
+  return value;
+}
 
 const fmt = (n: number) =>
   new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }).format(n);
@@ -48,36 +67,47 @@ export default function DashboardOverview() {
     ? Math.round(((metrics.collectedThisMonth - metrics.collectedLastMonth) / metrics.collectedLastMonth) * 100)
     : 0;
 
-  // Research-ordered: strategic CFO metrics first, operational second
+  const outstanding = useCountUp(loading ? 0 : (metrics?.totalOutstanding ?? 0));
+  const cei         = useCountUp(loading ? 0 : (metrics?.cei ?? 0));
+  const overduePct  = useCountUp(loading ? 0 : (metrics?.overduePercent ?? 0));
+  const dsoVal      = useCountUp(loading ? 0 : (metrics?.dso ?? 0));
+  const collected   = useCountUp(loading ? 0 : (metrics?.collectedThisMonth ?? 0));
+  const avgDel      = useCountUp(loading ? 0 : (metrics?.avgDaysDelinquent ?? 0));
+  const disputes    = useCountUp(loading ? 0 : (metrics?.activeDisputes ?? 0));
+  const emails      = useCountUp(loading ? 0 : (metrics?.emailsSentThisMonth ?? 0));
+
   const row1 = [
     {
       label: "Total AR Outstanding",
-      value: loading ? "—" : fmt(metrics?.totalOutstanding ?? 0),
+      value: loading ? "—" : `$${outstanding.toLocaleString()}`,
       sub:   loading ? "Loading…" : `${metrics?.customerCount ?? 0} active customers`,
-      icon: DollarSign, iconBg: "#111111",
+      icon: DollarSign, iconClass: "metric-icon-brand",
       tooltip: "Total unpaid invoices across all customers",
     },
     {
       label: "Days Sales Outstanding",
-      value: loading ? "—" : hasData ? `${metrics?.dso ?? 0}d` : "—",
+      value: loading ? "—" : hasData ? `${dsoVal}d` : "—",
       sub:   loading ? "Loading…" : hasData
         ? (metrics?.dso && metrics.dso > 45 ? "⚠ Above 45-day target" : "✓ Within 45-day target")
         : "Import invoices to calculate",
-      icon: Clock, iconBg: metrics?.dso && metrics.dso > 45 ? "#DC2626" : "#111111",
+      icon: Clock,
+      iconClass: metrics?.dso && metrics.dso > 45 ? "metric-icon-danger" : "metric-icon-dark",
       tooltip: "Average days to collect payment. Industry target: under 45 days",
     },
     {
       label: "Collection Effectiveness",
-      value: loading ? "—" : hasData ? `${metrics?.cei ?? 0}%` : "—",
+      value: loading ? "—" : hasData ? `${cei}%` : "—",
       sub:   loading ? "Loading…" : (metrics?.cei ?? 0) >= 80 ? "✓ Healthy (target 80%+)" : "⚠ Below 80% target",
-      icon: Target, iconBg: (metrics?.cei ?? 0) >= 80 ? "#16A34A" : "#DC2626",
+      icon: Target,
+      iconClass: (metrics?.cei ?? 0) >= 80 ? "metric-icon-success" : "metric-icon-danger",
       tooltip: "CEI: % of collectible AR actually collected. 80%+ is healthy",
     },
     {
       label: "Overdue % of AR",
-      value: loading ? "—" : hasData ? `${metrics?.overduePercent ?? 0}%` : "—",
+      value: loading ? "—" : hasData ? `${overduePct}%` : "—",
       sub:   loading ? "Loading…" : fmt(metrics?.overdueAmount ?? 0) + " past due",
-      icon: BarChart2, iconBg: (metrics?.overduePercent ?? 0) > 50 ? "#DC2626" : "#F59E0B",
+      icon: BarChart2,
+      iconClass: (metrics?.overduePercent ?? 0) > 50 ? "metric-icon-danger" : "metric-icon-amber",
       tooltip: "What percentage of your total AR is past the due date",
     },
   ];
@@ -85,32 +115,33 @@ export default function DashboardOverview() {
   const row2 = [
     {
       label: "Collected This Month",
-      value: loading ? "—" : fmt(metrics?.collectedThisMonth ?? 0),
+      value: loading ? "—" : `$${collected.toLocaleString()}`,
       sub:   loading ? "Loading…" : collectionTrend !== 0
         ? `${collectionTrend >= 0 ? "+" : ""}${collectionTrend}% vs last month`
         : "vs last month",
-      icon: TrendingUp, iconBg: "#16A34A",
+      icon: TrendingUp, iconClass: "metric-icon-success",
       tooltip: "Total payments received this calendar month",
     },
     {
       label: "Avg Days Delinquent",
-      value: loading ? "—" : hasData ? `${metrics?.avgDaysDelinquent ?? 0}d` : "—",
+      value: loading ? "—" : hasData ? `${avgDel}d` : "—",
       sub:   loading ? "Loading…" : `across ${metrics?.overdueCount ?? 0} overdue invoices`,
-      icon: Clock, iconBg: "#111111",
+      icon: Clock, iconClass: "metric-icon-dark",
       tooltip: "Average number of days overdue for all outstanding invoices",
     },
     {
       label: "Active Disputes",
-      value: loading ? "—" : `${metrics?.activeDisputes ?? 0}`,
+      value: loading ? "—" : `${disputes}`,
       sub:   loading ? "Loading…" : (metrics?.activeDisputes ?? 0) > 0 ? "Need resolution" : "All clear",
-      icon: AlertTriangle, iconBg: (metrics?.activeDisputes ?? 0) > 0 ? "#DC2626" : "#16A34A",
+      icon: AlertTriangle,
+      iconClass: (metrics?.activeDisputes ?? 0) > 0 ? "metric-icon-danger" : "metric-icon-success",
       tooltip: "Open disputes pausing collections — need your attention",
     },
     {
       label: "Emails Sent (Month)",
-      value: loading ? "—" : `${metrics?.emailsSentThisMonth ?? 0}`,
+      value: loading ? "—" : `${emails}`,
       sub:   loading ? "Loading…" : `to ${metrics?.customerCount ?? 0} customers`,
-      icon: Mail, iconBg: "#4F46E5",
+      icon: Mail, iconClass: "metric-icon-brand",
       tooltip: "Total dunning emails sent this month by DataByt",
     },
   ];
@@ -170,18 +201,20 @@ export default function DashboardOverview() {
 
       {/* Tier 1 — Strategic metrics (CFO view) */}
       <div>
-        <p className="text-[11px] font-semibold text-[#999] uppercase tracking-widest mb-3">Financial Health</p>
+        <p className="text-[11px] font-semibold text-[#6366F1] uppercase tracking-widest mb-3">Financial Health</p>
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {row1.map((m, i) => (
-            <motion.div key={i} initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.05 * i }} className="glass rounded-2xl p-5" title={m.tooltip}>
-              <div className="w-9 h-9 rounded-xl flex items-center justify-center mb-4"
-                style={{ background: m.iconBg }}>
-                <m.icon className="w-4 h-4 text-white" />
+            <motion.div key={i}
+              initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.06 * i, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+              whileHover={{ y: -3, transition: { duration: 0.2 } }}
+              className="glass rounded-2xl p-5 cursor-default" title={m.tooltip}>
+              <div className={`w-10 h-10 rounded-xl flex items-center justify-center mb-4 ${m.iconClass}`}>
+                <m.icon className="w-5 h-5 text-white" />
               </div>
-              <p className="text-2xl font-bold text-[#0F172A]">{m.value}</p>
-              <p className="text-xs font-medium text-[#222222] mt-1">{m.label}</p>
-              <p className="text-xs text-[#333333] mt-0.5">{m.sub}</p>
+              <p className="text-2xl font-bold text-[#0F172A] tabular-nums">{m.value}</p>
+              <p className="text-xs font-semibold text-[#475569] mt-1">{m.label}</p>
+              <p className="text-xs text-[#64748B] mt-0.5">{m.sub}</p>
             </motion.div>
           ))}
         </div>
@@ -192,15 +225,17 @@ export default function DashboardOverview() {
         <p className="text-[11px] font-semibold text-[#999] uppercase tracking-widest mb-3">Operations This Month</p>
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {row2.map((m, i) => (
-            <motion.div key={i} initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.05 * i + 0.2 }} className="glass rounded-2xl p-5" title={m.tooltip}>
-              <div className="w-9 h-9 rounded-xl flex items-center justify-center mb-4"
-                style={{ background: m.iconBg }}>
-                <m.icon className="w-4 h-4 text-white" />
+            <motion.div key={i}
+              initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.06 * i + 0.25, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+              whileHover={{ y: -3, transition: { duration: 0.2 } }}
+              className="glass rounded-2xl p-5 cursor-default" title={m.tooltip}>
+              <div className={`w-10 h-10 rounded-xl flex items-center justify-center mb-4 ${m.iconClass}`}>
+                <m.icon className="w-5 h-5 text-white" />
               </div>
-              <p className="text-2xl font-bold text-[#0F172A]">{m.value}</p>
-              <p className="text-xs font-medium text-[#222222] mt-1">{m.label}</p>
-              <p className="text-xs text-[#333333] mt-0.5">{m.sub}</p>
+              <p className="text-2xl font-bold text-[#0F172A] tabular-nums">{m.value}</p>
+              <p className="text-xs font-semibold text-[#475569] mt-1">{m.label}</p>
+              <p className="text-xs text-[#64748B] mt-0.5">{m.sub}</p>
             </motion.div>
           ))}
         </div>
