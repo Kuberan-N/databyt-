@@ -8,7 +8,7 @@ import {
 } from "recharts";
 import {
   DollarSign, Clock, TrendingUp, AlertTriangle,
-  RefreshCw, UserPlus, FileText, ArrowRight, Link2, Check, Send,
+  RefreshCw, UserPlus, FileText, ArrowRight, Link2, Check, Send, CheckCircle,
 } from "lucide-react";
 import { useAuth } from "@/components/AuthProvider";
 import {
@@ -132,19 +132,25 @@ export default function AgingDashboard({ readOnly = false }: { readOnly?: boolea
           <h2 className="text-2xl font-bold text-[#0F172A]">AR Aging</h2>
           <p className="text-[#222222] text-sm mt-1">Live accounts receivable overview</p>
         </div>
-        {!readOnly && (
-          <div className="flex gap-2">
-            <button onClick={() => setShowAddCustomer(true)} className={btnBase}>
-              <UserPlus className="w-4 h-4" /> Add Customer
-            </button>
-            <button onClick={() => setShowAddInvoice(true)} className={btnBase}>
-              <FileText className="w-4 h-4" /> Add Invoice
-            </button>
-          </div>
-        )}
-        <button onClick={load} className={btnBase}>
-          <RefreshCw className={`w-4 h-4 ${loading ? "animate-spin" : ""}`} />
-        </button>
+        <div className="flex gap-2 flex-wrap">
+          {!readOnly && (
+            <>
+              <button onClick={() => setShowAddCustomer(true)} className={btnBase}>
+                <UserPlus className="w-4 h-4" /> Add Customer
+              </button>
+              <button onClick={() => setShowAddInvoice(true)} className={btnBase}>
+                <FileText className="w-4 h-4" /> Add Invoice
+              </button>
+              <a href="#invoice-table"
+                className="flex items-center gap-2 px-3 py-2 rounded-lg border border-[#16A34A]/40 bg-[#F0FDF4] text-[#16A34A] text-sm font-semibold hover:bg-[#16A34A] hover:text-white transition-all">
+                <CheckCircle className="w-4 h-4" /> Mark as Paid ↓
+              </a>
+            </>
+          )}
+          <button onClick={load} className={btnBase}>
+            <RefreshCw className={`w-4 h-4 ${loading ? "animate-spin" : ""}`} />
+          </button>
+        </div>
       </div>
 
       {/* Metric cards */}
@@ -238,9 +244,12 @@ export default function AgingDashboard({ readOnly = false }: { readOnly?: boolea
       )}
 
       {/* Invoice table */}
-      <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.35 }} className="glass rounded-2xl overflow-hidden">
+      <motion.div id="invoice-table" initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.35 }} className="glass rounded-2xl overflow-hidden">
         <div className="px-5 py-4 border-b border-[#E2E8F0] flex items-center gap-3 flex-wrap">
-          <h3 className="text-sm font-semibold text-[#0F172A] flex-1">Invoices</h3>
+          <div className="flex-1">
+            <h3 className="text-sm font-semibold text-[#0F172A]">Invoices</h3>
+            {!readOnly && <p className="text-xs text-[#555] mt-0.5">Click <span className="text-[#16A34A] font-semibold">Mark Paid</span> on any invoice once you confirm payment in your bank.</p>}
+          </div>
           <input
             value={search}
             onChange={e => { setSearch(e.target.value); setPage(1); }}
