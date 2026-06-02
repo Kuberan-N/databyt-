@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://databyt.in"),
   title: "DataByt — AI-Powered AR Collections for Mid-Market B2B",
   description:
     "Reduce DSO by 30% in 48 hours. AI dunning emails, dispute management, and live CEI analytics. Works with Stripe, Razorpay, or any payment provider. Connects to QuickBooks Online and Xero. One flat plan, everything included.",
