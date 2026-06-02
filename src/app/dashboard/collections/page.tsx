@@ -198,23 +198,22 @@ export default function CollectionsPage() {
         </div>
       </motion.div>
 
-      {/* Mark as Paid awareness — critical action notice */}
+      {/* Mark as Paid tip */}
       <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.05 }}
-        className="flex gap-4 p-4 rounded-2xl border border-[#FDE68A] bg-[#FFFBEB]">
-        <AlertTriangle className="w-5 h-5 text-[#D97706] shrink-0 mt-0.5" />
-        <div>
-          <p className="text-sm font-semibold text-[#92400E]">Action required when a customer pays</p>
-          <p className="text-xs text-[#92400E]/80 mt-1 leading-relaxed">
-            When a customer makes a payment, DataByt does not automatically know. You must go to{" "}
-            <a href="/dashboard/ar-aging" className="underline font-semibold">AR Aging</a>
-            {" "}→ find the invoice → click <strong>Mark Paid</strong>. This stops further dunning emails to that customer immediately.
-            If you don&apos;t do this, DataByt will keep chasing a customer who has already paid — which damages your relationship.
-          </p>
-          <a href="/dashboard/ar-aging"
-            className="inline-flex items-center gap-1.5 mt-2 text-xs font-semibold text-[#92400E] underline hover:text-[#78350F]">
-            Go to AR Aging → Mark invoices paid
-          </a>
+        className="flex items-center gap-4 p-4 rounded-2xl border border-[#BBF7D0] bg-[#F0FDF4]">
+        <div className="w-8 h-8 rounded-full bg-[#16A34A] flex items-center justify-center shrink-0">
+          <CheckCircle className="w-4 h-4 text-white" />
         </div>
+        <div className="flex-1">
+          <p className="text-sm font-semibold text-[#15803D]">Got a payment? Mark it as paid in AR Aging</p>
+          <p className="text-xs text-[#16A34A]/80 mt-0.5">
+            Once you confirm a payment in your bank, head to AR Aging and click <strong>Mark Paid</strong> on that invoice — takes 5 seconds and keeps your collections accurate.
+          </p>
+        </div>
+        <a href="/dashboard/ar-aging"
+          className="shrink-0 text-xs font-semibold px-3 py-1.5 bg-[#16A34A] text-white rounded-lg hover:bg-[#15803D] transition-colors">
+          Go to AR Aging
+        </a>
       </motion.div>
 
       {/* Stats */}

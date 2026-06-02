@@ -314,9 +314,11 @@ export default function AgingDashboard({ readOnly = false }: { readOnly?: boolea
                                 ? <><Check className="w-3 h-3 text-[#16A34A]" /><span className="text-[#16A34A]">Copied</span></>
                                 : <><Link2 className="w-3 h-3" />Pay link</>}
                             </button>
-                            <span className="text-[#E2E8F0]">·</span>
-                            <button onClick={() => markPaid(inv.id)} className="text-xs text-[#16A34A] hover:text-[#15803D] font-medium transition-colors">
-                              Mark paid
+                            <button
+                              onClick={() => markPaid(inv.id)}
+                              className="flex items-center gap-1 text-xs font-semibold bg-[#F0FDF4] text-[#16A34A] border border-[#16A34A]/25 px-2.5 py-1 rounded-lg hover:bg-[#16A34A] hover:text-white transition-all"
+                            >
+                              <Check className="w-3 h-3" />Mark Paid
                             </button>
                           </>
                         )}
