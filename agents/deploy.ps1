@@ -5,6 +5,8 @@
 #   1. gcloud CLI installed and authenticated (gcloud auth login)
 #   2. Cloud Run API enabled: gcloud services enable run.googleapis.com
 #   3. Cloud Build API enabled: gcloud services enable cloudbuild.googleapis.com
+#
+# Secrets are read from support_agent/.env — never hardcoded here.
 
 param(
   [Parameter(Mandatory=$true)]
@@ -13,6 +15,21 @@ param(
   [string]$ServiceName = "databyt-support-agent"
 )
 
+# Read secrets from .env file — keeps keys out of this script and out of git
+$envFile = Join-Path $PSScriptRoot "support_agent\.env"
+if (-not (Test-Path $envFile)) {
+  Write-Host "ERROR: support_agent/.env not found." -ForegroundColor Red
+  exit 1
+}
+
+$envVars = @{}
+Get-Content $envFile | ForEach-Object {
+  if ($_ -match "^\s*([^#][^=]+)=(.+)$") {
+    $envVars[$matches[1].Trim()] = $matches[2].Trim()
+  }
+}
+
+$envString = ($envVars.GetEnumerator() | ForEach-Object { "$($_.Key)=$($_.Value)" }) -join ","
 $ImageName = "gcr.io/$ProjectId/$ServiceName"
 
 Write-Host "==> Building DataByt Support Agent image via Cloud Build..."
@@ -33,9 +50,9 @@ gcloud run deploy $ServiceName `
   --allow-unauthenticated `
   --port 8080 `
   --memory 1Gi `
-  --min-instances 0 `
+  --min-instances 1 `
   --max-instances 5 `
-  --set-env-vars "GOOGLE_GENAI_USE_VERTEXAI=FALSE,GOOGLE_API_KEY=AIzaSyCIk2_F9ELn8K5gzpCU-2_UZjrlQlGMkTc,SUPABASE_URL=https://szcgnccuazmzxbudtbyw.supabase.co,SUPABASE_SERVICE_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InN6Y2duY2N1YXptenhidWR0Ynl3Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3OTEwMjQyNywiZXhwIjoyMDk0Njc4NDI3fQ.wYe7i3qf733Je81TO-psX66iH7qSMJSpLIMj2PacRvQ" `
+  --set-env-vars $envString `
   --project $ProjectId
 
 if (-not $?) {
@@ -45,8 +62,4 @@ if (-not $?) {
 
 Write-Host ""
 Write-Host "==> Deployment complete!" -ForegroundColor Green
-Write-Host ""
-Write-Host "NEXT STEP: Copy the Cloud Run URL printed above, then add it to your .env.local:"
-Write-Host "  SUPPORT_AGENT_URL=https://databyt-support-agent-xxxx-uc.a.run.app"
-Write-Host ""
-Write-Host "Then redeploy your Next.js app to Vercel/Cloud Run."
+Write-Host "NEXT STEP: Add SUPPORT_AGENT_URL to Vercel environment variables."
