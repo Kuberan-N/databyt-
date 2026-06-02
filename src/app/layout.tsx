@@ -19,18 +19,18 @@ export const metadata: Metadata = {
     "mid-market AR",
   ],
   openGraph: {
-    title: "DataByt — AI AR Collections That Actually Close the Loop",
+    title: "DataByt — Get paid 30 days faster, automatically",
     description:
-      "Import → Score → Email → Pay → Match → Dispute → Analyse. Live in 48 hours. 10× cheaper than HighRadius.",
+      "AI chases your unpaid invoices, sends reminders, manages disputes, and shows live DSO + CEI. Connected to your accounting system in 48 hours.",
     url: "https://databyt.in",
     siteName: "DataByt",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "DataByt — AI-Powered AR Collections",
+    title: "DataByt — Get paid 30 days faster, automatically",
     description:
-      "Reduce DSO by 30%. Live in 48 hours. One flat plan, everything included.",
+      "AI collections that cut DSO without hiring. Live in 48 hours. Works with QuickBooks, Xero, NetSuite, Sage.",
   },
   robots: { index: true, follow: true },
 };
