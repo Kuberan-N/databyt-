@@ -1,14 +1,20 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
-import { Send, Bot, Sparkles, Minus, X, AlertTriangle, Lightbulb, ChevronUp } from "lucide-react";
+import { useState, useRef, useEffect, useCallback } from "react";
+import { Send, Bot, Sparkles, Minus, X, AlertTriangle, Lightbulb, ChevronUp, Copy, Check, ThumbsUp, ThumbsDown } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useAuth } from "@/components/AuthProvider";
+import { supabase } from "@/lib/supabase";
 
 type ChatState = "closed" | "open" | "minimized";
 type Drawer = "none" | "escalate" | "feature";
+type Feedback = "up" | "down" | null;
 
-interface Message { role: "user" | "agent"; text: string; }
+interface Message {
+  role: "user" | "agent";
+  text: string;
+  feedback?: Feedback;
+}
 
 const WELCOME: Message = {
   role: "agent",
@@ -28,13 +34,15 @@ const QUICK_CHIPS = [
 
 const ESCALATE_REASONS = ["Billing issue", "Wrong data shown", "Technical bug", "Account access problem", "Other"];
 
-// ── Markdown renderer ─────────────────────────────────────────────────────────
+const CHAT_KEY = "databyt_chat_v2";
+
+// ── Markdown renderer ──────────────────────────────────────────────────────────
 function renderInline(text: string): React.ReactNode[] {
   const parts = text.split(/(\*\*[^*]+\*\*|\*[^*]+\*|`[^`]+`)/g);
   return parts.map((part, i) => {
     if (part.startsWith("**") && part.endsWith("**"))
       return <strong key={i} className="font-semibold text-[#0F172A]">{part.slice(2, -2)}</strong>;
-    if (part.startsWith("*") && part.endsWith("*"))
+    if (part.startsWith("*") && part.endsWith("*") && part.length > 2)
       return <em key={i}>{part.slice(1, -1)}</em>;
     if (part.startsWith("`") && part.endsWith("`"))
       return <code key={i} className="bg-black/8 rounded px-1 font-mono text-[11px]">{part.slice(1, -1)}</code>;
@@ -48,28 +56,24 @@ function AgentMessage({ text }: { text: string }) {
     <div className="space-y-2">
       {blocks.map((block, bi) => {
         const lines = block.split("\n").filter(l => l.trim());
-        const isList = lines.length > 1 && lines.every(l => /^[\*\-•]\s/.test(l.trim()) || !l.trim());
+        if (!lines.length) return null;
+        const isList = lines.length > 0 && lines.every(l => /^[\*\-•]\s/.test(l.trim()));
         const isHeading = lines.length === 1 && /^#{1,3}\s/.test(lines[0]);
-
-        if (isHeading) {
-          return (
-            <p key={bi} className="font-semibold text-[#0F172A] text-[11px] uppercase tracking-wide">
-              {renderInline(lines[0].replace(/^#{1,3}\s/, ""))}
-            </p>
-          );
-        }
-        if (isList) {
-          return (
-            <ul key={bi} className="space-y-1.5 pl-0.5">
-              {lines.map((line, li) => (
-                <li key={li} className="flex gap-2 leading-snug">
-                  <span className="text-[#4F46E5] mt-0.5 shrink-0">•</span>
-                  <span>{renderInline(line.replace(/^[\*\-•]\s+/, ""))}</span>
-                </li>
-              ))}
-            </ul>
-          );
-        }
+        if (isHeading) return (
+          <p key={bi} className="font-semibold text-[#0F172A] text-[11px] uppercase tracking-wide mt-1">
+            {renderInline(lines[0].replace(/^#{1,3}\s/, ""))}
+          </p>
+        );
+        if (isList) return (
+          <ul key={bi} className="space-y-1.5">
+            {lines.map((line, li) => (
+              <li key={li} className="flex gap-2 leading-snug">
+                <span className="text-[#4F46E5] shrink-0 mt-0.5">•</span>
+                <span>{renderInline(line.replace(/^[\*\-•]\s+/, ""))}</span>
+              </li>
+            ))}
+          </ul>
+        );
         return (
           <p key={bi} className="leading-relaxed">
             {lines.map((line, li) => (
@@ -84,7 +88,10 @@ function AgentMessage({ text }: { text: string }) {
 
 function TypingIndicator() {
   return (
-    <div className="flex justify-start">
+    <div className="flex justify-start gap-2">
+      <div className="w-6 h-6 rounded-full bg-[#111] flex items-center justify-center shrink-0 mt-0.5">
+        <Bot className="w-3 h-3 text-white" />
+      </div>
       <div className="bg-[#F3F3F3] rounded-2xl rounded-bl-sm px-4 py-3 flex gap-1.5 items-center">
         {[0, 1, 2].map(i => (
           <motion.span key={i} className="w-2 h-2 rounded-full bg-[#111]/25 block"
@@ -98,13 +105,30 @@ function TypingIndicator() {
 
 export default function SupportChat() {
   const { user, organization, orgUser } = useAuth();
+
+  const [sessionId] = useState<string>(() => {
+    if (typeof window === "undefined") return `chat-${Date.now()}`;
+    try {
+      return JSON.parse(localStorage.getItem(CHAT_KEY) ?? "{}").sessionId ?? `chat-${Date.now()}`;
+    } catch { return `chat-${Date.now()}`; }
+  });
+
+  const [messages, setMessages] = useState<Message[]>(() => {
+    if (typeof window === "undefined") return [WELCOME];
+    try {
+      const saved = JSON.parse(localStorage.getItem(CHAT_KEY) ?? "{}");
+      return Array.isArray(saved.messages) && saved.messages.length > 1 ? saved.messages : [WELCOME];
+    } catch { return [WELCOME]; }
+  });
+
   const [state, setState] = useState<ChatState>("closed");
-  const [messages, setMessages] = useState<Message[]>([WELCOME]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
   const [drawer, setDrawer] = useState<Drawer>("none");
   const [featureText, setFeatureText] = useState("");
-  const [sessionId] = useState(() => `chat-${Date.now()}`);
+  const [alertBadge, setAlertBadge] = useState(false);
+  const [copiedIdx, setCopiedIdx] = useState<number | null>(null);
+
   const bottomRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const featureRef = useRef<HTMLTextAreaElement>(null);
@@ -112,16 +136,39 @@ export default function SupportChat() {
   const isOpen = state === "open";
   const isMinimized = state === "minimized";
 
+  // Persist to localStorage whenever messages change
+  useEffect(() => {
+    try {
+      localStorage.setItem(CHAT_KEY, JSON.stringify({ sessionId, messages: messages.slice(-60) }));
+    } catch {}
+  }, [messages, sessionId]);
+
+  // Check for critical AR alerts (90+ days overdue)
+  useEffect(() => {
+    if (!orgUser?.org_id) return;
+    (supabase as unknown as { from: (t: string) => { select: (c: string, o: object) => { eq: (...a: unknown[]) => { gt: (...a: unknown[]) => { limit: (n: number) => Promise<{ data: unknown[] | null }> } } } } })
+      .from("invoices")
+      .select("id", { count: "exact" })
+      .eq("org_id", orgUser.org_id)
+      .gt("days_overdue", 89)
+      .limit(1)
+      .then(({ data }) => { if (data && data.length > 0) setAlertBadge(true); })
+      .catch(() => {});
+  }, [orgUser?.org_id]);
+
   useEffect(() => {
     if (isOpen) bottomRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages, loading, isOpen]);
 
   useEffect(() => {
     if (isOpen) setTimeout(() => inputRef.current?.focus(), 150);
-    if (drawer === "feature") setTimeout(() => featureRef.current?.focus(), 100);
-  }, [isOpen, drawer]);
+  }, [isOpen]);
 
-  async function send(overrideText?: string) {
+  useEffect(() => {
+    if (drawer === "feature") setTimeout(() => featureRef.current?.focus(), 100);
+  }, [drawer]);
+
+  const send = useCallback(async (overrideText?: string) => {
     const text = (overrideText ?? input).trim();
     if (!text || loading) return;
     setInput("");
@@ -132,7 +179,12 @@ export default function SupportChat() {
       const res = await fetch("/api/support/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message: text, sessionId, userId: user?.id, orgId: orgUser?.org_id, orgName: organization?.name }),
+        body: JSON.stringify({
+          message: text, sessionId,
+          userId: user?.id,
+          orgId: orgUser?.org_id,
+          orgName: organization?.name,
+        }),
       });
       const data = await res.json();
       setMessages(prev => [...prev, { role: "agent", text: data.reply ?? "Sorry, something went wrong." }]);
@@ -141,6 +193,21 @@ export default function SupportChat() {
     } finally {
       setLoading(false);
     }
+  }, [input, loading, sessionId, user?.id, orgUser?.org_id, organization?.name]);
+
+  function copyMessage(text: string, idx: number) {
+    navigator.clipboard.writeText(text).then(() => {
+      setCopiedIdx(idx);
+      setTimeout(() => setCopiedIdx(null), 2000);
+    });
+  }
+
+  function setFeedback(idx: number, fb: Feedback) {
+    setMessages(prev => prev.map((m, i) => i === idx ? { ...m, feedback: m.feedback === fb ? null : fb } : m));
+  }
+
+  function toggleDrawer(d: Drawer) {
+    setDrawer(prev => prev === d ? "none" : d);
   }
 
   function escalate(reason: string) {
@@ -153,28 +220,32 @@ export default function SupportChat() {
     setFeatureText("");
   }
 
-  function toggleDrawer(d: Drawer) {
-    setDrawer(prev => prev === d ? "none" : d);
-  }
-
   if (!user) return null;
+
+  const unreadAgentCount = messages.filter(m => m.role === "agent").length - 1;
 
   return (
     <>
-      {/* FAB button */}
+      {/* FAB */}
       <motion.button
-        onClick={() => setState(s => s === "closed" ? "open" : s === "minimized" ? "open" : "minimized")}
+        onClick={() => setState(s => s === "open" ? "minimized" : "open")}
         whileHover={{ scale: 1.08 }} whileTap={{ scale: 0.94 }}
         className="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full bg-[#111111] text-white flex items-center justify-center shadow-2xl"
         aria-label="AI Assistant"
       >
         <AnimatePresence mode="wait" initial={false}>
-          <motion.div key={state}
+          <motion.div key={isOpen ? "minus" : "spark"}
             initial={{ rotate: -90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }}
             exit={{ rotate: 90, opacity: 0 }} transition={{ duration: 0.18 }}>
             {isOpen ? <Minus className="w-5 h-5" /> : <Sparkles className="w-5 h-5" />}
           </motion.div>
         </AnimatePresence>
+        {/* Alert badge */}
+        {alertBadge && !isOpen && (
+          <motion.span
+            className="absolute -top-0.5 -right-0.5 w-4 h-4 rounded-full bg-red-500 border-2 border-white"
+            animate={{ scale: [1, 1.2, 1] }} transition={{ duration: 1.5, repeat: Infinity }} />
+        )}
       </motion.button>
 
       {/* Minimized bar */}
@@ -197,12 +268,12 @@ export default function SupportChat() {
               </p>
             </div>
             <div className="flex items-center gap-2">
-              {messages.length > 1 && (
-                <span className="w-5 h-5 rounded-full bg-[#4F46E5] text-white text-[10px] font-bold flex items-center justify-center">
-                  {messages.filter(m => m.role === "agent").length}
+              {unreadAgentCount > 0 && (
+                <span className="w-5 h-5 rounded-full bg-[#4F46E5] text-white text-[10px] font-bold flex items-center justify-center shrink-0">
+                  {unreadAgentCount}
                 </span>
               )}
-              <ChevronUp className="w-4 h-4 text-white/50" />
+              <ChevronUp className="w-4 h-4 text-white/50 shrink-0" />
             </div>
           </motion.div>
         )}
@@ -234,13 +305,11 @@ export default function SupportChat() {
               </div>
               <div className="ml-auto flex items-center gap-1">
                 <button onClick={() => setState("minimized")}
-                  className="p-1.5 rounded-lg hover:bg-white/10 transition-colors text-white/60 hover:text-white"
-                  title="Minimize">
+                  className="p-1.5 rounded-lg hover:bg-white/10 transition-colors text-white/60 hover:text-white" title="Minimize">
                   <Minus className="w-3.5 h-3.5" />
                 </button>
                 <button onClick={() => setState("closed")}
-                  className="p-1.5 rounded-lg hover:bg-white/10 transition-colors text-white/60 hover:text-white"
-                  title="Close">
+                  className="p-1.5 rounded-lg hover:bg-white/10 transition-colors text-white/60 hover:text-white" title="Close">
                   <X className="w-3.5 h-3.5" />
                 </button>
               </div>
@@ -251,26 +320,52 @@ export default function SupportChat() {
               {messages.map((m, i) => (
                 <motion.div key={i} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.2 }}
-                  className={`flex ${m.role === "user" ? "justify-end" : "justify-start gap-2"}`}>
-                  {m.role === "agent" && (
-                    <div className="w-6 h-6 rounded-full bg-[#111] flex items-center justify-center shrink-0 mt-0.5">
-                      <Bot className="w-3 h-3 text-white" />
+                  className={`flex flex-col ${m.role === "user" ? "items-end" : "items-start"}`}>
+
+                  <div className={`flex ${m.role === "user" ? "justify-end" : "justify-start gap-2"} w-full`}>
+                    {m.role === "agent" && (
+                      <div className="w-6 h-6 rounded-full bg-[#111] flex items-center justify-center shrink-0 mt-0.5">
+                        <Bot className="w-3 h-3 text-white" />
+                      </div>
+                    )}
+                    <div className={`group relative max-w-[82%] text-xs rounded-2xl px-4 py-3 ${
+                      m.role === "user"
+                        ? "bg-[#111111] text-white rounded-br-sm leading-relaxed"
+                        : "bg-[#F8F9FC] text-[#0F172A] rounded-bl-sm border border-[#E8ECF0]"
+                    }`}>
+                      {m.role === "agent" ? <AgentMessage text={m.text} /> : m.text}
+
+                      {/* Copy button — agent messages only */}
+                      {m.role === "agent" && (
+                        <button
+                          onClick={() => copyMessage(m.text, i)}
+                          className="absolute -top-2 -right-2 opacity-0 group-hover:opacity-100 transition-opacity w-6 h-6 rounded-full bg-white border border-[#E2E8F0] shadow-sm flex items-center justify-center text-[#666] hover:text-[#111]">
+                          {copiedIdx === i ? <Check className="w-3 h-3 text-emerald-500" /> : <Copy className="w-3 h-3" />}
+                        </button>
+                      )}
+                    </div>
+                  </div>
+
+                  {/* Thumbs feedback — agent messages only, not welcome */}
+                  {m.role === "agent" && i > 0 && (
+                    <div className="flex gap-1 mt-1 ml-8">
+                      <button onClick={() => setFeedback(i, "up")}
+                        className={`p-1 rounded transition-colors ${m.feedback === "up" ? "text-emerald-500" : "text-[#CCC] hover:text-[#666]"}`}>
+                        <ThumbsUp className="w-3 h-3" />
+                      </button>
+                      <button onClick={() => setFeedback(i, "down")}
+                        className={`p-1 rounded transition-colors ${m.feedback === "down" ? "text-red-400" : "text-[#CCC] hover:text-[#666]"}`}>
+                        <ThumbsDown className="w-3 h-3" />
+                      </button>
                     </div>
                   )}
-                  <div className={`max-w-[82%] text-xs rounded-2xl px-4 py-3 ${
-                    m.role === "user"
-                      ? "bg-[#111111] text-white rounded-br-sm leading-relaxed"
-                      : "bg-[#F8F9FC] text-[#0F172A] rounded-bl-sm border border-[#E8ECF0]"
-                  }`}>
-                    {m.role === "agent" ? <AgentMessage text={m.text} /> : m.text}
-                  </div>
                 </motion.div>
               ))}
               {loading && <TypingIndicator />}
               <div ref={bottomRef} />
             </div>
 
-            {/* Quick chips — shown only on first open */}
+            {/* Quick chips */}
             {messages.length === 1 && !loading && (
               <div className="px-4 pb-3 flex flex-wrap gap-1.5">
                 {QUICK_CHIPS.map(q => (
@@ -335,10 +430,8 @@ export default function SupportChat() {
                 </motion.button>
               </div>
 
-              {/* Bottom action icons */}
               <div className="px-4 py-2 flex items-center gap-2">
-                <button onClick={() => toggleDrawer("escalate")}
-                  title="Escalate an issue"
+                <button onClick={() => toggleDrawer("escalate")} title="Escalate an issue"
                   className={`flex items-center gap-1.5 text-[10px] px-2.5 py-1 rounded-full transition-colors ${
                     drawer === "escalate"
                       ? "bg-[#FEF3C7] text-[#92400E] border border-[#F59E0B]/40"
@@ -347,8 +440,7 @@ export default function SupportChat() {
                   <AlertTriangle className="w-3 h-3" />
                   Escalate issue
                 </button>
-                <button onClick={() => toggleDrawer("feature")}
-                  title="Request a feature"
+                <button onClick={() => toggleDrawer("feature")} title="Request a feature"
                   className={`flex items-center gap-1.5 text-[10px] px-2.5 py-1 rounded-full transition-colors ${
                     drawer === "feature"
                       ? "bg-[#EEF2FF] text-[#3730A3] border border-[#C7D2FE]"
@@ -357,7 +449,7 @@ export default function SupportChat() {
                   <Lightbulb className="w-3 h-3" />
                   Request feature
                 </button>
-                <span className="ml-auto text-[10px] text-[#999]">DataByt AI</span>
+                <span className="ml-auto text-[10px] text-[#CCC]">DataByt AI</span>
               </div>
             </div>
           </motion.div>

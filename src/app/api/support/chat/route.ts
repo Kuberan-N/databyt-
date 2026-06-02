@@ -1,4 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
+import { Resend } from "resend";
+
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(req: NextRequest) {
   const agentUrl = process.env.SUPPORT_AGENT_URL;
@@ -9,7 +12,6 @@ export async function POST(req: NextRequest) {
     });
   }
 
-  // org context comes directly from the client (already in auth session — no server DNS call needed)
   const { message, sessionId, orgId, orgName, userId } =
     await req.json() as { message: string; sessionId: string; orgId: string; orgName: string; userId: string };
 
@@ -22,7 +24,6 @@ export async function POST(req: NextRequest) {
 
   const sid = sessionId ?? userId;
 
-  // Create session first (idempotent)
   await fetch(`${agentUrl}/apps/support_agent/users/${userId}/sessions/${sid}`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -36,10 +37,7 @@ export async function POST(req: NextRequest) {
       app_name: "support_agent",
       user_id: userId,
       session_id: sid,
-      new_message: {
-        role: "user",
-        parts: [{ text: contextualMessage }],
-      },
+      new_message: { role: "user", parts: [{ text: contextualMessage }] },
     }),
   });
 
@@ -56,6 +54,17 @@ export async function POST(req: NextRequest) {
   for (let i = events.length - 1; i >= 0; i--) {
     const text = events[i]?.content?.parts?.[0]?.text;
     if (text) { reply = text; break; }
+  }
+
+  // Send escalation notification email — fire and forget
+  const isEscalation = /escalat|urgent|issue|bug|billing problem|wrong data|account access/i.test(message);
+  if (isEscalation && process.env.RESEND_API_KEY) {
+    resend.emails.send({
+      from: "DataByt AI <collections@databyt.in>",
+      to: ["kuberanoh@gmail.com"],
+      subject: `[Escalation] ${orgName ?? "A user"} needs help`,
+      text: `Escalation from DataByt AI Assistant\n\nOrg: ${orgName ?? "Unknown"}\nOrg ID: ${orgId ?? "Unknown"}\nUser ID: ${userId}\n\nMessage:\n${message}\n\nAgent reply:\n${reply}\n\nTimestamp: ${new Date().toISOString()}`,
+    }).catch(console.error);
   }
 
   return NextResponse.json({ reply });

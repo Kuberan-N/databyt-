@@ -172,6 +172,81 @@ def get_customer_invoices(customer_name: str, org_id: str) -> dict:
         return {"status": "error", "message": str(e)}
 
 
+def get_disputed_invoices(org_id: str) -> dict:
+    """Lists all invoices with active disputes for an org.
+
+    Args:
+        org_id: The organisation UUID.
+    """
+    try:
+        rows = (_supabase.table("disputes")
+                .select("id, reason, status, created_at, invoices(invoice_number, amount), customers(name)")
+                .eq("org_id", org_id).eq("status", "open").order("created_at", desc=True).execute()).data or []
+        result = [{
+            "invoice_number": r.get("invoices", {}).get("invoice_number"),
+            "amount": r.get("invoices", {}).get("amount"),
+            "customer": r.get("customers", {}).get("name"),
+            "reason": r.get("reason"),
+            "opened": r.get("created_at", "")[:10],
+        } for r in rows]
+        return {"status": "success", "disputes": result, "total": len(result)}
+    except Exception as e:
+        return {"status": "error", "message": str(e)}
+
+
+def get_upcoming_dunning(org_id: str) -> dict:
+    """Shows which customers are scheduled to receive a dunning email in the next automated run.
+
+    Args:
+        org_id: The organisation UUID.
+    """
+    try:
+        from datetime import datetime, timedelta, timezone
+        cooldown_cutoff = (datetime.now(timezone.utc) - timedelta(days=3)).isoformat()
+
+        recently_emailed = {
+            r["customer_id"] for r in
+            (_supabase.table("communications")
+             .select("customer_id").eq("org_id", org_id)
+             .eq("type", "email").eq("direction", "outbound")
+             .gte("sent_at", cooldown_cutoff).execute()).data or []
+        }
+
+        opted_out = {
+            r["customer_id"] for r in
+            (_supabase.table("communications")
+             .select("customer_id").eq("org_id", org_id)
+             .eq("type", "note").eq("content", "UNSUBSCRIBED").execute()).data or []
+        }
+
+        invoices = (_supabase.table("invoices")
+                    .select("amount, days_overdue, customer_id, customers(name, email)")
+                    .eq("org_id", org_id).in_("status", ["overdue", "reminded"])
+                    .gt("days_overdue", 0).execute()).data or []
+
+        by_customer: dict = {}
+        for inv in invoices:
+            cid = inv.get("customer_id")
+            if not cid or cid in recently_emailed or cid in opted_out:
+                continue
+            c = inv.get("customers") or {}
+            if not c.get("email"):
+                continue
+            if cid not in by_customer:
+                by_customer[cid] = {"name": c.get("name"), "email": c.get("email"),
+                                     "invoice_count": 0, "total": 0, "max_days": 0}
+            by_customer[cid]["invoice_count"] += 1
+            by_customer[cid]["total"] += inv["amount"]
+            by_customer[cid]["max_days"] = max(by_customer[cid]["max_days"], inv.get("days_overdue", 0))
+
+        scheduled = sorted(by_customer.values(), key=lambda x: x["total"], reverse=True)
+        return {"status": "success", "scheduled_count": len(scheduled),
+                "customers": scheduled[:10],
+                "note": "These customers will receive a dunning email in the next Mon-Fri 8am run."}
+    except Exception as e:
+        return {"status": "error", "message": str(e)}
+
+
 # ── ACTION TOOLS ─────────────────────────────────────────────────────────────
 
 def send_dunning_email(customer_name: str, org_id: str, escalation_level: int) -> dict:
@@ -381,6 +456,8 @@ TOOL SELECTION:
 - "List all overdue customers / who owes me most?" → list_overdue_customers(org_id)
 - "Show all invoices for [Customer]" → get_customer_invoices(customer_name, org_id)
 - "When did we last email [Customer]?" → get_last_communication(customer_name, org_id)
+- "Show active disputes / what disputes are open?" → get_disputed_invoices(org_id)
+- "Who gets emailed next / upcoming dunning / scheduled emails?" → get_upcoming_dunning(org_id)
 - Need org_id from a name → get_org_id(org_name)
 
 RULES:
@@ -390,7 +467,8 @@ RULES:
 """,
     tools=[get_org_id, get_invoice_count, get_total_ar_outstanding,
            get_customer_balance, list_overdue_customers,
-           get_customer_invoices, get_last_communication],
+           get_customer_invoices, get_last_communication,
+           get_disputed_invoices, get_upcoming_dunning],
 )
 
 action_agent = Agent(
