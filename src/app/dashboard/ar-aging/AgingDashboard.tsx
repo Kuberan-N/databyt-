@@ -50,6 +50,8 @@ export default function AgingDashboard({ readOnly = false }: { readOnly?: boolea
   const [copiedId, setCopied]           = useState<string | null>(null);
   const [emailTarget, setEmailTarget]   = useState<InvoiceRow | null>(null);
   const [payTemplate, setPayTemplate]   = useState<string | null>(null);
+  const [markingPaid, setMarkingPaid]   = useState<Set<string>>(new Set());
+  const [markedPaid, setMarkedPaid]     = useState<Set<string>>(new Set());
   const PER_PAGE = 20;
 
   const load = useCallback(async () => {
@@ -83,21 +85,45 @@ export default function AgingDashboard({ readOnly = false }: { readOnly?: boolea
   }
 
   async function markPaid(invoiceId: string) {
-    await db.from("invoices").update({
-      status: "paid",
-      payment_received_date: new Date().toISOString().split("T")[0],
-    }).eq("id", invoiceId);
-    const inv = invoices.find(i => i.id === invoiceId);
-    if (inv && organization) {
-      await db.from("payments").insert({
-        org_id: organization.id,
-        invoice_id: invoiceId,
-        amount: inv.amount,
-        payment_date: new Date().toISOString().split("T")[0],
-        method: "manual",
-      });
+    // Immediate visual feedback — show loading state
+    setMarkingPaid(prev => new Set(prev).add(invoiceId));
+
+    // Optimistic update — row disappears from overdue list instantly
+    setInvoices(prev => prev.map(i =>
+      i.id === invoiceId ? { ...i, status: "paid", days_overdue: 0 } : i
+    ));
+
+    try {
+      await db.from("invoices").update({
+        status: "paid",
+        payment_received_date: new Date().toISOString().split("T")[0],
+      }).eq("id", invoiceId);
+
+      const inv = invoices.find(i => i.id === invoiceId);
+      if (inv && organization) {
+        await db.from("payments").insert({
+          org_id: organization.id,
+          invoice_id: invoiceId,
+          amount: inv.amount,
+          payment_date: new Date().toISOString().split("T")[0],
+          method: "manual",
+        });
+      }
+
+      // Show success state briefly before hiding the row
+      setMarkedPaid(prev => new Set(prev).add(invoiceId));
+      setTimeout(() => {
+        setMarkedPaid(prev => { const n = new Set(prev); n.delete(invoiceId); return n; });
+        load();
+      }, 1200);
+    } catch {
+      // Revert on error
+      setInvoices(prev => prev.map(i =>
+        i.id === invoiceId ? { ...i, status: "overdue" } : i
+      ));
+    } finally {
+      setMarkingPaid(prev => { const n = new Set(prev); n.delete(invoiceId); return n; });
     }
-    load();
   }
 
   const filtered = invoices.filter(i =>
@@ -303,35 +329,55 @@ export default function AgingDashboard({ readOnly = false }: { readOnly?: boolea
                     <span className={`px-2 py-0.5 rounded-full text-xs font-medium capitalize ${STATUS_COLORS[inv.status] ?? ""}`}>{inv.status}</span>
                   </td>
                   {!readOnly && (
-                    <td className="px-4 py-3">
-                      <div className="flex items-center gap-2 flex-wrap">
-                        {inv.status !== "paid" && (
-                          <>
-                            <button
-                              onClick={() => setEmailTarget(inv)}
-                              className="flex items-center gap-1 text-xs text-[#000000] font-semibold bg-[#F3F3F3] px-2 py-1 rounded-lg hover:bg-[#E5E5E5] transition-colors"
-                            >
-                              <Send className="w-3 h-3" />Email
-                            </button>
+                    <td className="px-4 py-3 min-w-[200px]">
+                      {inv.status === "paid" ? (
+                        <span className="flex items-center gap-1 text-xs text-[#16A34A] font-medium">
+                          <Check className="w-3.5 h-3.5" /> Paid
+                        </span>
+                      ) : markedPaid.has(inv.id) ? (
+                        <span className="flex items-center gap-1.5 text-xs text-[#16A34A] font-semibold animate-pulse">
+                          <Check className="w-3.5 h-3.5" /> Marked as paid!
+                        </span>
+                      ) : (
+                        <div className="flex items-center gap-2">
+                          {/* Email */}
+                          <button
+                            onClick={() => setEmailTarget(inv)}
+                            className="flex items-center gap-1 text-xs text-[#0F172A] font-medium bg-[#F1F5F9] px-2.5 py-1.5 rounded-lg hover:bg-[#E2E8F0] transition-colors whitespace-nowrap"
+                          >
+                            <Send className="w-3 h-3" /> Email
+                          </button>
+
+                          {/* Pay link */}
+                          {payTemplate ? (
                             <button
                               onClick={() => copyPayLink(inv)}
-                              title={payTemplate ? "Copy payment link" : "No payment link configured — set one in Settings"}
-                              disabled={!payTemplate}
-                              className="flex items-center gap-1 text-xs text-[#222222] hover:text-[#000000] font-medium transition-colors"
+                              className="flex items-center gap-1 text-xs font-medium px-2.5 py-1.5 rounded-lg transition-colors whitespace-nowrap bg-[#EEF2FF] text-[#4338CA] hover:bg-[#4F46E5] hover:text-white"
                             >
                               {copiedId === inv.id
-                                ? <><Check className="w-3 h-3 text-[#16A34A]" /><span className="text-[#16A34A]">Copied</span></>
+                                ? <><Check className="w-3 h-3" />Copied!</>
                                 : <><Link2 className="w-3 h-3" />Pay link</>}
                             </button>
-                            <button
-                              onClick={() => markPaid(inv.id)}
-                              className="flex items-center gap-1 text-xs font-semibold bg-[#F0FDF4] text-[#16A34A] border border-[#16A34A]/25 px-2.5 py-1 rounded-lg hover:bg-[#16A34A] hover:text-white transition-all"
-                            >
-                              <Check className="w-3 h-3" />Mark Paid
-                            </button>
-                          </>
-                        )}
-                      </div>
+                          ) : (
+                            <a href="/dashboard/settings"
+                              title="Set up a payment link in Settings → Payment Collection"
+                              className="flex items-center gap-1 text-xs font-medium text-[#6366F1] hover:underline whitespace-nowrap">
+                              <Link2 className="w-3 h-3" />Set up pay link
+                            </a>
+                          )}
+
+                          {/* Mark Paid */}
+                          <button
+                            onClick={() => markPaid(inv.id)}
+                            disabled={markingPaid.has(inv.id)}
+                            className="flex items-center gap-1 text-xs font-semibold px-2.5 py-1.5 rounded-lg border transition-all whitespace-nowrap bg-[#F0FDF4] text-[#16A34A] border-[#16A34A]/30 hover:bg-[#16A34A] hover:text-white hover:border-[#16A34A] disabled:opacity-60"
+                          >
+                            {markingPaid.has(inv.id)
+                              ? <><div className="w-3 h-3 border border-current border-t-transparent rounded-full animate-spin" />Saving…</>
+                              : <><Check className="w-3 h-3" />Mark Paid</>}
+                          </button>
+                        </div>
+                      )}
                     </td>
                   )}
                 </tr>
