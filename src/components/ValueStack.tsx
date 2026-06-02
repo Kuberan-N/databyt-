@@ -15,6 +15,7 @@ const stackItemsINTL = [
   { item: "Done-for-you deployment & onboarding", value: "$5,000" },
   { item: "Board-ready PDF reporting suite", value: "$3,600/yr" },
   { item: "Priority support (12 months)", value: "$2,400/yr" },
+  { item: "Built-in AI Assistant (ask questions + take actions)", value: "$4,800/yr" },
 ];
 
 const stackItemsIN = [
@@ -26,6 +27,7 @@ const stackItemsIN = [
   { item: "Done-for-you deployment & onboarding", value: "₹4L" },
   { item: "Board-ready PDF reporting suite", value: "₹3L/yr" },
   { item: "Priority support (12 months)", value: "₹2L/yr" },
+  { item: "Built-in AI Assistant (ask questions + take actions)", value: "₹4L/yr" },
 ];
 
 const guarantees = [

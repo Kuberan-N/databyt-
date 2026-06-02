@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowRight, Database, Brain, Mail, CreditCard, AlertTriangle, BarChart2 } from "lucide-react";
+import { ArrowRight, Database, Brain, Mail, CreditCard, AlertTriangle, BarChart2, MessageSquare } from "lucide-react";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
@@ -47,6 +47,13 @@ const steps = [
     title: "CFO sees real performance",
     desc:  "CEI gauge, email open/click rates, payment velocity, 6-month collection trend, and DSO tracking — all live. One-click PDF for the board.",
     tag:   "Live analytics",
+  },
+  {
+    num:   "07",
+    icon:  MessageSquare,
+    title: "Built-in AI Assistant — ask anything, do anything",
+    desc:  "Ask \"who owes me most?\" or \"send a reminder to Acme Corp\" — the AI Assistant reads your live data and takes real actions. Available 24/7 inside your dashboard.",
+    tag:   "AI-powered",
   },
 ];
 
