@@ -248,7 +248,7 @@ export default function DashboardShell({ children }: { children: ReactNode }) {
               ? "Your 30-day free trial has ended. Contact us to continue using DataByt."
               : `Free trial: ${trialDaysLeft} day${trialDaysLeft !== 1 ? "s" : ""} remaining. No credit card needed yet.`}
             {trialDaysLeft <= 7 && (
-              <a href="mailto:kuberanoh@gmail.com?subject=DataByt%20Plan%20Upgrade"
+              <a href="mailto:kuberan811@gmail.com?subject=DataByt%20Plan%20Upgrade"
                 className="ml-auto underline font-semibold">
                 Talk to us
               </a>

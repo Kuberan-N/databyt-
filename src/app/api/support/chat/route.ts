@@ -61,7 +61,7 @@ export async function POST(req: NextRequest) {
   if (isEscalation && process.env.RESEND_API_KEY) {
     resend.emails.send({
       from: "DataByt AI <collections@databyt.in>",
-      to: ["kuberanoh@gmail.com"],
+      to: ["kuberan811@gmail.com"],
       subject: `[Escalation] ${orgName ?? "A user"} needs help`,
       text: `Escalation from DataByt AI Assistant\n\nOrg: ${orgName ?? "Unknown"}\nOrg ID: ${orgId ?? "Unknown"}\nUser ID: ${userId}\n\nMessage:\n${message}\n\nAgent reply:\n${reply}\n\nTimestamp: ${new Date().toISOString()}`,
     }).catch(console.error);

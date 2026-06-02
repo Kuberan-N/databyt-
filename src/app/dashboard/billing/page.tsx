@@ -91,7 +91,7 @@ export default function BillingPage() {
           After your trial, DataByt Pro is $2,000/month (billed monthly) or $20,000/year — 2 months free. Founding customer rate locked in for life.
         </p>
         <a
-          href="mailto:kuberanoh@gmail.com?subject=DataByt%20Plan%20Upgrade%20Request"
+          href="mailto:kuberan811@gmail.com?subject=DataByt%20Plan%20Upgrade%20Request"
           className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-[#000000] text-white text-[13.5px] font-semibold hover:bg-[#111111] transition-colors"
         >
           Talk to us about upgrading
