@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import {
   DollarSign, Clock, TrendingUp, ArrowRight,
   AlertTriangle, Users, RefreshCw, Sparkles, FileSpreadsheet,
+  Target, BarChart2, Mail, MessageSquare,
 } from "lucide-react";
 import { useAuth } from "@/components/AuthProvider";
 import { fetchARMetrics, fetchOverdueCustomers, ARMetrics, OverdueCustomer } from "@/lib/ar-data";
@@ -47,14 +48,14 @@ export default function DashboardOverview() {
     ? Math.round(((metrics.collectedThisMonth - metrics.collectedLastMonth) / metrics.collectedLastMonth) * 100)
     : 0;
 
-  const metricCards = [
+  // Research-ordered: strategic CFO metrics first, operational second
+  const row1 = [
     {
       label: "Total AR Outstanding",
       value: loading ? "—" : fmt(metrics?.totalOutstanding ?? 0),
       sub:   loading ? "Loading…" : `${metrics?.customerCount ?? 0} active customers`,
-      icon: DollarSign,
-      iconBg: "#F3F3F3",
-      iconColor: "#000000",
+      icon: DollarSign, iconBg: "#111111",
+      tooltip: "Total unpaid invoices across all customers",
     },
     {
       label: "Days Sales Outstanding",
@@ -62,27 +63,55 @@ export default function DashboardOverview() {
       sub:   loading ? "Loading…" : hasData
         ? (metrics?.dso && metrics.dso > 45 ? "⚠ Above 45-day target" : "✓ Within 45-day target")
         : "Import invoices to calculate",
-      icon: Clock,
-      iconBg: "#F3F3F3",
-      iconColor: "#000000",
+      icon: Clock, iconBg: metrics?.dso && metrics.dso > 45 ? "#DC2626" : "#111111",
+      tooltip: "Average days to collect payment. Industry target: under 45 days",
     },
+    {
+      label: "Collection Effectiveness",
+      value: loading ? "—" : hasData ? `${metrics?.cei ?? 0}%` : "—",
+      sub:   loading ? "Loading…" : (metrics?.cei ?? 0) >= 80 ? "✓ Healthy (target 80%+)" : "⚠ Below 80% target",
+      icon: Target, iconBg: (metrics?.cei ?? 0) >= 80 ? "#16A34A" : "#DC2626",
+      tooltip: "CEI: % of collectible AR actually collected. 80%+ is healthy",
+    },
+    {
+      label: "Overdue % of AR",
+      value: loading ? "—" : hasData ? `${metrics?.overduePercent ?? 0}%` : "—",
+      sub:   loading ? "Loading…" : fmt(metrics?.overdueAmount ?? 0) + " past due",
+      icon: BarChart2, iconBg: (metrics?.overduePercent ?? 0) > 50 ? "#DC2626" : "#F59E0B",
+      tooltip: "What percentage of your total AR is past the due date",
+    },
+  ];
+
+  const row2 = [
     {
       label: "Collected This Month",
       value: loading ? "—" : fmt(metrics?.collectedThisMonth ?? 0),
       sub:   loading ? "Loading…" : collectionTrend !== 0
         ? `${collectionTrend >= 0 ? "+" : ""}${collectionTrend}% vs last month`
         : "vs last month",
-      icon: TrendingUp,
-      iconBg: "#F0FDF4",
-      iconColor: "#16A34A",
+      icon: TrendingUp, iconBg: "#16A34A",
+      tooltip: "Total payments received this calendar month",
     },
     {
-      label: "Overdue Invoices",
-      value: loading ? "—" : `${metrics?.overdueCount ?? 0}`,
-      sub:   loading ? "Loading…" : fmt(metrics?.overdueAmount ?? 0) + " at risk",
-      icon: AlertTriangle,
-      iconBg: "#F3F3F3",
-      iconColor: "#DC2626",
+      label: "Avg Days Delinquent",
+      value: loading ? "—" : hasData ? `${metrics?.avgDaysDelinquent ?? 0}d` : "—",
+      sub:   loading ? "Loading…" : `across ${metrics?.overdueCount ?? 0} overdue invoices`,
+      icon: Clock, iconBg: "#111111",
+      tooltip: "Average number of days overdue for all outstanding invoices",
+    },
+    {
+      label: "Active Disputes",
+      value: loading ? "—" : `${metrics?.activeDisputes ?? 0}`,
+      sub:   loading ? "Loading…" : (metrics?.activeDisputes ?? 0) > 0 ? "Need resolution" : "All clear",
+      icon: AlertTriangle, iconBg: (metrics?.activeDisputes ?? 0) > 0 ? "#DC2626" : "#16A34A",
+      tooltip: "Open disputes pausing collections — need your attention",
+    },
+    {
+      label: "Emails Sent (Month)",
+      value: loading ? "—" : `${metrics?.emailsSentThisMonth ?? 0}`,
+      sub:   loading ? "Loading…" : `to ${metrics?.customerCount ?? 0} customers`,
+      icon: Mail, iconBg: "#4F46E5",
+      tooltip: "Total dunning emails sent this month by DataByt",
     },
   ];
 
@@ -139,25 +168,42 @@ export default function DashboardOverview() {
         </motion.div>
       )}
 
-      {/* Metric cards */}
-      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        {metricCards.map((m, i) => (
-          <motion.div
-            key={i}
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.05 * i }}
-            className="glass rounded-2xl p-5"
-          >
-            <div className="w-9 h-9 rounded-xl flex items-center justify-center mb-4"
-              style={{ background: m.iconBg }}>
-              <m.icon className="w-4 h-4" style={{ color: m.iconColor }} />
-            </div>
-            <p className="text-2xl font-bold text-[#0F172A]">{m.value}</p>
-            <p className="text-xs font-medium text-[#222222] mt-1">{m.label}</p>
-            <p className="text-xs text-[#333333] mt-0.5">{m.sub}</p>
-          </motion.div>
-        ))}
+      {/* Tier 1 — Strategic metrics (CFO view) */}
+      <div>
+        <p className="text-[11px] font-semibold text-[#999] uppercase tracking-widest mb-3">Financial Health</p>
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          {row1.map((m, i) => (
+            <motion.div key={i} initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.05 * i }} className="glass rounded-2xl p-5" title={m.tooltip}>
+              <div className="w-9 h-9 rounded-xl flex items-center justify-center mb-4"
+                style={{ background: m.iconBg }}>
+                <m.icon className="w-4 h-4 text-white" />
+              </div>
+              <p className="text-2xl font-bold text-[#0F172A]">{m.value}</p>
+              <p className="text-xs font-medium text-[#222222] mt-1">{m.label}</p>
+              <p className="text-xs text-[#333333] mt-0.5">{m.sub}</p>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+
+      {/* Tier 2 — Operational metrics (AR Manager view) */}
+      <div>
+        <p className="text-[11px] font-semibold text-[#999] uppercase tracking-widest mb-3">Operations This Month</p>
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          {row2.map((m, i) => (
+            <motion.div key={i} initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.05 * i + 0.2 }} className="glass rounded-2xl p-5" title={m.tooltip}>
+              <div className="w-9 h-9 rounded-xl flex items-center justify-center mb-4"
+                style={{ background: m.iconBg }}>
+                <m.icon className="w-4 h-4 text-white" />
+              </div>
+              <p className="text-2xl font-bold text-[#0F172A]">{m.value}</p>
+              <p className="text-xs font-medium text-[#222222] mt-1">{m.label}</p>
+              <p className="text-xs text-[#333333] mt-0.5">{m.sub}</p>
+            </motion.div>
+          ))}
+        </div>
       </div>
 
       <div className="grid lg:grid-cols-2 gap-5">

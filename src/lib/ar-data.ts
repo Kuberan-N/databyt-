@@ -19,6 +19,12 @@ export interface ARMetrics {
   overdueAmount: number;
   customerCount: number;
   agingBuckets: AgingBucket[];
+  // Extended metrics
+  cei: number;                // Collection Effectiveness Index 0–100
+  overduePercent: number;     // % of total AR that is overdue
+  avgDaysDelinquent: number;  // Average days overdue across all overdue invoices
+  activeDisputes: number;     // Open disputes requiring attention
+  emailsSentThisMonth: number;// Outbound emails sent this month
 }
 
 export interface OverdueCustomer {
@@ -51,6 +57,7 @@ export async function fetchARMetrics(orgId: string): Promise<ARMetrics> {
   const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1).toISOString().split("T")[0];
   const startOfLastMonth = new Date(now.getFullYear(), now.getMonth() - 1, 1).toISOString().split("T")[0];
   const endOfLastMonth = new Date(now.getFullYear(), now.getMonth(), 0).toISOString().split("T")[0];
+  const startOfMonthFull = new Date(now.getFullYear(), now.getMonth(), 1).toISOString();
 
   // All open/overdue invoices
   const { data: openInvoices } = await db
@@ -78,6 +85,20 @@ export async function fetchARMetrics(orgId: string): Promise<ARMetrics> {
     .from("customers")
     .select("id", { count: "exact", head: true })
     .eq("org_id", orgId);
+
+  const { count: activeDisputes } = await db
+    .from("disputes")
+    .select("id", { count: "exact", head: true })
+    .eq("org_id", orgId)
+    .eq("status", "open");
+
+  const { count: emailsSentThisMonth } = await db
+    .from("communications")
+    .select("id", { count: "exact", head: true })
+    .eq("org_id", orgId)
+    .eq("type", "email")
+    .eq("direction", "outbound")
+    .gte("sent_at", startOfMonthFull);
 
   const invoices: Array<{ amount: number; days_overdue: number; due_date: string; issue_date: string; status: string }> = openInvoices ?? [];
 
@@ -112,6 +133,19 @@ export async function fetchARMetrics(orgId: string): Promise<ARMetrics> {
     };
   });
 
+  const totalCollectable = totalOutstanding + collectedThisMonth;
+  const cei = totalCollectable > 0
+    ? Math.round((collectedThisMonth / totalCollectable) * 100)
+    : 0;
+
+  const overduePercent = totalOutstanding > 0
+    ? Math.round((overdueAmount / totalOutstanding) * 100)
+    : 0;
+
+  const avgDaysDelinquent = overdueInvoices.length > 0
+    ? Math.round(overdueInvoices.reduce((s: number, i: { days_overdue: number }) => s + i.days_overdue, 0) / overdueInvoices.length)
+    : 0;
+
   return {
     totalOutstanding,
     dso,
@@ -121,6 +155,11 @@ export async function fetchARMetrics(orgId: string): Promise<ARMetrics> {
     overdueAmount,
     customerCount: customerCount ?? 0,
     agingBuckets,
+    cei,
+    overduePercent,
+    avgDaysDelinquent,
+    activeDisputes: activeDisputes ?? 0,
+    emailsSentThisMonth: emailsSentThisMonth ?? 0,
   };
 }
 
