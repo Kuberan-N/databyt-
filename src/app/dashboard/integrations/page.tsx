@@ -2,7 +2,7 @@
 
 import { useEffect, useState, useCallback } from "react";
 import { motion } from "framer-motion";
-import { CheckCircle, AlertCircle, RefreshCw, Plug, Clock } from "lucide-react";
+import { CheckCircle, AlertCircle, RefreshCw, Plug, Clock, Sparkles, Database } from "lucide-react";
 import { useAuth } from "@/components/AuthProvider";
 import { useSearchParams } from "next/navigation";
 import { Suspense } from "react";
@@ -205,6 +205,72 @@ function IntegrationCard({
   );
 }
 
+function DemoDataCard({ orgId, onFlash }: { orgId: string; onFlash: (msg: string, ok: boolean) => void }) {
+  const [loading, setLoading] = useState(false);
+  const [done, setDone] = useState(false);
+
+  async function handleSeed() {
+    setLoading(true);
+    try {
+      const res = await fetch("/api/demo/seed", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ orgId }),
+      });
+      const json = await res.json();
+      if (!res.ok) throw new Error(json.error ?? "Failed to load sample data");
+      setDone(true);
+      onFlash(`Sample data loaded — ${json.invoices} invoices, ${json.customers} customers. Refresh your dashboard.`, true);
+    } catch (err) {
+      onFlash((err as Error).message, false);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}
+      className="bg-gradient-to-br from-[#F8F9FC] to-[#EEF2FF] rounded-2xl border border-[#E2E8F0] p-6"
+    >
+      <div className="flex items-start gap-4">
+        <div className="w-10 h-10 rounded-xl bg-[#4F46E5] flex items-center justify-center shrink-0">
+          <Database className="w-5 h-5 text-white" />
+        </div>
+        <div className="flex-1">
+          <div className="flex items-center gap-2">
+            <h3 className="text-sm font-semibold text-[#0F172A]">Load Sample Data</h3>
+            <span className="text-[10px] px-2 py-0.5 rounded-full bg-[#EEF2FF] text-[#4F46E5] font-semibold">DEMO</span>
+          </div>
+          <p className="text-xs text-[#555555] mt-1 leading-relaxed">
+            No accounting software? Load 15 realistic B2B customers and 70+ invoices across all aging buckets — so you can explore the full DataByt experience instantly.
+          </p>
+          <div className="mt-3 flex flex-wrap gap-2 text-[11px] text-[#666]">
+            {["15 companies", "70+ invoices", "INR + USD", "Disputes", "Comms history"].map(t => (
+              <span key={t} className="flex items-center gap-1">
+                <CheckCircle className="w-3 h-3 text-[#4F46E5]" />{t}
+              </span>
+            ))}
+          </div>
+        </div>
+        <div className="shrink-0">
+          {done ? (
+            <span className="flex items-center gap-1.5 text-xs font-medium text-[#16A34A]">
+              <CheckCircle className="w-4 h-4" /> Loaded
+            </span>
+          ) : (
+            <button onClick={handleSeed} disabled={loading}
+              className="flex items-center gap-1.5 px-4 py-2 text-xs font-semibold bg-[#4F46E5] text-white rounded-lg hover:bg-[#4338CA] transition-colors disabled:opacity-50">
+              <Sparkles className="w-3.5 h-3.5" />
+              {loading ? "Loading…" : "Load data"}
+            </button>
+          )}
+        </div>
+      </div>
+    </motion.div>
+  );
+}
+
 function IntegrationsContent() {
   const { organization } = useAuth();
   const params = useSearchParams();
@@ -273,6 +339,8 @@ function IntegrationsContent() {
           </motion.div>
         ))}
       </div>
+
+      <DemoDataCard orgId={organization.id} onFlash={(msg, ok) => setFlash({ msg, ok })} />
 
       <motion.div
         initial={{ opacity: 0, y: 12 }}

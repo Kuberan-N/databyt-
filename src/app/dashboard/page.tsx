@@ -4,7 +4,7 @@ import { useEffect, useState, useCallback } from "react";
 import { motion } from "framer-motion";
 import {
   DollarSign, Clock, TrendingUp, ArrowRight,
-  AlertTriangle, Users, RefreshCw,
+  AlertTriangle, Users, RefreshCw, Sparkles, FileSpreadsheet,
 } from "lucide-react";
 import { useAuth } from "@/components/AuthProvider";
 import { fetchARMetrics, fetchOverdueCustomers, ARMetrics, OverdueCustomer } from "@/lib/ar-data";
@@ -110,6 +110,34 @@ export default function DashboardOverview() {
           <RefreshCw className={`w-4 h-4 ${loading ? "animate-spin" : ""}`} />
         </button>
       </div>
+
+      {/* Empty state — shown only when org has no data */}
+      {!loading && !hasData && (
+        <motion.div
+          initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}
+          className="rounded-2xl border-2 border-dashed border-[#C7D2FE] bg-[#F0F4FF] p-8 text-center"
+        >
+          <div className="w-12 h-12 rounded-full bg-[#4F46E5] flex items-center justify-center mx-auto mb-4">
+            <Sparkles className="w-6 h-6 text-white" />
+          </div>
+          <h3 className="text-base font-bold text-[#1E1B4B] mb-2">You&apos;re all set up — let&apos;s get data in</h3>
+          <p className="text-sm text-[#4338CA] mb-6 max-w-md mx-auto">
+            Connect your accounting system, import a CSV, or load sample data to see your AR dashboard come alive.
+          </p>
+          <div className="flex flex-wrap gap-3 justify-center">
+            <a href="/dashboard/integrations"
+              className="flex items-center gap-2 px-5 py-2.5 bg-[#4F46E5] text-white text-sm font-semibold rounded-xl hover:bg-[#4338CA] transition-colors">
+              <Sparkles className="w-4 h-4" />
+              Load sample data
+            </a>
+            <a href="/dashboard/integrations"
+              className="flex items-center gap-2 px-5 py-2.5 bg-white border border-[#C7D2FE] text-[#4F46E5] text-sm font-semibold rounded-xl hover:bg-[#EEF2FF] transition-colors">
+              <FileSpreadsheet className="w-4 h-4" />
+              Import CSV
+            </a>
+          </div>
+        </motion.div>
+      )}
 
       {/* Metric cards */}
       <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
