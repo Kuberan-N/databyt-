@@ -76,6 +76,17 @@ export default function CollectionsPage() {
     const invoices = invoicesRes.data ?? [];
     const comms = commsRes.data ?? [];
 
+    // Track per-customer invoice state correctly
+    const custMeta = new Map<string, { hasOutstanding: boolean; hasDisputed: boolean }>();
+    for (const inv of invoices) {
+      const c = inv.customers;
+      if (!c) continue;
+      if (!custMeta.has(c.id)) custMeta.set(c.id, { hasOutstanding: false, hasDisputed: false });
+      const meta = custMeta.get(c.id)!;
+      if (inv.status === "disputed") meta.hasDisputed = true;
+      if (["open", "overdue", "reminded"].includes(inv.status)) meta.hasOutstanding = true;
+    }
+
     // Build pipeline: group invoices by customer, determine stage
     const custMap = new Map<string, PipelineCustomer>();
     for (const inv of invoices) {
@@ -89,17 +100,23 @@ export default function CollectionsPage() {
         });
       }
       const entry = custMap.get(c.id)!;
-      if (inv.status !== "paid") {
+      // Only count outstanding invoices toward totalOwed
+      if (["open", "overdue", "reminded"].includes(inv.status)) {
         entry.totalOwed += inv.amount;
         if (inv.days_overdue > 0) entry.overdueInvoices++;
         entry.maxDaysOverdue = Math.max(entry.maxDaysOverdue, inv.days_overdue);
       }
-      // Determine stage
-      if (inv.status === "disputed") entry.stage = "disputed";
-      else if (inv.status === "paid" && entry.stage !== "disputed") entry.stage = "paid";
     }
 
-    // Layer in email history to refine stage
+    // Set initial stage based on invoice state
+    for (const [cid, entry] of custMap) {
+      const meta = custMeta.get(cid);
+      if (meta?.hasDisputed) { entry.stage = "disputed"; continue; }
+      // Only "paid" if customer has NO outstanding invoices at all
+      if (!meta?.hasOutstanding) { entry.stage = "paid"; }
+    }
+
+    // Layer in email history to refine stage for non-disputed, non-paid customers
     const emailCountByCustomer = new Map<string, { count: number; lastSent: string }>();
     for (const comm of comms) {
       const cid = comm.customer_id;
@@ -175,8 +192,29 @@ export default function CollectionsPage() {
       <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}
         className="flex items-center gap-4 p-4 rounded-2xl border border-[#BBF7D0] bg-[#F0FDF4]">
         <div className="w-2.5 h-2.5 rounded-full bg-[#16A34A] animate-pulse shrink-0" />
-        <p className="text-sm font-semibold text-[#15803D]">AI Collections Agent Active</p>
-        <p className="text-xs text-[#16A34A]/70 ml-1">· Dunning emails sent Mon–Fri at 8am automatically</p>
+        <div className="flex-1">
+          <p className="text-sm font-semibold text-[#15803D]">AI Collections Agent Active</p>
+          <p className="text-xs text-[#16A34A]/70 mt-0.5">Dunning emails run automatically Mon–Fri at 8am. New customers appear as &quot;Not Contacted&quot; until the next scheduled run.</p>
+        </div>
+      </motion.div>
+
+      {/* Mark as Paid awareness — critical action notice */}
+      <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.05 }}
+        className="flex gap-4 p-4 rounded-2xl border border-[#FDE68A] bg-[#FFFBEB]">
+        <AlertTriangle className="w-5 h-5 text-[#D97706] shrink-0 mt-0.5" />
+        <div>
+          <p className="text-sm font-semibold text-[#92400E]">Action required when a customer pays</p>
+          <p className="text-xs text-[#92400E]/80 mt-1 leading-relaxed">
+            When a customer makes a payment, DataByt does not automatically know. You must go to{" "}
+            <a href="/dashboard/ar-aging" className="underline font-semibold">AR Aging</a>
+            {" "}→ find the invoice → click <strong>Mark Paid</strong>. This stops further dunning emails to that customer immediately.
+            If you don&apos;t do this, DataByt will keep chasing a customer who has already paid — which damages your relationship.
+          </p>
+          <a href="/dashboard/ar-aging"
+            className="inline-flex items-center gap-1.5 mt-2 text-xs font-semibold text-[#92400E] underline hover:text-[#78350F]">
+            Go to AR Aging → Mark invoices paid
+          </a>
+        </div>
       </motion.div>
 
       {/* Stats */}
