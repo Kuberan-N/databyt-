@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>DataByt — The AR Mastery Guide</title>
+<style>
+  @page { size: A4; margin: 0; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --indigo:#4F46E5; --indigo-dark:#3730A3; --violet:#7C3AED;
+    --ink:#0F172A; --slate:#475569; --muted:#64748B; --line:#E2E8F0;
+    --bg-soft:#F8F9FC; --bg-indigo:#EEF2FF;
+  }
+  body { font-family:-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif; color:var(--ink); line-height:1.6; font-size:13px; }
+  .page { width:210mm; min-height:297mm; padding:22mm 20mm; margin:0 auto; background:#fff; page-break-after:always; position:relative; }
+  .page:last-child { page-break-after:auto; }
+  .cover { background:linear-gradient(150deg,#130E25 0%,#2A1E5C 45%,#4F46E5 100%); color:#fff; display:flex; flex-direction:column; justify-content:center; padding:30mm; }
+  .cover .eyebrow { font-size:13px; letter-spacing:3px; color:#A492FF; font-weight:600; margin-bottom:18px; }
+  .cover h1 { font-size:46px; font-weight:800; line-height:1.08; letter-spacing:-0.02em; margin-bottom:20px; }
+  .cover h1 .grad { color:#A492FF; }
+  .cover .sub { font-size:17px; color:#CBD5E1; max-width:82%; margin-bottom:40px; }
+  .cover .meta { font-size:13px; color:#94A3B8; border-top:1px solid rgba(255,255,255,.2); padding-top:20px; }
+  .cover .brand { display:flex; align-items:center; gap:12px; margin-top:auto; font-size:20px; font-weight:700; }
+  .cover .brand .logo { width:40px; height:40px; border-radius:9px; background:#fff; color:#130E25; display:flex; align-items:center; justify-content:center; font-weight:800; }
+  h2.section { font-size:25px; font-weight:800; color:var(--ink); letter-spacing:-0.01em; margin-bottom:6px; padding-top:4px; }
+  .section-rule { height:4px; width:60px; background:linear-gradient(90deg,var(--indigo),var(--violet)); border-radius:2px; margin-bottom:20px; }
+  h3 { font-size:17px; font-weight:700; margin:22px 0 10px; color:var(--ink); }
+  h4 { font-size:14px; font-weight:700; margin:16px 0 6px; color:var(--indigo-dark); }
+  p { margin-bottom:11px; color:var(--slate); }
+  strong { color:var(--ink); font-weight:650; }
+  ul,ol { margin:0 0 12px 18px; } li { margin-bottom:6px; color:var(--slate); }
+  .lead { font-size:15px; color:var(--slate); margin-bottom:18px; }
+  .callout { background:var(--bg-indigo); border-left:4px solid var(--indigo); padding:14px 18px; border-radius:0 10px 10px 0; margin:16px 0; }
+  .callout p { margin:0; color:var(--indigo-dark); font-size:13px; }
+  .callout strong { color:var(--indigo-dark); }
+  .tip { background:#F0FDF4; border-left:4px solid #16A34A; padding:14px 18px; border-radius:0 10px 10px 0; margin:16px 0; }
+  .tip p { margin:0; color:#15803D; font-size:13px; } .tip strong { color:#15803D; }
+  .warn { background:#FFFBEB; border-left:4px solid #D97706; padding:14px 18px; border-radius:0 10px 10px 0; margin:16px 0; }
+  .warn p { margin:0; color:#92400E; font-size:13px; } .warn strong { color:#92400E; }
+  .formula { background:var(--ink); color:#fff; border-radius:12px; padding:16px 20px; margin:14px 0; font-family:'Segoe UI',sans-serif; }
+  .formula .lbl { color:#A5B4FC; font-size:11px; letter-spacing:1.5px; text-transform:uppercase; font-weight:700; margin-bottom:6px; }
+  .formula .eq { font-size:17px; font-weight:700; color:#fff; }
+  .formula .note { color:#CBD5E1; font-size:12px; margin-top:8px; }
+  table { width:100%; border-collapse:collapse; margin:14px 0 20px; font-size:12px; }
+  th { background:var(--ink); color:#fff; text-align:left; padding:9px 12px; font-weight:600; }
+  td { padding:9px 12px; border-bottom:1px solid var(--line); color:var(--slate); vertical-align:top; }
+  tr:nth-child(even) td { background:var(--bg-soft); }
+  .num { color:var(--indigo); font-weight:800; }
+  .toc-item { display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid var(--line); }
+  .toc-item .t { color:var(--ink); font-weight:600; } .toc-item .n { color:var(--muted); }
+  .step { display:flex; gap:14px; margin-bottom:14px; }
+  .step .dot { width:26px; height:26px; border-radius:50%; background:linear-gradient(135deg,var(--indigo),var(--violet)); color:#fff; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:12px; flex-shrink:0; }
+  .step .body { flex:1; } .step .body b { color:var(--ink); }
+  .footer-note { position:absolute; bottom:12mm; left:20mm; right:20mm; font-size:10px; color:var(--muted); border-top:1px solid var(--line); padding-top:8px; display:flex; justify-content:space-between; }
+  .gloss { margin-bottom:10px; } .gloss b { color:var(--ink); }
+</style>
+</head>
+<body>
+
+<!-- COVER -->
+<div class="page cover">
+  <div class="eyebrow">● THE AR MASTERY GUIDE</div>
+  <h1>Master<br>Accounts <span class="grad">Receivable</span></h1>
+  <p class="sub">Everything that makes a great AR operator — the metrics, the psychology, the dunning strategy, and the playbook to cut DSO. Read this once and you'll understand AR better than most CFOs.</p>
+  <div class="meta">From the team at DataByt · The discipline behind the software · databyt.in</div>
+  <div class="brand"><span class="logo">D</span> DataByt</div>
+</div>
+
+<!-- TOC -->
+<div class="page">
+  <h2 class="section">What You'll Master</h2>
+  <div class="section-rule"></div>
+  <div class="toc-item"><span class="t">1 · Why AR Is the Hidden Killer</span><span class="n">Cash vs profit</span></div>
+  <div class="toc-item"><span class="t">2 · The AR Lifecycle</span><span class="n">Order → cash</span></div>
+  <div class="toc-item"><span class="t">3 · The 7 Metrics That Matter</span><span class="n">Formulas + benchmarks</span></div>
+  <div class="toc-item"><span class="t">4 · Reading AR Aging Like a Pro</span><span class="n">The buckets</span></div>
+  <div class="toc-item"><span class="t">5 · The Dunning Strategy</span><span class="n">Tone, timing, escalation</span></div>
+  <div class="toc-item"><span class="t">6 · Customer Segmentation &amp; Risk</span><span class="n">Who to chase how</span></div>
+  <div class="toc-item"><span class="t">7 · Dispute Management</span><span class="n">Protect the relationship</span></div>
+  <div class="toc-item"><span class="t">8 · The Cost of Late Payments</span><span class="n">Working capital</span></div>
+  <div class="toc-item"><span class="t">9 · Industry Benchmarks</span><span class="n">Where you should be</span></div>
+  <div class="toc-item"><span class="t">10 · The DSO Reduction Playbook</span><span class="n">Step by step</span></div>
+  <div class="toc-item"><span class="t">11 · The 7 Deadly AR Mistakes</span><span class="n">What to avoid</span></div>
+  <div class="toc-item"><span class="t">12 · Glossary</span><span class="n">Every term defined</span></div>
+  <div class="footer-note"><span>DataByt — AR Mastery Guide</span><span>Contents</span></div>
+</div>
+
+<!-- 1 -->
+<div class="page">
+  <h2 class="section">1 · Why AR Is the Hidden Killer</h2>
+  <div class="section-rule"></div>
+  <p class="lead">82% of businesses that fail were profitable. They didn't run out of customers — they ran out of cash. Accounts Receivable is where that cash gets trapped.</p>
+  <h3>Profit is an opinion. Cash is a fact.</h3>
+  <p>When you deliver work and send an invoice, accounting calls it <strong>revenue</strong> — immediately. But you don't have the money yet. That gap, between "earned" and "collected," is <strong>Accounts Receivable</strong>: money owed to you but not yet in your bank.</p>
+  <p>A business can be highly profitable on paper and still:</p>
+  <ul>
+    <li>Miss payroll</li>
+    <li>Delay paying its own suppliers</li>
+    <li>Turn down growth because there's no cash to fund it</li>
+  </ul>
+  <p>…all because too much money is sitting in AR instead of the bank.</p>
+  <div class="callout"><p><strong>The core truth of AR:</strong> Revenue you can't collect isn't revenue. It's a promise. And promises don't make payroll.</p></div>
+  <h3>Why it's "hidden"</h3>
+  <p>Sales is celebrated. Collections is invisible — until cash runs short. Most companies obsess over winning the next deal and ignore collecting the deals they've already won. Mastering AR means collecting cash you've <em>already earned</em> — no new sales required. It's the highest-ROI lever in finance, and almost nobody pulls it deliberately.</p>
+  <div class="footer-note"><span>DataByt — AR Mastery Guide</span><span>1 · The Hidden Killer</span></div>
+</div>
+
+<!-- 2 -->
+<div class="page">
+  <h2 class="section">2 · The AR Lifecycle</h2>
+  <div class="section-rule"></div>
+  <p class="lead">Every invoice travels the same path. Master AR = control every stage of this journey.</p>
+  <div class="step"><div class="dot">1</div><div class="body"><b>Sale / delivery</b> — you deliver the product or service.</div></div>
+  <div class="step"><div class="dot">2</div><div class="body"><b>Invoice issued</b> — you bill the customer with payment terms (e.g. Net 30 = due in 30 days).</div></div>
+  <div class="step"><div class="dot">3</div><div class="body"><b>Current</b> — the invoice is outstanding but not yet due. Healthy.</div></div>
+  <div class="step"><div class="dot">4</div><div class="body"><b>Overdue</b> — the due date passes. The clock starts. Risk rises every day.</div></div>
+  <div class="step"><div class="dot">5</div><div class="body"><b>Collections (dunning)</b> — you chase: reminders escalate in tone over time.</div></div>
+  <div class="step"><div class="dot">6</div><div class="body"><b>Resolution</b> — either <b>Paid</b> (cash in bank), <b>Disputed</b> (paused while contested), or — worst case — <b>Bad Debt</b> (written off as uncollectable).</div></div>
+  <h3>Payment terms you must know</h3>
+  <table>
+    <tr><th>Term</th><th>Meaning</th></tr>
+    <tr><td><strong>Net 30 / 60 / 90</strong></td><td>Payment due 30 / 60 / 90 days after invoice date</td></tr>
+    <tr><td><strong>Due on receipt</strong></td><td>Payment expected immediately</td></tr>
+    <tr><td><strong>2/10 Net 30</strong></td><td>2% discount if paid within 10 days, otherwise full amount due in 30 (an "early-payment discount")</td></tr>
+  </table>
+  <div class="tip"><p><strong>Master move:</strong> Shorter terms = faster cash. If your standard is Net 60, test moving new contracts to Net 30. The single fastest structural DSO improvement.</p></div>
+  <div class="footer-note"><span>DataByt — AR Mastery Guide</span><span>2 · The AR Lifecycle</span></div>
+</div>
+
+<!-- 3 METRICS (part 1) -->
+<div class="page">
+  <h2 class="section">3 · The 7 Metrics That Matter</h2>
+  <div class="section-rule"></div>
+  <p class="lead">If you learn nothing else, learn these. Each one is a lens on a different part of your AR health.</p>
+
+  <h3>1. DSO — Days Sales Outstanding</h3>
+  <p>The single most important AR metric. The average number of days it takes to collect payment after a sale.</p>
+  <div class="formula"><div class="lbl">Formula</div><div class="eq">DSO = (Accounts Receivable ÷ Total Credit Sales) × Number of Days</div><div class="note">Example: $500K AR ÷ $2M quarterly sales × 90 days = 22.5 days DSO</div></div>
+  <p><strong>Benchmark:</strong> Under 45 days is healthy for most B2B. Lower is better. Rising DSO = cash collection is slowing.</p>
+
+  <h3>2. Best Possible DSO (BPDSO)</h3>
+  <p>What your DSO would be if every customer paid exactly on time. The gap between DSO and BPDSO is your real collections problem.</p>
+  <div class="formula"><div class="lbl">Formula</div><div class="eq">BPDSO = (Current AR ÷ Total Credit Sales) × Days</div><div class="note">If DSO is 45 but BPDSO is 30, you have 15 days of pure late-payment drag to fix.</div></div>
+
+  <h3>3. CEI — Collection Effectiveness Index</h3>
+  <p>Of the money you <em>could</em> have collected this period, how much you actually did. Better than DSO because it isn't distorted by sales swings — it's pure collections performance.</p>
+  <div class="formula"><div class="lbl">Formula</div><div class="eq">CEI = (Collected ÷ Collectible) × 100</div><div class="note">Collectible = beginning AR + credit sales − ending total AR. Target: 80%+.</div></div>
+  <div class="footer-note"><span>DataByt — AR Mastery Guide</span><span>3 · Metrics (1 of 2)</span></div>
+</div>
+
+<!-- 3 METRICS (part 2) -->
+<div class="page">
+  <h3>4. ADD — Average Days Delinquent</h3>
+  <p>Across only your <em>overdue</em> invoices, how late they are on average. Rising ADD means customers are learning they can pay you late without consequence.</p>
+  <div class="formula"><div class="lbl">Formula</div><div class="eq">ADD = DSO − Best Possible DSO</div><div class="note">A clean way to isolate the "lateness" portion of your DSO.</div></div>
+
+  <h3>5. Overdue % of AR</h3>
+  <p>What share of your total receivables is past due. The fastest single signal of trouble.</p>
+  <div class="formula"><div class="lbl">Formula</div><div class="eq">Overdue % = (Overdue AR ÷ Total AR) × 100</div><div class="note">Under 30% = manageable. Above 50% = your collections process is failing.</div></div>
+
+  <h3>6. AR Turnover Ratio</h3>
+  <p>How many times per year you collect your average receivables. Higher = you collect faster and more often.</p>
+  <div class="formula"><div class="lbl">Formula</div><div class="eq">AR Turnover = Net Credit Sales ÷ Average Accounts Receivable</div><div class="note">A turnover of 12 means you collect your full AR roughly once a month.</div></div>
+
+  <h3>7. Bad Debt Ratio</h3>
+  <p>The share of receivables you'll never collect. Pure lost profit.</p>
+  <div class="formula"><div class="lbl">Formula</div><div class="eq">Bad Debt Ratio = (Bad Debt ÷ Total Credit Sales) × 100</div><div class="note">Keep under 1.5%. Every point above is money you earned but never banked.</div></div>
+
+  <div class="callout"><p><strong>How a master reads them together:</strong> DSO tells you "how long." CEI tells you "how well." Overdue % tells you "how urgent." Watch the <em>trend</em> of all three. If DSO rises while CEI falls — act now, before it hits your cash.</p></div>
+  <div class="footer-note"><span>DataByt — AR Mastery Guide</span><span>3 · Metrics (2 of 2)</span></div>
+</div>
+
+<!-- 4 AGING -->
+<div class="page">
+  <h2 class="section">4 · Reading AR Aging Like a Pro</h2>
+  <div class="section-rule"></div>
+  <p class="lead">The AR aging report buckets every unpaid invoice by how overdue it is. It's the X-ray of your receivables.</p>
+  <table>
+    <tr><th>Bucket</th><th>What it signals</th><th>Action</th></tr>
+    <tr><td><strong>Current</strong></td><td>Healthy, not yet due</td><td>Monitor</td></tr>
+    <tr><td><strong>1–30 days</strong></td><td>Recently late — usually an oversight</td><td>Friendly reminder (L1)</td></tr>
+    <tr><td><strong>31–60 days</strong></td><td>A pattern is forming</td><td>Firm follow-up (L2)</td></tr>
+    <tr><td><strong>61–90 days</strong></td><td>High risk of non-payment</td><td>Final notice (L3), call them</td></tr>
+    <tr><td><strong>90+ days</strong></td><td>Likely heading to bad debt</td><td>Escalate / payment plan / collections</td></tr>
+  </table>
+  <h3>How a master reads it</h3>
+  <ul>
+    <li><strong>Watch the right side.</strong> Money drifting into 60+ buckets is your early warning. Healthy AR is weighted toward Current and 1–30.</li>
+    <li><strong>Concentration risk.</strong> If one customer is most of your 90+ bucket, that's a single point of failure. Diversify or de-risk them.</li>
+    <li><strong>The 90-day cliff.</strong> The probability of collecting drops sharply after 90 days. Roughly: ~90% collectable at 30 days, ~70% at 60, ~50% at 90, far less beyond. <strong>Speed of chasing is everything.</strong></li>
+  </ul>
+  <div class="tip"><p><strong>The #1 lesson of aging:</strong> An invoice chased on day 5 is worth far more than the same invoice chased on day 50. Time kills collectability. Automate early, consistent contact.</p></div>
+  <div class="footer-note"><span>DataByt — AR Mastery Guide</span><span>4 · Reading Aging</span></div>
+</div>
+
+<!-- 5 DUNNING -->
+<div class="page">
+  <h2 class="section">5 · The Dunning Strategy</h2>
+  <div class="section-rule"></div>
+  <p class="lead">"Dunning" = the process of methodically reminding customers to pay. Done well, it's a science of tone, timing, and consistency. Done badly, it either fails or burns relationships.</p>
+  <h3>The escalation ladder (L1 → L2 → L3)</h3>
+  <table>
+    <tr><th>Level</th><th>Timing</th><th>Tone</th><th>Goal</th></tr>
+    <tr><td><strong>L1</strong></td><td>1+ days late</td><td>Friendly, assume they forgot</td><td>Gentle nudge, preserve goodwill</td></tr>
+    <tr><td><strong>L2</strong></td><td>10+ days late</td><td>Professional, firm, clear deadline</td><td>Create urgency, reference prior reminders</td></tr>
+    <tr><td><strong>L3</strong></td><td>30+ days late</td><td>Serious final notice, offer a path</td><td>Resolve before bad debt; offer payment plan</td></tr>
+  </table>
+  <h3>The principles of effective dunning</h3>
+  <ul>
+    <li><strong>Escalate tone deliberately.</strong> Too soft and they ignore you; too aggressive and you lose the customer. The ladder solves this.</li>
+    <li><strong>Be consistent, not random.</strong> Late, sporadic reminders signal that <em>you</em> don't track your own AR — which teaches customers they can stretch you.</li>
+    <li><strong>Batch by customer, not by invoice.</strong> One email covering all of a customer's overdue invoices beats five separate nags.</li>
+    <li><strong>Always include a payment link.</strong> Every extra click is another day of delay. Make paying frictionless.</li>
+    <li><strong>Lead with the ask.</strong> Amount, invoice number, and deadline up top — not buried in paragraph three.</li>
+    <li><strong>Respect a cooldown.</strong> Don't email the same customer daily. ~3 days minimum between contacts keeps you firm, not harassing.</li>
+  </ul>
+  <div class="warn"><p><strong>The relationship trap:</strong> Collections isn't just a cash problem — it's a relationship problem. The goal is to get paid <em>and</em> keep the customer. Tone is how you do both.</p></div>
+  <div class="footer-note"><span>DataByt — AR Mastery Guide</span><span>5 · Dunning Strategy</span></div>
+</div>
+
+<!-- 6 SEGMENTATION -->
+<div class="page">
+  <h2 class="section">6 · Customer Segmentation &amp; Risk</h2>
+  <div class="section-rule"></div>
+  <p class="lead">Not every customer should be chased the same way. Master AR = treating customers by their value and their risk.</p>
+  <table>
+    <tr><th>Segment</th><th>Who they are</th><th>How to chase</th></tr>
+    <tr><td><strong>Strategic</strong></td><td>High-value, long-term, relationship matters</td><td>Extra courteous tone. Protect the relationship. A phone call may beat an email.</td></tr>
+    <tr><td><strong>Standard</strong></td><td>Reliable, average accounts</td><td>Normal escalation ladder.</td></tr>
+    <tr><td><strong>At-risk</strong></td><td>History of late or partial payment</td><td>Firmer, earlier, more frequent. Consider stricter terms or upfront deposits.</td></tr>
+  </table>
+  <h3>Prioritisation: chase by impact, not by date</h3>
+  <p>A master doesn't chase oldest-first or randomly. They chase by <strong>recovery impact</strong> — a blend of:</p>
+  <ul>
+    <li><strong>Amount</strong> — bigger invoices, bigger cash impact</li>
+    <li><strong>Days overdue</strong> — older = higher risk, lower collectability</li>
+    <li><strong>Customer risk</strong> — at-risk customers need earlier attention</li>
+  </ul>
+  <div class="callout"><p><strong>The 80/20 of AR:</strong> Usually ~20% of your overdue customers hold ~80% of your at-risk cash. Find those few, focus there first. This is the highest-leverage habit in collections.</p></div>
+  <h3>Credit control (preventing the problem upstream)</h3>
+  <p>The best AR teams reduce overdue invoices <em>before</em> they happen: run credit checks on new customers, set credit limits, require deposits from at-risk accounts, and make terms explicit on every invoice.</p>
+  <div class="footer-note"><span>DataByt — AR Mastery Guide</span><span>6 · Segmentation &amp; Risk</span></div>
+</div>
+
+<!-- 7 DISPUTES -->
+<div class="page">
+  <h2 class="section">7 · Dispute Management</h2>
+  <div class="section-rule"></div>
+  <p class="lead">A dispute is when a customer contests an invoice. Handled well, it protects cash <em>and</em> the relationship. Handled badly, it does neither.</p>
+  <h3>Common dispute reasons</h3>
+  <table>
+    <tr><th>Reason</th><th>What it means</th></tr>
+    <tr><td><strong>Incorrect amount</strong></td><td>They believe the invoice is wrong</td></tr>
+    <tr><td><strong>Goods / services not received</strong></td><td>Delivery is contested</td></tr>
+    <tr><td><strong>Duplicate invoice</strong></td><td>They were billed twice</td></tr>
+    <tr><td><strong>Already paid</strong></td><td>Payment was made but not matched</td></tr>
+    <tr><td><strong>Service not rendered</strong></td><td>Work quality or completion contested</td></tr>
+  </table>
+  <h3>The golden rule of disputes</h3>
+  <div class="warn"><p><strong>Pause collections the moment a dispute is raised.</strong> Continuing to send dunning emails to a customer with a legitimate complaint is the fastest way to lose them. Investigate first, chase later.</p></div>
+  <h3>The dispute workflow</h3>
+  <div class="step"><div class="dot">1</div><div class="body"><b>Log it</b> — record the dispute and its reason immediately.</div></div>
+  <div class="step"><div class="dot">2</div><div class="body"><b>Pause</b> — stop automated collections on that invoice.</div></div>
+  <div class="step"><div class="dot">3</div><div class="body"><b>Investigate</b> — verify the claim quickly. Speed signals respect.</div></div>
+  <div class="step"><div class="dot">4</div><div class="body"><b>Resolve or reject</b> — fix the invoice, or explain clearly why it stands. Then resume collections.</div></div>
+  <div class="tip"><p><strong>Master insight:</strong> Many "disputes" are really just confusion or a lost invoice. Fast, friendly handling often turns a dispute into a same-week payment.</p></div>
+  <div class="footer-note"><span>DataByt — AR Mastery Guide</span><span>7 · Dispute Management</span></div>
+</div>
+
+<!-- 8 COST -->
+<div class="page">
+  <h2 class="section">8 · The Cost of Late Payments</h2>
+  <div class="section-rule"></div>
+  <p class="lead">Late payments aren't just annoying — they have a real, calculable cost. Understanding it is what makes collections a priority instead of an afterthought.</p>
+  <h3>The hidden costs of every overdue invoice</h3>
+  <ul>
+    <li><strong>Opportunity cost</strong> — cash stuck in AR can't fund payroll, inventory, or growth.</li>
+    <li><strong>Cost of capital</strong> — if you borrow to cover the gap, you pay interest on money you're already owed.</li>
+    <li><strong>Bad debt risk</strong> — the longer it's overdue, the higher the chance you never collect.</li>
+    <li><strong>Labour cost</strong> — manual chasing burns ~10 hours/week of skilled finance time.</li>
+    <li><strong>Forecasting noise</strong> — unpredictable collections make cash forecasting unreliable.</li>
+  </ul>
+  <h3>Working capital — the big picture</h3>
+  <p>AR is one leg of the <strong>cash conversion cycle</strong> — the time between paying for inputs and collecting from customers. Every day you shave off DSO is a day of cash freed up to run and grow the business.</p>
+  <div class="formula"><div class="lbl">The value of cutting DSO</div><div class="eq">Cash freed ≈ (DSO reduction in days ÷ 365) × Annual Revenue</div><div class="note">Example: cutting DSO by 15 days on $10M revenue frees ~$411,000 in cash — without a single new sale.</div></div>
+  <div class="callout"><p><strong>This is the pitch a master CFO makes to the board:</strong> "I can free up $400K in cash this quarter by improving collections — no new revenue required." That's the power of AR mastery.</p></div>
+  <div class="footer-note"><span>DataByt — AR Mastery Guide</span><span>8 · Cost of Late Payments</span></div>
+</div>
+
+<!-- 9 BENCHMARKS -->
+<div class="page">
+  <h2 class="section">9 · Industry Benchmarks</h2>
+  <div class="section-rule"></div>
+  <p class="lead">Numbers only mean something in context. Here's roughly where healthy B2B companies sit. Use them as targets, not gospel — every industry differs.</p>
+  <table>
+    <tr><th>Metric</th><th>Great</th><th>Healthy</th><th>Warning</th></tr>
+    <tr><td><strong>DSO</strong></td><td>&lt; 30 days</td><td>30–45 days</td><td>&gt; 60 days</td></tr>
+    <tr><td><strong>CEI</strong></td><td>90%+</td><td>80–90%</td><td>&lt; 80%</td></tr>
+    <tr><td><strong>Overdue % of AR</strong></td><td>&lt; 15%</td><td>15–30%</td><td>&gt; 40%</td></tr>
+    <tr><td><strong>Bad Debt Ratio</strong></td><td>&lt; 0.5%</td><td>0.5–1.5%</td><td>&gt; 3%</td></tr>
+    <tr><td><strong>AR Turnover</strong></td><td>&gt; 12×/yr</td><td>8–12×/yr</td><td>&lt; 6×/yr</td></tr>
+  </table>
+  <h3>DSO varies by industry</h3>
+  <table>
+    <tr><th>Sector</th><th>Typical DSO</th></tr>
+    <tr><td>SaaS / software (annual billing)</td><td>30–50 days</td></tr>
+    <tr><td>Professional services / consulting</td><td>45–60 days</td></tr>
+    <tr><td>Manufacturing / distribution</td><td>45–65 days</td></tr>
+    <tr><td>Staffing / recruitment</td><td>40–55 days</td></tr>
+    <tr><td>Construction / engineering</td><td>60–90+ days</td></tr>
+  </table>
+  <div class="tip"><p><strong>How to use benchmarks:</strong> Compare yourself to your own past first (is the trend improving?), then to your industry. Beating your own last quarter matters more than any external number.</p></div>
+  <div class="footer-note"><span>DataByt — AR Mastery Guide</span><span>9 · Benchmarks</span></div>
+</div>
+
+<!-- 10 PLAYBOOK -->
+<div class="page">
+  <h2 class="section">10 · The DSO Reduction Playbook</h2>
+  <div class="section-rule"></div>
+  <p class="lead">The exact sequence a master uses to bring DSO down. Work it top to bottom.</p>
+  <div class="step"><div class="dot">1</div><div class="body"><b>Measure your baseline.</b> Calculate DSO, CEI, and Overdue %. You can't improve what you don't track.</div></div>
+  <div class="step"><div class="dot">2</div><div class="body"><b>Find the gap.</b> Compare DSO to Best Possible DSO. The difference is pure late-payment drag — your target.</div></div>
+  <div class="step"><div class="dot">3</div><div class="body"><b>Invoice faster and cleaner.</b> Send invoices immediately, with correct details and clear terms. Late or wrong invoices are the #1 self-inflicted DSO cause.</div></div>
+  <div class="step"><div class="dot">4</div><div class="body"><b>Make paying frictionless.</b> Add a one-click payment link to every invoice and reminder.</div></div>
+  <div class="step"><div class="dot">5</div><div class="body"><b>Automate consistent dunning.</b> L1/L2/L3 reminders, on schedule, every time — no human forgetting. This is the biggest single lever.</div></div>
+  <div class="step"><div class="dot">6</div><div class="body"><b>Prioritise by impact.</b> Chase the 20% of customers holding 80% of at-risk cash first.</div></div>
+  <div class="step"><div class="dot">7</div><div class="body"><b>Segment your tone.</b> Courteous for strategic accounts, firm for at-risk ones.</div></div>
+  <div class="step"><div class="dot">8</div><div class="body"><b>Resolve disputes fast.</b> A dispute sitting for weeks is cash frozen. Speed unlocks it.</div></div>
+  <div class="step"><div class="dot">9</div><div class="body"><b>Tighten terms upstream.</b> Move new contracts to shorter terms; require deposits from risky accounts.</div></div>
+  <div class="step"><div class="dot">10</div><div class="body"><b>Review the trend monthly.</b> Track DSO and CEI every month. Reward improvement. Iterate.</div></div>
+  <div class="callout"><p><strong>The compounding effect:</strong> Steps 3–5 alone (fast clean invoices + payment links + automated dunning) typically cut DSO by 20–30% within a quarter. That's exactly the engine DataByt automates for you.</p></div>
+  <div class="footer-note"><span>DataByt — AR Mastery Guide</span><span>10 · DSO Playbook</span></div>
+</div>
+
+<!-- 11 MISTAKES -->
+<div class="page">
+  <h2 class="section">11 · The 7 Deadly AR Mistakes</h2>
+  <div class="section-rule"></div>
+  <p class="lead">Avoid these and you're ahead of most finance teams.</p>
+  <div class="step"><div class="dot">1</div><div class="body"><b>Chasing inconsistently.</b> Random, late reminders teach customers they can stretch you. Consistency is everything.</div></div>
+  <div class="step"><div class="dot">2</div><div class="body"><b>Waiting too long to start.</b> The first reminder on day 30 instead of day 1 quietly doubles your DSO.</div></div>
+  <div class="step"><div class="dot">3</div><div class="body"><b>Same tone forever.</b> Either always-soft (ignored) or always-harsh (relationship damage). Escalate deliberately.</div></div>
+  <div class="step"><div class="dot">4</div><div class="body"><b>No payment link.</b> Making customers hunt for how to pay adds days of delay for zero reason.</div></div>
+  <div class="step"><div class="dot">5</div><div class="body"><b>Treating all customers the same.</b> Your strategic accounts and your at-risk accounts need opposite approaches.</div></div>
+  <div class="step"><div class="dot">6</div><div class="body"><b>Ignoring disputes.</b> A festering dispute is frozen cash <em>and</em> a dying relationship.</div></div>
+  <div class="step"><div class="dot">7</div><div class="body"><b>Tracking revenue, not collections.</b> Celebrating sales while ignoring whether you got paid is how profitable companies go broke.</div></div>
+  <div class="warn"><p><strong>The meta-mistake:</strong> Treating AR as admin instead of strategy. AR is where your earned cash lives or dies. Treat it with the seriousness you give to sales.</p></div>
+  <div class="footer-note"><span>DataByt — AR Mastery Guide</span><span>11 · Deadly Mistakes</span></div>
+</div>
+
+<!-- 12 GLOSSARY -->
+<div class="page">
+  <h2 class="section">12 · Glossary</h2>
+  <div class="section-rule"></div>
+  <div class="gloss"><b>Accounts Receivable (AR)</b> — Money owed to you by customers for delivered goods/services, not yet paid.</div>
+  <div class="gloss"><b>Aging report</b> — A breakdown of unpaid invoices grouped by how overdue they are.</div>
+  <div class="gloss"><b>Bad debt</b> — Receivables deemed uncollectable and written off.</div>
+  <div class="gloss"><b>Best Possible DSO (BPDSO)</b> — Your DSO if every customer paid exactly on time.</div>
+  <div class="gloss"><b>CEI (Collection Effectiveness Index)</b> — % of collectible cash actually collected in a period. Target 80%+.</div>
+  <div class="gloss"><b>Cash conversion cycle</b> — Time between paying suppliers and collecting from customers.</div>
+  <div class="gloss"><b>Credit terms / Net 30</b> — The agreed window a customer has to pay (e.g. 30 days).</div>
+  <div class="gloss"><b>DSO (Days Sales Outstanding)</b> — Average days to collect payment after a sale. The headline AR metric.</div>
+  <div class="gloss"><b>Dunning</b> — The systematic process of reminding customers to pay overdue invoices.</div>
+  <div class="gloss"><b>Escalation (L1/L2/L3)</b> — Increasing firmness of reminders as an invoice ages.</div>
+  <div class="gloss"><b>Overdue % of AR</b> — Share of total receivables that is past due.</div>
+  <div class="gloss"><b>Payment terms</b> — The conditions of payment stated on an invoice.</div>
+  <div class="gloss"><b>Working capital</b> — Cash available to run day-to-day operations; heavily affected by AR.</div>
+  <div class="gloss"><b>Write-off</b> — Formally recording a receivable as a loss.</div>
+
+  <div style="margin-top:30px; padding:20px; background:linear-gradient(135deg,#130E25,#4F46E5); border-radius:14px; color:#fff;">
+    <p style="color:#A5B4FC; font-size:12px; letter-spacing:2px; font-weight:600; margin-bottom:8px;">YOU'VE MASTERED THE SYSTEM</p>
+    <p style="color:#fff; font-size:16px; font-weight:700; margin:0 0 6px;">You now understand AR better than most CFOs. The discipline is simple to state, hard to do consistently — which is exactly why DataByt automates it.</p>
+    <p style="color:#CBD5E1; font-size:13px; margin:0;">Knowledge runs the strategy. DataByt runs the execution.</p>
+  </div>
+  <div class="footer-note"><span>DataByt — AR Mastery Guide</span><span>12 · Glossary</span></div>
+</div>
+
+</body>
+</html>

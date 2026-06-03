@@ -1,0 +1,1041 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>DataByt — 30-Day LinkedIn Founder Playbook</title>
+<style>
+  @page { size: A4; margin: 0; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --indigo: #4F46E5;
+    --indigo-dark: #3730A3;
+    --violet: #7C3AED;
+    --ink: #0F172A;
+    --slate: #475569;
+    --muted: #64748B;
+    --line: #E2E8F0;
+    --bg-soft: #F8F9FC;
+    --bg-indigo: #EEF2FF;
+  }
+  body {
+    font-family: -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    color: var(--ink);
+    line-height: 1.6;
+    font-size: 13px;
+  }
+  .page {
+    width: 210mm;
+    min-height: 297mm;
+    padding: 22mm 20mm;
+    margin: 0 auto;
+    background: #fff;
+    page-break-after: always;
+    position: relative;
+  }
+  .page:last-child { page-break-after: auto; }
+
+  /* COVER */
+  .cover {
+    background: linear-gradient(150deg, #130E25 0%, #2A1E5C 45%, #4F46E5 100%);
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 30mm;
+  }
+  .cover .eyebrow {
+    font-size: 13px; letter-spacing: 3px; color: #A492FF;
+    font-weight: 600; margin-bottom: 18px;
+  }
+  .cover h1 {
+    font-size: 46px; font-weight: 800; line-height: 1.08;
+    letter-spacing: -0.02em; margin-bottom: 20px;
+  }
+  .cover h1 .grad { color: #A492FF; }
+  .cover .sub { font-size: 17px; color: #CBD5E1; max-width: 80%; margin-bottom: 40px; }
+  .cover .meta { font-size: 13px; color: #94A3B8; border-top: 1px solid rgba(255,255,255,.2); padding-top: 20px; }
+  .cover .brand { display:flex; align-items:center; gap:12px; margin-top:auto; font-size:20px; font-weight:700; }
+  .cover .brand .logo { width:40px; height:40px; border-radius:9px; background:#fff; color:#130E25; display:flex; align-items:center; justify-content:center; font-weight:800; }
+
+  h2.section {
+    font-size: 26px; font-weight: 800; color: var(--ink);
+    letter-spacing: -0.01em; margin-bottom: 6px; padding-top: 4px;
+  }
+  .section-rule { height: 4px; width: 60px; background: linear-gradient(90deg, var(--indigo), var(--violet)); border-radius: 2px; margin-bottom: 22px; }
+  h3 { font-size: 17px; font-weight: 700; margin: 22px 0 10px; color: var(--ink); }
+  p { margin-bottom: 11px; color: var(--slate); }
+  strong { color: var(--ink); font-weight: 650; }
+  ul { margin: 0 0 12px 18px; }
+  li { margin-bottom: 6px; color: var(--slate); }
+
+  .lead { font-size: 15px; color: var(--slate); margin-bottom: 18px; }
+
+  .callout {
+    background: var(--bg-indigo); border-left: 4px solid var(--indigo);
+    padding: 14px 18px; border-radius: 0 10px 10px 0; margin: 16px 0;
+  }
+  .callout p { margin: 0; color: var(--indigo-dark); font-size: 13px; }
+  .callout strong { color: var(--indigo-dark); }
+
+  table { width: 100%; border-collapse: collapse; margin: 14px 0 20px; font-size: 12px; }
+  th { background: var(--ink); color: #fff; text-align: left; padding: 9px 12px; font-weight: 600; }
+  td { padding: 9px 12px; border-bottom: 1px solid var(--line); color: var(--slate); vertical-align: top; }
+  tr:nth-child(even) td { background: var(--bg-soft); }
+
+  /* POST CARD */
+  .post-block { margin-bottom: 30px; page-break-inside: avoid; }
+  .day-tag {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--ink); color: #fff; font-size: 12px; font-weight: 700;
+    padding: 6px 14px; border-radius: 999px; margin-bottom: 4px;
+  }
+  .day-tag .pillar { color: #A5B4FC; font-weight: 500; }
+  .post-title { font-size: 15px; font-weight: 700; color: var(--ink); margin: 10px 0 12px; }
+
+  .post-card {
+    background: #fff; border: 1px solid var(--line); border-radius: 14px;
+    padding: 20px 22px; box-shadow: 0 1px 3px rgba(0,0,0,.05), 0 6px 18px rgba(0,0,0,.04);
+    margin-bottom: 14px;
+  }
+  .post-card .label { font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted); font-weight: 700; margin-bottom: 10px; }
+  .post-text { white-space: pre-wrap; font-size: 13px; line-height: 1.65; color: var(--ink); font-family: 'Segoe UI', sans-serif; }
+
+  .meta-row { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0; }
+  .chip { font-size: 11px; padding: 4px 11px; border-radius: 999px; background: var(--bg-soft); border: 1px solid var(--line); color: var(--slate); }
+  .chip.tag { background: var(--bg-indigo); border-color: #C7D2FE; color: var(--indigo-dark); }
+
+  .breakdown {
+    background: linear-gradient(180deg, #FBFAFF 0%, #F5F3FF 100%);
+    border: 1px solid #E0E7FF; border-radius: 14px; padding: 18px 22px;
+  }
+  .breakdown .bd-title { font-size: 13px; font-weight: 800; color: var(--indigo-dark); margin-bottom: 12px; display:flex; align-items:center; gap:8px; }
+  .breakdown .bd-item { margin-bottom: 11px; }
+  .breakdown .bd-item:last-child { margin-bottom: 0; }
+  .breakdown .bd-k { font-size: 11px; font-weight: 700; color: var(--indigo); text-transform: uppercase; letter-spacing: .5px; display: block; margin-bottom: 2px; }
+  .breakdown .bd-v { font-size: 12.5px; color: var(--slate); }
+  .steal { background: #fff; border: 1px dashed var(--violet); border-radius: 10px; padding: 10px 14px; margin-top: 10px; }
+  .steal .bd-k { color: var(--violet); }
+
+  .num { color: var(--indigo); font-weight: 800; }
+  .week-divider {
+    background: var(--ink); color: #fff; padding: 14px 22px; border-radius: 12px;
+    font-size: 18px; font-weight: 800; margin: 8px 0 24px; letter-spacing: -0.01em;
+  }
+  .week-divider span { color: #A5B4FC; font-weight: 500; font-size: 13px; display:block; margin-top:2px; }
+  .footer-note { position: absolute; bottom: 12mm; left: 20mm; right: 20mm; font-size: 10px; color: var(--muted); border-top: 1px solid var(--line); padding-top: 8px; display:flex; justify-content:space-between; }
+</style>
+</head>
+<body>
+
+<!-- ===================== COVER ===================== -->
+<div class="page cover">
+  <div class="eyebrow">● LINKEDIN FOUNDER PLAYBOOK</div>
+  <h1>30 Days to Your First<br>50 <span class="grad">CFO Followers</span></h1>
+  <p class="sub">A done-for-you content engine for the founder of DataByt — every post written, every technique explained, so you learn to write your own.</p>
+  <div class="meta">
+    Built for: Kuberan N · Founder, DataByt<br>
+    Market: USA &amp; EU mid-market B2B CFOs<br>
+    Goal: 50 CFO followers by Day 31 · First pilot by Day 60
+  </div>
+  <div class="brand"><span class="logo">D</span> DataByt</div>
+</div>
+
+<!-- ===================== HOW TO USE ===================== -->
+<div class="page">
+  <h2 class="section">How to Use This Playbook</h2>
+  <div class="section-rule"></div>
+  <p class="lead">This isn't just 20 posts. It's a 30-day training program. Each post is followed by a <strong>breakdown</strong> that teaches you the hook technique, the psychology, and the structure — so by Day 30 you can write your own without help.</p>
+
+  <h3>Your daily 5 steps</h3>
+  <table>
+    <tr><th style="width:60px">#</th><th>Action</th><th>Why</th></tr>
+    <tr><td><span class="num">1</span></td><td>Post the day's content at 7:30–8:30am ET</td><td>When US CFOs check LinkedIn</td></tr>
+    <tr><td><span class="num">2</span></td><td>Reply to every comment within 90 min</td><td>Engagement velocity = reach</td></tr>
+    <tr><td><span class="num">3</span></td><td>Comment on 8 CFO/finance posts</td><td>Their audience becomes yours</td></tr>
+    <tr><td><span class="num">4</span></td><td>Send 10 CFO connection requests + 1-line note</td><td>This is what actually hits 50 followers</td></tr>
+    <tr><td><span class="num">5</span></td><td>Read the breakdown for tomorrow's post</td><td>Learn the technique before you post it</td></tr>
+  </table>
+
+  <div class="callout">
+    <p><strong>The #1 truth:</strong> Posts build credibility. The connect-and-comment routine builds the following. ~70% of your 50 CFOs will come from Step 3 &amp; 4 — not the posts. Run both every weekday.</p>
+  </div>
+
+  <h3>How to read each post's breakdown</h3>
+  <ul>
+    <li><strong>✍️ Hook Technique</strong> — the exact device used in line 1 and why it stops the scroll</li>
+    <li><strong>🧠 Why It Works</strong> — the psychology that makes a CFO engage</li>
+    <li><strong>📐 Structure</strong> — the skeleton, so you can refill it with new ideas</li>
+    <li><strong>💡 Steal This</strong> — the one transferable move to reuse in your own posts</li>
+  </ul>
+
+  <h3>The pillar mix (Month 1 = Authority Phase)</h3>
+  <table>
+    <tr><th>Pillar</th><th>Share</th><th>Its job</th></tr>
+    <tr><td>Pain points</td><td><span class="num">45%</span></td><td>Make CFOs feel seen → engage &amp; share</td></tr>
+    <tr><td>Education</td><td><span class="num">30%</span></td><td>Prove you know AR cold → carousels</td></tr>
+    <tr><td>Founder journey</td><td><span class="num">20%</span></td><td>Make them follow <em>you</em></td></tr>
+    <tr><td>Bold take / poll</td><td><span class="num">5%</span></td><td>Reach spikes</td></tr>
+  </table>
+
+  <div class="footer-note"><span>DataByt — LinkedIn Founder Playbook</span><span>How to Use</span></div>
+</div>
+
+<!-- ===================== CALENDAR ===================== -->
+<div class="page">
+  <h2 class="section">The 30-Day Calendar</h2>
+  <div class="section-rule"></div>
+  <p class="lead">5 posts per week, weekdays only. Quality over quantity — one strong post beats three rushed ones. Same weekly skeleton so you never face a blank page.</p>
+  <table>
+    <tr><th>Week</th><th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th></tr>
+    <tr><td><strong>1</strong></td><td>Manifesto</td><td>Carousel: 5 Metrics</td><td>Pain story</td><td>Pain: data</td><td>Poll</td></tr>
+    <tr><td><strong>2</strong></td><td>Pain: time</td><td>Carousel: DSO</td><td>Founder: BIP</td><td>Pain: relationships</td><td>Bold take</td></tr>
+    <tr><td><strong>3</strong></td><td>Pain: profitable-broke</td><td>Carousel: CEI</td><td>Founder: mistake</td><td>Pain: CFO's job</td><td>Poll</td></tr>
+    <tr><td><strong>4</strong></td><td>Pain: spreadsheets</td><td>Carousel: dunning</td><td>Founder: vision</td><td>Education: automate</td><td>Bold + CTA</td></tr>
+  </table>
+
+  <h3>The weekly rhythm explained</h3>
+  <ul>
+    <li><strong>Monday</strong> — open the week on a wound (pain). People are back at work feeling the problem.</li>
+    <li><strong>Tuesday</strong> — your education carousel. Highest save-rate day. Builds authority.</li>
+    <li><strong>Wednesday</strong> — founder journey. Mid-week humanizing. Makes them root for you.</li>
+    <li><strong>Thursday</strong> — pain again. Thursday is peak B2B reach on LinkedIn.</li>
+    <li><strong>Friday</strong> — poll or bold take. Engagement spike heading into the weekend.</li>
+  </ul>
+
+  <div class="callout">
+    <p><strong>Carousel rule:</strong> Only once a week, education only. They take longer to make and get bookmarked, not just liked. Don't try to do them daily — quality drops and you burn out.</p>
+  </div>
+
+  <div class="footer-note"><span>DataByt — LinkedIn Founder Playbook</span><span>Calendar</span></div>
+</div>
+
+<!-- ===================== WEEK 1 ===================== -->
+<div class="page">
+  <div class="week-divider">WEEK 1<span>Authority + Problem — establish that you know AR cold</span></div>
+
+  <!-- DAY 1 -->
+  <div class="post-block">
+    <div class="day-tag">DAY 1 · MON <span class="pillar">— Founder Manifesto</span></div>
+    <div class="post-title">📌 Your anchor post — pin this to your profile</div>
+    <div class="post-card">
+      <div class="label">The Post</div>
+      <div class="post-text">82% of businesses that fail were profitable.
+
+They didn't run out of customers.
+They ran out of cash — waiting on invoices that customers never paid on time.
+
+I've watched it happen. A company does everything right. Great product. Happy clients. And then one big client pays 90 days late, and suddenly payroll is at risk.
+
+That's not a business problem.
+That's a systems problem.
+
+So I'm building DataByt — AI that chases your overdue invoices automatically, so finance teams stop spending 10 hours a week sending reminders by hand.
+
+No collections agency. No new hires. Just your unpaid invoices, handled.
+
+I'm going to build this in public — the wins, the mistakes, what I learn from finance leaders along the way.
+
+If you run finance at a B2B company and late payments are quietly killing your cash flow — follow along. This is for you.</div>
+      <div class="meta-row">
+        <span class="chip">🎯 CFOs, founders, VP Finance</span>
+        <span class="chip tag">#CashFlow</span><span class="chip tag">#AccountsReceivable</span><span class="chip tag">#B2B</span><span class="chip tag">#FinanceLeadership</span><span class="chip tag">#StartupJourney</span>
+      </div>
+    </div>
+    <div class="breakdown">
+      <div class="bd-title">🎓 BREAKDOWN — learn from this one</div>
+      <div class="bd-item"><span class="bd-k">✍️ Hook Technique — Shocking Statistic</span><span class="bd-v">Line 1 is a counterintuitive number ("82% of failed businesses were profitable"). It breaks a belief — we assume failed = unprofitable. Broken assumptions force the brain to keep reading for resolution.</span></div>
+      <div class="bd-item"><span class="bd-k">🧠 Why It Works</span><span class="bd-v">It reframes a problem the reader already fears (failure) and blames a system, not them. CFOs feel relief + recognition. That emotion = the comment and the follow.</span></div>
+      <div class="bd-item"><span class="bd-k">📐 Structure</span><span class="bd-v">Stat → reframe → micro-story → "not X, it's Y" pivot → what you're building → CTA to follow. This is the classic manifesto skeleton.</span></div>
+      <div class="steal"><span class="bd-k">💡 Steal This</span><span class="bd-v">The "That's not a ___ problem. That's a ___ problem." line. It's a thought-reversal that makes any point feel profound. Reuse it across topics.</span></div>
+    </div>
+  </div>
+
+  <div class="footer-note"><span>DataByt — LinkedIn Founder Playbook</span><span>Week 1 · Day 1</span></div>
+</div>
+
+<!-- DAY 2 -->
+<div class="page">
+  <div class="post-block">
+    <div class="day-tag">DAY 2 · TUE <span class="pillar">— Education Carousel</span></div>
+    <div class="post-title">Carousel: "5 Numbers Every CFO Should Watch"</div>
+    <div class="post-card">
+      <div class="label">The Caption</div>
+      <div class="post-text">Most finance teams track revenue and call it a day.
+
+But revenue doesn't tell you if you'll actually get paid.
+
+These 5 numbers do. Swipe through 👉
+
+Which one does your team actually track? 👇</div>
+    </div>
+    <div class="post-card">
+      <div class="label">The 7 Slides (build in Canva, indigo brand)</div>
+      <div class="post-text">1 · 5 Numbers Every CFO Should Watch to Fix Cash Flow
+2 · DSO — Days Sales Outstanding. Avg days to collect. Healthy: under 45.
+3 · CEI — Collection Effectiveness Index. Of what you could collect, how much you did. Healthy: 80%+.
+4 · Overdue % of AR — What share is past due. Above 30%? Act now.
+5 · Avg Days Delinquent — How late your late invoices are. Rising = customers training you to wait.
+6 · Bad Debt Ratio — What you'll never collect. Keep under 1.5%.
+7 · Track these by hand → or let DataByt track all 5 live. databyt.in</div>
+      <div class="meta-row">
+        <span class="chip">🎯 CFOs, Controllers, FP&amp;A, AR managers</span>
+        <span class="chip tag">#DSO</span><span class="chip tag">#CFO</span><span class="chip tag">#FinanceMetrics</span><span class="chip tag">#AccountsReceivable</span><span class="chip tag">#CashFlowManagement</span>
+      </div>
+    </div>
+    <div class="breakdown">
+      <div class="bd-title">🎓 BREAKDOWN</div>
+      <div class="bd-item"><span class="bd-k">✍️ Hook Technique — Pattern Interrupt</span><span class="bd-v">"Most teams track revenue and call it a day" calls out a comfortable habit, then immediately undercuts it. Mild accusation → reader checks "is that me?"</span></div>
+      <div class="bd-item"><span class="bd-k">🧠 Why It Works</span><span class="bd-v">Carousels are saved, not just liked. A "5 things" list promises finite, useful value — high save rate. Saves &amp; shares are the strongest reach signals on LinkedIn.</span></div>
+      <div class="bd-item"><span class="bd-k">📐 Structure</span><span class="bd-v">Caption = hook + promise + question. Slides = title → one idea per slide → soft product slide last. Always end a carousel with a question in the caption to drive comments.</span></div>
+      <div class="steal"><span class="bd-k">💡 Steal This</span><span class="bd-v">The "X things every [role] should [verb]" format is the most reliable carousel template in existence. Swap the noun, keep the skeleton.</span></div>
+    </div>
+  </div>
+  <div class="footer-note"><span>DataByt — LinkedIn Founder Playbook</span><span>Week 1 · Day 2</span></div>
+</div>
+
+<!-- DAY 3 -->
+<div class="page">
+  <div class="post-block">
+    <div class="day-tag">DAY 3 · WED <span class="pillar">— Pain Story</span></div>
+    <div class="post-title">The cash-flow death story</div>
+    <div class="post-card">
+      <div class="label">The Post</div>
+      <div class="post-text">A founder I spoke with last month couldn't make payroll.
+
+He wasn't broke.
+$340,000 was sitting in unpaid invoices — money his customers owed but hadn't sent.
+
+He'd been emailing reminders for 11 weeks. Politely. One at a time. Between everything else he had to do.
+
+Here's what struck me: he felt embarrassed. Like he had failed.
+
+He didn't fail. The system failed him. There's no reason a human should be manually chasing 60 invoices in 2026.
+
+Your cash shouldn't depend on whether someone remembered to send a follow-up email.
+
+If this is you — you're not bad at finance. You just don't have the right system yet.</div>
+      <div class="meta-row">
+        <span class="chip">🎯 Founders, CFOs in the manual grind</span>
+        <span class="chip tag">#CashFlow</span><span class="chip tag">#AccountsReceivable</span><span class="chip tag">#SmallBusiness</span><span class="chip tag">#Finance</span><span class="chip tag">#B2B</span>
+      </div>
+    </div>
+    <div class="breakdown">
+      <div class="bd-title">🎓 BREAKDOWN</div>
+      <div class="bd-item"><span class="bd-k">✍️ Hook Technique — In Medias Res (drop into a tense moment)</span><span class="bd-v">"A founder couldn't make payroll" opens mid-crisis. No setup. The reader is instantly inside a high-stakes moment and needs to know how it resolves.</span></div>
+      <div class="bd-item"><span class="bd-k">🧠 Why It Works</span><span class="bd-v">This is storytelling: a real person + tension + emotional detail ("he felt embarrassed"). Emotion is what makes a post memorable and shareable. The close absolves the reader of blame — pure relief.</span></div>
+      <div class="bd-item"><span class="bd-k">📐 Structure</span><span class="bd-v">Tense moment → the twist (not broke) → specific number → emotional beat → reframe → reassurance to reader. Specificity ($340K, 11 weeks, 60 invoices) makes it believable.</span></div>
+      <div class="steal"><span class="bd-k">💡 Steal This</span><span class="bd-v">Always use real, odd-specific numbers ($340,000, not "a lot"). Specificity = credibility. Round numbers feel invented.</span></div>
+    </div>
+  </div>
+  <div class="footer-note"><span>DataByt — LinkedIn Founder Playbook</span><span>Week 1 · Day 3</span></div>
+</div>
+
+<!-- DAY 4 -->
+<div class="page">
+  <div class="post-block">
+    <div class="day-tag">DAY 4 · THU <span class="pillar">— Pain (data-driven)</span></div>
+    <div class="post-title">The trapped-cash math</div>
+    <div class="post-card">
+      <div class="label">The Post</div>
+      <div class="post-text">Late payments cost US businesses over $3 trillion in tied-up cash at any given moment.
+
+Not lost money. Trapped money. Yours — sitting in someone else's bank account, earning them interest instead of you.
+
+The average B2B invoice in the US is paid 14 days late. For SMBs, it's worse.
+
+Now do the math on your own AR:
+→ How much is outstanding right now?
+→ What's 14+ days late?
+→ What could you do with that cash today?
+
+Most CFOs have never run that number. When they do, it changes how seriously they take collections.
+
+What's your DSO right now? Be honest. 👇</div>
+      <div class="meta-row">
+        <span class="chip">🎯 CFOs, finance leaders</span>
+        <span class="chip tag">#DSO</span><span class="chip tag">#WorkingCapital</span><span class="chip tag">#CFO</span><span class="chip tag">#CashFlow</span><span class="chip tag">#B2BFinance</span>
+      </div>
+    </div>
+    <div class="breakdown">
+      <div class="bd-title">🎓 BREAKDOWN</div>
+      <div class="bd-item"><span class="bd-k">✍️ Hook Technique — Big Number + Reframe</span><span class="bd-v">"$3 trillion" is huge and abstract — then "Not lost money. Trapped money. Yours." makes it personal and concrete in three short fragments.</span></div>
+      <div class="bd-item"><span class="bd-k">🧠 Why It Works</span><span class="bd-v">It moves from macro (industry stat) to micro ("your own AR") and ends with a direct question that demands self-reflection. Self-reflection questions = comments, and comments = reach.</span></div>
+      <div class="bd-item"><span class="bd-k">📐 Structure</span><span class="bd-v">Macro stat → reframe → supporting stat → 3 self-audit questions → insight → direct question CTA. The arrow bullets (→) create skimmable rhythm.</span></div>
+      <div class="steal"><span class="bd-k">💡 Steal This</span><span class="bd-v">End pain posts with a question the reader can answer about themselves ("What's your DSO?"). It converts passive readers into commenters.</span></div>
+    </div>
+  </div>
+  <div class="footer-note"><span>DataByt — LinkedIn Founder Playbook</span><span>Week 1 · Day 4</span></div>
+</div>
+
+<!-- DAY 5 -->
+<div class="page">
+  <div class="post-block">
+    <div class="day-tag">DAY 5 · FRI <span class="pillar">— Poll</span></div>
+    <div class="post-title">AR headache poll</div>
+    <div class="post-card">
+      <div class="label">The Post (use LinkedIn's native Poll feature)</div>
+      <div class="post-text">Poll: What's your biggest accounts receivable headache?
+
+I'm building AR software and talking to finance leaders every week. Curious what actually frustrates you most.
+
+◻️ Chasing invoices manually
+◻️ Customers who always pay late
+◻️ No visibility into what's overdue
+◻️ Disputes that drag on forever
+
+Whatever you pick — drop a comment on why. I read every one.</div>
+      <div class="meta-row">
+        <span class="chip">🎯 CFOs, AR managers, finance teams</span>
+        <span class="chip tag">#AccountsReceivable</span><span class="chip tag">#Finance</span><span class="chip tag">#CFO</span><span class="chip tag">#Poll</span><span class="chip tag">#CashFlow</span>
+      </div>
+    </div>
+    <div class="breakdown">
+      <div class="bd-title">🎓 BREAKDOWN</div>
+      <div class="bd-item"><span class="bd-k">✍️ Hook Technique — Low-Friction Participation</span><span class="bd-v">A poll asks for one tap, not a comment. The barrier to engage is near zero, so participation is high — and LinkedIn rewards polls with extra reach.</span></div>
+      <div class="bd-item"><span class="bd-k">🧠 Why It Works</span><span class="bd-v">Double win: (1) huge reach to non-followers, (2) free market research for you. The "comment why" line upgrades taps into comments, which boost reach further.</span></div>
+      <div class="bd-item"><span class="bd-k">📐 Structure</span><span class="bd-v">Question → why you're asking (positions you as a builder) → 4 tight options → "comment why" ask. Keep options to 4; LinkedIn's max and the readable limit.</span></div>
+      <div class="steal"><span class="bd-k">💡 Steal This</span><span class="bd-v">Run a poll every 1–2 weeks. It's the cheapest reach on LinkedIn and doubles as customer discovery you'd otherwise pay for.</span></div>
+    </div>
+  </div>
+  <div class="footer-note"><span>DataByt — LinkedIn Founder Playbook</span><span>Week 1 · Day 5</span></div>
+</div>
+
+<!-- ===================== WEEK 2 ===================== -->
+<div class="page">
+  <div class="week-divider">WEEK 2<span>Deepen authority — show range across pain, education, and journey</span></div>
+
+  <div class="post-block">
+    <div class="day-tag">DAY 6 · MON <span class="pillar">— Pain (time cost)</span></div>
+    <div class="post-title">A robot's job, done by a human</div>
+    <div class="post-card">
+      <div class="label">The Post</div>
+      <div class="post-text">Your finance team spends ~10 hours a week chasing invoices.
+
+That's a quarter of someone's job. Gone. Spent copy-pasting reminder emails and updating a spreadsheet.
+
+And the brutal part? Manual chasing doesn't even work well:
+→ Reminders go out late, inconsistently
+→ The squeaky customers get chased, the quiet late-payers slip through
+→ Nobody's tracking who got which email when
+
+You're paying a skilled finance person to do a robot's job — badly — because the robot didn't exist.
+
+It does now. That's the whole reason I'm building DataByt.</div>
+      <div class="meta-row">
+        <span class="chip">🎯 CFOs, finance managers who own AR</span>
+        <span class="chip tag">#Finance</span><span class="chip tag">#Automation</span><span class="chip tag">#AccountsReceivable</span><span class="chip tag">#Productivity</span><span class="chip tag">#CFO</span>
+      </div>
+    </div>
+    <div class="breakdown">
+      <div class="bd-title">🎓 BREAKDOWN</div>
+      <div class="bd-item"><span class="bd-k">✍️ Hook Technique — Specific Cost Calculation</span><span class="bd-v">"10 hours a week" → "a quarter of someone's job." Translating a vague waste into a concrete cost makes the reader feel the loss.</span></div>
+      <div class="bd-item"><span class="bd-k">🧠 Why It Works</span><span class="bd-v">"A robot's job — badly — because the robot didn't exist" is a sharp, quotable line that positions your product as the obvious fix without a hard pitch.</span></div>
+      <div class="bd-item"><span class="bd-k">📐 Structure</span><span class="bd-v">Cost stat → reframe as wasted salary → 3 reasons manual fails → the killer line → 1-sentence product tie. Keep the product mention to a single closing line.</span></div>
+      <div class="steal"><span class="bd-k">💡 Steal This</span><span class="bd-v">Convert time waste into money/headcount ("a quarter of a salary"). CFOs think in cost — speak their unit.</span></div>
+    </div>
+  </div>
+  <div class="footer-note"><span>DataByt — LinkedIn Founder Playbook</span><span>Week 2 · Day 6</span></div>
+</div>
+
+<!-- DAY 7 -->
+<div class="page">
+  <div class="post-block">
+    <div class="day-tag">DAY 7 · TUE <span class="pillar">— Education Carousel</span></div>
+    <div class="post-title">Carousel: "Your DSO Is Lying to You"</div>
+    <div class="post-card">
+      <div class="label">The Caption</div>
+      <div class="post-text">Your DSO looks fine. Your cash flow says otherwise.
+
+Here's why the number on your dashboard might be hiding the truth 👉</div>
+    </div>
+    <div class="post-card">
+      <div class="label">The 7 Slides</div>
+      <div class="post-text">1 · Your DSO Is Lying to You — Here's How
+2 · The trap: one big on-time customer can mask 20 late ones in the average.
+3 · Fix 1: Track Best Possible DSO vs actual — the gap is your real problem.
+4 · Fix 2: Segment DSO by customer size. Your whales hide your stragglers.
+5 · Fix 3: Watch the trend, not the number. Rising DSO = trouble coming.
+6 · Fix 4: Pair DSO with CEI. DSO = "how long," CEI = "how well."
+7 · DataByt shows real DSO, segmented + trending, live. databyt.in</div>
+      <div class="meta-row">
+        <span class="chip">🎯 CFOs, Controllers, FP&amp;A</span>
+        <span class="chip tag">#DSO</span><span class="chip tag">#FinanceLeadership</span><span class="chip tag">#CashFlow</span><span class="chip tag">#CFO</span><span class="chip tag">#AccountsReceivable</span>
+      </div>
+    </div>
+    <div class="breakdown">
+      <div class="bd-title">🎓 BREAKDOWN</div>
+      <div class="bd-item"><span class="bd-k">✍️ Hook Technique — Contradiction</span><span class="bd-v">"Your DSO looks fine. Your cash flow says otherwise." Two clashing facts create a gap the reader needs closed.</span></div>
+      <div class="bd-item"><span class="bd-k">🧠 Why It Works</span><span class="bd-v">"Lying to you" is provocative about a number they trust. Challenging a trusted metric signals deep expertise — only an insider knows where the metric breaks.</span></div>
+      <div class="bd-item"><span class="bd-k">📐 Structure</span><span class="bd-v">Contradiction caption → "the trap" slide → 4 numbered fixes → product slide. Numbered fixes make it actionable and screenshot-worthy.</span></div>
+      <div class="steal"><span class="bd-k">💡 Steal This</span><span class="bd-v">"[Thing they trust] is lying to you" is a top-tier hook for any educational post. It promises insider knowledge.</span></div>
+    </div>
+  </div>
+  <div class="footer-note"><span>DataByt — LinkedIn Founder Playbook</span><span>Week 2 · Day 7</span></div>
+</div>
+
+<!-- DAY 8 -->
+<div class="page">
+  <div class="post-block">
+    <div class="day-tag">DAY 8 · WED <span class="pillar">— Founder (building in public)</span></div>
+    <div class="post-title">3-week honest update</div>
+    <div class="post-card">
+      <div class="label">The Post</div>
+      <div class="post-text">3 weeks into posting about AR collections. Honest update:
+
+What's working:
+→ Finance leaders are replying to my DMs with real frustrations. Gold.
+→ One Controller told me their "system" is a color-coded spreadsheet and prayer. I've heard this 4 times now.
+
+What's hard:
+→ Posting daily when you'd rather be in the codebase.
+→ Saying things publicly before you have 1,000 customers to "prove" you're right.
+
+What I'm learning:
+→ CFOs don't want another dashboard. They want the work done. The collections to just… happen.
+
+That insight is reshaping how I'm building DataByt. Building in public actually works — you tell me what to build.
+
+What would make you trust an AI to chase your invoices? Genuinely asking. 👇</div>
+      <div class="meta-row">
+        <span class="chip">🎯 CFOs, founders, build-in-public crowd</span>
+        <span class="chip tag">#BuildInPublic</span><span class="chip tag">#StartupJourney</span><span class="chip tag">#Fintech</span><span class="chip tag">#AccountsReceivable</span><span class="chip tag">#Founders</span>
+      </div>
+    </div>
+    <div class="breakdown">
+      <div class="bd-title">🎓 BREAKDOWN</div>
+      <div class="bd-item"><span class="bd-k">✍️ Hook Technique — Transparency Marker</span><span class="bd-v">"Honest update:" signals vulnerability and earns attention. People stop for honesty because most content is polished spin.</span></div>
+      <div class="bd-item"><span class="bd-k">🧠 Why It Works</span><span class="bd-v">The Working / Hard / Learning structure shows you're human and listening. Admitting what's "hard" builds more trust than any win. Ends asking for the trust objection — turns readers into co-builders.</span></div>
+      <div class="bd-item"><span class="bd-k">📐 Structure</span><span class="bd-v">Time marker → 3 labeled buckets (Working/Hard/Learning) → the insight → question CTA. The buckets make a personal update feel organized and credible.</span></div>
+      <div class="steal"><span class="bd-k">💡 Steal This</span><span class="bd-v">The "What's working / What's hard / What I'm learning" template is a repeatable founder post you can run monthly forever.</span></div>
+    </div>
+  </div>
+  <div class="footer-note"><span>DataByt — LinkedIn Founder Playbook</span><span>Week 2 · Day 8</span></div>
+</div>
+
+<!-- DAY 9 -->
+<div class="page">
+  <div class="post-block">
+    <div class="day-tag">DAY 9 · THU <span class="pillar">— Pain (relationship cost)</span></div>
+    <div class="post-title">Collections is a relationship problem</div>
+    <div class="post-card">
+      <div class="label">The Post</div>
+      <div class="post-text">Chasing a late invoice the wrong way can cost you the customer.
+
+Too soft → they ignore you for another month.
+Too aggressive → you damage a relationship you spent years building.
+
+This is the part nobody talks about: collections isn't just a cash problem, it's a relationship problem.
+
+The best AR teams escalate in tone deliberately:
+→ Day 1 late: friendly nudge, assume they forgot
+→ Day 10: firm, clear deadline
+→ Day 30: serious, but offer a path (payment plan)
+
+Most teams can't do this consistently by hand. So they either nag or avoid. Both cost you.
+
+Getting tone right at scale is exactly the problem I'm obsessed with solving.</div>
+      <div class="meta-row">
+        <span class="chip">🎯 CFOs, AR managers, account managers</span>
+        <span class="chip tag">#AccountsReceivable</span><span class="chip tag">#CustomerRelationships</span><span class="chip tag">#Finance</span><span class="chip tag">#Collections</span><span class="chip tag">#B2B</span>
+      </div>
+    </div>
+    <div class="breakdown">
+      <div class="bd-title">🎓 BREAKDOWN</div>
+      <div class="bd-item"><span class="bd-k">✍️ Hook Technique — Cost / Consequence</span><span class="bd-v">"...can cost you the customer" opens with a stakes-raising consequence. Loss aversion: people fear losing a customer more than they want a faster payment.</span></div>
+      <div class="bd-item"><span class="bd-k">🧠 Why It Works</span><span class="bd-v">"The part nobody talks about" frames you as the one revealing a hidden truth. Then you teach a real framework (tone escalation) — value + authority in one post.</span></div>
+      <div class="bd-item"><span class="bd-k">📐 Structure</span><span class="bd-v">Consequence hook → the two-sided trap (soft/aggressive) → "nobody talks about" reframe → the L1/L2/L3 framework → product philosophy close.</span></div>
+      <div class="steal"><span class="bd-k">💡 Steal This</span><span class="bd-v">"This is the part nobody talks about" instantly elevates ordinary advice into insider insight. Use before any non-obvious point.</span></div>
+    </div>
+  </div>
+  <div class="footer-note"><span>DataByt — LinkedIn Founder Playbook</span><span>Week 2 · Day 9</span></div>
+</div>
+
+<!-- DAY 10 -->
+<div class="page">
+  <div class="post-block">
+    <div class="day-tag">DAY 10 · FRI <span class="pillar">— Bold Take</span></div>
+    <div class="post-title">AR software wasn't built for you</div>
+    <div class="post-card">
+      <div class="label">The Post</div>
+      <div class="post-text">Unpopular opinion: AR software wasn't built for you.
+
+HighRadius, Billtrust, the enterprise giants — they were built for Fortune 500 finance departments with 6-figure budgets and a team to run them.
+
+If you're a $5M–$50M B2B company, your options have been:
+1. Pay enterprise prices for enterprise complexity you don't need
+2. Hire a collections agency that takes a cut and torches relationships
+3. Do it by hand in a spreadsheet
+
+That's not a real choice. The entire mid-market has been ignored.
+
+That gap is why DataByt exists. AR automation that a finance team of 1–3 can actually run, at a price that isn't insane.
+
+The mid-market deserves better tools. Agree or disagree? 👇</div>
+      <div class="meta-row">
+        <span class="chip">🎯 Mid-market CFOs priced out of enterprise tools</span>
+        <span class="chip tag">#Fintech</span><span class="chip tag">#MidMarket</span><span class="chip tag">#AccountsReceivable</span><span class="chip tag">#CFO</span><span class="chip tag">#B2BSaaS</span>
+      </div>
+    </div>
+    <div class="breakdown">
+      <div class="bd-title">🎓 BREAKDOWN</div>
+      <div class="bd-item"><span class="bd-k">✍️ Hook Technique — Declared Contrarian ("Unpopular opinion")</span><span class="bd-v">Flagging a take as "unpopular" primes people to debate it. Debate = comments = reach. It signals you'll say something others won't.</span></div>
+      <div class="bd-item"><span class="bd-k">🧠 Why It Works</span><span class="bd-v">It names a common enemy (enterprise tools) and sides with the underdog (the reader). People rally behind a builder fighting for them. "Agree or disagree?" explicitly invites the comment.</span></div>
+      <div class="bd-item"><span class="bd-k">📐 Structure</span><span class="bd-v">Contrarian claim → name the villains → the 3 bad options → "not a real choice" → your alternative → debate-inviting CTA.</span></div>
+      <div class="steal"><span class="bd-k">💡 Steal This</span><span class="bd-v">Naming a clear enemy (a category, not a person) creates an "us vs them" that builds tribe. Use sparingly — ~1 bold take per week.</span></div>
+    </div>
+  </div>
+  <div class="footer-note"><span>DataByt — LinkedIn Founder Playbook</span><span>Week 2 · Day 10</span></div>
+</div>
+
+<!-- ===================== WEEK 3 ===================== -->
+<div class="page">
+  <div class="week-divider">WEEK 3<span>Sharpen the wound — mindset shifts + your first vulnerability post</span></div>
+
+  <div class="post-block">
+    <div class="day-tag">DAY 11 · MON <span class="pillar">— Pain (profitable but broke)</span></div>
+    <div class="post-title">Profit you can't collect isn't profit</div>
+    <div class="post-card">
+      <div class="label">The Post</div>
+      <div class="post-text">"We're profitable on paper but I can't sleep."
+
+A CFO said this to me last week. It's the most common contradiction in B2B finance.
+
+Profit is an accounting number. Cash is reality.
+
+You can be profitable and still:
+→ Miss payroll
+→ Delay your own vendors
+→ Turn down growth because there's no cash to fund it
+
+…all because your receivables are stuck.
+
+Profit you can't collect isn't profit. It's a promise. And promises don't make payroll.
+
+The fastest lever most SMBs ignore? Collecting what they're already owed, faster. No new sales required.</div>
+      <div class="meta-row">
+        <span class="chip">🎯 CFOs, founders, finance leaders</span>
+        <span class="chip tag">#CashFlow</span><span class="chip tag">#Profitability</span><span class="chip tag">#CFO</span><span class="chip tag">#WorkingCapital</span><span class="chip tag">#Finance</span>
+      </div>
+    </div>
+    <div class="breakdown">
+      <div class="bd-title">🎓 BREAKDOWN</div>
+      <div class="bd-item"><span class="bd-k">✍️ Hook Technique — Quote Open</span><span class="bd-v">Opening with a raw human quote ("I can't sleep") is instantly relatable and concrete. Quotes feel like eavesdropping — irresistible.</span></div>
+      <div class="bd-item"><span class="bd-k">🧠 Why It Works</span><span class="bd-v">"Profit is an accounting number. Cash is reality." is a quotable aphorism. The post reframes a belief (profit = health) into a sharper truth (cash = health).</span></div>
+      <div class="bd-item"><span class="bd-k">📐 Structure</span><span class="bd-v">Quote → "most common contradiction" → aphorism → list of consequences → the killer line → the takeaway lever.</span></div>
+      <div class="steal"><span class="bd-k">💡 Steal This</span><span class="bd-v">Coin short aphorisms ("Profit you can't collect is a promise"). They're the lines people re-share and quote you on.</span></div>
+    </div>
+  </div>
+  <div class="footer-note"><span>DataByt — LinkedIn Founder Playbook</span><span>Week 3 · Day 11</span></div>
+</div>
+
+<!-- DAY 12 -->
+<div class="page">
+  <div class="post-block">
+    <div class="day-tag">DAY 12 · TUE <span class="pillar">— Education Carousel</span></div>
+    <div class="post-title">Carousel: "CEI — The Metric Better Than DSO"</div>
+    <div class="post-card">
+      <div class="label">The Caption</div>
+      <div class="post-text">Everyone tracks DSO. Almost nobody tracks the metric that actually measures if your collections work.
+
+Meet CEI 👉</div>
+    </div>
+    <div class="post-card">
+      <div class="label">The 7 Slides</div>
+      <div class="post-text">1 · CEI: The Collections Metric You're Probably Ignoring
+2 · What it is: Of the money you could have collected this period, how much you actually did.
+3 · The formula: (Collected ÷ Collectible) × 100
+4 · Why it beats DSO: DSO is distorted by sales swings. CEI isn't — pure collections performance.
+5 · The benchmark: 80%+ is healthy. Under 80% = your process is leaking cash.
+6 · The move: Track CEI monthly. Falling CEI = fix collections now, before DSO even shows it.
+7 · DataByt calculates your CEI live, automatically. databyt.in</div>
+      <div class="meta-row">
+        <span class="chip">🎯 CFOs, Controllers, FP&amp;A</span>
+        <span class="chip tag">#CEI</span><span class="chip tag">#DSO</span><span class="chip tag">#FinanceMetrics</span><span class="chip tag">#AccountsReceivable</span><span class="chip tag">#CFO</span>
+      </div>
+    </div>
+    <div class="breakdown">
+      <div class="bd-title">🎓 BREAKDOWN</div>
+      <div class="bd-item"><span class="bd-k">✍️ Hook Technique — Insider Gap ("everyone vs almost nobody")</span><span class="bd-v">Contrasts what the crowd does (DSO) with what the smart few do (CEI). Reader wants to be in the smart few — so they swipe.</span></div>
+      <div class="bd-item"><span class="bd-k">🧠 Why It Works</span><span class="bd-v">Teaching a metric most people don't track instantly makes you the most knowledgeable voice in their feed that day. Authority by lesser-known value.</span></div>
+      <div class="bd-item"><span class="bd-k">📐 Structure</span><span class="bd-v">Gap caption → what/formula/why/benchmark/action across slides → product slide. Including the formula makes it a save-worthy reference.</span></div>
+      <div class="steal"><span class="bd-k">💡 Steal This</span><span class="bd-v">Teach the lesser-known metric, not the obvious one. Everyone posts "DSO 101." Owning the deeper metric = owning the expert position.</span></div>
+    </div>
+  </div>
+  <div class="footer-note"><span>DataByt — LinkedIn Founder Playbook</span><span>Week 3 · Day 12</span></div>
+</div>
+
+<!-- DAY 13 -->
+<div class="page">
+  <div class="post-block">
+    <div class="day-tag">DAY 13 · WED <span class="pillar">— Founder (a mistake)</span></div>
+    <div class="post-title">I almost built the wrong product</div>
+    <div class="post-card">
+      <div class="label">The Post</div>
+      <div class="post-text">I almost built the wrong product.
+
+My first version of DataByt was a beautiful analytics dashboard. Charts, trends, AR aging, the works.
+
+Then a finance leader looked at it and said:
+"This is nice. But I don't need to see the problem better. I need it gone. Stop showing me overdue invoices — go collect them."
+
+That sentence rebuilt my entire product.
+
+CFOs don't want another dashboard to check. They want the collections to happen without them. The reminders sent. The disputes flagged. The work done.
+
+So I rebuilt DataByt to act, not just report. AI that sends the emails, escalates the tone, flags the disputes — automatically.
+
+Best feedback I ever got. From someone who'll probably never know they changed the whole product.</div>
+      <div class="meta-row">
+        <span class="chip">🎯 CFOs, founders, product people</span>
+        <span class="chip tag">#BuildInPublic</span><span class="chip tag">#ProductDevelopment</span><span class="chip tag">#StartupLessons</span><span class="chip tag">#Fintech</span><span class="chip tag">#Founders</span>
+      </div>
+    </div>
+    <div class="breakdown">
+      <div class="bd-title">🎓 BREAKDOWN</div>
+      <div class="bd-item"><span class="bd-k">✍️ Hook Technique — Confession</span><span class="bd-v">"I almost built the wrong product" is an admission of near-failure. Confessions disarm the reader and feel honest in a feed full of bragging.</span></div>
+      <div class="bd-item"><span class="bd-k">🧠 Why It Works</span><span class="bd-v">The customer quote is the hero, not you. Showing you changed direction because of a customer proves you listen — the #1 trait buyers want in a vendor.</span></div>
+      <div class="bd-item"><span class="bd-k">📐 Structure</span><span class="bd-v">Confession → the wrong version → the pivotal quote → "that rebuilt the product" → the lesson generalized → humble close.</span></div>
+      <div class="steal"><span class="bd-k">💡 Steal This</span><span class="bd-v">Let a customer's quote carry the insight. Quoting them (not yourself) is more credible and makes you look like a listener, not a know-it-all.</span></div>
+    </div>
+  </div>
+  <div class="footer-note"><span>DataByt — LinkedIn Founder Playbook</span><span>Week 3 · Day 13</span></div>
+</div>
+
+<!-- DAY 14 -->
+<div class="page">
+  <div class="post-block">
+    <div class="day-tag">DAY 14 · THU <span class="pillar">— Pain (the CFO's job)</span></div>
+    <div class="post-title">The board-meeting fear</div>
+    <div class="post-card">
+      <div class="label">The Post</div>
+      <div class="post-text">Nothing makes a CFO look worse in a board meeting than a cash flow surprise.
+
+"Why is cash down when revenue is up?"
+
+The answer is almost always the same: receivables. The money was earned. It just wasn't collected.
+
+And the CFO ends up defending a number that isn't even about their performance — it's about whether 40 customers paid on time.
+
+Strong AR isn't just an ops task. It's how a CFO protects their own credibility.
+
+Predictable collections = predictable cash = a board that trusts you.
+
+That's the real product I'm building: not "collections software," but a CFO who never gets blindsided again.</div>
+      <div class="meta-row">
+        <span class="chip">🎯 CFOs, VP Finance</span>
+        <span class="chip tag">#CFO</span><span class="chip tag">#FinanceLeadership</span><span class="chip tag">#CashFlow</span><span class="chip tag">#BoardMeetings</span><span class="chip tag">#AccountsReceivable</span>
+      </div>
+    </div>
+    <div class="breakdown">
+      <div class="bd-title">🎓 BREAKDOWN</div>
+      <div class="bd-item"><span class="bd-k">✍️ Hook Technique — Status/Fear Trigger</span><span class="bd-v">"Look worse in a board meeting" hits professional status fear — the most powerful motivator for senior leaders. It's personal, not just operational.</span></div>
+      <div class="bd-item"><span class="bd-k">🧠 Why It Works</span><span class="bd-v">It elevates AR from a boring task to a career-protection issue. When you connect your product to the buyer's personal stakes (credibility), urgency skyrockets.</span></div>
+      <div class="bd-item"><span class="bd-k">📐 Structure</span><span class="bd-v">Fear scenario → the dreaded question → root cause → the unfairness → reframe (ops → credibility) → equation → product as identity ("a CFO who never gets blindsided").</span></div>
+      <div class="steal"><span class="bd-k">💡 Steal This</span><span class="bd-v">Sell the personal stakes, not the feature. "A CFO who never gets blindsided" beats "real-time AR analytics" every time.</span></div>
+    </div>
+  </div>
+  <div class="footer-note"><span>DataByt — LinkedIn Founder Playbook</span><span>Week 3 · Day 14</span></div>
+</div>
+
+<!-- DAY 15 -->
+<div class="page">
+  <div class="post-block">
+    <div class="day-tag">DAY 15 · FRI <span class="pillar">— Poll</span></div>
+    <div class="post-title">How does your team handle collections?</div>
+    <div class="post-card">
+      <div class="label">The Post (native Poll)</div>
+      <div class="post-text">Poll: How does your team currently handle collections?
+
+No judgment — just genuinely mapping how mid-market finance teams do this in 2026.
+
+◻️ Manually (email + spreadsheet)
+◻️ A collections agency
+◻️ Built-in QuickBooks/Xero reminders
+◻️ Dedicated AR software
+
+If you picked manual — you're the majority. And that's exactly the problem. 👇</div>
+      <div class="meta-row">
+        <span class="chip">🎯 CFOs, AR managers, Controllers</span>
+        <span class="chip tag">#AccountsReceivable</span><span class="chip tag">#Finance</span><span class="chip tag">#Poll</span><span class="chip tag">#CFO</span><span class="chip tag">#Collections</span>
+      </div>
+    </div>
+    <div class="breakdown">
+      <div class="bd-title">🎓 BREAKDOWN</div>
+      <div class="bd-item"><span class="bd-k">✍️ Hook Technique — Safe Participation ("No judgment")</span><span class="bd-v">"No judgment" lowers the guard so people answer honestly — including the slightly embarrassing "manual" option. More honesty = more votes.</span></div>
+      <div class="bd-item"><span class="bd-k">🧠 Why It Works</span><span class="bd-v">The closing line plants your narrative ("manual is the problem") without preaching — the data does the arguing for you. You'll also get a real market snapshot.</span></div>
+      <div class="bd-item"><span class="bd-k">📐 Structure</span><span class="bd-v">Question → safety + purpose framing → 4 realistic options → narrative-planting close. Note the options double as competitor mapping.</span></div>
+      <div class="steal"><span class="bd-k">💡 Steal This</span><span class="bd-v">Design poll options so the "majority answer" reinforces your thesis. The crowd's vote becomes your argument.</span></div>
+    </div>
+  </div>
+  <div class="footer-note"><span>DataByt — LinkedIn Founder Playbook</span><span>Week 3 · Day 15</span></div>
+</div>
+
+<!-- ===================== WEEK 4 ===================== -->
+<div class="page">
+  <div class="week-divider">WEEK 4<span>Convert attention to trust — vision, and your first soft CTA</span></div>
+
+  <div class="post-block">
+    <div class="day-tag">DAY 16 · MON <span class="pillar">— Pain (spreadsheets)</span></div>
+    <div class="post-title">Karen in accounting</div>
+    <div class="post-card">
+      <div class="label">The Post</div>
+      <div class="post-text">Your AR process is a spreadsheet and a good memory.
+
+Be honest. For most mid-market companies, "the system" is:
+→ A spreadsheet someone updates (when they remember)
+→ A mental note to "follow up with that client"
+→ A pile of reminders that go out whenever there's time
+
+It works… until the person who holds it all in their head goes on vacation. Or quits. Or just has a busy week.
+
+Your cash flow shouldn't have a single point of failure named "Karen in accounting."
+
+Collections should be a system, not a person's memory. That's the entire bet behind DataByt.</div>
+      <div class="meta-row">
+        <span class="chip">🎯 CFOs, finance ops, founders</span>
+        <span class="chip tag">#Finance</span><span class="chip tag">#AccountsReceivable</span><span class="chip tag">#Automation</span><span class="chip tag">#SmallBusiness</span><span class="chip tag">#CFO</span>
+      </div>
+    </div>
+    <div class="breakdown">
+      <div class="bd-title">🎓 BREAKDOWN</div>
+      <div class="bd-item"><span class="bd-k">✍️ Hook Technique — Uncomfortable Mirror</span><span class="bd-v">"A spreadsheet and a good memory" describes the reader's reality so accurately it stings a little. Recognition = "this is literally us."</span></div>
+      <div class="bd-item"><span class="bd-k">🧠 Why It Works</span><span class="bd-v">Humor ("Karen in accounting") makes a serious risk (single point of failure) shareable. People share posts that are both true and funny.</span></div>
+      <div class="bd-item"><span class="bd-k">📐 Structure</span><span class="bd-v">Mirror hook → "be honest" + the 3-part reality → the failure scenario → the funny-but-true line → the principle → 1-line product bet.</span></div>
+      <div class="steal"><span class="bd-k">💡 Steal This</span><span class="bd-v">One concrete, slightly funny image ("Karen in accounting") sticks better than ten abstract points. Specific &gt; generic, always.</span></div>
+    </div>
+  </div>
+  <div class="footer-note"><span>DataByt — LinkedIn Founder Playbook</span><span>Week 4 · Day 16</span></div>
+</div>
+
+<!-- DAY 17 -->
+<div class="page">
+  <div class="post-block">
+    <div class="day-tag">DAY 17 · TUE <span class="pillar">— Education Carousel</span></div>
+    <div class="post-title">Carousel: "Dunning Email Mistakes Costing You Cash"</div>
+    <div class="post-card">
+      <div class="label">The Caption</div>
+      <div class="post-text">Most reminder emails make customers pay later, not sooner.
+
+Here are the 5 mistakes — and what to do instead 👉</div>
+    </div>
+    <div class="post-card">
+      <div class="label">The 7 Slides</div>
+      <div class="post-text">1 · 5 Dunning Email Mistakes That Delay Payment
+2 · Mistake 1: Same tone every time. Escalate: friendly → firm → final.
+3 · Mistake 2: Burying the ask. State amount, invoice, deadline up top.
+4 · Mistake 3: No payment link. Every extra click = another day of delay.
+5 · Mistake 4: Inconsistent timing. Late, random reminders signal you don't track it.
+6 · Mistake 5: One email per invoice. Batch all overdue invoices per customer into one.
+7 · DataByt does all 5 automatically — right tone, right time. databyt.in</div>
+      <div class="meta-row">
+        <span class="chip">🎯 AR managers, CFOs, finance teams</span>
+        <span class="chip tag">#Collections</span><span class="chip tag">#AccountsReceivable</span><span class="chip tag">#EmailStrategy</span><span class="chip tag">#Finance</span><span class="chip tag">#CFO</span>
+      </div>
+    </div>
+    <div class="breakdown">
+      <div class="bd-title">🎓 BREAKDOWN</div>
+      <div class="bd-item"><span class="bd-k">✍️ Hook Technique — Counterintuitive Claim</span><span class="bd-v">"Reminders make customers pay later" reverses the assumption that reminders help. The surprise pulls the swipe.</span></div>
+      <div class="bd-item"><span class="bd-k">🧠 Why It Works</span><span class="bd-v">Mistake-format carousels are catnip — readers check if they're guilty of each one. Immediately actionable = high save rate. And every "fix" is quietly a DataByt feature.</span></div>
+      <div class="bd-item"><span class="bd-k">📐 Structure</span><span class="bd-v">Counterintuitive caption → 5 mistakes (each = problem + fix) → product slide. "Mistakes you're making" outperforms "tips" because it triggers self-checking.</span></div>
+      <div class="steal"><span class="bd-k">💡 Steal This</span><span class="bd-v">"X mistakes costing you ___" beats "X tips for ___." Loss-framing (mistakes) outpulls gain-framing (tips) almost every time.</span></div>
+    </div>
+  </div>
+  <div class="footer-note"><span>DataByt — LinkedIn Founder Playbook</span><span>Week 4 · Day 17</span></div>
+</div>
+
+<!-- DAY 18 -->
+<div class="page">
+  <div class="post-block">
+    <div class="day-tag">DAY 18 · WED <span class="pillar">— Founder (vision)</span></div>
+    <div class="post-title">The 10-year vision — the "movement" post</div>
+    <div class="post-card">
+      <div class="label">The Post</div>
+      <div class="post-text">I don't think "accounts receivable" should exist as a job in 10 years.
+
+Not the people — the manual grind. The chasing. The copy-pasting. The spreadsheet babysitting.
+
+Think about it: a business does the hard part — wins the client, delivers the work, earns the money. And then a human has to spend hours begging for what's already owed?
+
+That's broken. And it's exactly the kind of work AI should absorb completely.
+
+My bet for the next decade: collections becomes invisible. Money earned becomes money collected — automatically. Finance teams get promoted from "invoice chasers" to actual strategists.
+
+That's the future I'm building DataByt toward. Not a tool. A world where late payments stop quietly killing good businesses.
+
+Big vision. I know. But someone has to build it.</div>
+      <div class="meta-row">
+        <span class="chip">🎯 CFOs, founders, future-of-finance crowd</span>
+        <span class="chip tag">#FutureOfFinance</span><span class="chip tag">#AI</span><span class="chip tag">#Fintech</span><span class="chip tag">#Vision</span><span class="chip tag">#AccountsReceivable</span>
+      </div>
+    </div>
+    <div class="breakdown">
+      <div class="bd-title">🎓 BREAKDOWN</div>
+      <div class="bd-item"><span class="bd-k">✍️ Hook Technique — Bold Prediction</span><span class="bd-v">"AR shouldn't exist as a job in 10 years" is a provocative future claim. Predictions invite both agreement and pushback — both drive comments.</span></div>
+      <div class="bd-item"><span class="bd-k">🧠 Why It Works</span><span class="bd-v">This is the "movement" post. You're not selling software, you're describing a better world. People follow missions, not products. It elevates you from vendor to visionary.</span></div>
+      <div class="bd-item"><span class="bd-k">📐 Structure</span><span class="bd-v">Bold prediction → clarify (the grind, not people) → the absurdity of today → "AI should do this" → the 10-year bet → "not a tool, a world" → humble-bold close.</span></div>
+      <div class="steal"><span class="bd-k">💡 Steal This</span><span class="bd-v">"Not a tool. A world where ___." Zoom out from product to mission. Run a vision post roughly monthly to keep recruiting believers.</span></div>
+    </div>
+  </div>
+  <div class="footer-note"><span>DataByt — LinkedIn Founder Playbook</span><span>Week 4 · Day 18</span></div>
+</div>
+
+<!-- DAY 19 -->
+<div class="page">
+  <div class="post-block">
+    <div class="day-tag">DAY 19 · THU <span class="pillar">— Education / Pain hybrid</span></div>
+    <div class="post-title">Automate vs hire</div>
+    <div class="post-card">
+      <div class="label">The Post</div>
+      <div class="post-text">When collections get out of hand, most companies do the expensive thing: hire.
+
+A collections agency takes 10–25% of what they recover — and often torches the customer relationship doing it.
+
+A new AR hire costs $50K–$70K/year, plus ramp time, plus they still do it manually.
+
+Both are 2010 answers to a 2026 problem.
+
+The third option: automate the repetitive 80% — the reminders, the escalation, the tracking — and let your existing team handle the 20% that actually needs a human (negotiations, disputes, relationships).
+
+You don't need more people chasing invoices. You need the chasing to happen without people.
+
+That math is why mid-market finance is about to change fast.</div>
+      <div class="meta-row">
+        <span class="chip">🎯 CFOs evaluating how to scale collections</span>
+        <span class="chip tag">#Automation</span><span class="chip tag">#Finance</span><span class="chip tag">#AccountsReceivable</span><span class="chip tag">#CFO</span><span class="chip tag">#Fintech</span>
+      </div>
+    </div>
+    <div class="breakdown">
+      <div class="bd-title">🎓 BREAKDOWN</div>
+      <div class="bd-item"><span class="bd-k">✍️ Hook Technique — Name the Default Mistake</span><span class="bd-v">"Most companies do the expensive thing: hire." Calling the common move a mistake makes the reader want the smarter alternative you're about to give.</span></div>
+      <div class="bd-item"><span class="bd-k">🧠 Why It Works</span><span class="bd-v">It reframes the buying decision in your favor (automate vs hire) using the buyer's own cost logic, with real numbers. "2010 answers to a 2026 problem" is a sticky line.</span></div>
+      <div class="bd-item"><span class="bd-k">📐 Structure</span><span class="bd-v">Default mistake → cost of option A → cost of option B → "old answers" line → the 80/20 third option → the principle → market-shift close.</span></div>
+      <div class="steal"><span class="bd-k">💡 Steal This</span><span class="bd-v">Frame your product as "the third option" against two expensive defaults. It positions you as the obvious smart choice without a hard sell.</span></div>
+    </div>
+  </div>
+  <div class="footer-note"><span>DataByt — LinkedIn Founder Playbook</span><span>Week 4 · Day 19</span></div>
+</div>
+
+<!-- DAY 20 -->
+<div class="page">
+  <div class="post-block">
+    <div class="day-tag">DAY 20 · FRI <span class="pillar">— Bold Take + Soft CTA</span></div>
+    <div class="post-title">Month-1 recap + your first pilot offer</div>
+    <div class="post-card">
+      <div class="label">The Post</div>
+      <div class="post-text">One month ago I started posting about a deeply unsexy topic: getting B2B companies paid on time.
+
+Here's what I've learned from you:
+→ Almost everyone is still doing collections by hand
+→ CFOs don't want dashboards, they want the work gone
+→ "Profitable but cash-strapped" is the most common pain in the mid-market
+→ Nobody built a serious AR tool for companies under $100M — until now
+
+I built DataByt to fix exactly this. AI that chases your overdue invoices automatically — right tone, right time, connected to QuickBooks, Xero, NetSuite, or Sage. Live in 48 hours.
+
+I'm onboarding a small group of finance teams to use it free while we gather feedback and results.
+
+If your team is still chasing invoices manually and you want in — comment "AR" or DM me. I'll show you what it looks like.
+
+Either way — thank you for the first month. This is just the start.</div>
+      <div class="meta-row">
+        <span class="chip">🎯 CFOs &amp; finance leaders ready to try</span>
+        <span class="chip tag">#AccountsReceivable</span><span class="chip tag">#Fintech</span><span class="chip tag">#CFO</span><span class="chip tag">#CashFlow</span><span class="chip tag">#B2BSaaS</span>
+      </div>
+    </div>
+    <div class="breakdown">
+      <div class="bd-title">🎓 BREAKDOWN</div>
+      <div class="bd-item"><span class="bd-k">✍️ Hook Technique — Vulnerable Time-Anchor</span><span class="bd-v">"One month ago I started... a deeply unsexy topic" is humble and self-aware. It earns goodwill before any ask — so the CTA doesn't feel salesy.</span></div>
+      <div class="bd-item"><span class="bd-k">🧠 Why It Works</span><span class="bd-v">By Day 20 the audience is warm. Recapping shared learnings ("what I learned from you") makes them co-owners. The CTA is soft (free pilot, comment a word) and low-risk — the right ask after a month of pure value.</span></div>
+      <div class="bd-item"><span class="bd-k">📐 Structure</span><span class="bd-v">Time anchor → 4 learnings (social proof of insight) → product in one tight line → the free-pilot offer → frictionless CTA ("comment AR") → gracious close.</span></div>
+      <div class="steal"><span class="bd-k">💡 Steal This</span><span class="bd-v">"Comment [word]" CTAs outperform "DM me" — they're public (social proof) and low-effort. Then DM everyone who comments.</span></div>
+    </div>
+  </div>
+  <div class="footer-note"><span>DataByt — LinkedIn Founder Playbook</span><span>Week 4 · Day 20</span></div>
+</div>
+
+<!-- ===================== FOLLOW LIST ===================== -->
+<div class="page">
+  <h2 class="section">Who to Follow (exact list)</h2>
+  <div class="section-rule"></div>
+  <p class="lead">Follow all of these. Turn on the 🔔 bell for the ⭐ starred ones so you can comment early on their posts (early comments = more visibility).</p>
+
+  <h3>LinkedIn writing &amp; growth craft</h3>
+  <ul>
+    <li>⭐ <strong>Justin Welsh</strong> — the gold standard for solo-founder LinkedIn content</li>
+    <li><strong>Jasmin Alić ("Jay")</strong> — LinkedIn writing coach; hooks &amp; formatting</li>
+    <li><strong>Lara Acosta</strong> — personal branding on LinkedIn</li>
+    <li><strong>Ruben Hassid</strong> — AI + LinkedIn growth</li>
+  </ul>
+
+  <h3>Finance / CFO thought leaders (your niche &amp; audience)</h3>
+  <ul>
+    <li>⭐ <strong>Anders Liu-Lindberg</strong> — the biggest finance business-partnering voice on LinkedIn</li>
+    <li>⭐ <strong>Ben Murray (The SaaS CFO)</strong> — SaaS finance, very active</li>
+    <li><strong>Glenn Hopper</strong> — finance + AI</li>
+    <li><strong>Christian Wattig</strong> — FP&amp;A education</li>
+    <li><strong>CJ Gustafson (Mostly Metrics)</strong> — CFO metrics, newsletter + LinkedIn</li>
+  </ul>
+
+  <h3>Communities to join (where US/EU CFOs gather)</h3>
+  <ul>
+    <li>⭐ <strong>CFO Connect</strong> (by Spendesk) — large, active CFO community</li>
+    <li><strong>Pavilion</strong> — finance &amp; ops leaders</li>
+    <li><strong>The SaaS CFO community</strong></li>
+  </ul>
+
+  <h3>AR competitors to watch (study messaging, don't copy)</h3>
+  <ul>
+    <li><strong>Tesorio · Versapay · HighRadius · Billtrust · Upflow · Kolleno</strong></li>
+  </ul>
+
+  <h3>Fintech brands with great content (model the style)</h3>
+  <ul>
+    <li><strong>Ramp · Mercury · Bill.com · Tipalti · Datarails</strong></li>
+  </ul>
+
+  <div class="footer-note"><span>DataByt — LinkedIn Founder Playbook</span><span>Who to Follow</span></div>
+</div>
+
+<!-- ===================== FEED + EXPECTATIONS ===================== -->
+<div class="page">
+  <h2 class="section">Engineer Your Feed + Expectations</h2>
+  <div class="section-rule"></div>
+
+  <h3>Turn your feed into an AR/finance intelligence stream (15 min today)</h3>
+  <table>
+    <tr><th style="width:50px">#</th><th>Action</th></tr>
+    <tr><td><span class="num">1</span></td><td>Follow everyone on the previous page — <em>follow</em> + 🔔 on the starred</td></tr>
+    <tr><td><span class="num">2</span></td><td>Connect with 20 CFOs now: search <em>"CFO" OR "VP Finance" OR "Controller"</em>, filter US / UK / EU, 2nd-degree</td></tr>
+    <tr><td><span class="num">3</span></td><td>For 2 weeks, like/comment ONLY on finance content — it trains the algorithm on who you are</td></tr>
+    <tr><td><span class="num">4</span></td><td>On irrelevant posts: ⋯ → "I don't want to see this." Prune ruthlessly</td></tr>
+    <tr><td><span class="num">5</span></td><td>Save a search for "accounts receivable" / "DSO", sort by recent, check daily for posts to comment on</td></tr>
+    <tr><td><span class="num">6</span></td><td>Join 2–3 finance groups + the CFO Connect community</td></tr>
+  </table>
+
+  <h3>What to actually expect (so you don't quit early)</h3>
+  <div class="callout">
+    <p><strong>Days 1–14:</strong> Almost no traction. 5–20 likes per post. This is normal and everyone goes through it. Do NOT change strategy. Keep posting.</p>
+  </div>
+  <div class="callout">
+    <p><strong>Days 15–30:</strong> Momentum starts. A post or two breaks out. Connection requests get accepted. CFOs begin following.</p>
+  </div>
+  <div class="callout">
+    <p><strong>50 CFOs by Day 31:</strong> Achievable — but ~70% comes from the connect + comment routine, not the posts. Run both every weekday without fail.</p>
+  </div>
+  <div class="callout">
+    <p><strong>First pilot by Day 60:</strong> Realistic if you post the Day-20 pilot CTA and follow up with everyone who comments or accepts, in the DMs.</p>
+  </div>
+
+  <h3>The only variable that matters</h3>
+  <p>The posts are written. The plan is built. The follow list and routine are set. The one thing left is whether you <strong>show up every weekday for 30 days</strong> — post, reply, comment, connect. That consistency is the entire game. Most founders quit at week 3 when 4 people like their post. The ones who win simply don't.</p>
+
+  <div style="margin-top:30px; padding:20px; background:linear-gradient(135deg,#130E25,#4F46E5); border-radius:14px; color:#fff;">
+    <p style="color:#A5B4FC; font-size:12px; letter-spacing:2px; font-weight:600; margin-bottom:8px;">REMEMBER</p>
+    <p style="color:#fff; font-size:16px; font-weight:700; margin:0;">Posts build credibility. The routine builds the following. Run both, daily, for 30 days. Then judge.</p>
+  </div>
+
+  <div class="footer-note"><span>DataByt — LinkedIn Founder Playbook</span><span>Feed &amp; Expectations</span></div>
+</div>
+
+</body>
+</html>

@@ -1,11 +1,18 @@
 const puppeteer = require('puppeteer-core');
 const path = require('path');
+const fs = require('fs');
 
-const CHROME = 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe';
-const HTML   = path.resolve(__dirname, 'master-guide.html');
-const OUT    = path.resolve(__dirname, 'DataByt-ADK-Master-Guide.pdf');
+const CHROME_CANDIDATES = [
+  'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe',
+  'C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe',
+  'C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe',
+];
+const CHROME = CHROME_CANDIDATES.find(p => fs.existsSync(p));
+const HTML = path.resolve(__dirname, 'linkedin-playbook.html');
+const OUT = path.resolve(__dirname, 'DataByt-LinkedIn-Playbook.pdf');
 
 (async () => {
+  if (!CHROME) { console.error('No Chrome/Edge found'); process.exit(1); }
   const browser = await puppeteer.launch({
     executablePath: CHROME,
     headless: 'new',

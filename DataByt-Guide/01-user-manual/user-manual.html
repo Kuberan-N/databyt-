@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>DataByt — User Manual</title>
+<style>
+  @page { size: A4; margin: 0; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --indigo:#4F46E5; --indigo-dark:#3730A3; --violet:#7C3AED;
+    --ink:#0F172A; --slate:#475569; --muted:#64748B; --line:#E2E8F0;
+    --bg-soft:#F8F9FC; --bg-indigo:#EEF2FF;
+  }
+  body { font-family:-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif; color:var(--ink); line-height:1.6; font-size:13px; }
+  .page { width:210mm; min-height:297mm; padding:22mm 20mm; margin:0 auto; background:#fff; page-break-after:always; position:relative; }
+  .page:last-child { page-break-after:auto; }
+  .cover { background:linear-gradient(150deg,#130E25 0%,#2A1E5C 45%,#4F46E5 100%); color:#fff; display:flex; flex-direction:column; justify-content:center; padding:30mm; }
+  .cover .eyebrow { font-size:13px; letter-spacing:3px; color:#A492FF; font-weight:600; margin-bottom:18px; }
+  .cover h1 { font-size:48px; font-weight:800; line-height:1.08; letter-spacing:-0.02em; margin-bottom:20px; }
+  .cover h1 .grad { color:#A492FF; }
+  .cover .sub { font-size:17px; color:#CBD5E1; max-width:80%; margin-bottom:40px; }
+  .cover .meta { font-size:13px; color:#94A3B8; border-top:1px solid rgba(255,255,255,.2); padding-top:20px; }
+  .cover .brand { display:flex; align-items:center; gap:12px; margin-top:auto; font-size:20px; font-weight:700; }
+  .cover .brand .logo { width:40px; height:40px; border-radius:9px; background:#fff; color:#130E25; display:flex; align-items:center; justify-content:center; font-weight:800; }
+  h2.section { font-size:26px; font-weight:800; color:var(--ink); letter-spacing:-0.01em; margin-bottom:6px; padding-top:4px; }
+  .section-rule { height:4px; width:60px; background:linear-gradient(90deg,var(--indigo),var(--violet)); border-radius:2px; margin-bottom:22px; }
+  h3 { font-size:17px; font-weight:700; margin:22px 0 10px; color:var(--ink); }
+  h4 { font-size:14px; font-weight:700; margin:16px 0 6px; color:var(--indigo-dark); }
+  p { margin-bottom:11px; color:var(--slate); }
+  strong { color:var(--ink); font-weight:650; }
+  ul,ol { margin:0 0 12px 18px; } li { margin-bottom:6px; color:var(--slate); }
+  .lead { font-size:15px; color:var(--slate); margin-bottom:18px; }
+  .callout { background:var(--bg-indigo); border-left:4px solid var(--indigo); padding:14px 18px; border-radius:0 10px 10px 0; margin:16px 0; }
+  .callout p { margin:0; color:var(--indigo-dark); font-size:13px; }
+  .callout strong { color:var(--indigo-dark); }
+  .tip { background:#F0FDF4; border-left:4px solid #16A34A; padding:14px 18px; border-radius:0 10px 10px 0; margin:16px 0; }
+  .tip p { margin:0; color:#15803D; font-size:13px; }
+  .tip strong { color:#15803D; }
+  .warn { background:#FFFBEB; border-left:4px solid #D97706; padding:14px 18px; border-radius:0 10px 10px 0; margin:16px 0; }
+  .warn p { margin:0; color:#92400E; font-size:13px; }
+  .warn strong { color:#92400E; }
+  table { width:100%; border-collapse:collapse; margin:14px 0 20px; font-size:12px; }
+  th { background:var(--ink); color:#fff; text-align:left; padding:9px 12px; font-weight:600; }
+  td { padding:9px 12px; border-bottom:1px solid var(--line); color:var(--slate); vertical-align:top; }
+  tr:nth-child(even) td { background:var(--bg-soft); }
+  .num { color:var(--indigo); font-weight:800; }
+  .toc-item { display:flex; justify-content:space-between; padding:9px 0; border-bottom:1px solid var(--line); }
+  .toc-item .t { color:var(--ink); font-weight:600; } .toc-item .n { color:var(--muted); }
+  .step { display:flex; gap:14px; margin-bottom:14px; }
+  .step .dot { width:26px; height:26px; border-radius:50%; background:linear-gradient(135deg,var(--indigo),var(--violet)); color:#fff; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:12px; flex-shrink:0; }
+  .step .body { flex:1; } .step .body b { color:var(--ink); }
+  .footer-note { position:absolute; bottom:12mm; left:20mm; right:20mm; font-size:10px; color:var(--muted); border-top:1px solid var(--line); padding-top:8px; display:flex; justify-content:space-between; }
+  .pill { display:inline-block; font-size:11px; padding:3px 10px; border-radius:999px; background:var(--bg-indigo); color:var(--indigo-dark); font-weight:600; margin-right:4px; }
+</style>
+</head>
+<body>
+
+<!-- COVER -->
+<div class="page cover">
+  <div class="eyebrow">● PRODUCT USER MANUAL</div>
+  <h1>DataByt<br><span class="grad">User Manual</span></h1>
+  <p class="sub">Everything you need to run automated AR collections — from first login to mastering every page of the dashboard.</p>
+  <div class="meta">Version 1.0 · Mid-market B2B AR Collections · databyt.in</div>
+  <div class="brand"><span class="logo">D</span> DataByt</div>
+</div>
+
+<!-- TOC -->
+<div class="page">
+  <h2 class="section">Contents</h2>
+  <div class="section-rule"></div>
+  <div class="toc-item"><span class="t">1 · What DataByt Does</span><span class="n">The 60-second overview</span></div>
+  <div class="toc-item"><span class="t">2 · Getting Started</span><span class="n">Login &amp; loading your data</span></div>
+  <div class="toc-item"><span class="t">3 · The Dashboard</span><span class="n">Your 8 core metrics</span></div>
+  <div class="toc-item"><span class="t">4 · AR Aging</span><span class="n">Invoices, buckets &amp; actions</span></div>
+  <div class="toc-item"><span class="t">5 · Collections</span><span class="n">The customer pipeline</span></div>
+  <div class="toc-item"><span class="t">6 · Disputes</span><span class="n">Pause &amp; resolve</span></div>
+  <div class="toc-item"><span class="t">7 · Analytics</span><span class="n">Performance &amp; trends</span></div>
+  <div class="toc-item"><span class="t">8 · Customers</span><span class="n">Segments &amp; balances</span></div>
+  <div class="toc-item"><span class="t">9 · Reports</span><span class="n">Board-ready PDFs</span></div>
+  <div class="toc-item"><span class="t">10 · Integrations</span><span class="n">QuickBooks, Xero, CSV, sample data</span></div>
+  <div class="toc-item"><span class="t">11 · Settings</span><span class="n">Signature, rules, payment links</span></div>
+  <div class="toc-item"><span class="t">12 · The AI Assistant</span><span class="n">Ask &amp; act</span></div>
+  <div class="toc-item"><span class="t">13 · Your Daily Workflow</span><span class="n">The 5-minute routine</span></div>
+  <div class="toc-item"><span class="t">14 · FAQ &amp; Troubleshooting</span><span class="n">Common questions</span></div>
+  <div class="footer-note"><span>DataByt — User Manual</span><span>Contents</span></div>
+</div>
+
+<!-- 1 WHAT -->
+<div class="page">
+  <h2 class="section">1 · What DataByt Does</h2>
+  <div class="section-rule"></div>
+  <p class="lead">DataByt is an AI-powered accounts receivable (AR) platform. It chases your overdue invoices automatically — so your team stops sending reminder emails by hand.</p>
+  <h3>The full loop DataByt closes</h3>
+  <table>
+    <tr><th>Step</th><th>What happens</th></tr>
+    <tr><td><span class="num">1</span> Import</td><td>Your invoices come in via QuickBooks, Xero, CSV, or sample data</td></tr>
+    <tr><td><span class="num">2</span> Score</td><td>Every overdue invoice is ranked by amount, age, and customer risk</td></tr>
+    <tr><td><span class="num">3</span> Email</td><td>AI sends personalised dunning emails, escalating in tone (L1 → L2 → L3)</td></tr>
+    <tr><td><span class="num">4</span> Pay</td><td>Customers pay via your payment link (Stripe, bank, any URL you set)</td></tr>
+    <tr><td><span class="num">5</span> Dispute</td><td>Disputes pause collections automatically until resolved</td></tr>
+    <tr><td><span class="num">6</span> Analyse</td><td>Live DSO, CEI, and collection trends — board-ready in one click</td></tr>
+  </table>
+  <div class="tip"><p><strong>The promise:</strong> Connected and live in 48 hours. No IT team. Your finance team of 1–3 can run it.</p></div>
+  <h3>Who runs it</h3>
+  <ul>
+    <li><strong>CFO / VP Finance</strong> — watches the metrics, makes decisions</li>
+    <li><strong>Controller / AR Manager</strong> — daily operator: reviews, marks paid, handles disputes</li>
+    <li><strong>The AI Assistant</strong> — does the repetitive chasing automatically</li>
+  </ul>
+  <div class="footer-note"><span>DataByt — User Manual</span><span>1 · What DataByt Does</span></div>
+</div>
+
+<!-- 2 GETTING STARTED -->
+<div class="page">
+  <h2 class="section">2 · Getting Started</h2>
+  <div class="section-rule"></div>
+  <h3>Step 1 — Log in</h3>
+  <div class="step"><div class="dot">1</div><div class="body">Go to <b>databyt.in</b> → click <b>Sign in</b> → enter your email and password. New here? Sign up creates your organisation automatically.</div></div>
+  <h3>Step 2 — Get your data in (pick one)</h3>
+  <div class="step"><div class="dot">A</div><div class="body"><b>Connect QuickBooks or Xero</b> — Dashboard → Integrations → Connect → log in → Allow. Invoices import automatically. (~5 min)</div></div>
+  <div class="step"><div class="dot">B</div><div class="body"><b>Import a CSV</b> — Integrations → Import CSV → download the template → fill it → upload. Required columns: invoice_number, customer_name, customer_email, amount, due_date.</div></div>
+  <div class="step"><div class="dot">C</div><div class="body"><b>Load sample data</b> — Integrations → Load Sample Data. Instantly fills the dashboard with realistic demo invoices so you can explore everything. (Great for testing.)</div></div>
+  <div class="warn"><p><strong>Empty dashboard?</strong> That just means no data yet. The dashboard shows a guide card pointing you to the three options above. Pick one and the whole product comes alive.</p></div>
+  <h3>Step 3 — Set your essentials (Settings)</h3>
+  <ul>
+    <li>Add your <strong>email signature</strong> (goes on every dunning email)</li>
+    <li>Set your <strong>payment link template</strong> so emails include a "Pay now" link</li>
+    <li>Confirm your <strong>collection rules</strong> (when L1/L2/L3 emails fire)</li>
+  </ul>
+  <div class="footer-note"><span>DataByt — User Manual</span><span>2 · Getting Started</span></div>
+</div>
+
+<!-- 3 DASHBOARD -->
+<div class="page">
+  <h2 class="section">3 · The Dashboard</h2>
+  <div class="section-rule"></div>
+  <p class="lead">Your command center, organised in two tiers: <span class="pill">Financial Health</span> for the CFO view, <span class="pill">Operations</span> for the daily view.</p>
+  <h3>Tier 1 — Financial Health</h3>
+  <table>
+    <tr><th>Metric</th><th>What it tells you</th><th>Healthy</th></tr>
+    <tr><td><strong>Total AR Outstanding</strong></td><td>All unpaid invoices across customers</td><td>—</td></tr>
+    <tr><td><strong>DSO</strong></td><td>Avg days to collect payment</td><td>Under 45</td></tr>
+    <tr><td><strong>Collection Effectiveness (CEI)</strong></td><td>% of collectible cash you actually collected</td><td>80%+</td></tr>
+    <tr><td><strong>Overdue % of AR</strong></td><td>Share of your AR that's past due</td><td>Under 30%</td></tr>
+  </table>
+  <h3>Tier 2 — Operations This Month</h3>
+  <table>
+    <tr><th>Metric</th><th>What it tells you</th></tr>
+    <tr><td><strong>Collected This Month</strong></td><td>Payments received + trend vs last month</td></tr>
+    <tr><td><strong>Avg Days Delinquent</strong></td><td>How late your overdue invoices are, on average</td></tr>
+    <tr><td><strong>Active Disputes</strong></td><td>Open disputes needing resolution (green = all clear)</td></tr>
+    <tr><td><strong>Emails Sent (Month)</strong></td><td>How many dunning emails DataByt sent for you</td></tr>
+  </table>
+  <p>Below the metrics: <strong>AR Aging Buckets</strong> (how your money spreads across overdue ranges) and <strong>Top Overdue Customers</strong> (who to chase first).</p>
+  <div class="tip"><p><strong>Read the metrics in order.</strong> Start top-left. If DSO is rising and CEI is falling, your collections are slipping — act before it shows up in cash.</p></div>
+  <div class="footer-note"><span>DataByt — User Manual</span><span>3 · The Dashboard</span></div>
+</div>
+
+<!-- 4 AR AGING -->
+<div class="page">
+  <h2 class="section">4 · AR Aging</h2>
+  <div class="section-rule"></div>
+  <p class="lead">The operational heart of DataByt. Every invoice, grouped by how overdue it is — and where you take action.</p>
+  <h3>The aging buckets</h3>
+  <table>
+    <tr><th>Bucket</th><th>Meaning</th></tr>
+    <tr><td><strong>Current</strong></td><td>Not yet due — healthy</td></tr>
+    <tr><td><strong>1–30 days</strong></td><td>Recently late — gentle reminders</td></tr>
+    <tr><td><strong>31–60 days</strong></td><td>Getting serious — firm follow-up</td></tr>
+    <tr><td><strong>61–90 days</strong></td><td>High risk — escalate</td></tr>
+    <tr><td><strong>90+ days</strong></td><td>Critical — may become bad debt</td></tr>
+  </table>
+  <h3>The invoice table — your 3 actions</h3>
+  <p>Each invoice row (on the <b>Action</b> column) gives you three buttons:</p>
+  <div class="step"><div class="dot">1</div><div class="body"><b>Email</b> — opens the AI email drafter. Pick escalation level (L1/L2/L3), the AI writes it, you review and send.</div></div>
+  <div class="step"><div class="dot">2</div><div class="body"><b>Pay link</b> — copies a payment link for that invoice (if you've set a template in Settings). If not set, it links you to Settings to add one.</div></div>
+  <div class="step"><div class="dot">3</div><div class="body"><b>Mark Paid</b> — the green button. Click it the moment a customer pays. The invoice updates instantly and stops further chasing.</div></div>
+  <div class="warn"><p><strong>Always Mark Paid when a payment lands.</strong> DataByt can't see your bank account — when you confirm a payment, click Mark Paid so it stops emailing a customer who already paid. Takes 5 seconds.</p></div>
+  <p>Use the <strong>filter tabs</strong> (All / Overdue / Open / Paid) and the <strong>search box</strong> to find invoices fast.</p>
+  <div class="footer-note"><span>DataByt — User Manual</span><span>4 · AR Aging</span></div>
+</div>
+
+<!-- 5 COLLECTIONS -->
+<div class="page">
+  <h2 class="section">5 · Collections</h2>
+  <div class="section-rule"></div>
+  <p class="lead">See exactly where every customer sits in the chasing process. Two tabs: Pipeline and Email Activity.</p>
+  <h3>The Customer Pipeline</h3>
+  <p>Every customer shows a <strong>stage badge</strong> so you know at a glance who's been contacted and how far they've escalated:</p>
+  <table>
+    <tr><th>Stage</th><th>Meaning</th></tr>
+    <tr><td><strong>Not Contacted</strong></td><td>Overdue but no email sent yet — queued for the next run</td></tr>
+    <tr><td><strong>L1 Sent</strong></td><td>Friendly first reminder sent (1–9 days late)</td></tr>
+    <tr><td><strong>L2 Sent</strong></td><td>Firm reminder with deadline (10–29 days late)</td></tr>
+    <tr><td><strong>L3 Final</strong></td><td>Final notice sent (30+ days late)</td></tr>
+    <tr><td><strong>Disputed</strong></td><td>Dispute raised — collections paused</td></tr>
+    <tr><td><strong>Paid</strong></td><td>All invoices settled</td></tr>
+  </table>
+  <p>Each row also shows: total owed, overdue invoice count, max days late, last email date, and total emails sent.</p>
+  <h3>Email Activity tab</h3>
+  <p>A live log of every dunning email sent — customer name, subject, date, and status (sent / opened / clicked). This is your proof that the AI is working.</p>
+  <div class="callout"><p><strong>This page is your USP made visible.</strong> When a CFO asks "is anything actually happening?" — this pipeline is the answer.</p></div>
+  <div class="footer-note"><span>DataByt — User Manual</span><span>5 · Collections</span></div>
+</div>
+
+<!-- 6 DISPUTES + 7 ANALYTICS -->
+<div class="page">
+  <h2 class="section">6 · Disputes</h2>
+  <div class="section-rule"></div>
+  <p class="lead">When a customer contests an invoice, collections should pause — not keep nagging. Disputes handle that.</p>
+  <h3>How disputes work</h3>
+  <div class="step"><div class="dot">1</div><div class="body"><b>File</b> — from AR Aging, click the dispute icon on an invoice (or ask the AI Assistant). Pick a reason: incorrect amount, goods not received, duplicate, already paid, service not rendered, other.</div></div>
+  <div class="step"><div class="dot">2</div><div class="body"><b>Pause</b> — collections automatically stop for that invoice while the dispute is open.</div></div>
+  <div class="step"><div class="dot">3</div><div class="body"><b>Resolve or reject</b> — from the Disputes page. Resolving resumes collections; the invoice returns to its normal flow.</div></div>
+  <div class="tip"><p><strong>Why this matters:</strong> Chasing a customer who has a legitimate dispute destroys the relationship. Disputes keep you professional.</p></div>
+
+  <h2 class="section" style="margin-top:34px">7 · Analytics</h2>
+  <div class="section-rule"></div>
+  <p class="lead">The deep-dive view for performance and trends over time.</p>
+  <ul>
+    <li><strong>Collection Effectiveness Index (CEI) gauge</strong> — your headline collections score</li>
+    <li><strong>Email performance</strong> — sent, open rates, payment conversion</li>
+    <li><strong>DSO trend</strong> — is it improving month over month?</li>
+    <li><strong>Active disputes &amp; avg days to pay</strong></li>
+  </ul>
+  <p>Use Analytics to answer the board's questions <em>before</em> they ask them.</p>
+  <div class="footer-note"><span>DataByt — User Manual</span><span>6 · Disputes · 7 · Analytics</span></div>
+</div>
+
+<!-- 8 CUSTOMERS + 9 REPORTS -->
+<div class="page">
+  <h2 class="section">8 · Customers</h2>
+  <div class="section-rule"></div>
+  <p class="lead">Your full customer list with balances, invoice counts, and segments.</p>
+  <h3>Customer segments — and why they matter</h3>
+  <table>
+    <tr><th>Segment</th><th>How DataByt treats them</th></tr>
+    <tr><td><strong>Strategic</strong></td><td>High-value. Emails are extra courteous — protect the relationship.</td></tr>
+    <tr><td><strong>Standard</strong></td><td>Normal escalation tone.</td></tr>
+    <tr><td><strong>At-risk</strong></td><td>History of late payments. Emails are firmer and more direct.</td></tr>
+  </table>
+  <p>Set a customer's segment by editing them here. The AI adjusts its email tone accordingly.</p>
+
+  <h2 class="section" style="margin-top:34px">9 · Reports</h2>
+  <div class="section-rule"></div>
+  <p class="lead">One click → a board-ready PDF.</p>
+  <p>Dashboard → Reports → <strong>Generate PDF Report</strong>. Includes AR aging summary, total outstanding, collection rate, and top overdue customers. Perfect for board meetings and finance reviews — no manual spreadsheet work.</p>
+  <div class="footer-note"><span>DataByt — User Manual</span><span>8 · Customers · 9 · Reports</span></div>
+</div>
+
+<!-- 10 INTEGRATIONS + 11 SETTINGS -->
+<div class="page">
+  <h2 class="section">10 · Integrations</h2>
+  <div class="section-rule"></div>
+  <p class="lead">Where your data comes from. Three live options + more on the roadmap.</p>
+  <table>
+    <tr><th>Option</th><th>Use when</th></tr>
+    <tr><td><strong>QuickBooks Online</strong></td><td>You run accounting in QuickBooks — syncs invoices daily</td></tr>
+    <tr><td><strong>Xero</strong></td><td>You run accounting in Xero — pulls outstanding invoices</td></tr>
+    <tr><td><strong>CSV Import</strong></td><td>You use any other system — export to CSV, upload</td></tr>
+    <tr><td><strong>Load Sample Data</strong></td><td>You want to explore/demo before connecting real data</td></tr>
+  </table>
+  <p><em>Coming soon:</em> NetSuite, Sage, and more ERP connectors.</p>
+
+  <h2 class="section" style="margin-top:34px">11 · Settings</h2>
+  <div class="section-rule"></div>
+  <table>
+    <tr><th>Setting</th><th>What it controls</th></tr>
+    <tr><td><strong>Email Signature</strong></td><td>The sign-off on every dunning email</td></tr>
+    <tr><td><strong>Collection Rules</strong></td><td>Day thresholds for L1/L2/L3 + cooldown between emails</td></tr>
+    <tr><td><strong>Payment Collection</strong></td><td>Your payment link template (use INVOICE_NUMBER as the placeholder)</td></tr>
+    <tr><td><strong>Currency</strong></td><td>Your default billing currency</td></tr>
+  </table>
+  <div class="tip"><p><strong>Set the payment link first.</strong> Emails with a one-click "Pay now" link get paid noticeably faster than emails without one.</p></div>
+  <div class="footer-note"><span>DataByt — User Manual</span><span>10 · Integrations · 11 · Settings</span></div>
+</div>
+
+<!-- 12 AI ASSISTANT -->
+<div class="page">
+  <h2 class="section">12 · The AI Assistant</h2>
+  <div class="section-rule"></div>
+  <p class="lead">The chat widget (bottom-right of every dashboard page). It doesn't just answer — it <strong>takes actions</strong>.</p>
+  <h3>What you can ask</h3>
+  <ul>
+    <li>"Who owes me the most?" → ranked list of overdue customers</li>
+    <li>"How many overdue invoices do I have?" → live count</li>
+    <li>"What's my total AR outstanding?" → the number</li>
+    <li>"How much does [customer] owe?" → that customer's balance + breakdown</li>
+    <li>"When did we last email [customer]?" → communication history</li>
+    <li>"How do I connect QuickBooks?" → product help</li>
+  </ul>
+  <h3>What it can do (actions)</h3>
+  <ul>
+    <li><strong>Send a reminder</strong> — "Send a reminder to [customer]" → it confirms, then sends</li>
+    <li><strong>File a dispute</strong> — "File a dispute for INV-023" → it confirms reason, then files</li>
+  </ul>
+  <div class="warn"><p><strong>It always confirms before acting.</strong> The Assistant will never send an email or file a dispute without asking you first.</p></div>
+  <h3>The toolbar</h3>
+  <ul>
+    <li><strong>Minimize</strong> (–) keeps your chat session alive in a small bar; <strong>Close</strong> (×) closes it</li>
+    <li><strong>Escalate an issue</strong> — sends a flagged message to the DataByt team</li>
+    <li><strong>Request a feature</strong> — submit an idea directly</li>
+  </ul>
+  <div class="footer-note"><span>DataByt — User Manual</span><span>12 · The AI Assistant</span></div>
+</div>
+
+<!-- 13 WORKFLOW -->
+<div class="page">
+  <h2 class="section">13 · Your Daily Workflow</h2>
+  <div class="section-rule"></div>
+  <p class="lead">DataByt does the heavy lifting automatically. Your job is a 5-minute daily check.</p>
+  <h3>The automatic part (no action needed)</h3>
+  <ul>
+    <li>Dunning emails go out <strong>Monday–Friday at 8am</strong>, escalating by age</li>
+    <li>Cooldown of <strong>3 days minimum</strong> between emails to the same customer</li>
+    <li>Disputes pause collections automatically</li>
+  </ul>
+  <h3>Your 5-minute daily routine</h3>
+  <div class="step"><div class="dot">1</div><div class="body"><b>Open the Dashboard</b> — glance at DSO, CEI, Overdue %. Anything red?</div></div>
+  <div class="step"><div class="dot">2</div><div class="body"><b>Check your bank</b> — any payments landed? Go to AR Aging → <b>Mark Paid</b> on those invoices.</div></div>
+  <div class="step"><div class="dot">3</div><div class="body"><b>Review Disputes</b> — resolve or reject anything open.</div></div>
+  <div class="step"><div class="dot">4</div><div class="body"><b>Scan the Collections pipeline</b> — any "Not Contacted" customers that need a manual nudge? Use the AI Assistant.</div></div>
+  <div class="tip"><p><strong>That's it.</strong> Five minutes a day. The system runs the other 23 hours and 55 minutes.</p></div>
+  <h3>Weekly</h3>
+  <ul><li>Generate a Reports PDF for your records / the board</li><li>Review Analytics — is DSO trending down? Is CEI above 80%?</li></ul>
+  <div class="footer-note"><span>DataByt — User Manual</span><span>13 · Daily Workflow</span></div>
+</div>
+
+<!-- 14 FAQ -->
+<div class="page">
+  <h2 class="section">14 · FAQ &amp; Troubleshooting</h2>
+  <div class="section-rule"></div>
+  <h4>The dashboard is empty.</h4>
+  <p>You have no invoice data yet. Go to Integrations and connect QuickBooks/Xero, import a CSV, or load sample data.</p>
+  <h4>A customer paid but still shows overdue.</h4>
+  <p>DataByt can't see your bank. Go to AR Aging → find the invoice → click <strong>Mark Paid</strong>. This is the one manual step (or reconnect your accounting integration so payments sync automatically).</p>
+  <h4>Why does a new customer show "Not Contacted"?</h4>
+  <p>Dunning emails run Mon–Fri at 8am. New overdue invoices wait for the next scheduled run. Nothing is broken — it's queued.</p>
+  <h4>How do I stop emails to one customer?</h4>
+  <p>Mark their invoices as paid, or file a dispute — both pause collections for that customer.</p>
+  <h4>Can I customise the email tone?</h4>
+  <p>Yes — set the customer's segment (Strategic / Standard / At-risk) in Customers, and adjust thresholds in Settings → Collection Rules.</p>
+  <h4>The AI Assistant says "unavailable."</h4>
+  <p>Usually a temporary connection issue — try again in a moment. If it persists, use the "Escalate an issue" button in the chat.</p>
+  <h4>How do I get a board report?</h4>
+  <p>Reports → Generate PDF Report. One click.</p>
+
+  <div style="margin-top:30px; padding:20px; background:linear-gradient(135deg,#130E25,#4F46E5); border-radius:14px; color:#fff;">
+    <p style="color:#A5B4FC; font-size:12px; letter-spacing:2px; font-weight:600; margin-bottom:8px;">NEED HELP?</p>
+    <p style="color:#fff; font-size:16px; font-weight:700; margin:0;">Use the AI Assistant's "Escalate an issue" button, or email support@databyt.in.</p>
+  </div>
+  <div class="footer-note"><span>DataByt — User Manual</span><span>14 · FAQ</span></div>
+</div>
+
+</body>
+</html>
