@@ -50,24 +50,46 @@ function AnimatedCounter({
 
 function DashboardMockup({ locale = "INTL" }: { locale?: Locale }) {
   const isIN = locale === "IN";
-  const bars = [38, 52, 45, 68, 61, 82];
-  const arTotal = isIN ? "₹6.8Cr" : "$847,200";
-  const overdue = isIN
+  // Tier-1 "Financial Health" metrics — mirrors the real dashboard
+  const metrics = isIN
     ? [
-        { name: "Sterling Corp",   amt: "₹9,90,000", tag: "L2", tagBg: "#FEF3C7", tagTx: "#92400E" },
-        { name: "TechFlow Pvt",    amt: "₹7,00,000", tag: "L1", tagBg: "#EEF2FF", tagTx: "#4338CA" },
-        { name: "BuildRight Ltd",  amt: "₹4,15,000", tag: "L3", tagBg: "#FEE2E2", tagTx: "#B91C1C" },
+        { label: "Total AR Outstanding",     value: "₹6.8Cr",  sub: "21 active customers",   icon: "$", iconBg: "linear-gradient(135deg,#4F46E5,#6366F1)", subTone: "#64748B" },
+        { label: "Days Sales Outstanding",   value: "32d",     sub: "✓ Within 45-day target", icon: "◷", iconBg: "linear-gradient(135deg,#0F172A,#334155)", subTone: "#16A34A" },
+        { label: "Collection Effectiveness", value: "86%",     sub: "✓ Healthy (80%+)",       icon: "◎", iconBg: "linear-gradient(135deg,#16A34A,#4ADE80)", subTone: "#16A34A" },
+        { label: "Overdue % of AR",          value: "18%",     sub: "₹1.2Cr past due",        icon: "▮", iconBg: "linear-gradient(135deg,#D97706,#F59E0B)", subTone: "#64748B" },
       ]
     : [
-        { name: "Acme Corp",     amt: "$12,400", tag: "L2", tagBg: "#FEF3C7", tagTx: "#92400E" },
-        { name: "TechFlow Inc",  amt: "$8,750",  tag: "L1", tagBg: "#EEF2FF", tagTx: "#4338CA" },
-        { name: "BuildRight Ltd",amt: "$5,200",  tag: "L3", tagBg: "#FEE2E2", tagTx: "#B91C1C" },
+        { label: "Total AR Outstanding",     value: "$744,450", sub: "21 active customers",   icon: "$", iconBg: "linear-gradient(135deg,#4F46E5,#6366F1)", subTone: "#64748B" },
+        { label: "Days Sales Outstanding",   value: "32d",      sub: "✓ Within 45-day target", icon: "◷", iconBg: "linear-gradient(135deg,#0F172A,#334155)", subTone: "#16A34A" },
+        { label: "Collection Effectiveness", value: "86%",      sub: "✓ Healthy (80%+)",       icon: "◎", iconBg: "linear-gradient(135deg,#16A34A,#4ADE80)", subTone: "#16A34A" },
+        { label: "Overdue % of AR",          value: "18%",      sub: "$132K past due",         icon: "▮", iconBg: "linear-gradient(135deg,#D97706,#F59E0B)", subTone: "#64748B" },
       ];
-  const metrics = [
-    { label: "Total AR Outstanding", value: arTotal,    sub: "21 active customers",   icon: "$",  tone: "#4F46E5" },
-    { label: "Days Sales Outstanding", value: "38 days", sub: "✓ within 45d target",  icon: "◷",  tone: "#16A34A" },
-    { label: "Collection Effectiveness", value: "87%",   sub: "✓ healthy (80%+)",      icon: "◎",  tone: "#16A34A" },
-  ];
+  // AR aging buckets — horizontal rows like the real dashboard
+  const buckets = isIN
+    ? [
+        { label: "Current",    amt: "₹1.9Cr", inv: 6,  pct: 34, color: "#16A34A" },
+        { label: "1–30 days",  amt: "₹2.4Cr", inv: 9,  pct: 42, color: "#4F46E5" },
+        { label: "31–60 days", amt: "₹1.1Cr", inv: 4,  pct: 16, color: "#EA580C" },
+        { label: "90+ days",   amt: "₹0.4Cr", inv: 2,  pct: 8,  color: "#B91C1C" },
+      ]
+    : [
+        { label: "Current",    amt: "$210K", inv: 6,  pct: 34, color: "#16A34A" },
+        { label: "1–30 days",  amt: "$268K", inv: 9,  pct: 42, color: "#4F46E5" },
+        { label: "31–60 days", amt: "$132K", inv: 4,  pct: 16, color: "#EA580C" },
+        { label: "90+ days",   amt: "$48K",  inv: 2,  pct: 8,  color: "#B91C1C" },
+      ];
+  // Top overdue customers — ranked list like the real dashboard
+  const top = isIN
+    ? [
+        { rank: 1, name: "Sunrise Foods",    meta: "4 inv · 12d overdue",  amt: "₹45.8L" },
+        { rank: 2, name: "Global Trade Co",  meta: "3 inv · 28d overdue",  amt: "₹24.5L" },
+        { rank: 3, name: "Acme Corp",        meta: "4 inv · 9d overdue",   amt: "₹7.4L"  },
+      ]
+    : [
+        { rank: 1, name: "Sunrise Foods",    meta: "4 inv · 12d overdue",  amt: "$58,550" },
+        { rank: 2, name: "Global Trade Co",  meta: "3 inv · 28d overdue",  amt: "$45,000" },
+        { rank: 3, name: "Acme Corp",        meta: "4 inv · 9d overdue",   amt: "$33,700" },
+      ];
   return (
     <div className="w-full rounded-2xl border border-[#E2E8F0] shadow-[0_40px_100px_-20px_rgba(79,70,229,0.18)] overflow-hidden bg-white">
       {/* Browser chrome */}
@@ -83,7 +105,7 @@ function DashboardMockup({ locale = "INTL" }: { locale?: Locale }) {
       </div>
 
       {/* Dashboard body */}
-      <div className="flex" style={{ height: 340 }}>
+      <div className="flex" style={{ height: 372 }}>
         {/* Sidebar */}
         <div className="w-[150px] shrink-0 bg-white border-r border-[#E2E8F0] flex flex-col p-3 gap-0.5 relative">
           <div className="absolute top-0 left-0 right-0 h-[3px]" style={{ background: "linear-gradient(90deg,#4F46E5,#7C3AED)" }} />
@@ -117,45 +139,51 @@ function DashboardMockup({ locale = "INTL" }: { locale?: Locale }) {
 
         {/* Main content */}
         <div className="flex-1 bg-[#F8FAFC] p-4 overflow-hidden">
-          <div className="grid grid-cols-3 gap-2 mb-3">
+          {/* Tier label */}
+          <p className="text-[7.5px] font-bold text-[#6366F1] uppercase tracking-widest mb-1.5">Financial Health</p>
+
+          {/* 4 metric cards */}
+          <div className="grid grid-cols-4 gap-1.5 mb-3">
             {metrics.map(m => (
-              <div key={m.label} className="bg-white rounded-xl border border-[#E2E8F0] p-3">
-                <div className="w-6 h-6 rounded-lg flex items-center justify-center mb-2 text-white text-[11px] font-bold"
-                  style={{ background: m.tone }}>{m.icon}</div>
-                <p className="text-[14px] font-bold text-[#0F172A] leading-none mb-1">{m.value}</p>
-                <p className="text-[9px] text-[#64748B] mb-0.5 leading-none">{m.label}</p>
-                <p className="text-[9px] font-semibold" style={{ color: m.tone }}>{m.sub}</p>
+              <div key={m.label} className="bg-white rounded-lg border border-[#E2E8F0] p-2">
+                <div className="w-5 h-5 rounded-md flex items-center justify-center mb-1.5 text-white text-[10px] font-bold"
+                  style={{ background: m.iconBg }}>{m.icon}</div>
+                <p className="text-[13px] font-bold text-[#0F172A] leading-none mb-1">{m.value}</p>
+                <p className="text-[8px] text-[#64748B] mb-0.5 leading-tight">{m.label}</p>
+                <p className="text-[8px] font-semibold leading-none" style={{ color: m.subTone }}>{m.sub}</p>
               </div>
             ))}
           </div>
 
+          {/* AR Aging Buckets + Top Overdue Customers */}
           <div className="grid grid-cols-2 gap-2">
             <div className="bg-white rounded-xl border border-[#E2E8F0] p-3">
-              <div className="flex items-center justify-between mb-3">
-                <p className="text-[10px] font-semibold text-[#0F172A]">Collections Trend</p>
-                <span className="text-[9px] text-[#64748B]">6 months</span>
-              </div>
-              <div className="flex items-end gap-1" style={{ height: 64 }}>
-                {bars.map((h, i) => (
-                  <div key={i} className="flex-1 rounded-t"
-                    style={{ height: `${h}%`, background: i === bars.length - 1 ? "#4F46E5" : "#C7D2FE" }} />
-                ))}
-              </div>
-              <div className="flex justify-between mt-1.5">
-                {["Dec", "Jan", "Feb", "Mar", "Apr", "May"].map(m => (
-                  <span key={m} className="text-[8px] text-[#94A3B8]">{m}</span>
+              <p className="text-[10px] font-semibold text-[#0F172A] mb-2.5">AR Aging Buckets</p>
+              <div className="space-y-2">
+                {buckets.map(b => (
+                  <div key={b.label}>
+                    <div className="flex justify-between items-center mb-1">
+                      <span className="text-[8.5px] text-[#475569] font-medium">{b.label}</span>
+                      <span className="text-[8px] text-[#64748B]">{b.amt} · {b.inv} inv</span>
+                    </div>
+                    <div className="h-1.5 rounded-full bg-[#F1F5F9] overflow-hidden">
+                      <div className="h-full rounded-full" style={{ width: `${b.pct}%`, background: b.color }} />
+                    </div>
+                  </div>
                 ))}
               </div>
             </div>
 
             <div className="bg-white rounded-xl border border-[#E2E8F0] p-3">
-              <p className="text-[10px] font-semibold text-[#0F172A] mb-2">Overdue Invoices</p>
-              {overdue.map(inv => (
-                <div key={inv.name} className="flex items-center justify-between py-1.5 border-b border-[#F1F5F9] last:border-0 gap-2">
-                  <span className="text-[9px] text-[#475569] font-medium truncate">{inv.name}</span>
-                  <span className="text-[9px] font-bold text-[#0F172A] shrink-0">{inv.amt}</span>
-                  <span className="text-[8px] px-1.5 py-0.5 rounded-full font-semibold shrink-0"
-                    style={{ background: inv.tagBg, color: inv.tagTx }}>{inv.tag}</span>
+              <p className="text-[10px] font-semibold text-[#0F172A] mb-2.5">Top Overdue Customers</p>
+              {top.map(c => (
+                <div key={c.rank} className="flex items-center gap-2 py-1.5 border-b border-[#F1F5F9] last:border-0">
+                  <span className="text-[8px] text-[#94A3B8] w-2 shrink-0">{c.rank}</span>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-[9px] font-semibold text-[#0F172A] truncate leading-none mb-0.5">{c.name}</p>
+                    <p className="text-[7.5px] text-[#64748B] leading-none">{c.meta}</p>
+                  </div>
+                  <span className="text-[9px] font-bold text-[#0F172A] shrink-0">{c.amt}</span>
                 </div>
               ))}
             </div>
