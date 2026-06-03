@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>DataByt — Sales Sheet</title>
+<style>
+  @page { size: A4; margin: 0; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root { --indigo:#4F46E5; --indigo-dark:#3730A3; --violet:#7C3AED; --ink:#0F172A; --slate:#475569; --muted:#64748B; --line:#E2E8F0; --bg-soft:#F8F9FC; --bg-indigo:#EEF2FF; }
+  body { font-family:-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif; color:var(--ink); line-height:1.5; font-size:12px; }
+  .page { width:210mm; height:297mm; padding:0; margin:0 auto; background:#fff; position:relative; display:flex; flex-direction:column; }
+
+  .hero { background:linear-gradient(130deg,#130E25 0%,#2A1E5C 50%,#4F46E5 100%); color:#fff; padding:24mm 18mm 16mm; position:relative; }
+  .hero .accent { position:absolute; top:0; left:0; right:0; height:8px; background:linear-gradient(90deg,#4F46E5,#7C3AED,#EC4899); }
+  .hero .eyebrow { font-size:11px; letter-spacing:2.5px; color:#A492FF; font-weight:600; margin-bottom:12px; }
+  .hero h1 { font-size:40px; font-weight:800; line-height:1.05; letter-spacing:-0.02em; margin-bottom:10px; }
+  .hero h1 .grad { color:#A492FF; }
+  .hero .tagline { font-size:16px; color:#CBD5E1; max-width:90%; }
+  .hero .brand { position:absolute; top:24mm; right:18mm; display:flex; align-items:center; gap:10px; font-size:18px; font-weight:700; }
+  .hero .brand .logo { width:34px; height:34px; border-radius:8px; background:#fff; color:#130E25; display:flex; align-items:center; justify-content:center; font-weight:800; }
+
+  .body { padding:14mm 18mm; flex:1; display:flex; flex-direction:column; gap:14px; }
+  .sec-label { font-size:11px; letter-spacing:1.5px; text-transform:uppercase; color:var(--indigo); font-weight:700; margin-bottom:8px; }
+
+  .problem { background:var(--bg-soft); border-radius:12px; padding:16px 20px; }
+  .problem p { color:var(--slate); margin:0; font-size:13px; }
+  .problem strong { color:var(--ink); }
+
+  .stats { display:flex; gap:14px; }
+  .stat { flex:1; background:#fff; border:1px solid var(--line); border-radius:12px; padding:16px; text-align:center; box-shadow:0 1px 3px rgba(0,0,0,.05); }
+  .stat .big { font-size:30px; font-weight:800; color:var(--indigo); line-height:1; }
+  .stat .small { font-size:11px; color:var(--muted); margin-top:6px; }
+
+  .how { display:flex; gap:10px; }
+  .how .item { flex:1; background:var(--bg-indigo); border-radius:10px; padding:12px; }
+  .how .item .n { font-size:11px; font-weight:800; color:var(--indigo); }
+  .how .item .t { font-size:12px; font-weight:700; color:var(--ink); margin:4px 0 2px; }
+  .how .item .d { font-size:10.5px; color:var(--slate); line-height:1.4; }
+
+  .two-col { display:flex; gap:18px; }
+  .col { flex:1; }
+  .feat { display:flex; gap:9px; margin-bottom:8px; align-items:flex-start; }
+  .feat .check { width:18px; height:18px; border-radius:50%; background:#F0FDF4; color:#16A34A; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:11px; flex-shrink:0; }
+  .feat .txt { font-size:12px; color:var(--slate); } .feat .txt b { color:var(--ink); }
+
+  .compare { width:100%; border-collapse:collapse; font-size:11px; }
+  .compare th { background:var(--ink); color:#fff; text-align:left; padding:7px 10px; font-weight:600; }
+  .compare td { padding:7px 10px; border-bottom:1px solid var(--line); color:var(--slate); }
+  .compare .win { color:#16A34A; font-weight:700; }
+
+  .cta { background:linear-gradient(135deg,#4F46E5,#7C3AED); border-radius:14px; padding:20px 24px; color:#fff; display:flex; align-items:center; justify-content:space-between; margin-top:auto; }
+  .cta .l h3 { font-size:18px; font-weight:800; margin-bottom:4px; color:#fff; }
+  .cta .l p { font-size:12px; color:#E0E7FF; margin:0; }
+  .cta .r { text-align:right; }
+  .cta .r .url { font-size:18px; font-weight:800; }
+  .cta .r .email { font-size:12px; color:#E0E7FF; margin-top:2px; }
+
+  h3.blk { font-size:15px; font-weight:800; color:var(--ink); margin-bottom:2px; }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="accent"></div>
+    <div class="brand"><span class="logo">D</span> DataByt</div>
+    <div class="eyebrow">● AI-POWERED AR COLLECTIONS</div>
+    <h1>Get paid 30 days faster.<br><span class="grad">Automatically.</span></h1>
+    <p class="tagline">AI that chases your overdue invoices — right tone, right time — so your finance team never sends a reminder by hand again.</p>
+  </div>
+
+  <!-- BODY -->
+  <div class="body">
+
+    <!-- PROBLEM -->
+    <div>
+      <div class="sec-label">The Problem</div>
+      <div class="problem"><p><strong>82% of failed businesses were profitable.</strong> They didn't run out of customers — they ran out of cash, waiting on invoices. Most finance teams still chase overdue invoices by hand: 10+ hours a week, inconsistent, and quietly pushing DSO up every quarter.</p></div>
+    </div>
+
+    <!-- STATS -->
+    <div class="stats">
+      <div class="stat"><div class="big">30%</div><div class="small">average DSO reduction</div></div>
+      <div class="stat"><div class="big">48 hrs</div><div class="small">to live collections</div></div>
+      <div class="stat"><div class="big">10×</div><div class="small">cheaper than HighRadius</div></div>
+      <div class="stat"><div class="big">1–3</div><div class="small">person team can run it</div></div>
+    </div>
+
+    <!-- HOW -->
+    <div>
+      <div class="sec-label">How It Works</div>
+      <div class="how">
+        <div class="item"><div class="n">01</div><div class="t">Connect</div><div class="d">QuickBooks, Xero, NetSuite, Sage, or CSV. Live in 48 hrs.</div></div>
+        <div class="item"><div class="n">02</div><div class="t">Score</div><div class="d">AI ranks every overdue invoice by amount, age &amp; risk.</div></div>
+        <div class="item"><div class="n">03</div><div class="t">Chase</div><div class="d">Personalised dunning emails, escalating L1→L2→L3.</div></div>
+        <div class="item"><div class="n">04</div><div class="t">Collect</div><div class="d">Payment links, disputes handled, live DSO + CEI.</div></div>
+      </div>
+    </div>
+
+    <!-- FEATURES + COMPARE -->
+    <div class="two-col">
+      <div class="col">
+        <div class="sec-label">What's Included</div>
+        <div class="feat"><span class="check">✓</span><span class="txt"><b>AI dunning engine</b> — auto reminders, tone escalation</span></div>
+        <div class="feat"><span class="check">✓</span><span class="txt"><b>Customer pipeline</b> — see every account's stage</span></div>
+        <div class="feat"><span class="check">✓</span><span class="txt"><b>Dispute management</b> — pause &amp; resolve cleanly</span></div>
+        <div class="feat"><span class="check">✓</span><span class="txt"><b>Live analytics</b> — DSO, CEI, aging, trends</span></div>
+        <div class="feat"><span class="check">✓</span><span class="txt"><b>AI assistant</b> — ask &amp; act on your AR data</span></div>
+        <div class="feat"><span class="check">✓</span><span class="txt"><b>Board-ready PDF reports</b> — one click</span></div>
+      </div>
+      <div class="col">
+        <div class="sec-label">Why DataByt</div>
+        <table class="compare">
+          <tr><th>Instead of…</th><th>You get</th></tr>
+          <tr><td>Enterprise tools</td><td class="win">Mid-market fit</td></tr>
+          <tr><td>Collections agency</td><td class="win">Keep 100%</td></tr>
+          <tr><td>Hiring an AR clerk</td><td class="win">Automation</td></tr>
+          <tr><td>Spreadsheet + memory</td><td class="win">A real system</td></tr>
+          <tr><td>Months to deploy</td><td class="win">48 hours</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- GUARANTEE -->
+    <div>
+      <div class="sec-label">Risk-Free</div>
+      <h3 class="blk">30-day free trial · No credit card · Full data export anytime · No lock-in</h3>
+    </div>
+
+    <!-- CTA -->
+    <div class="cta">
+      <div class="l">
+        <h3>See your numbers in 48 hours.</h3>
+        <p>Built for B2B finance teams who are done chasing invoices by hand.</p>
+      </div>
+      <div class="r">
+        <div class="url">databyt.in</div>
+        <div class="email">kuberan811@gmail.com</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+</body>
+</html>

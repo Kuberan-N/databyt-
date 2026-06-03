@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>DataByt — Sales &amp; Conversion Playbook</title>
+<style>
+  @page { size: A4; margin: 0; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root { --indigo:#4F46E5; --indigo-dark:#3730A3; --violet:#7C3AED; --ink:#0F172A; --slate:#475569; --muted:#64748B; --line:#E2E8F0; --bg-soft:#F8F9FC; --bg-indigo:#EEF2FF; }
+  body { font-family:-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif; color:var(--ink); line-height:1.6; font-size:13px; }
+  .page { width:210mm; min-height:297mm; padding:22mm 20mm; margin:0 auto; background:#fff; page-break-after:always; position:relative; }
+  .page:last-child { page-break-after:auto; }
+  .cover { background:linear-gradient(150deg,#130E25 0%,#2A1E5C 45%,#4F46E5 100%); color:#fff; display:flex; flex-direction:column; justify-content:center; padding:30mm; }
+  .cover .eyebrow { font-size:13px; letter-spacing:3px; color:#A492FF; font-weight:600; margin-bottom:18px; }
+  .cover h1 { font-size:46px; font-weight:800; line-height:1.08; letter-spacing:-0.02em; margin-bottom:20px; }
+  .cover h1 .grad { color:#A492FF; }
+  .cover .sub { font-size:17px; color:#CBD5E1; max-width:82%; margin-bottom:40px; }
+  .cover .meta { font-size:13px; color:#94A3B8; border-top:1px solid rgba(255,255,255,.2); padding-top:20px; }
+  .cover .brand { display:flex; align-items:center; gap:12px; margin-top:auto; font-size:20px; font-weight:700; }
+  .cover .brand .logo { width:40px; height:40px; border-radius:9px; background:#fff; color:#130E25; display:flex; align-items:center; justify-content:center; font-weight:800; }
+  h2.section { font-size:25px; font-weight:800; color:var(--ink); letter-spacing:-0.01em; margin-bottom:6px; padding-top:4px; }
+  .section-rule { height:4px; width:60px; background:linear-gradient(90deg,var(--indigo),var(--violet)); border-radius:2px; margin-bottom:20px; }
+  h3 { font-size:17px; font-weight:700; margin:22px 0 10px; color:var(--ink); }
+  h4 { font-size:14px; font-weight:700; margin:16px 0 6px; color:var(--indigo-dark); }
+  p { margin-bottom:11px; color:var(--slate); }
+  strong { color:var(--ink); font-weight:650; }
+  ul,ol { margin:0 0 12px 18px; } li { margin-bottom:6px; color:var(--slate); }
+  .lead { font-size:15px; color:var(--slate); margin-bottom:18px; }
+  .callout { background:var(--bg-indigo); border-left:4px solid var(--indigo); padding:14px 18px; border-radius:0 10px 10px 0; margin:16px 0; }
+  .callout p { margin:0; color:var(--indigo-dark); font-size:13px; } .callout strong { color:var(--indigo-dark); }
+  .tip { background:#F0FDF4; border-left:4px solid #16A34A; padding:14px 18px; border-radius:0 10px 10px 0; margin:16px 0; }
+  .tip p { margin:0; color:#15803D; font-size:13px; } .tip strong { color:#15803D; }
+  .warn { background:#FFFBEB; border-left:4px solid #D97706; padding:14px 18px; border-radius:0 10px 10px 0; margin:16px 0; }
+  .warn p { margin:0; color:#92400E; font-size:13px; } .warn strong { color:#92400E; }
+  .script { background:#fff; border:1px solid var(--line); border-radius:12px; padding:16px 18px; margin:12px 0; box-shadow:0 1px 3px rgba(0,0,0,.05); }
+  .script .lbl { font-size:10px; letter-spacing:1.5px; text-transform:uppercase; color:var(--muted); font-weight:700; margin-bottom:8px; }
+  .script .body { white-space:pre-wrap; font-size:12.5px; line-height:1.6; color:var(--ink); }
+  table { width:100%; border-collapse:collapse; margin:14px 0 20px; font-size:12px; }
+  th { background:var(--ink); color:#fff; text-align:left; padding:9px 12px; font-weight:600; }
+  td { padding:9px 12px; border-bottom:1px solid var(--line); color:var(--slate); vertical-align:top; }
+  tr:nth-child(even) td { background:var(--bg-soft); }
+  .num { color:var(--indigo); font-weight:800; }
+  .toc-item { display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid var(--line); }
+  .toc-item .t { color:var(--ink); font-weight:600; } .toc-item .n { color:var(--muted); }
+  .step { display:flex; gap:14px; margin-bottom:14px; }
+  .step .dot { width:26px; height:26px; border-radius:50%; background:linear-gradient(135deg,var(--indigo),var(--violet)); color:#fff; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:12px; flex-shrink:0; }
+  .step .body { flex:1; } .step .body b { color:var(--ink); }
+  .qa { margin-bottom:16px; } .qa .q { font-weight:700; color:var(--ink); margin-bottom:4px; } .qa .a { color:var(--slate); }
+  .footer-note { position:absolute; bottom:12mm; left:20mm; right:20mm; font-size:10px; color:var(--muted); border-top:1px solid var(--line); padding-top:8px; display:flex; justify-content:space-between; }
+</style>
+</head>
+<body>
+
+<!-- COVER -->
+<div class="page cover">
+  <div class="eyebrow">● SALES &amp; CONVERSION PLAYBOOK</div>
+  <h1>From CFO Contact<br>to <span class="grad">Paying Customer</span></h1>
+  <p class="sub">The exact scripts, sequences, and answers that turn a LinkedIn connection into a pilot, a pilot into a testimonial, and a testimonial into revenue.</p>
+  <div class="meta">For: Kuberan N · Founder, DataByt · US/EU mid-market B2B CFOs</div>
+  <div class="brand"><span class="logo">D</span> DataByt</div>
+</div>
+
+<!-- TOC -->
+<div class="page">
+  <h2 class="section">Contents</h2>
+  <div class="section-rule"></div>
+  <div class="toc-item"><span class="t">1 · The Conversion Funnel</span><span class="n">The path to revenue</span></div>
+  <div class="toc-item"><span class="t">2 · DM &amp; Email Scripts</span><span class="n">Opening the conversation</span></div>
+  <div class="toc-item"><span class="t">3 · The Discovery Call</span><span class="n">Questions that close</span></div>
+  <div class="toc-item"><span class="t">4 · Objection Handling</span><span class="n">Word-for-word answers</span></div>
+  <div class="toc-item"><span class="t">5 · Competitor Battle Card</span><span class="n">DataByt vs the field</span></div>
+  <div class="toc-item"><span class="t">6 · The Free-Pilot Sequence</span><span class="n">Pilot → testimonial → paid</span></div>
+  <div class="toc-item"><span class="t">7 · Asking for the Testimonial</span><span class="n">The exact ask</span></div>
+  <div class="toc-item"><span class="t">8 · Converting Free to Paid</span><span class="n">The money conversation</span></div>
+  <div class="footer-note"><span>DataByt — Sales &amp; Conversion Playbook</span><span>Contents</span></div>
+</div>
+
+<!-- 1 FUNNEL -->
+<div class="page">
+  <h2 class="section">1 · The Conversion Funnel</h2>
+  <div class="section-rule"></div>
+  <p class="lead">Every stage has one job: move the CFO to the next step. Don't skip stages — a cold contact won't buy, but they will take a 15-minute call.</p>
+  <table>
+    <tr><th>Stage</th><th>Goal</th><th>The tool</th></tr>
+    <tr><td><span class="num">1</span> Connect</td><td>Become a familiar name</td><td>LinkedIn connect + note</td></tr>
+    <tr><td><span class="num">2</span> Converse</td><td>Earn a reply, build rapport</td><td>No-pitch DM (§2)</td></tr>
+    <tr><td><span class="num">3</span> Call</td><td>Diagnose their AR pain</td><td>Discovery script (§3)</td></tr>
+    <tr><td><span class="num">4</span> Pilot</td><td>Get them using DataByt free</td><td>Free-pilot offer (§6)</td></tr>
+    <tr><td><span class="num">5</span> Prove</td><td>Deliver a visible win</td><td>The 2-week pilot plan (§6)</td></tr>
+    <tr><td><span class="num">6</span> Testimonial</td><td>Capture social proof</td><td>The testimonial ask (§7)</td></tr>
+    <tr><td><span class="num">7</span> Convert</td><td>Turn free into paid</td><td>The money conversation (§8)</td></tr>
+  </table>
+  <div class="callout"><p><strong>The golden rule:</strong> At this stage your goal is <strong>learning + proof</strong>, not revenue. Your first 5–10 pilots exist to give you testimonials, case studies, and product feedback. Money comes after proof. Don't rush stage 7.</p></div>
+  <div class="tip"><p><strong>Conversion math:</strong> ~Of 100 CFOs you connect with, expect ~40 accept, ~10 reply, ~4 take a call, ~2 start a pilot. To get 5 pilots, plan to connect with ~250 CFOs. The LinkedIn Playbook routine feeds this funnel.</p></div>
+  <div class="footer-note"><span>DataByt — Sales &amp; Conversion Playbook</span><span>1 · The Funnel</span></div>
+</div>
+
+<!-- 2 DM SCRIPTS -->
+<div class="page">
+  <h2 class="section">2 · DM &amp; Email Scripts</h2>
+  <div class="section-rule"></div>
+  <p class="lead">Never pitch in the first message. The goal of message one is a <em>reply</em>, not a sale.</p>
+
+  <h4>A · The connection note (when sending the request)</h4>
+  <div class="script"><div class="lbl">LinkedIn connect note</div><div class="body">Hi [Name] — I'm building AI to fix B2B collections and I'm following finance leaders to learn what's actually broken in AR. Would love to connect and learn from your experience.</div></div>
+
+  <h4>B · The opener (after they accept — wait 1 day)</h4>
+  <div class="script"><div class="lbl">First DM — no pitch</div><div class="body">Thanks for connecting, [Name]! Quick question since you lead finance at [Company] — what's the most frustrating part of chasing overdue invoices for your team right now? I'm building in this space and trying to learn from people who live it.</div></div>
+
+  <h4>C · When they reply with a pain point</h4>
+  <div class="script"><div class="lbl">Build rapport, then soft-offer</div><div class="body">That's exactly what I keep hearing — [reflect their pain back in one line]. We built DataByt to automate precisely that: AI chases overdue invoices on a schedule, escalates the tone, and stops the moment someone pays.
+
+I'm onboarding a few finance teams to use it free while we gather feedback. Worth a quick 15-min look at how it'd work on your AR? No pressure either way.</div></div>
+
+  <h4>D · The "comment AR" follow-up (from a post)</h4>
+  <div class="script"><div class="lbl">When someone comments "AR" on your Day-20 post</div><div class="body">Thanks [Name]! Sent you a DM. Short version: I'll show you DataByt running on a sample of overdue invoices in ~15 min, and if it's useful, you can pilot it free. When works this week — Tue or Thu?</div></div>
+
+  <h4>E · The cold email (if you have their address)</h4>
+  <div class="script"><div class="lbl">Subject: quick q about [Company]'s DSO</div><div class="body">Hi [Name],
+
+I'll keep this short. Most finance teams at companies like [Company] are still chasing overdue invoices by hand — 10+ hours a week, inconsistent, and it quietly pushes DSO up.
+
+DataByt automates it: AI sends the reminders, escalates tone by age, and stops when a customer pays. Live in 48 hours, connects to QuickBooks/Xero/NetSuite/Sage.
+
+I'm letting a few teams pilot it free in exchange for feedback. Open to a 15-min look?
+
+— Kuberan, Founder @ DataByt · databyt.in</div></div>
+
+  <div class="warn"><p><strong>Rule:</strong> One follow-up only if no reply (after ~4 days). Two unanswered messages = move on. Never triple-text a CFO.</p></div>
+  <div class="footer-note"><span>DataByt — Sales &amp; Conversion Playbook</span><span>2 · DM &amp; Email Scripts</span></div>
+</div>
+
+<!-- 3 DISCOVERY -->
+<div class="page">
+  <h2 class="section">3 · The Discovery Call</h2>
+  <div class="section-rule"></div>
+  <p class="lead">The best salespeople talk ~30% of the time. Your job on this call is to <strong>diagnose</strong>, not pitch. Let them describe the pain — then show the cure.</p>
+  <h3>The 15-minute structure</h3>
+  <div class="step"><div class="dot">1</div><div class="body"><b>Frame (1 min):</b> "Thanks for the time. I want to understand how your team handles collections today, and if DataByt's a fit, I'll show you exactly how it'd work. If it's not, I'll tell you straight."</div></div>
+  <div class="step"><div class="dot">2</div><div class="body"><b>Diagnose (7 min):</b> Ask the questions below. Listen. Take notes. Reflect their pain back.</div></div>
+  <div class="step"><div class="dot">3</div><div class="body"><b>Show (5 min):</b> Screen-share DataByt on sample data. Show their kind of pain getting solved (see the Demo Script doc).</div></div>
+  <div class="step"><div class="dot">4</div><div class="body"><b>Close to pilot (2 min):</b> "Want to try this on your real invoices, free, for two weeks?"</div></div>
+
+  <h3>The discovery questions (ask these exactly)</h3>
+  <ul>
+    <li>"Walk me through how your team chases an overdue invoice today — step by step."</li>
+    <li>"Who actually does it, and how many hours a week does it eat?"</li>
+    <li>"Do you know your DSO off the top of your head? Is it trending up or down?"</li>
+    <li>"How much is sitting in overdue invoices right now, roughly?"</li>
+    <li>"What have you tried before — agency, software, just hiring? What happened?"</li>
+    <li>"If chasing invoices just… happened automatically, what would that free your team to do?"</li>
+  </ul>
+  <div class="tip"><p><strong>The magic question</strong> is the last one. It makes them describe the value <em>in their own words</em> — which is far more persuasive than you pitching it.</p></div>
+  <div class="callout"><p><strong>Qualify, don't convince.</strong> A good fit: $3M–$100M B2B, 30+ overdue invoices, DSO they're unhappy with, doing it manually. A bad fit: tiny, no AR pain, or a Fortune 500 with HighRadius already. If they're not a fit, say so — your honesty becomes your reputation.</p></div>
+  <div class="footer-note"><span>DataByt — Sales &amp; Conversion Playbook</span><span>3 · Discovery Call</span></div>
+</div>
+
+<!-- 4 OBJECTIONS -->
+<div class="page">
+  <h2 class="section">4 · Objection Handling</h2>
+  <div class="section-rule"></div>
+  <p class="lead">Objections aren't rejection — they're requests for reassurance. Answer calmly, briefly, then re-offer the pilot.</p>
+
+  <div class="qa"><div class="q">"How are you different from HighRadius / Billtrust?"</div><div class="a">"They're enterprise tools — six-figure budgets, months to implement, a team to run them. DataByt is built for finance teams of 1–3 at mid-market companies. Live in 48 hours, no IT, a fraction of the cost. Same automation, none of the enterprise weight."</div></div>
+
+  <div class="qa"><div class="q">"Is my data safe?"</div><div class="a">"Yes. Your data is isolated per organisation, encrypted, and we only read what's needed to chase invoices. We never share or sell data. You can export everything and delete your account anytime — no lock-in."</div></div>
+
+  <div class="qa"><div class="q">"Will this annoy my customers / hurt relationships?"</div><div class="a">"That's exactly why we built tone escalation. Early reminders are warm and friendly — they assume the customer just forgot. It only gets firmer over time, and you can set strategic customers to extra-courteous. You stay in control, and you review anything before it's automated."</div></div>
+
+  <div class="qa"><div class="q">"Why should I trust an AI to email my customers?"</div><div class="a">"You don't have to hand over the keys on day one. In the pilot, you approve emails before they send. Once you see the AI writes them as well as your team — better, actually, because it's consistent — you can let it run automatically. Your call, every step."</div></div>
+
+  <div class="qa"><div class="q">"We don't use QuickBooks or Xero."</div><div class="a">"No problem — you can import a simple CSV from any system, and NetSuite and Sage are supported too. Takes minutes. We'll have your AR in DataByt either way."</div></div>
+
+  <div class="qa"><div class="q">"I don't have time to switch tools right now."</div><div class="a">"That's the best reason to try it — it removes work, doesn't add it. Setup is 48 hours and we do it with you. The pilot is free and you can walk away anytime. The only thing it costs you is the 15 minutes we already spent."</div></div>
+
+  <div class="qa"><div class="q">"How much does it cost?"</div><div class="a">"Right now I'm onboarding a small group free in exchange for feedback and a testimonial if you're happy. After that it's one flat plan, no per-seat fees — and a founding rate locked in for early customers. Let's prove it works on your AR first; pricing's the easy part."</div></div>
+
+  <div class="footer-note"><span>DataByt — Sales &amp; Conversion Playbook</span><span>4 · Objection Handling</span></div>
+</div>
+
+<!-- 5 BATTLE CARD -->
+<div class="page">
+  <h2 class="section">5 · Competitor Battle Card</h2>
+  <div class="section-rule"></div>
+  <p class="lead">Know exactly where you win. Never bad-mouth competitors — position around the gap they leave.</p>
+  <table>
+    <tr><th>Option</th><th>Their world</th><th>Where DataByt wins</th></tr>
+    <tr><td><strong>HighRadius / Billtrust</strong></td><td>Enterprise, 6-figure, months to deploy, needs a team</td><td>Built for mid-market 1–3 person finance teams. 48 hrs, no IT, fraction of the cost.</td></tr>
+    <tr><td><strong>Tesorio / Upflow</strong></td><td>Solid, but pricier &amp; heavier for SMBs</td><td>Simpler, faster to value, AI takes actions (not just dashboards).</td></tr>
+    <tr><td><strong>Collections agency</strong></td><td>Takes 10–25% of recovered cash, can torch relationships</td><td>Flat cost, you keep 100%, tone protects the relationship.</td></tr>
+    <tr><td><strong>Hiring an AR clerk</strong></td><td>$50–70K/yr, still manual, single point of failure</td><td>Automates the repetitive 80%; your team handles the human 20%.</td></tr>
+    <tr><td><strong>QuickBooks/Xero reminders</strong></td><td>Basic, same-tone, no escalation or strategy</td><td>AI escalation, segmentation, disputes, live CEI/DSO, batching.</td></tr>
+    <tr><td><strong>Spreadsheet + memory</strong></td><td>Free, but inconsistent &amp; fragile</td><td>A system, not a person's memory. Consistent, automatic, tracked.</td></tr>
+  </table>
+  <h3>Your one-line positioning</h3>
+  <div class="callout"><p><strong>"DataByt is the AR collections tool built for the mid-market companies the enterprise giants ignored — automated, affordable, live in 48 hours."</strong></p></div>
+  <div class="tip"><p><strong>When a CFO names a competitor:</strong> "Great tool — for a different company. Here's who it's built for, and here's why DataByt fits a team your size better." Respect, then reframe.</p></div>
+  <div class="footer-note"><span>DataByt — Sales &amp; Conversion Playbook</span><span>5 · Battle Card</span></div>
+</div>
+
+<!-- 6 PILOT SEQUENCE -->
+<div class="page">
+  <h2 class="section">6 · The Free-Pilot Sequence</h2>
+  <div class="section-rule"></div>
+  <p class="lead">The pilot is your most powerful sales tool. A CFO who sees DataByt recover real cash needs no convincing. Run it as a tight, time-boxed plan with a clear win.</p>
+
+  <h3>The offer (how to frame it)</h3>
+  <div class="script"><div class="lbl">The pilot pitch</div><div class="body">"Here's what I'd suggest: let's run DataByt on your real AR, free, for two weeks. I'll set it up with you in 48 hours. You approve every email before it sends. At the end, you'll see exactly how much we moved — invoices chased, replies, payments. If it's not obviously useful, we part as friends and you keep all your data."</div></div>
+
+  <h3>The 2-week pilot plan</h3>
+  <table>
+    <tr><th>Day</th><th>What happens</th></tr>
+    <tr><td><strong>Day 0</strong></td><td>Onboard: connect data (or CSV), set signature + payment link, set segments. (See Demo &amp; Onboarding Script.)</td></tr>
+    <tr><td><strong>Day 1–2</strong></td><td>Review the AR aging together. Agree which overdue invoices to chase first.</td></tr>
+    <tr><td><strong>Day 2–10</strong></td><td>AI sends reminders (CFO approves first batch, then lets it run). Track opens, replies, payments.</td></tr>
+    <tr><td><strong>Day 10–12</strong></td><td>Handle any disputes; mark payments received. Watch DSO/overdue % move.</td></tr>
+    <tr><td><strong>Day 14</strong></td><td><strong>The wrap-up call</strong> — show the results. This is where you ask for the testimonial and the paid conversation.</td></tr>
+  </table>
+
+  <h3>Engineer a visible win</h3>
+  <ul>
+    <li>Pick 1–2 chaseable overdue invoices likely to pay during the window — an early payment is your proof.</li>
+    <li>Track a clear before/after: "Day 0: $X overdue, DSO Y. Day 14: $Z collected, N reminders sent, M replies."</li>
+    <li>Even if little is collected in 14 days, the <em>time saved</em> and <em>consistency</em> are the win. Quantify hours saved.</li>
+  </ul>
+  <div class="tip"><p><strong>Always end the pilot with a scheduled wrap-up call.</strong> Never let a pilot just fizzle out. The Day-14 call is where pilots become customers.</p></div>
+  <div class="footer-note"><span>DataByt — Sales &amp; Conversion Playbook</span><span>6 · Free-Pilot Sequence</span></div>
+</div>
+
+<!-- 7 TESTIMONIAL -->
+<div class="page">
+  <h2 class="section">7 · Asking for the Testimonial</h2>
+  <div class="section-rule"></div>
+  <p class="lead">A testimonial from a real CFO is worth more than any ad. Ask at the moment of maximum happiness — right after they see a result.</p>
+
+  <h3>When to ask</h3>
+  <p>On the Day-14 wrap-up call, immediately after showing a positive result, while they're nodding. Or the moment they say something like "this is great" — that's your cue.</p>
+
+  <h3>The ask (make it easy)</h3>
+  <div class="script"><div class="lbl">The testimonial ask</div><div class="body">"I'm really glad it's working for you. Honestly, the best thing you could do for me right now isn't to pay — it's to let me share your experience. Would you be open to a short testimonial I can use? I can even draft it from what you've told me and you just edit or approve it. One line about what DataByt changed for your team would mean the world."</div></div>
+
+  <h3>Make it frictionless — offer 3 formats</h3>
+  <ul>
+    <li><strong>Easiest:</strong> you draft 2–3 sentences from their own words, they approve → you post it.</li>
+    <li><strong>Better:</strong> a LinkedIn recommendation on your profile (huge for the algorithm + trust).</li>
+    <li><strong>Best:</strong> a 60-second video clip or a named quote with their title/company.</li>
+  </ul>
+
+  <h3>The draft-it-for-them template</h3>
+  <div class="script"><div class="lbl">Draft you send them to approve</div><div class="body">"Before DataByt, our team spent hours every week chasing invoices by hand and our DSO kept creeping up. Within two weeks, [result — e.g. 'we'd automated all our reminders and recovered $X']. It's like having an AR analyst that never forgets. — [Name], [Title], [Company]"</div></div>
+  <div class="callout"><p><strong>Why draft it yourself:</strong> A busy CFO will rarely write one from scratch — but they'll happily approve a good draft in 30 seconds. Remove every ounce of friction.</p></div>
+  <div class="footer-note"><span>DataByt — Sales &amp; Conversion Playbook</span><span>7 · The Testimonial Ask</span></div>
+</div>
+
+<!-- 8 CONVERT -->
+<div class="page">
+  <h2 class="section">8 · Converting Free to Paid</h2>
+  <div class="section-rule"></div>
+  <p class="lead">Once you have proof and a few testimonials, the free era ends and the paid era begins. This is the money conversation — handle it with confidence, not apology.</p>
+
+  <h3>When to have it</h3>
+  <ul>
+    <li>After the pilot delivered a clear win, and they've given a testimonial</li>
+    <li>Once you have ~3–5 happy pilots / testimonials in hand (proof gives you pricing confidence)</li>
+    <li>At the natural end of the free period — frame it as graduation, not a bill</li>
+  </ul>
+
+  <h3>The conversion conversation</h3>
+  <div class="script"><div class="lbl">Free → paid</div><div class="body">"You've seen what DataByt does on your real AR — [recap the result]. The free pilot was to prove it works, and it has. To keep it running, it's one flat plan, everything included, no per-seat fees. As one of our early customers, I'll lock in the founding rate for you — it won't go up as we grow. Shall I keep your account live and get you set up?"</div></div>
+
+  <h3>Pricing principles for this stage</h3>
+  <table>
+    <tr><th>Principle</th><th>Why</th></tr>
+    <tr><td><strong>Flat plan, no per-seat</strong></td><td>Simple to say yes to; no math, no procurement friction</td></tr>
+    <tr><td><strong>Founding rate, locked</strong></td><td>Rewards early believers; creates urgency to commit now</td></tr>
+    <tr><td><strong>Anchor to value, not cost</strong></td><td>"It recovers $X and saves Y hours" &gt;&gt; "it costs $Z"</td></tr>
+    <tr><td><strong>Annual option</strong></td><td>Better cash for you; offer a discount vs monthly</td></tr>
+  </table>
+
+  <div class="warn"><p><strong>Don't undercharge out of fear.</strong> If DataByt frees $400K in cash and saves 10 hours/week, a few hundred a month is trivial. Price to the value you deliver, not to your nerves. Your testimonials give you the confidence to hold the number.</p></div>
+
+  <h3>If they hesitate on price</h3>
+  <div class="script"><div class="lbl">The reframe</div><div class="body">"Totally fair. Let's look at it differently: in the pilot we [recovered $X / saved Y hours]. The plan costs less than [a fraction of that value / one hour of your AR person's time per week]. The question isn't really the price — it's whether you want to keep that result running. I think you do."</div></div>
+
+  <div style="margin-top:24px; padding:20px; background:linear-gradient(135deg,#130E25,#4F46E5); border-radius:14px; color:#fff;">
+    <p style="color:#A5B4FC; font-size:12px; letter-spacing:2px; font-weight:600; margin-bottom:8px;">THE WHOLE PLAYBOOK IN ONE LINE</p>
+    <p style="color:#fff; font-size:16px; font-weight:700; margin:0;">Connect without pitching. Diagnose without selling. Prove with a free pilot. Then charge with confidence — because the proof does the closing for you.</p>
+  </div>
+  <div class="footer-note"><span>DataByt — Sales &amp; Conversion Playbook</span><span>8 · Free to Paid</span></div>
+</div>
+
+</body>
+</html>
