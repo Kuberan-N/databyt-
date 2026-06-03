@@ -36,7 +36,7 @@ export default function ROICalculator({ locale = "INTL", cfg }: { locale?: Local
     : `${fmt(c.roiDataBytMonthly)}/month flat`;
 
   return (
-    <section id="roi" className="bg-[#F8FAFC] py-20 border-b border-[#E8E8E8]">
+    <section id="roi" className="bg-[#F8FAFC] py-20 border-b border-[#E2E8F0]">
       <div className="max-w-6xl mx-auto px-6">
 
         <motion.div
@@ -50,7 +50,7 @@ export default function ROICalculator({ locale = "INTL", cfg }: { locale?: Local
             See exactly what DataByt<br className="hidden sm:block" />{" "}
             <span className="text-[#000000]">saves your business.</span>
           </h2>
-          <p className="text-[#333333] text-[15px] mt-3 max-w-md leading-relaxed">
+          <p className="text-[#475569] text-[15px] mt-3 max-w-md leading-relaxed">
             Move the sliders. The savings update in real time.
           </p>
         </motion.div>
@@ -63,8 +63,8 @@ export default function ROICalculator({ locale = "INTL", cfg }: { locale?: Local
           className="grid lg:grid-cols-2 gap-5"
         >
           {/* ── Inputs ── */}
-          <div className="rounded-xl border border-[#E5E5E5] p-7 bg-white">
-            <p className="text-[13px] font-semibold text-[#333333] mb-6">Your Numbers</p>
+          <div className="rounded-xl border border-[#E2E8F0] p-7 bg-white">
+            <p className="text-[13px] font-semibold text-[#475569] mb-6">Your Numbers</p>
 
             <div className="space-y-8">
               {/* Revenue slider */}
@@ -81,8 +81,8 @@ export default function ROICalculator({ locale = "INTL", cfg }: { locale?: Local
                   style={{ accentColor: "#4F46E5" }}
                 />
                 <div className="flex justify-between mt-1.5">
-                  <span className="text-[11px] text-[#333333]">{revMinLabel}</span>
-                  <span className="text-[11px] text-[#333333]">{revMaxLabel}</span>
+                  <span className="text-[11px] text-[#475569]">{revMinLabel}</span>
+                  <span className="text-[11px] text-[#475569]">{revMaxLabel}</span>
                 </div>
               </div>
 
@@ -100,17 +100,17 @@ export default function ROICalculator({ locale = "INTL", cfg }: { locale?: Local
                   style={{ accentColor: "#4F46E5" }}
                 />
                 <div className="flex justify-between mt-1.5">
-                  <span className="text-[11px] text-[#333333]">20 days</span>
-                  <span className="text-[11px] text-[#333333]">120 days</span>
+                  <span className="text-[11px] text-[#475569]">20 days</span>
+                  <span className="text-[11px] text-[#475569]">120 days</span>
                 </div>
               </div>
             </div>
 
             {/* Current AR balance */}
             <div className="mt-7 p-4 rounded-lg bg-[#F9F9F9] border border-[#EDEDED]">
-              <p className="text-[11px] text-[#333333] font-medium mb-1">Cash currently locked in AR</p>
+              <p className="text-[11px] text-[#475569] font-medium mb-1">Cash currently locked in AR</p>
               <p className="text-[28px] font-bold text-[#111111]">{fmt(r.arBalance)}</p>
-              <p className="text-[11px] text-[#333333] mt-1">
+              <p className="text-[11px] text-[#475569] mt-1">
                 = ({revPrefix}{revenue}{locale === "IN" ? "Cr" : "M"} ÷ 365) × {dso} days
               </p>
             </div>
@@ -163,7 +163,7 @@ export default function ROICalculator({ locale = "INTL", cfg }: { locale?: Local
               </div>
             </div>
 
-            <p className="text-[11px] text-[#333333] leading-relaxed">
+            <p className="text-[11px] text-[#475569] leading-relaxed">
               Based on 30% DSO reduction (DataByt average) and 8% cost of capital.
               Labor savings and bad debt reduction not included — those add further upside.
             </p>

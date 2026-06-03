@@ -1,113 +1,116 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Star } from "lucide-react";
+import { Lock, Zap, Shield, Sparkles, ArrowRight, Check } from "lucide-react";
 import type { Locale } from "@/lib/geo";
 
-const testimonialsINTL = [
+const ease = [0.22, 1, 0.36, 1] as const;
+
+const guarantees = [
   {
-    quote: "We were chasing 60+ overdue invoices manually every week. DataByt took that off our plate entirely. DSO dropped 28% in the first month.",
-    name: "Sarah Chen",
-    role: "CFO, Precision Manufacturing",
-    metric: "28% DSO reduction in 30 days",
-    company: "Manufacturing · $40M ARR",
+    icon: Zap,
+    title: "Live in 48 hours",
+    desc: "We set it up with you. Connect your accounting system and your first AI reminders go out within two days — no IT team required.",
   },
   {
-    quote: "HighRadius quoted us $85,000/year. DataByt does the same job for a fraction of that. The AI emails are indistinguishable from what our team would write.",
-    name: "James Rodriguez",
-    role: "VP Finance, Swift Logistics",
-    metric: "83% reduction in manual follow-ups",
-    company: "Logistics · 500+ active customers",
+    icon: Shield,
+    title: "Your data stays yours",
+    desc: "Isolated per organisation, encrypted, never sold. Export everything and delete your account anytime. Zero lock-in.",
   },
   {
-    quote: "Setup took two hours. Our AR manager now reviews a queue instead of writing emails. She calls it the best thing we've ever bought.",
-    name: "Maria Thompson",
-    role: "Controller, Crestline Partners",
-    metric: "$220K recovered in first quarter",
-    company: "Professional Services · 200 invoices/mo",
+    icon: Lock,
+    title: "You stay in control",
+    desc: "Approve every email before it sends during your trial. Hand the keys to the AI only once you trust it — your call, every step.",
   },
 ];
 
-const testimonialsIN = [
-  {
-    quote: "We were chasing 60+ overdue invoices manually every week. DataByt took that off our plate entirely. DSO dropped 28% in the first month.",
-    name: "Priya Nair",
-    role: "CFO, Sterling Industries",
-    metric: "28% DSO reduction in 30 days",
-    company: "Manufacturing · ₹320Cr ARR",
-  },
-  {
-    quote: "HighRadius quoted us ₹68L/year. DataByt does the same job for a fraction of that. The AI emails are indistinguishable from what our team would write.",
-    name: "Rahul Mehta",
-    role: "VP Finance, Swift Logistics",
-    metric: "83% reduction in manual follow-ups",
-    company: "Logistics · 500+ active customers",
-  },
-  {
-    quote: "Setup took two hours. Our AR manager now reviews a queue instead of writing emails. She calls it the best thing we've ever bought.",
-    name: "Anita Desai",
-    role: "Controller, Crestline Partners",
-    metric: "₹1.8Cr recovered in first quarter",
-    company: "Professional Services · 200 invoices/mo",
-  },
+const perks = [
+  "Founding-customer rate, locked for life",
+  "Direct line to the founder — shape the roadmap",
+  "Full white-glove onboarding, done with you",
+  "Cancel anytime — month-to-month, no contracts",
 ];
 
 export default function Testimonials({ locale = "INTL" }: { locale?: Locale }) {
-  const testimonials = locale === "IN" ? testimonialsIN : testimonialsINTL;
+  void locale;
   return (
     <section className="bg-white py-24">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-14"
+          transition={{ duration: 0.6, ease }}
+          className="text-center mb-14 max-w-2xl mx-auto"
         >
-          <h2 className="text-[30px] sm:text-[38px] font-extrabold text-[#111111] leading-[1.15] tracking-[-0.02em]">
-            Finance teams that stopped<br className="hidden sm:block" /> chasing invoices manually.
+          <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#C7D2FE] bg-[#EEF2FF] text-[#4338CA] text-[11px] font-semibold tracking-widest uppercase mb-5">
+            <Sparkles className="w-3 h-3" />
+            Founding Customer Program
+          </span>
+          <h2 className="text-[30px] sm:text-[38px] font-extrabold text-[#0F172A] leading-[1.15] tracking-[-0.02em]">
+            Be one of the first finance teams<br className="hidden sm:block" />
+            to stop chasing invoices by hand.
           </h2>
+          <p className="text-[#475569] text-[15px] mt-4 leading-relaxed">
+            DataByt is onboarding a small group of B2B finance teams onto its founding plan.
+            You get the founding rate, white-glove setup, and a direct line to shape what we build next.
+          </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-3 gap-6">
-          {testimonials.map((t, i) => (
+        {/* Guarantee cards */}
+        <div className="grid md:grid-cols-3 gap-6 mb-12">
+          {guarantees.map((g, i) => (
             <motion.div
               key={i}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: i * 0.12 }}
-              className="bg-white border border-[#E2E8F0] rounded-2xl p-6 flex flex-col shadow-sm hover:shadow-md transition-shadow"
+              transition={{ delay: i * 0.1, duration: 0.5, ease }}
+              className="bg-white border border-[#E2E8F0] rounded-2xl p-6 flex flex-col shadow-sm hover:shadow-[0_12px_40px_-12px_rgba(79,70,229,0.18)] hover:border-[#C7D2FE] transition-all"
             >
-              {/* Stars */}
-              <div className="flex gap-1 mb-4">
-                {[...Array(5)].map((_, j) => (
-                  <Star key={j} className="w-4 h-4 text-[#F59E0B] fill-[#F59E0B]" />
-                ))}
+              <div className="w-11 h-11 rounded-xl flex items-center justify-center mb-4"
+                style={{ background: "linear-gradient(135deg,#4F46E5,#7C3AED)" }}>
+                <g.icon className="w-5 h-5 text-white" />
               </div>
-
-              <p className="text-[#111111] text-sm leading-relaxed italic flex-1 mb-5">
-                &ldquo;{t.quote}&rdquo;
-              </p>
-
-              {/* Metric badge */}
-              <div className="bg-[#4F46E5] rounded-xl px-4 py-2.5 mb-4">
-                <p className="text-white text-sm font-bold">{t.metric}</p>
-                <p className="text-white/70 text-xs">{t.company}</p>
-              </div>
-
-              {/* Author */}
-              <div className="flex items-center gap-3">
-                <div className="w-9 h-9 rounded-full bg-[#111111] flex items-center justify-center text-white text-xs font-black">
-                  {t.name.split(" ").map(n => n[0]).join("")}
-                </div>
-                <div>
-                  <p className="text-[#0F172A] text-sm font-semibold">{t.name}</p>
-                  <p className="text-[#333333] text-xs">{t.role}</p>
-                </div>
-              </div>
+              <h3 className="text-[#0F172A] text-[16px] font-bold mb-2">{g.title}</h3>
+              <p className="text-[#475569] text-[13.5px] leading-relaxed">{g.desc}</p>
             </motion.div>
           ))}
         </div>
+
+        {/* Founding perks band */}
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, ease }}
+          className="rounded-2xl p-8 sm:p-10 flex flex-col lg:flex-row items-start lg:items-center gap-8"
+          style={{ background: "linear-gradient(135deg,#130E25 0%,#2A1E5C 50%,#4F46E5 100%)" }}
+        >
+          <div className="flex-1">
+            <h3 className="text-white text-[22px] sm:text-[26px] font-extrabold leading-tight mb-4">
+              What founding customers get
+            </h3>
+            <div className="grid sm:grid-cols-2 gap-3">
+              {perks.map((p) => (
+                <div key={p} className="flex items-start gap-2.5">
+                  <span className="w-5 h-5 rounded-full bg-white/15 flex items-center justify-center shrink-0 mt-0.5">
+                    <Check className="w-3 h-3 text-[#A5B4FC]" />
+                  </span>
+                  <span className="text-white/85 text-[13.5px]">{p}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+          <a href="/auth"
+            className="group shrink-0 inline-flex items-center gap-2 px-7 py-3.5 rounded-xl bg-white text-[#4338CA] text-[14px] font-bold hover:bg-[#EEF2FF] hover:-translate-y-0.5 transition-all shadow-lg">
+            Claim a founding spot
+            <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+          </a>
+        </motion.div>
+
       </div>
     </section>
   );

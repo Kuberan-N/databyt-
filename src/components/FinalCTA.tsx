@@ -17,7 +17,7 @@ export default function FinalCTA({ locale = "INTL", cfg }: { locale?: Locale; cf
   ];
 
   return (
-    <section className="bg-[#070707] py-20">
+    <section className="bg-[#0F172A] py-20">
       <div className="max-w-6xl mx-auto px-6">
 
         {/* Urgency stats */}
@@ -93,27 +93,27 @@ export function Footer() {
       <div className="max-w-6xl mx-auto px-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5">
         <Logo className="text-[16px]" />
 
-        <div className="flex flex-wrap items-center gap-6 text-[#333333] text-[13px]">
-          <a href="#how-it-works" className="hover:text-[#000000] transition-colors">How It Works</a>
-          <a href="#roi"          className="hover:text-[#000000] transition-colors">ROI Calculator</a>
-          <a href="#pricing"      className="hover:text-[#000000] transition-colors">Pricing</a>
-          <a href="#faq"          className="hover:text-[#000000] transition-colors">FAQ</a>
-          <a href="/dashboard"    className="hover:text-[#000000] transition-colors">Dashboard</a>
+        <div className="flex flex-wrap items-center gap-6 text-[#475569] text-[13px]">
+          <a href="#how-it-works" className="hover:text-[#4338CA] transition-colors">How It Works</a>
+          <a href="#roi"          className="hover:text-[#4338CA] transition-colors">ROI Calculator</a>
+          <a href="#pricing"      className="hover:text-[#4338CA] transition-colors">Pricing</a>
+          <a href="#faq"          className="hover:text-[#4338CA] transition-colors">FAQ</a>
+          <a href="/dashboard"    className="hover:text-[#4338CA] transition-colors">Dashboard</a>
         </div>
 
-        <a href="mailto:kuberan@databyt.in"
-          className="flex items-center gap-2 text-[#333333] text-[13px] hover:text-[#000000] transition-colors">
+        <a href="mailto:support@databyt.in"
+          className="flex items-center gap-2 text-[#475569] text-[13px] hover:text-[#4338CA] transition-colors">
           <Mail className="w-3.5 h-3.5" />
-          kuberan@databyt.in
+          support@databyt.in
         </a>
       </div>
 
-      <div className="max-w-6xl mx-auto px-6 mt-6 pt-5 border-t border-[#F0F0F0] flex flex-col sm:flex-row items-center justify-between gap-3 text-[#333333] text-[12px]">
+      <div className="max-w-6xl mx-auto px-6 mt-6 pt-5 border-t border-[#E2E8F0] flex flex-col sm:flex-row items-center justify-between gap-3 text-[#475569] text-[12px]">
         <p>© 2026 DataByt. AR automation for mid-market B2B.</p>
         <div className="flex gap-5">
-          <a href="#" className="hover:text-[#111111] transition-colors">Privacy</a>
-          <a href="#" className="hover:text-[#111111] transition-colors">Terms</a>
-          <a href="#" className="hover:text-[#111111] transition-colors">Security</a>
+          <a href="/privacy"  className="hover:text-[#4338CA] transition-colors">Privacy</a>
+          <a href="/terms"    className="hover:text-[#4338CA] transition-colors">Terms</a>
+          <a href="/security" className="hover:text-[#4338CA] transition-colors">Security</a>
         </div>
       </div>
     </footer>

@@ -72,7 +72,7 @@ const sources = [
 export default function ResearchSection({ locale = "INTL" }: { locale?: Locale }) {
   const isIN = locale === "IN";
   return (
-    <section className="bg-white py-20 border-b border-[#E8E8E8]">
+    <section className="bg-white py-20 border-b border-[#E2E8F0]">
       <div className="max-w-6xl mx-auto px-6">
 
         <motion.div
@@ -87,7 +87,7 @@ export default function ResearchSection({ locale = "INTL" }: { locale?: Locale }
             <br />
             <span className="text-[#4F46E5]">The solution is DataByt.</span>
           </h2>
-          <p className="mt-3 text-[#333333] text-[15px] max-w-[480px] leading-relaxed">
+          <p className="mt-3 text-[#475569] text-[15px] max-w-[480px] leading-relaxed">
             Every claim we make is backed by independent research from the institutions that track B2B payments.
           </p>
         </motion.div>
@@ -105,7 +105,7 @@ export default function ResearchSection({ locale = "INTL" }: { locale?: Locale }
               viewport={{ once: true, margin: "-40px" }}
               transition={{ duration: 0.5, ease, delay: i * 0.07 }}
               whileHover={{ y: -3, transition: { duration: 0.2 } }}
-              className="group p-6 rounded-xl border border-[#EBEBEB] bg-white hover:border-[#4F46E5]/30 hover:shadow-[0_8px_28px_-8px_rgba(79,70,229,0.12)] transition-all cursor-pointer block"
+              className="group p-6 rounded-xl border border-[#E2E8F0] bg-white hover:border-[#4F46E5]/30 hover:shadow-[0_8px_28px_-8px_rgba(79,70,229,0.12)] transition-all cursor-pointer block"
             >
               <div className="flex items-start justify-between mb-4 gap-3">
                 <p className="text-[40px] font-extrabold text-[#4F46E5] leading-none">{f.stat}</p>
@@ -113,10 +113,10 @@ export default function ResearchSection({ locale = "INTL" }: { locale?: Locale }
                   <f.icon className="w-4 h-4 text-[#4F46E5] group-hover:text-white transition-colors" />
                 </div>
               </div>
-              <p className="text-[14px] text-[#333333] leading-snug mb-4">{isIN && "findingIN" in f ? (f as { findingIN: string }).findingIN : f.finding}</p>
+              <p className="text-[14px] text-[#475569] leading-snug mb-4">{isIN && "findingIN" in f ? (f as { findingIN: string }).findingIN : f.finding}</p>
               <div className="flex items-center gap-2">
                 <ExternalLink className="w-3 h-3 text-[#4F46E5]/40 group-hover:text-[#4F46E5] transition-colors" />
-                <span className="text-[12px] text-[#333333] group-hover:text-[#111111] transition-colors">
+                <span className="text-[12px] text-[#475569] group-hover:text-[#111111] transition-colors">
                   {f.source} · {f.year}
                 </span>
               </div>
@@ -143,7 +143,7 @@ export default function ResearchSection({ locale = "INTL" }: { locale?: Locale }
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, ease, delay: i * 0.05 }}
-                className="group p-4 rounded-xl border border-[#EBEBEB] bg-[#FAFAFA] hover:border-[#D4D4D4] hover:bg-white transition-all flex flex-col gap-2"
+                className="group p-4 rounded-xl border border-[#E2E8F0] bg-[#F8FAFC] hover:border-[#C7D2FE] hover:bg-white transition-all flex flex-col gap-2"
               >
                 <div className="flex items-center justify-between">
                   <span className="text-[10px] font-semibold text-[#4F46E5]/60 uppercase tracking-widest">{s.badge}</span>
@@ -152,7 +152,7 @@ export default function ResearchSection({ locale = "INTL" }: { locale?: Locale }
                 <p className="text-[13px] font-semibold text-[#111111] leading-tight group-hover:text-[#000000] transition-colors">
                   {s.name}
                 </p>
-                <p className="text-[11px] text-[#333333] leading-snug">{s.desc}</p>
+                <p className="text-[11px] text-[#475569] leading-snug">{s.desc}</p>
               </motion.a>
             ))}
           </div>

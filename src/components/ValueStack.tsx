@@ -61,7 +61,7 @@ export default function ValueStack({ locale = "INTL", cfg }: { locale?: Locale; 
   const saveLabel    = isIN ? "₹55L+" : "$51,000+";
 
   return (
-    <section className="bg-[#F8FAFC] py-20 border-b border-[#E8E8E8]">
+    <section className="bg-[#F8FAFC] py-20 border-b border-[#E2E8F0]">
       <div className="max-w-4xl mx-auto px-6">
 
         <motion.div
@@ -76,7 +76,7 @@ export default function ValueStack({ locale = "INTL", cfg }: { locale?: Locale; 
             An offer so good,<br />
             <span className="text-[#4F46E5]">saying no feels like a mistake.</span>
           </h2>
-          <p className="text-[#333333] text-[15px] max-w-md mx-auto">
+          <p className="text-[#475569] text-[15px] max-w-md mx-auto">
             We take on the risk. You keep the upside.
           </p>
         </motion.div>
@@ -86,10 +86,10 @@ export default function ValueStack({ locale = "INTL", cfg }: { locale?: Locale; 
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, ease }}
-          className="rounded-2xl border border-[#E5E5E5] bg-white overflow-hidden shadow-sm"
+          className="rounded-2xl border border-[#E2E8F0] bg-white overflow-hidden shadow-sm"
         >
           {/* Stack items */}
-          <div className="p-8 border-b border-[#F0F0F0]">
+          <div className="p-8 border-b border-[#E2E8F0]">
             <p className="text-[11px] font-semibold text-[#4F46E5] uppercase tracking-wider mb-5">What you get — and what it costs elsewhere</p>
             <div className="space-y-3">
               {stackItems.map((s, i) => (
@@ -99,13 +99,13 @@ export default function ValueStack({ locale = "INTL", cfg }: { locale?: Locale; 
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.05, duration: 0.4, ease }}
-                  className="flex items-center justify-between py-3 border-b border-[#F5F5F5] last:border-0"
+                  className="flex items-center justify-between py-3 border-b border-[#F5F3FF] last:border-0"
                 >
                   <div className="flex items-center gap-3">
                     <Check className="w-4 h-4 text-[#4F46E5] shrink-0" />
                     <span className="text-[13.5px] text-[#111111]">{s.item}</span>
                   </div>
-                  <span className="text-[13px] text-[#333333]/40 line-through font-mono shrink-0 ml-4">{s.value}</span>
+                  <span className="text-[13px] text-[#475569]/40 line-through font-mono shrink-0 ml-4">{s.value}</span>
                 </motion.div>
               ))}
             </div>
@@ -129,7 +129,7 @@ export default function ValueStack({ locale = "INTL", cfg }: { locale?: Locale; 
               </div>
               <a
                 href="/auth"
-                className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl bg-white text-[#111111] text-[14px] font-bold hover:bg-[#F3F3F3] transition-colors shrink-0 group"
+                className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl bg-white text-[#111111] text-[14px] font-bold hover:bg-[#EEF2FF] transition-colors shrink-0 group"
               >
                 Start Free Trial
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
@@ -147,10 +147,10 @@ export default function ValueStack({ locale = "INTL", cfg }: { locale?: Locale; 
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.07, duration: 0.45, ease }}
-              className="rounded-xl p-5 bg-white border border-[#E5E5E5]"
+              className="rounded-xl p-5 bg-white border border-[#E2E8F0]"
             >
               <p className="text-[15px] mb-1">{g.emoji} <span className="font-semibold text-[#111111] text-[13px]">{g.title}</span></p>
-              <p className="text-[#333333] text-[12px] leading-relaxed">{g.desc}</p>
+              <p className="text-[#475569] text-[12px] leading-relaxed">{g.desc}</p>
             </motion.div>
           ))}
         </div>

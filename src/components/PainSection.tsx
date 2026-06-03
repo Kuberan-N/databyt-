@@ -59,7 +59,7 @@ function CounterStat({
       viewport={{ once: true, margin: "-40px" }}
       transition={{ duration: 0.55, ease, delay: i * 0.07 }}
       whileHover={{ y: -4, transition: { duration: 0.2 } }}
-      className="group p-5 rounded-xl bg-white border border-[#EBEBEB] hover:border-[#D4D4D4] hover:shadow-[0_10px_32px_-10px_rgba(0,0,0,0.1)] transition-all flex flex-col"
+      className="group p-5 rounded-xl bg-white border border-[#E2E8F0] hover:border-[#C7D2FE] hover:shadow-[0_10px_32px_-10px_rgba(0,0,0,0.1)] transition-all flex flex-col"
     >
       <div className="mb-4">
         <p
@@ -70,7 +70,7 @@ function CounterStat({
         </p>
         <p className="text-[11px] text-[#4F46E5] mt-1 font-semibold">{context}</p>
       </div>
-      <p className="text-[13.5px] text-[#333333] font-medium leading-snug mb-2 flex-1">{problem}</p>
+      <p className="text-[13.5px] text-[#475569] font-medium leading-snug mb-2 flex-1">{problem}</p>
       <p className="text-[12px] text-[#111111] font-semibold mb-3">{cost}</p>
       <a
         href={href}
@@ -156,7 +156,7 @@ export default function PainSection({ locale = "INTL", cfg }: { locale?: Locale;
   ];
 
   return (
-    <section className="bg-[#F8FAFC] py-20 border-b border-[#E8E8E8]">
+    <section className="bg-[#F8FAFC] py-20 border-b border-[#E2E8F0]">
       <div className="max-w-6xl mx-auto px-6">
 
         {/* Section header */}
@@ -186,23 +186,23 @@ export default function PainSection({ locale = "INTL", cfg }: { locale?: Locale;
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-40px" }}
           transition={{ duration: 0.5, ease }}
-          className="flex flex-col sm:flex-row mb-12 overflow-hidden rounded-xl border border-[#EBEBEB] bg-white divide-y sm:divide-y-0 sm:divide-x divide-[#EBEBEB]"
+          className="flex flex-col sm:flex-row mb-12 overflow-hidden rounded-xl border border-[#E2E8F0] bg-white divide-y sm:divide-y-0 sm:divide-x divide-[#E2E8F0]"
         >
           <div className="flex-1 px-6 py-5">
             <p className="text-[30px] font-extrabold text-[#4F46E5] leading-none">
-              {overhead}<span className="text-[14px] text-[#333333] font-medium ml-1">/year</span>
+              {overhead}<span className="text-[14px] text-[#475569] font-medium ml-1">/year</span>
             </p>
             <p className="text-[13px] font-semibold text-[#111111] mt-1.5">Average annual AR overhead per company</p>
-            <p className="text-[11px] text-[#333333] mt-1 leading-relaxed">
+            <p className="text-[11px] text-[#475569] mt-1 leading-relaxed">
               Late-payment admin, dispute handling, and bad debt write-offs · Kaplan Group
             </p>
           </div>
           <div className="flex-1 px-6 py-5">
             <p className="text-[30px] font-extrabold text-[#4F46E5] leading-none">
-              16<span className="text-[14px] text-[#333333] font-medium ml-1">hrs/day</span>
+              16<span className="text-[14px] text-[#475569] font-medium ml-1">hrs/day</span>
             </p>
             <p className="text-[13px] font-semibold text-[#111111] mt-1.5">Manual cash posting per finance team</p>
-            <p className="text-[11px] text-[#333333] mt-1 leading-relaxed">
+            <p className="text-[11px] text-[#475569] mt-1 leading-relaxed">
               Equivalent to {labor}/year in pure labor cost — automated end-to-end by DataByt · Versapay 2024
             </p>
           </div>
@@ -220,7 +220,7 @@ export default function PainSection({ locale = "INTL", cfg }: { locale?: Locale;
             Before DataByt vs. After DataByt
           </h3>
 
-          <div className="rounded-xl border border-[#E5E5E5] overflow-hidden shadow-sm">
+          <div className="rounded-xl border border-[#E2E8F0] overflow-hidden shadow-sm">
             <div className="grid grid-cols-2">
               <div className="px-5 py-3 bg-[#F9F9F9] flex items-center gap-1.5">
                 <X className="w-3.5 h-3.5 text-[#DC2626]" />
@@ -238,11 +238,11 @@ export default function PainSection({ locale = "INTL", cfg }: { locale?: Locale;
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true, margin: "-20px" }}
                 transition={{ duration: 0.4, ease, delay: i * 0.05 }}
-                className={`grid grid-cols-2 border-t border-[#F0F0F0] hover:bg-[#FAFAFA] transition-colors ${i % 2 === 1 ? "bg-[#FAFAFA]" : "bg-white"}`}
+                className={`grid grid-cols-2 border-t border-[#E2E8F0] hover:bg-[#F8FAFC] transition-colors ${i % 2 === 1 ? "bg-[#F8FAFC]" : "bg-white"}`}
               >
-                <div className="px-5 py-4 flex items-start gap-2.5 border-r border-[#EBEBEB]">
+                <div className="px-5 py-4 flex items-start gap-2.5 border-r border-[#E2E8F0]">
                   <X className="w-3 h-3 text-[#DC2626] mt-0.5 shrink-0" />
-                  <p className="text-[13px] text-[#333333] leading-snug">{row.before}</p>
+                  <p className="text-[13px] text-[#475569] leading-snug">{row.before}</p>
                 </div>
                 <div className="px-5 py-4 flex items-start gap-2.5">
                   <Check className="w-3 h-3 text-[#16A34A] mt-0.5 shrink-0" />
@@ -273,7 +273,7 @@ export default function PainSection({ locale = "INTL", cfg }: { locale?: Locale;
             </p>
           </div>
           <a href="#pricing"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-white text-[#111111] text-[14px] font-semibold hover:bg-[#F3F3F3] hover:-translate-y-0.5 transition-all shrink-0">
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-white text-[#111111] text-[14px] font-semibold hover:bg-[#EEF2FF] hover:-translate-y-0.5 transition-all shrink-0">
             See Full Pricing
             <ArrowRight className="w-4 h-4" />
           </a>

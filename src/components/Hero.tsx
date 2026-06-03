@@ -55,24 +55,29 @@ function DashboardMockup({ locale = "INTL" }: { locale?: Locale }) {
   const overdue = isIN
     ? [
         { name: "Sterling Corp",   amt: "₹9,90,000", tag: "L2", tagBg: "#FEF3C7", tagTx: "#92400E" },
-        { name: "TechFlow Pvt",    amt: "₹7,00,000", tag: "L1", tagBg: "#F3F3F3", tagTx: "#111111" },
-        { name: "BuildRight Ltd",  amt: "₹4,15,000", tag: "L3", tagBg: "#FEE2E2", tagTx: "#312E81" },
+        { name: "TechFlow Pvt",    amt: "₹7,00,000", tag: "L1", tagBg: "#EEF2FF", tagTx: "#4338CA" },
+        { name: "BuildRight Ltd",  amt: "₹4,15,000", tag: "L3", tagBg: "#FEE2E2", tagTx: "#B91C1C" },
       ]
     : [
         { name: "Acme Corp",     amt: "$12,400", tag: "L2", tagBg: "#FEF3C7", tagTx: "#92400E" },
-        { name: "TechFlow Inc",  amt: "$8,750",  tag: "L1", tagBg: "#F3F3F3", tagTx: "#111111" },
-        { name: "BuildRight Ltd",amt: "$5,200",  tag: "L3", tagBg: "#FEE2E2", tagTx: "#312E81" },
+        { name: "TechFlow Inc",  amt: "$8,750",  tag: "L1", tagBg: "#EEF2FF", tagTx: "#4338CA" },
+        { name: "BuildRight Ltd",amt: "$5,200",  tag: "L3", tagBg: "#FEE2E2", tagTx: "#B91C1C" },
       ];
+  const metrics = [
+    { label: "Total AR Outstanding", value: arTotal,    sub: "21 active customers",   icon: "$",  tone: "#4F46E5" },
+    { label: "Days Sales Outstanding", value: "38 days", sub: "✓ within 45d target",  icon: "◷",  tone: "#16A34A" },
+    { label: "Collection Effectiveness", value: "87%",   sub: "✓ healthy (80%+)",      icon: "◎",  tone: "#16A34A" },
+  ];
   return (
-    <div className="w-full rounded-2xl border border-[#E2E8F0] shadow-[0_40px_100px_-20px_rgba(0,0,0,0.18)] overflow-hidden bg-white">
+    <div className="w-full rounded-2xl border border-[#E2E8F0] shadow-[0_40px_100px_-20px_rgba(79,70,229,0.18)] overflow-hidden bg-white">
       {/* Browser chrome */}
-      <div className="bg-[#F5F5F5] border-b border-[#E8E8E8] px-4 py-2.5 flex items-center gap-3">
+      <div className="bg-[#F5F3FF] border-b border-[#E2E8F0] px-4 py-2.5 flex items-center gap-3">
         <div className="flex gap-1.5 shrink-0">
           <div className="w-2.5 h-2.5 rounded-full bg-[#FF5F57]" />
           <div className="w-2.5 h-2.5 rounded-full bg-[#FFBD2E]" />
           <div className="w-2.5 h-2.5 rounded-full bg-[#28C840]" />
         </div>
-        <div className="flex-1 bg-white border border-[#E2E8F0] rounded-md px-3 py-1 text-[11px] text-[#555555] text-center">
+        <div className="flex-1 bg-white border border-[#E2E8F0] rounded-md px-3 py-1 text-[11px] text-[#64748B] text-center">
           app.databyt.in/dashboard
         </div>
       </div>
@@ -80,27 +85,30 @@ function DashboardMockup({ locale = "INTL" }: { locale?: Locale }) {
       {/* Dashboard body */}
       <div className="flex" style={{ height: 340 }}>
         {/* Sidebar */}
-        <div className="w-[148px] shrink-0 bg-white border-r border-[#F0F0F0] flex flex-col p-3 gap-0.5">
+        <div className="w-[150px] shrink-0 bg-white border-r border-[#E2E8F0] flex flex-col p-3 gap-0.5 relative">
+          <div className="absolute top-0 left-0 right-0 h-[3px]" style={{ background: "linear-gradient(90deg,#4F46E5,#7C3AED)" }} />
           <div className="flex items-center gap-2 px-2 py-2 mb-2">
-            <div className="w-5 h-5 rounded bg-[#000000] flex items-center justify-center shrink-0">
+            <div className="w-5 h-5 rounded bg-[#0F172A] flex items-center justify-center shrink-0">
               <svg width="11" height="11" viewBox="0 0 11 11" fill="none">
                 <rect x="2" y="2" width="2" height="7" fill="white" />
                 <path d="M4 2h2.5C8.43 2 10 3.57 10 5.5S8.43 9 6.5 9H4V2Z" fill="white" />
               </svg>
             </div>
-            <span className="text-[11px] font-bold text-[#111111]">DataByt</span>
+            <span className="text-[11px] font-bold text-[#0F172A]">DataByt</span>
           </div>
           {[
-            { label: "Dashboard",   active: true },
-            { label: "AR Aging",    active: false },
-            { label: "Collections", active: false },
-            { label: "Disputes",    active: false },
-            { label: "Analytics",   active: false },
-            { label: "Reports",     active: false },
+            { label: "Dashboard",    active: true },
+            { label: "AR Aging",     active: false },
+            { label: "Collections",  active: false },
+            { label: "Disputes",     active: false },
+            { label: "Analytics",    active: false },
+            { label: "Customers",    active: false },
+            { label: "Reports",      active: false },
+            { label: "Settings",     active: false },
           ].map(item => (
             <div key={item.label}
               className={`px-2.5 py-1.5 rounded-lg text-[10px] font-medium ${
-                item.active ? "bg-[#F3F3F3] text-[#000000]" : "text-[#555555]"
+                item.active ? "bg-[#EEF2FF] text-[#4338CA] border-l-2 border-[#4F46E5]" : "text-[#64748B]"
               }`}>
               {item.label}
             </div>
@@ -110,44 +118,42 @@ function DashboardMockup({ locale = "INTL" }: { locale?: Locale }) {
         {/* Main content */}
         <div className="flex-1 bg-[#F8FAFC] p-4 overflow-hidden">
           <div className="grid grid-cols-3 gap-2 mb-3">
-            {[
-              { label: "Total AR Outstanding", value: arTotal, sub: "↓ collecting fast", color: "#000000" },
-              { label: "Days Sales Outstanding", value: "42 days",    sub: "↓ 8 days this month", color: "#16A34A" },
-              { label: "CEI Score",              value: "87%",        sub: "↑ excellent",          color: "#16A34A" },
-            ].map(m => (
-              <div key={m.label} className="bg-white rounded-xl border border-[#EBEBEB] p-3">
-                <p className="text-[9px] text-[#555555] mb-1.5 leading-none">{m.label}</p>
-                <p className="text-[14px] font-bold text-[#111111] leading-none mb-1">{m.value}</p>
-                <p className="text-[9px] font-semibold" style={{ color: m.color }}>{m.sub}</p>
+            {metrics.map(m => (
+              <div key={m.label} className="bg-white rounded-xl border border-[#E2E8F0] p-3">
+                <div className="w-6 h-6 rounded-lg flex items-center justify-center mb-2 text-white text-[11px] font-bold"
+                  style={{ background: m.tone }}>{m.icon}</div>
+                <p className="text-[14px] font-bold text-[#0F172A] leading-none mb-1">{m.value}</p>
+                <p className="text-[9px] text-[#64748B] mb-0.5 leading-none">{m.label}</p>
+                <p className="text-[9px] font-semibold" style={{ color: m.tone }}>{m.sub}</p>
               </div>
             ))}
           </div>
 
           <div className="grid grid-cols-2 gap-2">
-            <div className="bg-white rounded-xl border border-[#EBEBEB] p-3">
+            <div className="bg-white rounded-xl border border-[#E2E8F0] p-3">
               <div className="flex items-center justify-between mb-3">
-                <p className="text-[10px] font-semibold text-[#111111]">Collections Trend</p>
-                <span className="text-[9px] text-[#555555]">6 months</span>
+                <p className="text-[10px] font-semibold text-[#0F172A]">Collections Trend</p>
+                <span className="text-[9px] text-[#64748B]">6 months</span>
               </div>
               <div className="flex items-end gap-1" style={{ height: 64 }}>
                 {bars.map((h, i) => (
                   <div key={i} className="flex-1 rounded-t"
-                    style={{ height: `${h}%`, background: i === bars.length - 1 ? "#000000" : "#E5E5E5" }} />
+                    style={{ height: `${h}%`, background: i === bars.length - 1 ? "#4F46E5" : "#C7D2FE" }} />
                 ))}
               </div>
               <div className="flex justify-between mt-1.5">
                 {["Dec", "Jan", "Feb", "Mar", "Apr", "May"].map(m => (
-                  <span key={m} className="text-[8px] text-[#999999]">{m}</span>
+                  <span key={m} className="text-[8px] text-[#94A3B8]">{m}</span>
                 ))}
               </div>
             </div>
 
-            <div className="bg-white rounded-xl border border-[#EBEBEB] p-3">
-              <p className="text-[10px] font-semibold text-[#111111] mb-2">Overdue Invoices</p>
+            <div className="bg-white rounded-xl border border-[#E2E8F0] p-3">
+              <p className="text-[10px] font-semibold text-[#0F172A] mb-2">Overdue Invoices</p>
               {overdue.map(inv => (
-                <div key={inv.name} className="flex items-center justify-between py-1.5 border-b border-[#F5F5F5] last:border-0 gap-2">
-                  <span className="text-[9px] text-[#555555] font-medium truncate">{inv.name}</span>
-                  <span className="text-[9px] font-bold text-[#111111] shrink-0">{inv.amt}</span>
+                <div key={inv.name} className="flex items-center justify-between py-1.5 border-b border-[#F1F5F9] last:border-0 gap-2">
+                  <span className="text-[9px] text-[#475569] font-medium truncate">{inv.name}</span>
+                  <span className="text-[9px] font-bold text-[#0F172A] shrink-0">{inv.amt}</span>
                   <span className="text-[8px] px-1.5 py-0.5 rounded-full font-semibold shrink-0"
                     style={{ background: inv.tagBg, color: inv.tagTx }}>{inv.tag}</span>
                 </div>
@@ -170,12 +176,15 @@ export default function Hero({ locale = "INTL", cfg }: { locale?: Locale; cfg?: 
   void cfg;
   return (
     <section className="relative bg-[#F8FAFC] pt-24 pb-0 overflow-hidden">
-      {/* Subtle grid background */}
+      {/* Subtle brand grid background */}
       <div className="absolute inset-0 pointer-events-none" style={{
-        backgroundImage: "radial-gradient(circle at 1px 1px, #E5E5E5 1px, transparent 0)",
+        backgroundImage: "radial-gradient(circle at 1px 1px, #C7D2FE 1px, transparent 0)",
         backgroundSize: "32px 32px",
-        opacity: 0.4,
+        opacity: 0.35,
       }} />
+      {/* Soft indigo glow */}
+      <div className="absolute top-[-120px] left-1/2 -translate-x-1/2 w-[600px] h-[400px] pointer-events-none"
+        style={{ background: "radial-gradient(ellipse, rgba(124,58,237,0.10) 0%, transparent 70%)" }} />
 
       <div className="max-w-6xl mx-auto px-6 relative">
 
@@ -186,7 +195,7 @@ export default function Hero({ locale = "INTL", cfg }: { locale?: Locale; cfg?: 
           transition={{ duration: 0.4, ease }}
           className="flex justify-center mb-7"
         >
-          <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[#D4D4D4] bg-white text-[#111111] text-[11px] font-semibold tracking-widest uppercase shadow-sm">
+          <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[#C7D2FE] bg-[#EEF2FF] text-[#4338CA] text-[11px] font-semibold tracking-widest uppercase shadow-sm">
             <span className="w-1.5 h-1.5 rounded-full bg-[#4F46E5] animate-pulse" />
             AI-Powered AR Collections
           </span>
@@ -209,7 +218,7 @@ export default function Hero({ locale = "INTL", cfg }: { locale?: Locale; cfg?: 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease, delay: 0.12 }}
-          className="text-center text-[17px] text-[#333333] max-w-[500px] mx-auto mb-9 leading-[1.7] font-[450]"
+          className="text-center text-[17px] text-[#475569] max-w-[500px] mx-auto mb-9 leading-[1.7] font-[450]"
         >
           AI dunning emails, dispute management, and live CEI analytics —
           connected to your accounting system in 48 hours.
@@ -228,7 +237,7 @@ export default function Hero({ locale = "INTL", cfg }: { locale?: Locale; cfg?: 
             <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
           </a>
           <a href="#roi"
-            className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl border border-[#E2E8F0] bg-white text-[#333333] text-[14px] font-medium hover:border-[#4F46E5]/40 hover:-translate-y-0.5 transition-all">
+            className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl border border-[#C7D2FE] bg-white text-[#4338CA] text-[14px] font-semibold hover:border-[#4F46E5] hover:bg-[#EEF2FF] hover:-translate-y-0.5 transition-all">
             Calculate My Savings
           </a>
         </motion.div>
@@ -254,7 +263,7 @@ export default function Hero({ locale = "INTL", cfg }: { locale?: Locale; cfg?: 
                     duration={1.6 + i * 0.2}
                   />
                 </p>
-                <p className="text-[11px] text-[#333333] mt-0.5">{s.label}</p>
+                <p className="text-[11px] text-[#64748B] mt-0.5">{s.label}</p>
               </div>
             </div>
           ))}
@@ -267,9 +276,9 @@ export default function Hero({ locale = "INTL", cfg }: { locale?: Locale; cfg?: 
           transition={{ duration: 0.4, ease, delay: 0.28 }}
           className="flex flex-wrap justify-center items-center gap-2 mb-12"
         >
-          <span className="text-[11px] text-[#333333] font-medium mr-1">Integrates with</span>
+          <span className="text-[11px] text-[#64748B] font-medium mr-1">Integrates with</span>
           {integrations.map(l => (
-            <span key={l} className="px-3 py-1.5 rounded-lg border border-[#E5E5E5] bg-white text-[11px] font-semibold text-[#333333] shadow-sm">
+            <span key={l} className="px-3 py-1.5 rounded-lg border border-[#E2E8F0] bg-white text-[11px] font-semibold text-[#475569] shadow-sm">
               {l}
             </span>
           ))}

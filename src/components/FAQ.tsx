@@ -56,7 +56,7 @@ export default function FAQ({ locale = "INTL" }: { locale?: Locale }) {
   const [open, setOpen] = useState<number | null>(null);
 
   return (
-    <section id="faq" className="bg-[#F8FAFC] py-20 border-b border-[#E8E8E8]">
+    <section id="faq" className="bg-[#F8FAFC] py-20 border-b border-[#E2E8F0]">
       <div className="max-w-6xl mx-auto px-6">
 
         <motion.div
@@ -79,7 +79,7 @@ export default function FAQ({ locale = "INTL" }: { locale?: Locale }) {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-40px" }}
               transition={{ duration: 0.45, ease, delay: i * 0.04 }}
-              className="rounded-lg bg-white border border-[#EBEBEB] overflow-hidden"
+              className="rounded-lg bg-white border border-[#E2E8F0] overflow-hidden"
             >
               <button
                 onClick={() => setOpen(open === i ? null : i)}

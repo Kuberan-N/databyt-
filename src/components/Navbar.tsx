@@ -62,7 +62,7 @@ export default function Navbar() {
         </div>
 
         <button
-          className="md:hidden text-[#111111] p-2 rounded-md hover:bg-[#F5F5F5] transition-colors"
+          className="md:hidden text-[#0F172A] p-2 rounded-md hover:bg-[#EEF2FF] transition-colors"
           onClick={() => setOpen(!open)}
           aria-label="Toggle menu"
         >
@@ -76,7 +76,7 @@ export default function Navbar() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden border-t border-[#F0F0F0] bg-white overflow-hidden"
+            className="md:hidden border-t border-[#E2E8F0] bg-white overflow-hidden"
           >
             <div className="px-6 py-4 flex flex-col gap-1">
               {navLinks.map(l => (

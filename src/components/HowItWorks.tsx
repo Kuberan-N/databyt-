@@ -59,7 +59,7 @@ const steps = [
 
 export default function HowItWorks() {
   return (
-    <section id="how-it-works" className="bg-white py-20 border-y border-[#E8E8E8]">
+    <section id="how-it-works" className="bg-white py-20 border-y border-[#E2E8F0]">
       <div className="max-w-6xl mx-auto px-6">
 
         <motion.div
@@ -73,7 +73,7 @@ export default function HowItWorks() {
             The complete AR loop.<br />
             <span className="text-[#4F46E5]">Closed end-to-end.</span>
           </h2>
-          <p className="text-[#333333] text-[15px] mt-4 max-w-[480px] leading-relaxed">
+          <p className="text-[#475569] text-[15px] mt-4 max-w-[480px] leading-relaxed">
             Most tools stop at &quot;send the email.&quot; DataByt closes the full loop:
             import → score → email → pay → match → dispute → analytics.
           </p>
@@ -88,7 +88,7 @@ export default function HowItWorks() {
               viewport={{ once: true, margin: "-40px" }}
               transition={{ duration: 0.55, ease, delay: i * 0.07 }}
               whileHover={{ y: -5, transition: { duration: 0.2, ease: "easeOut" } }}
-              className="group p-6 rounded-xl bg-white border border-[#E8E8E8] hover:border-[#4F46E5]/40 hover:shadow-[0_12px_40px_-12px_rgba(79,70,229,0.15)] transition-all flex flex-col cursor-default"
+              className="group p-6 rounded-xl bg-white border border-[#E2E8F0] hover:border-[#4F46E5]/40 hover:shadow-[0_12px_40px_-12px_rgba(79,70,229,0.15)] transition-all flex flex-col cursor-default"
             >
               <div className="flex items-start justify-between mb-6">
                 <motion.div
@@ -99,7 +99,7 @@ export default function HowItWorks() {
                 <span className="text-[#4F46E5]/40 font-bold text-[22px] leading-none tabular-nums">{s.num}</span>
               </div>
               <h3 className="text-[#111111] font-semibold text-[14px] mb-3 leading-snug">{s.title}</h3>
-              <p className="text-[#333333] text-[13px] leading-relaxed flex-1">{s.desc}</p>
+              <p className="text-[#475569] text-[13px] leading-relaxed flex-1">{s.desc}</p>
               <div className="mt-5">
                 <span className="inline-flex px-2.5 py-1 rounded-full bg-[#EEF2FF] text-[#4F46E5] text-[11px] font-semibold group-hover:bg-[#4F46E5] group-hover:text-white transition-colors duration-300">
                   {s.tag}
@@ -121,7 +121,7 @@ export default function HowItWorks() {
             Start Free Trial
             <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
           </a>
-          <p className="text-[#333333] text-[13px]">30 days free · No credit card · Live in 48 hours</p>
+          <p className="text-[#475569] text-[13px]">30 days free · No credit card · Live in 48 hours</p>
         </motion.div>
 
       </div>

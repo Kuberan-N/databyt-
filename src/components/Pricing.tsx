@@ -46,7 +46,7 @@ export default function Pricing({ locale = "INTL", cfg }: { locale?: Locale; cfg
   const cmpUs   = locale === "IN" ? "₹3.9L/yr" : "$20K/yr";
 
   return (
-    <section id="pricing" className="bg-white py-20 border-b border-[#E8E8E8]">
+    <section id="pricing" className="bg-white py-20 border-b border-[#E2E8F0]">
       <div className="max-w-6xl mx-auto px-6">
 
         <motion.div
@@ -59,7 +59,7 @@ export default function Pricing({ locale = "INTL", cfg }: { locale?: Locale; cfg
           <h2 className="text-[30px] sm:text-[38px] font-extrabold text-[#111111] leading-[1.15] tracking-[-0.02em]">
             One plan. Everything included.
           </h2>
-          <p className="mt-3 text-[#333333] text-[15px] max-w-md">
+          <p className="mt-3 text-[#475569] text-[15px] max-w-md">
             No feature tiers. No per-invoice charges. No surprises. 10× cheaper than HighRadius.
           </p>
         </motion.div>
@@ -90,7 +90,7 @@ export default function Pricing({ locale = "INTL", cfg }: { locale?: Locale; cfg
           <button
             onClick={() => setYearly(false)}
             className={`px-4 py-2 rounded-lg text-[13px] font-semibold transition-all ${
-              !yearly ? "bg-[#111111] text-white" : "text-[#333333] hover:text-[#111111]"
+              !yearly ? "bg-[#111111] text-white" : "text-[#475569] hover:text-[#111111]"
             }`}
           >
             Monthly
@@ -99,7 +99,7 @@ export default function Pricing({ locale = "INTL", cfg }: { locale?: Locale; cfg
           <div
             onClick={() => setYearly(y => !y)}
             className="relative w-11 h-6 rounded-full cursor-pointer transition-colors"
-            style={{ background: yearly ? "#111111" : "#E5E5E5" }}
+            style={{ background: yearly ? "#111111" : "#E2E8F0" }}
           >
             <div
               className="absolute top-1 w-4 h-4 rounded-full bg-white shadow transition-all duration-200"
@@ -110,7 +110,7 @@ export default function Pricing({ locale = "INTL", cfg }: { locale?: Locale; cfg
           <button
             onClick={() => setYearly(true)}
             className={`px-4 py-2 rounded-lg text-[13px] font-semibold transition-all flex items-center gap-2 ${
-              yearly ? "bg-[#111111] text-white" : "text-[#333333] hover:text-[#111111]"
+              yearly ? "bg-[#111111] text-white" : "text-[#475569] hover:text-[#111111]"
             }`}
           >
             Annual
@@ -190,7 +190,7 @@ export default function Pricing({ locale = "INTL", cfg }: { locale?: Locale; cfg
 
             <a
               href="/auth"
-              className="flex items-center justify-center gap-2 py-3.5 rounded-xl bg-white text-[#111111] text-[14px] font-bold mb-8 hover:bg-[#F3F3F3] transition-colors group"
+              className="flex items-center justify-center gap-2 py-3.5 rounded-xl bg-white text-[#111111] text-[14px] font-bold mb-8 hover:bg-[#EEF2FF] transition-colors group"
             >
               Start 30-Day Free Trial — No Credit Card
               <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
@@ -213,14 +213,14 @@ export default function Pricing({ locale = "INTL", cfg }: { locale?: Locale; cfg
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.2 }}
-          className="mt-8 flex flex-wrap items-center justify-center gap-5 text-[#333333] text-[12px]"
+          className="mt-8 flex flex-wrap items-center justify-center gap-5 text-[#475569] text-[12px]"
         >
           <span>&#10003; 30-day free trial</span>
           <span>&#10003; No credit card required</span>
           <span>&#10003; Cancel anytime</span>
           <span>&#10003; Live in 48 hours</span>
           <span>&#10003; CAN-SPAM compliant</span>
-          <span className="text-[#333333]">
+          <span className="text-[#475569]">
             HighRadius: <span className="line-through">{cmpHigh}</span> · Billtrust: <span className="line-through">{cmpBill}</span> · DataByt Pro: {cmpUs}
           </span>
         </motion.div>
