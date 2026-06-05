@@ -22,10 +22,15 @@ The discipline behind the software. Read once and you'll understand AR better th
 
 ## 🟦 Grow & Convert
 
-### 📙 03 · LinkedIn Founder Playbook
+### 📙 03 · LinkedIn Founder Playbook — Month 1 (Days 1–20)
 **[DataByt-LinkedIn-Playbook.pdf](03-linkedin-playbook/DataByt-LinkedIn-Playbook.pdf)**
 
-A 30-day content engine. 20 copy-paste posts (US/EU CFO audience), each with a teaching breakdown — hook technique, psychology, structure, the move to steal. Plus the daily routine, who to follow, and how to engineer your feed to hit 50 CFO followers.
+The Authority phase. 20 copy-paste posts (US/EU CFO audience), each with a teaching breakdown — hook technique, psychology, structure, the move to steal. Plus the daily routine, who to follow, and how to engineer your feed to hit 50 CFO followers.
+
+### 📙 03 · LinkedIn Founder Playbook — Month 2 (Days 21–40)
+**[DataByt-LinkedIn-Playbook-Month2.pdf](03-linkedin-playbook/DataByt-LinkedIn-Playbook-Month2.pdf)**
+
+The Trust phase. 20 more posts (Days 21–40) that deepen authority, bring real CFO conversations into the feed, and warm the audience toward the free pilot — same teaching breakdown on every post, plus the Month-2 pillar mix and what to do after Day 40.
 
 ### 📕 04 · Sales & Conversion Playbook
 **[DataByt-Sales-Playbook.pdf](04-sales-playbook/DataByt-Sales-Playbook.pdf)**

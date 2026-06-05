@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>DataByt — LinkedIn Playbook · Month 2 (Days 21–40)</title>
+<style>
+  @page { size: A4; margin: 0; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root { --indigo:#4F46E5; --indigo-dark:#3730A3; --violet:#7C3AED; --ink:#0F172A; --slate:#475569; --muted:#64748B; --line:#E2E8F0; --bg-soft:#F8F9FC; --bg-indigo:#EEF2FF; }
+  body { font-family:-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif; color:var(--ink); line-height:1.6; font-size:13px; }
+  .page { width:210mm; min-height:297mm; padding:22mm 20mm; margin:0 auto; background:#fff; page-break-after:always; position:relative; }
+  .page:last-child { page-break-after:auto; }
+  .cover { background:linear-gradient(150deg,#130E25 0%,#2A1E5C 45%,#4F46E5 100%); color:#fff; display:flex; flex-direction:column; justify-content:center; padding:30mm; }
+  .cover .eyebrow { font-size:13px; letter-spacing:3px; color:#A492FF; font-weight:600; margin-bottom:18px; }
+  .cover h1 { font-size:46px; font-weight:800; line-height:1.08; letter-spacing:-0.02em; margin-bottom:20px; }
+  .cover h1 .grad { color:#A492FF; }
+  .cover .sub { font-size:17px; color:#CBD5E1; max-width:82%; margin-bottom:40px; }
+  .cover .meta { font-size:13px; color:#94A3B8; border-top:1px solid rgba(255,255,255,.2); padding-top:20px; }
+  .cover .brand { display:flex; align-items:center; gap:12px; margin-top:auto; font-size:20px; font-weight:700; }
+  .cover .brand .logo { width:40px; height:40px; border-radius:9px; background:#fff; color:#130E25; display:flex; align-items:center; justify-content:center; font-weight:800; }
+  h2.section { font-size:26px; font-weight:800; color:var(--ink); letter-spacing:-0.01em; margin-bottom:6px; padding-top:4px; }
+  .section-rule { height:4px; width:60px; background:linear-gradient(90deg,var(--indigo),var(--violet)); border-radius:2px; margin-bottom:22px; }
+  h3 { font-size:17px; font-weight:700; margin:22px 0 10px; color:var(--ink); }
+  p { margin-bottom:11px; color:var(--slate); }
+  strong { color:var(--ink); font-weight:650; }
+  ul { margin:0 0 12px 18px; } li { margin-bottom:6px; color:var(--slate); }
+  .lead { font-size:15px; color:var(--slate); margin-bottom:18px; }
+  .callout { background:var(--bg-indigo); border-left:4px solid var(--indigo); padding:14px 18px; border-radius:0 10px 10px 0; margin:16px 0; }
+  .callout p { margin:0; color:var(--indigo-dark); font-size:13px; } .callout strong { color:var(--indigo-dark); }
+  table { width:100%; border-collapse:collapse; margin:14px 0 20px; font-size:12px; }
+  th { background:var(--ink); color:#fff; text-align:left; padding:9px 12px; font-weight:600; }
+  td { padding:9px 12px; border-bottom:1px solid var(--line); color:var(--slate); vertical-align:top; }
+  tr:nth-child(even) td { background:var(--bg-soft); }
+  .post-block { margin-bottom:30px; page-break-inside:avoid; }
+  .day-tag { display:inline-flex; align-items:center; gap:8px; background:var(--ink); color:#fff; font-size:12px; font-weight:700; padding:6px 14px; border-radius:999px; margin-bottom:4px; }
+  .day-tag .pillar { color:#A5B4FC; font-weight:500; }
+  .post-title { font-size:15px; font-weight:700; color:var(--ink); margin:10px 0 12px; }
+  .post-card { background:#fff; border:1px solid var(--line); border-radius:14px; padding:20px 22px; box-shadow:0 1px 3px rgba(0,0,0,.05),0 6px 18px rgba(0,0,0,.04); margin-bottom:14px; }
+  .post-card .label { font-size:10px; letter-spacing:1.5px; text-transform:uppercase; color:var(--muted); font-weight:700; margin-bottom:10px; }
+  .post-text { white-space:pre-wrap; font-size:13px; line-height:1.65; color:var(--ink); font-family:'Segoe UI',sans-serif; }
+  .meta-row { display:flex; flex-wrap:wrap; gap:8px; margin:12px 0; }
+  .chip { font-size:11px; padding:4px 11px; border-radius:999px; background:var(--bg-soft); border:1px solid var(--line); color:var(--slate); }
+  .chip.tag { background:var(--bg-indigo); border-color:#C7D2FE; color:var(--indigo-dark); }
+  .breakdown { background:linear-gradient(180deg,#FBFAFF 0%,#F5F3FF 100%); border:1px solid #E0E7FF; border-radius:14px; padding:18px 22px; }
+  .breakdown .bd-title { font-size:13px; font-weight:800; color:var(--indigo-dark); margin-bottom:12px; display:flex; align-items:center; gap:8px; }
+  .breakdown .bd-item { margin-bottom:11px; }
+  .breakdown .bd-item:last-child { margin-bottom:0; }
+  .breakdown .bd-k { font-size:11px; font-weight:700; color:var(--indigo); text-transform:uppercase; letter-spacing:.5px; display:block; margin-bottom:2px; }
+  .breakdown .bd-v { font-size:12.5px; color:var(--slate); }
+  .steal { background:#fff; border:1px dashed var(--violet); border-radius:10px; padding:10px 14px; margin-top:10px; }
+  .steal .bd-k { color:var(--violet); }
+  .num { color:var(--indigo); font-weight:800; }
+  .week-divider { background:var(--ink); color:#fff; padding:14px 22px; border-radius:12px; font-size:18px; font-weight:800; margin:8px 0 24px; letter-spacing:-0.01em; }
+  .week-divider span { color:#A5B4FC; font-weight:500; font-size:13px; display:block; margin-top:2px; }
+  .footer-note { position:absolute; bottom:12mm; left:20mm; right:20mm; font-size:10px; color:var(--muted); border-top:1px solid var(--line); padding-top:8px; display:flex; justify-content:space-between; }
+</style>
+</head>
+<body>
+
+<!-- COVER -->
+<div class="page cover">
+  <div class="eyebrow">● LINKEDIN FOUNDER PLAYBOOK · MONTH 2</div>
+  <h1>Days 21–40<br>The <span class="grad">Trust Phase</span></h1>
+  <p class="sub">Month 2 of your content engine — 20 more posts that deepen authority, bring your real CFO conversations into the feed, and warm the audience toward the pilot. Each post + the technique that makes it work.</p>
+  <div class="meta">For: Kuberan N · Founder, DataByt · US/EU mid-market B2B CFOs · Continues from Month 1 (Days 1–20)</div>
+  <div class="brand"><span class="logo">D</span> DataByt</div>
+</div>
+
+<!-- INTRO -->
+<div class="page">
+  <h2 class="section">Month 2 — What Changes</h2>
+  <div class="section-rule"></div>
+  <p class="lead">Month 1 built authority (heavy pain + education) to make CFOs trust that you know AR. Month 2 keeps that, but shifts the mix toward <strong>founder voice and real conversations</strong> — and starts warming the audience toward the free pilot. You are no longer a stranger with good tips; you're a founder they've watched for a month.</p>
+
+  <h3>The Month-2 pillar mix</h3>
+  <table>
+    <tr><th>Pillar</th><th>Share</th><th>Why now</th></tr>
+    <tr><td>Pain points</td><td><span class="num">40%</span></td><td>Still the engine of engagement</td></tr>
+    <tr><td>Education</td><td><span class="num">25%</span></td><td>Carousels keep proving expertise</td></tr>
+    <tr><td>Founder journey</td><td><span class="num">25%</span></td><td>Up from 20% — they follow <em>you</em> now</td></tr>
+    <tr><td>Bold take / poll / CTA</td><td><span class="num">10%</span></td><td>Begin the soft conversion</td></tr>
+  </table>
+
+  <h3>The calendar (Weeks 5–8)</h3>
+  <table>
+    <tr><th>Wk</th><th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th></tr>
+    <tr><td><strong>5</strong></td><td>DSO drift</td><td>Carousel: 7 levers</td><td>30-day update</td><td>Write-off math</td><td>Poll: your DSO</td></tr>
+    <tr><td><strong>6</strong></td><td>One person's memory</td><td>Carousel: dunning</td><td>CFO conversation</td><td>Concentration risk</td><td>Bold: agencies</td></tr>
+    <tr><td><strong>7</strong></td><td>Payroll Friday</td><td>Carousel: 5 signs</td><td>I was wrong</td><td>Net 60</td><td>Poll: hours</td></tr>
+    <tr><td><strong>8</strong></td><td>Early-pay discounts</td><td>Carousel: month-end</td><td>Boring problems</td><td>AI promotes you</td><td>Recap + CTA</td></tr>
+  </table>
+
+  <div class="callout"><p><strong>Reminder:</strong> the posts build credibility; the daily <strong>connect + comment routine</strong> builds the following. Keep both running — 10 CFO connection requests + 8 thoughtful comments every weekday. By Day 40 you should be well past 50 followers and starting real conversations.</p></div>
+
+  <div class="footer-note"><span>DataByt — LinkedIn Playbook · Month 2</span><span>Intro</span></div>
+</div>
+
+<!-- WEEK 5 -->
+<div class="page">
+  <div class="week-divider">WEEK 5<span>Authority compounds — and you mark the 30-day milestone</span></div>
+
+  <div class="post-block">
+    <div class="day-tag">DAY 21 · MON <span class="pillar">— Pain</span></div>
+    <div class="post-title">DSO doesn't spike — it creeps</div>
+    <div class="post-card"><div class="label">The Post</div><div class="post-text">Your DSO didn't spike. It crept.
+
+Nobody notices 45 → 48 → 52 days. There's no alarm, no red screen. Just one quarter where cash feels tighter and you're not sure why.
+
+That's the dangerous part of AR. It doesn't break — it drifts. By the time it's obvious, you've got 90 days of cash trapped and a board asking questions.
+
+The fix isn't heroics. It's watching the trend weekly, and chasing consistently before invoices age.
+
+When did you last actually look at your DSO trend — not the number, the direction?</div>
+      <div class="meta-row"><span class="chip">🎯 CFOs, finance leaders</span><span class="chip tag">#DSO</span><span class="chip tag">#CashFlow</span><span class="chip tag">#CFO</span><span class="chip tag">#AccountsReceivable</span></div>
+    </div>
+    <div class="breakdown"><div class="bd-title">🎓 BREAKDOWN</div>
+      <div class="bd-item"><span class="bd-k">✍️ Hook — Correction of expectation</span><span class="bd-v">"Didn't spike. It crept." denies the dramatic version and offers a subtler, scarier truth — the reader leans in to learn the real danger.</span></div>
+      <div class="bd-item"><span class="bd-k">🧠 Why it works</span><span class="bd-v">"Drifts, doesn't break" is a memorable reframe. The closing question forces self-reflection (do I watch the trend?) → comments.</span></div>
+      <div class="bd-item"><span class="bd-k">📐 Structure</span><span class="bd-v">Myth → the subtler truth → the consequence → the fix → reflective question.</span></div>
+      <div class="steal"><span class="bd-k">💡 Steal this</span><span class="bd-v">"It doesn't break — it drifts." Slow, invisible decline is scarier than a crash. Use it for any creeping metric.</span></div>
+    </div>
+  </div>
+  <div class="footer-note"><span>DataByt — LinkedIn Playbook · Month 2</span><span>Week 5 · Day 21</span></div>
+</div>
+
+<!-- DAY 22 -->
+<div class="page">
+  <div class="post-block">
+    <div class="day-tag">DAY 22 · TUE <span class="pillar">— Education Carousel</span></div>
+    <div class="post-title">7 Levers to Actually Cut DSO</div>
+    <div class="post-card"><div class="label">Caption</div><div class="post-text">Everyone says "reduce your DSO." Nobody says how.
+
+Here are the 7 levers that actually move it — in order of impact 👉
+Which one are you missing?</div></div>
+    <div class="post-card"><div class="label">Slides</div><div class="post-text">1 · 7 Levers to Actually Cut DSO
+2 · Invoice the same day you deliver. Late invoices = late payments.
+3 · Put a one-click payment link on every invoice + reminder.
+4 · Automate consistent reminders (L1→L2→L3). The #1 lever.
+5 · Chase by impact — the 20% of customers holding 80% of overdue cash.
+6 · Segment tone: courteous for strategic, firm for at-risk.
+7 · Shorten terms on new contracts; resolve disputes fast.
+8 · DataByt automates levers 2–5 for you → databyt.in</div>
+      <div class="meta-row"><span class="chip">🎯 CFOs, Controllers, FP&amp;A</span><span class="chip tag">#DSO</span><span class="chip tag">#FinanceMetrics</span><span class="chip tag">#AccountsReceivable</span><span class="chip tag">#CFO</span></div>
+    </div>
+    <div class="breakdown"><div class="bd-title">🎓 BREAKDOWN</div>
+      <div class="bd-item"><span class="bd-k">✍️ Hook — Says-vs-does gap</span><span class="bd-v">"Everyone says X. Nobody says how." promises the missing practical half — exactly what an operator wants.</span></div>
+      <div class="bd-item"><span class="bd-k">🧠 Why it works</span><span class="bd-v">"In order of impact" signals you've prioritised, not just listed — that's expert framing. Save-worthy.</span></div>
+      <div class="bd-item"><span class="bd-k">📐 Structure</span><span class="bd-v">Gap caption → ranked levers → product slide mapping which levers DataByt covers.</span></div>
+      <div class="steal"><span class="bd-k">💡 Steal this</span><span class="bd-v">Rank your list "by impact." Ordering implies expertise that a flat list doesn't.</span></div>
+    </div>
+  </div>
+  <div class="footer-note"><span>DataByt — LinkedIn Playbook · Month 2</span><span>Week 5 · Day 22</span></div>
+</div>
+
+<!-- DAY 23 -->
+<div class="page">
+  <div class="post-block">
+    <div class="day-tag">DAY 23 · WED <span class="pillar">— Founder Journey</span></div>
+    <div class="post-title">30-day building-in-public update</div>
+    <div class="post-card"><div class="label">The Post</div><div class="post-text">30 days ago I started posting about getting B2B companies paid on time.
+
+What I expected: a few likes, maybe a CFO or two.
+What actually happened: finance leaders started DMing me their real AR horror stories. Spreadsheets held together by one person's memory. $200K stuck because nobody followed up. DSO nobody had measured in a year.
+
+Every conversation makes DataByt sharper — because I'm not guessing what CFOs need, they're telling me.
+
+Building in public works. If you run finance and something here resonates, my DMs are open. I'm still learning, and you're the best teachers.</div>
+      <div class="meta-row"><span class="chip">🎯 CFOs, founders, BIP crowd</span><span class="chip tag">#BuildInPublic</span><span class="chip tag">#StartupJourney</span><span class="chip tag">#Fintech</span><span class="chip tag">#Founders</span></div>
+    </div>
+    <div class="breakdown"><div class="bd-title">🎓 BREAKDOWN</div>
+      <div class="bd-item"><span class="bd-k">✍️ Hook — Expectation vs reality</span><span class="bd-v">"What I expected / what happened" is an irresistible structure — the gap is the story.</span></div>
+      <div class="bd-item"><span class="bd-k">🧠 Why it works</span><span class="bd-v">Milestone posts invite goodwill; the specific DM details ($200K, a year) make it real. Open DMs = a soft lead magnet.</span></div>
+      <div class="bd-item"><span class="bd-k">📐 Structure</span><span class="bd-v">Time anchor → expected vs actual → the insight → humble open-DM CTA.</span></div>
+      <div class="steal"><span class="bd-k">💡 Steal this</span><span class="bd-v">Post a milestone ("30 days in") with expected-vs-reality. It's a reusable founder format.</span></div>
+    </div>
+  </div>
+  <div class="footer-note"><span>DataByt — LinkedIn Playbook · Month 2</span><span>Week 5 · Day 23</span></div>
+</div>
+
+<!-- DAY 24 -->
+<div class="page">
+  <div class="post-block">
+    <div class="day-tag">DAY 24 · THU <span class="pillar">— Pain</span></div>
+    <div class="post-title">The 10x math of a write-off</div>
+    <div class="post-card"><div class="label">The Post</div><div class="post-text">A write-off is the most expensive line in finance — and the quietest.
+
+When an invoice finally gets marked "uncollectable," it doesn't just cost the invoice amount. To replace $50K of written-off revenue at a 10% margin, you have to sell $500K more.
+
+That's the real math of bad debt: every dollar you fail to collect costs you ten dollars of new sales to make up for.
+
+Collecting what you're already owed isn't admin. It's the highest-margin revenue in your business.</div>
+      <div class="meta-row"><span class="chip">🎯 CFOs, founders</span><span class="chip tag">#BadDebt</span><span class="chip tag">#CashFlow</span><span class="chip tag">#CFO</span><span class="chip tag">#Profitability</span></div>
+    </div>
+    <div class="breakdown"><div class="bd-title">🎓 BREAKDOWN</div>
+      <div class="bd-item"><span class="bd-k">✍️ Hook — Superlative + paradox</span><span class="bd-v">"Most expensive line — and the quietest" pairs extreme cost with invisibility; the contradiction pulls the read.</span></div>
+      <div class="bd-item"><span class="bd-k">🧠 Why it works</span><span class="bd-v">The 10x replacement math is a concrete, shareable calculation that reframes collections as high-margin revenue.</span></div>
+      <div class="bd-item"><span class="bd-k">📐 Structure</span><span class="bd-v">Provocative claim → the hidden math → the reframe ("highest-margin revenue").</span></div>
+      <div class="steal"><span class="bd-k">💡 Steal this</span><span class="bd-v">Turn an abstract loss into a vivid multiplier ("$1 lost = $10 of new sales"). Math makes it stick.</span></div>
+    </div>
+  </div>
+  <div class="footer-note"><span>DataByt — LinkedIn Playbook · Month 2</span><span>Week 5 · Day 24</span></div>
+</div>
+
+<!-- DAY 25 -->
+<div class="page">
+  <div class="post-block">
+    <div class="day-tag">DAY 25 · FRI <span class="pillar">— Poll</span></div>
+    <div class="post-title">What's your DSO right now?</div>
+    <div class="post-card"><div class="label">The Post (native Poll)</div><div class="post-text">Poll: What's your team's DSO right now?
+
+No judgment — I'm mapping where mid-market B2B really sits in 2026.
+
+◻️ Under 30 days (elite)
+◻️ 30–45 days (healthy)
+◻️ 46–60 days (warning)
+◻️ 60+ days (it hurts)
+
+Whatever you pick, I'll share the benchmark by industry in the comments.</div>
+      <div class="meta-row"><span class="chip">🎯 CFOs, AR managers</span><span class="chip tag">#DSO</span><span class="chip tag">#Finance</span><span class="chip tag">#Poll</span><span class="chip tag">#CFO</span></div>
+    </div>
+    <div class="breakdown"><div class="bd-title">🎓 BREAKDOWN</div>
+      <div class="bd-item"><span class="bd-k">✍️ Hook — Labeled options</span><span class="bd-v">Tagging each band ("elite / healthy / warning / it hurts") makes voting a self-identification — people love placing themselves.</span></div>
+      <div class="bd-item"><span class="bd-k">🧠 Why it works</span><span class="bd-v">The "benchmark in comments" promise creates a reason to return and comment, extending reach. Also pure market research.</span></div>
+      <div class="bd-item"><span class="bd-k">📐 Structure</span><span class="bd-v">Question → purpose framing → labeled bands → value promise.</span></div>
+      <div class="steal"><span class="bd-k">💡 Steal this</span><span class="bd-v">Label poll options with identity words. "Elite/healthy/warning" outperforms bare numbers.</span></div>
+    </div>
+  </div>
+  <div class="footer-note"><span>DataByt — LinkedIn Playbook · Month 2</span><span>Week 5 · Day 25</span></div>
+</div>
+
+<!-- WEEK 6 -->
+<div class="page">
+  <div class="week-divider">WEEK 6<span>Deepen the wound + your first customer-conversation insight</span></div>
+
+  <div class="post-block">
+    <div class="day-tag">DAY 26 · MON <span class="pillar">— Pain</span></div>
+    <div class="post-title">A liability with a job title</div>
+    <div class="post-card"><div class="label">The Post</div><div class="post-text">Your entire collections process is one person's memory.
+
+They know which customer "always pays late but always pays," who to call vs email, which invoice is actually disputed. It's all in their head.
+
+Then they take a two-week vacation — and collections quietly stop. Or they quit, and six months of context walks out the door.
+
+Cash flow should never depend on a single person remembering to follow up. That's not a process. That's a liability with a job title.</div>
+      <div class="meta-row"><span class="chip">🎯 CFOs, finance ops, founders</span><span class="chip tag">#Finance</span><span class="chip tag">#AccountsReceivable</span><span class="chip tag">#Automation</span><span class="chip tag">#CFO</span></div>
+    </div>
+    <div class="breakdown"><div class="bd-title">🎓 BREAKDOWN</div>
+      <div class="bd-item"><span class="bd-k">✍️ Hook — Uncomfortable truth</span><span class="bd-v">"One person's memory" names a fragile reality the reader recognises instantly.</span></div>
+      <div class="bd-item"><span class="bd-k">🧠 Why it works</span><span class="bd-v">The vacation/quit scenario makes the risk concrete. "A liability with a job title" is a sharp, quotable closer.</span></div>
+      <div class="bd-item"><span class="bd-k">📐 Structure</span><span class="bd-v">Mirror → what's in their head → the failure trigger → the principle + punchline.</span></div>
+      <div class="steal"><span class="bd-k">💡 Steal this</span><span class="bd-v">End on a reframing label ("a liability with a job title"). A vivid relabel beats a plain warning.</span></div>
+    </div>
+  </div>
+  <div class="footer-note"><span>DataByt — LinkedIn Playbook · Month 2</span><span>Week 6 · Day 26</span></div>
+</div>
+
+<!-- DAY 27 -->
+<div class="page">
+  <div class="post-block">
+    <div class="day-tag">DAY 27 · TUE <span class="pillar">— Education Carousel</span></div>
+    <div class="post-title">Anatomy of a Dunning Email That Gets Paid</div>
+    <div class="post-card"><div class="label">Caption</div><div class="post-text">Most reminder emails get ignored. A few get paid in 48 hours.
+
+Here's the anatomy of the ones that work 👉</div></div>
+    <div class="post-card"><div class="label">Slides</div><div class="post-text">1 · Anatomy of a Dunning Email That Gets Paid
+2 · Subject: name the invoice + amount. "Invoice #1042 — $8,400 outstanding."
+3 · First line: the ask, not pleasantries. Lead with what you need.
+4 · The amount, due date, and how late — up top, scannable.
+5 · One-click payment link. Remove every step between them and paying.
+6 · Tone matched to age: friendly early, firm later. Never robotic.
+7 · One email per customer covering all overdue invoices — not five.
+8 · DataByt writes these automatically, at the right tone → databyt.in</div>
+      <div class="meta-row"><span class="chip">🎯 AR managers, CFOs</span><span class="chip tag">#Collections</span><span class="chip tag">#AccountsReceivable</span><span class="chip tag">#EmailStrategy</span><span class="chip tag">#CFO</span></div>
+    </div>
+    <div class="breakdown"><div class="bd-title">🎓 BREAKDOWN</div>
+      <div class="bd-item"><span class="bd-k">✍️ Hook — Outcome contrast</span><span class="bd-v">"Ignored vs paid in 48 hours" sets a clear before/after the reader wants to be on the right side of.</span></div>
+      <div class="bd-item"><span class="bd-k">🧠 Why it works</span><span class="bd-v">"Anatomy of…" promises a teardown — high save value. Every line is also a DataByt capability.</span></div>
+      <div class="bd-item"><span class="bd-k">📐 Structure</span><span class="bd-v">Contrast caption → component-by-component teardown → product slide.</span></div>
+      <div class="steal"><span class="bd-k">💡 Steal this</span><span class="bd-v">"Anatomy of [a thing that works]" is a reliable teardown format for any craft post.</span></div>
+    </div>
+  </div>
+  <div class="footer-note"><span>DataByt — LinkedIn Playbook · Month 2</span><span>Week 6 · Day 27</span></div>
+</div>
+
+<!-- DAY 28 -->
+<div class="page">
+  <div class="post-block">
+    <div class="day-tag">DAY 28 · WED <span class="pillar">— Founder Journey</span></div>
+    <div class="post-title">"I need to care less about it"</div>
+    <div class="post-card"><div class="label">The Post</div><div class="post-text">A CFO said something last week that I can't stop thinking about:
+
+"I don't need help knowing who's late. I need help caring less about it."
+
+She didn't want a better report. She wanted the whole thing off her plate — the chasing, the tracking, the mental load of wondering if cash would land.
+
+That reframed how I think about DataByt. We're not selling visibility. We're selling peace of mind — a finance leader who stops carrying collections in their head.
+
+The best product insight always comes from one honest sentence.</div>
+      <div class="meta-row"><span class="chip">🎯 CFOs, founders, product people</span><span class="chip tag">#BuildInPublic</span><span class="chip tag">#Fintech</span><span class="chip tag">#ProductStrategy</span><span class="chip tag">#CFO</span></div>
+    </div>
+    <div class="breakdown"><div class="bd-title">🎓 BREAKDOWN</div>
+      <div class="bd-item"><span class="bd-k">✍️ Hook — Intriguing quote</span><span class="bd-v">A surprising customer quote ("care less about it") creates curiosity — what did she mean?</span></div>
+      <div class="bd-item"><span class="bd-k">🧠 Why it works</span><span class="bd-v">Shows you listen, and repositions the product from "visibility" to "peace of mind" — an emotional, higher-order benefit.</span></div>
+      <div class="bd-item"><span class="bd-k">📐 Structure</span><span class="bd-v">Setup → the quote → what she really wanted → the reframe it caused → the lesson.</span></div>
+      <div class="steal"><span class="bd-k">💡 Steal this</span><span class="bd-v">Let one real customer line carry the post. Quoting them is more persuasive than asserting it yourself.</span></div>
+    </div>
+  </div>
+  <div class="footer-note"><span>DataByt — LinkedIn Playbook · Month 2</span><span>Week 6 · Day 28</span></div>
+</div>
+
+<!-- DAY 29 -->
+<div class="page">
+  <div class="post-block">
+    <div class="day-tag">DAY 29 · THU <span class="pillar">— Pain</span></div>
+    <div class="post-title">Your biggest customer is your biggest cash risk</div>
+    <div class="post-card"><div class="label">The Post</div><div class="post-text">Your biggest customer is also your biggest cash risk.
+
+When one client is 30–40% of your receivables, their payment habits are your cash flow. They pay late, you scramble. They dispute one invoice, your month is wrecked.
+
+Concentration feels like success — until it becomes fragility.
+
+Two moves: watch what % of your AR sits with your top 1–2 customers, and never let a big account quietly stretch from Net 30 to Net 75 because "they're important."
+
+Important customers still have to pay on time.</div>
+      <div class="meta-row"><span class="chip">🎯 CFOs, founders</span><span class="chip tag">#CashFlow</span><span class="chip tag">#RiskManagement</span><span class="chip tag">#CFO</span><span class="chip tag">#AccountsReceivable</span></div>
+    </div>
+    <div class="breakdown"><div class="bd-title">🎓 BREAKDOWN</div>
+      <div class="bd-item"><span class="bd-k">✍️ Hook — Counterintuitive pairing</span><span class="bd-v">"Biggest customer = biggest risk" flips a positive into a warning; the tension drives the read.</span></div>
+      <div class="bd-item"><span class="bd-k">🧠 Why it works</span><span class="bd-v">"Concentration feels like success — until fragility" is a quotable line; the two concrete moves make it actionable.</span></div>
+      <div class="bd-item"><span class="bd-k">📐 Structure</span><span class="bd-v">Flip → why it's risky → the aphorism → two moves → firm closer.</span></div>
+      <div class="steal"><span class="bd-k">💡 Steal this</span><span class="bd-v">Reframe a perceived strength as a hidden risk. It surprises and teaches at once.</span></div>
+    </div>
+  </div>
+  <div class="footer-note"><span>DataByt — LinkedIn Playbook · Month 2</span><span>Week 6 · Day 29</span></div>
+</div>
+
+<!-- DAY 30 -->
+<div class="page">
+  <div class="post-block">
+    <div class="day-tag">DAY 30 · FRI <span class="pillar">— Bold Take</span></div>
+    <div class="post-title">Agencies are a tax on broken systems</div>
+    <div class="post-card"><div class="label">The Post</div><div class="post-text">Hot take: a collections agency is a tax you pay for a broken system.
+
+They take 10–25% of what they recover, and they'll happily torch a customer relationship to get it. You're handing away a quarter of your own money — plus goodwill — because the chasing didn't happen earlier and consistently.
+
+Agencies are a last resort dressed up as a solution. The real fix is upstream: chase early, chase consistently, escalate with the right tone — so invoices rarely reach "agency" territory at all.
+
+Prevention beats recovery. Every time.</div>
+      <div class="meta-row"><span class="chip">🎯 Mid-market CFOs</span><span class="chip tag">#Collections</span><span class="chip tag">#Fintech</span><span class="chip tag">#AccountsReceivable</span><span class="chip tag">#CFO</span></div>
+    </div>
+    <div class="breakdown"><div class="bd-title">🎓 BREAKDOWN</div>
+      <div class="bd-item"><span class="bd-k">✍️ Hook — Declared hot take</span><span class="bd-v">"Hot take:" primes debate; calling agencies "a tax" is a provocative reframe.</span></div>
+      <div class="bd-item"><span class="bd-k">🧠 Why it works</span><span class="bd-v">Names an enemy category and sides with the reader's wallet + relationships. "Prevention beats recovery" lands the point.</span></div>
+      <div class="bd-item"><span class="bd-k">📐 Structure</span><span class="bd-v">Hot take → the cost (money + goodwill) → reframe (last resort) → the upstream fix → aphorism.</span></div>
+      <div class="steal"><span class="bd-k">💡 Steal this</span><span class="bd-v">Reframe a competitor/alternative as "a tax." It flips a neutral option into a cost to avoid.</span></div>
+    </div>
+  </div>
+  <div class="footer-note"><span>DataByt — LinkedIn Playbook · Month 2</span><span>Week 6 · Day 30</span></div>
+</div>
+
+<!-- WEEK 7 -->
+<div class="page">
+  <div class="week-divider">WEEK 7<span>Peak tension + your second vulnerability post</span></div>
+
+  <div class="post-block">
+    <div class="day-tag">DAY 31 · MON <span class="pillar">— Pain</span></div>
+    <div class="post-title">Friday 2 PM, payroll Monday</div>
+    <div class="post-card"><div class="label">The Post</div><div class="post-text">Friday, 2 PM. Payroll runs Monday. The cash isn't there.
+
+Not because the business is failing — because three customers who owe you $180K just… haven't paid. You've sent reminders. You've waited. Now you're deciding whether to dip into a credit line to cover wages for work you already did and already invoiced.
+
+No founder should spend a Friday afternoon like that. But thousands do, every week.
+
+Your cash flow shouldn't be a cliffhanger. It should be a system.</div>
+      <div class="meta-row"><span class="chip">🎯 Founders, CFOs</span><span class="chip tag">#CashFlow</span><span class="chip tag">#SmallBusiness</span><span class="chip tag">#Finance</span><span class="chip tag">#Founders</span></div>
+    </div>
+    <div class="breakdown"><div class="bd-title">🎓 BREAKDOWN</div>
+      <div class="bd-item"><span class="bd-k">✍️ Hook — Cinematic timestamp</span><span class="bd-v">"Friday, 2 PM. Payroll Monday." drops you into a ticking-clock scene — instant tension.</span></div>
+      <div class="bd-item"><span class="bd-k">🧠 Why it works</span><span class="bd-v">Payroll panic is the most visceral AR fear. Specifics ($180K, three customers) make it real; the closer reframes the cure.</span></div>
+      <div class="bd-item"><span class="bd-k">📐 Structure</span><span class="bd-v">Scene → the twist (not failing) → the impossible choice → the universal truth → reframe.</span></div>
+      <div class="steal"><span class="bd-k">💡 Steal this</span><span class="bd-v">Open with a timestamp to create a scene. Time + stakes = a story people finish.</span></div>
+    </div>
+  </div>
+  <div class="footer-note"><span>DataByt — LinkedIn Playbook · Month 2</span><span>Week 7 · Day 31</span></div>
+</div>
+
+<!-- DAY 32 -->
+<div class="page">
+  <div class="post-block">
+    <div class="day-tag">DAY 32 · TUE <span class="pillar">— Education Carousel</span></div>
+    <div class="post-title">5 Signs Your AR Process Is Broken</div>
+    <div class="post-card"><div class="label">Caption</div><div class="post-text">Most finance teams don't realise their AR is broken until cash gets tight.
+
+Here are the 5 early warning signs 👉 How many apply to you?</div></div>
+    <div class="post-card"><div class="label">Slides</div><div class="post-text">1 · 5 Signs Your AR Process Is Broken
+2 · You can't say your DSO from memory.
+3 · Reminders go out "when someone has time."
+4 · The same customers are always late — and nothing changes.
+5 · Disputes sit unresolved for weeks.
+6 · "AR" is a spreadsheet only one person understands.
+7 · 3+ apply? Your collections are leaking cash. DataByt fixes all 5 → databyt.in</div>
+      <div class="meta-row"><span class="chip">🎯 CFOs, Controllers, AR managers</span><span class="chip tag">#AccountsReceivable</span><span class="chip tag">#Finance</span><span class="chip tag">#CFO</span><span class="chip tag">#CashFlow</span></div>
+    </div>
+    <div class="breakdown"><div class="bd-title">🎓 BREAKDOWN</div>
+      <div class="bd-item"><span class="bd-k">✍️ Hook — Delayed-realisation warning</span><span class="bd-v">"Don't realise until cash gets tight" implies a hidden problem the reader should check for now.</span></div>
+      <div class="bd-item"><span class="bd-k">🧠 Why it works</span><span class="bd-v">Self-diagnostic ("how many apply?") drives comments as people confess their count. High save rate.</span></div>
+      <div class="bd-item"><span class="bd-k">📐 Structure</span><span class="bd-v">Warning caption → 5 concrete symptoms → scoring CTA + product.</span></div>
+      <div class="steal"><span class="bd-k">💡 Steal this</span><span class="bd-v">"How many apply to you?" turns a list into a quiz — quizzes get comments.</span></div>
+    </div>
+  </div>
+  <div class="footer-note"><span>DataByt — LinkedIn Playbook · Month 2</span><span>Week 7 · Day 32</span></div>
+</div>
+
+<!-- DAY 33 -->
+<div class="page">
+  <div class="post-block">
+    <div class="day-tag">DAY 33 · WED <span class="pillar">— Founder Journey</span></div>
+    <div class="post-title">I was wrong about CFOs</div>
+    <div class="post-card"><div class="label">The Post</div><div class="post-text">I was wrong about CFOs.
+
+When I started, I assumed they'd want maximum control — approve every email, tweak every setting. So I built DataByt to be highly configurable.
+
+Turns out the best CFOs want the opposite. They want to set the rules once and never think about it again. "Configurable" felt like "more work" to them.
+
+So I'm simplifying — smart defaults, minimal setup, automation they can trust on day one. Being wrong in public is uncomfortable, but it's how the product gets better.
+
+What's something you assumed about your customers that turned out backwards?</div>
+      <div class="meta-row"><span class="chip">🎯 Founders, CFOs, product people</span><span class="chip tag">#BuildInPublic</span><span class="chip tag">#StartupLessons</span><span class="chip tag">#ProductDevelopment</span><span class="chip tag">#Founders</span></div>
+    </div>
+    <div class="breakdown"><div class="bd-title">🎓 BREAKDOWN</div>
+      <div class="bd-item"><span class="bd-k">✍️ Hook — Admission</span><span class="bd-v">"I was wrong about X" is disarming and rare; admissions earn trust in a feed full of flexing.</span></div>
+      <div class="bd-item"><span class="bd-k">🧠 Why it works</span><span class="bd-v">Shows you adapt to customers, not ego. The closing question invites other founders to share — strong comment driver.</span></div>
+      <div class="bd-item"><span class="bd-k">📐 Structure</span><span class="bd-v">Admission → the wrong assumption → what you learned → the change → question CTA.</span></div>
+      <div class="steal"><span class="bd-k">💡 Steal this</span><span class="bd-v">"I was wrong about ___" → lesson → question. A repeatable, trust-building founder post.</span></div>
+    </div>
+  </div>
+  <div class="footer-note"><span>DataByt — LinkedIn Playbook · Month 2</span><span>Week 7 · Day 33</span></div>
+</div>
+
+<!-- DAY 34 -->
+<div class="page">
+  <div class="post-block">
+    <div class="day-tag">DAY 34 · THU <span class="pillar">— Pain</span></div>
+    <div class="post-title">Net 60 is halving your cash flow</div>
+    <div class="post-card"><div class="label">The Post</div><div class="post-text">"Net 60" is quietly cutting your cash flow in half.
+
+Every day of payment terms is a day you finance your customer's business for free. Net 60 means two full months between doing the work and seeing the money — and customers almost always stretch it to 75+.
+
+Most companies set terms once, years ago, and never revisit them. Meanwhile their cash is permanently parked in someone else's account.
+
+Two questions worth asking this quarter: do new contracts really need Net 60? And are your at-risk customers earning those terms?</div>
+      <div class="meta-row"><span class="chip">🎯 CFOs, founders</span><span class="chip tag">#WorkingCapital</span><span class="chip tag">#CashFlow</span><span class="chip tag">#CFO</span><span class="chip tag">#PaymentTerms</span></div>
+    </div>
+    <div class="breakdown"><div class="bd-title">🎓 BREAKDOWN</div>
+      <div class="bd-item"><span class="bd-k">✍️ Hook — Quiet damage</span><span class="bd-v">"Quietly cutting your cash flow in half" attaches a big consequence to a routine setting.</span></div>
+      <div class="bd-item"><span class="bd-k">🧠 Why it works</span><span class="bd-v">"Financing your customer for free" reframes terms as a hidden loan; challenges a set-and-forget default.</span></div>
+      <div class="bd-item"><span class="bd-k">📐 Structure</span><span class="bd-v">Consequence → the reframe → the neglected habit → two questions to act on.</span></div>
+      <div class="steal"><span class="bd-k">💡 Steal this</span><span class="bd-v">Reframe a routine default as a hidden cost ("financing them for free"). Defaults are easy targets.</span></div>
+    </div>
+  </div>
+  <div class="footer-note"><span>DataByt — LinkedIn Playbook · Month 2</span><span>Week 7 · Day 34</span></div>
+</div>
+
+<!-- DAY 35 -->
+<div class="page">
+  <div class="post-block">
+    <div class="day-tag">DAY 35 · FRI <span class="pillar">— Poll</span></div>
+    <div class="post-title">Hours/week chasing invoices</div>
+    <div class="post-card"><div class="label">The Post (native Poll)</div><div class="post-text">Poll: How many hours/week does your team spend chasing invoices?
+
+Honest answers only — I'm building the case that this is a solved problem.
+
+◻️ Under 2 hours
+◻️ 2–5 hours
+◻️ 5–10 hours
+◻️ 10+ hours (send help)
+
+If you're above 5, that's a quarter of a salary spent on something a system should do.</div>
+      <div class="meta-row"><span class="chip">🎯 CFOs, AR managers, finance ops</span><span class="chip tag">#Finance</span><span class="chip tag">#Automation</span><span class="chip tag">#Poll</span><span class="chip tag">#CFO</span></div>
+    </div>
+    <div class="breakdown"><div class="bd-title">🎓 BREAKDOWN</div>
+      <div class="bd-item"><span class="bd-k">✍️ Hook — Quantify the pain</span><span class="bd-v">Asking for hours makes the waste measurable and personal; the "(send help)" option adds levity.</span></div>
+      <div class="bd-item"><span class="bd-k">🧠 Why it works</span><span class="bd-v">Closing line converts the vote into your thesis ("a quarter of a salary"). Reach + research + narrative.</span></div>
+      <div class="bd-item"><span class="bd-k">📐 Structure</span><span class="bd-v">Question → purpose → quantified bands → cost reframe.</span></div>
+      <div class="steal"><span class="bd-k">💡 Steal this</span><span class="bd-v">Translate the poll result into money in the closing line. Let the crowd's vote argue your point.</span></div>
+    </div>
+  </div>
+  <div class="footer-note"><span>DataByt — LinkedIn Playbook · Month 2</span><span>Week 7 · Day 35</span></div>
+</div>
+
+<!-- WEEK 8 -->
+<div class="page">
+  <div class="week-divider">WEEK 8<span>Convert attention to intent — vision, reassurance, and the pilot CTA</span></div>
+
+  <div class="post-block">
+    <div class="day-tag">DAY 36 · MON <span class="pillar">— Pain / Education</span></div>
+    <div class="post-title">Do early-payment discounts actually work?</div>
+    <div class="post-card"><div class="label">The Post</div><div class="post-text">Early-payment discounts feel smart. Usually they're not.
+
+Offering "2% off if you pay in 10 days" can work — but most companies hand the discount to customers who would've paid on time anyway, and the chronic late-payers ignore it completely.
+
+You end up paying your best customers to do what they already did, while your cash-flow problem (the late ones) is untouched.
+
+A discount is a blunt tool. Consistent, escalating follow-up is a precise one — and it doesn't cost you margin.</div>
+      <div class="meta-row"><span class="chip">🎯 CFOs, finance leaders</span><span class="chip tag">#CashFlow</span><span class="chip tag">#Finance</span><span class="chip tag">#CFO</span><span class="chip tag">#WorkingCapital</span></div>
+    </div>
+    <div class="breakdown"><div class="bd-title">🎓 BREAKDOWN</div>
+      <div class="bd-item"><span class="bd-k">✍️ Hook — Myth-bust</span><span class="bd-v">"Feel smart. Usually they're not." challenges a common tactic — readers want to know why.</span></div>
+      <div class="bd-item"><span class="bd-k">🧠 Why it works</span><span class="bd-v">Exposes the leak (paying on-time payers) and positions follow-up (your product) as the precise alternative.</span></div>
+      <div class="bd-item"><span class="bd-k">📐 Structure</span><span class="bd-v">Myth → why it fails → the wasted spend → blunt vs precise tool reframe.</span></div>
+      <div class="steal"><span class="bd-k">💡 Steal this</span><span class="bd-v">Contrast "blunt tool vs precise tool." It elegantly elevates your approach over the common one.</span></div>
+    </div>
+  </div>
+  <div class="footer-note"><span>DataByt — LinkedIn Playbook · Month 2</span><span>Week 8 · Day 36</span></div>
+</div>
+
+<!-- DAY 37 -->
+<div class="page">
+  <div class="post-block">
+    <div class="day-tag">DAY 37 · TUE <span class="pillar">— Education Carousel</span></div>
+    <div class="post-title">The CFO's Month-End AR Checklist</div>
+    <div class="post-card"><div class="label">Caption</div><div class="post-text">Most month-end AR reviews are a scramble. They shouldn't be.
+
+Here's the 6-point checklist a sharp CFO runs every month 👉 Save it.</div></div>
+    <div class="post-card"><div class="label">Slides</div><div class="post-text">1 · The CFO's Month-End AR Checklist
+2 · DSO this month vs last 3 — direction, not just the number.
+3 · CEI: did we collect 80%+ of what was collectable?
+4 · Overdue % of AR — is it rising?
+5 · Top 5 overdue accounts — owner + next action for each.
+6 · Open disputes — anything stuck &gt; 2 weeks?
+7 · DataByt gives you all of this live — no month-end scramble → databyt.in</div>
+      <div class="meta-row"><span class="chip">🎯 CFOs, Controllers, FP&amp;A</span><span class="chip tag">#CFO</span><span class="chip tag">#FinanceMetrics</span><span class="chip tag">#MonthEnd</span><span class="chip tag">#DSO</span></div>
+    </div>
+    <div class="breakdown"><div class="bd-title">🎓 BREAKDOWN</div>
+      <div class="bd-item"><span class="bd-k">✍️ Hook — Relatable pain + promise</span><span class="bd-v">"Most reviews are a scramble. They shouldn't be." offers relief via a ready checklist.</span></div>
+      <div class="bd-item"><span class="bd-k">🧠 Why it works</span><span class="bd-v">A named, reusable framework ("the checklist") gets saved and referenced monthly — pure authority + recall.</span></div>
+      <div class="bd-item"><span class="bd-k">📐 Structure</span><span class="bd-v">Pain + promise → the 6 checks → product as the live version.</span></div>
+      <div class="steal"><span class="bd-k">💡 Steal this</span><span class="bd-v">Package advice as "the [role]'s checklist." Ownership ("the CFO's") makes it feel canonical.</span></div>
+    </div>
+  </div>
+  <div class="footer-note"><span>DataByt — LinkedIn Playbook · Month 2</span><span>Week 8 · Day 37</span></div>
+</div>
+
+<!-- DAY 38 -->
+<div class="page">
+  <div class="post-block">
+    <div class="day-tag">DAY 38 · WED <span class="pillar">— Founder Journey (vision)</span></div>
+    <div class="post-title">Boring problems build the best businesses</div>
+    <div class="post-card"><div class="label">The Post</div><div class="post-text">Everyone's building AI for sales and marketing. Almost nobody's building it for the unglamorous part: getting paid.
+
+That's exactly why I'm building DataByt for it.
+
+Sales gets the spotlight, but a sale you can't collect isn't a sale — it's a loan you didn't agree to make. The mid-market has thousands of profitable companies quietly strangled by their own receivables, with no tool built for them.
+
+I'd rather solve the boring problem that keeps CFOs up at night than chase the shiny one everyone else is crowded around.
+
+Boring problems, solved well, build the best businesses.</div>
+      <div class="meta-row"><span class="chip">🎯 CFOs, founders, fintech crowd</span><span class="chip tag">#Fintech</span><span class="chip tag">#FutureOfFinance</span><span class="chip tag">#AI</span><span class="chip tag">#Vision</span></div>
+    </div>
+    <div class="breakdown"><div class="bd-title">🎓 BREAKDOWN</div>
+      <div class="bd-item"><span class="bd-k">✍️ Hook — Crowd vs gap</span><span class="bd-v">"Everyone's building X. Almost nobody's building Y." stakes out unclaimed territory — distinctive positioning.</span></div>
+      <div class="bd-item"><span class="bd-k">🧠 Why it works</span><span class="bd-v">Contrarian + mission ("boring problems build the best businesses") recruits believers and frames you as a category contrarian.</span></div>
+      <div class="bd-item"><span class="bd-k">📐 Structure</span><span class="bd-v">Crowd/gap → why you chose the gap → the reframe ("a loan you didn't agree to make") → the mission line.</span></div>
+      <div class="steal"><span class="bd-k">💡 Steal this</span><span class="bd-v">"Everyone's doing X; I'm doing Y" defines your lane in one line. Own the gap, not the crowd.</span></div>
+    </div>
+  </div>
+  <div class="footer-note"><span>DataByt — LinkedIn Playbook · Month 2</span><span>Week 8 · Day 38</span></div>
+</div>
+
+<!-- DAY 39 -->
+<div class="page">
+  <div class="post-block">
+    <div class="day-tag">DAY 39 · THU <span class="pillar">— Education / Pain</span></div>
+    <div class="post-title">AI won't replace finance — it'll promote it</div>
+    <div class="post-card"><div class="label">The Post</div><div class="post-text">AI won't replace your finance team. It'll get them promoted.
+
+The fear is that automation eats finance jobs. The reality: it eats the worst parts of finance jobs — the copy-pasting, the reminder emails, the spreadsheet updates nobody enjoys.
+
+What's left is the work that actually needs a human: negotiating with a key account, resolving a real dispute, advising the CEO on cash strategy.
+
+Automate the repetitive 80%, and your AR person stops being an invoice-chaser and becomes a finance strategist. That's not a threat. That's a promotion.</div>
+      <div class="meta-row"><span class="chip">🎯 CFOs, finance teams, AR managers</span><span class="chip tag">#AI</span><span class="chip tag">#Automation</span><span class="chip tag">#FutureOfWork</span><span class="chip tag">#Finance</span></div>
+    </div>
+    <div class="breakdown"><div class="bd-title">🎓 BREAKDOWN</div>
+      <div class="bd-item"><span class="bd-k">✍️ Hook — Reassuring reversal</span><span class="bd-v">"Won't replace — it'll promote" flips the dominant AI fear into a benefit; a hopeful contrarian take.</span></div>
+      <div class="bd-item"><span class="bd-k">🧠 Why it works</span><span class="bd-v">Directly disarms the #1 buyer objection (AI threat) and reframes adoption as a career upgrade for the team that uses it.</span></div>
+      <div class="bd-item"><span class="bd-k">📐 Structure</span><span class="bd-v">Reversal → the fear → the reality → what's left for humans → "not a threat, a promotion."</span></div>
+      <div class="steal"><span class="bd-k">💡 Steal this</span><span class="bd-v">Turn the biggest objection into the biggest benefit in line one. It defuses resistance instantly.</span></div>
+    </div>
+  </div>
+  <div class="footer-note"><span>DataByt — LinkedIn Playbook · Month 2</span><span>Week 8 · Day 39</span></div>
+</div>
+
+<!-- DAY 40 -->
+<div class="page">
+  <div class="post-block">
+    <div class="day-tag">DAY 40 · FRI <span class="pillar">— Bold Take + Soft CTA</span></div>
+    <div class="post-title">Month-2 recap + pilot CTA</div>
+    <div class="post-card"><div class="label">The Post</div><div class="post-text">Two months ago, DataByt was an idea and an empty LinkedIn page.
+
+Since then, finance leaders have told me the same thing over and over: collections is broken, manual, and nobody built a real tool for the mid-market. Every conversation confirmed the bet.
+
+DataByt now does it end-to-end: AI chases overdue invoices, escalates the tone, manages disputes, and shows live DSO + CEI — connected to QuickBooks, Xero, NetSuite, or Sage. Live in 48 hours.
+
+I'm still onboarding a small group of finance teams free, in exchange for feedback and a testimonial if you love it.
+
+If chasing invoices is eating your team's week — comment "AR" or DM me. Let's fix it.</div>
+      <div class="meta-row"><span class="chip">🎯 CFOs &amp; finance leaders ready to try</span><span class="chip tag">#AccountsReceivable</span><span class="chip tag">#Fintech</span><span class="chip tag">#CFO</span><span class="chip tag">#B2BSaaS</span></div>
+    </div>
+    <div class="breakdown"><div class="bd-title">🎓 BREAKDOWN</div>
+      <div class="bd-item"><span class="bd-k">✍️ Hook — Humble origin marker</span><span class="bd-v">"Two months ago… an empty LinkedIn page" shows the arc; humility earns the right to ask.</span></div>
+      <div class="bd-item"><span class="bd-k">🧠 Why it works</span><span class="bd-v">After two months of value the audience is warm; the recap proves the thesis and the free-pilot ask is low-risk. "Comment AR" is public + frictionless.</span></div>
+      <div class="bd-item"><span class="bd-k">📐 Structure</span><span class="bd-v">Origin → validated learning → product in one line → free-pilot offer → frictionless CTA.</span></div>
+      <div class="steal"><span class="bd-k">💡 Steal this</span><span class="bd-v">Earn the CTA with a recap of value first. The ask lands because you gave for weeks before taking.</span></div>
+    </div>
+  </div>
+  <div class="footer-note"><span>DataByt — LinkedIn Playbook · Month 2</span><span>Week 8 · Day 40</span></div>
+</div>
+
+<!-- CLOSE -->
+<div class="page">
+  <h2 class="section">After Day 40 — What Next</h2>
+  <div class="section-rule"></div>
+  <p class="lead">You've now run 40 weekday posts — two full months. You've moved from unknown → trusted voice → a founder people want to root for. The audience is warm and the pilot CTA is in the feed.</p>
+  <h3>Month 3 onward — the Conversion phase</h3>
+  <ul>
+    <li><strong>Add social proof.</strong> Once your first pilots deliver wins, replace the founding-customer framing with real (permissioned) results and testimonials.</li>
+    <li><strong>Increase founder + proof content</strong> to ~40 pain / 25 education / 25 founder / 10 proof+CTA.</li>
+    <li><strong>Run the Sales &amp; Conversion Playbook</strong> (Guide 04) on everyone who comments "AR", connects, or DMs — that's where followers become customers.</li>
+    <li><strong>Keep the routine.</strong> Daily: post, reply in the first 90 min, comment on 8 CFO posts, send 10 connection requests.</li>
+  </ul>
+  <div class="callout"><p><strong>The only thing that decides this:</strong> consistency. Two months in, the compounding has barely started. Founders who keep going past day 60 are the ones who win — most quit before the curve bends. Don't be most.</p></div>
+
+  <div style="margin-top:28px; padding:20px; background:linear-gradient(135deg,#130E25,#4F46E5); border-radius:14px; color:#fff;">
+    <p style="color:#A5B4FC; font-size:12px; letter-spacing:2px; font-weight:600; margin-bottom:8px;">40 POSTS DOWN</p>
+    <p style="color:#fff; font-size:16px; font-weight:700; margin:0;">Month 1 built authority. Month 2 built trust. Month 3 converts it. Keep showing up — the audience you're building is your future customer list.</p>
+  </div>
+  <div class="footer-note"><span>DataByt — LinkedIn Playbook · Month 2</span><span>What Next</span></div>
+</div>
+
+</body>
+</html>
