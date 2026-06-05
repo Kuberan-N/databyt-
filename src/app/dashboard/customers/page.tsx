@@ -26,7 +26,7 @@ const fmt = (n: number) =>
   new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }).format(n);
 
 const SEGMENT_STYLE: Record<string, { color: string; bg: string; border: string }> = {
-  strategic: { color: "text-[#000000]",  bg: "bg-[#F3F3F3]",  border: "border-[#000000]/20" },
+  strategic: { color: "text-[#000000]",  bg: "bg-[#F1F5F9]",  border: "border-[#000000]/20" },
   standard:  { color: "text-[#16A34A]",  bg: "bg-[#F0FDF4]",  border: "border-[#BBF7D0]" },
   at_risk:   { color: "text-[#DC2626]",  bg: "bg-[#FEF2F2]",  border: "border-[#FECACA]" },
 };
@@ -98,18 +98,18 @@ export default function CustomersPage() {
       {/* Search + filter */}
       <div className="flex gap-3 flex-wrap">
         <div className="relative flex-1 min-w-[200px]">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#333333]" />
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#475569]" />
           <input type="text" value={search} onChange={e => setSearch(e.target.value)}
             placeholder="Search customers by name or email..."
-            className="w-full bg-white border border-[#E2E8F0] rounded-xl pl-10 pr-4 py-2.5 text-sm text-[#0F172A] placeholder-[#333333] focus:border-[#000000] focus:outline-none transition-colors" />
+            className="w-full bg-white border border-[#E2E8F0] rounded-xl pl-10 pr-4 py-2.5 text-sm text-[#0F172A] placeholder-[#475569] focus:border-[#000000] focus:outline-none transition-colors" />
         </div>
         <div className="flex gap-1">
           {["all", "strategic", "standard", "at_risk"].map(s => (
             <button key={s} onClick={() => setSegmentFilter(s)}
               className={`px-3 py-2 rounded-xl text-xs font-medium transition-all ${
                 segmentFilter === s
-                  ? "bg-[#F3F3F3] text-[#000000] border border-[#000000]/20"
-                  : "border border-[#E2E8F0] text-[#333333] hover:text-[#000000]"
+                  ? "bg-[#F1F5F9] text-[#000000] border border-[#000000]/20"
+                  : "border border-[#E2E8F0] text-[#475569] hover:text-[#000000]"
               }`}>
               {s === "at_risk" ? "At Risk" : s === "all" ? "All" : s.charAt(0).toUpperCase() + s.slice(1)}
             </button>
@@ -133,7 +133,7 @@ export default function CustomersPage() {
                 <span className={`text-sm font-semibold ${style.color}`}>{s.label}</span>
                 <span className="text-2xl font-bold text-[#0F172A]">{segmentCounts[s.key as keyof typeof segmentCounts]}</span>
               </div>
-              <p className="text-xs text-[#333333]">{s.desc}</p>
+              <p className="text-xs text-[#475569]">{s.desc}</p>
             </motion.div>
           );
         })}
@@ -141,7 +141,7 @@ export default function CustomersPage() {
 
       {/* Customer table */}
       <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="glass rounded-2xl overflow-hidden">
-        <div className="grid grid-cols-6 gap-2 px-5 py-3 border-b border-[#E2E8F0] text-xs font-medium text-[#333333] uppercase tracking-wider">
+        <div className="grid grid-cols-6 gap-2 px-5 py-3 border-b border-[#E2E8F0] text-xs font-medium text-[#475569] uppercase tracking-wider">
           <span className="col-span-2">Customer</span>
           <span>Outstanding</span>
           <span>Invoices</span>
@@ -155,13 +155,13 @@ export default function CustomersPage() {
           </div>
         ) : filtered.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-16 text-center px-8">
-            <div className="w-14 h-14 rounded-2xl bg-[#F3F3F3] flex items-center justify-center mb-4">
-              <Users className="w-7 h-7 text-[#333333]" />
+            <div className="w-14 h-14 rounded-2xl bg-[#F1F5F9] flex items-center justify-center mb-4">
+              <Users className="w-7 h-7 text-[#475569]" />
             </div>
             <p className="text-[#0F172A] font-medium mb-1">
               {customers.length === 0 ? "No customers yet" : "No customers match your search"}
             </p>
-            <p className="text-[#333333] text-sm max-w-xs leading-relaxed">
+            <p className="text-[#475569] text-sm max-w-xs leading-relaxed">
               {customers.length === 0
                 ? "Sync your QuickBooks account to import customers automatically."
                 : "Try adjusting your search or filter."}
@@ -176,12 +176,12 @@ export default function CustomersPage() {
                   <div className="col-span-2 min-w-0">
                     <p className="text-sm font-medium text-[#0F172A] truncate">{c.name}</p>
                     <div className="flex items-center gap-3 mt-0.5">
-                      {c.email && <span className="text-xs text-[#333333] flex items-center gap-1 truncate"><Mail className="w-3 h-3 shrink-0" />{c.email}</span>}
-                      {c.phone && <span className="text-xs text-[#333333] flex items-center gap-1"><Phone className="w-3 h-3 shrink-0" />{c.phone}</span>}
+                      {c.email && <span className="text-xs text-[#475569] flex items-center gap-1 truncate"><Mail className="w-3 h-3 shrink-0" />{c.email}</span>}
+                      {c.phone && <span className="text-xs text-[#475569] flex items-center gap-1"><Phone className="w-3 h-3 shrink-0" />{c.phone}</span>}
                     </div>
                   </div>
                   <div>
-                    <p className={`text-sm font-semibold ${c.outstanding > 0 ? "text-[#0F172A]" : "text-[#333333]"}`}>{fmt(c.outstanding)}</p>
+                    <p className={`text-sm font-semibold ${c.outstanding > 0 ? "text-[#0F172A]" : "text-[#475569]"}`}>{fmt(c.outstanding)}</p>
                     {c.overdueCount > 0 && (
                       <p className="text-xs text-[#DC2626] flex items-center gap-1 mt-0.5">
                         <AlertTriangle className="w-3 h-3" />{c.overdueCount} overdue
@@ -190,11 +190,11 @@ export default function CustomersPage() {
                   </div>
                   <div>
                     <p className="text-sm text-[#0F172A]">{c.invoiceCount}</p>
-                    <p className="text-xs text-[#333333]">open</p>
+                    <p className="text-xs text-[#475569]">open</p>
                   </div>
                   <div className="flex items-center gap-1">
-                    <CreditCard className="w-3.5 h-3.5 text-[#333333]" />
-                    <span className="text-sm text-[#333333]">Net {c.payment_terms}</span>
+                    <CreditCard className="w-3.5 h-3.5 text-[#475569]" />
+                    <span className="text-sm text-[#475569]">Net {c.payment_terms}</span>
                   </div>
                   <div>
                     <span className={`text-xs px-2 py-0.5 rounded-full font-medium capitalize border ${style.color} ${style.bg} ${style.border}`}>

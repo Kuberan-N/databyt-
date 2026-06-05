@@ -92,7 +92,7 @@ function TypingIndicator() {
       <div className="w-6 h-6 rounded-full bg-[#111] flex items-center justify-center shrink-0 mt-0.5">
         <Bot className="w-3 h-3 text-white" />
       </div>
-      <div className="bg-[#F3F3F3] rounded-2xl rounded-bl-sm px-4 py-3 flex gap-1.5 items-center">
+      <div className="bg-[#F1F5F9] rounded-2xl rounded-bl-sm px-4 py-3 flex gap-1.5 items-center">
         {[0, 1, 2].map(i => (
           <motion.span key={i} className="w-2 h-2 rounded-full bg-[#111]/25 block"
             animate={{ y: [0, -5, 0] }}

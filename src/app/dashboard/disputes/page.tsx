@@ -10,8 +10,8 @@ const fmt = (n: number) =>
   new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }).format(n);
 
 const STATUS_STYLES: Record<DisputeStatus, { bg: string; text: string; label: string }> = {
-  open:          { bg: "bg-[#F3F3F3]", text: "text-[#000000]",  label: "Open" },
-  investigating: { bg: "bg-[#F3F3F3]", text: "text-[#000000]",  label: "Investigating" },
+  open:          { bg: "bg-[#F1F5F9]", text: "text-[#000000]",  label: "Open" },
+  investigating: { bg: "bg-[#F1F5F9]", text: "text-[#000000]",  label: "Investigating" },
   resolved:      { bg: "bg-[#F0FDF4]", text: "text-[#16A34A]",  label: "Resolved" },
   rejected:      { bg: "bg-[#F1F5F9]", text: "text-[#222222]",  label: "Rejected" },
 };
@@ -92,7 +92,7 @@ export default function DisputesPage() {
           { key: "open",          label: "Open",          icon: AlertTriangle, color: "#000000" },
           { key: "investigating", label: "Investigating", icon: Clock,         color: "#000000" },
           { key: "resolved",      label: "Resolved",      icon: CheckCircle,   color: "#16A34A" },
-          { key: "rejected",      label: "Rejected",      icon: CheckCircle,   color: "#333333" },
+          { key: "rejected",      label: "Rejected",      icon: CheckCircle,   color: "#475569" },
         ].map((s, i) => (
           <motion.button key={s.key}
             initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.05 }}
@@ -114,9 +114,9 @@ export default function DisputesPage() {
         <div className="px-5 py-4 border-b border-[#E2E8F0] flex items-center gap-3 flex-wrap">
           <h3 className="text-sm font-semibold text-[#0F172A] flex-1">All Disputes</h3>
           <div className="flex items-center gap-2 bg-white border border-[#E2E8F0] rounded-lg px-3 py-1.5 w-48">
-            <Search className="w-3.5 h-3.5 text-[#333333]" />
+            <Search className="w-3.5 h-3.5 text-[#475569]" />
             <input value={search} onChange={e => setSearch(e.target.value)}
-              placeholder="Search..." className="text-xs outline-none flex-1 text-[#0F172A] placeholder-[#333333]" />
+              placeholder="Search..." className="text-xs outline-none flex-1 text-[#0F172A] placeholder-[#475569]" />
           </div>
         </div>
 
@@ -125,7 +125,7 @@ export default function DisputesPage() {
             <thead>
               <tr className="border-b border-[#E2E8F0]">
                 {["Customer", "Invoice", "Amount", "Reason", "Status", "Filed", "Actions"].map(h => (
-                  <th key={h} className="text-left text-[#333333] px-4 py-3 font-medium whitespace-nowrap">{h}</th>
+                  <th key={h} className="text-left text-[#475569] px-4 py-3 font-medium whitespace-nowrap">{h}</th>
                 ))}
               </tr>
             </thead>
@@ -135,7 +135,7 @@ export default function DisputesPage() {
                   <div className="w-5 h-5 border-2 border-[#000000]/20 border-t-[#000000] rounded-full animate-spin mx-auto" />
                 </td></tr>
               ) : filtered.length === 0 ? (
-                <tr><td colSpan={7} className="text-center py-12 text-[#333333]">
+                <tr><td colSpan={7} className="text-center py-12 text-[#475569]">
                   {disputes.length === 0 ? "No disputes filed yet" : "No disputes match your search"}
                 </td></tr>
               ) : filtered.map(d => {
@@ -149,7 +149,7 @@ export default function DisputesPage() {
                     <td className="px-4 py-3">
                       <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${s.bg} ${s.text}`}>{s.label}</span>
                     </td>
-                    <td className="px-4 py-3 text-[#333333]">
+                    <td className="px-4 py-3 text-[#475569]">
                       {new Date(d.created_at).toLocaleDateString("en-US", { month: "short", day: "numeric" })}
                     </td>
                     <td className="px-4 py-3">
@@ -166,7 +166,7 @@ export default function DisputesPage() {
                                 rows={2}
                                 value={resolutionNotes[d.id] ?? ""}
                                 onChange={e => setNotes(n => ({ ...n, [d.id]: e.target.value }))}
-                                className="w-full text-xs border border-[#E2E8F0] rounded-lg px-2 py-1.5 resize-none outline-none focus:border-[#000000] text-[#0F172A] placeholder-[#333333]"
+                                className="w-full text-xs border border-[#E2E8F0] rounded-lg px-2 py-1.5 resize-none outline-none focus:border-[#000000] text-[#0F172A] placeholder-[#475569]"
                               />
                               {[
                                 { status: "investigating" as DisputeStatus, label: "→ Investigating", color: "text-[#000000]" },
@@ -185,7 +185,7 @@ export default function DisputesPage() {
                         </div>
                       )}
                       {(d.status === "resolved" || d.status === "rejected") && (
-                        <span className="text-[#333333]">
+                        <span className="text-[#475569]">
                           {d.resolved_at ? new Date(d.resolved_at).toLocaleDateString("en-US", { month: "short", day: "numeric" }) : "—"}
                         </span>
                       )}

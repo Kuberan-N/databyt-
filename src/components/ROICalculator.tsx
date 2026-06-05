@@ -120,7 +120,7 @@ export default function ROICalculator({ locale = "INTL", cfg }: { locale?: Local
           <div className="flex flex-col gap-3">
 
             {/* Dark card — cash freed */}
-            <div className="rounded-xl bg-[#070707] p-7 text-white flex-1">
+            <div className="rounded-xl bg-[#0F172A] p-7 text-white flex-1">
               <p className="text-white/40 text-[11px] font-semibold uppercase tracking-widest mb-4">
                 With DataByt (30% DSO reduction)
               </p>

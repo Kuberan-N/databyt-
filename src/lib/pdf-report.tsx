@@ -19,7 +19,7 @@ const colors = {
   bg:       "#0f172a",
   surface:  "#0F172A",
   text:     "#f1f5f9",
-  muted:    "#333333",
+  muted:    "#475569",
   border:   "#111111",
 };
 

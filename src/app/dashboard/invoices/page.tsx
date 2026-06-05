@@ -37,7 +37,7 @@ const statusConfig: Record<
   InvoiceStatus,
   { label: string; color: string; icon: typeof Clock }
 > = {
-  pending: { label: "Pending", color: "text-[#333333] bg-surface-700/50", icon: Clock },
+  pending: { label: "Pending", color: "text-[#475569] bg-surface-700/50", icon: Clock },
   extracting: { label: "Extracting", color: "text-primary-400 bg-primary-500/10", icon: Brain },
   extracted: { label: "Extracted", color: "text-accent-400 bg-accent-500/10", icon: CheckCircle2 },
   reviewed: { label: "Reviewed", color: "text-success-400 bg-success-500/10", icon: CheckCircle2 },
@@ -113,9 +113,9 @@ export default function InvoicesPage() {
         <div>
           <h2 className="text-2xl font-bold text-white">
             Invoice Processing{" "}
-            <span className="text-[#333333] text-sm font-normal">(AP)</span>
+            <span className="text-[#475569] text-sm font-normal">(AP)</span>
           </h2>
-          <p className="text-[#333333] text-sm">
+          <p className="text-[#475569] text-sm">
             Upload invoices and let AI extract the data automatically.
           </p>
         </div>
@@ -157,7 +157,7 @@ export default function InvoicesPage() {
             className={`w-14 h-14 rounded-2xl flex items-center justify-center transition-colors ${
               isDragging
                 ? "bg-primary-500/20 text-primary-400"
-                : "bg-surface-800 text-[#333333]"
+                : "bg-surface-800 text-[#475569]"
             }`}
           >
             <Upload className="w-7 h-7" />
@@ -168,7 +168,7 @@ export default function InvoicesPage() {
                 ? "Drop your invoices here"
                 : "Drag & drop invoices here"}
             </p>
-            <p className="text-[#333333] text-sm mt-1">
+            <p className="text-[#475569] text-sm mt-1">
               PDF, Excel, PNG, JPG ?€” any format. AI extracts data at 95%+ accuracy.
             </p>
           </div>
@@ -185,7 +185,7 @@ export default function InvoicesPage() {
       {invoices.length > 0 && (
         <div className="flex items-center gap-3">
           <div className="relative flex-1 max-w-sm">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#333333]" />
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#475569]" />
             <input
               type="text"
               placeholder="Search vendors or invoice numbers..."
@@ -204,22 +204,22 @@ export default function InvoicesPage() {
             <table className="w-full">
               <thead>
                 <tr className="border-b border-surface-800">
-                  <th className="text-left text-[#333333] text-xs font-medium uppercase tracking-wider px-6 py-4">
+                  <th className="text-left text-[#475569] text-xs font-medium uppercase tracking-wider px-6 py-4">
                     Vendor
                   </th>
-                  <th className="text-left text-[#333333] text-xs font-medium uppercase tracking-wider px-6 py-4">
+                  <th className="text-left text-[#475569] text-xs font-medium uppercase tracking-wider px-6 py-4">
                     Invoice #
                   </th>
-                  <th className="text-left text-[#333333] text-xs font-medium uppercase tracking-wider px-6 py-4">
+                  <th className="text-left text-[#475569] text-xs font-medium uppercase tracking-wider px-6 py-4">
                     Amount
                   </th>
-                  <th className="text-left text-[#333333] text-xs font-medium uppercase tracking-wider px-6 py-4">
+                  <th className="text-left text-[#475569] text-xs font-medium uppercase tracking-wider px-6 py-4">
                     Status
                   </th>
-                  <th className="text-left text-[#333333] text-xs font-medium uppercase tracking-wider px-6 py-4">
+                  <th className="text-left text-[#475569] text-xs font-medium uppercase tracking-wider px-6 py-4">
                     Confidence
                   </th>
-                  <th className="text-right text-[#333333] text-xs font-medium uppercase tracking-wider px-6 py-4">
+                  <th className="text-right text-[#475569] text-xs font-medium uppercase tracking-wider px-6 py-4">
                     Actions
                   </th>
                 </tr>
@@ -238,14 +238,14 @@ export default function InvoicesPage() {
                       <td className="px-6 py-4">
                         <div className="flex items-center gap-3">
                           <div className="w-9 h-9 rounded-lg bg-surface-800 flex items-center justify-center">
-                            <FileText className="w-4 h-4 text-[#333333]" />
+                            <FileText className="w-4 h-4 text-[#475569]" />
                           </div>
                           <span className="text-white text-sm font-medium">
                             {inv.vendor_name}
                           </span>
                         </div>
                       </td>
-                      <td className="px-6 py-4 text-[#444444] text-sm font-mono">
+                      <td className="px-6 py-4 text-[#475569] text-sm font-mono">
                         {inv.invoice_number}
                       </td>
                       <td className="px-6 py-4 text-white text-sm font-semibold">
@@ -278,7 +278,7 @@ export default function InvoicesPage() {
                                 }}
                               />
                             </div>
-                            <span className="text-[#333333] text-xs">
+                            <span className="text-[#475569] text-xs">
                               {(inv.confidence * 100).toFixed(0)}%
                             </span>
                           </div>
@@ -289,13 +289,13 @@ export default function InvoicesPage() {
                       <td className="px-6 py-4 text-right">
                         <div className="flex items-center justify-end gap-1">
                           <button
-                            className="p-2 text-[#333333] hover:text-white hover:bg-surface-700 rounded-lg transition-colors"
+                            className="p-2 text-[#475569] hover:text-white hover:bg-surface-700 rounded-lg transition-colors"
                             title="View"
                           >
                             <Eye className="w-4 h-4" />
                           </button>
                           <button
-                            className="p-2 text-[#333333] hover:text-danger-400 hover:bg-danger-500/10 rounded-lg transition-colors"
+                            className="p-2 text-[#475569] hover:text-danger-400 hover:bg-danger-500/10 rounded-lg transition-colors"
                             title="Delete"
                             onClick={() =>
                               setInvoices((prev) =>
@@ -323,11 +323,11 @@ export default function InvoicesPage() {
             <h3 className="text-xl font-semibold text-white mb-2">
               No invoices yet
             </h3>
-            <p className="text-[#333333] text-sm max-w-md mx-auto mb-6">
+            <p className="text-[#475569] text-sm max-w-md mx-auto mb-6">
               Upload your first invoice above to see AI-powered data extraction
               in action. We support PDF, Excel, PNG, and JPG formats.
             </p>
-            <div className="flex items-center justify-center gap-4 text-[#333333] text-xs">
+            <div className="flex items-center justify-center gap-4 text-[#475569] text-xs">
               <span className="flex items-center gap-1">
                 <CheckCircle2 className="w-3 h-3 text-success-400" />
                 95%+ accuracy

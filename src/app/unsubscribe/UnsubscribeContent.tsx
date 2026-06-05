@@ -28,13 +28,13 @@ export default function UnsubscribeContent() {
                   "You will no longer receive collection reminders."
                 )}
               </p>
-              <p className="text-[#333333] text-xs mt-4 leading-relaxed">
+              <p className="text-[#475569] text-xs mt-4 leading-relaxed">
                 If you have outstanding invoices, please contact the sender directly to arrange payment.
               </p>
             </>
           ) : error ? (
             <>
-              <div className="w-14 h-14 rounded-full bg-[#F3F3F3] flex items-center justify-center mx-auto mb-5">
+              <div className="w-14 h-14 rounded-full bg-[#F1F5F9] flex items-center justify-center mx-auto mb-5">
                 <svg className="w-7 h-7 text-[#DC2626]" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
                 </svg>
@@ -52,13 +52,13 @@ export default function UnsubscribeContent() {
           )}
 
           <div className="mt-8 pt-6 border-t border-[#F1F5F9]">
-            <p className="text-xs text-[#333333]">
+            <p className="text-xs text-[#475569]">
               Powered by <span className="font-semibold text-[#000000]">DataByt</span>
             </p>
           </div>
         </div>
 
-        <Link href="/" className="mt-5 inline-block text-sm text-[#333333] hover:text-[#222222] transition-colors">
+        <Link href="/" className="mt-5 inline-block text-sm text-[#475569] hover:text-[#222222] transition-colors">
           Return to homepage
         </Link>
       </div>

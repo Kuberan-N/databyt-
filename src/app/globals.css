@@ -12,16 +12,16 @@
   --color-brand-800: #3730A3;
 
   /* ─── Primary: Near-black ─── */
-  --color-primary-50:  #F8F8F8;
-  --color-primary-100: #F3F3F3;
-  --color-primary-200: #E5E5E5;
-  --color-primary-300: #D4D4D4;
-  --color-primary-400: #999999;
+  --color-primary-50:  #F8FAFC;
+  --color-primary-100: #F1F5F9;
+  --color-primary-200: #E2E8F0;
+  --color-primary-300: #CBD5E1;
+  --color-primary-400: #94A3B8;
   --color-primary-500: #0F172A;
   --color-primary-600: #111111;
   --color-primary-700: #222222;
-  --color-primary-800: #333333;
-  --color-primary-900: #444444;
+  --color-primary-800: #475569;
+  --color-primary-900: #475569;
 
   /* ─── Success: Green ─── */
   --color-success-50:  #F0FDF4;

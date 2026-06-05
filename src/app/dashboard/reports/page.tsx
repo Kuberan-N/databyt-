@@ -72,7 +72,7 @@ export default function ReportsPage() {
         <div className="grid sm:grid-cols-2 gap-3 mb-6">
           {reportSections.map((s, i) => (
             <div key={i} className="flex items-start gap-3 p-3.5 rounded-xl bg-[#F8F9FC] border border-[#E2E8F0]">
-              <div className="w-7 h-7 rounded-lg bg-[#F3F3F3] border border-[#000000]/20 flex items-center justify-center shrink-0 mt-0.5">
+              <div className="w-7 h-7 rounded-lg bg-[#F1F5F9] border border-[#000000]/20 flex items-center justify-center shrink-0 mt-0.5">
                 <s.icon className="w-3.5 h-3.5 text-[#000000]" />
               </div>
               <div>
@@ -120,7 +120,7 @@ export default function ReportsPage() {
             "Forecast: projected collections next 30/60/90 days",
           ].map((f, i) => (
             <div key={i} className="flex items-center gap-3 text-sm text-[#222222]">
-              <div className="w-1.5 h-1.5 rounded-full bg-[#444444] shrink-0" />
+              <div className="w-1.5 h-1.5 rounded-full bg-[#475569] shrink-0" />
               {f}
             </div>
           ))}

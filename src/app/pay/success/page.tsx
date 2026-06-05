@@ -18,12 +18,12 @@ export default function PaySuccessPage() {
           </p>
 
           <div className="mt-8 p-4 rounded-xl bg-[#F8F9FC] border border-[#E2E8F0] text-left space-y-1">
-            <p className="text-xs text-[#333333]">What happens next</p>
+            <p className="text-xs text-[#475569]">What happens next</p>
             <p className="text-sm text-[#0F172A]">Your invoice will be marked as paid and collections activity will stop automatically.</p>
           </div>
 
           <div className="mt-6 pt-6 border-t border-[#F1F5F9]">
-            <p className="text-xs text-[#333333]">
+            <p className="text-xs text-[#475569]">
               Powered by{" "}
               <span className="font-semibold text-[#000000]">DataByt</span>
               {" "}· Collections powered by DataByt
@@ -33,7 +33,7 @@ export default function PaySuccessPage() {
 
         <Link
           href="/"
-          className="mt-6 inline-block text-sm text-[#333333] hover:text-[#222222] transition-colors"
+          className="mt-6 inline-block text-sm text-[#475569] hover:text-[#222222] transition-colors"
         >
           Return to homepage
         </Link>

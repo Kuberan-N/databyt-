@@ -57,39 +57,39 @@ export default function AddCustomerModal({ open, onClose, onSaved }: Props) {
             <div className="glass rounded-2xl p-6 w-full max-w-md">
               <div className="flex items-center justify-between mb-5">
                 <h3 className="text-lg font-semibold text-white">Add Customer</h3>
-                <button onClick={onClose} className="text-[#333333] hover:text-white"><X className="w-5 h-5" /></button>
+                <button onClick={onClose} className="text-[#475569] hover:text-white"><X className="w-5 h-5" /></button>
               </div>
               {error && <div className="text-danger-400 text-sm mb-4 px-3 py-2 bg-danger-500/10 rounded-xl">{error}</div>}
               <form onSubmit={handleSave} className="space-y-4">
                 <div>
-                  <label className="text-[#444444] text-sm font-medium mb-1.5 block">Company Name *</label>
+                  <label className="text-[#475569] text-sm font-medium mb-1.5 block">Company Name *</label>
                   <div className="relative">
-                    <User className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#333333]" />
+                    <User className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#475569]" />
                     <input value={name} onChange={e => setName(e.target.value)} required placeholder="Acme Corp"
                       className="w-full bg-surface-800/50 border border-surface-700 rounded-xl pl-10 pr-4 py-2.5 text-white text-sm placeholder-surface-500 focus:border-primary-500 outline-none" />
                   </div>
                 </div>
                 <div>
-                  <label className="text-[#444444] text-sm font-medium mb-1.5 block">Email</label>
+                  <label className="text-[#475569] text-sm font-medium mb-1.5 block">Email</label>
                   <div className="relative">
-                    <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#333333]" />
+                    <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#475569]" />
                     <input value={email} onChange={e => setEmail(e.target.value)} type="email" placeholder="billing@acme.com"
                       className="w-full bg-surface-800/50 border border-surface-700 rounded-xl pl-10 pr-4 py-2.5 text-white text-sm placeholder-surface-500 focus:border-primary-500 outline-none" />
                   </div>
                 </div>
                 <div className="grid grid-cols-2 gap-3">
                   <div>
-                    <label className="text-[#444444] text-sm font-medium mb-1.5 block">Phone</label>
+                    <label className="text-[#475569] text-sm font-medium mb-1.5 block">Phone</label>
                     <div className="relative">
-                      <Phone className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#333333]" />
+                      <Phone className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#475569]" />
                       <input value={phone} onChange={e => setPhone(e.target.value)} placeholder="+1 555 000"
                         className="w-full bg-surface-800/50 border border-surface-700 rounded-xl pl-10 pr-4 py-2.5 text-white text-sm placeholder-surface-500 focus:border-primary-500 outline-none" />
                     </div>
                   </div>
                   <div>
-                    <label className="text-[#444444] text-sm font-medium mb-1.5 block">Payment Terms</label>
+                    <label className="text-[#475569] text-sm font-medium mb-1.5 block">Payment Terms</label>
                     <div className="relative">
-                      <CreditCard className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#333333]" />
+                      <CreditCard className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#475569]" />
                       <select value={paymentTerms} onChange={e => setPaymentTerms(e.target.value)}
                         className="w-full bg-surface-800/50 border border-surface-700 rounded-xl pl-10 pr-4 py-2.5 text-white text-sm focus:border-primary-500 outline-none appearance-none">
                         {["7","14","30","45","60","90"].map(d => <option key={d} value={d}>Net {d}</option>)}
@@ -98,20 +98,20 @@ export default function AddCustomerModal({ open, onClose, onSaved }: Props) {
                   </div>
                 </div>
                 <div>
-                  <label className="text-[#444444] text-sm font-medium mb-1.5 block">Segment</label>
+                  <label className="text-[#475569] text-sm font-medium mb-1.5 block">Segment</label>
                   <div className="flex gap-2">
                     {segments.map(s => (
                       <button key={s} type="button" onClick={() => setSegment(s)}
                         className={`flex-1 py-2 rounded-xl text-xs font-medium border transition-all capitalize ${segment === s
                           ? "bg-primary-500/15 border-primary-500/40 text-primary-400"
-                          : "border-surface-700 text-[#333333] hover:border-surface-600"}`}>
+                          : "border-surface-700 text-[#475569] hover:border-surface-600"}`}>
                         {s.replace("_", " ")}
                       </button>
                     ))}
                   </div>
                 </div>
                 <div className="flex gap-3 pt-1">
-                  <button type="button" onClick={onClose} className="flex-1 py-2.5 rounded-xl border border-surface-700 text-[#333333] text-sm hover:border-surface-600">Cancel</button>
+                  <button type="button" onClick={onClose} className="flex-1 py-2.5 rounded-xl border border-surface-700 text-[#475569] text-sm hover:border-surface-600">Cancel</button>
                   <button type="submit" disabled={saving}
                     className="flex-1 flex items-center justify-center gap-2 py-2.5 rounded-xl bg-gradient-to-r from-primary-600 to-accent-600 text-white text-sm font-semibold disabled:opacity-50">
                     {saving ? <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" /> : <><Save className="w-4 h-4" />Save</>}

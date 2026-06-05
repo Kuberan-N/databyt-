@@ -149,13 +149,13 @@ export default function AuthPage() {
                 <div>
                   <label className="text-[#0F172A] text-[13px] font-medium mb-1.5 block">Company Name</label>
                   <div className="relative">
-                    <Building2 className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#333333]" />
+                    <Building2 className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#475569]" />
                     <input
                       type="text"
                       value={companyName}
                       onChange={e => setCompanyName(e.target.value)}
                       placeholder="Acme Corp"
-                      className="w-full bg-white border border-[#E2E8F0] rounded-xl pl-10 pr-4 py-3 text-[#0F172A] text-[14px] placeholder-[#444444] focus:border-[#000000] focus:ring-2 focus:ring-[#000000]/10 transition-all outline-none"
+                      className="w-full bg-white border border-[#E2E8F0] rounded-xl pl-10 pr-4 py-3 text-[#0F172A] text-[14px] placeholder-[#475569] focus:border-[#000000] focus:ring-2 focus:ring-[#000000]/10 transition-all outline-none"
                       required
                     />
                   </div>
@@ -165,13 +165,13 @@ export default function AuthPage() {
               <div>
                 <label className="text-[#0F172A] text-[13px] font-medium mb-1.5 block">Email</label>
                 <div className="relative">
-                  <Mail className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#333333]" />
+                  <Mail className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#475569]" />
                   <input
                     type="email"
                     value={email}
                     onChange={e => setEmail(e.target.value)}
                     placeholder="you@company.com"
-                    className="w-full bg-white border border-[#E2E8F0] rounded-xl pl-10 pr-4 py-3 text-[#0F172A] text-[14px] placeholder-[#444444] focus:border-[#000000] focus:ring-2 focus:ring-[#000000]/10 transition-all outline-none"
+                    className="w-full bg-white border border-[#E2E8F0] rounded-xl pl-10 pr-4 py-3 text-[#0F172A] text-[14px] placeholder-[#475569] focus:border-[#000000] focus:ring-2 focus:ring-[#000000]/10 transition-all outline-none"
                     required
                   />
                 </div>
@@ -181,20 +181,20 @@ export default function AuthPage() {
                 <div>
                   <label className="text-[#0F172A] text-[13px] font-medium mb-1.5 block">Password</label>
                   <div className="relative">
-                    <Lock className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#333333]" />
+                    <Lock className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#475569]" />
                     <input
                       type={showPassword ? "text" : "password"}
                       value={password}
                       onChange={e => setPassword(e.target.value)}
                       placeholder="Min. 8 characters"
-                      className="w-full bg-white border border-[#E2E8F0] rounded-xl pl-10 pr-11 py-3 text-[#0F172A] text-[14px] placeholder-[#444444] focus:border-[#000000] focus:ring-2 focus:ring-[#000000]/10 transition-all outline-none"
+                      className="w-full bg-white border border-[#E2E8F0] rounded-xl pl-10 pr-11 py-3 text-[#0F172A] text-[14px] placeholder-[#475569] focus:border-[#000000] focus:ring-2 focus:ring-[#000000]/10 transition-all outline-none"
                       minLength={8}
                       required
                     />
                     <button
                       type="button"
                       onClick={() => setShowPassword(!showPassword)}
-                      className="absolute right-3.5 top-1/2 -translate-y-1/2 text-[#333333] hover:text-[#222222] transition-colors"
+                      className="absolute right-3.5 top-1/2 -translate-y-1/2 text-[#475569] hover:text-[#222222] transition-colors"
                     >
                       {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                     </button>
@@ -203,7 +203,7 @@ export default function AuthPage() {
                     <button
                       type="button"
                       onClick={() => { setMode("forgot"); reset(); }}
-                      className="text-[12px] text-[#333333] hover:text-[#000000] transition-colors mt-2 block text-right w-full"
+                      className="text-[12px] text-[#475569] hover:text-[#000000] transition-colors mt-2 block text-right w-full"
                     >
                       Forgot password?
                     </button>
@@ -223,7 +223,7 @@ export default function AuthPage() {
               </button>
             </form>
 
-            <p className="text-center text-[#333333] text-[13px] mt-5">
+            <p className="text-center text-[#475569] text-[13px] mt-5">
               {mode === "signup" ? (
                 <>Already have an account?{" "}
                   <button onClick={() => { setMode("login"); reset(); }} className="text-[#000000] hover:text-[#111111] font-medium">Sign in</button>
@@ -238,7 +238,7 @@ export default function AuthPage() {
             </p>
           </div>
 
-          <p className="text-center text-[#444444] text-[12px] mt-5">
+          <p className="text-center text-[#475569] text-[12px] mt-5">
             Your data is encrypted and never shared.
           </p>
         </motion.div>

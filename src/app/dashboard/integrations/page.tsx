@@ -59,11 +59,11 @@ const providers: ProviderConfig[] = [
 
 function StatusBadge({ status }: { status: IntegrationStatus | null }) {
   if (!status || status === "disconnected") {
-    return <span className="text-xs text-[#555555] font-medium">Not connected</span>;
+    return <span className="text-xs text-[#64748B] font-medium">Not connected</span>;
   }
   const styles: Record<string, { bg: string; text: string; label: string }> = {
     connected: { bg: "bg-[#F0FDF4]", text: "text-[#16A34A]", label: "Connected" },
-    syncing:   { bg: "bg-[#F3F3F3]", text: "text-[#000000]", label: "Syncing..." },
+    syncing:   { bg: "bg-[#F1F5F9]", text: "text-[#000000]", label: "Syncing..." },
     error:     { bg: "bg-[#FEF2F2]", text: "text-[#DC2626]", label: "Error" },
   };
   const s = styles[status] ?? styles.connected;
@@ -153,10 +153,10 @@ function IntegrationCard({
             <h3 className="text-sm font-semibold text-[#0F172A]">{provider.label}</h3>
             <StatusBadge status={info?.status ?? null} />
           </div>
-          <p className="text-xs text-[#333333] mt-1 leading-relaxed">{provider.description}</p>
+          <p className="text-xs text-[#475569] mt-1 leading-relaxed">{provider.description}</p>
 
           {isConnected && info?.last_sync_at && (
-            <div className="flex items-center gap-1.5 mt-2 text-xs text-[#555555]">
+            <div className="flex items-center gap-1.5 mt-2 text-xs text-[#64748B]">
               <Clock className="w-3 h-3" />
               Last sync: {new Date(info.last_sync_at).toLocaleString("en-US", { month: "short", day: "numeric", hour: "2-digit", minute: "2-digit" })}
               {info.last_sync_count != null && ` · ${info.last_sync_count} records`}
@@ -242,7 +242,7 @@ function DemoDataCard({ orgId, onFlash }: { orgId: string; onFlash: (msg: string
             <h3 className="text-sm font-semibold text-[#0F172A]">Load Sample Data</h3>
             <span className="text-[10px] px-2 py-0.5 rounded-full bg-[#EEF2FF] text-[#4F46E5] font-semibold">DEMO</span>
           </div>
-          <p className="text-xs text-[#555555] mt-1 leading-relaxed">
+          <p className="text-xs text-[#64748B] mt-1 leading-relaxed">
             No accounting software? Load 15 realistic B2B customers and 70+ invoices across all aging buckets — so you can explore the full DataByt experience instantly.
           </p>
           <div className="mt-3 flex flex-wrap gap-2 text-[11px] text-[#666]">
@@ -301,7 +301,7 @@ function IntegrationsContent() {
     <div className="space-y-6 max-w-2xl">
       <div>
         <h2 className="text-2xl font-bold text-[#0F172A]">Integrations</h2>
-        <p className="text-[#333333] text-sm mt-1">
+        <p className="text-[#475569] text-sm mt-1">
           Connect your accounting system to sync invoices and customers automatically.
         </p>
       </div>
@@ -349,10 +349,10 @@ function IntegrationsContent() {
         className="bg-white rounded-2xl border border-[#E2E8F0] p-6"
       >
         <h3 className="text-sm font-semibold text-[#0F172A] mb-1">Coming soon</h3>
-        <p className="text-xs text-[#555555] mb-4">Enterprise ERP integrations on the roadmap.</p>
+        <p className="text-xs text-[#64748B] mb-4">Enterprise ERP integrations on the roadmap.</p>
         <div className="flex flex-wrap gap-3">
           {["SAP S/4HANA", "Oracle Financials", "Microsoft Dynamics", "FreshBooks", "Zoho Books"].map((name) => (
-            <span key={name} className="px-3 py-1.5 text-xs text-[#555555] border border-[#E2E8F0] rounded-lg bg-[#FAFAFA]">
+            <span key={name} className="px-3 py-1.5 text-xs text-[#64748B] border border-[#E2E8F0] rounded-lg bg-[#FAFAFA]">
               {name}
             </span>
           ))}

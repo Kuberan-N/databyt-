@@ -26,7 +26,7 @@ const currencies = [
   { code: "AED", label: "AED — UAE Dirham" },
 ];
 
-const inputCls = "w-full bg-white border border-[#E2E8F0] rounded-xl px-4 py-3 text-[#0F172A] placeholder-[#333333] focus:border-[#000000] focus:ring-1 focus:ring-[#000000]/20 outline-none transition-all text-sm";
+const inputCls = "w-full bg-white border border-[#E2E8F0] rounded-xl px-4 py-3 text-[#0F172A] placeholder-[#475569] focus:border-[#000000] focus:ring-1 focus:ring-[#000000]/20 outline-none transition-all text-sm";
 const selectCls = "w-full bg-white border border-[#E2E8F0] rounded-xl px-4 py-3 text-[#0F172A] focus:border-[#000000] focus:ring-1 focus:ring-[#000000]/20 outline-none transition-all text-sm appearance-none";
 
 export default function SettingsPage() {
@@ -138,7 +138,7 @@ export default function SettingsPage() {
           className={`flex items-center gap-2 px-4 py-3 rounded-xl text-sm ${
             status === "success"
               ? "bg-[#F0FDF4] border border-[#BBF7D0] text-[#16A34A]"
-              : "bg-[#F3F3F3] border border-[#FECACA] text-[#DC2626]"
+              : "bg-[#F1F5F9] border border-[#FECACA] text-[#DC2626]"
           }`}>
           {status === "success" ? <CheckCircle className="w-4 h-4 shrink-0" /> : <AlertCircle className="w-4 h-4 shrink-0" />}
           {statusMsg}
@@ -148,7 +148,7 @@ export default function SettingsPage() {
       <form onSubmit={handleSave} className="space-y-5">
         <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} className="glass rounded-2xl p-6 space-y-5">
           <div className="flex items-center gap-2 mb-1">
-            <Building2 className="w-4 h-4 text-[#333333]" />
+            <Building2 className="w-4 h-4 text-[#475569]" />
             <h3 className="text-sm font-semibold text-[#0F172A]">Company Info</h3>
           </div>
           <div>
@@ -161,13 +161,13 @@ export default function SettingsPage() {
         <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.05 }}
           className="glass rounded-2xl p-6 space-y-5">
           <div className="flex items-center gap-2 mb-1">
-            <Globe className="w-4 h-4 text-[#333333]" />
+            <Globe className="w-4 h-4 text-[#475569]" />
             <h3 className="text-sm font-semibold text-[#0F172A]">Regional</h3>
           </div>
           <div className="grid sm:grid-cols-2 gap-4">
             <div>
               <label className="text-[#111111] text-sm font-medium mb-2 block">
-                <Clock className="w-3.5 h-3.5 inline mr-1.5 text-[#333333]" />Timezone
+                <Clock className="w-3.5 h-3.5 inline mr-1.5 text-[#475569]" />Timezone
               </label>
               <select value={timezone} onChange={(e) => setTimezone(e.target.value)} className={selectCls}>
                 {timezones.map((tz) => <option key={tz} value={tz}>{tz.replace("_", " ")}</option>)}
@@ -185,24 +185,24 @@ export default function SettingsPage() {
         <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}
           className="glass rounded-2xl p-6 space-y-4">
           <div className="flex items-center gap-2 mb-1">
-            <Mail className="w-4 h-4 text-[#333333]" />
+            <Mail className="w-4 h-4 text-[#475569]" />
             <h3 className="text-sm font-semibold text-[#0F172A]">Email Signature</h3>
           </div>
-          <p className="text-[#333333] text-xs -mt-2">Appended to all collection emails sent on your behalf.</p>
+          <p className="text-[#475569] text-xs -mt-2">Appended to all collection emails sent on your behalf.</p>
           <textarea value={emailSignature} onChange={(e) => setEmailSignature(e.target.value)}
             rows={4} placeholder={`Best regards,\nThe ${orgName || "Finance"} Team`}
-            className="w-full bg-white border border-[#E2E8F0] rounded-xl px-4 py-3 text-[#0F172A] placeholder-[#333333] focus:border-[#000000] focus:ring-1 focus:ring-[#000000]/20 outline-none transition-all text-sm resize-none font-mono" />
+            className="w-full bg-white border border-[#E2E8F0] rounded-xl px-4 py-3 text-[#0F172A] placeholder-[#475569] focus:border-[#000000] focus:ring-1 focus:ring-[#000000]/20 outline-none transition-all text-sm resize-none font-mono" />
         </motion.div>
 
         <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.15 }}
           className="glass rounded-2xl p-6 space-y-4">
           <div className="flex items-center gap-2 mb-1">
-            <Link className="w-4 h-4 text-[#333333]" />
+            <Link className="w-4 h-4 text-[#475569]" />
             <h3 className="text-sm font-semibold text-[#0F172A]">Payment Collection</h3>
           </div>
-          <p className="text-[#333333] text-xs -mt-2">
+          <p className="text-[#475569] text-xs -mt-2">
             Add your payment portal link here — Stripe, Razorpay, bank transfer page, or any URL your customers use to pay you.
-            Use <code className="bg-[#F3F3F3] px-1 py-0.5 rounded text-[#000000] font-mono">{"{invoice_number}"}</code> as a placeholder and DataByt will swap it with the real invoice number in every email.
+            Use <code className="bg-[#F1F5F9] px-1 py-0.5 rounded text-[#000000] font-mono">{"{invoice_number}"}</code> as a placeholder and DataByt will swap it with the real invoice number in every email.
           </p>
           <div>
             <label className="text-[#111111] text-sm font-medium mb-2 block">Payment Link Template</label>
@@ -215,8 +215,8 @@ export default function SettingsPage() {
             />
           </div>
           {paymentLinkTemplate && (
-            <div className="rounded-xl bg-[#F3F3F3] border border-[#000000]/10 px-4 py-3">
-              <p className="text-[10px] text-[#555555] uppercase tracking-wider font-medium mb-1">Preview for invoice #INV-0042</p>
+            <div className="rounded-xl bg-[#F1F5F9] border border-[#000000]/10 px-4 py-3">
+              <p className="text-[10px] text-[#64748B] uppercase tracking-wider font-medium mb-1">Preview for invoice #INV-0042</p>
               <p className="text-xs text-[#0F172A] break-all font-mono">
                 {paymentLinkTemplate.replace("{invoice_number}", "INV-0042")}
               </p>
@@ -227,10 +227,10 @@ export default function SettingsPage() {
         <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}
           className="glass rounded-2xl p-6 space-y-4">
           <div className="flex items-center gap-2 mb-1">
-            <SlidersHorizontal className="w-4 h-4 text-[#333333]" />
+            <SlidersHorizontal className="w-4 h-4 text-[#475569]" />
             <h3 className="text-sm font-semibold text-[#0F172A]">Collection Rules</h3>
           </div>
-          <p className="text-[#333333] text-xs -mt-2">
+          <p className="text-[#475569] text-xs -mt-2">
             Set when each dunning level fires. L1 is a polite reminder, L2 is firm, L3 is a final notice.
             Cooldown prevents emails being sent to the same customer too frequently.
           </p>
@@ -264,8 +264,8 @@ export default function SettingsPage() {
                 onChange={e => setCooldown(Number(e.target.value))} className={inputCls} />
             </div>
           </div>
-          <div className="rounded-lg bg-[#F3F3F3] border border-[#E2E8F0] px-4 py-3">
-            <p className="text-[11px] text-[#555555]">
+          <div className="rounded-lg bg-[#F1F5F9] border border-[#E2E8F0] px-4 py-3">
+            <p className="text-[11px] text-[#64748B]">
               Current schedule: L1 after <strong>{dunningL1}d</strong> → L2 after <strong>{dunningL2}d</strong> → L3 after <strong>{dunningL3}d</strong> · min <strong>{cooldown}d</strong> between emails
             </p>
           </div>
@@ -284,7 +284,7 @@ export default function SettingsPage() {
       <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.15 }}
         className="glass rounded-2xl p-6 space-y-4">
         <div className="flex items-center gap-2 mb-1">
-          <User className="w-4 h-4 text-[#333333]" />
+          <User className="w-4 h-4 text-[#475569]" />
           <h3 className="text-sm font-semibold text-[#0F172A]">Your Account</h3>
         </div>
         <div className="grid sm:grid-cols-2 gap-4 text-sm">
@@ -297,7 +297,7 @@ export default function SettingsPage() {
               : "—" },
           ].map(f => (
             <div key={f.label}>
-              <p className="text-[#333333] text-xs mb-1">{f.label}</p>
+              <p className="text-[#475569] text-xs mb-1">{f.label}</p>
               <p className="text-[#0F172A] capitalize">{f.value}</p>
             </div>
           ))}
@@ -308,16 +308,16 @@ export default function SettingsPage() {
       <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}
         className="glass rounded-2xl p-6">
         <div className="flex items-center gap-2 mb-4">
-          <Shield className="w-4 h-4 text-[#333333]" />
+          <Shield className="w-4 h-4 text-[#475569]" />
           <h3 className="text-sm font-semibold text-[#0F172A]">Security</h3>
         </div>
         <div className="flex items-center justify-between">
           <div>
             <p className="text-sm text-[#0F172A]">Password</p>
-            <p className="text-xs text-[#333333] mt-0.5">Change your account password</p>
+            <p className="text-xs text-[#475569] mt-0.5">Change your account password</p>
           </div>
           <a href="/auth/reset-password"
-            className="text-xs text-[#000000] font-medium px-3 py-1.5 rounded-lg border border-[#000000]/20 bg-[#F3F3F3] hover:bg-[#EBEBEB] transition-colors">
+            className="text-xs text-[#000000] font-medium px-3 py-1.5 rounded-lg border border-[#000000]/20 bg-[#F1F5F9] hover:bg-[#E2E8F0] transition-colors">
             Change Password
           </a>
         </div>
@@ -327,10 +327,10 @@ export default function SettingsPage() {
       <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.25 }}
         className="glass rounded-2xl p-6">
         <div className="flex items-center gap-2 mb-1">
-          <Lightbulb className="w-4 h-4 text-[#333333]" />
+          <Lightbulb className="w-4 h-4 text-[#475569]" />
           <h3 className="text-sm font-semibold text-[#0F172A]">Request a Feature</h3>
         </div>
-        <p className="text-xs text-[#555555] mb-5">
+        <p className="text-xs text-[#64748B] mb-5">
           Tell us what would make DataByt better for you. We review every request and reply within{" "}
           <strong className="text-[#0F172A]">2 working days</strong> — whether it&apos;s feasible or not.
         </p>
@@ -340,7 +340,7 @@ export default function SettingsPage() {
             <CheckCircle className="w-4 h-4 text-[#16A34A] shrink-0 mt-0.5" />
             <div>
               <p className="text-sm font-semibold text-[#16A34A]">Request sent!</p>
-              <p className="text-xs text-[#555555] mt-0.5">
+              <p className="text-xs text-[#64748B] mt-0.5">
                 We&apos;ll email you at <strong>{user?.email}</strong> within 2 working days with our assessment.
               </p>
             </div>

@@ -13,7 +13,7 @@ const fmt = (n: number) =>
 
 const PLAN_STYLE: Record<string, { color: string; bg: string; border: string }> = {
   starter: { color: "text-[#222222]",   bg: "bg-[#F1F5F9]",         border: "border-[#E2E8F0]" },
-  growth:  { color: "text-[#555555]",   bg: "bg-[#F3F3F3]",         border: "border-[#111111]/20" },
+  growth:  { color: "text-[#64748B]",   bg: "bg-[#F1F5F9]",         border: "border-[#111111]/20" },
   scale:   { color: "text-[#000000]",   bg: "bg-[#FFF1F2]",         border: "border-[#000000]/20" },
 };
 
@@ -44,7 +44,7 @@ export default function AdminDashboard() {
   }, []);
 
   const btnBase = "flex items-center gap-2 px-4 py-2 rounded-lg border border-[#E2E8F0] text-[#222222] text-sm hover:text-[#111111] hover:border-[#111111]/30 bg-white transition-all disabled:opacity-50";
-  const spinner = <div className="w-4 h-4 border-2 border-[#333333]/30 border-t-[#333333] rounded-full animate-spin" />;
+  const spinner = <div className="w-4 h-4 border-2 border-[#475569]/30 border-t-[#475569] rounded-full animate-spin" />;
 
   return (
     <div className="space-y-6 max-w-6xl">
@@ -152,7 +152,7 @@ export default function AdminDashboard() {
       {/* Failed jobs alert */}
       {failedJobsCount !== null && failedJobsCount > 0 && (
         <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }}
-          className="flex items-center justify-between px-5 py-3.5 rounded-2xl bg-[#F3F3F3] border border-[#F59E0B]/30">
+          className="flex items-center justify-between px-5 py-3.5 rounded-2xl bg-[#F1F5F9] border border-[#F59E0B]/30">
           <div className="flex items-center gap-3">
             <AlertCircle className="w-4 h-4 text-[#000000] shrink-0" />
             <p className="text-sm text-[#92400E]">
@@ -170,7 +170,7 @@ export default function AdminDashboard() {
       {/* Overdue alert */}
       {!orgsLoading && totalOverdue > 0 && (
         <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }}
-          className="flex items-center justify-between px-5 py-3.5 rounded-2xl bg-[#F3F3F3] border border-[#EF4444]/20">
+          className="flex items-center justify-between px-5 py-3.5 rounded-2xl bg-[#F1F5F9] border border-[#EF4444]/20">
           <div className="flex items-center gap-3">
             <AlertTriangle className="w-4 h-4 text-[#DC2626] shrink-0" />
             <p className="text-sm text-[#991B1B]">
@@ -189,55 +189,55 @@ export default function AdminDashboard() {
         className="glass rounded-2xl overflow-hidden">
         <div className="px-5 py-3.5 border-b border-[#E2E8F0] flex items-center justify-between">
           <h3 className="text-sm font-semibold text-[#0F172A]">Client Organizations</h3>
-          <span className="text-xs text-[#333333]">{orgs.length} total</span>
+          <span className="text-xs text-[#475569]">{orgs.length} total</span>
         </div>
         <div className="overflow-x-auto">
           <table className="w-full text-xs">
             <thead>
               <tr className="border-b border-[#E2E8F0]">
                 {["Organization", "Status", "MRR", "Plan", "AR Outstanding", "Overdue", "Emails/mo", "Joined"].map(h => (
-                  <th key={h} className="text-left text-[#333333] px-4 py-3 font-medium whitespace-nowrap">{h}</th>
+                  <th key={h} className="text-left text-[#475569] px-4 py-3 font-medium whitespace-nowrap">{h}</th>
                 ))}
               </tr>
             </thead>
             <tbody>
               {orgsLoading ? (
-                <tr><td colSpan={8} className="text-center py-12 text-[#333333]">
+                <tr><td colSpan={8} className="text-center py-12 text-[#475569]">
                   <div className="flex items-center justify-center gap-2">
                     <div className="w-4 h-4 border-2 border-[#111111]/20 border-t-[#111111] rounded-full animate-spin" />
                     Loading clients...
                   </div>
                 </td></tr>
               ) : orgs.length === 0 ? (
-                <tr><td colSpan={8} className="text-center py-12 text-[#333333]">No client organizations yet</td></tr>
+                <tr><td colSpan={8} className="text-center py-12 text-[#475569]">No client organizations yet</td></tr>
               ) : orgs.map(org => {
                 const planStyle = PLAN_STYLE[org.plan_tier] ?? PLAN_STYLE.starter;
                 const isSelected = selectedOrg?.id === org.id;
                 return (
                   <tr key={org.id}
-                    className={`border-t border-[#F1F5F9] hover:bg-[#F8F9FC] transition-colors cursor-pointer ${isSelected ? "bg-[#F3F3F3]" : ""}`}
+                    className={`border-t border-[#F1F5F9] hover:bg-[#F8F9FC] transition-colors cursor-pointer ${isSelected ? "bg-[#F1F5F9]" : ""}`}
                     onClick={() => setSelectedOrg(isSelected ? org : org)}>
                     <td className="px-4 py-3.5">
                       <div className="flex items-center gap-2.5">
-                        <div className="w-7 h-7 rounded-lg bg-[#F3F3F3] border border-[#111111]/20 flex items-center justify-center shrink-0">
+                        <div className="w-7 h-7 rounded-lg bg-[#F1F5F9] border border-[#111111]/20 flex items-center justify-center shrink-0">
                           <span className="text-[10px] font-bold text-[#111111]">{org.name.charAt(0).toUpperCase()}</span>
                         </div>
                         <div>
                           <p className="font-medium text-[#0F172A] text-xs">{org.name}</p>
-                          <p className="text-[#333333] text-[10px] mt-0.5">{org.userCount} user{org.userCount !== 1 ? "s" : ""}</p>
+                          <p className="text-[#475569] text-[10px] mt-0.5">{org.userCount} user{org.userCount !== 1 ? "s" : ""}</p>
                         </div>
                       </div>
                     </td>
                     <td className="px-4 py-3.5">
                       <span className={`px-2 py-0.5 rounded-full text-[10px] font-medium border capitalize ${
                         org.status === "active"     ? "bg-[#F0FDF4] text-[#16A34A] border-[#16A34A]/20" :
-                        org.status === "onboarding" ? "bg-[#F3F3F3] text-[#111111] border-[#111111]/20" :
-                        org.status === "paused"     ? "bg-[#F3F3F3] text-[#000000] border-[#F59E0B]/20" :
-                        "bg-[#F1F5F9] text-[#333333] border-[#E2E8F0]"
+                        org.status === "onboarding" ? "bg-[#F1F5F9] text-[#111111] border-[#111111]/20" :
+                        org.status === "paused"     ? "bg-[#F1F5F9] text-[#000000] border-[#F59E0B]/20" :
+                        "bg-[#F1F5F9] text-[#475569] border-[#E2E8F0]"
                       }`}>{org.status}</span>
                     </td>
                     <td className="px-4 py-3.5 text-[#111111]">
-                      {org.mrr != null ? fmt(org.mrr) : <span className="text-[#333333]">—</span>}
+                      {org.mrr != null ? fmt(org.mrr) : <span className="text-[#475569]">—</span>}
                     </td>
                     <td className="px-4 py-3.5">
                       <span className={`px-2 py-0.5 rounded-full text-[10px] font-medium border capitalize ${planStyle.color} ${planStyle.bg} ${planStyle.border}`}>
@@ -256,7 +256,7 @@ export default function AdminDashboard() {
                       )}
                     </td>
                     <td className="px-4 py-3.5 text-[#222222]">{org.emailsSentThisMonth}</td>
-                    <td className="px-4 py-3.5 text-[#333333]">
+                    <td className="px-4 py-3.5 text-[#475569]">
                       {new Date(org.created_at).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}
                     </td>
                   </tr>

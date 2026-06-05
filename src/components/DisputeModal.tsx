@@ -61,7 +61,7 @@ export default function DisputeModal({
     }
   }
 
-  const inputCls = "w-full bg-white border border-[#E2E8F0] rounded-xl px-4 py-3 text-[#0F172A] placeholder-[#333333] focus:border-[#000000] focus:ring-1 focus:ring-[#000000]/20 outline-none transition-all text-sm";
+  const inputCls = "w-full bg-white border border-[#E2E8F0] rounded-xl px-4 py-3 text-[#0F172A] placeholder-[#475569] focus:border-[#000000] focus:ring-1 focus:ring-[#000000]/20 outline-none transition-all text-sm";
 
   return (
     <AnimatePresence>
@@ -82,22 +82,22 @@ export default function DisputeModal({
             >
               <div className="flex items-center justify-between px-6 py-4 border-b border-[#E2E8F0]">
                 <div className="flex items-center gap-2">
-                  <div className="w-8 h-8 rounded-lg bg-[#F3F3F3] flex items-center justify-center">
+                  <div className="w-8 h-8 rounded-lg bg-[#F1F5F9] flex items-center justify-center">
                     <AlertTriangle className="w-4 h-4 text-[#000000]" />
                   </div>
                   <div>
                     <h3 className="text-sm font-semibold text-[#0F172A]">File a Dispute</h3>
-                    <p className="text-xs text-[#333333]">Invoice {invoiceNumber} · {fmt(invoiceAmount)}</p>
+                    <p className="text-xs text-[#475569]">Invoice {invoiceNumber} · {fmt(invoiceAmount)}</p>
                   </div>
                 </div>
-                <button onClick={onClose} className="text-[#333333] hover:text-[#222222] transition-colors p-1">
+                <button onClick={onClose} className="text-[#475569] hover:text-[#222222] transition-colors p-1">
                   <X className="w-4 h-4" />
                 </button>
               </div>
 
               <form onSubmit={handleSubmit} className="p-6 space-y-4">
                 {error && (
-                  <div className="px-4 py-3 rounded-xl bg-[#F3F3F3] border border-[#FECACA] text-[#DC2626] text-sm">
+                  <div className="px-4 py-3 rounded-xl bg-[#F1F5F9] border border-[#FECACA] text-[#DC2626] text-sm">
                     {error}
                   </div>
                 )}
@@ -112,18 +112,18 @@ export default function DisputeModal({
 
                 <div>
                   <label className="text-[#111111] text-sm font-medium mb-2 block">
-                    Description <span className="text-[#333333] font-normal">(optional)</span>
+                    Description <span className="text-[#475569] font-normal">(optional)</span>
                   </label>
                   <textarea
                     value={description}
                     onChange={e => setDescription(e.target.value)}
                     rows={3}
                     placeholder="Provide any additional context..."
-                    className="w-full bg-white border border-[#E2E8F0] rounded-xl px-4 py-3 text-[#0F172A] placeholder-[#333333] focus:border-[#000000] focus:ring-1 focus:ring-[#000000]/20 outline-none transition-all text-sm resize-none"
+                    className="w-full bg-white border border-[#E2E8F0] rounded-xl px-4 py-3 text-[#0F172A] placeholder-[#475569] focus:border-[#000000] focus:ring-1 focus:ring-[#000000]/20 outline-none transition-all text-sm resize-none"
                   />
                 </div>
 
-                <div className="p-3 rounded-xl bg-[#F3F3F3] border border-[#FEF08A]">
+                <div className="p-3 rounded-xl bg-[#F1F5F9] border border-[#FEF08A]">
                   <p className="text-xs text-[#713F12]">
                     Filing a dispute will pause automated collections on this invoice until resolved.
                     Your DataByt operator will investigate and respond within 2 business days.

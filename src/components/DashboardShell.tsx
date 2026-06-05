@@ -92,7 +92,7 @@ export default function DashboardShell({ children }: { children: ReactNode }) {
           )}
           <button
             onClick={() => setSidebarOpen(!sidebarOpen)}
-            className="text-[#333333] hover:text-[#000000] transition-colors p-1 shrink-0"
+            className="text-[#475569] hover:text-[#000000] transition-colors p-1 shrink-0"
           >
             <ChevronLeft className={`w-4 h-4 transition-transform ${!sidebarOpen ? "rotate-180" : ""}`} />
           </button>
@@ -148,14 +148,14 @@ export default function DashboardShell({ children }: { children: ReactNode }) {
                   className="flex-1 min-w-0"
                 >
                   <p className="text-sm text-[#0F172A] font-medium truncate">{organization?.name ?? "My Company"}</p>
-                  <p className="text-xs text-[#333333] truncate capitalize">{orgUser?.role ?? "admin"}</p>
+                  <p className="text-xs text-[#475569] truncate capitalize">{orgUser?.role ?? "admin"}</p>
                 </motion.div>
               )}
             </AnimatePresence>
             {sidebarOpen && (
               <button
                 onClick={signOut}
-                className="text-[#333333] hover:text-[#000000] transition-colors p-1 shrink-0"
+                className="text-[#475569] hover:text-[#000000] transition-colors p-1 shrink-0"
                 title="Sign out"
               >
                 <LogOut className="w-4 h-4" />
@@ -243,7 +243,7 @@ export default function DashboardShell({ children }: { children: ReactNode }) {
               ? "bg-red-50 border-b border-red-200 text-red-700"
               : trialDaysLeft <= 7
               ? "bg-amber-50 border-b border-amber-200 text-amber-700"
-              : "bg-[#F3F3F3] border-b border-[#000000]/20 text-[#000000]"
+              : "bg-[#F1F5F9] border-b border-[#000000]/20 text-[#000000]"
           }`}>
             <Clock className="w-3.5 h-3.5 shrink-0" />
             {trialDaysLeft <= 0

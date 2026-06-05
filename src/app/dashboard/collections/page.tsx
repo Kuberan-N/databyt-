@@ -171,7 +171,7 @@ export default function CollectionsPage() {
   const statusStyle: Record<string, string> = {
     sent:    "bg-[#F1F5F9] text-[#111111]",
     opened:  "bg-[#F0FDF4] text-[#16A34A]",
-    clicked: "bg-[#F3F3F3] text-[#000000]",
+    clicked: "bg-[#F1F5F9] text-[#000000]",
     bounced: "bg-[#FEF2F2] text-[#DC2626]",
     failed:  "bg-[#FEF2F2] text-[#DC2626]",
   };
@@ -239,7 +239,7 @@ export default function CollectionsPage() {
         {([["pipeline", "Customer Pipeline"], ["activity", "Email Activity"]] as const).map(([key, label]) => (
           <button key={key} onClick={() => setTab(key)}
             className={`px-4 py-2.5 text-sm font-medium transition-colors border-b-2 -mb-px ${
-              tab === key ? "border-[#111111] text-[#0F172A]" : "border-transparent text-[#555555] hover:text-[#222222]"
+              tab === key ? "border-[#111111] text-[#0F172A]" : "border-transparent text-[#64748B] hover:text-[#222222]"
             }`}>{label}
           </button>
         ))}
@@ -353,7 +353,7 @@ export default function CollectionsPage() {
             <div>
               {recentComms.map((c, i) => (
                 <div key={i} className="flex items-center gap-4 px-5 py-3.5 border-t border-[#F1F5F9] hover:bg-[#FAFAFA] transition-colors">
-                  <div className="w-7 h-7 rounded-lg bg-[#F3F3F3] border border-[#000]/10 flex items-center justify-center shrink-0">
+                  <div className="w-7 h-7 rounded-lg bg-[#F1F5F9] border border-[#000]/10 flex items-center justify-center shrink-0">
                     <Mail className="w-3.5 h-3.5 text-[#000]" />
                   </div>
                   <div className="flex-1 min-w-0">

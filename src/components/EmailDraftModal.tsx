@@ -94,12 +94,12 @@ export default function EmailDraftModal({ invoiceId, invoiceNumber, customerName
           <div className="flex items-center justify-between px-5 py-4 border-b border-[#E2E8F0]">
             <div>
               <h3 className="text-sm font-semibold text-[#0F172A]">Draft Collections Email</h3>
-              <p className="text-xs text-[#333333] mt-0.5">
+              <p className="text-xs text-[#475569] mt-0.5">
                 {customerName} · Invoice {invoiceNumber} · {daysOverdue}d overdue
               </p>
             </div>
-            <button onClick={onClose} className="w-7 h-7 rounded-lg flex items-center justify-center hover:bg-[#F3F3F3] transition-colors">
-              <X className="w-4 h-4 text-[#333333]" />
+            <button onClick={onClose} className="w-7 h-7 rounded-lg flex items-center justify-center hover:bg-[#F1F5F9] transition-colors">
+              <X className="w-4 h-4 text-[#475569]" />
             </button>
           </div>
 
@@ -108,13 +108,13 @@ export default function EmailDraftModal({ invoiceId, invoiceNumber, customerName
             {([1, 2, 3] as const).map(l => (
               <button key={l} onClick={() => setLevel(l)}
                 className={`flex-1 py-1.5 rounded-lg text-xs font-medium transition-all border ${
-                  level === l ? "bg-[#F3F3F3] border-[#000000]/20 text-[#000000]" : "border-[#E2E8F0] text-[#333333] hover:text-[#000000]"
+                  level === l ? "bg-[#F1F5F9] border-[#000000]/20 text-[#000000]" : "border-[#E2E8F0] text-[#475569] hover:text-[#000000]"
                 }`}>
                 <span className={level === l ? LEVEL_LABELS[l].color : ""}>{LEVEL_LABELS[l].label}</span>
               </button>
             ))}
             <button onClick={() => draft(level)} disabled={drafting}
-              className="px-3 py-1.5 rounded-lg border border-[#E2E8F0] text-[#333333] hover:text-[#000000] transition-colors disabled:opacity-50">
+              className="px-3 py-1.5 rounded-lg border border-[#E2E8F0] text-[#475569] hover:text-[#000000] transition-colors disabled:opacity-50">
               <RefreshCw className={`w-3.5 h-3.5 ${drafting ? "animate-spin" : ""}`} />
             </button>
           </div>
@@ -124,7 +124,7 @@ export default function EmailDraftModal({ invoiceId, invoiceNumber, customerName
             {drafting ? (
               <div className="flex flex-col items-center justify-center py-12 gap-3">
                 <div className="w-6 h-6 border-2 border-[#000000]/20 border-t-[#000000] rounded-full animate-spin" />
-                <p className="text-xs text-[#333333]">AI is drafting your email…</p>
+                <p className="text-xs text-[#475569]">AI is drafting your email…</p>
               </div>
             ) : error ? (
               <div className="flex items-start gap-2 p-3 rounded-xl bg-[#FEF2F2] border border-[#FECACA] text-[#DC2626] text-xs">
@@ -145,16 +145,16 @@ export default function EmailDraftModal({ invoiceId, invoiceNumber, customerName
             ) : (
               <>
                 <div>
-                  <label className="text-[10px] font-semibold text-[#333333] uppercase tracking-wider">To</label>
+                  <label className="text-[10px] font-semibold text-[#475569] uppercase tracking-wider">To</label>
                   <p className="text-xs text-[#0F172A] mt-0.5">{customerEmail}</p>
                 </div>
                 <div>
-                  <label className="text-[10px] font-semibold text-[#333333] uppercase tracking-wider">Subject</label>
+                  <label className="text-[10px] font-semibold text-[#475569] uppercase tracking-wider">Subject</label>
                   <input value={subject} onChange={e => setSubject(e.target.value)}
                     className="w-full mt-1 text-xs border border-[#E2E8F0] rounded-lg px-3 py-2 text-[#0F172A] outline-none focus:border-[#000000] transition-colors" />
                 </div>
                 <div>
-                  <label className="text-[10px] font-semibold text-[#333333] uppercase tracking-wider">Body</label>
+                  <label className="text-[10px] font-semibold text-[#475569] uppercase tracking-wider">Body</label>
                   <textarea value={body} onChange={e => setBody(e.target.value)} rows={10}
                     className="w-full mt-1 text-xs border border-[#E2E8F0] rounded-lg px-3 py-2 text-[#0F172A] outline-none focus:border-[#000000] transition-colors resize-none font-mono leading-relaxed" />
                 </div>
@@ -165,7 +165,7 @@ export default function EmailDraftModal({ invoiceId, invoiceNumber, customerName
           {/* Footer */}
           {!sent && !drafting && !error && (
             <div className="px-5 py-4 border-t border-[#E2E8F0] flex items-center justify-between gap-3">
-              <p className="text-[10px] text-[#555555]">{LEVEL_LABELS[level].desc} · Sent via Resend</p>
+              <p className="text-[10px] text-[#64748B]">{LEVEL_LABELS[level].desc} · Sent via Resend</p>
               <button onClick={send} disabled={sending || !subject || !body || !customerEmail}
                 className="flex items-center gap-2 px-4 py-2 bg-[#000000] text-white rounded-lg text-xs font-semibold hover:bg-[#111111] transition-colors disabled:opacity-50">
                 {sending ? <><RefreshCw className="w-3.5 h-3.5 animate-spin" />Sending…</> : <><Send className="w-3.5 h-3.5" />Send Email</>}

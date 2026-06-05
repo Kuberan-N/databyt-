@@ -36,8 +36,8 @@ const BUCKETS = [
   { label: "Current",    color: "#16A34A", track: "#DCFCE7" },
   { label: "1–30 days",  color: "#000000", track: "#FEF3C7" },
   { label: "31–60 days", color: "#EA580C", track: "#FFEDD5" },
-  { label: "61–90 days", color: "#DC2626", track: "#F3F3F3" },
-  { label: "90+ days",   color: "#991B1B", track: "#F3F3F3" },
+  { label: "61–90 days", color: "#DC2626", track: "#F1F5F9" },
+  { label: "90+ days",   color: "#991B1B", track: "#F1F5F9" },
 ];
 
 export default function DashboardOverview() {
@@ -306,10 +306,10 @@ export default function DashboardOverview() {
               {overdue.slice(0, 5).map((c, i) => (
                 <div key={c.id}
                   className="flex items-center gap-3 py-2.5 border-b border-[#F1F5F9] last:border-0">
-                  <span className="text-xs text-[#333333] w-4 shrink-0">{i + 1}</span>
+                  <span className="text-xs text-[#475569] w-4 shrink-0">{i + 1}</span>
                   <div className="flex-1 min-w-0">
                     <p className="text-sm text-[#0F172A] font-medium truncate">{c.name}</p>
-                    <p className="text-xs text-[#333333]">
+                    <p className="text-xs text-[#475569]">
                       {c.invoiceCount} inv · {c.maxDaysOverdue}d overdue
                     </p>
                   </div>
@@ -320,12 +320,12 @@ export default function DashboardOverview() {
           ) : (
             <div className="flex flex-col items-center justify-center py-10 text-center">
               <div className="w-12 h-12 rounded-xl bg-[#F8F9FC] border border-[#E2E8F0] flex items-center justify-center mb-3">
-                <Users className="w-6 h-6 text-[#333333]" />
+                <Users className="w-6 h-6 text-[#475569]" />
               </div>
               <p className="text-[#222222] text-sm font-medium mb-1">
                 {hasData ? "All customers are current" : "No overdue customers yet"}
               </p>
-              <p className="text-[#333333] text-xs max-w-[200px] leading-relaxed">
+              <p className="text-[#475569] text-xs max-w-[200px] leading-relaxed">
                 {hasData
                   ? "Great — no overdue accounts."
                   : "Connect an integration or import invoices to get started."}
@@ -348,7 +348,7 @@ export default function DashboardOverview() {
             Last 30 days
           </span>
         </div>
-        <p className="text-[#333333] text-xs mb-6">
+        <p className="text-[#475569] text-xs mb-6">
           Days Sales Outstanding — lower is better. Target: under 45 days.
         </p>
         <div className="flex items-end justify-between gap-1 h-20 px-1">
@@ -363,7 +363,7 @@ export default function DashboardOverview() {
                 className="flex-1 rounded-t-sm transition-all"
                 style={{
                   height: `${Math.min(height, 100)}%`,
-                  background: isHigh ? "#F3F3F3" : "#F1F5F9",
+                  background: isHigh ? "#F1F5F9" : "#F1F5F9",
                   opacity: hasData ? 1 : 0.4,
                 }}
               />
@@ -371,7 +371,7 @@ export default function DashboardOverview() {
           })}
         </div>
         <div className="flex items-center justify-between mt-3">
-          <p className="text-[#333333] text-xs">
+          <p className="text-[#475569] text-xs">
             {hasData ? `Current DSO: ` : "Import data to see real DSO trend"}
             {hasData && (
               <span className={`font-semibold ${(metrics?.dso ?? 0) > 45 ? "text-[#DC2626]" : "text-[#16A34A]"}`}>
@@ -382,7 +382,7 @@ export default function DashboardOverview() {
           {hasData && (
             <span className={`text-xs font-medium px-2 py-0.5 rounded-full ${
               (metrics?.dso ?? 0) > 45
-                ? "bg-[#F3F3F3] text-[#DC2626]"
+                ? "bg-[#F1F5F9] text-[#DC2626]"
                 : "bg-[#F0FDF4] text-[#16A34A]"
             }`}>
               {(metrics?.dso ?? 0) > 45 ? "Above target" : "On track"}

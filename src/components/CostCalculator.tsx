@@ -46,7 +46,7 @@ export default function CostCalculator() {
             Find out what manual invoicing is{" "}
             <span className="gradient-text">actually costing you.</span>
           </h2>
-          <p className="text-[#333333] text-lg">
+          <p className="text-[#475569] text-lg">
             Adjust the sliders. See real numbers in real time.
           </p>
         </motion.div>
@@ -91,7 +91,7 @@ export default function CostCalculator() {
               />
               <div className="text-2xl font-bold text-white mt-2">
                 ${hourlyRate}/hr{" "}
-                <span className="text-[#333333] text-xs font-normal">
+                <span className="text-[#475569] text-xs font-normal">
                   US avg: $20-25 (BLS, 2025)
                 </span>
               </div>
@@ -118,46 +118,46 @@ export default function CostCalculator() {
           {/* Results */}
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
             <div className="bg-danger-500/10 rounded-2xl p-5 text-center border border-danger-500/20">
-              <div className="text-[#333333] text-xs mb-1 uppercase tracking-wider">
+              <div className="text-[#475569] text-xs mb-1 uppercase tracking-wider">
                 Manual Cost / Month
               </div>
               <div className="text-3xl font-black text-danger-400">
                 ${fmt(manualMonthlyCost)}
               </div>
-              <div className="text-[#333333] text-xs mt-1">
+              <div className="text-[#475569] text-xs mt-1">
                 {manualMonthlyHours.toFixed(0)} hrs of labor
               </div>
             </div>
             <div className="bg-success-500/10 rounded-2xl p-5 text-center border border-success-500/20">
-              <div className="text-[#333333] text-xs mb-1 uppercase tracking-wider">
+              <div className="text-[#475569] text-xs mb-1 uppercase tracking-wider">
                 DataByt Cost / Month
               </div>
               <div className="text-3xl font-black text-success-400">
                 ${databytMonthlyCost}
               </div>
-              <div className="text-[#333333] text-xs mt-1">
+              <div className="text-[#475569] text-xs mt-1">
                 {((1 - databytMonthlyCost / manualMonthlyCost) * 100).toFixed(1)}% less
               </div>
             </div>
             <div className="bg-primary-500/10 rounded-2xl p-5 text-center border border-primary-500/20">
-              <div className="text-[#333333] text-xs mb-1 uppercase tracking-wider">
+              <div className="text-[#475569] text-xs mb-1 uppercase tracking-wider">
                 Your Annual Savings
               </div>
               <div className="text-3xl font-black text-primary-400">
                 ${fmt(annualSavings)}
               </div>
-              <div className="text-[#333333] text-xs mt-1">
+              <div className="text-[#475569] text-xs mt-1">
                 ${fmt(monthlySavings)}/month saved
               </div>
             </div>
             <div className="bg-accent-500/10 rounded-2xl p-5 text-center border border-accent-500/20">
-              <div className="text-[#333333] text-xs mb-1 uppercase tracking-wider">
+              <div className="text-[#475569] text-xs mb-1 uppercase tracking-wider">
                 Cash Unlocked (AR)
               </div>
               <div className="text-3xl font-black text-accent-400">
                 ${fmt(cashUnlocked)}
               </div>
-              <div className="text-[#333333] text-xs mt-1">
+              <div className="text-[#475569] text-xs mt-1">
                 DSO: {manualDSO} to {aiDSO} days
               </div>
             </div>

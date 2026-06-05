@@ -34,7 +34,7 @@ function StatCard({
       </div>
       <p className="text-2xl font-bold text-[#0F172A]">{value}</p>
       <p className="text-[#222222] text-xs mt-0.5">{label}</p>
-      {sub && <p className="text-[#333333] text-xs mt-0.5">{sub}</p>}
+      {sub && <p className="text-[#475569] text-xs mt-0.5">{sub}</p>}
     </motion.div>
   );
 }
@@ -63,12 +63,12 @@ function CEIGauge({ value, prev }: { value: number; prev: number }) {
           ? <TrendingUp className="w-3.5 h-3.5 text-green-600" />
           : diff < 0
           ? <TrendingDown className="w-3.5 h-3.5 text-red-500" />
-          : <Minus className="w-3.5 h-3.5 text-[#333333]" />}
-        <span className={`text-xs font-medium ${diff > 0 ? "text-green-600" : diff < 0 ? "text-red-500" : "text-[#333333]"}`}>
+          : <Minus className="w-3.5 h-3.5 text-[#475569]" />}
+        <span className={`text-xs font-medium ${diff > 0 ? "text-green-600" : diff < 0 ? "text-red-500" : "text-[#475569]"}`}>
           {diff > 0 ? "+" : ""}{diff}% vs last month
         </span>
       </div>
-      <p className="text-xs text-[#333333] mt-1">
+      <p className="text-xs text-[#475569] mt-1">
         {value >= 80 ? "Excellent — top quartile" : value >= 60 ? "Good — room to improve" : "Needs attention"}
       </p>
     </div>
@@ -162,7 +162,7 @@ export default function AnalyticsPage() {
               </div>
             </>
           ) : (
-            <div className="flex items-center justify-center h-48 text-[#333333] text-sm">No data yet</div>
+            <div className="flex items-center justify-center h-48 text-[#475569] text-sm">No data yet</div>
           )}
         </motion.div>
 
@@ -196,7 +196,7 @@ export default function AnalyticsPage() {
               </div>
             </div>
           ) : (
-            <div className="flex items-center justify-center h-48 text-[#333333] text-sm">No emails sent yet</div>
+            <div className="flex items-center justify-center h-48 text-[#475569] text-sm">No emails sent yet</div>
           )}
         </motion.div>
       </div>
@@ -208,8 +208,8 @@ export default function AnalyticsPage() {
         {d && d.monthlyTrend.some(m => m.collected > 0) ? (
           <ResponsiveContainer width="100%" height={220}>
             <BarChart data={d.monthlyTrend} barSize={36}>
-              <XAxis dataKey="month" tick={{ fill: "#333333", fontSize: 11 }} axisLine={false} tickLine={false} />
-              <YAxis tick={{ fill: "#333333", fontSize: 11 }} axisLine={false} tickLine={false}
+              <XAxis dataKey="month" tick={{ fill: "#475569", fontSize: 11 }} axisLine={false} tickLine={false} />
+              <YAxis tick={{ fill: "#475569", fontSize: 11 }} axisLine={false} tickLine={false}
                 tickFormatter={(v) => `$${(v / 1000).toFixed(0)}k`} />
               <Tooltip
                 contentStyle={{ background: "#FFFFFF", border: "1px solid #E2E8F0", borderRadius: 12, fontSize: 12, color: "#0F172A" }}
@@ -219,7 +219,7 @@ export default function AnalyticsPage() {
             </BarChart>
           </ResponsiveContainer>
         ) : (
-          <div className="flex items-center justify-center h-52 text-[#333333] text-sm">
+          <div className="flex items-center justify-center h-52 text-[#475569] text-sm">
             No payment data yet — collections will appear here once invoices are paid
           </div>
         )}
@@ -231,7 +231,7 @@ export default function AnalyticsPage() {
         <div className="flex items-center justify-between mb-5">
           <div>
             <h3 className="text-sm font-semibold text-[#0F172A]">Expected Cash Inflows — AR Forecast</h3>
-            <p className="text-xs text-[#333333] mt-0.5">Overdue invoices by collection window · older = lower recovery likelihood</p>
+            <p className="text-xs text-[#475569] mt-0.5">Overdue invoices by collection window · older = lower recovery likelihood</p>
           </div>
           {cashFlow && cashFlow.totalExpected > 0 && (
             <span className="text-sm font-bold text-[#0F172A]">{fmt(cashFlow.totalExpected)} total</span>
@@ -250,8 +250,8 @@ export default function AnalyticsPage() {
                   <div className="flex items-center justify-between mb-1.5">
                     <div className="flex items-center gap-2">
                       <div className="w-2 h-2 rounded-full shrink-0" style={{ background: barColor }} />
-                      <span className="text-xs text-[#333333]">{bucket.label} overdue</span>
-                      <span className="text-xs text-[#888888]">· {bucket.invoiceCount} inv · {label}</span>
+                      <span className="text-xs text-[#475569]">{bucket.label} overdue</span>
+                      <span className="text-xs text-[#94A3B8]">· {bucket.invoiceCount} inv · {label}</span>
                     </div>
                     <span className="text-xs font-semibold text-[#0F172A]">
                       {fmt(bucket.expectedAmount)} ({pct}%)
@@ -266,11 +266,11 @@ export default function AnalyticsPage() {
             })}
           </div>
         ) : (
-          <div className="flex items-center justify-center h-28 text-[#333333] text-sm">
+          <div className="flex items-center justify-center h-28 text-[#475569] text-sm">
             No overdue invoices — great job!
           </div>
         )}
-        <p className="text-xs text-[#555555] mt-4 border-t border-[#E2E8F0] pt-3">
+        <p className="text-xs text-[#64748B] mt-4 border-t border-[#E2E8F0] pt-3">
           Amounts shown are total outstanding per aging bucket. Invoices 90+ days overdue have significantly lower collection rates on average.
         </p>
       </motion.div>
@@ -289,9 +289,9 @@ export default function AnalyticsPage() {
 
       {/* CEI explanation */}
       <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5 }}
-        className="rounded-2xl p-5 bg-[#F3F3F3] border border-[#000000]/15">
+        className="rounded-2xl p-5 bg-[#F1F5F9] border border-[#000000]/15">
         <p className="text-xs font-semibold text-[#000000] mb-1">What is CEI?</p>
-        <p className="text-xs text-[#333333] leading-relaxed">
+        <p className="text-xs text-[#475569] leading-relaxed">
           The Collections Effectiveness Index measures how much of your collectible AR you actually collected in a period.
           100% = you collected everything. 80%+ is excellent. Below 60% means invoices are aging into bad debt.
           Industry average for manual teams is ~65–72%. DataByt&apos;s AI-driven collections target 80%+.
